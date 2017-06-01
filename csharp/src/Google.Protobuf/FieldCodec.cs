@@ -34,6 +34,8 @@ using Google.Protobuf.Compatibility;
 using Google.Protobuf.WellKnownTypes;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using System.Threading;
 
 namespace Google.Protobuf
 {
@@ -51,7 +53,11 @@ namespace Google.Protobuf
         /// <returns>A codec for the given tag.</returns>
         public static FieldCodec<string> ForString(uint tag)
         {
-            return new FieldCodec<string>(input => input.ReadString(), (output, value) => output.WriteString(value), CodedOutputStream.ComputeStringSize, tag);
+            return new FieldCodec<string>(
+                input => input.ReadString(),
+                (input, cancellationToken) => input.ReadStringAsync(cancellationToken),
+                (output, value) => output.WriteString(value),
+                (output, value, cancellationToken) => output.WriteStringAsync(value, cancellationToken), CodedOutputStream.ComputeStringSize, tag);
         }
 
         /// <summary>
@@ -61,7 +67,11 @@ namespace Google.Protobuf
         /// <returns>A codec for the given tag.</returns>
         public static FieldCodec<ByteString> ForBytes(uint tag)
         {
-            return new FieldCodec<ByteString>(input => input.ReadBytes(), (output, value) => output.WriteBytes(value), CodedOutputStream.ComputeBytesSize, tag);
+            return new FieldCodec<ByteString>(
+                input => input.ReadBytes(),
+                (input, cancellationToken) => input.ReadBytesAsync(cancellationToken),
+                (output, value) => output.WriteBytes(value),
+                (output, value, cancellationToken) => output.WriteBytesAsync(value, cancellationToken), CodedOutputStream.ComputeBytesSize, tag);
         }
 
         /// <summary>
@@ -71,7 +81,11 @@ namespace Google.Protobuf
         /// <returns>A codec for the given tag.</returns>
         public static FieldCodec<bool> ForBool(uint tag)
         {
-            return new FieldCodec<bool>(input => input.ReadBool(), (output, value) => output.WriteBool(value), CodedOutputStream.ComputeBoolSize, tag);
+            return new FieldCodec<bool>(
+                input => input.ReadBool(),
+                (input, cancellationToken) => input.ReadBoolAsync(cancellationToken),
+                (output, value) => output.WriteBool(value),
+                (output, value, cancellationToken) => output.WriteBoolAsync(value, cancellationToken), CodedOutputStream.ComputeBoolSize, tag);
         }
 
         /// <summary>
@@ -81,7 +95,11 @@ namespace Google.Protobuf
         /// <returns>A codec for the given tag.</returns>
         public static FieldCodec<int> ForInt32(uint tag)
         {
-            return new FieldCodec<int>(input => input.ReadInt32(), (output, value) => output.WriteInt32(value), CodedOutputStream.ComputeInt32Size, tag);
+            return new FieldCodec<int>(
+                input => input.ReadInt32(),
+                (input, cancellationToken) => input.ReadInt32Async(cancellationToken),
+                (output, value) => output.WriteInt32(value),
+                (output, value, cancellationToken) => output.WriteInt32Async(value, cancellationToken), CodedOutputStream.ComputeInt32Size, tag);
         }
 
         /// <summary>
@@ -91,7 +109,11 @@ namespace Google.Protobuf
         /// <returns>A codec for the given tag.</returns>
         public static FieldCodec<int> ForSInt32(uint tag)
         {
-            return new FieldCodec<int>(input => input.ReadSInt32(), (output, value) => output.WriteSInt32(value), CodedOutputStream.ComputeSInt32Size, tag);
+            return new FieldCodec<int>(
+                input => input.ReadSInt32(),
+                (input, cancellationToken) => input.ReadSInt32Async(cancellationToken),
+                (output, value) => output.WriteSInt32(value),
+                (output, value, cancellationToken) => output.WriteSInt32Async(value, cancellationToken), CodedOutputStream.ComputeSInt32Size, tag);
         }
 
         /// <summary>
@@ -101,7 +123,11 @@ namespace Google.Protobuf
         /// <returns>A codec for the given tag.</returns>
         public static FieldCodec<uint> ForFixed32(uint tag)
         {
-            return new FieldCodec<uint>(input => input.ReadFixed32(), (output, value) => output.WriteFixed32(value), 4, tag);
+            return new FieldCodec<uint>(
+                input => input.ReadFixed32(),
+                (input, cancellationToken) => input.ReadFixed32Async(cancellationToken),
+                (output, value) => output.WriteFixed32(value),
+                (output, value, cancellationToken) => output.WriteFixed32Async(value, cancellationToken), 4, tag);
         }
 
         /// <summary>
@@ -111,7 +137,11 @@ namespace Google.Protobuf
         /// <returns>A codec for the given tag.</returns>
         public static FieldCodec<int> ForSFixed32(uint tag)
         {
-            return new FieldCodec<int>(input => input.ReadSFixed32(), (output, value) => output.WriteSFixed32(value), 4, tag);
+            return new FieldCodec<int>(
+                input => input.ReadSFixed32(),
+                (input, cancellationToken) => input.ReadSFixed32Async(cancellationToken),
+                (output, value) => output.WriteSFixed32(value),
+                (output, value, cancellationToken) => output.WriteSFixed32Async(value, cancellationToken), 4, tag);
         }
 
         /// <summary>
@@ -121,7 +151,11 @@ namespace Google.Protobuf
         /// <returns>A codec for the given tag.</returns>
         public static FieldCodec<uint> ForUInt32(uint tag)
         {
-            return new FieldCodec<uint>(input => input.ReadUInt32(), (output, value) => output.WriteUInt32(value), CodedOutputStream.ComputeUInt32Size, tag);
+            return new FieldCodec<uint>(
+                input => input.ReadUInt32(),
+                (input, cancellationToken) => input.ReadUInt32Async(cancellationToken),
+                (output, value) => output.WriteUInt32(value),
+                (output, value, cancellationToken) => output.WriteUInt32Async(value, cancellationToken), CodedOutputStream.ComputeUInt32Size, tag);
         }
 
         /// <summary>
@@ -131,7 +165,11 @@ namespace Google.Protobuf
         /// <returns>A codec for the given tag.</returns>
         public static FieldCodec<long> ForInt64(uint tag)
         {
-            return new FieldCodec<long>(input => input.ReadInt64(), (output, value) => output.WriteInt64(value), CodedOutputStream.ComputeInt64Size, tag);
+            return new FieldCodec<long>(
+                input => input.ReadInt64(),
+                (input, cancellationToken) => input.ReadInt64Async(cancellationToken),
+                (output, value) => output.WriteInt64(value),
+                (output, value, cancellationToken) => output.WriteInt64Async(value, cancellationToken), CodedOutputStream.ComputeInt64Size, tag);
         }
 
         /// <summary>
@@ -141,7 +179,11 @@ namespace Google.Protobuf
         /// <returns>A codec for the given tag.</returns>
         public static FieldCodec<long> ForSInt64(uint tag)
         {
-            return new FieldCodec<long>(input => input.ReadSInt64(), (output, value) => output.WriteSInt64(value), CodedOutputStream.ComputeSInt64Size, tag);
+            return new FieldCodec<long>(
+                input => input.ReadSInt64(),
+                (input, cancellationToken) => input.ReadSInt64Async(cancellationToken),
+                (output, value) => output.WriteSInt64(value),
+                (output, value, cancellationToken) => output.WriteSInt64Async(value, cancellationToken), CodedOutputStream.ComputeSInt64Size, tag);
         }
 
         /// <summary>
@@ -151,7 +193,11 @@ namespace Google.Protobuf
         /// <returns>A codec for the given tag.</returns>
         public static FieldCodec<ulong> ForFixed64(uint tag)
         {
-            return new FieldCodec<ulong>(input => input.ReadFixed64(), (output, value) => output.WriteFixed64(value), 8, tag);
+            return new FieldCodec<ulong>(
+                input => input.ReadFixed64(),
+                (input, cancellationToken) => input.ReadFixed64Async(cancellationToken),
+                (output, value) => output.WriteFixed64(value),
+                (output, value, cancellationToken) => output.WriteFixed64Async(value, cancellationToken), 8, tag);
         }
 
         /// <summary>
@@ -161,7 +207,11 @@ namespace Google.Protobuf
         /// <returns>A codec for the given tag.</returns>
         public static FieldCodec<long> ForSFixed64(uint tag)
         {
-            return new FieldCodec<long>(input => input.ReadSFixed64(), (output, value) => output.WriteSFixed64(value), 8, tag);
+            return new FieldCodec<long>(
+                input => input.ReadSFixed64(),
+                (input, cancellationToken) => input.ReadSFixed64Async(cancellationToken),
+                (output, value) => output.WriteSFixed64(value), 
+                (output, value, cancellationToken) => output.WriteSFixed64Async(value, cancellationToken), 8, tag);
         }
 
         /// <summary>
@@ -171,7 +221,12 @@ namespace Google.Protobuf
         /// <returns>A codec for the given tag.</returns>
         public static FieldCodec<ulong> ForUInt64(uint tag)
         {
-            return new FieldCodec<ulong>(input => input.ReadUInt64(), (output, value) => output.WriteUInt64(value), CodedOutputStream.ComputeUInt64Size, tag);
+            return new FieldCodec<ulong>(
+                input => input.ReadUInt64(),
+                (input, cancellationToken) => input.ReadUInt64Async(cancellationToken),
+                (output, value) => output.WriteUInt64(value),
+                (output, value, cancellationToken) => output.WriteUInt64Async(value, cancellationToken),
+                CodedOutputStream.ComputeUInt64Size, tag);
         }
 
         /// <summary>
@@ -181,7 +236,12 @@ namespace Google.Protobuf
         /// <returns>A codec for the given tag.</returns>
         public static FieldCodec<float> ForFloat(uint tag)
         {
-            return new FieldCodec<float>(input => input.ReadFloat(), (output, value) => output.WriteFloat(value), CodedOutputStream.ComputeFloatSize, tag);
+            return new FieldCodec<float>(
+                input => input.ReadFloat(), 
+                (input, cancellationToken) => input.ReadFloatAsync(cancellationToken),
+                (output, value) => output.WriteFloat(value),
+                (output, value, cancellationToken) => output.WriteFloatAsync(value, cancellationToken),
+                CodedOutputStream.ComputeFloatSize, tag);
         }
 
         /// <summary>
@@ -191,7 +251,12 @@ namespace Google.Protobuf
         /// <returns>A codec for the given tag.</returns>
         public static FieldCodec<double> ForDouble(uint tag)
         {
-            return new FieldCodec<double>(input => input.ReadDouble(), (output, value) => output.WriteDouble(value), CodedOutputStream.ComputeDoubleSize, tag);
+            return new FieldCodec<double>(
+                input => input.ReadDouble(),
+                (input, cancellationToken) => input.ReadDoubleAsync(cancellationToken),
+                (output, value) => output.WriteDouble(value),
+                (output, value, cancellationToken) => output.WriteDoubleAsync(value, cancellationToken),
+                CodedOutputStream.ComputeDoubleSize, tag);
         }
 
         // Enums are tricky. We can probably use expression trees to build these delegates automatically,
@@ -206,9 +271,11 @@ namespace Google.Protobuf
         /// <returns>A codec for the given tag.</returns>
         public static FieldCodec<T> ForEnum<T>(uint tag, Func<T, int> toInt32, Func<int, T> fromInt32)
         {
-            return new FieldCodec<T>(input => fromInt32(
-                input.ReadEnum()),
+            return new FieldCodec<T>(
+                input => fromInt32(input.ReadEnum()),
+                async (input, cancellationToken) => fromInt32(await input.ReadEnumAsync(cancellationToken)),
                 (output, value) => output.WriteEnum(toInt32(value)),
+                (output, value, cancellationToken) => output.WriteEnumAsync(toInt32(value), cancellationToken),
                 value => CodedOutputStream.ComputeEnumSize(toInt32(value)), tag);
         }
 
@@ -220,8 +287,12 @@ namespace Google.Protobuf
         /// <returns>A codec for the given tag.</returns>
         public static FieldCodec<T> ForMessage<T>(uint tag, MessageParser<T> parser) where T : IMessage<T>
         {
-            return new FieldCodec<T>(input => { T message = parser.CreateTemplate(); input.ReadMessage(message); return message; },
-                (output, value) => output.WriteMessage(value), message => CodedOutputStream.ComputeMessageSize(message), tag);
+            return new FieldCodec<T>(
+                input => { T message = parser.CreateTemplate(); input.ReadMessage(message); return message; },
+                async (input, cancellationToken) => { T message = parser.CreateTemplate(); await input.ReadMessageAsync(message, cancellationToken); return message; },
+                (output, value) => output.WriteMessage(value),
+                (output, value, cancellationToken) => output.WriteMessageAsync(value, cancellationToken),
+                message => CodedOutputStream.ComputeMessageSize(message), tag);
         }
 
         /// <summary>
@@ -232,7 +303,9 @@ namespace Google.Protobuf
             var nestedCodec = WrapperCodecs.GetCodec<T>();
             return new FieldCodec<T>(
                 input => WrapperCodecs.Read<T>(input, nestedCodec),
+                async (input, cancellationToken) => await WrapperCodecs.ReadAsync<T>(input, nestedCodec, cancellationToken),
                 (output, value) => WrapperCodecs.Write<T>(output, value, nestedCodec),
+                (output, value, cancellationToken) => WrapperCodecs.WriteAsync<T>(output, value, nestedCodec, cancellationToken),
                 value => WrapperCodecs.CalculateSize<T>(value, nestedCodec),
                 tag,
                 null); // Default value for the wrapper
@@ -247,7 +320,9 @@ namespace Google.Protobuf
             var nestedCodec = WrapperCodecs.GetCodec<T>();
             return new FieldCodec<T?>(
                 input => WrapperCodecs.Read<T>(input, nestedCodec),
+                async (input, cancellationToken) => await WrapperCodecs.ReadAsync<T>(input, nestedCodec, cancellationToken),
                 (output, value) => WrapperCodecs.Write<T>(output, value.Value, nestedCodec),
+                (output, value, cancellationToken) => WrapperCodecs.WriteAsync<T>(output, value.Value, nestedCodec, cancellationToken),
                 value => value == null ? 0 : WrapperCodecs.CalculateSize<T>(value.Value, nestedCodec),
                 tag,
                 null); // Default value for the wrapper
@@ -315,10 +390,41 @@ namespace Google.Protobuf
                 return value;
             }
 
+            internal async static ValueTask<T> ReadAsync<T>(CodedInputStream input, FieldCodec<T> codec, CancellationToken cancellationToken)
+            {
+                int length = await input.ReadLengthAsync(cancellationToken);
+                int oldLimit = input.PushLimit(length);
+
+                uint tag;
+                T value = codec.DefaultValue;
+                while ((tag = await input.ReadTagAsync(cancellationToken)) != 0)
+                {
+                    if (tag == codec.Tag)
+                    {
+                        value = await codec.ReadAsync(input, cancellationToken);
+                    }
+                    else
+                    {
+                        await input.SkipLastFieldAsync(cancellationToken);
+                    }
+
+                }
+                input.CheckReadEndOfStreamTag();
+                input.PopLimit(oldLimit);
+
+                return value;
+            }
+
             internal static void Write<T>(CodedOutputStream output, T value, FieldCodec<T> codec)
             {
                 output.WriteLength(codec.CalculateSizeWithTag(value));
                 codec.WriteTagAndValue(output, value);
+            }
+
+            internal static async Task WriteAsync<T>(CodedOutputStream output, T value, FieldCodec<T> codec, CancellationToken cancellationToken)
+            {
+                await output.WriteLengthAsync(codec.CalculateSizeWithTag(value), cancellationToken).ConfigureAwait(false);
+                await codec.WriteTagAndValueAsync(output, value, cancellationToken).ConfigureAwait(false);
             }
 
             internal  static int CalculateSize<T>(T value, FieldCodec<T> codec)
@@ -372,6 +478,7 @@ namespace Google.Protobuf
         /// Returns a delegate to write a value (unconditionally) to a coded output stream.
         /// </summary>
         internal Action<CodedOutputStream, T> ValueWriter { get; }
+        internal Func<CodedOutputStream, T, CancellationToken, Task> ValueAsyncWriter { get; }
 
         /// <summary>
         /// Returns the size calculator for just a value.
@@ -383,6 +490,7 @@ namespace Google.Protobuf
         /// the stream is already positioned on the appropriate tag.
         /// </summary>
         internal Func<CodedInputStream, T> ValueReader { get; }
+        internal Func<CodedInputStream, CancellationToken, ValueTask<T>> ValueAsyncReader { get; }
 
         /// <summary>
         /// Returns the fixed size for an entry, or 0 if sizes vary.
@@ -411,24 +519,30 @@ namespace Google.Protobuf
         
         internal FieldCodec(
                 Func<CodedInputStream, T> reader,
+                Func<CodedInputStream, CancellationToken, ValueTask<T>> asyncReader,
                 Action<CodedOutputStream, T> writer,
+                Func<CodedOutputStream, T, CancellationToken, Task> asyncWriter,
                 int fixedSize,
-                uint tag) : this(reader, writer, _ => fixedSize, tag)
+                uint tag) : this(reader, asyncReader, writer, asyncWriter, _ => fixedSize, tag)
         {
             FixedSize = fixedSize;
         }
 
         internal FieldCodec(
             Func<CodedInputStream, T> reader,
+            Func<CodedInputStream, CancellationToken, ValueTask<T>> asyncReader,
             Action<CodedOutputStream, T> writer,
+            Func<CodedOutputStream, T, CancellationToken, Task> asyncWriter,
             Func<T, int> sizeCalculator,
-            uint tag) : this(reader, writer, sizeCalculator, tag, DefaultDefault)
+            uint tag) : this(reader, asyncReader, writer, asyncWriter, sizeCalculator, tag, DefaultDefault)
         {
         }
 
         internal FieldCodec(
             Func<CodedInputStream, T> reader,
+            Func<CodedInputStream, CancellationToken, ValueTask<T>> asyncReader,
             Action<CodedOutputStream, T> writer,
+            Func<CodedOutputStream, T, CancellationToken, Task> asyncWriter,
             Func<T, int> sizeCalculator,
             uint tag,
             T defaultValue)
@@ -456,12 +570,23 @@ namespace Google.Protobuf
             }
         }
 
+        public async Task WriteTagAndValueAsync(CodedOutputStream output, T value, CancellationToken cancellationToken)
+        {
+            if (!IsDefault(value))
+            {
+                await output.WriteTagAsync(Tag, cancellationToken).ConfigureAwait(false);
+                await ValueAsyncWriter(output, value, cancellationToken).ConfigureAwait(false);
+            }
+        }
+
         /// <summary>
         /// Reads a value of the codec type from the given <see cref="CodedInputStream"/>.
         /// </summary>
         /// <param name="input">The input stream to read from.</param>
         /// <returns>The value read from the stream.</returns>
         public T Read(CodedInputStream input) => ValueReader(input);
+
+        public ValueTask<T> ReadAsync(CodedInputStream input, CancellationToken cancellationToken) => ValueAsyncReader(input, cancellationToken);
 
         /// <summary>
         /// Calculates the size required to write the given value, with a tag,

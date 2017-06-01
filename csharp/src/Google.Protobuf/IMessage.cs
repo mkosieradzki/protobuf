@@ -31,6 +31,8 @@
 #endregion
 
 using System;
+using System.Threading;
+using System.Threading.Tasks;
 using Google.Protobuf.Reflection;
 
 namespace Google.Protobuf
@@ -69,6 +71,12 @@ namespace Google.Protobuf
         MessageDescriptor Descriptor { get; }
     }
 
+    public interface IAsyncMessage : IMessage
+    {
+        Task MergeFromAsync(CodedInputStream input, CancellationToken cancellationToken);
+        Task WriteToAsync(CodedOutputStream output, CancellationToken cancellationToken);
+    }
+
     /// <summary>
     /// Generic interface for a Protocol Buffers message,
     /// where the type parameter is expected to be the same type as
@@ -83,5 +91,10 @@ namespace Google.Protobuf
         /// <remarks>See the user guide for precise merge semantics.</remarks>
         /// <param name="message">The message to merge with this one. Must not be null.</param>
         void MergeFrom(T message);
+    }
+
+    public interface IAsyncMessage<T> : IAsyncMessage, IEquatable<T>, IDeepCloneable<T> where T : IMessage<T>
+    {
+
     }
 }

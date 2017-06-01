@@ -37,6 +37,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Google.Protobuf.Collections
 {
@@ -655,6 +657,33 @@ namespace Google.Protobuf.Collections
                     }
                 }
 
+                public async Task MergeFromAsync(CodedInputStream input, CancellationToken cancellationToken)
+                {
+                    uint tag;
+                    while ((tag = await input.ReadTagAsync(cancellationToken).ConfigureAwait(false)) != 0)
+                    {
+                        if (tag == codec.keyCodec.Tag)
+                        {
+                            Key = await codec.keyCodec.ReadAsync(input, cancellationToken).ConfigureAwait(false);
+                        }
+                        else if (tag == codec.valueCodec.Tag)
+                        {
+                            Value = await codec.valueCodec.ReadAsync(input, cancellationToken).ConfigureAwait(false);
+                        }
+                        else
+                        {
+                            await input.SkipLastFieldAsync(cancellationToken).ConfigureAwait(false);
+                        }
+                    }
+
+                    // Corner case: a map entry with a key but no value, where the value type is a message.
+                    // Read it as if we'd seen an input stream with no data (i.e. create a "default" message).
+                    if (Value == null)
+                    {
+                        Value = await codec.valueCodec.ReadAsync(new CodedInputStream(ZeroLengthMessageStreamData), cancellationToken);
+                    }
+                }
+
                 public void WriteTo(CodedOutputStream output)
                 {
                     codec.keyCodec.WriteTagAndValue(output, Key);
@@ -664,6 +693,12 @@ namespace Google.Protobuf.Collections
                 public int CalculateSize()
                 {
                     return codec.keyCodec.CalculateSizeWithTag(Key) + codec.valueCodec.CalculateSizeWithTag(Value);
+                }
+
+                public async Task WriteToAsync(CodedOutputStream output, CancellationToken cancellationToken)
+                {
+                    await codec.keyCodec.WriteTagAndValueAsync(output, Key, cancellationToken).ConfigureAwait(false);
+                    await codec.valueCodec.WriteTagAndValueAsync(output, Value, cancellationToken);
                 }
 
                 MessageDescriptor IMessage.Descriptor { get { return null; } }

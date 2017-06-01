@@ -34,6 +34,8 @@ using Google.Protobuf.Collections;
 using System;
 using System.IO;
 using System.Text;
+using System.Threading.Tasks;
+using System.Threading;
 
 namespace Google.Protobuf
 {
@@ -172,6 +174,8 @@ namespace Google.Protobuf
             WriteRawLittleEndian64((ulong)BitConverter.DoubleToInt64Bits(value));
         }
 
+        public Task WriteDoubleAsync(double value, CancellationToken cancellationToken) => WriteRawLittleEndian64Async((ulong)BitConverter.DoubleToInt64Bits(value), cancellationToken);
+
         /// <summary>
         /// Writes a float field value, without a tag, to the stream.
         /// </summary>
@@ -197,6 +201,27 @@ namespace Google.Protobuf
             }
         }
 
+        public async Task WriteFloatAsync(float value, CancellationToken cancellationToken)
+        {
+            byte[] rawBytes = BitConverter.GetBytes(value);
+            if (!BitConverter.IsLittleEndian)
+            {
+                ByteArray.Reverse(rawBytes);
+            }
+
+            if (limit - position >= 4)
+            {
+                buffer[position++] = rawBytes[0];
+                buffer[position++] = rawBytes[1];
+                buffer[position++] = rawBytes[2];
+                buffer[position++] = rawBytes[3];
+            }
+            else
+            {
+                await WriteRawBytesAsync(rawBytes, 0, 4, cancellationToken).ConfigureAwait(false);
+            }
+        }
+
         /// <summary>
         /// Writes a uint64 field value, without a tag, to the stream.
         /// </summary>
@@ -206,6 +231,8 @@ namespace Google.Protobuf
             WriteRawVarint64(value);
         }
 
+        public Task WriteUInt64Async(ulong value, CancellationToken cancellationToken) => WriteRawVarint64Async(value, cancellationToken);
+
         /// <summary>
         /// Writes an int64 field value, without a tag, to the stream.
         /// </summary>
@@ -214,6 +241,8 @@ namespace Google.Protobuf
         {
             WriteRawVarint64((ulong) value);
         }
+
+        public Task WriteInt64Async(long value, CancellationToken cancellationToken) => WriteRawVarint64Async((ulong)value, cancellationToken);
 
         /// <summary>
         /// Writes an int32 field value, without a tag, to the stream.
@@ -232,6 +261,19 @@ namespace Google.Protobuf
             }
         }
 
+        public Task WriteInt32Async(int value, CancellationToken cancellationToken)
+        {
+            if (value >= 0)
+            {
+                return WriteRawVarint32Async((uint)value, cancellationToken);
+            }
+            else
+            {
+                // Must sign-extend.
+                return WriteRawVarint64Async((ulong)value, cancellationToken);
+            }
+        }
+
         /// <summary>
         /// Writes a fixed64 field value, without a tag, to the stream.
         /// </summary>
@@ -240,6 +282,8 @@ namespace Google.Protobuf
         {
             WriteRawLittleEndian64(value);
         }
+
+        public Task WriteFixed64Async(ulong value, CancellationToken cancellationToken) => WriteRawLittleEndian64Async(value, cancellationToken);
 
         /// <summary>
         /// Writes a fixed32 field value, without a tag, to the stream.
@@ -250,6 +294,8 @@ namespace Google.Protobuf
             WriteRawLittleEndian32(value);
         }
 
+        public Task WriteFixed32Async(uint value, CancellationToken cancellationToken) => WriteRawLittleEndian32Async(value, cancellationToken);
+
         /// <summary>
         /// Writes a bool field value, without a tag, to the stream.
         /// </summary>
@@ -258,6 +304,8 @@ namespace Google.Protobuf
         {
             WriteRawByte(value ? (byte) 1 : (byte) 0);
         }
+
+        public Task WriteBoolAsync(bool value, CancellationToken cancellationToken) => WriteRawByteAsync(value ? (byte)1 : (byte)0, cancellationToken);
 
         /// <summary>
         /// Writes a string field value, without a tag, to the stream.
@@ -292,6 +340,34 @@ namespace Google.Protobuf
             }
         }
 
+        public async Task WriteStringAsync(string value, CancellationToken cancellationToken)
+        {
+            // Optimise the case where we have enough space to write
+            // the string directly to the buffer, which should be common.
+            int length = Utf8Encoding.GetByteCount(value);
+            await WriteLengthAsync(length, cancellationToken);
+            if (limit - position >= length)
+            {
+                if (length == value.Length) // Must be all ASCII...
+                {
+                    for (int i = 0; i < length; i++)
+                    {
+                        buffer[position + i] = (byte)value[i];
+                    }
+                }
+                else
+                {
+                    Utf8Encoding.GetBytes(value, 0, value.Length, buffer, position);
+                }
+                position += length;
+            }
+            else
+            {
+                byte[] bytes = Utf8Encoding.GetBytes(value);
+                await WriteRawBytesAsync(bytes, cancellationToken);
+            }
+        }
+
         /// <summary>
         /// Writes a message, without a tag, to the stream.
         /// The data is length-prefixed.
@@ -301,6 +377,19 @@ namespace Google.Protobuf
         {
             WriteLength(value.CalculateSize());
             value.WriteTo(this);
+        }
+
+        public async Task WriteMessageAsync(IMessage value, CancellationToken cancellationToken)
+        {
+            await WriteLengthAsync(value.CalculateSize(), cancellationToken);
+            if (value is IAsyncMessage asyncMessage)
+            {
+                await asyncMessage.WriteToAsync(this, cancellationToken);
+            }
+            else
+            {
+                value.WriteTo(this);
+            }
         }
 
         /// <summary>
@@ -314,6 +403,12 @@ namespace Google.Protobuf
             value.WriteRawBytesTo(this);
         }
 
+        public async Task WriteBytesAsync(ByteString value, CancellationToken cancellationToken)
+        {
+            await WriteLengthAsync(value.Length, cancellationToken).ConfigureAwait(false);
+            await value.WriteRawBytesToAsync(this, cancellationToken);
+        }
+
         /// <summary>
         /// Writes a uint32 value, without a tag, to the stream.
         /// </summary>
@@ -322,6 +417,8 @@ namespace Google.Protobuf
         {
             WriteRawVarint32(value);
         }
+
+        public Task WriteUInt32Async(uint value, CancellationToken cancellationToken) => WriteRawVarint32Async(value, cancellationToken);
 
         /// <summary>
         /// Writes an enum value, without a tag, to the stream.
@@ -332,6 +429,8 @@ namespace Google.Protobuf
             WriteInt32(value);
         }
 
+        public Task WriteEnumAsync(int value, CancellationToken cancellationToken) => WriteInt32Async(value, cancellationToken);
+
         /// <summary>
         /// Writes an sfixed32 value, without a tag, to the stream.
         /// </summary>
@@ -340,6 +439,8 @@ namespace Google.Protobuf
         {
             WriteRawLittleEndian32((uint) value);
         }
+
+        public Task WriteSFixed32Async(int value, CancellationToken cancellationToken) => WriteRawLittleEndian32Async((uint)value, cancellationToken);
 
         /// <summary>
         /// Writes an sfixed64 value, without a tag, to the stream.
@@ -350,6 +451,8 @@ namespace Google.Protobuf
             WriteRawLittleEndian64((ulong) value);
         }
 
+        public Task WriteSFixed64Async(long value, CancellationToken cancellationToken) => WriteRawLittleEndian64Async((ulong)value, cancellationToken);
+
         /// <summary>
         /// Writes an sint32 value, without a tag, to the stream.
         /// </summary>
@@ -359,6 +462,8 @@ namespace Google.Protobuf
             WriteRawVarint32(EncodeZigZag32(value));
         }
 
+        public Task WriteSInt32Async(int value, CancellationToken cancellationToken) => WriteRawVarint32Async(EncodeZigZag32(value), cancellationToken);
+
         /// <summary>
         /// Writes an sint64 value, without a tag, to the stream.
         /// </summary>
@@ -367,6 +472,8 @@ namespace Google.Protobuf
         {
             WriteRawVarint64(EncodeZigZag64(value));
         }
+
+        public Task WriteSInt64Async(long value, CancellationToken cancellationToken) => WriteRawVarint64Async(EncodeZigZag64(value), cancellationToken);
 
         /// <summary>
         /// Writes a length (in bytes) for length-delimited data.
@@ -379,6 +486,8 @@ namespace Google.Protobuf
         {
             WriteRawVarint32((uint) length);
         }
+
+        public Task WriteLengthAsync(int length, CancellationToken cancellationToken) => WriteRawVarint32Async((uint)length, cancellationToken);
 
         #endregion
 
@@ -401,6 +510,8 @@ namespace Google.Protobuf
         {
             WriteRawVarint32(tag);
         }
+
+        public Task WriteTagAsync(uint tag, CancellationToken cancellationToken) => WriteRawVarint32Async(tag, cancellationToken);
 
         /// <summary>
         /// Writes the given single-byte tag directly to the stream.
@@ -503,6 +614,35 @@ namespace Google.Protobuf
             }
         }
 
+        internal async Task WriteRawVarint32Async(uint value, CancellationToken cancellationToken)
+        {
+            // Optimize for the common case of a single byte value
+            if (value < 128 && position < limit)
+            {
+                buffer[position++] = (byte)value;
+                return;
+            }
+
+            while (value > 127 && position < limit)
+            {
+                buffer[position++] = (byte)((value & 0x7F) | 0x80);
+                value >>= 7;
+            }
+            while (value > 127)
+            {
+                await WriteRawByteAsync((byte)((value & 0x7F) | 0x80), cancellationToken).ConfigureAwait(false);
+                value >>= 7;
+            }
+            if (position < limit)
+            {
+                buffer[position++] = (byte)value;
+            }
+            else
+            {
+                await WriteRawByteAsync((byte)value, cancellationToken).ConfigureAwait(false);
+            }
+        }
+
         internal void WriteRawVarint64(ulong value)
         {
             while (value > 127 && position < limit)
@@ -525,6 +665,28 @@ namespace Google.Protobuf
             }
         }
 
+        internal async Task WriteRawVarint64Async(ulong value, CancellationToken cancellationToken)
+        {
+            while (value > 127 && position < limit)
+            {
+                buffer[position++] = (byte)((value & 0x7F) | 0x80);
+                value >>= 7;
+            }
+            while (value > 127)
+            {
+                await WriteRawByteAsync((byte)((value & 0x7F) | 0x80), cancellationToken);
+                value >>= 7;
+            }
+            if (position < limit)
+            {
+                buffer[position++] = (byte)value;
+            }
+            else
+            {
+                await WriteRawByteAsync((byte)value, cancellationToken);
+            }
+        }
+
         internal void WriteRawLittleEndian32(uint value)
         {
             if (position + 4 > limit)
@@ -540,6 +702,24 @@ namespace Google.Protobuf
                 buffer[position++] = ((byte) (value >> 8));
                 buffer[position++] = ((byte) (value >> 16));
                 buffer[position++] = ((byte) (value >> 24));
+            }
+        }
+
+        internal async Task WriteRawLittleEndian32Async(uint value, CancellationToken cancellationToken)
+        {
+            if (position + 4 > limit)
+            {
+                await WriteRawByteAsync((byte)value, cancellationToken);
+                await WriteRawByteAsync((byte)(value >> 8), cancellationToken);
+                await WriteRawByteAsync((byte)(value >> 16), cancellationToken);
+                await WriteRawByteAsync((byte)(value >> 24), cancellationToken);
+            }
+            else
+            {
+                buffer[position++] = ((byte)value);
+                buffer[position++] = ((byte)(value >> 8));
+                buffer[position++] = ((byte)(value >> 16));
+                buffer[position++] = ((byte)(value >> 24));
             }
         }
 
@@ -569,11 +749,47 @@ namespace Google.Protobuf
             }
         }
 
+        internal async Task WriteRawLittleEndian64Async(ulong value, CancellationToken cancellationToken)
+        {
+            if (position + 8 > limit)
+            {
+                await WriteRawByteAsync((byte)value, cancellationToken);
+                await WriteRawByteAsync((byte)(value >> 8), cancellationToken);
+                await WriteRawByteAsync((byte)(value >> 16), cancellationToken);
+                await WriteRawByteAsync((byte)(value >> 24), cancellationToken);
+                await WriteRawByteAsync((byte)(value >> 32), cancellationToken);
+                await WriteRawByteAsync((byte)(value >> 40), cancellationToken);
+                await WriteRawByteAsync((byte)(value >> 48), cancellationToken);
+                await WriteRawByteAsync((byte)(value >> 56), cancellationToken);
+            }
+            else
+            {
+                buffer[position++] = ((byte)value);
+                buffer[position++] = ((byte)(value >> 8));
+                buffer[position++] = ((byte)(value >> 16));
+                buffer[position++] = ((byte)(value >> 24));
+                buffer[position++] = ((byte)(value >> 32));
+                buffer[position++] = ((byte)(value >> 40));
+                buffer[position++] = ((byte)(value >> 48));
+                buffer[position++] = ((byte)(value >> 56));
+            }
+        }
+
         internal void WriteRawByte(byte value)
         {
             if (position == limit)
             {
                 RefreshBuffer();
+            }
+
+            buffer[position++] = value;
+        }
+
+        internal async Task WriteRawByteAsync(byte value, CancellationToken cancellationToken)
+        {
+            if (position == limit)
+            {
+                await RefreshBufferAsync(cancellationToken).ConfigureAwait(false);
             }
 
             buffer[position++] = value;
@@ -591,6 +807,8 @@ namespace Google.Protobuf
         {
             WriteRawBytes(value, 0, value.Length);
         }
+
+        internal Task WriteRawBytesAsync(byte[] value, CancellationToken cancellationToken) => WriteRawBytesAsync(value, 0, value.Length, cancellationToken);
 
         /// <summary>
         /// Writes out part of an array of bytes.
@@ -627,6 +845,42 @@ namespace Google.Protobuf
                 {
                     // Write is very big.  Let's do it all at once.
                     output.Write(value, offset, length);
+                }
+            }
+        }
+
+        internal async Task WriteRawBytesAsync(byte[] value, int offset, int length, CancellationToken cancellationToken)
+        {
+            if (limit - position >= length)
+            {
+                ByteArray.Copy(value, offset, buffer, position, length);
+                // We have room in the current buffer.
+                position += length;
+            }
+            else
+            {
+                // Write extends past current buffer.  Fill the rest of this buffer and
+                // flush.
+                int bytesWritten = limit - position;
+                ByteArray.Copy(value, offset, buffer, position, bytesWritten);
+                offset += bytesWritten;
+                length -= bytesWritten;
+                position = limit;
+                await RefreshBufferAsync(cancellationToken).ConfigureAwait(false);
+
+                // Now deal with the rest.
+                // Since we have an output stream, this is our buffer
+                // and buffer offset == 0
+                if (length <= limit)
+                {
+                    // Fits in new buffer.
+                    ByteArray.Copy(value, offset, buffer, 0, length);
+                    position = length;
+                }
+                else
+                {
+                    // Write is very big.  Let's do it all at once.
+                    await output.WriteAsync(value, offset, length, cancellationToken).ConfigureAwait(false);
                 }
             }
         }
@@ -673,6 +927,20 @@ namespace Google.Protobuf
             // Since we have an output stream, this is our buffer
             // and buffer offset == 0
             output.Write(buffer, 0, position);
+            position = 0;
+        }
+
+        private async Task RefreshBufferAsync(CancellationToken cancellationToken)
+        {
+            if (output == null)
+            {
+                // We're writing to a single buffer.
+                throw new OutOfSpaceException();
+            }
+
+            // Since we have an output stream, this is our buffer
+            // and buffer offset == 0
+            await output.WriteAsync(buffer, 0, position, cancellationToken).ConfigureAwait(false);
             position = 0;
         }
 
