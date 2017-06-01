@@ -93,7 +93,7 @@ namespace Google.Protobuf
         void MergeFrom(T message);
     }
 
-    public interface IAsyncMessage<T> : IAsyncMessage, IEquatable<T>, IDeepCloneable<T> where T : IMessage<T>
+    public interface IAsyncMessage<T> : IAsyncMessage, IEquatable<T>, IDeepCloneable<T> where T : IAsyncMessage<T>
     {
 
     }

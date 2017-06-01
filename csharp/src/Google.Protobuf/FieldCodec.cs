@@ -548,7 +548,9 @@ namespace Google.Protobuf
             T defaultValue)
         {
             ValueReader = reader;
+            ValueAsyncReader = asyncReader;
             ValueWriter = writer;
+            ValueAsyncWriter = asyncWriter;
             ValueSizeCalculator = sizeCalculator;
             FixedSize = 0;
             Tag = tag;
