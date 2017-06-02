@@ -382,7 +382,9 @@ namespace Google.Protobuf
             outputStream.WriteRawBytes(bytes, 0, bytes.Length);
         }
 
+#if !NET35
         internal Task WriteRawBytesToAsync(CodedOutputStream outputStream, CancellationToken cancellationToken) => outputStream.WriteRawBytesAsync(bytes, 0, bytes.Length, cancellationToken);
+#endif
 
         /// <summary>
         /// Copies the entire byte array to the destination array provided at the offset specified.
