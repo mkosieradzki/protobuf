@@ -105,16 +105,19 @@ void MessageGenerator::AddDeprecatedFlag(io::Printer* printer) {
 }
 
 void MessageGenerator::Generate(io::Printer* printer) {
+  const bool allowAsync = descriptor_->file()->options().csharp_async();
+
   map<string, string> vars;
   vars["class_name"] = class_name();
   vars["access_level"] = class_access_level();
+  vars["message_interface"] = allowAsync ? "IAsyncMessage" : "IMessage";
 
   WriteMessageDocComment(printer, descriptor_);
   AddDeprecatedFlag(printer);
   
   printer->Print(
     vars,
-    "$access_level$ sealed partial class $class_name$ : pb::IMessage<$class_name$> {\n");
+    "$access_level$ sealed partial class $class_name$ : pb::$message_interface$<$class_name$> {\n");
   printer->Indent();
 
   // All static fields and properties
