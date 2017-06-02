@@ -380,6 +380,8 @@ message FileOptions {
   // from this .proto. Default is empty.
   optional string php_class_prefix = 40;
 
+  optional bool csharp_async = 41 [default=false];
+
   // The parser stores options it doesn't recognize here. See above.
   repeated UninterpretedOption uninterpreted_option = 999;
 
