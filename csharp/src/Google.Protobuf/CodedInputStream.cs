@@ -34,8 +34,6 @@ using Google.Protobuf.Collections;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Threading.Tasks;
-using System.Threading;
 
 namespace Google.Protobuf
 {
@@ -53,7 +51,7 @@ namespace Google.Protobuf
     /// and <see cref="MapField{TKey, TValue}"/> to serialize such fields.
     /// </para>
     /// </remarks>
-    public sealed class CodedInputStream : IDisposable
+    public sealed partial class CodedInputStream : IDisposable
     {
         /// <summary>
         /// Whether to leave the underlying stream open when disposing of this stream.
@@ -382,58 +380,6 @@ namespace Google.Protobuf
             return lastTag;
         }
 
-        public async ValueTask<uint> ReadTagAsync(CancellationToken cancellationToken)
-        {
-            if (hasNextTag)
-            {
-                lastTag = nextTag;
-                hasNextTag = false;
-                return lastTag;
-            }
-
-            // Optimize for the incredibly common case of having at least two bytes left in the buffer,
-            // and those two bytes being enough to get the tag. This will be true for fields up to 4095.
-            if (bufferPos + 2 <= bufferSize)
-            {
-                int tmp = buffer[bufferPos++];
-                if (tmp < 128)
-                {
-                    lastTag = (uint)tmp;
-                }
-                else
-                {
-                    int result = tmp & 0x7f;
-                    if ((tmp = buffer[bufferPos++]) < 128)
-                    {
-                        result |= tmp << 7;
-                        lastTag = (uint)result;
-                    }
-                    else
-                    {
-                        // Nope, rewind and go the potentially slow route.
-                        bufferPos -= 2;
-                        lastTag = await ReadRawVarint32Async(cancellationToken);
-                    }
-                }
-            }
-            else
-            {
-                if (IsAtEnd)
-                {
-                    lastTag = 0;
-                    return 0; // This is the only case in which we return 0.
-                }
-
-                lastTag = await ReadRawVarint32Async(cancellationToken);
-            }
-            if (lastTag == 0)
-            {
-                // If we actually read zero, that's not a valid tag.
-                throw InvalidProtocolBufferException.InvalidTag();
-            }
-            return lastTag;
-        }
-
         /// <summary>
         /// Skips the data for the field with the tag we've just read.
         /// This should be called directly after <see cref="ReadTag"/>, when
@@ -477,36 +423,6 @@ namespace Google.Protobuf
             }
         }
 
-        public async Task SkipLastFieldAsync(CancellationToken cancellationToken)
-        {
-            if (lastTag == 0)
-            {
-                throw new InvalidOperationException("SkipLastField cannot be called at the end of a stream");
-            }
-            switch (WireFormat.GetTagWireType(lastTag))
-            {
-                case WireFormat.WireType.StartGroup:
-                    await SkipGroupAsync(lastTag, cancellationToken);
-                    break;
-                case WireFormat.WireType.EndGroup:
-                    throw new InvalidProtocolBufferException(
-                        "SkipLastField called on an end-group tag, indicating that the corresponding start-group was missing");
-                case WireFormat.WireType.Fixed32:
-                    await ReadFixed32Async(cancellationToken);
-                    break;
-                case WireFormat.WireType.Fixed64:
-                    ReadFixed64();
-                    break;
-                case WireFormat.WireType.LengthDelimited:
-                    var length = await ReadLengthAsync(cancellationToken);
-                    SkipRawBytes(length);
-                    break;
-                case WireFormat.WireType.Varint:
-                    await ReadRawVarint32Async(cancellationToken);
-                    break;
-            }
-        }
-
         private void SkipGroup(uint startGroupTag)
         {
             // Note: Currently we expect this to be the way that groups are read. We could put the recursion
@@ -542,41 +458,6 @@ namespace Google.Protobuf
             recursionDepth--;
         }
 
-        private async Task SkipGroupAsync(uint startGroupTag, CancellationToken cancellationToken)
-        {
-            // Note: Currently we expect this to be the way that groups are read. We could put the recursion
-            // depth changes into the ReadTag method instead, potentially...
-            recursionDepth++;
-            if (recursionDepth >= recursionLimit)
-            {
-                throw InvalidProtocolBufferException.RecursionLimitExceeded();
-            }
-            uint tag;
-            while (true)
-            {
-                tag = await ReadTagAsync(cancellationToken);
-                if (tag == 0)
-                {
-                    throw InvalidProtocolBufferException.TruncatedMessage();
-                }
-                // Can't call SkipLastField for this case- that would throw.
-                if (WireFormat.GetTagWireType(tag) == WireFormat.WireType.EndGroup)
-                {
-                    break;
-                }
-                // This recursion will allow us to handle nested groups.
-                SkipLastField();
-            }
-            int startField = WireFormat.GetTagFieldNumber(startGroupTag);
-            int endField = WireFormat.GetTagFieldNumber(tag);
-            if (startField != endField)
-            {
-                throw new InvalidProtocolBufferException(
-                    $"Mismatched end-group tag. Started with field {startField}; ended with field {endField}");
-            }
-            recursionDepth--;
-        }
-
         /// <summary>
         /// Reads a double field from the stream.
         /// </summary>
@@ -584,8 +465,6 @@ namespace Google.Protobuf
         {
             return BitConverter.Int64BitsToDouble((long) ReadRawLittleEndian64());
         }
-
-        public async ValueTask<double> ReadDoubleAsync(CancellationToken cancellationToken) => BitConverter.Int64BitsToDouble((long)await ReadRawLittleEndian64Async(cancellationToken).ConfigureAwait(false));
 
         /// <summary>
         /// Reads a float field from the stream.
@@ -609,25 +488,6 @@ namespace Google.Protobuf
             }
         }
 
-        public async ValueTask<float> ReadFloatAsync(CancellationToken cancellationToken)
-        {
-            if (BitConverter.IsLittleEndian && 4 <= bufferSize - bufferPos)
-            {
-                float ret = BitConverter.ToSingle(buffer, bufferPos);
-                bufferPos += 4;
-                return ret;
-            }
-            else
-            {
-                byte[] rawBytes = await ReadRawBytesAsync(4, cancellationToken);
-                if (!BitConverter.IsLittleEndian)
-                {
-                    ByteArray.Reverse(rawBytes);
-                }
-                return BitConverter.ToSingle(rawBytes, 0);
-            }
-        }
-
         /// <summary>
         /// Reads a uint64 field from the stream.
         /// </summary>
@@ -636,19 +496,12 @@ namespace Google.Protobuf
             return ReadRawVarint64();
         }
 
-        public ValueTask<ulong> ReadUInt64Async(CancellationToken cancellationToken) => ReadRawVarint64Async(cancellationToken);
-
         /// <summary>
         /// Reads an int64 field from the stream.
         /// </summary>
         public long ReadInt64()
         {
             return (long) ReadRawVarint64();
-        }
-
-        public async ValueTask<long> ReadInt64Async(CancellationToken cancellationToken)
-        {
-            return (long)await ReadRawVarint64Async(cancellationToken);
         }
 
         /// <summary>
@@ -659,11 +512,6 @@ namespace Google.Protobuf
             return (int) ReadRawVarint32();
         }
 
-        public async ValueTask<int> ReadInt32Async(CancellationToken cancellationToken)
-        {
-            return (int)await ReadRawVarint32Async(cancellationToken);
-        }
-
         /// <summary>
         /// Reads a fixed64 field from the stream.
         /// </summary>
@@ -671,8 +519,6 @@ namespace Google.Protobuf
         {
             return ReadRawLittleEndian64();
         }
-
-        public ValueTask<ulong> ReadFixed64Async(CancellationToken cancellationToken) => ReadRawLittleEndian64Async(cancellationToken);
 
         /// <summary>
         /// Reads a fixed32 field from the stream.
@@ -682,19 +528,12 @@ namespace Google.Protobuf
             return ReadRawLittleEndian32();
         }
 
-        public ValueTask<uint> ReadFixed32Async(CancellationToken cancellationToken) => ReadRawLittleEndian32Async(cancellationToken);
-
         /// <summary>
         /// Reads a bool field from the stream.
         /// </summary>
         public bool ReadBool()
         {
             return ReadRawVarint32() != 0;
-        }
-
-        public async ValueTask<bool> ReadBoolAsync(CancellationToken cancellationToken)
-        {
-            return await ReadRawVarint32Async(cancellationToken) != 0;
         }
 
         /// <summary>
@@ -720,26 +559,6 @@ namespace Google.Protobuf
             return CodedOutputStream.Utf8Encoding.GetString(ReadRawBytes(length), 0, length);
         }
 
-        public async ValueTask<string> ReadStringAsync(CancellationToken cancellationToken)
-        {
-            int length = await ReadLengthAsync(cancellationToken);
-            // No need to read any data for an empty string.
-            if (length == 0)
-            {
-                return "";
-            }
-            if (length <= bufferSize - bufferPos)
-            {
-                // Fast path:  We already have the bytes in a contiguous buffer, so
-                //   just copy directly from it.
-                String result = CodedOutputStream.Utf8Encoding.GetString(buffer, bufferPos, length);
-                bufferPos += length;
-                return result;
-            }
-            // Slow path: Build a byte array first then copy it.
-            return CodedOutputStream.Utf8Encoding.GetString(await ReadRawBytesAsync(length, cancellationToken), 0, length);
-        }
-
         /// <summary>
         /// Reads an embedded message field value from the stream.
         /// </summary>   
@@ -753,38 +572,6 @@ namespace Google.Protobuf
             int oldLimit = PushLimit(length);
             ++recursionDepth;
             builder.MergeFrom(this);
-            CheckReadEndOfStreamTag();
-            // Check that we've read exactly as much data as expected.
-            if (!ReachedLimit)
-            {
-                throw InvalidProtocolBufferException.TruncatedMessage();
-            }
-            --recursionDepth;
-            PopLimit(oldLimit);
-        }
-
-        /// <summary>
-        /// Reads an embedded message field value from the stream.
-        /// </summary>   
-        public async Task ReadMessageAsync(IMessage builder, CancellationToken cancellationToken)
-        {
-            int length = await ReadLengthAsync(cancellationToken).ConfigureAwait(false);
-            if (recursionDepth >= recursionLimit)
-            {
-                throw InvalidProtocolBufferException.RecursionLimitExceeded();
-            }
-            int oldLimit = PushLimit(length);
-            ++recursionDepth;
-
-            if (builder is IAsyncMessage asyncMessage)
-            {
-                await asyncMessage.MergeFromAsync(this, cancellationToken);
-            }
-            else
-            {
-                builder.MergeFrom(this);
-            }
-
             CheckReadEndOfStreamTag();
             // Check that we've read exactly as much data as expected.
             if (!ReachedLimit)
@@ -816,24 +603,6 @@ namespace Google.Protobuf
             }
         }
 
-        public async ValueTask<ByteString> ReadBytesAsync(CancellationToken cancellationToken)
-        {
-            int length = await ReadLengthAsync(cancellationToken);
-            if (length <= bufferSize - bufferPos && length > 0)
-            {
-                // Fast path:  We already have the bytes in a contiguous buffer, so
-                //   just copy directly from it.
-                ByteString result = ByteString.CopyFrom(buffer, bufferPos, length);
-                bufferPos += length;
-                return result;
-            }
-            else
-            {
-                // Slow path:  Build a byte array and attach it to a new ByteString.
-                return ByteString.AttachBytes(await ReadRawBytesAsync(length, cancellationToken));
-            }
-        }
-
         /// <summary>
         /// Reads a uint32 field value from the stream.
         /// </summary>   
@@ -841,8 +610,6 @@ namespace Google.Protobuf
         {
             return ReadRawVarint32();
         }
-
-        public ValueTask<uint> ReadUInt32Async(CancellationToken cancellationToken) => ReadRawVarint32Async(cancellationToken);
 
         /// <summary>
         /// Reads an enum field value from the stream.
@@ -853,23 +620,12 @@ namespace Google.Protobuf
             return (int) ReadRawVarint32();
         }
 
-        public async ValueTask<int> ReadEnumAsync(CancellationToken cancellationToken)
-        {
-            // Currently just a pass-through, but it's nice to separate it logically from WriteInt32.
-            return (int)await ReadRawVarint32Async(cancellationToken);
-        }
-
         /// <summary>
         /// Reads an sfixed32 field value from the stream.
         /// </summary>   
         public int ReadSFixed32()
         {
             return (int) ReadRawLittleEndian32();
-        }
-
-        public async ValueTask<int> ReadSFixed32Async(CancellationToken cancellationToken)
-        {
-            return (int)await ReadRawLittleEndian32Async(cancellationToken);
         }
 
         /// <summary>
@@ -880,11 +636,6 @@ namespace Google.Protobuf
             return (long) ReadRawLittleEndian64();
         }
 
-        public async ValueTask<long> ReadSFixed64Async(CancellationToken cancellationToken)
-        {
-            return (long)await ReadRawLittleEndian64Async(cancellationToken).ConfigureAwait(false);
-        }
-
         /// <summary>
         /// Reads an sint32 field value from the stream.
         /// </summary>   
@@ -893,22 +644,12 @@ namespace Google.Protobuf
             return DecodeZigZag32(ReadRawVarint32());
         }
 
-        public async ValueTask<int> ReadSInt32Async(CancellationToken cancellationToken)
-        {
-            return DecodeZigZag32(await ReadRawVarint32Async(cancellationToken).ConfigureAwait(false));
-        }
-
         /// <summary>
         /// Reads an sint64 field value from the stream.
         /// </summary>   
         public long ReadSInt64()
         {
             return DecodeZigZag64(ReadRawVarint64());
-        }
-
-        public async ValueTask<long> ReadSInt64Async(CancellationToken cancellationToken)
-        {
-            return DecodeZigZag64(await ReadRawVarint64Async(cancellationToken).ConfigureAwait(false));
         }
 
         /// <summary>
@@ -922,8 +663,6 @@ namespace Google.Protobuf
         {
             return (int) ReadRawVarint32();
         }
-
-        public async ValueTask<int> ReadLengthAsync(CancellationToken cancellationToken) => (int)await ReadRawVarint32Async(cancellationToken).ConfigureAwait(false);
 
         /// <summary>
         /// Peeks at the next tag in the stream. If it matches <paramref name="tag"/>,
@@ -996,54 +735,6 @@ namespace Google.Protobuf
             return (uint) result;
         }
 
-        private async ValueTask<uint> SlowReadRawVarint32Async(CancellationToken cancellationToken)
-        {
-            int tmp = await ReadRawByteAsync(cancellationToken);
-            if (tmp < 128)
-            {
-                return (uint)tmp;
-            }
-            int result = tmp & 0x7f;
-            if ((tmp = await ReadRawByteAsync(cancellationToken)) < 128)
-            {
-                result |= tmp << 7;
-            }
-            else
-            {
-                result |= (tmp & 0x7f) << 7;
-                if ((tmp = await ReadRawByteAsync(cancellationToken)) < 128)
-                {
-                    result |= tmp << 14;
-                }
-                else
-                {
-                    result |= (tmp & 0x7f) << 14;
-                    if ((tmp = await ReadRawByteAsync(cancellationToken)) < 128)
-                    {
-                        result |= tmp << 21;
-                    }
-                    else
-                    {
-                        result |= (tmp & 0x7f) << 21;
-                        result |= (tmp = await ReadRawByteAsync(cancellationToken)) << 28;
-                        if (tmp >= 128)
-                        {
-                            // Discard upper 32 bits.
-                            for (int i = 0; i < 5; i++)
-                            {
-                                if (await ReadRawByteAsync(cancellationToken) < 128)
-                                {
-                                    return (uint)result;
-                                }
-                            }
-                            throw InvalidProtocolBufferException.MalformedVarint();
-                        }
-                    }
-                }
-            }
-            return (uint)result;
-        }
-
         /// <summary>
         /// Reads a raw Varint from the stream.  If larger than 32 bits, discard the upper bits.
         /// This method is optimised for the case where we've got lots of data in the buffer.
@@ -1104,62 +795,6 @@ namespace Google.Protobuf
                 }
             }
             return (uint) result;
-        }
-
-        internal async ValueTask<uint> ReadRawVarint32Async(CancellationToken cancellationToken)
-        {
-            if (bufferPos + 5 > bufferSize)
-            {
-                return await SlowReadRawVarint32Async(cancellationToken);
-            }
-
-            int tmp = buffer[bufferPos++];
-            if (tmp < 128)
-            {
-                return (uint)tmp;
-            }
-            int result = tmp & 0x7f;
-            if ((tmp = buffer[bufferPos++]) < 128)
-            {
-                result |= tmp << 7;
-            }
-            else
-            {
-                result |= (tmp & 0x7f) << 7;
-                if ((tmp = buffer[bufferPos++]) < 128)
-                {
-                    result |= tmp << 14;
-                }
-                else
-                {
-                    result |= (tmp & 0x7f) << 14;
-                    if ((tmp = buffer[bufferPos++]) < 128)
-                    {
-                        result |= tmp << 21;
-                    }
-                    else
-                    {
-                        result |= (tmp & 0x7f) << 21;
-                        result |= (tmp = buffer[bufferPos++]) << 28;
-                        if (tmp >= 128)
-                        {
-                            // Discard upper 32 bits.
-                            // Note that this has to use ReadRawByte() as we only ensure we've
-                            // got at least 5 bytes at the start of the method. This lets us
-                            // use the fast path in more cases, and we rarely hit this section of code.
-                            for (int i = 0; i < 5; i++)
-                            {
-                                if (await ReadRawByteAsync(cancellationToken) < 128)
-                                {
-                                    return (uint)result;
-                                }
-                            }
-                            throw InvalidProtocolBufferException.MalformedVarint();
-                        }
-                    }
-                }
-            }
-            return (uint)result;
         }
 
         /// <summary>
@@ -1224,23 +859,6 @@ namespace Google.Protobuf
             throw InvalidProtocolBufferException.MalformedVarint();
         }
 
-        internal async ValueTask<ulong> ReadRawVarint64Async(CancellationToken cancellationToken)
-        {
-            int shift = 0;
-            ulong result = 0;
-            while (shift < 64)
-            {
-                byte b = await ReadRawByteAsync(cancellationToken);
-                result |= (ulong)(b & 0x7F) << shift;
-                if ((b & 0x80) == 0)
-                {
-                    return result;
-                }
-                shift += 7;
-            }
-            throw InvalidProtocolBufferException.MalformedVarint();
-        }
-
         /// <summary>
         /// Reads a 32-bit little-endian integer from the stream.
         /// </summary>
@@ -1250,18 +868,6 @@ namespace Google.Protobuf
             uint b2 = ReadRawByte();
             uint b3 = ReadRawByte();
             uint b4 = ReadRawByte();
-            return b1 | (b2 << 8) | (b3 << 16) | (b4 << 24);
-        }
-
-        /// <summary>
-        /// Reads a 32-bit little-endian integer from the stream.
-        /// </summary>
-        internal async ValueTask<uint> ReadRawLittleEndian32Async(CancellationToken cancellationToken)
-        {
-            uint b1 = await ReadRawByteAsync(cancellationToken).ConfigureAwait(false);
-            uint b2 = await ReadRawByteAsync(cancellationToken).ConfigureAwait(false);
-            uint b3 = await ReadRawByteAsync(cancellationToken).ConfigureAwait(false);
-            uint b4 = await ReadRawByteAsync(cancellationToken).ConfigureAwait(false);
             return b1 | (b2 << 8) | (b3 << 16) | (b4 << 24);
         }
 
@@ -1278,20 +884,6 @@ namespace Google.Protobuf
             ulong b6 = ReadRawByte();
             ulong b7 = ReadRawByte();
             ulong b8 = ReadRawByte();
-            return b1 | (b2 << 8) | (b3 << 16) | (b4 << 24)
-                   | (b5 << 32) | (b6 << 40) | (b7 << 48) | (b8 << 56);
-        }
-
-        internal async ValueTask<ulong> ReadRawLittleEndian64Async(CancellationToken cancellationToken)
-        {
-            ulong b1 = await ReadRawByteAsync(cancellationToken).ConfigureAwait(false);
-            ulong b2 = await ReadRawByteAsync(cancellationToken).ConfigureAwait(false);
-            ulong b3 = await ReadRawByteAsync(cancellationToken).ConfigureAwait(false);
-            ulong b4 = await ReadRawByteAsync(cancellationToken).ConfigureAwait(false);
-            ulong b5 = await ReadRawByteAsync(cancellationToken).ConfigureAwait(false);
-            ulong b6 = await ReadRawByteAsync(cancellationToken).ConfigureAwait(false);
-            ulong b7 = await ReadRawByteAsync(cancellationToken).ConfigureAwait(false);
-            ulong b8 = await ReadRawByteAsync(cancellationToken).ConfigureAwait(false);
             return b1 | (b2 << 8) | (b3 << 16) | (b4 << 24)
                    | (b5 << 32) | (b6 << 40) | (b7 << 48) | (b8 << 56);
         }
@@ -1465,58 +1057,6 @@ namespace Google.Protobuf
             }
         }
 
-        private async ValueTask<bool> RefillBufferAsync(bool mustSucceed, CancellationToken cancellationToken)
-        {
-            if (bufferPos < bufferSize)
-            {
-                throw new InvalidOperationException("RefillBuffer() called when buffer wasn't empty.");
-            }
-
-            if (totalBytesRetired + bufferSize == currentLimit)
-            {
-                // Oops, we hit a limit.
-                if (mustSucceed)
-                {
-                    throw InvalidProtocolBufferException.TruncatedMessage();
-                }
-                else
-                {
-                    return false;
-                }
-            }
-
-            totalBytesRetired += bufferSize;
-
-            bufferPos = 0;
-            bufferSize = (input == null) ? 0 : await input.ReadAsync(buffer, 0, buffer.Length, cancellationToken);
-            if (bufferSize < 0)
-            {
-                throw new InvalidOperationException("Stream.Read returned a negative count");
-            }
-            if (bufferSize == 0)
-            {
-                if (mustSucceed)
-                {
-                    throw InvalidProtocolBufferException.TruncatedMessage();
-                }
-                else
-                {
-                    return false;
-                }
-            }
-            else
-            {
-                RecomputeBufferSizeAfterLimit();
-                int totalBytesRead =
-                    totalBytesRetired + bufferSize + bufferSizeAfterLimit;
-                if (totalBytesRead > sizeLimit || totalBytesRead < 0)
-                {
-                    throw InvalidProtocolBufferException.SizeLimitExceeded();
-                }
-                return true;
-            }
-        }
-
         /// <summary>
         /// Read one byte from the input.
         /// </summary>
@@ -1528,15 +1068,6 @@ namespace Google.Protobuf
             if (bufferPos == bufferSize)
             {
                 RefillBuffer(true);
-            }
-            return buffer[bufferPos++];
-        }
-
-        internal async ValueTask<byte> ReadRawByteAsync(CancellationToken cancellationToken)
-        {
-            if (bufferPos == bufferSize)
-            {
-                await RefillBufferAsync(true, cancellationToken).ConfigureAwait(false);
             }
             return buffer[bufferPos++];
         }
@@ -1660,119 +1191,6 @@ namespace Google.Protobuf
             }
         }
 
-        internal async ValueTask<byte[]> ReadRawBytesAsync(int size, CancellationToken cancellationToken)
-        {
-            if (size < 0)
-            {
-                throw InvalidProtocolBufferException.NegativeSize();
-            }
-
-            if (totalBytesRetired + bufferPos + size > currentLimit)
-            {
-                // Read to the end of the stream (up to the current limit) anyway.
-                SkipRawBytes(currentLimit - totalBytesRetired - bufferPos);
-                // Then fail.
-                throw InvalidProtocolBufferException.TruncatedMessage();
-            }
-
-            if (size <= bufferSize - bufferPos)
-            {
-                // We have all the bytes we need already.
-                byte[] bytes = new byte[size];
-                ByteArray.Copy(buffer, bufferPos, bytes, 0, size);
-                bufferPos += size;
-                return bytes;
-            }
-            else if (size < buffer.Length)
-            {
-                // Reading more bytes than are in the buffer, but not an excessive number
-                // of bytes.  We can safely allocate the resulting array ahead of time.
-
-                // First copy what we have.
-                byte[] bytes = new byte[size];
-                int pos = bufferSize - bufferPos;
-                ByteArray.Copy(buffer, bufferPos, bytes, 0, pos);
-                bufferPos = bufferSize;
-
-                // We want to use RefillBuffer() and then copy from the buffer into our
-                // byte array rather than reading directly into our byte array because
-                // the input may be unbuffered.
-                await RefillBufferAsync(true, cancellationToken);
-
-                while (size - pos > bufferSize)
-                {
-                    Buffer.BlockCopy(buffer, 0, bytes, pos, bufferSize);
-                    pos += bufferSize;
-                    bufferPos = bufferSize;
-                    await RefillBufferAsync(true, cancellationToken);
-                }
-
-                ByteArray.Copy(buffer, 0, bytes, pos, size - pos);
-                bufferPos = size - pos;
-
-                return bytes;
-            }
-            else
-            {
-                // The size is very large.  For security reasons, we can't allocate the
-                // entire byte array yet.  The size comes directly from the input, so a
-                // maliciously-crafted message could provide a bogus very large size in
-                // order to trick the app into allocating a lot of memory.  We avoid this
-                // by allocating and reading only a small chunk at a time, so that the
-                // malicious message must actually *be* extremely large to cause
-                // problems.  Meanwhile, we limit the allowed size of a message elsewhere.
-
-                // Remember the buffer markers since we'll have to copy the bytes out of
-                // it later.
-                int originalBufferPos = bufferPos;
-                int originalBufferSize = bufferSize;
-
-                // Mark the current buffer consumed.
-                totalBytesRetired += bufferSize;
-                bufferPos = 0;
-                bufferSize = 0;
-
-                // Read all the rest of the bytes we need.
-                int sizeLeft = size - (originalBufferSize - originalBufferPos);
-                List<byte[]> chunks = new List<byte[]>();
-
-                while (sizeLeft > 0)
-                {
-                    byte[] chunk = new byte[Math.Min(sizeLeft, buffer.Length)];
-                    int pos = 0;
-                    while (pos < chunk.Length)
-                    {
-                        int n = (input == null) ? -1 : await input.ReadAsync(chunk, pos, chunk.Length - pos, cancellationToken);
-                        if (n <= 0)
-                        {
-                            throw InvalidProtocolBufferException.TruncatedMessage();
-                        }
-                        totalBytesRetired += n;
-                        pos += n;
-                    }
-                    sizeLeft -= chunk.Length;
-                    chunks.Add(chunk);
-                }
-
-                // OK, got everything.  Now concatenate it all into one buffer.
-                byte[] bytes = new byte[size];
-
-                // Start by copying the leftover bytes from this.buffer.
-                int newPos = originalBufferSize - originalBufferPos;
-                ByteArray.Copy(buffer, originalBufferPos, bytes, 0, newPos);
-
-                // And now all the chunks.
-                foreach (byte[] chunk in chunks)
-                {
-                    Buffer.BlockCopy(chunk, 0, bytes, newPos, chunk.Length);
-                    newPos += chunk.Length;
-                }
-
-                // Done.
-                return bytes;
-            }
-        }
-
         /// <summary>
         /// Reads and discards <paramref name="size"/> bytes.
         /// </summary>
@@ -1823,51 +1241,6 @@ namespace Google.Protobuf
             }
         }
 
-        private async Task SkipRawBytesAsync(int size, CancellationToken cancellationToken)
-        {
-            if (size < 0)
-            {
-                throw InvalidProtocolBufferException.NegativeSize();
-            }
-
-            if (totalBytesRetired + bufferPos + size > currentLimit)
-            {
-                // Read to the end of the stream anyway.
-                await SkipRawBytesAsync(currentLimit - totalBytesRetired - bufferPos, cancellationToken);
-                // Then fail.
-                throw InvalidProtocolBufferException.TruncatedMessage();
-            }
-
-            if (size <= bufferSize - bufferPos)
-            {
-                // We have all the bytes we need already.
-                bufferPos += size;
-            }
-            else
-            {
-                // Skipping more bytes than are in the buffer.  First skip what we have.
-                int pos = bufferSize - bufferPos;
-
-                // ROK 5/7/2013 Issue #54: should retire all bytes in buffer (bufferSize)
-                // totalBytesRetired += pos;
-                totalBytesRetired += bufferSize;
-
-                bufferPos = 0;
-                bufferSize = 0;
-
-                // Then skip directly from the InputStream for the rest.
-                if (pos < size)
-                {
-                    if (input == null)
-                    {
-                        throw InvalidProtocolBufferException.TruncatedMessage();
-                    }
-                    await SkipImplAsync(size - pos, cancellationToken);
-                    totalBytesRetired += size - pos;
-                }
-            }
-        }
-
         /// <summary>
         /// Abstraction of skipping to cope with streams which can't really skip.
         /// </summary>
@@ -1888,32 +1261,6 @@ namespace Google.Protobuf
                 while (amountToSkip > 0)
                 {
                     int bytesRead = input.Read(skipBuffer, 0, Math.Min(skipBuffer.Length, amountToSkip));
-                    if (bytesRead <= 0)
-                    {
-                        throw InvalidProtocolBufferException.TruncatedMessage();
-                    }
-                    amountToSkip -= bytesRead;
-                }
-            }
-        }
-
-        private async Task SkipImplAsync(int amountToSkip, CancellationToken cancellationToken)
-        {
-            if (input.CanSeek)
-            {
-                long previousPosition = input.Position;
-                input.Position += amountToSkip;
-                if (input.Position != previousPosition + amountToSkip)
-                {
-                    throw InvalidProtocolBufferException.TruncatedMessage();
-                }
-            }
-            else
-            {
-                byte[] skipBuffer = new byte[Math.Min(1024, amountToSkip)];
-                while (amountToSkip > 0)
-                {
-                    int bytesRead = await input.ReadAsync(skipBuffer, 0, Math.Min(skipBuffer.Length, amountToSkip), cancellationToken);
                     if (bytesRead <= 0)
                     {
                         throw InvalidProtocolBufferException.TruncatedMessage();
