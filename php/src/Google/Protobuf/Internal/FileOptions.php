@@ -187,6 +187,10 @@ class FileOptions extends \Google\Protobuf\Internal\Message
     private $php_class_prefix = '';
     private $has_php_class_prefix = false;
     /**
+     * <pre>
+     * Enables async-friendly code generation for C#.
+     * </pre>
+     *
      * <code>optional bool csharp_async = 41 [default = false];</code>
      */
     private $csharp_async = false;
@@ -787,6 +791,10 @@ class FileOptions extends \Google\Protobuf\Internal\Message
     }
 
     /**
+     * <pre>
+     * Enables async-friendly code generation for C#.
+     * </pre>
+     *
      * <code>optional bool csharp_async = 41 [default = false];</code>
      */
     public function getCsharpAsync()
@@ -795,6 +803,10 @@ class FileOptions extends \Google\Protobuf\Internal\Message
     }
 
     /**
+     * <pre>
+     * Enables async-friendly code generation for C#.
+     * </pre>
+     *
      * <code>optional bool csharp_async = 41 [default = false];</code>
      */
     public function setCsharpAsync($var)

@@ -3077,6 +3077,9 @@ namespace Google.Protobuf.Reflection {
     /// <summary>Field number for the "csharp_async" field.</summary>
     public const int CsharpAsyncFieldNumber = 41;
     private bool csharpAsync_;
+    /// <summary>
+    /// Enables async-friendly code generation for C#.
+    /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public bool CsharpAsync {
       get { return csharpAsync_; }
