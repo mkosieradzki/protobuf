@@ -7,6 +7,10 @@ using pb = global::Google.Protobuf;
 using pbc = global::Google.Protobuf.Collections;
 using pbr = global::Google.Protobuf.Reflection;
 using scg = global::System.Collections.Generic;
+#if !NET35
+using st = global::System.Threading;
+using stt = global::System.Threading.Tasks;
+#endif
 namespace Google.Protobuf.TestProtos {
 
   /// <summary>Holder for reflection information generated from google/protobuf/unittest_proto3.proto</summary>
@@ -1202,15 +1206,15 @@ namespace Google.Protobuf.TestProtos {
       }
       if (SingleNestedEnum != 0) {
         await output.WriteRawTagAsync(168, 1, cancellationToken).ConfigureAwait(false);
-        awaot output.WriteEnumAsync((int) SingleNestedEnum, cancellationToken).ConfigureAwait(false);
+        await output.WriteEnumAsync((int) SingleNestedEnum, cancellationToken).ConfigureAwait(false);
       }
       if (SingleForeignEnum != 0) {
         await output.WriteRawTagAsync(176, 1, cancellationToken).ConfigureAwait(false);
-        awaot output.WriteEnumAsync((int) SingleForeignEnum, cancellationToken).ConfigureAwait(false);
+        await output.WriteEnumAsync((int) SingleForeignEnum, cancellationToken).ConfigureAwait(false);
       }
       if (SingleImportEnum != 0) {
         await output.WriteRawTagAsync(184, 1, cancellationToken).ConfigureAwait(false);
-        awaot output.WriteEnumAsync((int) SingleImportEnum, cancellationToken).ConfigureAwait(false);
+        await output.WriteEnumAsync((int) SingleImportEnum, cancellationToken).ConfigureAwait(false);
       }
       if (singlePublicImportMessage_ != null) {
         await output.WriteRawTagAsync(210, 1, cancellationToken).ConfigureAwait(false);
@@ -3773,7 +3777,7 @@ namespace Google.Protobuf.TestProtos {
     public async Task WriteToAsync(pb::CodedOutputStream output, CancellationToken cancellationToken) {
       if (Value != 0) {
         await output.WriteRawTagAsync(8, cancellationToken).ConfigureAwait(false);
-        awaot output.WriteEnumAsync((int) Value, cancellationToken).ConfigureAwait(false);
+        await output.WriteEnumAsync((int) Value, cancellationToken).ConfigureAwait(false);
       }
     }
     #endif
@@ -4044,7 +4048,7 @@ namespace Google.Protobuf.TestProtos {
       }
       if (EnumField != 0) {
         await output.WriteRawTagAsync(24, cancellationToken).ConfigureAwait(false);
-        awaot output.WriteEnumAsync((int) EnumField, cancellationToken).ConfigureAwait(false);
+        await output.WriteEnumAsync((int) EnumField, cancellationToken).ConfigureAwait(false);
       }
       if (messageField_ != null) {
         await output.WriteRawTagAsync(34, cancellationToken).ConfigureAwait(false);
@@ -4763,7 +4767,7 @@ namespace Google.Protobuf.TestProtos {
     public async Task WriteToAsync(pb::CodedOutputStream output, CancellationToken cancellationToken) {
       if (SparseEnum != 0) {
         await output.WriteRawTagAsync(8, cancellationToken).ConfigureAwait(false);
-        awaot output.WriteEnumAsync((int) SparseEnum, cancellationToken).ConfigureAwait(false);
+        await output.WriteEnumAsync((int) SparseEnum, cancellationToken).ConfigureAwait(false);
       }
     }
     #endif

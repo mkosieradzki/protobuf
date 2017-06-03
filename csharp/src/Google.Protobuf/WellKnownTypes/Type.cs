@@ -7,6 +7,10 @@ using pb = global::Google.Protobuf;
 using pbc = global::Google.Protobuf.Collections;
 using pbr = global::Google.Protobuf.Reflection;
 using scg = global::System.Collections.Generic;
+#if !NET35
+using st = global::System.Threading;
+using stt = global::System.Threading.Tasks;
+#endif
 namespace Google.Protobuf.WellKnownTypes {
 
   /// <summary>Holder for reflection information generated from google/protobuf/type.proto</summary>
@@ -288,7 +292,7 @@ namespace Google.Protobuf.WellKnownTypes {
       }
       if (Syntax != 0) {
         await output.WriteRawTagAsync(48, cancellationToken).ConfigureAwait(false);
-        awaot output.WriteEnumAsync((int) Syntax, cancellationToken).ConfigureAwait(false);
+        await output.WriteEnumAsync((int) Syntax, cancellationToken).ConfigureAwait(false);
       }
     }
     #endif
@@ -697,11 +701,11 @@ namespace Google.Protobuf.WellKnownTypes {
     public async Task WriteToAsync(pb::CodedOutputStream output, CancellationToken cancellationToken) {
       if (Kind != 0) {
         await output.WriteRawTagAsync(8, cancellationToken).ConfigureAwait(false);
-        awaot output.WriteEnumAsync((int) Kind, cancellationToken).ConfigureAwait(false);
+        await output.WriteEnumAsync((int) Kind, cancellationToken).ConfigureAwait(false);
       }
       if (Cardinality != 0) {
         await output.WriteRawTagAsync(16, cancellationToken).ConfigureAwait(false);
-        awaot output.WriteEnumAsync((int) Cardinality, cancellationToken).ConfigureAwait(false);
+        await output.WriteEnumAsync((int) Cardinality, cancellationToken).ConfigureAwait(false);
       }
       if (Number != 0) {
         await output.WriteRawTagAsync(24, cancellationToken).ConfigureAwait(false);
@@ -1204,7 +1208,7 @@ namespace Google.Protobuf.WellKnownTypes {
       }
       if (Syntax != 0) {
         await output.WriteRawTagAsync(40, cancellationToken).ConfigureAwait(false);
-        awaot output.WriteEnumAsync((int) Syntax, cancellationToken).ConfigureAwait(false);
+        await output.WriteEnumAsync((int) Syntax, cancellationToken).ConfigureAwait(false);
       }
     }
     #endif

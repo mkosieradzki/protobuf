@@ -7,6 +7,10 @@ using pb = global::Google.Protobuf;
 using pbc = global::Google.Protobuf.Collections;
 using pbr = global::Google.Protobuf.Reflection;
 using scg = global::System.Collections.Generic;
+#if !NET35
+using st = global::System.Threading;
+using stt = global::System.Threading.Tasks;
+#endif
 namespace ProtobufTestMessages.Proto3 {
 
   /// <summary>Holder for reflection information generated from google/protobuf/test_messages_proto3.proto</summary>
@@ -2353,11 +2357,11 @@ namespace ProtobufTestMessages.Proto3 {
       }
       if (OptionalNestedEnum != 0) {
         await output.WriteRawTagAsync(168, 1, cancellationToken).ConfigureAwait(false);
-        awaot output.WriteEnumAsync((int) OptionalNestedEnum, cancellationToken).ConfigureAwait(false);
+        await output.WriteEnumAsync((int) OptionalNestedEnum, cancellationToken).ConfigureAwait(false);
       }
       if (OptionalForeignEnum != 0) {
         await output.WriteRawTagAsync(176, 1, cancellationToken).ConfigureAwait(false);
-        awaot output.WriteEnumAsync((int) OptionalForeignEnum, cancellationToken).ConfigureAwait(false);
+        await output.WriteEnumAsync((int) OptionalForeignEnum, cancellationToken).ConfigureAwait(false);
       }
       if (OptionalStringPiece.Length != 0) {
         await output.WriteRawTagAsync(194, 1, cancellationToken).ConfigureAwait(false);

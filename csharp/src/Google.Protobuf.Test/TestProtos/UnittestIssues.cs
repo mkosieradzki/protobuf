@@ -7,6 +7,10 @@ using pb = global::Google.Protobuf;
 using pbc = global::Google.Protobuf.Collections;
 using pbr = global::Google.Protobuf.Reflection;
 using scg = global::System.Collections.Generic;
+#if !NET35
+using st = global::System.Threading;
+using stt = global::System.Threading.Tasks;
+#endif
 namespace UnitTest.Issues.TestProtos {
 
   /// <summary>Holder for reflection information generated from unittest_issues.proto</summary>
@@ -552,7 +556,7 @@ namespace UnitTest.Issues.TestProtos {
     public async Task WriteToAsync(pb::CodedOutputStream output, CancellationToken cancellationToken) {
       if (Value != 0) {
         await output.WriteRawTagAsync(8, cancellationToken).ConfigureAwait(false);
-        awaot output.WriteEnumAsync((int) Value, cancellationToken).ConfigureAwait(false);
+        await output.WriteEnumAsync((int) Value, cancellationToken).ConfigureAwait(false);
       }
       await values_.WriteToAsync(output, _repeated_values_codec, cancellationToken).ConfigureAwait(false);
       await packedValues_.WriteToAsync(output, _repeated_packedValues_codec, cancellationToken).ConfigureAwait(false);
@@ -934,7 +938,7 @@ namespace UnitTest.Issues.TestProtos {
       await messageArray_.WriteToAsync(output, _repeated_messageArray_codec, cancellationToken).ConfigureAwait(false);
       if (EnumValue != 0) {
         await output.WriteRawTagAsync(40, cancellationToken).ConfigureAwait(false);
-        awaot output.WriteEnumAsync((int) EnumValue, cancellationToken).ConfigureAwait(false);
+        await output.WriteEnumAsync((int) EnumValue, cancellationToken).ConfigureAwait(false);
       }
       await enumArray_.WriteToAsync(output, _repeated_enumArray_codec, cancellationToken).ConfigureAwait(false);
     }

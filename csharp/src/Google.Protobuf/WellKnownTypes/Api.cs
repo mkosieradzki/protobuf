@@ -7,6 +7,10 @@ using pb = global::Google.Protobuf;
 using pbc = global::Google.Protobuf.Collections;
 using pbr = global::Google.Protobuf.Reflection;
 using scg = global::System.Collections.Generic;
+#if !NET35
+using st = global::System.Threading;
+using stt = global::System.Threading.Tasks;
+#endif
 namespace Google.Protobuf.WellKnownTypes {
 
   /// <summary>Holder for reflection information generated from google/protobuf/api.proto</summary>
@@ -296,7 +300,7 @@ namespace Google.Protobuf.WellKnownTypes {
       await mixins_.WriteToAsync(output, _repeated_mixins_codec, cancellationToken).ConfigureAwait(false);
       if (Syntax != 0) {
         await output.WriteRawTagAsync(56, cancellationToken).ConfigureAwait(false);
-        awaot output.WriteEnumAsync((int) Syntax, cancellationToken).ConfigureAwait(false);
+        await output.WriteEnumAsync((int) Syntax, cancellationToken).ConfigureAwait(false);
       }
     }
     #endif
@@ -675,7 +679,7 @@ namespace Google.Protobuf.WellKnownTypes {
       await options_.WriteToAsync(output, _repeated_options_codec, cancellationToken).ConfigureAwait(false);
       if (Syntax != 0) {
         await output.WriteRawTagAsync(56, cancellationToken).ConfigureAwait(false);
-        awaot output.WriteEnumAsync((int) Syntax, cancellationToken).ConfigureAwait(false);
+        await output.WriteEnumAsync((int) Syntax, cancellationToken).ConfigureAwait(false);
       }
     }
     #endif

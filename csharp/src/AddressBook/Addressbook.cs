@@ -7,6 +7,10 @@ using pb = global::Google.Protobuf;
 using pbc = global::Google.Protobuf.Collections;
 using pbr = global::Google.Protobuf.Reflection;
 using scg = global::System.Collections.Generic;
+#if !NET35
+using st = global::System.Threading;
+using stt = global::System.Threading.Tasks;
+#endif
 namespace Google.Protobuf.Examples.AddressBook {
 
   /// <summary>Holder for reflection information generated from addressbook.proto</summary>
@@ -413,7 +417,7 @@ namespace Google.Protobuf.Examples.AddressBook {
           }
           if (Type != 0) {
             await output.WriteRawTagAsync(16, cancellationToken).ConfigureAwait(false);
-            awaot output.WriteEnumAsync((int) Type, cancellationToken).ConfigureAwait(false);
+            await output.WriteEnumAsync((int) Type, cancellationToken).ConfigureAwait(false);
           }
         }
         #endif

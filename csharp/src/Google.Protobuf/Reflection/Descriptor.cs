@@ -7,6 +7,10 @@ using pb = global::Google.Protobuf;
 using pbc = global::Google.Protobuf.Collections;
 using pbr = global::Google.Protobuf.Reflection;
 using scg = global::System.Collections.Generic;
+#if !NET35
+using st = global::System.Threading;
+using stt = global::System.Threading.Tasks;
+#endif
 namespace Google.Protobuf.Reflection {
 
   /// <summary>Holder for reflection information generated from google/protobuf/descriptor.proto</summary>
@@ -1928,11 +1932,11 @@ namespace Google.Protobuf.Reflection {
       }
       if (Label != 0) {
         await output.WriteRawTagAsync(32, cancellationToken).ConfigureAwait(false);
-        awaot output.WriteEnumAsync((int) Label, cancellationToken).ConfigureAwait(false);
+        await output.WriteEnumAsync((int) Label, cancellationToken).ConfigureAwait(false);
       }
       if (Type != 0) {
         await output.WriteRawTagAsync(40, cancellationToken).ConfigureAwait(false);
-        awaot output.WriteEnumAsync((int) Type, cancellationToken).ConfigureAwait(false);
+        await output.WriteEnumAsync((int) Type, cancellationToken).ConfigureAwait(false);
       }
       if (TypeName.Length != 0) {
         await output.WriteRawTagAsync(50, cancellationToken).ConfigureAwait(false);
@@ -3925,7 +3929,7 @@ namespace Google.Protobuf.Reflection {
       }
       if (OptimizeFor != 0) {
         await output.WriteRawTagAsync(72, cancellationToken).ConfigureAwait(false);
-        awaot output.WriteEnumAsync((int) OptimizeFor, cancellationToken).ConfigureAwait(false);
+        await output.WriteEnumAsync((int) OptimizeFor, cancellationToken).ConfigureAwait(false);
       }
       if (JavaMultipleFiles != false) {
         await output.WriteRawTagAsync(80, cancellationToken).ConfigureAwait(false);
@@ -4902,7 +4906,7 @@ namespace Google.Protobuf.Reflection {
     public async Task WriteToAsync(pb::CodedOutputStream output, CancellationToken cancellationToken) {
       if (Ctype != 0) {
         await output.WriteRawTagAsync(8, cancellationToken).ConfigureAwait(false);
-        awaot output.WriteEnumAsync((int) Ctype, cancellationToken).ConfigureAwait(false);
+        await output.WriteEnumAsync((int) Ctype, cancellationToken).ConfigureAwait(false);
       }
       if (Packed != false) {
         await output.WriteRawTagAsync(16, cancellationToken).ConfigureAwait(false);
@@ -4918,7 +4922,7 @@ namespace Google.Protobuf.Reflection {
       }
       if (Jstype != 0) {
         await output.WriteRawTagAsync(48, cancellationToken).ConfigureAwait(false);
-        awaot output.WriteEnumAsync((int) Jstype, cancellationToken).ConfigureAwait(false);
+        await output.WriteEnumAsync((int) Jstype, cancellationToken).ConfigureAwait(false);
       }
       if (Weak != false) {
         await output.WriteRawTagAsync(80, cancellationToken).ConfigureAwait(false);
@@ -5968,7 +5972,7 @@ namespace Google.Protobuf.Reflection {
       }
       if (IdempotencyLevel != 0) {
         await output.WriteRawTagAsync(144, 2, cancellationToken).ConfigureAwait(false);
-        awaot output.WriteEnumAsync((int) IdempotencyLevel, cancellationToken).ConfigureAwait(false);
+        await output.WriteEnumAsync((int) IdempotencyLevel, cancellationToken).ConfigureAwait(false);
       }
       await uninterpretedOption_.WriteToAsync(output, _repeated_uninterpretedOption_codec, cancellationToken).ConfigureAwait(false);
     }
