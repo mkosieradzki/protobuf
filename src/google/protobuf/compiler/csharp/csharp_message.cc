@@ -105,20 +105,28 @@ void MessageGenerator::AddDeprecatedFlag(io::Printer* printer) {
 }
 
 void MessageGenerator::Generate(io::Printer* printer) {
-  const bool allowAsync = descriptor_->file()->options().csharp_async();
-
   map<string, string> vars;
   vars["class_name"] = class_name();
   vars["access_level"] = class_access_level();
-  vars["message_interface"] = allowAsync ? "IAsyncMessage" : "IMessage";
 
   WriteMessageDocComment(printer, descriptor_);
   AddDeprecatedFlag(printer);
-  
-  printer->Print(
-    vars,
-    "$access_level$ sealed partial class $class_name$ : pb::$message_interface$<$class_name$> {\n");
-  printer->Indent();
+
+  if (descriptor_->file()->options().csharp_async()) {
+    printer->Print(
+      vars,
+      "#if !NET35\n"
+      "$access_level$ sealed partial class $class_name$ : pb::IAsyncMessage<$class_name$> {\n"
+      "#else\n"
+      "$access_level$ sealed partial class $class_name$ : pb::IMessage<$class_name$> {\n"
+      "#endif\n");
+    printer->Indent();
+  } else {
+    printer->Print(
+      vars,
+      "$access_level$ sealed partial class $class_name$ : pb::IMessage<$class_name$> {\n");
+    printer->Indent();
+  }
 
   // All static fields and properties
   printer->Print(
@@ -418,6 +426,8 @@ void MessageGenerator::GenerateMessageSerializationMethods(io::Printer* printer)
 	"\n");
 
   if (descriptor_->file()->options().csharp_async()) {
+    printer->Print(
+      "#if !NET35\n");
     WriteGeneratedCodeAttributes(printer);
     printer->Print(
       "public async Task WriteToAsync(pb::CodedOutputStream output, CancellationToken cancellationToken) {\n");
@@ -434,6 +444,7 @@ void MessageGenerator::GenerateMessageSerializationMethods(io::Printer* printer)
     printer->Outdent();
     printer->Print(
       "}\n"
+      "#endif\n"
       "\n");
   }
 
@@ -554,6 +565,8 @@ void MessageGenerator::GenerateMergingMethods(io::Printer* printer) {
   printer->Print("}\n\n"); // method
 
   if (descriptor_->file()->options().csharp_async()) {
+    printer->Print(
+      "#if !NET35\n");
     WriteGeneratedCodeAttributes(printer);
     printer->Print("public async Task MergeFromAsync(pb::CodedInputStream input, CancellationToken cancellationToken) {\n");
     printer->Indent();
@@ -610,7 +623,8 @@ void MessageGenerator::GenerateMergingMethods(io::Printer* printer) {
     printer->Outdent();
     printer->Print("}\n"); // while
     printer->Outdent();
-    printer->Print("}\n\n"); // method
+    printer->Print("}\n"
+      "#endif\n\n"); // method
   }
 }
 
