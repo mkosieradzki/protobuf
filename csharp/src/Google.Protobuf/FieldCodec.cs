@@ -324,7 +324,7 @@ namespace Google.Protobuf
                 input => { T message = parser.CreateTemplate(); input.ReadMessage(message); return message; },
                 (output, value) => output.WriteMessage(value),
 #if !NET35
-                async (input, cancellationToken) => { T message = parser.CreateTemplate(); await input.ReadMessageAsync(message, cancellationToken); return message; },
+                async (input, cancellationToken) => { T message = parser.CreateTemplate(); await input.ReadMessageAsync(message, cancellationToken).ConfigureAwait(false); return message; },
                 (output, value, cancellationToken) => output.WriteMessageAsync(value, cancellationToken),
 #endif
                 message => CodedOutputStream.ComputeMessageSize(message), tag);
