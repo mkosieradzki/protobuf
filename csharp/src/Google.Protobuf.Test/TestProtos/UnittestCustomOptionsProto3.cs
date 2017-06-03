@@ -1994,7 +1994,7 @@ namespace UnitTest.Issues.TestProtos {
     /// <summary>Field number for the "barney" field.</summary>
     public const int BarneyFieldNumber = 4;
     private static readonly pb::FieldCodec<global::UnitTest.Issues.TestProtos.ComplexOptionType2.Types.ComplexOptionType4> _repeated_barney_codec
-        = pb::FieldCodec.ForMessage(34, global::UnitTest.Issues.TestProtos.ComplexOptionType2.Types.ComplexOptionType4.Parser);
+        = pb::FieldCodec.ForAsyncMessage(34, global::UnitTest.Issues.TestProtos.ComplexOptionType2.Types.ComplexOptionType4.Parser);
     private readonly pbc::RepeatedField<global::UnitTest.Issues.TestProtos.ComplexOptionType2.Types.ComplexOptionType4> barney_ = new pbc::RepeatedField<global::UnitTest.Issues.TestProtos.ComplexOptionType2.Types.ComplexOptionType4>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<global::UnitTest.Issues.TestProtos.ComplexOptionType2.Types.ComplexOptionType4> Barney {

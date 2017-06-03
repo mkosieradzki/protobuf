@@ -834,7 +834,7 @@ namespace UnitTest.Issues.TestProtos {
     /// <summary>Field number for the "MessageArray" field.</summary>
     public const int MessageArrayFieldNumber = 4;
     private static readonly pb::FieldCodec<global::UnitTest.Issues.TestProtos.DeprecatedChild> _repeated_messageArray_codec
-        = pb::FieldCodec.ForMessage(34, global::UnitTest.Issues.TestProtos.DeprecatedChild.Parser);
+        = pb::FieldCodec.ForAsyncMessage(34, global::UnitTest.Issues.TestProtos.DeprecatedChild.Parser);
     private readonly pbc::RepeatedField<global::UnitTest.Issues.TestProtos.DeprecatedChild> messageArray_ = new pbc::RepeatedField<global::UnitTest.Issues.TestProtos.DeprecatedChild>();
     [global::System.ObsoleteAttribute]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]

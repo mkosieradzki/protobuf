@@ -807,7 +807,7 @@ namespace ProtobufTestMessages.Proto3 {
     /// <summary>Field number for the "repeated_nested_message" field.</summary>
     public const int RepeatedNestedMessageFieldNumber = 48;
     private static readonly pb::FieldCodec<global::ProtobufTestMessages.Proto3.TestAllTypes.Types.NestedMessage> _repeated_repeatedNestedMessage_codec
-        = pb::FieldCodec.ForMessage(386, global::ProtobufTestMessages.Proto3.TestAllTypes.Types.NestedMessage.Parser);
+        = pb::FieldCodec.ForAsyncMessage(386, global::ProtobufTestMessages.Proto3.TestAllTypes.Types.NestedMessage.Parser);
     private readonly pbc::RepeatedField<global::ProtobufTestMessages.Proto3.TestAllTypes.Types.NestedMessage> repeatedNestedMessage_ = new pbc::RepeatedField<global::ProtobufTestMessages.Proto3.TestAllTypes.Types.NestedMessage>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<global::ProtobufTestMessages.Proto3.TestAllTypes.Types.NestedMessage> RepeatedNestedMessage {
@@ -817,7 +817,7 @@ namespace ProtobufTestMessages.Proto3 {
     /// <summary>Field number for the "repeated_foreign_message" field.</summary>
     public const int RepeatedForeignMessageFieldNumber = 49;
     private static readonly pb::FieldCodec<global::ProtobufTestMessages.Proto3.ForeignMessage> _repeated_repeatedForeignMessage_codec
-        = pb::FieldCodec.ForMessage(394, global::ProtobufTestMessages.Proto3.ForeignMessage.Parser);
+        = pb::FieldCodec.ForAsyncMessage(394, global::ProtobufTestMessages.Proto3.ForeignMessage.Parser);
     private readonly pbc::RepeatedField<global::ProtobufTestMessages.Proto3.ForeignMessage> repeatedForeignMessage_ = new pbc::RepeatedField<global::ProtobufTestMessages.Proto3.ForeignMessage>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<global::ProtobufTestMessages.Proto3.ForeignMessage> RepeatedForeignMessage {
@@ -1020,7 +1020,7 @@ namespace ProtobufTestMessages.Proto3 {
     /// <summary>Field number for the "map_string_nested_message" field.</summary>
     public const int MapStringNestedMessageFieldNumber = 71;
     private static readonly pbc::MapField<string, global::ProtobufTestMessages.Proto3.TestAllTypes.Types.NestedMessage>.Codec _map_mapStringNestedMessage_codec
-        = new pbc::MapField<string, global::ProtobufTestMessages.Proto3.TestAllTypes.Types.NestedMessage>.Codec(pb::FieldCodec.ForString(10), pb::FieldCodec.ForMessage(18, global::ProtobufTestMessages.Proto3.TestAllTypes.Types.NestedMessage.Parser), 570);
+        = new pbc::MapField<string, global::ProtobufTestMessages.Proto3.TestAllTypes.Types.NestedMessage>.Codec(pb::FieldCodec.ForString(10), pb::FieldCodec.ForAsyncMessage(18, global::ProtobufTestMessages.Proto3.TestAllTypes.Types.NestedMessage.Parser), 570);
     private readonly pbc::MapField<string, global::ProtobufTestMessages.Proto3.TestAllTypes.Types.NestedMessage> mapStringNestedMessage_ = new pbc::MapField<string, global::ProtobufTestMessages.Proto3.TestAllTypes.Types.NestedMessage>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::MapField<string, global::ProtobufTestMessages.Proto3.TestAllTypes.Types.NestedMessage> MapStringNestedMessage {
@@ -1030,7 +1030,7 @@ namespace ProtobufTestMessages.Proto3 {
     /// <summary>Field number for the "map_string_foreign_message" field.</summary>
     public const int MapStringForeignMessageFieldNumber = 72;
     private static readonly pbc::MapField<string, global::ProtobufTestMessages.Proto3.ForeignMessage>.Codec _map_mapStringForeignMessage_codec
-        = new pbc::MapField<string, global::ProtobufTestMessages.Proto3.ForeignMessage>.Codec(pb::FieldCodec.ForString(10), pb::FieldCodec.ForMessage(18, global::ProtobufTestMessages.Proto3.ForeignMessage.Parser), 578);
+        = new pbc::MapField<string, global::ProtobufTestMessages.Proto3.ForeignMessage>.Codec(pb::FieldCodec.ForString(10), pb::FieldCodec.ForAsyncMessage(18, global::ProtobufTestMessages.Proto3.ForeignMessage.Parser), 578);
     private readonly pbc::MapField<string, global::ProtobufTestMessages.Proto3.ForeignMessage> mapStringForeignMessage_ = new pbc::MapField<string, global::ProtobufTestMessages.Proto3.ForeignMessage>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::MapField<string, global::ProtobufTestMessages.Proto3.ForeignMessage> MapStringForeignMessage {
@@ -1426,7 +1426,7 @@ namespace ProtobufTestMessages.Proto3 {
     /// <summary>Field number for the "repeated_duration" field.</summary>
     public const int RepeatedDurationFieldNumber = 311;
     private static readonly pb::FieldCodec<global::Google.Protobuf.WellKnownTypes.Duration> _repeated_repeatedDuration_codec
-        = pb::FieldCodec.ForMessage(2490, global::Google.Protobuf.WellKnownTypes.Duration.Parser);
+        = pb::FieldCodec.ForAsyncMessage(2490, global::Google.Protobuf.WellKnownTypes.Duration.Parser);
     private readonly pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.Duration> repeatedDuration_ = new pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.Duration>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.Duration> RepeatedDuration {
@@ -1436,7 +1436,7 @@ namespace ProtobufTestMessages.Proto3 {
     /// <summary>Field number for the "repeated_timestamp" field.</summary>
     public const int RepeatedTimestampFieldNumber = 312;
     private static readonly pb::FieldCodec<global::Google.Protobuf.WellKnownTypes.Timestamp> _repeated_repeatedTimestamp_codec
-        = pb::FieldCodec.ForMessage(2498, global::Google.Protobuf.WellKnownTypes.Timestamp.Parser);
+        = pb::FieldCodec.ForAsyncMessage(2498, global::Google.Protobuf.WellKnownTypes.Timestamp.Parser);
     private readonly pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.Timestamp> repeatedTimestamp_ = new pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.Timestamp>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.Timestamp> RepeatedTimestamp {
@@ -1446,7 +1446,7 @@ namespace ProtobufTestMessages.Proto3 {
     /// <summary>Field number for the "repeated_fieldmask" field.</summary>
     public const int RepeatedFieldmaskFieldNumber = 313;
     private static readonly pb::FieldCodec<global::Google.Protobuf.WellKnownTypes.FieldMask> _repeated_repeatedFieldmask_codec
-        = pb::FieldCodec.ForMessage(2506, global::Google.Protobuf.WellKnownTypes.FieldMask.Parser);
+        = pb::FieldCodec.ForAsyncMessage(2506, global::Google.Protobuf.WellKnownTypes.FieldMask.Parser);
     private readonly pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.FieldMask> repeatedFieldmask_ = new pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.FieldMask>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.FieldMask> RepeatedFieldmask {
@@ -1456,7 +1456,7 @@ namespace ProtobufTestMessages.Proto3 {
     /// <summary>Field number for the "repeated_struct" field.</summary>
     public const int RepeatedStructFieldNumber = 324;
     private static readonly pb::FieldCodec<global::Google.Protobuf.WellKnownTypes.Struct> _repeated_repeatedStruct_codec
-        = pb::FieldCodec.ForMessage(2594, global::Google.Protobuf.WellKnownTypes.Struct.Parser);
+        = pb::FieldCodec.ForAsyncMessage(2594, global::Google.Protobuf.WellKnownTypes.Struct.Parser);
     private readonly pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.Struct> repeatedStruct_ = new pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.Struct>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.Struct> RepeatedStruct {
@@ -1466,7 +1466,7 @@ namespace ProtobufTestMessages.Proto3 {
     /// <summary>Field number for the "repeated_any" field.</summary>
     public const int RepeatedAnyFieldNumber = 315;
     private static readonly pb::FieldCodec<global::Google.Protobuf.WellKnownTypes.Any> _repeated_repeatedAny_codec
-        = pb::FieldCodec.ForMessage(2522, global::Google.Protobuf.WellKnownTypes.Any.Parser);
+        = pb::FieldCodec.ForAsyncMessage(2522, global::Google.Protobuf.WellKnownTypes.Any.Parser);
     private readonly pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.Any> repeatedAny_ = new pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.Any>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.Any> RepeatedAny {
@@ -1476,7 +1476,7 @@ namespace ProtobufTestMessages.Proto3 {
     /// <summary>Field number for the "repeated_value" field.</summary>
     public const int RepeatedValueFieldNumber = 316;
     private static readonly pb::FieldCodec<global::Google.Protobuf.WellKnownTypes.Value> _repeated_repeatedValue_codec
-        = pb::FieldCodec.ForMessage(2530, global::Google.Protobuf.WellKnownTypes.Value.Parser);
+        = pb::FieldCodec.ForAsyncMessage(2530, global::Google.Protobuf.WellKnownTypes.Value.Parser);
     private readonly pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.Value> repeatedValue_ = new pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.Value>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.Value> RepeatedValue {

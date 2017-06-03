@@ -154,7 +154,7 @@ namespace Google.Protobuf.WellKnownTypes {
     /// <summary>Field number for the "fields" field.</summary>
     public const int FieldsFieldNumber = 2;
     private static readonly pb::FieldCodec<global::Google.Protobuf.WellKnownTypes.Field> _repeated_fields_codec
-        = pb::FieldCodec.ForMessage(18, global::Google.Protobuf.WellKnownTypes.Field.Parser);
+        = pb::FieldCodec.ForAsyncMessage(18, global::Google.Protobuf.WellKnownTypes.Field.Parser);
     private readonly pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.Field> fields_ = new pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.Field>();
     /// <summary>
     /// The list of fields.
@@ -180,7 +180,7 @@ namespace Google.Protobuf.WellKnownTypes {
     /// <summary>Field number for the "options" field.</summary>
     public const int OptionsFieldNumber = 4;
     private static readonly pb::FieldCodec<global::Google.Protobuf.WellKnownTypes.Option> _repeated_options_codec
-        = pb::FieldCodec.ForMessage(34, global::Google.Protobuf.WellKnownTypes.Option.Parser);
+        = pb::FieldCodec.ForAsyncMessage(34, global::Google.Protobuf.WellKnownTypes.Option.Parser);
     private readonly pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.Option> options_ = new pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.Option>();
     /// <summary>
     /// The protocol buffer options.
@@ -570,7 +570,7 @@ namespace Google.Protobuf.WellKnownTypes {
     /// <summary>Field number for the "options" field.</summary>
     public const int OptionsFieldNumber = 9;
     private static readonly pb::FieldCodec<global::Google.Protobuf.WellKnownTypes.Option> _repeated_options_codec
-        = pb::FieldCodec.ForMessage(74, global::Google.Protobuf.WellKnownTypes.Option.Parser);
+        = pb::FieldCodec.ForAsyncMessage(74, global::Google.Protobuf.WellKnownTypes.Option.Parser);
     private readonly pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.Option> options_ = new pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.Option>();
     /// <summary>
     /// The protocol buffer options.
@@ -1087,7 +1087,7 @@ namespace Google.Protobuf.WellKnownTypes {
     /// <summary>Field number for the "enumvalue" field.</summary>
     public const int EnumvalueFieldNumber = 2;
     private static readonly pb::FieldCodec<global::Google.Protobuf.WellKnownTypes.EnumValue> _repeated_enumvalue_codec
-        = pb::FieldCodec.ForMessage(18, global::Google.Protobuf.WellKnownTypes.EnumValue.Parser);
+        = pb::FieldCodec.ForAsyncMessage(18, global::Google.Protobuf.WellKnownTypes.EnumValue.Parser);
     private readonly pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.EnumValue> enumvalue_ = new pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.EnumValue>();
     /// <summary>
     /// Enum value definitions.
@@ -1100,7 +1100,7 @@ namespace Google.Protobuf.WellKnownTypes {
     /// <summary>Field number for the "options" field.</summary>
     public const int OptionsFieldNumber = 3;
     private static readonly pb::FieldCodec<global::Google.Protobuf.WellKnownTypes.Option> _repeated_options_codec
-        = pb::FieldCodec.ForMessage(26, global::Google.Protobuf.WellKnownTypes.Option.Parser);
+        = pb::FieldCodec.ForAsyncMessage(26, global::Google.Protobuf.WellKnownTypes.Option.Parser);
     private readonly pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.Option> options_ = new pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.Option>();
     /// <summary>
     /// Protocol buffer options.
@@ -1397,7 +1397,7 @@ namespace Google.Protobuf.WellKnownTypes {
     /// <summary>Field number for the "options" field.</summary>
     public const int OptionsFieldNumber = 3;
     private static readonly pb::FieldCodec<global::Google.Protobuf.WellKnownTypes.Option> _repeated_options_codec
-        = pb::FieldCodec.ForMessage(26, global::Google.Protobuf.WellKnownTypes.Option.Parser);
+        = pb::FieldCodec.ForAsyncMessage(26, global::Google.Protobuf.WellKnownTypes.Option.Parser);
     private readonly pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.Option> options_ = new pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.Option>();
     /// <summary>
     /// Protocol buffer options.
