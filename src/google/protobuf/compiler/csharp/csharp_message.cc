@@ -430,7 +430,7 @@ void MessageGenerator::GenerateMessageSerializationMethods(io::Printer* printer)
       "#if !NET35\n");
     WriteGeneratedCodeAttributes(printer);
     printer->Print(
-      "public async Task WriteToAsync(pb::CodedOutputStream output, CancellationToken cancellationToken) {\n");
+      "public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {\n");
     printer->Indent();
 
     // Serialize all the fields
@@ -568,7 +568,7 @@ void MessageGenerator::GenerateMergingMethods(io::Printer* printer) {
     printer->Print(
       "#if !NET35\n");
     WriteGeneratedCodeAttributes(printer);
-    printer->Print("public async Task MergeFromAsync(pb::CodedInputStream input, CancellationToken cancellationToken) {\n");
+    printer->Print("public async stt::Task MergeFromAsync(pb::CodedInputStream input, st::CancellationToken cancellationToken) {\n");
     printer->Indent();
     printer->Print(
       "uint tag;\n"
