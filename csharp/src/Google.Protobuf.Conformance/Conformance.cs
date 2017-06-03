@@ -60,7 +60,11 @@ namespace Conformance {
   ///   2. parse the protobuf or JSON payload in "payload" (which may fail)
   ///   3. if the parse succeeded, serialize the message in the requested format.
   /// </summary>
+  #if !NET35
+  public sealed partial class ConformanceRequest : pb::IAsyncMessage<ConformanceRequest> {
+  #else
   public sealed partial class ConformanceRequest : pb::IMessage<ConformanceRequest> {
+  #endif
     private static readonly pb::MessageParser<ConformanceRequest> _parser = new pb::MessageParser<ConformanceRequest>(() => new ConformanceRequest());
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pb::MessageParser<ConformanceRequest> Parser { get { return _parser; } }
@@ -207,6 +211,24 @@ namespace Conformance {
       }
     }
 
+    #if !NET35
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async Task WriteToAsync(pb::CodedOutputStream output, CancellationToken cancellationToken) {
+      if (payloadCase_ == PayloadOneofCase.ProtobufPayload) {
+        await output.WriteRawTagAsync(10, cancellationToken).ConfigureAwait(false);
+        await output.WriteBytesAsync(ProtobufPayload, cancellationToken).ConfigureAwait(false);
+      }
+      if (payloadCase_ == PayloadOneofCase.JsonPayload) {
+        await output.WriteRawTagAsync(18, cancellationToken).ConfigureAwait(false);
+        await output.WriteStringAsync(JsonPayload, cancellationToken).ConfigureAwait(false);
+      }
+      if (RequestedOutputFormat != 0) {
+        await output.WriteRawTagAsync(24, cancellationToken).ConfigureAwait(false);
+        awaot output.WriteEnumAsync((int) RequestedOutputFormat, cancellationToken).ConfigureAwait(false);
+      }
+    }
+    #endif
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
@@ -265,12 +287,42 @@ namespace Conformance {
       }
     }
 
+    #if !NET35
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async Task MergeFromAsync(pb::CodedInputStream input, CancellationToken cancellationToken) {
+      uint tag;
+      while ((tag = await input.ReadTagAsync(cancellationToken).ConfigureAwait(false)) != 0) {
+        switch(tag) {
+          default:
+            await input.SkipLastFieldAsync(cancellationToken).ConfigureAwait(false);
+            break;
+          case 10: {
+            ProtobufPayload = await input.ReadBytesAsync(cancellationToken).ConfigureAwait(false);
+            break;
+          }
+          case 18: {
+            JsonPayload = await input.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+            break;
+          }
+          case 24: {
+            requestedOutputFormat_ = (global::Conformance.WireFormat) await input.ReadEnumAsync(cancellationToken).ConfigureAwait(false);
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
   }
 
   /// <summary>
   /// Represents a single test case's output.
   /// </summary>
+  #if !NET35
+  public sealed partial class ConformanceResponse : pb::IAsyncMessage<ConformanceResponse> {
+  #else
   public sealed partial class ConformanceResponse : pb::IMessage<ConformanceResponse> {
+  #endif
     private static readonly pb::MessageParser<ConformanceResponse> _parser = new pb::MessageParser<ConformanceResponse>(() => new ConformanceResponse());
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pb::MessageParser<ConformanceResponse> Parser { get { return _parser; } }
@@ -509,6 +561,36 @@ namespace Conformance {
       }
     }
 
+    #if !NET35
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async Task WriteToAsync(pb::CodedOutputStream output, CancellationToken cancellationToken) {
+      if (resultCase_ == ResultOneofCase.ParseError) {
+        await output.WriteRawTagAsync(10, cancellationToken).ConfigureAwait(false);
+        await output.WriteStringAsync(ParseError, cancellationToken).ConfigureAwait(false);
+      }
+      if (resultCase_ == ResultOneofCase.RuntimeError) {
+        await output.WriteRawTagAsync(18, cancellationToken).ConfigureAwait(false);
+        await output.WriteStringAsync(RuntimeError, cancellationToken).ConfigureAwait(false);
+      }
+      if (resultCase_ == ResultOneofCase.ProtobufPayload) {
+        await output.WriteRawTagAsync(26, cancellationToken).ConfigureAwait(false);
+        await output.WriteBytesAsync(ProtobufPayload, cancellationToken).ConfigureAwait(false);
+      }
+      if (resultCase_ == ResultOneofCase.JsonPayload) {
+        await output.WriteRawTagAsync(34, cancellationToken).ConfigureAwait(false);
+        await output.WriteStringAsync(JsonPayload, cancellationToken).ConfigureAwait(false);
+      }
+      if (resultCase_ == ResultOneofCase.Skipped) {
+        await output.WriteRawTagAsync(42, cancellationToken).ConfigureAwait(false);
+        await output.WriteStringAsync(Skipped, cancellationToken).ConfigureAwait(false);
+      }
+      if (resultCase_ == ResultOneofCase.SerializeError) {
+        await output.WriteRawTagAsync(50, cancellationToken).ConfigureAwait(false);
+        await output.WriteStringAsync(SerializeError, cancellationToken).ConfigureAwait(false);
+      }
+    }
+    #endif
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
@@ -596,6 +678,44 @@ namespace Conformance {
         }
       }
     }
+
+    #if !NET35
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async Task MergeFromAsync(pb::CodedInputStream input, CancellationToken cancellationToken) {
+      uint tag;
+      while ((tag = await input.ReadTagAsync(cancellationToken).ConfigureAwait(false)) != 0) {
+        switch(tag) {
+          default:
+            await input.SkipLastFieldAsync(cancellationToken).ConfigureAwait(false);
+            break;
+          case 10: {
+            ParseError = await input.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+            break;
+          }
+          case 18: {
+            RuntimeError = await input.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+            break;
+          }
+          case 26: {
+            ProtobufPayload = await input.ReadBytesAsync(cancellationToken).ConfigureAwait(false);
+            break;
+          }
+          case 34: {
+            JsonPayload = await input.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+            break;
+          }
+          case 42: {
+            Skipped = await input.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+            break;
+          }
+          case 50: {
+            SerializeError = await input.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+            break;
+          }
+        }
+      }
+    }
+    #endif
 
   }
 

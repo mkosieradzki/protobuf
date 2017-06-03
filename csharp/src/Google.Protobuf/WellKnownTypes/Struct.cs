@@ -75,7 +75,11 @@ namespace Google.Protobuf.WellKnownTypes {
   ///
   /// The JSON representation for `Struct` is JSON object.
   /// </summary>
+  #if !NET35
+  public sealed partial class Struct : pb::IAsyncMessage<Struct> {
+  #else
   public sealed partial class Struct : pb::IMessage<Struct> {
+  #endif
     private static readonly pb::MessageParser<Struct> _parser = new pb::MessageParser<Struct>(() => new Struct());
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pb::MessageParser<Struct> Parser { get { return _parser; } }
@@ -154,6 +158,13 @@ namespace Google.Protobuf.WellKnownTypes {
       fields_.WriteTo(output, _map_fields_codec);
     }
 
+    #if !NET35
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async Task WriteToAsync(pb::CodedOutputStream output, CancellationToken cancellationToken) {
+      await fields_.WriteToAsync(output, _map_fields_codec, cancellationToken).ConfigureAwait(false);
+    }
+    #endif
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
@@ -185,6 +196,24 @@ namespace Google.Protobuf.WellKnownTypes {
       }
     }
 
+    #if !NET35
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async Task MergeFromAsync(pb::CodedInputStream input, CancellationToken cancellationToken) {
+      uint tag;
+      while ((tag = await input.ReadTagAsync(cancellationToken).ConfigureAwait(false)) != 0) {
+        switch(tag) {
+          default:
+            await input.SkipLastFieldAsync(cancellationToken).ConfigureAwait(false);
+            break;
+          case 10: {
+            await fields_.AddEntriesFromAsync(input, _map_fields_codec, cancellationToken).ConfigureAwait(false);
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
   }
 
   /// <summary>
@@ -195,7 +224,11 @@ namespace Google.Protobuf.WellKnownTypes {
   ///
   /// The JSON representation for `Value` is JSON value.
   /// </summary>
+  #if !NET35
+  public sealed partial class Value : pb::IAsyncMessage<Value> {
+  #else
   public sealed partial class Value : pb::IMessage<Value> {
+  #endif
     private static readonly pb::MessageParser<Value> _parser = new pb::MessageParser<Value>(() => new Value());
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pb::MessageParser<Value> Parser { get { return _parser; } }
@@ -423,6 +456,36 @@ namespace Google.Protobuf.WellKnownTypes {
       }
     }
 
+    #if !NET35
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async Task WriteToAsync(pb::CodedOutputStream output, CancellationToken cancellationToken) {
+      if (kindCase_ == KindOneofCase.NullValue) {
+        await output.WriteRawTagAsync(8, cancellationToken).ConfigureAwait(false);
+        await output.WriteEnumAsync((int) NullValue, cancellationToken).ConfigureAwait(false);
+      }
+      if (kindCase_ == KindOneofCase.NumberValue) {
+        await output.WriteRawTagAsync(17, cancellationToken).ConfigureAwait(false);
+        await output.WriteDoubleAsync(NumberValue, cancellationToken).ConfigureAwait(false);
+      }
+      if (kindCase_ == KindOneofCase.StringValue) {
+        await output.WriteRawTagAsync(26, cancellationToken).ConfigureAwait(false);
+        await output.WriteStringAsync(StringValue, cancellationToken).ConfigureAwait(false);
+      }
+      if (kindCase_ == KindOneofCase.BoolValue) {
+        await output.WriteRawTagAsync(32, cancellationToken).ConfigureAwait(false);
+        await output.WriteBoolAsync(BoolValue, cancellationToken).ConfigureAwait(false);
+      }
+      if (kindCase_ == KindOneofCase.StructValue) {
+        await output.WriteRawTagAsync(42, cancellationToken).ConfigureAwait(false);
+        await output.WriteMessageAsync(StructValue, cancellationToken).ConfigureAwait(false);
+      }
+      if (kindCase_ == KindOneofCase.ListValue) {
+        await output.WriteRawTagAsync(50, cancellationToken).ConfigureAwait(false);
+        await output.WriteMessageAsync(ListValue, cancellationToken).ConfigureAwait(false);
+      }
+    }
+    #endif
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
@@ -522,6 +585,55 @@ namespace Google.Protobuf.WellKnownTypes {
       }
     }
 
+    #if !NET35
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async Task MergeFromAsync(pb::CodedInputStream input, CancellationToken cancellationToken) {
+      uint tag;
+      while ((tag = await input.ReadTagAsync(cancellationToken).ConfigureAwait(false)) != 0) {
+        switch(tag) {
+          default:
+            await input.SkipLastFieldAsync(cancellationToken).ConfigureAwait(false);
+            break;
+          case 8: {
+            kind_ = await input.ReadEnumAsync(cancellationToken).ConfigureAwait(false);
+            kindCase_ = KindOneofCase.NullValue;
+            break;
+          }
+          case 17: {
+            NumberValue = await input.ReadDoubleAsync(cancellationToken).ConfigureAwait(false);
+            break;
+          }
+          case 26: {
+            StringValue = await input.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+            break;
+          }
+          case 32: {
+            BoolValue = await input.ReadBoolAsync(cancellationToken).ConfigureAwait(false);
+            break;
+          }
+          case 42: {
+            global::Google.Protobuf.WellKnownTypes.Struct subBuilder = new global::Google.Protobuf.WellKnownTypes.Struct();
+            if (kindCase_ == KindOneofCase.StructValue) {
+              subBuilder.MergeFrom(StructValue);
+            }
+            await input.ReadMessageAsync(subBuilder, cancellationToken).ConfigureAwait(false);
+            StructValue = subBuilder;
+            break;
+          }
+          case 50: {
+            global::Google.Protobuf.WellKnownTypes.ListValue subBuilder = new global::Google.Protobuf.WellKnownTypes.ListValue();
+            if (kindCase_ == KindOneofCase.ListValue) {
+              subBuilder.MergeFrom(ListValue);
+            }
+            await input.ReadMessageAsync(subBuilder, cancellationToken).ConfigureAwait(false);
+            ListValue = subBuilder;
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
   }
 
   /// <summary>
@@ -529,7 +641,11 @@ namespace Google.Protobuf.WellKnownTypes {
   ///
   /// The JSON representation for `ListValue` is JSON array.
   /// </summary>
+  #if !NET35
+  public sealed partial class ListValue : pb::IAsyncMessage<ListValue> {
+  #else
   public sealed partial class ListValue : pb::IMessage<ListValue> {
+  #endif
     private static readonly pb::MessageParser<ListValue> _parser = new pb::MessageParser<ListValue>(() => new ListValue());
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pb::MessageParser<ListValue> Parser { get { return _parser; } }
@@ -608,6 +724,13 @@ namespace Google.Protobuf.WellKnownTypes {
       values_.WriteTo(output, _repeated_values_codec);
     }
 
+    #if !NET35
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async Task WriteToAsync(pb::CodedOutputStream output, CancellationToken cancellationToken) {
+      await values_.WriteToAsync(output, _repeated_values_codec, cancellationToken).ConfigureAwait(false);
+    }
+    #endif
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
@@ -638,6 +761,24 @@ namespace Google.Protobuf.WellKnownTypes {
         }
       }
     }
+
+    #if !NET35
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async Task MergeFromAsync(pb::CodedInputStream input, CancellationToken cancellationToken) {
+      uint tag;
+      while ((tag = await input.ReadTagAsync(cancellationToken).ConfigureAwait(false)) != 0) {
+        switch(tag) {
+          default:
+            await input.SkipLastFieldAsync(cancellationToken).ConfigureAwait(false);
+            break;
+          case 10: {
+            await values_.AddEntriesFromAsync(input, _repeated_values_codec, cancellationToken).ConfigureAwait(false);
+            break;
+          }
+        }
+      }
+    }
+    #endif
 
   }
 

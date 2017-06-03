@@ -107,7 +107,11 @@ namespace Google.Protobuf.WellKnownTypes {
   ///       "value": "1.212s"
   ///     }
   /// </summary>
+  #if !NET35
+  public sealed partial class Any : pb::IAsyncMessage<Any> {
+  #else
   public sealed partial class Any : pb::IMessage<Any> {
+  #endif
     private static readonly pb::MessageParser<Any> _parser = new pb::MessageParser<Any>(() => new Any());
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pb::MessageParser<Any> Parser { get { return _parser; } }
@@ -231,6 +235,20 @@ namespace Google.Protobuf.WellKnownTypes {
       }
     }
 
+    #if !NET35
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async Task WriteToAsync(pb::CodedOutputStream output, CancellationToken cancellationToken) {
+      if (TypeUrl.Length != 0) {
+        await output.WriteRawTagAsync(10, cancellationToken).ConfigureAwait(false);
+        await output.WriteStringAsync(TypeUrl, cancellationToken).ConfigureAwait(false);
+      }
+      if (Value.Length != 0) {
+        await output.WriteRawTagAsync(18, cancellationToken).ConfigureAwait(false);
+        await output.WriteBytesAsync(Value, cancellationToken).ConfigureAwait(false);
+      }
+    }
+    #endif
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
@@ -275,6 +293,28 @@ namespace Google.Protobuf.WellKnownTypes {
         }
       }
     }
+
+    #if !NET35
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async Task MergeFromAsync(pb::CodedInputStream input, CancellationToken cancellationToken) {
+      uint tag;
+      while ((tag = await input.ReadTagAsync(cancellationToken).ConfigureAwait(false)) != 0) {
+        switch(tag) {
+          default:
+            await input.SkipLastFieldAsync(cancellationToken).ConfigureAwait(false);
+            break;
+          case 10: {
+            TypeUrl = await input.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+            break;
+          }
+          case 18: {
+            Value = await input.ReadBytesAsync(cancellationToken).ConfigureAwait(false);
+            break;
+          }
+        }
+      }
+    }
+    #endif
 
   }
 

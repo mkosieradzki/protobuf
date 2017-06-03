@@ -54,7 +54,11 @@ namespace Google.Protobuf.WellKnownTypes {
   /// <summary>
   /// Api is a light-weight descriptor for a protocol buffer service.
   /// </summary>
+  #if !NET35
+  public sealed partial class Api : pb::IAsyncMessage<Api> {
+  #else
   public sealed partial class Api : pb::IMessage<Api> {
+  #endif
     private static readonly pb::MessageParser<Api> _parser = new pb::MessageParser<Api>(() => new Api());
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pb::MessageParser<Api> Parser { get { return _parser; } }
@@ -272,6 +276,31 @@ namespace Google.Protobuf.WellKnownTypes {
       }
     }
 
+    #if !NET35
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async Task WriteToAsync(pb::CodedOutputStream output, CancellationToken cancellationToken) {
+      if (Name.Length != 0) {
+        await output.WriteRawTagAsync(10, cancellationToken).ConfigureAwait(false);
+        await output.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
+      }
+      await methods_.WriteToAsync(output, _repeated_methods_codec, cancellationToken).ConfigureAwait(false);
+      await options_.WriteToAsync(output, _repeated_options_codec, cancellationToken).ConfigureAwait(false);
+      if (Version.Length != 0) {
+        await output.WriteRawTagAsync(34, cancellationToken).ConfigureAwait(false);
+        await output.WriteStringAsync(Version, cancellationToken).ConfigureAwait(false);
+      }
+      if (sourceContext_ != null) {
+        await output.WriteRawTagAsync(42, cancellationToken).ConfigureAwait(false);
+        await output.WriteMessageAsync(SourceContext, cancellationToken).ConfigureAwait(false);
+      }
+      await mixins_.WriteToAsync(output, _repeated_mixins_codec, cancellationToken).ConfigureAwait(false);
+      if (Syntax != 0) {
+        await output.WriteRawTagAsync(56, cancellationToken).ConfigureAwait(false);
+        awaot output.WriteEnumAsync((int) Syntax, cancellationToken).ConfigureAwait(false);
+      }
+    }
+    #endif
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
@@ -361,12 +390,61 @@ namespace Google.Protobuf.WellKnownTypes {
       }
     }
 
+    #if !NET35
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async Task MergeFromAsync(pb::CodedInputStream input, CancellationToken cancellationToken) {
+      uint tag;
+      while ((tag = await input.ReadTagAsync(cancellationToken).ConfigureAwait(false)) != 0) {
+        switch(tag) {
+          default:
+            await input.SkipLastFieldAsync(cancellationToken).ConfigureAwait(false);
+            break;
+          case 10: {
+            Name = await input.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+            break;
+          }
+          case 18: {
+            await methods_.AddEntriesFromAsync(input, _repeated_methods_codec, cancellationToken).ConfigureAwait(false);
+            break;
+          }
+          case 26: {
+            await options_.AddEntriesFromAsync(input, _repeated_options_codec, cancellationToken).ConfigureAwait(false);
+            break;
+          }
+          case 34: {
+            Version = await input.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+            break;
+          }
+          case 42: {
+            if (sourceContext_ == null) {
+              sourceContext_ = new global::Google.Protobuf.WellKnownTypes.SourceContext();
+            }
+            await input.ReadMessageAsync(sourceContext_, cancellationToken).ConfigureAwait(false);
+            break;
+          }
+          case 50: {
+            await mixins_.AddEntriesFromAsync(input, _repeated_mixins_codec, cancellationToken).ConfigureAwait(false);
+            break;
+          }
+          case 56: {
+            syntax_ = (global::Google.Protobuf.WellKnownTypes.Syntax) await input.ReadEnumAsync(cancellationToken).ConfigureAwait(false);
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
   }
 
   /// <summary>
   /// Method represents a method of an api.
   /// </summary>
+  #if !NET35
+  public sealed partial class Method : pb::IAsyncMessage<Method> {
+  #else
   public sealed partial class Method : pb::IMessage<Method> {
+  #endif
     private static readonly pb::MessageParser<Method> _parser = new pb::MessageParser<Method>(() => new Method());
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pb::MessageParser<Method> Parser { get { return _parser; } }
@@ -571,6 +649,37 @@ namespace Google.Protobuf.WellKnownTypes {
       }
     }
 
+    #if !NET35
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async Task WriteToAsync(pb::CodedOutputStream output, CancellationToken cancellationToken) {
+      if (Name.Length != 0) {
+        await output.WriteRawTagAsync(10, cancellationToken).ConfigureAwait(false);
+        await output.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
+      }
+      if (RequestTypeUrl.Length != 0) {
+        await output.WriteRawTagAsync(18, cancellationToken).ConfigureAwait(false);
+        await output.WriteStringAsync(RequestTypeUrl, cancellationToken).ConfigureAwait(false);
+      }
+      if (RequestStreaming != false) {
+        await output.WriteRawTagAsync(24, cancellationToken).ConfigureAwait(false);
+        await output.WriteBoolAsync(RequestStreaming, cancellationToken).ConfigureAwait(false);
+      }
+      if (ResponseTypeUrl.Length != 0) {
+        await output.WriteRawTagAsync(34, cancellationToken).ConfigureAwait(false);
+        await output.WriteStringAsync(ResponseTypeUrl, cancellationToken).ConfigureAwait(false);
+      }
+      if (ResponseStreaming != false) {
+        await output.WriteRawTagAsync(40, cancellationToken).ConfigureAwait(false);
+        await output.WriteBoolAsync(ResponseStreaming, cancellationToken).ConfigureAwait(false);
+      }
+      await options_.WriteToAsync(output, _repeated_options_codec, cancellationToken).ConfigureAwait(false);
+      if (Syntax != 0) {
+        await output.WriteRawTagAsync(56, cancellationToken).ConfigureAwait(false);
+        awaot output.WriteEnumAsync((int) Syntax, cancellationToken).ConfigureAwait(false);
+      }
+    }
+    #endif
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
@@ -662,6 +771,48 @@ namespace Google.Protobuf.WellKnownTypes {
       }
     }
 
+    #if !NET35
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async Task MergeFromAsync(pb::CodedInputStream input, CancellationToken cancellationToken) {
+      uint tag;
+      while ((tag = await input.ReadTagAsync(cancellationToken).ConfigureAwait(false)) != 0) {
+        switch(tag) {
+          default:
+            await input.SkipLastFieldAsync(cancellationToken).ConfigureAwait(false);
+            break;
+          case 10: {
+            Name = await input.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+            break;
+          }
+          case 18: {
+            RequestTypeUrl = await input.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+            break;
+          }
+          case 24: {
+            RequestStreaming = await input.ReadBoolAsync(cancellationToken).ConfigureAwait(false);
+            break;
+          }
+          case 34: {
+            ResponseTypeUrl = await input.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+            break;
+          }
+          case 40: {
+            ResponseStreaming = await input.ReadBoolAsync(cancellationToken).ConfigureAwait(false);
+            break;
+          }
+          case 50: {
+            await options_.AddEntriesFromAsync(input, _repeated_options_codec, cancellationToken).ConfigureAwait(false);
+            break;
+          }
+          case 56: {
+            syntax_ = (global::Google.Protobuf.WellKnownTypes.Syntax) await input.ReadEnumAsync(cancellationToken).ConfigureAwait(false);
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
   }
 
   /// <summary>
@@ -743,7 +894,11 @@ namespace Google.Protobuf.WellKnownTypes {
   ///       ...
   ///     }
   /// </summary>
+  #if !NET35
+  public sealed partial class Mixin : pb::IAsyncMessage<Mixin> {
+  #else
   public sealed partial class Mixin : pb::IMessage<Mixin> {
+  #endif
     private static readonly pb::MessageParser<Mixin> _parser = new pb::MessageParser<Mixin>(() => new Mixin());
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pb::MessageParser<Mixin> Parser { get { return _parser; } }
@@ -848,6 +1003,20 @@ namespace Google.Protobuf.WellKnownTypes {
       }
     }
 
+    #if !NET35
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async Task WriteToAsync(pb::CodedOutputStream output, CancellationToken cancellationToken) {
+      if (Name.Length != 0) {
+        await output.WriteRawTagAsync(10, cancellationToken).ConfigureAwait(false);
+        await output.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
+      }
+      if (Root.Length != 0) {
+        await output.WriteRawTagAsync(18, cancellationToken).ConfigureAwait(false);
+        await output.WriteStringAsync(Root, cancellationToken).ConfigureAwait(false);
+      }
+    }
+    #endif
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
@@ -892,6 +1061,28 @@ namespace Google.Protobuf.WellKnownTypes {
         }
       }
     }
+
+    #if !NET35
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async Task MergeFromAsync(pb::CodedInputStream input, CancellationToken cancellationToken) {
+      uint tag;
+      while ((tag = await input.ReadTagAsync(cancellationToken).ConfigureAwait(false)) != 0) {
+        switch(tag) {
+          default:
+            await input.SkipLastFieldAsync(cancellationToken).ConfigureAwait(false);
+            break;
+          case 10: {
+            Name = await input.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+            break;
+          }
+          case 18: {
+            Root = await input.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+            break;
+          }
+        }
+      }
+    }
+    #endif
 
   }
 

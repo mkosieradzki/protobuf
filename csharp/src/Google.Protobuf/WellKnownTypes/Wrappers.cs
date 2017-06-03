@@ -55,7 +55,11 @@ namespace Google.Protobuf.WellKnownTypes {
   ///
   /// The JSON representation for `DoubleValue` is JSON number.
   /// </summary>
+  #if !NET35
+  public sealed partial class DoubleValue : pb::IAsyncMessage<DoubleValue> {
+  #else
   public sealed partial class DoubleValue : pb::IMessage<DoubleValue> {
+  #endif
     private static readonly pb::MessageParser<DoubleValue> _parser = new pb::MessageParser<DoubleValue>(() => new DoubleValue());
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pb::MessageParser<DoubleValue> Parser { get { return _parser; } }
@@ -138,6 +142,16 @@ namespace Google.Protobuf.WellKnownTypes {
       }
     }
 
+    #if !NET35
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async Task WriteToAsync(pb::CodedOutputStream output, CancellationToken cancellationToken) {
+      if (Value != 0D) {
+        await output.WriteRawTagAsync(9, cancellationToken).ConfigureAwait(false);
+        await output.WriteDoubleAsync(Value, cancellationToken).ConfigureAwait(false);
+      }
+    }
+    #endif
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
@@ -173,6 +187,24 @@ namespace Google.Protobuf.WellKnownTypes {
       }
     }
 
+    #if !NET35
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async Task MergeFromAsync(pb::CodedInputStream input, CancellationToken cancellationToken) {
+      uint tag;
+      while ((tag = await input.ReadTagAsync(cancellationToken).ConfigureAwait(false)) != 0) {
+        switch(tag) {
+          default:
+            await input.SkipLastFieldAsync(cancellationToken).ConfigureAwait(false);
+            break;
+          case 9: {
+            Value = await input.ReadDoubleAsync(cancellationToken).ConfigureAwait(false);
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
   }
 
   /// <summary>
@@ -180,7 +212,11 @@ namespace Google.Protobuf.WellKnownTypes {
   ///
   /// The JSON representation for `FloatValue` is JSON number.
   /// </summary>
+  #if !NET35
+  public sealed partial class FloatValue : pb::IAsyncMessage<FloatValue> {
+  #else
   public sealed partial class FloatValue : pb::IMessage<FloatValue> {
+  #endif
     private static readonly pb::MessageParser<FloatValue> _parser = new pb::MessageParser<FloatValue>(() => new FloatValue());
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pb::MessageParser<FloatValue> Parser { get { return _parser; } }
@@ -263,6 +299,16 @@ namespace Google.Protobuf.WellKnownTypes {
       }
     }
 
+    #if !NET35
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async Task WriteToAsync(pb::CodedOutputStream output, CancellationToken cancellationToken) {
+      if (Value != 0F) {
+        await output.WriteRawTagAsync(13, cancellationToken).ConfigureAwait(false);
+        await output.WriteFloatAsync(Value, cancellationToken).ConfigureAwait(false);
+      }
+    }
+    #endif
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
@@ -298,6 +344,24 @@ namespace Google.Protobuf.WellKnownTypes {
       }
     }
 
+    #if !NET35
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async Task MergeFromAsync(pb::CodedInputStream input, CancellationToken cancellationToken) {
+      uint tag;
+      while ((tag = await input.ReadTagAsync(cancellationToken).ConfigureAwait(false)) != 0) {
+        switch(tag) {
+          default:
+            await input.SkipLastFieldAsync(cancellationToken).ConfigureAwait(false);
+            break;
+          case 13: {
+            Value = await input.ReadFloatAsync(cancellationToken).ConfigureAwait(false);
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
   }
 
   /// <summary>
@@ -305,7 +369,11 @@ namespace Google.Protobuf.WellKnownTypes {
   ///
   /// The JSON representation for `Int64Value` is JSON string.
   /// </summary>
+  #if !NET35
+  public sealed partial class Int64Value : pb::IAsyncMessage<Int64Value> {
+  #else
   public sealed partial class Int64Value : pb::IMessage<Int64Value> {
+  #endif
     private static readonly pb::MessageParser<Int64Value> _parser = new pb::MessageParser<Int64Value>(() => new Int64Value());
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pb::MessageParser<Int64Value> Parser { get { return _parser; } }
@@ -388,6 +456,16 @@ namespace Google.Protobuf.WellKnownTypes {
       }
     }
 
+    #if !NET35
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async Task WriteToAsync(pb::CodedOutputStream output, CancellationToken cancellationToken) {
+      if (Value != 0L) {
+        await output.WriteRawTagAsync(8, cancellationToken).ConfigureAwait(false);
+        await output.WriteInt64Async(Value, cancellationToken).ConfigureAwait(false);
+      }
+    }
+    #endif
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
@@ -423,6 +501,24 @@ namespace Google.Protobuf.WellKnownTypes {
       }
     }
 
+    #if !NET35
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async Task MergeFromAsync(pb::CodedInputStream input, CancellationToken cancellationToken) {
+      uint tag;
+      while ((tag = await input.ReadTagAsync(cancellationToken).ConfigureAwait(false)) != 0) {
+        switch(tag) {
+          default:
+            await input.SkipLastFieldAsync(cancellationToken).ConfigureAwait(false);
+            break;
+          case 8: {
+            Value = await input.ReadInt64Async(cancellationToken).ConfigureAwait(false);
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
   }
 
   /// <summary>
@@ -430,7 +526,11 @@ namespace Google.Protobuf.WellKnownTypes {
   ///
   /// The JSON representation for `UInt64Value` is JSON string.
   /// </summary>
+  #if !NET35
+  public sealed partial class UInt64Value : pb::IAsyncMessage<UInt64Value> {
+  #else
   public sealed partial class UInt64Value : pb::IMessage<UInt64Value> {
+  #endif
     private static readonly pb::MessageParser<UInt64Value> _parser = new pb::MessageParser<UInt64Value>(() => new UInt64Value());
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pb::MessageParser<UInt64Value> Parser { get { return _parser; } }
@@ -513,6 +613,16 @@ namespace Google.Protobuf.WellKnownTypes {
       }
     }
 
+    #if !NET35
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async Task WriteToAsync(pb::CodedOutputStream output, CancellationToken cancellationToken) {
+      if (Value != 0UL) {
+        await output.WriteRawTagAsync(8, cancellationToken).ConfigureAwait(false);
+        await output.WriteUInt64Async(Value, cancellationToken).ConfigureAwait(false);
+      }
+    }
+    #endif
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
@@ -548,6 +658,24 @@ namespace Google.Protobuf.WellKnownTypes {
       }
     }
 
+    #if !NET35
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async Task MergeFromAsync(pb::CodedInputStream input, CancellationToken cancellationToken) {
+      uint tag;
+      while ((tag = await input.ReadTagAsync(cancellationToken).ConfigureAwait(false)) != 0) {
+        switch(tag) {
+          default:
+            await input.SkipLastFieldAsync(cancellationToken).ConfigureAwait(false);
+            break;
+          case 8: {
+            Value = await input.ReadUInt64Async(cancellationToken).ConfigureAwait(false);
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
   }
 
   /// <summary>
@@ -555,7 +683,11 @@ namespace Google.Protobuf.WellKnownTypes {
   ///
   /// The JSON representation for `Int32Value` is JSON number.
   /// </summary>
+  #if !NET35
+  public sealed partial class Int32Value : pb::IAsyncMessage<Int32Value> {
+  #else
   public sealed partial class Int32Value : pb::IMessage<Int32Value> {
+  #endif
     private static readonly pb::MessageParser<Int32Value> _parser = new pb::MessageParser<Int32Value>(() => new Int32Value());
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pb::MessageParser<Int32Value> Parser { get { return _parser; } }
@@ -638,6 +770,16 @@ namespace Google.Protobuf.WellKnownTypes {
       }
     }
 
+    #if !NET35
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async Task WriteToAsync(pb::CodedOutputStream output, CancellationToken cancellationToken) {
+      if (Value != 0) {
+        await output.WriteRawTagAsync(8, cancellationToken).ConfigureAwait(false);
+        await output.WriteInt32Async(Value, cancellationToken).ConfigureAwait(false);
+      }
+    }
+    #endif
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
@@ -673,6 +815,24 @@ namespace Google.Protobuf.WellKnownTypes {
       }
     }
 
+    #if !NET35
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async Task MergeFromAsync(pb::CodedInputStream input, CancellationToken cancellationToken) {
+      uint tag;
+      while ((tag = await input.ReadTagAsync(cancellationToken).ConfigureAwait(false)) != 0) {
+        switch(tag) {
+          default:
+            await input.SkipLastFieldAsync(cancellationToken).ConfigureAwait(false);
+            break;
+          case 8: {
+            Value = await input.ReadInt32Async(cancellationToken).ConfigureAwait(false);
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
   }
 
   /// <summary>
@@ -680,7 +840,11 @@ namespace Google.Protobuf.WellKnownTypes {
   ///
   /// The JSON representation for `UInt32Value` is JSON number.
   /// </summary>
+  #if !NET35
+  public sealed partial class UInt32Value : pb::IAsyncMessage<UInt32Value> {
+  #else
   public sealed partial class UInt32Value : pb::IMessage<UInt32Value> {
+  #endif
     private static readonly pb::MessageParser<UInt32Value> _parser = new pb::MessageParser<UInt32Value>(() => new UInt32Value());
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pb::MessageParser<UInt32Value> Parser { get { return _parser; } }
@@ -763,6 +927,16 @@ namespace Google.Protobuf.WellKnownTypes {
       }
     }
 
+    #if !NET35
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async Task WriteToAsync(pb::CodedOutputStream output, CancellationToken cancellationToken) {
+      if (Value != 0) {
+        await output.WriteRawTagAsync(8, cancellationToken).ConfigureAwait(false);
+        await output.WriteUInt32Async(Value, cancellationToken).ConfigureAwait(false);
+      }
+    }
+    #endif
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
@@ -798,6 +972,24 @@ namespace Google.Protobuf.WellKnownTypes {
       }
     }
 
+    #if !NET35
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async Task MergeFromAsync(pb::CodedInputStream input, CancellationToken cancellationToken) {
+      uint tag;
+      while ((tag = await input.ReadTagAsync(cancellationToken).ConfigureAwait(false)) != 0) {
+        switch(tag) {
+          default:
+            await input.SkipLastFieldAsync(cancellationToken).ConfigureAwait(false);
+            break;
+          case 8: {
+            Value = await input.ReadUInt32Async(cancellationToken).ConfigureAwait(false);
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
   }
 
   /// <summary>
@@ -805,7 +997,11 @@ namespace Google.Protobuf.WellKnownTypes {
   ///
   /// The JSON representation for `BoolValue` is JSON `true` and `false`.
   /// </summary>
+  #if !NET35
+  public sealed partial class BoolValue : pb::IAsyncMessage<BoolValue> {
+  #else
   public sealed partial class BoolValue : pb::IMessage<BoolValue> {
+  #endif
     private static readonly pb::MessageParser<BoolValue> _parser = new pb::MessageParser<BoolValue>(() => new BoolValue());
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pb::MessageParser<BoolValue> Parser { get { return _parser; } }
@@ -888,6 +1084,16 @@ namespace Google.Protobuf.WellKnownTypes {
       }
     }
 
+    #if !NET35
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async Task WriteToAsync(pb::CodedOutputStream output, CancellationToken cancellationToken) {
+      if (Value != false) {
+        await output.WriteRawTagAsync(8, cancellationToken).ConfigureAwait(false);
+        await output.WriteBoolAsync(Value, cancellationToken).ConfigureAwait(false);
+      }
+    }
+    #endif
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
@@ -923,6 +1129,24 @@ namespace Google.Protobuf.WellKnownTypes {
       }
     }
 
+    #if !NET35
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async Task MergeFromAsync(pb::CodedInputStream input, CancellationToken cancellationToken) {
+      uint tag;
+      while ((tag = await input.ReadTagAsync(cancellationToken).ConfigureAwait(false)) != 0) {
+        switch(tag) {
+          default:
+            await input.SkipLastFieldAsync(cancellationToken).ConfigureAwait(false);
+            break;
+          case 8: {
+            Value = await input.ReadBoolAsync(cancellationToken).ConfigureAwait(false);
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
   }
 
   /// <summary>
@@ -930,7 +1154,11 @@ namespace Google.Protobuf.WellKnownTypes {
   ///
   /// The JSON representation for `StringValue` is JSON string.
   /// </summary>
+  #if !NET35
+  public sealed partial class StringValue : pb::IAsyncMessage<StringValue> {
+  #else
   public sealed partial class StringValue : pb::IMessage<StringValue> {
+  #endif
     private static readonly pb::MessageParser<StringValue> _parser = new pb::MessageParser<StringValue>(() => new StringValue());
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pb::MessageParser<StringValue> Parser { get { return _parser; } }
@@ -1013,6 +1241,16 @@ namespace Google.Protobuf.WellKnownTypes {
       }
     }
 
+    #if !NET35
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async Task WriteToAsync(pb::CodedOutputStream output, CancellationToken cancellationToken) {
+      if (Value.Length != 0) {
+        await output.WriteRawTagAsync(10, cancellationToken).ConfigureAwait(false);
+        await output.WriteStringAsync(Value, cancellationToken).ConfigureAwait(false);
+      }
+    }
+    #endif
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
@@ -1048,6 +1286,24 @@ namespace Google.Protobuf.WellKnownTypes {
       }
     }
 
+    #if !NET35
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async Task MergeFromAsync(pb::CodedInputStream input, CancellationToken cancellationToken) {
+      uint tag;
+      while ((tag = await input.ReadTagAsync(cancellationToken).ConfigureAwait(false)) != 0) {
+        switch(tag) {
+          default:
+            await input.SkipLastFieldAsync(cancellationToken).ConfigureAwait(false);
+            break;
+          case 10: {
+            Value = await input.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
   }
 
   /// <summary>
@@ -1055,7 +1311,11 @@ namespace Google.Protobuf.WellKnownTypes {
   ///
   /// The JSON representation for `BytesValue` is JSON string.
   /// </summary>
+  #if !NET35
+  public sealed partial class BytesValue : pb::IAsyncMessage<BytesValue> {
+  #else
   public sealed partial class BytesValue : pb::IMessage<BytesValue> {
+  #endif
     private static readonly pb::MessageParser<BytesValue> _parser = new pb::MessageParser<BytesValue>(() => new BytesValue());
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pb::MessageParser<BytesValue> Parser { get { return _parser; } }
@@ -1138,6 +1398,16 @@ namespace Google.Protobuf.WellKnownTypes {
       }
     }
 
+    #if !NET35
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async Task WriteToAsync(pb::CodedOutputStream output, CancellationToken cancellationToken) {
+      if (Value.Length != 0) {
+        await output.WriteRawTagAsync(10, cancellationToken).ConfigureAwait(false);
+        await output.WriteBytesAsync(Value, cancellationToken).ConfigureAwait(false);
+      }
+    }
+    #endif
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
@@ -1172,6 +1442,24 @@ namespace Google.Protobuf.WellKnownTypes {
         }
       }
     }
+
+    #if !NET35
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async Task MergeFromAsync(pb::CodedInputStream input, CancellationToken cancellationToken) {
+      uint tag;
+      while ((tag = await input.ReadTagAsync(cancellationToken).ConfigureAwait(false)) != 0) {
+        switch(tag) {
+          default:
+            await input.SkipLastFieldAsync(cancellationToken).ConfigureAwait(false);
+            break;
+          case 10: {
+            Value = await input.ReadBytesAsync(cancellationToken).ConfigureAwait(false);
+            break;
+          }
+        }
+      }
+    }
+    #endif
 
   }
 

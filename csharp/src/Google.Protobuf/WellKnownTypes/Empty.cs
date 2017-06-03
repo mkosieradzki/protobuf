@@ -48,7 +48,11 @@ namespace Google.Protobuf.WellKnownTypes {
   ///
   /// The JSON representation for `Empty` is empty JSON object `{}`.
   /// </summary>
+  #if !NET35
+  public sealed partial class Empty : pb::IAsyncMessage<Empty> {
+  #else
   public sealed partial class Empty : pb::IMessage<Empty> {
+  #endif
     private static readonly pb::MessageParser<Empty> _parser = new pb::MessageParser<Empty>(() => new Empty());
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pb::MessageParser<Empty> Parser { get { return _parser; } }
@@ -110,6 +114,12 @@ namespace Google.Protobuf.WellKnownTypes {
     public void WriteTo(pb::CodedOutputStream output) {
     }
 
+    #if !NET35
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async Task WriteToAsync(pb::CodedOutputStream output, CancellationToken cancellationToken) {
+    }
+    #endif
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
@@ -134,6 +144,20 @@ namespace Google.Protobuf.WellKnownTypes {
         }
       }
     }
+
+    #if !NET35
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async Task MergeFromAsync(pb::CodedInputStream input, CancellationToken cancellationToken) {
+      uint tag;
+      while ((tag = await input.ReadTagAsync(cancellationToken).ConfigureAwait(false)) != 0) {
+        switch(tag) {
+          default:
+            await input.SkipLastFieldAsync(cancellationToken).ConfigureAwait(false);
+            break;
+        }
+      }
+    }
+    #endif
 
   }
 

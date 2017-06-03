@@ -181,7 +181,11 @@ namespace UnitTest.Issues.TestProtos {
   /// A test message with custom options at all possible locations (and also some
   /// regular options, to make sure they interact nicely).
   /// </summary>
+  #if !NET35
+  public sealed partial class TestMessageWithCustomOptions : pb::IAsyncMessage<TestMessageWithCustomOptions> {
+  #else
   public sealed partial class TestMessageWithCustomOptions : pb::IMessage<TestMessageWithCustomOptions> {
+  #endif
     private static readonly pb::MessageParser<TestMessageWithCustomOptions> _parser = new pb::MessageParser<TestMessageWithCustomOptions>(() => new TestMessageWithCustomOptions());
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pb::MessageParser<TestMessageWithCustomOptions> Parser { get { return _parser; } }
@@ -304,6 +308,20 @@ namespace UnitTest.Issues.TestProtos {
       }
     }
 
+    #if !NET35
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async Task WriteToAsync(pb::CodedOutputStream output, CancellationToken cancellationToken) {
+      if (Field1.Length != 0) {
+        await output.WriteRawTagAsync(10, cancellationToken).ConfigureAwait(false);
+        await output.WriteStringAsync(Field1, cancellationToken).ConfigureAwait(false);
+      }
+      if (anOneofCase_ == AnOneofOneofCase.OneofField) {
+        await output.WriteRawTagAsync(16, cancellationToken).ConfigureAwait(false);
+        await output.WriteInt32Async(OneofField, cancellationToken).ConfigureAwait(false);
+      }
+    }
+    #endif
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
@@ -352,6 +370,28 @@ namespace UnitTest.Issues.TestProtos {
       }
     }
 
+    #if !NET35
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async Task MergeFromAsync(pb::CodedInputStream input, CancellationToken cancellationToken) {
+      uint tag;
+      while ((tag = await input.ReadTagAsync(cancellationToken).ConfigureAwait(false)) != 0) {
+        switch(tag) {
+          default:
+            await input.SkipLastFieldAsync(cancellationToken).ConfigureAwait(false);
+            break;
+          case 10: {
+            Field1 = await input.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+            break;
+          }
+          case 16: {
+            OneofField = await input.ReadInt32Async(cancellationToken).ConfigureAwait(false);
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
     #region Nested types
     /// <summary>Container for nested types declared in the TestMessageWithCustomOptions message type.</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -371,7 +411,11 @@ namespace UnitTest.Issues.TestProtos {
   /// A test RPC service with custom options at all possible locations (and also
   /// some regular options, to make sure they interact nicely).
   /// </summary>
+  #if !NET35
+  public sealed partial class CustomOptionFooRequest : pb::IAsyncMessage<CustomOptionFooRequest> {
+  #else
   public sealed partial class CustomOptionFooRequest : pb::IMessage<CustomOptionFooRequest> {
+  #endif
     private static readonly pb::MessageParser<CustomOptionFooRequest> _parser = new pb::MessageParser<CustomOptionFooRequest>(() => new CustomOptionFooRequest());
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pb::MessageParser<CustomOptionFooRequest> Parser { get { return _parser; } }
@@ -433,6 +477,12 @@ namespace UnitTest.Issues.TestProtos {
     public void WriteTo(pb::CodedOutputStream output) {
     }
 
+    #if !NET35
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async Task WriteToAsync(pb::CodedOutputStream output, CancellationToken cancellationToken) {
+    }
+    #endif
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
@@ -458,9 +508,27 @@ namespace UnitTest.Issues.TestProtos {
       }
     }
 
+    #if !NET35
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async Task MergeFromAsync(pb::CodedInputStream input, CancellationToken cancellationToken) {
+      uint tag;
+      while ((tag = await input.ReadTagAsync(cancellationToken).ConfigureAwait(false)) != 0) {
+        switch(tag) {
+          default:
+            await input.SkipLastFieldAsync(cancellationToken).ConfigureAwait(false);
+            break;
+        }
+      }
+    }
+    #endif
+
   }
 
+  #if !NET35
+  public sealed partial class CustomOptionFooResponse : pb::IAsyncMessage<CustomOptionFooResponse> {
+  #else
   public sealed partial class CustomOptionFooResponse : pb::IMessage<CustomOptionFooResponse> {
+  #endif
     private static readonly pb::MessageParser<CustomOptionFooResponse> _parser = new pb::MessageParser<CustomOptionFooResponse>(() => new CustomOptionFooResponse());
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pb::MessageParser<CustomOptionFooResponse> Parser { get { return _parser; } }
@@ -522,6 +590,12 @@ namespace UnitTest.Issues.TestProtos {
     public void WriteTo(pb::CodedOutputStream output) {
     }
 
+    #if !NET35
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async Task WriteToAsync(pb::CodedOutputStream output, CancellationToken cancellationToken) {
+    }
+    #endif
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
@@ -547,9 +621,27 @@ namespace UnitTest.Issues.TestProtos {
       }
     }
 
+    #if !NET35
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async Task MergeFromAsync(pb::CodedInputStream input, CancellationToken cancellationToken) {
+      uint tag;
+      while ((tag = await input.ReadTagAsync(cancellationToken).ConfigureAwait(false)) != 0) {
+        switch(tag) {
+          default:
+            await input.SkipLastFieldAsync(cancellationToken).ConfigureAwait(false);
+            break;
+        }
+      }
+    }
+    #endif
+
   }
 
+  #if !NET35
+  public sealed partial class CustomOptionFooClientMessage : pb::IAsyncMessage<CustomOptionFooClientMessage> {
+  #else
   public sealed partial class CustomOptionFooClientMessage : pb::IMessage<CustomOptionFooClientMessage> {
+  #endif
     private static readonly pb::MessageParser<CustomOptionFooClientMessage> _parser = new pb::MessageParser<CustomOptionFooClientMessage>(() => new CustomOptionFooClientMessage());
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pb::MessageParser<CustomOptionFooClientMessage> Parser { get { return _parser; } }
@@ -611,6 +703,12 @@ namespace UnitTest.Issues.TestProtos {
     public void WriteTo(pb::CodedOutputStream output) {
     }
 
+    #if !NET35
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async Task WriteToAsync(pb::CodedOutputStream output, CancellationToken cancellationToken) {
+    }
+    #endif
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
@@ -636,9 +734,27 @@ namespace UnitTest.Issues.TestProtos {
       }
     }
 
+    #if !NET35
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async Task MergeFromAsync(pb::CodedInputStream input, CancellationToken cancellationToken) {
+      uint tag;
+      while ((tag = await input.ReadTagAsync(cancellationToken).ConfigureAwait(false)) != 0) {
+        switch(tag) {
+          default:
+            await input.SkipLastFieldAsync(cancellationToken).ConfigureAwait(false);
+            break;
+        }
+      }
+    }
+    #endif
+
   }
 
+  #if !NET35
+  public sealed partial class CustomOptionFooServerMessage : pb::IAsyncMessage<CustomOptionFooServerMessage> {
+  #else
   public sealed partial class CustomOptionFooServerMessage : pb::IMessage<CustomOptionFooServerMessage> {
+  #endif
     private static readonly pb::MessageParser<CustomOptionFooServerMessage> _parser = new pb::MessageParser<CustomOptionFooServerMessage>(() => new CustomOptionFooServerMessage());
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pb::MessageParser<CustomOptionFooServerMessage> Parser { get { return _parser; } }
@@ -700,6 +816,12 @@ namespace UnitTest.Issues.TestProtos {
     public void WriteTo(pb::CodedOutputStream output) {
     }
 
+    #if !NET35
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async Task WriteToAsync(pb::CodedOutputStream output, CancellationToken cancellationToken) {
+    }
+    #endif
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
@@ -725,9 +847,27 @@ namespace UnitTest.Issues.TestProtos {
       }
     }
 
+    #if !NET35
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async Task MergeFromAsync(pb::CodedInputStream input, CancellationToken cancellationToken) {
+      uint tag;
+      while ((tag = await input.ReadTagAsync(cancellationToken).ConfigureAwait(false)) != 0) {
+        switch(tag) {
+          default:
+            await input.SkipLastFieldAsync(cancellationToken).ConfigureAwait(false);
+            break;
+        }
+      }
+    }
+    #endif
+
   }
 
+  #if !NET35
+  public sealed partial class DummyMessageContainingEnum : pb::IAsyncMessage<DummyMessageContainingEnum> {
+  #else
   public sealed partial class DummyMessageContainingEnum : pb::IMessage<DummyMessageContainingEnum> {
+  #endif
     private static readonly pb::MessageParser<DummyMessageContainingEnum> _parser = new pb::MessageParser<DummyMessageContainingEnum>(() => new DummyMessageContainingEnum());
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pb::MessageParser<DummyMessageContainingEnum> Parser { get { return _parser; } }
@@ -789,6 +929,12 @@ namespace UnitTest.Issues.TestProtos {
     public void WriteTo(pb::CodedOutputStream output) {
     }
 
+    #if !NET35
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async Task WriteToAsync(pb::CodedOutputStream output, CancellationToken cancellationToken) {
+    }
+    #endif
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
@@ -814,6 +960,20 @@ namespace UnitTest.Issues.TestProtos {
       }
     }
 
+    #if !NET35
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async Task MergeFromAsync(pb::CodedInputStream input, CancellationToken cancellationToken) {
+      uint tag;
+      while ((tag = await input.ReadTagAsync(cancellationToken).ConfigureAwait(false)) != 0) {
+        switch(tag) {
+          default:
+            await input.SkipLastFieldAsync(cancellationToken).ConfigureAwait(false);
+            break;
+        }
+      }
+    }
+    #endif
+
     #region Nested types
     /// <summary>Container for nested types declared in the DummyMessageContainingEnum message type.</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -829,7 +989,11 @@ namespace UnitTest.Issues.TestProtos {
 
   }
 
+  #if !NET35
+  public sealed partial class DummyMessageInvalidAsOptionType : pb::IAsyncMessage<DummyMessageInvalidAsOptionType> {
+  #else
   public sealed partial class DummyMessageInvalidAsOptionType : pb::IMessage<DummyMessageInvalidAsOptionType> {
+  #endif
     private static readonly pb::MessageParser<DummyMessageInvalidAsOptionType> _parser = new pb::MessageParser<DummyMessageInvalidAsOptionType>(() => new DummyMessageInvalidAsOptionType());
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pb::MessageParser<DummyMessageInvalidAsOptionType> Parser { get { return _parser; } }
@@ -891,6 +1055,12 @@ namespace UnitTest.Issues.TestProtos {
     public void WriteTo(pb::CodedOutputStream output) {
     }
 
+    #if !NET35
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async Task WriteToAsync(pb::CodedOutputStream output, CancellationToken cancellationToken) {
+    }
+    #endif
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
@@ -916,9 +1086,27 @@ namespace UnitTest.Issues.TestProtos {
       }
     }
 
+    #if !NET35
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async Task MergeFromAsync(pb::CodedInputStream input, CancellationToken cancellationToken) {
+      uint tag;
+      while ((tag = await input.ReadTagAsync(cancellationToken).ConfigureAwait(false)) != 0) {
+        switch(tag) {
+          default:
+            await input.SkipLastFieldAsync(cancellationToken).ConfigureAwait(false);
+            break;
+        }
+      }
+    }
+    #endif
+
   }
 
+  #if !NET35
+  public sealed partial class CustomOptionMinIntegerValues : pb::IAsyncMessage<CustomOptionMinIntegerValues> {
+  #else
   public sealed partial class CustomOptionMinIntegerValues : pb::IMessage<CustomOptionMinIntegerValues> {
+  #endif
     private static readonly pb::MessageParser<CustomOptionMinIntegerValues> _parser = new pb::MessageParser<CustomOptionMinIntegerValues>(() => new CustomOptionMinIntegerValues());
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pb::MessageParser<CustomOptionMinIntegerValues> Parser { get { return _parser; } }
@@ -980,6 +1168,12 @@ namespace UnitTest.Issues.TestProtos {
     public void WriteTo(pb::CodedOutputStream output) {
     }
 
+    #if !NET35
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async Task WriteToAsync(pb::CodedOutputStream output, CancellationToken cancellationToken) {
+    }
+    #endif
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
@@ -1005,9 +1199,27 @@ namespace UnitTest.Issues.TestProtos {
       }
     }
 
+    #if !NET35
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async Task MergeFromAsync(pb::CodedInputStream input, CancellationToken cancellationToken) {
+      uint tag;
+      while ((tag = await input.ReadTagAsync(cancellationToken).ConfigureAwait(false)) != 0) {
+        switch(tag) {
+          default:
+            await input.SkipLastFieldAsync(cancellationToken).ConfigureAwait(false);
+            break;
+        }
+      }
+    }
+    #endif
+
   }
 
+  #if !NET35
+  public sealed partial class CustomOptionMaxIntegerValues : pb::IAsyncMessage<CustomOptionMaxIntegerValues> {
+  #else
   public sealed partial class CustomOptionMaxIntegerValues : pb::IMessage<CustomOptionMaxIntegerValues> {
+  #endif
     private static readonly pb::MessageParser<CustomOptionMaxIntegerValues> _parser = new pb::MessageParser<CustomOptionMaxIntegerValues>(() => new CustomOptionMaxIntegerValues());
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pb::MessageParser<CustomOptionMaxIntegerValues> Parser { get { return _parser; } }
@@ -1069,6 +1281,12 @@ namespace UnitTest.Issues.TestProtos {
     public void WriteTo(pb::CodedOutputStream output) {
     }
 
+    #if !NET35
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async Task WriteToAsync(pb::CodedOutputStream output, CancellationToken cancellationToken) {
+    }
+    #endif
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
@@ -1094,9 +1312,27 @@ namespace UnitTest.Issues.TestProtos {
       }
     }
 
+    #if !NET35
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async Task MergeFromAsync(pb::CodedInputStream input, CancellationToken cancellationToken) {
+      uint tag;
+      while ((tag = await input.ReadTagAsync(cancellationToken).ConfigureAwait(false)) != 0) {
+        switch(tag) {
+          default:
+            await input.SkipLastFieldAsync(cancellationToken).ConfigureAwait(false);
+            break;
+        }
+      }
+    }
+    #endif
+
   }
 
+  #if !NET35
+  public sealed partial class CustomOptionOtherValues : pb::IAsyncMessage<CustomOptionOtherValues> {
+  #else
   public sealed partial class CustomOptionOtherValues : pb::IMessage<CustomOptionOtherValues> {
+  #endif
     private static readonly pb::MessageParser<CustomOptionOtherValues> _parser = new pb::MessageParser<CustomOptionOtherValues>(() => new CustomOptionOtherValues());
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pb::MessageParser<CustomOptionOtherValues> Parser { get { return _parser; } }
@@ -1158,6 +1394,12 @@ namespace UnitTest.Issues.TestProtos {
     public void WriteTo(pb::CodedOutputStream output) {
     }
 
+    #if !NET35
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async Task WriteToAsync(pb::CodedOutputStream output, CancellationToken cancellationToken) {
+    }
+    #endif
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
@@ -1183,9 +1425,27 @@ namespace UnitTest.Issues.TestProtos {
       }
     }
 
+    #if !NET35
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async Task MergeFromAsync(pb::CodedInputStream input, CancellationToken cancellationToken) {
+      uint tag;
+      while ((tag = await input.ReadTagAsync(cancellationToken).ConfigureAwait(false)) != 0) {
+        switch(tag) {
+          default:
+            await input.SkipLastFieldAsync(cancellationToken).ConfigureAwait(false);
+            break;
+        }
+      }
+    }
+    #endif
+
   }
 
+  #if !NET35
+  public sealed partial class SettingRealsFromPositiveInts : pb::IAsyncMessage<SettingRealsFromPositiveInts> {
+  #else
   public sealed partial class SettingRealsFromPositiveInts : pb::IMessage<SettingRealsFromPositiveInts> {
+  #endif
     private static readonly pb::MessageParser<SettingRealsFromPositiveInts> _parser = new pb::MessageParser<SettingRealsFromPositiveInts>(() => new SettingRealsFromPositiveInts());
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pb::MessageParser<SettingRealsFromPositiveInts> Parser { get { return _parser; } }
@@ -1247,6 +1507,12 @@ namespace UnitTest.Issues.TestProtos {
     public void WriteTo(pb::CodedOutputStream output) {
     }
 
+    #if !NET35
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async Task WriteToAsync(pb::CodedOutputStream output, CancellationToken cancellationToken) {
+    }
+    #endif
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
@@ -1272,9 +1538,27 @@ namespace UnitTest.Issues.TestProtos {
       }
     }
 
+    #if !NET35
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async Task MergeFromAsync(pb::CodedInputStream input, CancellationToken cancellationToken) {
+      uint tag;
+      while ((tag = await input.ReadTagAsync(cancellationToken).ConfigureAwait(false)) != 0) {
+        switch(tag) {
+          default:
+            await input.SkipLastFieldAsync(cancellationToken).ConfigureAwait(false);
+            break;
+        }
+      }
+    }
+    #endif
+
   }
 
+  #if !NET35
+  public sealed partial class SettingRealsFromNegativeInts : pb::IAsyncMessage<SettingRealsFromNegativeInts> {
+  #else
   public sealed partial class SettingRealsFromNegativeInts : pb::IMessage<SettingRealsFromNegativeInts> {
+  #endif
     private static readonly pb::MessageParser<SettingRealsFromNegativeInts> _parser = new pb::MessageParser<SettingRealsFromNegativeInts>(() => new SettingRealsFromNegativeInts());
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pb::MessageParser<SettingRealsFromNegativeInts> Parser { get { return _parser; } }
@@ -1336,6 +1620,12 @@ namespace UnitTest.Issues.TestProtos {
     public void WriteTo(pb::CodedOutputStream output) {
     }
 
+    #if !NET35
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async Task WriteToAsync(pb::CodedOutputStream output, CancellationToken cancellationToken) {
+    }
+    #endif
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
@@ -1361,9 +1651,27 @@ namespace UnitTest.Issues.TestProtos {
       }
     }
 
+    #if !NET35
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async Task MergeFromAsync(pb::CodedInputStream input, CancellationToken cancellationToken) {
+      uint tag;
+      while ((tag = await input.ReadTagAsync(cancellationToken).ConfigureAwait(false)) != 0) {
+        switch(tag) {
+          default:
+            await input.SkipLastFieldAsync(cancellationToken).ConfigureAwait(false);
+            break;
+        }
+      }
+    }
+    #endif
+
   }
 
+  #if !NET35
+  public sealed partial class ComplexOptionType1 : pb::IAsyncMessage<ComplexOptionType1> {
+  #else
   public sealed partial class ComplexOptionType1 : pb::IMessage<ComplexOptionType1> {
+  #endif
     private static readonly pb::MessageParser<ComplexOptionType1> _parser = new pb::MessageParser<ComplexOptionType1>(() => new ComplexOptionType1());
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pb::MessageParser<ComplexOptionType1> Parser { get { return _parser; } }
@@ -1493,6 +1801,25 @@ namespace UnitTest.Issues.TestProtos {
       foo4_.WriteTo(output, _repeated_foo4_codec);
     }
 
+    #if !NET35
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async Task WriteToAsync(pb::CodedOutputStream output, CancellationToken cancellationToken) {
+      if (Foo != 0) {
+        await output.WriteRawTagAsync(8, cancellationToken).ConfigureAwait(false);
+        await output.WriteInt32Async(Foo, cancellationToken).ConfigureAwait(false);
+      }
+      if (Foo2 != 0) {
+        await output.WriteRawTagAsync(16, cancellationToken).ConfigureAwait(false);
+        await output.WriteInt32Async(Foo2, cancellationToken).ConfigureAwait(false);
+      }
+      if (Foo3 != 0) {
+        await output.WriteRawTagAsync(24, cancellationToken).ConfigureAwait(false);
+        await output.WriteInt32Async(Foo3, cancellationToken).ConfigureAwait(false);
+      }
+      await foo4_.WriteToAsync(output, _repeated_foo4_codec, cancellationToken).ConfigureAwait(false);
+    }
+    #endif
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
@@ -1555,9 +1882,44 @@ namespace UnitTest.Issues.TestProtos {
       }
     }
 
+    #if !NET35
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async Task MergeFromAsync(pb::CodedInputStream input, CancellationToken cancellationToken) {
+      uint tag;
+      while ((tag = await input.ReadTagAsync(cancellationToken).ConfigureAwait(false)) != 0) {
+        switch(tag) {
+          default:
+            await input.SkipLastFieldAsync(cancellationToken).ConfigureAwait(false);
+            break;
+          case 8: {
+            Foo = await input.ReadInt32Async(cancellationToken).ConfigureAwait(false);
+            break;
+          }
+          case 16: {
+            Foo2 = await input.ReadInt32Async(cancellationToken).ConfigureAwait(false);
+            break;
+          }
+          case 24: {
+            Foo3 = await input.ReadInt32Async(cancellationToken).ConfigureAwait(false);
+            break;
+          }
+          case 34:
+          case 32: {
+            await foo4_.AddEntriesFromAsync(input, _repeated_foo4_codec, cancellationToken).ConfigureAwait(false);
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
   }
 
+  #if !NET35
+  public sealed partial class ComplexOptionType2 : pb::IAsyncMessage<ComplexOptionType2> {
+  #else
   public sealed partial class ComplexOptionType2 : pb::IMessage<ComplexOptionType2> {
+  #endif
     private static readonly pb::MessageParser<ComplexOptionType2> _parser = new pb::MessageParser<ComplexOptionType2>(() => new ComplexOptionType2());
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pb::MessageParser<ComplexOptionType2> Parser { get { return _parser; } }
@@ -1687,6 +2049,25 @@ namespace UnitTest.Issues.TestProtos {
       barney_.WriteTo(output, _repeated_barney_codec);
     }
 
+    #if !NET35
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async Task WriteToAsync(pb::CodedOutputStream output, CancellationToken cancellationToken) {
+      if (bar_ != null) {
+        await output.WriteRawTagAsync(10, cancellationToken).ConfigureAwait(false);
+        await output.WriteMessageAsync(Bar, cancellationToken).ConfigureAwait(false);
+      }
+      if (Baz != 0) {
+        await output.WriteRawTagAsync(16, cancellationToken).ConfigureAwait(false);
+        await output.WriteInt32Async(Baz, cancellationToken).ConfigureAwait(false);
+      }
+      if (fred_ != null) {
+        await output.WriteRawTagAsync(26, cancellationToken).ConfigureAwait(false);
+        await output.WriteMessageAsync(Fred, cancellationToken).ConfigureAwait(false);
+      }
+      await barney_.WriteToAsync(output, _repeated_barney_codec, cancellationToken).ConfigureAwait(false);
+    }
+    #endif
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
@@ -1760,11 +2141,51 @@ namespace UnitTest.Issues.TestProtos {
       }
     }
 
+    #if !NET35
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async Task MergeFromAsync(pb::CodedInputStream input, CancellationToken cancellationToken) {
+      uint tag;
+      while ((tag = await input.ReadTagAsync(cancellationToken).ConfigureAwait(false)) != 0) {
+        switch(tag) {
+          default:
+            await input.SkipLastFieldAsync(cancellationToken).ConfigureAwait(false);
+            break;
+          case 10: {
+            if (bar_ == null) {
+              bar_ = new global::UnitTest.Issues.TestProtos.ComplexOptionType1();
+            }
+            await input.ReadMessageAsync(bar_, cancellationToken).ConfigureAwait(false);
+            break;
+          }
+          case 16: {
+            Baz = await input.ReadInt32Async(cancellationToken).ConfigureAwait(false);
+            break;
+          }
+          case 26: {
+            if (fred_ == null) {
+              fred_ = new global::UnitTest.Issues.TestProtos.ComplexOptionType2.Types.ComplexOptionType4();
+            }
+            await input.ReadMessageAsync(fred_, cancellationToken).ConfigureAwait(false);
+            break;
+          }
+          case 34: {
+            await barney_.AddEntriesFromAsync(input, _repeated_barney_codec, cancellationToken).ConfigureAwait(false);
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
     #region Nested types
     /// <summary>Container for nested types declared in the ComplexOptionType2 message type.</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static partial class Types {
+      #if !NET35
+      public sealed partial class ComplexOptionType4 : pb::IAsyncMessage<ComplexOptionType4> {
+      #else
       public sealed partial class ComplexOptionType4 : pb::IMessage<ComplexOptionType4> {
+      #endif
         private static readonly pb::MessageParser<ComplexOptionType4> _parser = new pb::MessageParser<ComplexOptionType4>(() => new ComplexOptionType4());
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public static pb::MessageParser<ComplexOptionType4> Parser { get { return _parser; } }
@@ -1844,6 +2265,16 @@ namespace UnitTest.Issues.TestProtos {
           }
         }
 
+        #if !NET35
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public async Task WriteToAsync(pb::CodedOutputStream output, CancellationToken cancellationToken) {
+          if (Waldo != 0) {
+            await output.WriteRawTagAsync(8, cancellationToken).ConfigureAwait(false);
+            await output.WriteInt32Async(Waldo, cancellationToken).ConfigureAwait(false);
+          }
+        }
+        #endif
+
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public int CalculateSize() {
           int size = 0;
@@ -1879,6 +2310,24 @@ namespace UnitTest.Issues.TestProtos {
           }
         }
 
+        #if !NET35
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public async Task MergeFromAsync(pb::CodedInputStream input, CancellationToken cancellationToken) {
+          uint tag;
+          while ((tag = await input.ReadTagAsync(cancellationToken).ConfigureAwait(false)) != 0) {
+            switch(tag) {
+              default:
+                await input.SkipLastFieldAsync(cancellationToken).ConfigureAwait(false);
+                break;
+              case 8: {
+                Waldo = await input.ReadInt32Async(cancellationToken).ConfigureAwait(false);
+                break;
+              }
+            }
+          }
+        }
+        #endif
+
       }
 
     }
@@ -1886,7 +2335,11 @@ namespace UnitTest.Issues.TestProtos {
 
   }
 
+  #if !NET35
+  public sealed partial class ComplexOptionType3 : pb::IAsyncMessage<ComplexOptionType3> {
+  #else
   public sealed partial class ComplexOptionType3 : pb::IMessage<ComplexOptionType3> {
+  #endif
     private static readonly pb::MessageParser<ComplexOptionType3> _parser = new pb::MessageParser<ComplexOptionType3>(() => new ComplexOptionType3());
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pb::MessageParser<ComplexOptionType3> Parser { get { return _parser; } }
@@ -1966,6 +2419,16 @@ namespace UnitTest.Issues.TestProtos {
       }
     }
 
+    #if !NET35
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async Task WriteToAsync(pb::CodedOutputStream output, CancellationToken cancellationToken) {
+      if (Qux != 0) {
+        await output.WriteRawTagAsync(8, cancellationToken).ConfigureAwait(false);
+        await output.WriteInt32Async(Qux, cancellationToken).ConfigureAwait(false);
+      }
+    }
+    #endif
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
@@ -2001,12 +2464,34 @@ namespace UnitTest.Issues.TestProtos {
       }
     }
 
+    #if !NET35
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async Task MergeFromAsync(pb::CodedInputStream input, CancellationToken cancellationToken) {
+      uint tag;
+      while ((tag = await input.ReadTagAsync(cancellationToken).ConfigureAwait(false)) != 0) {
+        switch(tag) {
+          default:
+            await input.SkipLastFieldAsync(cancellationToken).ConfigureAwait(false);
+            break;
+          case 8: {
+            Qux = await input.ReadInt32Async(cancellationToken).ConfigureAwait(false);
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
   }
 
   /// <summary>
   /// Note that we try various different ways of naming the same extension.
   /// </summary>
+  #if !NET35
+  public sealed partial class VariousComplexOptions : pb::IAsyncMessage<VariousComplexOptions> {
+  #else
   public sealed partial class VariousComplexOptions : pb::IMessage<VariousComplexOptions> {
+  #endif
     private static readonly pb::MessageParser<VariousComplexOptions> _parser = new pb::MessageParser<VariousComplexOptions>(() => new VariousComplexOptions());
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pb::MessageParser<VariousComplexOptions> Parser { get { return _parser; } }
@@ -2068,6 +2553,12 @@ namespace UnitTest.Issues.TestProtos {
     public void WriteTo(pb::CodedOutputStream output) {
     }
 
+    #if !NET35
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async Task WriteToAsync(pb::CodedOutputStream output, CancellationToken cancellationToken) {
+    }
+    #endif
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
@@ -2093,12 +2584,30 @@ namespace UnitTest.Issues.TestProtos {
       }
     }
 
+    #if !NET35
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async Task MergeFromAsync(pb::CodedInputStream input, CancellationToken cancellationToken) {
+      uint tag;
+      while ((tag = await input.ReadTagAsync(cancellationToken).ConfigureAwait(false)) != 0) {
+        switch(tag) {
+          default:
+            await input.SkipLastFieldAsync(cancellationToken).ConfigureAwait(false);
+            break;
+        }
+      }
+    }
+    #endif
+
   }
 
   /// <summary>
   /// A helper type used to test aggregate option parsing
   /// </summary>
+  #if !NET35
+  public sealed partial class Aggregate : pb::IAsyncMessage<Aggregate> {
+  #else
   public sealed partial class Aggregate : pb::IMessage<Aggregate> {
+  #endif
     private static readonly pb::MessageParser<Aggregate> _parser = new pb::MessageParser<Aggregate>(() => new Aggregate());
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pb::MessageParser<Aggregate> Parser { get { return _parser; } }
@@ -2217,6 +2726,24 @@ namespace UnitTest.Issues.TestProtos {
       }
     }
 
+    #if !NET35
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async Task WriteToAsync(pb::CodedOutputStream output, CancellationToken cancellationToken) {
+      if (I != 0) {
+        await output.WriteRawTagAsync(8, cancellationToken).ConfigureAwait(false);
+        await output.WriteInt32Async(I, cancellationToken).ConfigureAwait(false);
+      }
+      if (S.Length != 0) {
+        await output.WriteRawTagAsync(18, cancellationToken).ConfigureAwait(false);
+        await output.WriteStringAsync(S, cancellationToken).ConfigureAwait(false);
+      }
+      if (sub_ != null) {
+        await output.WriteRawTagAsync(26, cancellationToken).ConfigureAwait(false);
+        await output.WriteMessageAsync(Sub, cancellationToken).ConfigureAwait(false);
+      }
+    }
+    #endif
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
@@ -2278,9 +2805,42 @@ namespace UnitTest.Issues.TestProtos {
       }
     }
 
+    #if !NET35
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async Task MergeFromAsync(pb::CodedInputStream input, CancellationToken cancellationToken) {
+      uint tag;
+      while ((tag = await input.ReadTagAsync(cancellationToken).ConfigureAwait(false)) != 0) {
+        switch(tag) {
+          default:
+            await input.SkipLastFieldAsync(cancellationToken).ConfigureAwait(false);
+            break;
+          case 8: {
+            I = await input.ReadInt32Async(cancellationToken).ConfigureAwait(false);
+            break;
+          }
+          case 18: {
+            S = await input.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+            break;
+          }
+          case 26: {
+            if (sub_ == null) {
+              sub_ = new global::UnitTest.Issues.TestProtos.Aggregate();
+            }
+            await input.ReadMessageAsync(sub_, cancellationToken).ConfigureAwait(false);
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
   }
 
+  #if !NET35
+  public sealed partial class AggregateMessage : pb::IAsyncMessage<AggregateMessage> {
+  #else
   public sealed partial class AggregateMessage : pb::IMessage<AggregateMessage> {
+  #endif
     private static readonly pb::MessageParser<AggregateMessage> _parser = new pb::MessageParser<AggregateMessage>(() => new AggregateMessage());
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pb::MessageParser<AggregateMessage> Parser { get { return _parser; } }
@@ -2360,6 +2920,16 @@ namespace UnitTest.Issues.TestProtos {
       }
     }
 
+    #if !NET35
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async Task WriteToAsync(pb::CodedOutputStream output, CancellationToken cancellationToken) {
+      if (Fieldname != 0) {
+        await output.WriteRawTagAsync(8, cancellationToken).ConfigureAwait(false);
+        await output.WriteInt32Async(Fieldname, cancellationToken).ConfigureAwait(false);
+      }
+    }
+    #endif
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
@@ -2395,12 +2965,34 @@ namespace UnitTest.Issues.TestProtos {
       }
     }
 
+    #if !NET35
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async Task MergeFromAsync(pb::CodedInputStream input, CancellationToken cancellationToken) {
+      uint tag;
+      while ((tag = await input.ReadTagAsync(cancellationToken).ConfigureAwait(false)) != 0) {
+        switch(tag) {
+          default:
+            await input.SkipLastFieldAsync(cancellationToken).ConfigureAwait(false);
+            break;
+          case 8: {
+            Fieldname = await input.ReadInt32Async(cancellationToken).ConfigureAwait(false);
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
   }
 
   /// <summary>
   /// Test custom options for nested type.
   /// </summary>
+  #if !NET35
+  public sealed partial class NestedOptionType : pb::IAsyncMessage<NestedOptionType> {
+  #else
   public sealed partial class NestedOptionType : pb::IMessage<NestedOptionType> {
+  #endif
     private static readonly pb::MessageParser<NestedOptionType> _parser = new pb::MessageParser<NestedOptionType>(() => new NestedOptionType());
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pb::MessageParser<NestedOptionType> Parser { get { return _parser; } }
@@ -2462,6 +3054,12 @@ namespace UnitTest.Issues.TestProtos {
     public void WriteTo(pb::CodedOutputStream output) {
     }
 
+    #if !NET35
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async Task WriteToAsync(pb::CodedOutputStream output, CancellationToken cancellationToken) {
+    }
+    #endif
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
@@ -2487,6 +3085,20 @@ namespace UnitTest.Issues.TestProtos {
       }
     }
 
+    #if !NET35
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async Task MergeFromAsync(pb::CodedInputStream input, CancellationToken cancellationToken) {
+      uint tag;
+      while ((tag = await input.ReadTagAsync(cancellationToken).ConfigureAwait(false)) != 0) {
+        switch(tag) {
+          default:
+            await input.SkipLastFieldAsync(cancellationToken).ConfigureAwait(false);
+            break;
+        }
+      }
+    }
+    #endif
+
     #region Nested types
     /// <summary>Container for nested types declared in the NestedOptionType message type.</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2496,7 +3108,11 @@ namespace UnitTest.Issues.TestProtos {
         [pbr::OriginalName("NESTED_ENUM_VALUE")] Value = 1,
       }
 
+      #if !NET35
+      public sealed partial class NestedMessage : pb::IAsyncMessage<NestedMessage> {
+      #else
       public sealed partial class NestedMessage : pb::IMessage<NestedMessage> {
+      #endif
         private static readonly pb::MessageParser<NestedMessage> _parser = new pb::MessageParser<NestedMessage>(() => new NestedMessage());
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public static pb::MessageParser<NestedMessage> Parser { get { return _parser; } }
@@ -2576,6 +3192,16 @@ namespace UnitTest.Issues.TestProtos {
           }
         }
 
+        #if !NET35
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public async Task WriteToAsync(pb::CodedOutputStream output, CancellationToken cancellationToken) {
+          if (NestedField != 0) {
+            await output.WriteRawTagAsync(8, cancellationToken).ConfigureAwait(false);
+            await output.WriteInt32Async(NestedField, cancellationToken).ConfigureAwait(false);
+          }
+        }
+        #endif
+
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public int CalculateSize() {
           int size = 0;
@@ -2610,6 +3236,24 @@ namespace UnitTest.Issues.TestProtos {
             }
           }
         }
+
+        #if !NET35
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public async Task MergeFromAsync(pb::CodedInputStream input, CancellationToken cancellationToken) {
+          uint tag;
+          while ((tag = await input.ReadTagAsync(cancellationToken).ConfigureAwait(false)) != 0) {
+            switch(tag) {
+              default:
+                await input.SkipLastFieldAsync(cancellationToken).ConfigureAwait(false);
+                break;
+              case 8: {
+                NestedField = await input.ReadInt32Async(cancellationToken).ConfigureAwait(false);
+                break;
+              }
+            }
+          }
+        }
+        #endif
 
       }
 

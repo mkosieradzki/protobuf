@@ -240,7 +240,11 @@ namespace Google.Protobuf.WellKnownTypes {
   /// Note that oneof type names ("test_oneof" in this case) cannot be used in
   /// paths.
   /// </summary>
+  #if !NET35
+  public sealed partial class FieldMask : pb::IAsyncMessage<FieldMask> {
+  #else
   public sealed partial class FieldMask : pb::IMessage<FieldMask> {
+  #endif
     private static readonly pb::MessageParser<FieldMask> _parser = new pb::MessageParser<FieldMask>(() => new FieldMask());
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pb::MessageParser<FieldMask> Parser { get { return _parser; } }
@@ -319,6 +323,13 @@ namespace Google.Protobuf.WellKnownTypes {
       paths_.WriteTo(output, _repeated_paths_codec);
     }
 
+    #if !NET35
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async Task WriteToAsync(pb::CodedOutputStream output, CancellationToken cancellationToken) {
+      await paths_.WriteToAsync(output, _repeated_paths_codec, cancellationToken).ConfigureAwait(false);
+    }
+    #endif
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
@@ -349,6 +360,24 @@ namespace Google.Protobuf.WellKnownTypes {
         }
       }
     }
+
+    #if !NET35
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async Task MergeFromAsync(pb::CodedInputStream input, CancellationToken cancellationToken) {
+      uint tag;
+      while ((tag = await input.ReadTagAsync(cancellationToken).ConfigureAwait(false)) != 0) {
+        switch(tag) {
+          default:
+            await input.SkipLastFieldAsync(cancellationToken).ConfigureAwait(false);
+            break;
+          case 10: {
+            await paths_.AddEntriesFromAsync(input, _repeated_paths_codec, cancellationToken).ConfigureAwait(false);
+            break;
+          }
+        }
+      }
+    }
+    #endif
 
   }
 
