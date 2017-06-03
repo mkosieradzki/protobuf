@@ -416,6 +416,27 @@ void MessageGenerator::GenerateMessageSerializationMethods(io::Printer* printer)
   printer->Print(
 	"}\n"
 	"\n");
+
+  if (descriptor_->file()->options().csharp_async()) {
+    WriteGeneratedCodeAttributes(printer);
+    printer->Print(
+      "public async Task WriteToAsync(pb::CodedOutputStream output, CancellationToken cancellationToken) {\n");
+    printer->Indent();
+
+    // Serialize all the fields
+    for (int i = 0; i < fields_by_number().size(); i++) {
+      scoped_ptr<FieldGeneratorBase> generator(
+        CreateFieldGeneratorInternal(fields_by_number()[i]));
+      generator->GenerateAsyncSerializationCode(printer);
+    }
+
+    // TODO(jonskeet): Memoize size of frozen messages?
+    printer->Outdent();
+    printer->Print(
+      "}\n"
+      "\n");
+  }
+
   WriteGeneratedCodeAttributes(printer);
   printer->Print(
     "public int CalculateSize() {\n");
@@ -531,6 +552,66 @@ void MessageGenerator::GenerateMergingMethods(io::Printer* printer) {
   printer->Print("}\n"); // while
   printer->Outdent();
   printer->Print("}\n\n"); // method
+
+  if (descriptor_->file()->options().csharp_async()) {
+    WriteGeneratedCodeAttributes(printer);
+    printer->Print("public async Task MergeFromAsync(pb::CodedInputStream input, CancellationToken cancellationToken) {\n");
+    printer->Indent();
+    printer->Print(
+      "uint tag;\n"
+      "while ((tag = await input.ReadTagAsync(cancellationToken).ConfigureAwait(false)) != 0) {\n"
+      "  switch(tag) {\n");
+    printer->Indent();
+    printer->Indent();
+    // Option messages need to store unknown fields so that options can be parsed later.
+    if (IsDescriptorOptionMessage(descriptor_)) {
+      printer->Print(
+        "default:\n"
+        "  CustomOptions = await CustomOptions.ReadOrSkipUnknownFieldAsync(input, cancellationToken).ConfigureAwait(false);\n"
+        "  break;\n");
+    }
+    else {
+      printer->Print(
+        "default:\n"
+        "  await input.SkipLastFieldAsync(cancellationToken).ConfigureAwait(false);\n" // We're not storing the data, but we still need to consume it.
+        "  break;\n");
+    }
+    for (int i = 0; i < fields_by_number().size(); i++) {
+      const FieldDescriptor* field = fields_by_number()[i];
+      internal::WireFormatLite::WireType wt =
+        internal::WireFormat::WireTypeForFieldType(field->type());
+      uint32 tag = internal::WireFormatLite::MakeTag(field->number(), wt);
+      // Handle both packed and unpacked repeated fields with the same Read*Array call;
+      // the two generated cases are the packed and unpacked tags.
+      // TODO(jonskeet): Check that is_packable is equivalent to
+      // is_repeated && wt in { VARINT, FIXED32, FIXED64 }.
+      // It looks like it is...
+      if (field->is_packable()) {
+        printer->Print(
+          "case $packed_tag$:\n",
+          "packed_tag",
+          SimpleItoa(
+            internal::WireFormatLite::MakeTag(
+              field->number(),
+              internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED)));
+      }
+
+      printer->Print("case $tag$: {\n", "tag", SimpleItoa(tag));
+      printer->Indent();
+      scoped_ptr<FieldGeneratorBase> generator(
+        CreateFieldGeneratorInternal(field));
+      generator->GenerateAsyncParsingCode(printer);
+      printer->Print("break;\n");
+      printer->Outdent();
+      printer->Print("}\n");
+    }
+    printer->Outdent();
+    printer->Print("}\n"); // switch
+    printer->Outdent();
+    printer->Print("}\n"); // while
+    printer->Outdent();
+    printer->Print("}\n\n"); // method
+  }
 }
 
 int MessageGenerator::GetFieldOrdinal(const FieldDescriptor* descriptor) {
