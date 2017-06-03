@@ -48,6 +48,7 @@
 #include <google/protobuf/compiler/csharp/csharp_helpers.h>
 #include <google/protobuf/compiler/csharp/csharp_message.h>
 #include <google/protobuf/compiler/csharp/csharp_names.h>
+#include <google/protobuf/compiler/csharp/csharp_options.h>
 
 using google::protobuf::internal::scoped_ptr;
 
@@ -111,8 +112,7 @@ void MessageGenerator::Generate(io::Printer* printer) {
 
   WriteMessageDocComment(printer, descriptor_);
   AddDeprecatedFlag(printer);
-
-  if (descriptor_->file()->options().csharp_async()) {
+  if (descriptor_->file()->options().csharp_async() || options()->async) {
     printer->Print(
       vars,
       "#if !NET35\n"
@@ -425,7 +425,7 @@ void MessageGenerator::GenerateMessageSerializationMethods(io::Printer* printer)
 	"}\n"
 	"\n");
 
-  if (descriptor_->file()->options().csharp_async()) {
+  if (descriptor_->file()->options().csharp_async() || options()->async) {
     printer->Print(
       "#if !NET35\n");
     WriteGeneratedCodeAttributes(printer);
@@ -564,7 +564,7 @@ void MessageGenerator::GenerateMergingMethods(io::Printer* printer) {
   printer->Outdent();
   printer->Print("}\n\n"); // method
 
-  if (descriptor_->file()->options().csharp_async()) {
+  if (descriptor_->file()->options().csharp_async() || options()->async) {
     printer->Print(
       "#if !NET35\n");
     WriteGeneratedCodeAttributes(printer);
