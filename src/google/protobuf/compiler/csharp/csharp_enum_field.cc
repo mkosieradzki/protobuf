@@ -76,7 +76,7 @@ void EnumFieldGenerator::GenerateAsyncSerializationCode(io::Printer* printer) {
   printer->Print(variables_,
     "if ($has_property_check$) {\n"
     "  await output.WriteRawTagAsync($tag_bytes$, cancellationToken).ConfigureAwait(false);\n"
-    "  awaot output.WriteEnumAsync((int) $property_name$, cancellationToken).ConfigureAwait(false);\n"
+    "  await output.WriteEnumAsync((int) $property_name$, cancellationToken).ConfigureAwait(false);\n"
     "}\n");
 }
 
