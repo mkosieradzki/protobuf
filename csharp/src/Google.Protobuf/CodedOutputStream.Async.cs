@@ -158,15 +158,14 @@ namespace Google.Protobuf
         /// <param name="value">The value to write</param>
         public async Task WriteMessageAsync(IMessage value, CancellationToken cancellationToken)
         {
-            await WriteLengthAsync(value.CalculateSize(), cancellationToken);
-            if (value is IAsyncMessage asyncMessage)
-            {
-                await asyncMessage.WriteToAsync(this, cancellationToken);
-            }
-            else
-            {
-                value.WriteTo(this);
-            }
+            await WriteLengthAsync(value.CalculateSize(), cancellationToken).ConfigureAwait(false);
+            value.WriteTo(this);
+        }
+
+        public async Task WriteMessageAsync(IAsyncMessage value, CancellationToken cancellationToken)
+        {
+            await WriteLengthAsync(value.CalculateSize(), cancellationToken).ConfigureAwait(false);
+            await value.WriteToAsync(this, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -177,7 +176,7 @@ namespace Google.Protobuf
         public async Task WriteBytesAsync(ByteString value, CancellationToken cancellationToken)
         {
             await WriteLengthAsync(value.Length, cancellationToken).ConfigureAwait(false);
-            await value.WriteRawBytesToAsync(this, cancellationToken);
+            await value.WriteRawBytesToAsync(this, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>

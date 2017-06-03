@@ -42,7 +42,7 @@ namespace Google.Protobuf
         Task WriteToAsync(CodedOutputStream output, CancellationToken cancellationToken);
     }
 
-    public interface IAsyncMessage<T> : IAsyncMessage, IEquatable<T>, IDeepCloneable<T> where T : IAsyncMessage<T>
+    public interface IAsyncMessage<T> : IMessage<T>, IAsyncMessage where T : IAsyncMessage<T>
     {
 
     }

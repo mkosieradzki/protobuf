@@ -33,6 +33,9 @@
 using Google.Protobuf.WellKnownTypes;
 using System;
 using System.Collections.Generic;
+#if !NET35
+using System.Threading.Tasks;
+#endif
 
 namespace Google.Protobuf
 {
@@ -324,11 +327,47 @@ namespace Google.Protobuf
                 input => { T message = parser.CreateTemplate(); input.ReadMessage(message); return message; },
                 (output, value) => output.WriteMessage(value),
 #if !NET35
-                async (input, cancellationToken) => { T message = parser.CreateTemplate(); await input.ReadMessageAsync(message, cancellationToken).ConfigureAwait(false); return message; },
+                (input, cancellationToken) => { T message = parser.CreateTemplate(); input.ReadMessage(message); return Task.FromResult(message); },
+                (output, value, cancellationToken) => { output.WriteMessage(value); return Task.FromResult(0); },
+#endif
+                message => CodedOutputStream.ComputeMessageSize(message), tag);
+        }
+
+        /// <summary>
+        /// Retrieves a codec suitable for a message field with the given tag.
+        /// </summary>
+        /// <param name="tag">The tag.</param>
+        /// <param name="parser">A parser to use for the message type.</param>
+        /// <returns>A codec for the given tag.</returns>
+        public static FieldCodec<T> ForAsyncMessage<T>(uint tag, MessageParser<T> parser) where T : IAsyncMessage<T>
+        {
+            return new FieldCodec<T>(
+                input => { T message = parser.CreateTemplate(); input.ReadMessage(message); return message; },
+                (output, value) => output.WriteMessage(value),
+#if !NET35
+                async (input, cancellationToken) => { T message = parser.CreateTemplate(); await input.ReadMessageAsync(message, cancellationToken); return message; },
                 (output, value, cancellationToken) => output.WriteMessageAsync(value, cancellationToken),
 #endif
                 message => CodedOutputStream.ComputeMessageSize(message), tag);
         }
+
+        //#if !NET35
+        //        /// <summary>
+        //        /// Retrieves a codec suitable for a message field with the given tag.
+        //        /// </summary>
+        //        /// <param name="tag">The tag.</param>
+        //        /// <param name="parser">A parser to use for the message type.</param>
+        //        /// <returns>A codec for the given tag.</returns>
+        //        public static FieldCodec<T> ForMessage<T>(uint tag, MessageParser<T> parser) where T : IAsyncMessage<T>
+        //        {
+        //            return new FieldCodec<T>(
+        //                input => { T message = parser.CreateTemplate(); input.ReadMessage(message); return message; },
+        //                (output, value) => output.WriteMessage(value),
+        //                async (input, cancellationToken) => { T message = parser.CreateTemplate(); await input.ReadMessageAsync(message, cancellationToken).ConfigureAwait(false); return message; },
+        //                (output, value, cancellationToken) => output.WriteMessageAsync(value, cancellationToken),
+        //                message => CodedOutputStream.ComputeMessageSize(message), tag);
+        //        }
+        //#endif
 
         /// <summary>
         /// Creates a codec for a wrapper type of a class - which must be string or ByteString.
