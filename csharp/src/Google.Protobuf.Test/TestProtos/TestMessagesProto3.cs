@@ -2286,7 +2286,7 @@ namespace ProtobufTestMessages.Proto3 {
 
     #if !NET35
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public async Task WriteToAsync(pb::CodedOutputStream output, CancellationToken cancellationToken) {
+    public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
       if (OptionalInt32 != 0) {
         await output.WriteRawTagAsync(8, cancellationToken).ConfigureAwait(false);
         await output.WriteInt32Async(OptionalInt32, cancellationToken).ConfigureAwait(false);
@@ -3712,7 +3712,7 @@ namespace ProtobufTestMessages.Proto3 {
 
     #if !NET35
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public async Task MergeFromAsync(pb::CodedInputStream input, CancellationToken cancellationToken) {
+    public async stt::Task MergeFromAsync(pb::CodedInputStream input, st::CancellationToken cancellationToken) {
       uint tag;
       while ((tag = await input.ReadTagAsync(cancellationToken).ConfigureAwait(false)) != 0) {
         switch(tag) {
@@ -4393,7 +4393,7 @@ namespace ProtobufTestMessages.Proto3 {
 
         #if !NET35
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-        public async Task WriteToAsync(pb::CodedOutputStream output, CancellationToken cancellationToken) {
+        public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
           if (A != 0) {
             await output.WriteRawTagAsync(8, cancellationToken).ConfigureAwait(false);
             await output.WriteInt32Async(A, cancellationToken).ConfigureAwait(false);
@@ -4458,7 +4458,7 @@ namespace ProtobufTestMessages.Proto3 {
 
         #if !NET35
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-        public async Task MergeFromAsync(pb::CodedInputStream input, CancellationToken cancellationToken) {
+        public async stt::Task MergeFromAsync(pb::CodedInputStream input, st::CancellationToken cancellationToken) {
           uint tag;
           while ((tag = await input.ReadTagAsync(cancellationToken).ConfigureAwait(false)) != 0) {
             switch(tag) {
@@ -4574,7 +4574,7 @@ namespace ProtobufTestMessages.Proto3 {
 
     #if !NET35
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public async Task WriteToAsync(pb::CodedOutputStream output, CancellationToken cancellationToken) {
+    public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
       if (C != 0) {
         await output.WriteRawTagAsync(8, cancellationToken).ConfigureAwait(false);
         await output.WriteInt32Async(C, cancellationToken).ConfigureAwait(false);
@@ -4619,7 +4619,7 @@ namespace ProtobufTestMessages.Proto3 {
 
     #if !NET35
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public async Task MergeFromAsync(pb::CodedInputStream input, CancellationToken cancellationToken) {
+    public async stt::Task MergeFromAsync(pb::CodedInputStream input, st::CancellationToken cancellationToken) {
       uint tag;
       while ((tag = await input.ReadTagAsync(cancellationToken).ConfigureAwait(false)) != 0) {
         switch(tag) {

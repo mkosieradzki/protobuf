@@ -329,7 +329,7 @@ namespace Google.Protobuf.WellKnownTypes {
 
     #if !NET35
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public async Task WriteToAsync(pb::CodedOutputStream output, CancellationToken cancellationToken) {
+    public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
       await paths_.WriteToAsync(output, _repeated_paths_codec, cancellationToken).ConfigureAwait(false);
     }
     #endif
@@ -367,7 +367,7 @@ namespace Google.Protobuf.WellKnownTypes {
 
     #if !NET35
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public async Task MergeFromAsync(pb::CodedInputStream input, CancellationToken cancellationToken) {
+    public async stt::Task MergeFromAsync(pb::CodedInputStream input, st::CancellationToken cancellationToken) {
       uint tag;
       while ((tag = await input.ReadTagAsync(cancellationToken).ConfigureAwait(false)) != 0) {
         switch(tag) {

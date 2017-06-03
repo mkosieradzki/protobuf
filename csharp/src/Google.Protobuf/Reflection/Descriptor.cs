@@ -267,7 +267,7 @@ namespace Google.Protobuf.Reflection {
 
     #if !NET35
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public async Task WriteToAsync(pb::CodedOutputStream output, CancellationToken cancellationToken) {
+    public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
       await file_.WriteToAsync(output, _repeated_file_codec, cancellationToken).ConfigureAwait(false);
     }
     #endif
@@ -305,7 +305,7 @@ namespace Google.Protobuf.Reflection {
 
     #if !NET35
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public async Task MergeFromAsync(pb::CodedInputStream input, CancellationToken cancellationToken) {
+    public async stt::Task MergeFromAsync(pb::CodedInputStream input, st::CancellationToken cancellationToken) {
       uint tag;
       while ((tag = await input.ReadTagAsync(cancellationToken).ConfigureAwait(false)) != 0) {
         switch(tag) {
@@ -611,7 +611,7 @@ namespace Google.Protobuf.Reflection {
 
     #if !NET35
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public async Task WriteToAsync(pb::CodedOutputStream output, CancellationToken cancellationToken) {
+    public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
       if (Name.Length != 0) {
         await output.WriteRawTagAsync(10, cancellationToken).ConfigureAwait(false);
         await output.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
@@ -775,7 +775,7 @@ namespace Google.Protobuf.Reflection {
 
     #if !NET35
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public async Task MergeFromAsync(pb::CodedInputStream input, CancellationToken cancellationToken) {
+    public async stt::Task MergeFromAsync(pb::CodedInputStream input, st::CancellationToken cancellationToken) {
       uint tag;
       while ((tag = await input.ReadTagAsync(cancellationToken).ConfigureAwait(false)) != 0) {
         switch(tag) {
@@ -1068,7 +1068,7 @@ namespace Google.Protobuf.Reflection {
 
     #if !NET35
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public async Task WriteToAsync(pb::CodedOutputStream output, CancellationToken cancellationToken) {
+    public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
       if (Name.Length != 0) {
         await output.WriteRawTagAsync(10, cancellationToken).ConfigureAwait(false);
         await output.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
@@ -1189,7 +1189,7 @@ namespace Google.Protobuf.Reflection {
 
     #if !NET35
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public async Task MergeFromAsync(pb::CodedInputStream input, CancellationToken cancellationToken) {
+    public async stt::Task MergeFromAsync(pb::CodedInputStream input, st::CancellationToken cancellationToken) {
       uint tag;
       while ((tag = await input.ReadTagAsync(cancellationToken).ConfigureAwait(false)) != 0) {
         switch(tag) {
@@ -1352,7 +1352,7 @@ namespace Google.Protobuf.Reflection {
 
         #if !NET35
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-        public async Task WriteToAsync(pb::CodedOutputStream output, CancellationToken cancellationToken) {
+        public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
           if (Start != 0) {
             await output.WriteRawTagAsync(8, cancellationToken).ConfigureAwait(false);
             await output.WriteInt32Async(Start, cancellationToken).ConfigureAwait(false);
@@ -1411,7 +1411,7 @@ namespace Google.Protobuf.Reflection {
 
         #if !NET35
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-        public async Task MergeFromAsync(pb::CodedInputStream input, CancellationToken cancellationToken) {
+        public async stt::Task MergeFromAsync(pb::CodedInputStream input, st::CancellationToken cancellationToken) {
           uint tag;
           while ((tag = await input.ReadTagAsync(cancellationToken).ConfigureAwait(false)) != 0) {
             switch(tag) {
@@ -1548,7 +1548,7 @@ namespace Google.Protobuf.Reflection {
 
         #if !NET35
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-        public async Task WriteToAsync(pb::CodedOutputStream output, CancellationToken cancellationToken) {
+        public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
           if (Start != 0) {
             await output.WriteRawTagAsync(8, cancellationToken).ConfigureAwait(false);
             await output.WriteInt32Async(Start, cancellationToken).ConfigureAwait(false);
@@ -1607,7 +1607,7 @@ namespace Google.Protobuf.Reflection {
 
         #if !NET35
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-        public async Task MergeFromAsync(pb::CodedInputStream input, CancellationToken cancellationToken) {
+        public async stt::Task MergeFromAsync(pb::CodedInputStream input, st::CancellationToken cancellationToken) {
           uint tag;
           while ((tag = await input.ReadTagAsync(cancellationToken).ConfigureAwait(false)) != 0) {
             switch(tag) {
@@ -1917,7 +1917,7 @@ namespace Google.Protobuf.Reflection {
 
     #if !NET35
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public async Task WriteToAsync(pb::CodedOutputStream output, CancellationToken cancellationToken) {
+    public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
       if (Name.Length != 0) {
         await output.WriteRawTagAsync(10, cancellationToken).ConfigureAwait(false);
         await output.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
@@ -2094,7 +2094,7 @@ namespace Google.Protobuf.Reflection {
 
     #if !NET35
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public async Task MergeFromAsync(pb::CodedInputStream input, CancellationToken cancellationToken) {
+    public async stt::Task MergeFromAsync(pb::CodedInputStream input, st::CancellationToken cancellationToken) {
       uint tag;
       while ((tag = await input.ReadTagAsync(cancellationToken).ConfigureAwait(false)) != 0) {
         switch(tag) {
@@ -2325,7 +2325,7 @@ namespace Google.Protobuf.Reflection {
 
     #if !NET35
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public async Task WriteToAsync(pb::CodedOutputStream output, CancellationToken cancellationToken) {
+    public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
       if (Name.Length != 0) {
         await output.WriteRawTagAsync(10, cancellationToken).ConfigureAwait(false);
         await output.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
@@ -2390,7 +2390,7 @@ namespace Google.Protobuf.Reflection {
 
     #if !NET35
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public async Task MergeFromAsync(pb::CodedInputStream input, CancellationToken cancellationToken) {
+    public async stt::Task MergeFromAsync(pb::CodedInputStream input, st::CancellationToken cancellationToken) {
       uint tag;
       while ((tag = await input.ReadTagAsync(cancellationToken).ConfigureAwait(false)) != 0) {
         switch(tag) {
@@ -2536,7 +2536,7 @@ namespace Google.Protobuf.Reflection {
 
     #if !NET35
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public async Task WriteToAsync(pb::CodedOutputStream output, CancellationToken cancellationToken) {
+    public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
       if (Name.Length != 0) {
         await output.WriteRawTagAsync(10, cancellationToken).ConfigureAwait(false);
         await output.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
@@ -2608,7 +2608,7 @@ namespace Google.Protobuf.Reflection {
 
     #if !NET35
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public async Task MergeFromAsync(pb::CodedInputStream input, CancellationToken cancellationToken) {
+    public async stt::Task MergeFromAsync(pb::CodedInputStream input, st::CancellationToken cancellationToken) {
       uint tag;
       while ((tag = await input.ReadTagAsync(cancellationToken).ConfigureAwait(false)) != 0) {
         switch(tag) {
@@ -2762,7 +2762,7 @@ namespace Google.Protobuf.Reflection {
 
     #if !NET35
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public async Task WriteToAsync(pb::CodedOutputStream output, CancellationToken cancellationToken) {
+    public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
       if (Name.Length != 0) {
         await output.WriteRawTagAsync(10, cancellationToken).ConfigureAwait(false);
         await output.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
@@ -2841,7 +2841,7 @@ namespace Google.Protobuf.Reflection {
 
     #if !NET35
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public async Task MergeFromAsync(pb::CodedInputStream input, CancellationToken cancellationToken) {
+    public async stt::Task MergeFromAsync(pb::CodedInputStream input, st::CancellationToken cancellationToken) {
       uint tag;
       while ((tag = await input.ReadTagAsync(cancellationToken).ConfigureAwait(false)) != 0) {
         switch(tag) {
@@ -2991,7 +2991,7 @@ namespace Google.Protobuf.Reflection {
 
     #if !NET35
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public async Task WriteToAsync(pb::CodedOutputStream output, CancellationToken cancellationToken) {
+    public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
       if (Name.Length != 0) {
         await output.WriteRawTagAsync(10, cancellationToken).ConfigureAwait(false);
         await output.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
@@ -3063,7 +3063,7 @@ namespace Google.Protobuf.Reflection {
 
     #if !NET35
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public async Task MergeFromAsync(pb::CodedInputStream input, CancellationToken cancellationToken) {
+    public async stt::Task MergeFromAsync(pb::CodedInputStream input, st::CancellationToken cancellationToken) {
       uint tag;
       while ((tag = await input.ReadTagAsync(cancellationToken).ConfigureAwait(false)) != 0) {
         switch(tag) {
@@ -3281,7 +3281,7 @@ namespace Google.Protobuf.Reflection {
 
     #if !NET35
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public async Task WriteToAsync(pb::CodedOutputStream output, CancellationToken cancellationToken) {
+    public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
       if (Name.Length != 0) {
         await output.WriteRawTagAsync(10, cancellationToken).ConfigureAwait(false);
         await output.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
@@ -3402,7 +3402,7 @@ namespace Google.Protobuf.Reflection {
 
     #if !NET35
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public async Task MergeFromAsync(pb::CodedInputStream input, CancellationToken cancellationToken) {
+    public async stt::Task MergeFromAsync(pb::CodedInputStream input, st::CancellationToken cancellationToken) {
       uint tag;
       while ((tag = await input.ReadTagAsync(cancellationToken).ConfigureAwait(false)) != 0) {
         switch(tag) {
@@ -3918,7 +3918,7 @@ namespace Google.Protobuf.Reflection {
 
     #if !NET35
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public async Task WriteToAsync(pb::CodedOutputStream output, CancellationToken cancellationToken) {
+    public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
       if (JavaPackage.Length != 0) {
         await output.WriteRawTagAsync(10, cancellationToken).ConfigureAwait(false);
         await output.WriteStringAsync(JavaPackage, cancellationToken).ConfigureAwait(false);
@@ -4194,7 +4194,7 @@ namespace Google.Protobuf.Reflection {
 
     #if !NET35
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public async Task MergeFromAsync(pb::CodedInputStream input, CancellationToken cancellationToken) {
+    public async stt::Task MergeFromAsync(pb::CodedInputStream input, st::CancellationToken cancellationToken) {
       uint tag;
       while ((tag = await input.ReadTagAsync(cancellationToken).ConfigureAwait(false)) != 0) {
         switch(tag) {
@@ -4518,7 +4518,7 @@ namespace Google.Protobuf.Reflection {
 
     #if !NET35
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public async Task WriteToAsync(pb::CodedOutputStream output, CancellationToken cancellationToken) {
+    public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
       if (MessageSetWireFormat != false) {
         await output.WriteRawTagAsync(8, cancellationToken).ConfigureAwait(false);
         await output.WriteBoolAsync(MessageSetWireFormat, cancellationToken).ConfigureAwait(false);
@@ -4612,7 +4612,7 @@ namespace Google.Protobuf.Reflection {
 
     #if !NET35
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public async Task MergeFromAsync(pb::CodedInputStream input, CancellationToken cancellationToken) {
+    public async stt::Task MergeFromAsync(pb::CodedInputStream input, st::CancellationToken cancellationToken) {
       uint tag;
       while ((tag = await input.ReadTagAsync(cancellationToken).ConfigureAwait(false)) != 0) {
         switch(tag) {
@@ -4903,7 +4903,7 @@ namespace Google.Protobuf.Reflection {
 
     #if !NET35
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public async Task WriteToAsync(pb::CodedOutputStream output, CancellationToken cancellationToken) {
+    public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
       if (Ctype != 0) {
         await output.WriteRawTagAsync(8, cancellationToken).ConfigureAwait(false);
         await output.WriteEnumAsync((int) Ctype, cancellationToken).ConfigureAwait(false);
@@ -5025,7 +5025,7 @@ namespace Google.Protobuf.Reflection {
 
     #if !NET35
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public async Task MergeFromAsync(pb::CodedInputStream input, CancellationToken cancellationToken) {
+    public async stt::Task MergeFromAsync(pb::CodedInputStream input, st::CancellationToken cancellationToken) {
       uint tag;
       while ((tag = await input.ReadTagAsync(cancellationToken).ConfigureAwait(false)) != 0) {
         switch(tag) {
@@ -5185,7 +5185,7 @@ namespace Google.Protobuf.Reflection {
 
     #if !NET35
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public async Task WriteToAsync(pb::CodedOutputStream output, CancellationToken cancellationToken) {
+    public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
       await uninterpretedOption_.WriteToAsync(output, _repeated_uninterpretedOption_codec, cancellationToken).ConfigureAwait(false);
     }
     #endif
@@ -5223,7 +5223,7 @@ namespace Google.Protobuf.Reflection {
 
     #if !NET35
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public async Task MergeFromAsync(pb::CodedInputStream input, CancellationToken cancellationToken) {
+    public async stt::Task MergeFromAsync(pb::CodedInputStream input, st::CancellationToken cancellationToken) {
       uint tag;
       while ((tag = await input.ReadTagAsync(cancellationToken).ConfigureAwait(false)) != 0) {
         switch(tag) {
@@ -5374,7 +5374,7 @@ namespace Google.Protobuf.Reflection {
 
     #if !NET35
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public async Task WriteToAsync(pb::CodedOutputStream output, CancellationToken cancellationToken) {
+    public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
       if (AllowAlias != false) {
         await output.WriteRawTagAsync(16, cancellationToken).ConfigureAwait(false);
         await output.WriteBoolAsync(AllowAlias, cancellationToken).ConfigureAwait(false);
@@ -5440,7 +5440,7 @@ namespace Google.Protobuf.Reflection {
 
     #if !NET35
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public async Task MergeFromAsync(pb::CodedInputStream input, CancellationToken cancellationToken) {
+    public async stt::Task MergeFromAsync(pb::CodedInputStream input, st::CancellationToken cancellationToken) {
       uint tag;
       while ((tag = await input.ReadTagAsync(cancellationToken).ConfigureAwait(false)) != 0) {
         switch(tag) {
@@ -5577,7 +5577,7 @@ namespace Google.Protobuf.Reflection {
 
     #if !NET35
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public async Task WriteToAsync(pb::CodedOutputStream output, CancellationToken cancellationToken) {
+    public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
       if (Deprecated != false) {
         await output.WriteRawTagAsync(8, cancellationToken).ConfigureAwait(false);
         await output.WriteBoolAsync(Deprecated, cancellationToken).ConfigureAwait(false);
@@ -5629,7 +5629,7 @@ namespace Google.Protobuf.Reflection {
 
     #if !NET35
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public async Task MergeFromAsync(pb::CodedInputStream input, CancellationToken cancellationToken) {
+    public async stt::Task MergeFromAsync(pb::CodedInputStream input, st::CancellationToken cancellationToken) {
       uint tag;
       while ((tag = await input.ReadTagAsync(cancellationToken).ConfigureAwait(false)) != 0) {
         switch(tag) {
@@ -5762,7 +5762,7 @@ namespace Google.Protobuf.Reflection {
 
     #if !NET35
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public async Task WriteToAsync(pb::CodedOutputStream output, CancellationToken cancellationToken) {
+    public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
       if (Deprecated != false) {
         await output.WriteRawTagAsync(136, 2, cancellationToken).ConfigureAwait(false);
         await output.WriteBoolAsync(Deprecated, cancellationToken).ConfigureAwait(false);
@@ -5814,7 +5814,7 @@ namespace Google.Protobuf.Reflection {
 
     #if !NET35
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public async Task MergeFromAsync(pb::CodedInputStream input, CancellationToken cancellationToken) {
+    public async stt::Task MergeFromAsync(pb::CodedInputStream input, st::CancellationToken cancellationToken) {
       uint tag;
       while ((tag = await input.ReadTagAsync(cancellationToken).ConfigureAwait(false)) != 0) {
         switch(tag) {
@@ -5965,7 +5965,7 @@ namespace Google.Protobuf.Reflection {
 
     #if !NET35
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public async Task WriteToAsync(pb::CodedOutputStream output, CancellationToken cancellationToken) {
+    public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
       if (Deprecated != false) {
         await output.WriteRawTagAsync(136, 2, cancellationToken).ConfigureAwait(false);
         await output.WriteBoolAsync(Deprecated, cancellationToken).ConfigureAwait(false);
@@ -6031,7 +6031,7 @@ namespace Google.Protobuf.Reflection {
 
     #if !NET35
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public async Task MergeFromAsync(pb::CodedInputStream input, CancellationToken cancellationToken) {
+    public async stt::Task MergeFromAsync(pb::CodedInputStream input, st::CancellationToken cancellationToken) {
       uint tag;
       while ((tag = await input.ReadTagAsync(cancellationToken).ConfigureAwait(false)) != 0) {
         switch(tag) {
@@ -6283,7 +6283,7 @@ namespace Google.Protobuf.Reflection {
 
     #if !NET35
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public async Task WriteToAsync(pb::CodedOutputStream output, CancellationToken cancellationToken) {
+    public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
       await name_.WriteToAsync(output, _repeated_name_codec, cancellationToken).ConfigureAwait(false);
       if (IdentifierValue.Length != 0) {
         await output.WriteRawTagAsync(26, cancellationToken).ConfigureAwait(false);
@@ -6405,7 +6405,7 @@ namespace Google.Protobuf.Reflection {
 
     #if !NET35
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public async Task MergeFromAsync(pb::CodedInputStream input, CancellationToken cancellationToken) {
+    public async stt::Task MergeFromAsync(pb::CodedInputStream input, st::CancellationToken cancellationToken) {
       uint tag;
       while ((tag = await input.ReadTagAsync(cancellationToken).ConfigureAwait(false)) != 0) {
         switch(tag) {
@@ -6560,7 +6560,7 @@ namespace Google.Protobuf.Reflection {
 
         #if !NET35
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-        public async Task WriteToAsync(pb::CodedOutputStream output, CancellationToken cancellationToken) {
+        public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
           if (NamePart_.Length != 0) {
             await output.WriteRawTagAsync(10, cancellationToken).ConfigureAwait(false);
             await output.WriteStringAsync(NamePart_, cancellationToken).ConfigureAwait(false);
@@ -6619,7 +6619,7 @@ namespace Google.Protobuf.Reflection {
 
         #if !NET35
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-        public async Task MergeFromAsync(pb::CodedInputStream input, CancellationToken cancellationToken) {
+        public async stt::Task MergeFromAsync(pb::CodedInputStream input, st::CancellationToken cancellationToken) {
           uint tag;
           while ((tag = await input.ReadTagAsync(cancellationToken).ConfigureAwait(false)) != 0) {
             switch(tag) {
@@ -6777,7 +6777,7 @@ namespace Google.Protobuf.Reflection {
 
     #if !NET35
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public async Task WriteToAsync(pb::CodedOutputStream output, CancellationToken cancellationToken) {
+    public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
       await location_.WriteToAsync(output, _repeated_location_codec, cancellationToken).ConfigureAwait(false);
     }
     #endif
@@ -6815,7 +6815,7 @@ namespace Google.Protobuf.Reflection {
 
     #if !NET35
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public async Task MergeFromAsync(pb::CodedInputStream input, CancellationToken cancellationToken) {
+    public async stt::Task MergeFromAsync(pb::CodedInputStream input, st::CancellationToken cancellationToken) {
       uint tag;
       while ((tag = await input.ReadTagAsync(cancellationToken).ConfigureAwait(false)) != 0) {
         switch(tag) {
@@ -7062,7 +7062,7 @@ namespace Google.Protobuf.Reflection {
 
         #if !NET35
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-        public async Task WriteToAsync(pb::CodedOutputStream output, CancellationToken cancellationToken) {
+        public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
           await path_.WriteToAsync(output, _repeated_path_codec, cancellationToken).ConfigureAwait(false);
           await span_.WriteToAsync(output, _repeated_span_codec, cancellationToken).ConfigureAwait(false);
           if (LeadingComments.Length != 0) {
@@ -7144,7 +7144,7 @@ namespace Google.Protobuf.Reflection {
 
         #if !NET35
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-        public async Task MergeFromAsync(pb::CodedInputStream input, CancellationToken cancellationToken) {
+        public async stt::Task MergeFromAsync(pb::CodedInputStream input, st::CancellationToken cancellationToken) {
           uint tag;
           while ((tag = await input.ReadTagAsync(cancellationToken).ConfigureAwait(false)) != 0) {
             switch(tag) {
@@ -7276,7 +7276,7 @@ namespace Google.Protobuf.Reflection {
 
     #if !NET35
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public async Task WriteToAsync(pb::CodedOutputStream output, CancellationToken cancellationToken) {
+    public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
       await annotation_.WriteToAsync(output, _repeated_annotation_codec, cancellationToken).ConfigureAwait(false);
     }
     #endif
@@ -7314,7 +7314,7 @@ namespace Google.Protobuf.Reflection {
 
     #if !NET35
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public async Task MergeFromAsync(pb::CodedInputStream input, CancellationToken cancellationToken) {
+    public async stt::Task MergeFromAsync(pb::CodedInputStream input, st::CancellationToken cancellationToken) {
       uint tag;
       while ((tag = await input.ReadTagAsync(cancellationToken).ConfigureAwait(false)) != 0) {
         switch(tag) {
@@ -7486,7 +7486,7 @@ namespace Google.Protobuf.Reflection {
 
         #if !NET35
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-        public async Task WriteToAsync(pb::CodedOutputStream output, CancellationToken cancellationToken) {
+        public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
           await path_.WriteToAsync(output, _repeated_path_codec, cancellationToken).ConfigureAwait(false);
           if (SourceFile.Length != 0) {
             await output.WriteRawTagAsync(18, cancellationToken).ConfigureAwait(false);
@@ -7567,7 +7567,7 @@ namespace Google.Protobuf.Reflection {
 
         #if !NET35
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-        public async Task MergeFromAsync(pb::CodedInputStream input, CancellationToken cancellationToken) {
+        public async stt::Task MergeFromAsync(pb::CodedInputStream input, st::CancellationToken cancellationToken) {
           uint tag;
           while ((tag = await input.ReadTagAsync(cancellationToken).ConfigureAwait(false)) != 0) {
             switch(tag) {
