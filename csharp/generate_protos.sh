@@ -70,5 +70,4 @@ $PROTOC -Iexamples --csharp_out=csharp/src/AddressBook \
     examples/addressbook.proto
 
 $PROTOC -Iconformance -Isrc --csharp_out=csharp/src/Google.Protobuf.Conformance \
-    --csharp_opt=async \
     conformance/conformance.proto
