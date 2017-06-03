@@ -159,9 +159,16 @@ void MessageFieldGenerator::GenerateFreezingCode(io::Printer* printer) {
 }
 
 void MessageFieldGenerator::GenerateCodecCode(io::Printer* printer) {
-  printer->Print(
-    variables_,
-    "pb::FieldCodec.ForMessage($tag$, $type_name$.Parser)");
+  if (descriptor_->file()->options().csharp_async() || options()->async) {
+    printer->Print(
+      variables_,
+      "pb::FieldCodec.ForAsyncMessage($tag$, $type_name$.Parser)");
+  }
+  else {
+    printer->Print(
+      variables_,
+      "pb::FieldCodec.ForMessage($tag$, $type_name$.Parser)");
+  }
 }
 
 MessageOneofFieldGenerator::MessageOneofFieldGenerator(
