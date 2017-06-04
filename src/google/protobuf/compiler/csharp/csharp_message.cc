@@ -110,6 +110,33 @@ void MessageGenerator::Generate(io::Printer* printer) {
   vars["class_name"] = class_name();
   vars["access_level"] = class_access_level();
 
+  //It is critical that async class is declared first because static members must be declared BEFORE nested types
+  if (options()->async) {
+    printer->Print(
+      vars,
+      "#if !PROTOBUF_NO_ASYNC\n"
+      "$access_level$ sealed partial class $class_name$ : pb::IAsyncMessage<$class_name$> {\n");
+    printer->Indent();
+
+    printer->Print(
+      vars,
+      "private static readonly pb::AsyncMessageParser<$class_name$> _parser = new pb::AsyncMessageParser<$class_name$>(() => new $class_name$());\n");
+
+    WriteGeneratedCodeAttributes(printer);
+
+    printer->Print(
+      vars,
+      "public static pb::AsyncMessageParser<$class_name$> Parser { get { return _parser; } }\n\n");
+
+    GenerateMessageAsyncSerializationMethods(printer);
+    GenerateAsyncMergingMethods(printer);
+
+    printer->Outdent();
+    printer->Print("}\n"
+      "#endif\n"
+      "\n");
+  }
+
   WriteMessageDocComment(printer, descriptor_);
   AddDeprecatedFlag(printer);
   printer->Print(
@@ -274,33 +301,6 @@ void MessageGenerator::Generate(io::Printer* printer) {
   printer->Outdent();
   printer->Print("}\n");
   printer->Print("\n");
-
-
-  if (options()->async) {
-    printer->Print(
-      vars,
-      "#if !PROTOBUF_NO_ASYNC\n"
-      "$access_level$ sealed partial class $class_name$ : pb::IAsyncMessage<$class_name$> {\n");
-    printer->Indent();
-
-    printer->Print(
-      vars,
-      "private static readonly pb::AsyncMessageParser<$class_name$> _parser = new pb::AsyncMessageParser<$class_name$>(() => new $class_name$());\n");
-
-    WriteGeneratedCodeAttributes(printer);
-
-    printer->Print(
-      vars,
-      "public static pb::AsyncMessageParser<$class_name$> Parser { get { return _parser; } }\n\n");
-
-    GenerateMessageAsyncSerializationMethods(printer);
-    GenerateAsyncMergingMethods(printer);
-
-    printer->Outdent();
-    printer->Print("}\n"
-      "#endif\n"
-      "\n");
-  }
 }
 
 // Helper to work out whether we need to generate a class to hold nested types/enums.
