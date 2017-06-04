@@ -30,6 +30,7 @@
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #endregion
 
+#if !PROTOBUF_NO_ASYNC
 using System;
 using System.IO;
 using System.Threading;
@@ -213,30 +214,9 @@ namespace Google.Protobuf
             // Try different block sizes.
             for (int blockSize = 1; blockSize < 256; blockSize *= 2)
             {
-                message2 = TestAllTypes.Parser.ParseFrom(new SmallBlockInputStream(rawBytes, blockSize));
+                message2 = await TestAllTypes.Parser.ParseFromAsync(new SmallBlockInputStream(rawBytes, blockSize), CancellationToken.None);
                 Assert.AreEqual(message, message2);
             }
-        }
-                
-        [Test]
-        public async Task ReadHugeBlob()
-        {
-            // Allocate and initialize a 1MB blob.
-            byte[] blob = new byte[1 << 20];
-            for (int i = 0; i < blob.Length; i++)
-            {
-                blob[i] = (byte) i;
-            }
-
-            // Make a message containing it.
-            var message = new TestAllTypes { SingleBytes = ByteString.CopyFrom(blob) };
-
-            // Serialize and parse it.  Make sure to parse from an InputStream, not
-            // directly from a ByteString, so that CodedInputStream uses buffered
-            // reading.
-            TestAllTypes message2 = TestAllTypes.Parser.ParseFrom(message.ToByteString());
-
-            Assert.AreEqual(message, message2);
         }
 
         [Test]
@@ -285,27 +265,13 @@ namespace Google.Protobuf
         }
 
         [Test]
-        public async Task MaliciousRecursion()
-        {
-            ByteString data64 = MakeRecursiveMessage(64).ToByteString();
-            ByteString data65 = MakeRecursiveMessage(65).ToByteString();
-
-            AssertMessageDepth(TestRecursiveMessage.Parser.ParseFrom(data64), 64);
-
-            Assert.Throws<InvalidProtocolBufferException>(() => TestRecursiveMessage.Parser.ParseFrom(data65));
-
-            CodedInputStream input = CodedInputStream.CreateWithLimits(new MemoryStream(data64.ToByteArray()), 1000000, 63);
-            Assert.Throws<InvalidProtocolBufferException>(() => TestRecursiveMessage.Parser.ParseFrom(input));
-        }
-
-        [Test]
-        public async Task SizeLimit()
+        public void SizeLimit()
         {
             // Have to use a Stream rather than ByteString.CreateCodedInput as SizeLimit doesn't
             // apply to the latter case.
             MemoryStream ms = new MemoryStream(SampleMessages.CreateFullTestAllTypes().ToByteArray());
             CodedInputStream input = CodedInputStream.CreateWithLimits(ms, 16, 100);
-            Assert.Throws<InvalidProtocolBufferException>(() => TestAllTypes.Parser.ParseFrom(input));
+            Assert.ThrowsAsync<InvalidProtocolBufferException>(() => TestAllTypes.Parser.ParseFromAsync(input, CancellationToken.None));
         }
 
         /// <summary>
@@ -530,3 +496,4 @@ namespace Google.Protobuf
         }
     }
 }
+#endif

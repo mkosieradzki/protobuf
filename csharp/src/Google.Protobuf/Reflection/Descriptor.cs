@@ -851,6 +851,90 @@ namespace Google.Protobuf.Reflection {
   }
   #endif
 
+    #if !PROTOBUF_NO_ASYNC
+  internal sealed partial class DescriptorProto : pb::IAsyncMessage<DescriptorProto> {
+    private static readonly pb::AsyncMessageParser<DescriptorProto> _parser = new pb::AsyncMessageParser<DescriptorProto>(() => new DescriptorProto());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::AsyncMessageParser<DescriptorProto> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
+      if (Name.Length != 0) {
+        await output.WriteRawTagAsync(10, cancellationToken).ConfigureAwait(false);
+        await output.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
+      }
+      await field_.WriteToAsync(output, _repeated_field_codec, cancellationToken).ConfigureAwait(false);
+      await nestedType_.WriteToAsync(output, _repeated_nestedType_codec, cancellationToken).ConfigureAwait(false);
+      await enumType_.WriteToAsync(output, _repeated_enumType_codec, cancellationToken).ConfigureAwait(false);
+      await extensionRange_.WriteToAsync(output, _repeated_extensionRange_codec, cancellationToken).ConfigureAwait(false);
+      await extension_.WriteToAsync(output, _repeated_extension_codec, cancellationToken).ConfigureAwait(false);
+      if (options_ != null) {
+        await output.WriteRawTagAsync(58, cancellationToken).ConfigureAwait(false);
+        await output.WriteMessageAsync(Options, cancellationToken).ConfigureAwait(false);
+      }
+      await oneofDecl_.WriteToAsync(output, _repeated_oneofDecl_codec, cancellationToken).ConfigureAwait(false);
+      await reservedRange_.WriteToAsync(output, _repeated_reservedRange_codec, cancellationToken).ConfigureAwait(false);
+      await reservedName_.WriteToAsync(output, _repeated_reservedName_codec, cancellationToken).ConfigureAwait(false);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async stt::Task MergeFromAsync(pb::CodedInputStream input, st::CancellationToken cancellationToken) {
+      uint tag;
+      while ((tag = await input.ReadTagAsync(cancellationToken).ConfigureAwait(false)) != 0) {
+        switch(tag) {
+          default:
+            await input.SkipLastFieldAsync(cancellationToken).ConfigureAwait(false);
+            break;
+          case 10: {
+            Name = await input.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+            break;
+          }
+          case 18: {
+            await field_.AddEntriesFromAsync(input, _repeated_field_codec, cancellationToken).ConfigureAwait(false);
+            break;
+          }
+          case 26: {
+            await nestedType_.AddEntriesFromAsync(input, _repeated_nestedType_codec, cancellationToken).ConfigureAwait(false);
+            break;
+          }
+          case 34: {
+            await enumType_.AddEntriesFromAsync(input, _repeated_enumType_codec, cancellationToken).ConfigureAwait(false);
+            break;
+          }
+          case 42: {
+            await extensionRange_.AddEntriesFromAsync(input, _repeated_extensionRange_codec, cancellationToken).ConfigureAwait(false);
+            break;
+          }
+          case 50: {
+            await extension_.AddEntriesFromAsync(input, _repeated_extension_codec, cancellationToken).ConfigureAwait(false);
+            break;
+          }
+          case 58: {
+            if (options_ == null) {
+              options_ = new global::Google.Protobuf.Reflection.MessageOptions();
+            }
+            await input.ReadMessageAsync(options_, cancellationToken).ConfigureAwait(false);
+            break;
+          }
+          case 66: {
+            await oneofDecl_.AddEntriesFromAsync(input, _repeated_oneofDecl_codec, cancellationToken).ConfigureAwait(false);
+            break;
+          }
+          case 74: {
+            await reservedRange_.AddEntriesFromAsync(input, _repeated_reservedRange_codec, cancellationToken).ConfigureAwait(false);
+            break;
+          }
+          case 82: {
+            await reservedName_.AddEntriesFromAsync(input, _repeated_reservedName_codec, cancellationToken).ConfigureAwait(false);
+            break;
+          }
+        }
+      }
+    }
+
+  }
+  #endif
+
   /// <summary>
   /// Describes a message type.
   /// </summary>
@@ -1564,90 +1648,6 @@ namespace Google.Protobuf.Reflection {
     #endregion
 
   }
-
-  #if !PROTOBUF_NO_ASYNC
-  internal sealed partial class DescriptorProto : pb::IAsyncMessage<DescriptorProto> {
-    private static readonly pb::AsyncMessageParser<DescriptorProto> _parser = new pb::AsyncMessageParser<DescriptorProto>(() => new DescriptorProto());
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::AsyncMessageParser<DescriptorProto> Parser { get { return _parser; } }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
-      if (Name.Length != 0) {
-        await output.WriteRawTagAsync(10, cancellationToken).ConfigureAwait(false);
-        await output.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
-      }
-      await field_.WriteToAsync(output, _repeated_field_codec, cancellationToken).ConfigureAwait(false);
-      await nestedType_.WriteToAsync(output, _repeated_nestedType_codec, cancellationToken).ConfigureAwait(false);
-      await enumType_.WriteToAsync(output, _repeated_enumType_codec, cancellationToken).ConfigureAwait(false);
-      await extensionRange_.WriteToAsync(output, _repeated_extensionRange_codec, cancellationToken).ConfigureAwait(false);
-      await extension_.WriteToAsync(output, _repeated_extension_codec, cancellationToken).ConfigureAwait(false);
-      if (options_ != null) {
-        await output.WriteRawTagAsync(58, cancellationToken).ConfigureAwait(false);
-        await output.WriteMessageAsync(Options, cancellationToken).ConfigureAwait(false);
-      }
-      await oneofDecl_.WriteToAsync(output, _repeated_oneofDecl_codec, cancellationToken).ConfigureAwait(false);
-      await reservedRange_.WriteToAsync(output, _repeated_reservedRange_codec, cancellationToken).ConfigureAwait(false);
-      await reservedName_.WriteToAsync(output, _repeated_reservedName_codec, cancellationToken).ConfigureAwait(false);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public async stt::Task MergeFromAsync(pb::CodedInputStream input, st::CancellationToken cancellationToken) {
-      uint tag;
-      while ((tag = await input.ReadTagAsync(cancellationToken).ConfigureAwait(false)) != 0) {
-        switch(tag) {
-          default:
-            await input.SkipLastFieldAsync(cancellationToken).ConfigureAwait(false);
-            break;
-          case 10: {
-            Name = await input.ReadStringAsync(cancellationToken).ConfigureAwait(false);
-            break;
-          }
-          case 18: {
-            await field_.AddEntriesFromAsync(input, _repeated_field_codec, cancellationToken).ConfigureAwait(false);
-            break;
-          }
-          case 26: {
-            await nestedType_.AddEntriesFromAsync(input, _repeated_nestedType_codec, cancellationToken).ConfigureAwait(false);
-            break;
-          }
-          case 34: {
-            await enumType_.AddEntriesFromAsync(input, _repeated_enumType_codec, cancellationToken).ConfigureAwait(false);
-            break;
-          }
-          case 42: {
-            await extensionRange_.AddEntriesFromAsync(input, _repeated_extensionRange_codec, cancellationToken).ConfigureAwait(false);
-            break;
-          }
-          case 50: {
-            await extension_.AddEntriesFromAsync(input, _repeated_extension_codec, cancellationToken).ConfigureAwait(false);
-            break;
-          }
-          case 58: {
-            if (options_ == null) {
-              options_ = new global::Google.Protobuf.Reflection.MessageOptions();
-            }
-            await input.ReadMessageAsync(options_, cancellationToken).ConfigureAwait(false);
-            break;
-          }
-          case 66: {
-            await oneofDecl_.AddEntriesFromAsync(input, _repeated_oneofDecl_codec, cancellationToken).ConfigureAwait(false);
-            break;
-          }
-          case 74: {
-            await reservedRange_.AddEntriesFromAsync(input, _repeated_reservedRange_codec, cancellationToken).ConfigureAwait(false);
-            break;
-          }
-          case 82: {
-            await reservedName_.AddEntriesFromAsync(input, _repeated_reservedName_codec, cancellationToken).ConfigureAwait(false);
-            break;
-          }
-        }
-      }
-    }
-
-  }
-  #endif
 
   /// <summary>
   /// Describes a field within a message.

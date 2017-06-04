@@ -33,7 +33,7 @@
 using Google.Protobuf.WellKnownTypes;
 using System;
 using System.Collections.Generic;
-#if !NET35
+#if !PROTOBUF_NO_ASYNC
 using System.Threading.Tasks;
 #endif
 
@@ -56,11 +56,11 @@ namespace Google.Protobuf
             return new FieldCodec<string>(
                 input => input.ReadString(),
                 (output, value) => output.WriteString(value),
-#if !NET35
+#if !PROTOBUF_NO_ASYNC
                 (input, cancellationToken) => input.ReadStringAsync(cancellationToken),
                 (output, value, cancellationToken) => output.WriteStringAsync(value, cancellationToken),
-                CodedOutputStream.ComputeStringSize, tag);
 #endif
+                CodedOutputStream.ComputeStringSize, tag);
         }
 
         /// <summary>
@@ -73,11 +73,11 @@ namespace Google.Protobuf
             return new FieldCodec<ByteString>(
                 input => input.ReadBytes(),
                 (output, value) => output.WriteBytes(value),
-#if !NET35
+#if !PROTOBUF_NO_ASYNC
                 (input, cancellationToken) => input.ReadBytesAsync(cancellationToken),
-                (output, value, cancellationToken) => output.WriteBytesAsync(value, cancellationToken), 
-                CodedOutputStream.ComputeBytesSize, tag);
+                (output, value, cancellationToken) => output.WriteBytesAsync(value, cancellationToken),
 #endif
+                CodedOutputStream.ComputeBytesSize, tag);
         }
 
         /// <summary>
@@ -90,10 +90,11 @@ namespace Google.Protobuf
             return new FieldCodec<bool>(
                 input => input.ReadBool(),
                 (output, value) => output.WriteBool(value),
-#if !NET35
+#if !PROTOBUF_NO_ASYNC
                 (input, cancellationToken) => input.ReadBoolAsync(cancellationToken),
-                (output, value, cancellationToken) => output.WriteBoolAsync(value, cancellationToken), CodedOutputStream.ComputeBoolSize, tag);
+                (output, value, cancellationToken) => output.WriteBoolAsync(value, cancellationToken),
 #endif
+                CodedOutputStream.ComputeBoolSize, tag);
         }
 
         /// <summary>
@@ -106,10 +107,11 @@ namespace Google.Protobuf
             return new FieldCodec<int>(
                 input => input.ReadInt32(),
                 (output, value) => output.WriteInt32(value),
-#if !NET35
+#if !PROTOBUF_NO_ASYNC
                 (input, cancellationToken) => input.ReadInt32Async(cancellationToken),
-                (output, value, cancellationToken) => output.WriteInt32Async(value, cancellationToken), CodedOutputStream.ComputeInt32Size, tag);
+                (output, value, cancellationToken) => output.WriteInt32Async(value, cancellationToken),
 #endif
+                CodedOutputStream.ComputeInt32Size, tag);
         }
 
         /// <summary>
@@ -122,10 +124,11 @@ namespace Google.Protobuf
             return new FieldCodec<int>(
                 input => input.ReadSInt32(),
                 (output, value) => output.WriteSInt32(value),
-#if !NET35
+#if !PROTOBUF_NO_ASYNC
                 (input, cancellationToken) => input.ReadSInt32Async(cancellationToken),
-                (output, value, cancellationToken) => output.WriteSInt32Async(value, cancellationToken), CodedOutputStream.ComputeSInt32Size, tag);
+                (output, value, cancellationToken) => output.WriteSInt32Async(value, cancellationToken),
 #endif
+                CodedOutputStream.ComputeSInt32Size, tag);
         }
 
         /// <summary>
@@ -138,10 +141,11 @@ namespace Google.Protobuf
             return new FieldCodec<uint>(
                 input => input.ReadFixed32(),
                 (output, value) => output.WriteFixed32(value),
-#if !NET35
+#if !PROTOBUF_NO_ASYNC
                 (input, cancellationToken) => input.ReadFixed32Async(cancellationToken),
-                (output, value, cancellationToken) => output.WriteFixed32Async(value, cancellationToken), 4, tag);
+                (output, value, cancellationToken) => output.WriteFixed32Async(value, cancellationToken),
 #endif
+                4, tag);
         }
 
         /// <summary>
@@ -154,10 +158,11 @@ namespace Google.Protobuf
             return new FieldCodec<int>(
                 input => input.ReadSFixed32(),
                 (output, value) => output.WriteSFixed32(value),
-#if !NET35
+#if !PROTOBUF_NO_ASYNC
                 (input, cancellationToken) => input.ReadSFixed32Async(cancellationToken),
-                (output, value, cancellationToken) => output.WriteSFixed32Async(value, cancellationToken), 4, tag);
+                (output, value, cancellationToken) => output.WriteSFixed32Async(value, cancellationToken),
 #endif
+                4, tag);
         }
 
         /// <summary>
@@ -170,10 +175,11 @@ namespace Google.Protobuf
             return new FieldCodec<uint>(
                 input => input.ReadUInt32(),
                 (output, value) => output.WriteUInt32(value),
-#if !NET35
+#if !PROTOBUF_NO_ASYNC
                 (input, cancellationToken) => input.ReadUInt32Async(cancellationToken),
-                (output, value, cancellationToken) => output.WriteUInt32Async(value, cancellationToken), CodedOutputStream.ComputeUInt32Size, tag);
+                (output, value, cancellationToken) => output.WriteUInt32Async(value, cancellationToken),
 #endif
+                CodedOutputStream.ComputeUInt32Size, tag);
         }
 
         /// <summary>
@@ -186,10 +192,11 @@ namespace Google.Protobuf
             return new FieldCodec<long>(
                 input => input.ReadInt64(),
                 (output, value) => output.WriteInt64(value),
-#if !NET35
+#if !PROTOBUF_NO_ASYNC
                 (input, cancellationToken) => input.ReadInt64Async(cancellationToken),
-                (output, value, cancellationToken) => output.WriteInt64Async(value, cancellationToken), CodedOutputStream.ComputeInt64Size, tag);
+                (output, value, cancellationToken) => output.WriteInt64Async(value, cancellationToken),
 #endif
+                CodedOutputStream.ComputeInt64Size, tag);
         }
 
         /// <summary>
@@ -202,10 +209,11 @@ namespace Google.Protobuf
             return new FieldCodec<long>(
                 input => input.ReadSInt64(),
                 (output, value) => output.WriteSInt64(value),
-#if !NET35
+#if !PROTOBUF_NO_ASYNC
                 (input, cancellationToken) => input.ReadSInt64Async(cancellationToken),
-                (output, value, cancellationToken) => output.WriteSInt64Async(value, cancellationToken), CodedOutputStream.ComputeSInt64Size, tag);
+                (output, value, cancellationToken) => output.WriteSInt64Async(value, cancellationToken),
 #endif
+                CodedOutputStream.ComputeSInt64Size, tag);
         }
 
         /// <summary>
@@ -218,7 +226,7 @@ namespace Google.Protobuf
             return new FieldCodec<ulong>(
                 input => input.ReadFixed64(),
                 (output, value) => output.WriteFixed64(value),
-#if !NET35
+#if !PROTOBUF_NO_ASYNC
                 (input, cancellationToken) => input.ReadFixed64Async(cancellationToken),
                 (output, value, cancellationToken) => output.WriteFixed64Async(value, cancellationToken),
 #endif
@@ -235,7 +243,7 @@ namespace Google.Protobuf
             return new FieldCodec<long>(
                 input => input.ReadSFixed64(),
                 (output, value) => output.WriteSFixed64(value),
-#if !NET35
+#if !PROTOBUF_NO_ASYNC
                 (input, cancellationToken) => input.ReadSFixed64Async(cancellationToken),
                 (output, value, cancellationToken) => output.WriteSFixed64Async(value, cancellationToken),
 #endif
@@ -252,7 +260,7 @@ namespace Google.Protobuf
             return new FieldCodec<ulong>(
                 input => input.ReadUInt64(),
                 (output, value) => output.WriteUInt64(value),
-#if !NET35
+#if !PROTOBUF_NO_ASYNC
                 (input, cancellationToken) => input.ReadUInt64Async(cancellationToken),
                 (output, value, cancellationToken) => output.WriteUInt64Async(value, cancellationToken),
 #endif
@@ -269,7 +277,7 @@ namespace Google.Protobuf
             return new FieldCodec<float>(
                 input => input.ReadFloat(), 
                 (output, value) => output.WriteFloat(value),
-#if !NET35
+#if !PROTOBUF_NO_ASYNC
                 (input, cancellationToken) => input.ReadFloatAsync(cancellationToken),
                 (output, value, cancellationToken) => output.WriteFloatAsync(value, cancellationToken),
 #endif
@@ -286,7 +294,7 @@ namespace Google.Protobuf
             return new FieldCodec<double>(
                 input => input.ReadDouble(),
                 (output, value) => output.WriteDouble(value),
-#if !NET35
+#if !PROTOBUF_NO_ASYNC
                 (input, cancellationToken) => input.ReadDoubleAsync(cancellationToken),
                 (output, value, cancellationToken) => output.WriteDoubleAsync(value, cancellationToken),
 #endif
@@ -308,7 +316,7 @@ namespace Google.Protobuf
             return new FieldCodec<T>(
                 input => fromInt32(input.ReadEnum()),
                 (output, value) => output.WriteEnum(toInt32(value)),
-#if !NET35
+#if !PROTOBUF_NO_ASYNC
                 async (input, cancellationToken) => fromInt32(await input.ReadEnumAsync(cancellationToken)),
                 (output, value, cancellationToken) => output.WriteEnumAsync(toInt32(value), cancellationToken),
 #endif
@@ -326,48 +334,31 @@ namespace Google.Protobuf
             return new FieldCodec<T>(
                 input => { T message = parser.CreateTemplate(); input.ReadMessage(message); return message; },
                 (output, value) => output.WriteMessage(value),
-#if !NET35
+#if !PROTOBUF_NO_ASYNC
                 (input, cancellationToken) => { T message = parser.CreateTemplate(); input.ReadMessage(message); return Task.FromResult(message); },
                 (output, value, cancellationToken) => { output.WriteMessage(value); return Task.FromResult(0); },
 #endif
                 message => CodedOutputStream.ComputeMessageSize(message), tag);
         }
 
+#if !PROTOBUF_NO_ASYNC
         /// <summary>
         /// Retrieves a codec suitable for a message field with the given tag.
         /// </summary>
         /// <param name="tag">The tag.</param>
         /// <param name="parser">A parser to use for the message type.</param>
         /// <returns>A codec for the given tag.</returns>
-        public static FieldCodec<T> ForAsyncMessage<T>(uint tag, MessageParser<T> parser) where T : IAsyncMessage<T>
+        public static FieldCodec<T> ForMessage<T>(uint tag, AsyncMessageParser<T> parser) where T : IAsyncMessage<T>
         {
             return new FieldCodec<T>(
                 input => { T message = parser.CreateTemplate(); input.ReadMessage(message); return message; },
                 (output, value) => output.WriteMessage(value),
-#if !NET35
                 async (input, cancellationToken) => { T message = parser.CreateTemplate(); await input.ReadMessageAsync(message, cancellationToken); return message; },
                 (output, value, cancellationToken) => output.WriteMessageAsync(value, cancellationToken),
-#endif
                 message => CodedOutputStream.ComputeMessageSize(message), tag);
         }
 
-        //#if !NET35
-        //        /// <summary>
-        //        /// Retrieves a codec suitable for a message field with the given tag.
-        //        /// </summary>
-        //        /// <param name="tag">The tag.</param>
-        //        /// <param name="parser">A parser to use for the message type.</param>
-        //        /// <returns>A codec for the given tag.</returns>
-        //        public static FieldCodec<T> ForMessage<T>(uint tag, MessageParser<T> parser) where T : IAsyncMessage<T>
-        //        {
-        //            return new FieldCodec<T>(
-        //                input => { T message = parser.CreateTemplate(); input.ReadMessage(message); return message; },
-        //                (output, value) => output.WriteMessage(value),
-        //                async (input, cancellationToken) => { T message = parser.CreateTemplate(); await input.ReadMessageAsync(message, cancellationToken).ConfigureAwait(false); return message; },
-        //                (output, value, cancellationToken) => output.WriteMessageAsync(value, cancellationToken),
-        //                message => CodedOutputStream.ComputeMessageSize(message), tag);
-        //        }
-        //#endif
+#endif
 
         /// <summary>
         /// Creates a codec for a wrapper type of a class - which must be string or ByteString.
@@ -378,7 +369,7 @@ namespace Google.Protobuf
             return new FieldCodec<T>(
                 input => WrapperCodecs.Read<T>(input, nestedCodec),
                 (output, value) => WrapperCodecs.Write<T>(output, value, nestedCodec),
-#if !NET35
+#if !PROTOBUF_NO_ASYNC
                 async (input, cancellationToken) => await WrapperCodecsAsync.ReadAsync<T>(input, nestedCodec, cancellationToken),
                 (output, value, cancellationToken) => WrapperCodecsAsync.WriteAsync<T>(output, value, nestedCodec, cancellationToken),
 #endif
@@ -397,7 +388,7 @@ namespace Google.Protobuf
             return new FieldCodec<T?>(
                 input => WrapperCodecs.Read<T>(input, nestedCodec),
                 (output, value) => WrapperCodecs.Write<T>(output, value.Value, nestedCodec),
-#if !NET35
+#if !PROTOBUF_NO_ASYNC
                 async (input, cancellationToken) => await WrapperCodecsAsync.ReadAsync<T>(input, nestedCodec, cancellationToken),
                 (output, value, cancellationToken) => WrapperCodecsAsync.WriteAsync<T>(output, value.Value, nestedCodec, cancellationToken),
 #endif

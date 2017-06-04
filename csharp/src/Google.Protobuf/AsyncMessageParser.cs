@@ -43,11 +43,12 @@ namespace Google.Protobuf
     /// A general message parser, typically used by reflection-based code as all the methods
     /// return simple <see cref="IAsyncMessage"/>.
     /// </summary>
-    public class AsyncMessageParser
+    public class AsyncMessageParser : MessageParser
     {
         private Func<IAsyncMessage> factory;
 
         internal AsyncMessageParser(Func<IAsyncMessage> factory)
+            : base(factory)
         {
             this.factory = factory;
         }
@@ -56,7 +57,7 @@ namespace Google.Protobuf
         /// Creates a template instance ready for population.
         /// </summary>
         /// <returns>An empty message.</returns>
-        internal IAsyncMessage CreateTemplate()
+        new internal IAsyncMessage CreateTemplate()
         {
             return factory();
         }
@@ -66,7 +67,7 @@ namespace Google.Protobuf
         /// </summary>
         /// <param name="data">The byte array containing the message. Must not be null.</param>
         /// <returns>The newly parsed message.</returns>
-        public IAsyncMessage ParseFrom(byte[] data)
+        new public IAsyncMessage ParseFrom(byte[] data)
         {
             ProtoPreconditions.CheckNotNull(data, "data");
             IAsyncMessage message = factory();
@@ -79,7 +80,7 @@ namespace Google.Protobuf
         /// </summary>
         /// <param name="data">The data to parse.</param>
         /// <returns>The parsed message.</returns>
-        public IAsyncMessage ParseFrom(ByteString data)
+        new public IAsyncMessage ParseFrom(ByteString data)
         {
             ProtoPreconditions.CheckNotNull(data, "data");
             IAsyncMessage message = factory();
@@ -92,7 +93,7 @@ namespace Google.Protobuf
         /// </summary>
         /// <param name="input">The stream to parse.</param>
         /// <returns>The parsed message.</returns>
-        public IAsyncMessage ParseFrom(Stream input)
+        new public IAsyncMessage ParseFrom(Stream input)
         {
             IAsyncMessage message = factory();
             message.MergeFrom(input);
@@ -108,7 +109,7 @@ namespace Google.Protobuf
         /// </remarks>
         /// <param name="input">The stream to parse.</param>
         /// <returns>The parsed message.</returns>
-        public IAsyncMessage ParseDelimitedFrom(Stream input)
+        new public IAsyncMessage ParseDelimitedFrom(Stream input)
         {
             IAsyncMessage message = factory();
             message.MergeDelimitedFrom(input);
@@ -120,7 +121,7 @@ namespace Google.Protobuf
         /// </summary>
         /// <param name="input">The stream to parse.</param>
         /// <returns>The parsed message.</returns>
-        public IAsyncMessage ParseFrom(CodedInputStream input)
+        new public IAsyncMessage ParseFrom(CodedInputStream input)
         {
             IAsyncMessage message = factory();
             message.MergeFrom(input);
@@ -132,7 +133,7 @@ namespace Google.Protobuf
         /// </summary>
         /// <param name="input">The stream to parse.</param>
         /// <returns>The parsed message.</returns>
-        public async Task<IAsyncMessage> ParseFromAsync(CodedInputStream input, CancellationToken cancellationToken)
+        new public async Task<IAsyncMessage> ParseFromAsync(CodedInputStream input, CancellationToken cancellationToken)
         {
             IAsyncMessage message = factory();
             await message.MergeFromAsync(input, cancellationToken).ConfigureAwait(false);
@@ -146,7 +147,7 @@ namespace Google.Protobuf
         /// <returns>The parsed message.</returns>
         /// <exception cref="InvalidJsonException">The JSON does not comply with RFC 7159</exception>
         /// <exception cref="InvalidProtocolBufferException">The JSON does not represent a Protocol Buffers message correctly</exception>
-        public IAsyncMessage ParseJson(string json)
+        new public IAsyncMessage ParseJson(string json)
         {
             IAsyncMessage message = factory();
             JsonParser.Default.Merge(message, json);

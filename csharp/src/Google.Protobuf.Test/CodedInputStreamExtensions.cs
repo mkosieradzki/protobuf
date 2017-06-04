@@ -49,5 +49,15 @@ namespace Google.Protobuf
             stream.ReadMessage(message);
             return message;
         }
+
+#if !PROTOBUF_NO_ASYNC
+        public static T ReadMessage<T>(this CodedInputStream stream, AsyncMessageParser<T> parser)
+            where T : IAsyncMessage<T>
+        {
+            var message = parser.CreateTemplate();
+            stream.ReadMessage(message);
+            return message;
+        }
+#endif
     }
 }
