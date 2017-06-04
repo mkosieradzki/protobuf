@@ -7,7 +7,7 @@ using pb = global::Google.Protobuf;
 using pbc = global::Google.Protobuf.Collections;
 using pbr = global::Google.Protobuf.Reflection;
 using scg = global::System.Collections.Generic;
-#if !NET35
+#if !PROTOBUF_NO_ASYNC
 using st = global::System.Threading;
 using stt = global::System.Threading.Tasks;
 #endif
@@ -102,14 +102,12 @@ namespace Google.Protobuf.WellKnownTypes {
   /// be expressed in JSON format as "3.000000001s", and 3 seconds and 1
   /// microsecond should be expressed in JSON format as "3.000001s".
   /// </summary>
-  #if !NET35
-  public sealed partial class Duration : pb::IAsyncMessage<Duration> {
-  #else
   public sealed partial class Duration : pb::IMessage<Duration> {
-  #endif
+    #if PROTOBUF_NO_ASYNC
     private static readonly pb::MessageParser<Duration> _parser = new pb::MessageParser<Duration>(() => new Duration());
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pb::MessageParser<Duration> Parser { get { return _parser; } }
+    #endif
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
@@ -217,20 +215,6 @@ namespace Google.Protobuf.WellKnownTypes {
       }
     }
 
-    #if !NET35
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
-      if (Seconds != 0L) {
-        await output.WriteRawTagAsync(8, cancellationToken).ConfigureAwait(false);
-        await output.WriteInt64Async(Seconds, cancellationToken).ConfigureAwait(false);
-      }
-      if (Nanos != 0) {
-        await output.WriteRawTagAsync(16, cancellationToken).ConfigureAwait(false);
-        await output.WriteInt32Async(Nanos, cancellationToken).ConfigureAwait(false);
-      }
-    }
-    #endif
-
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
@@ -276,7 +260,26 @@ namespace Google.Protobuf.WellKnownTypes {
       }
     }
 
-    #if !NET35
+  }
+
+  #if !PROTOBUF_NO_ASYNC
+  public sealed partial class Duration : pb::IAsyncMessage<Duration> {
+    private static readonly pb::AsyncMessageParser<Duration> _parser = new pb::AsyncMessageParser<Duration>(() => new Duration());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::AsyncMessageParser<Duration> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
+      if (Seconds != 0L) {
+        await output.WriteRawTagAsync(8, cancellationToken).ConfigureAwait(false);
+        await output.WriteInt64Async(Seconds, cancellationToken).ConfigureAwait(false);
+      }
+      if (Nanos != 0) {
+        await output.WriteRawTagAsync(16, cancellationToken).ConfigureAwait(false);
+        await output.WriteInt32Async(Nanos, cancellationToken).ConfigureAwait(false);
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public async stt::Task MergeFromAsync(pb::CodedInputStream input, st::CancellationToken cancellationToken) {
       uint tag;
@@ -296,9 +299,9 @@ namespace Google.Protobuf.WellKnownTypes {
         }
       }
     }
-    #endif
 
   }
+  #endif
 
   #endregion
 

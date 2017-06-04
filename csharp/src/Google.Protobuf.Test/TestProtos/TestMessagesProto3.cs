@@ -7,7 +7,7 @@ using pb = global::Google.Protobuf;
 using pbc = global::Google.Protobuf.Collections;
 using pbr = global::Google.Protobuf.Reflection;
 using scg = global::System.Collections.Generic;
-#if !NET35
+#if !PROTOBUF_NO_ASYNC
 using st = global::System.Threading;
 using stt = global::System.Threading.Tasks;
 #endif
@@ -231,14 +231,12 @@ namespace ProtobufTestMessages.Proto3 {
   /// could trigger bugs that occur in any message type in this file.  We verify
   /// this stays true in a unit test.
   /// </summary>
-  #if !NET35
-  public sealed partial class TestAllTypes : pb::IAsyncMessage<TestAllTypes> {
-  #else
   public sealed partial class TestAllTypes : pb::IMessage<TestAllTypes> {
-  #endif
+    #if PROTOBUF_NO_ASYNC
     private static readonly pb::MessageParser<TestAllTypes> _parser = new pb::MessageParser<TestAllTypes>(() => new TestAllTypes());
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pb::MessageParser<TestAllTypes> Parser { get { return _parser; } }
+    #endif
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
@@ -807,7 +805,7 @@ namespace ProtobufTestMessages.Proto3 {
     /// <summary>Field number for the "repeated_nested_message" field.</summary>
     public const int RepeatedNestedMessageFieldNumber = 48;
     private static readonly pb::FieldCodec<global::ProtobufTestMessages.Proto3.TestAllTypes.Types.NestedMessage> _repeated_repeatedNestedMessage_codec
-        = pb::FieldCodec.ForAsyncMessage(386, global::ProtobufTestMessages.Proto3.TestAllTypes.Types.NestedMessage.Parser);
+        = pb::FieldCodec.ForMessage(386, global::ProtobufTestMessages.Proto3.TestAllTypes.Types.NestedMessage.Parser);
     private readonly pbc::RepeatedField<global::ProtobufTestMessages.Proto3.TestAllTypes.Types.NestedMessage> repeatedNestedMessage_ = new pbc::RepeatedField<global::ProtobufTestMessages.Proto3.TestAllTypes.Types.NestedMessage>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<global::ProtobufTestMessages.Proto3.TestAllTypes.Types.NestedMessage> RepeatedNestedMessage {
@@ -817,7 +815,7 @@ namespace ProtobufTestMessages.Proto3 {
     /// <summary>Field number for the "repeated_foreign_message" field.</summary>
     public const int RepeatedForeignMessageFieldNumber = 49;
     private static readonly pb::FieldCodec<global::ProtobufTestMessages.Proto3.ForeignMessage> _repeated_repeatedForeignMessage_codec
-        = pb::FieldCodec.ForAsyncMessage(394, global::ProtobufTestMessages.Proto3.ForeignMessage.Parser);
+        = pb::FieldCodec.ForMessage(394, global::ProtobufTestMessages.Proto3.ForeignMessage.Parser);
     private readonly pbc::RepeatedField<global::ProtobufTestMessages.Proto3.ForeignMessage> repeatedForeignMessage_ = new pbc::RepeatedField<global::ProtobufTestMessages.Proto3.ForeignMessage>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<global::ProtobufTestMessages.Proto3.ForeignMessage> RepeatedForeignMessage {
@@ -1020,7 +1018,7 @@ namespace ProtobufTestMessages.Proto3 {
     /// <summary>Field number for the "map_string_nested_message" field.</summary>
     public const int MapStringNestedMessageFieldNumber = 71;
     private static readonly pbc::MapField<string, global::ProtobufTestMessages.Proto3.TestAllTypes.Types.NestedMessage>.Codec _map_mapStringNestedMessage_codec
-        = new pbc::MapField<string, global::ProtobufTestMessages.Proto3.TestAllTypes.Types.NestedMessage>.Codec(pb::FieldCodec.ForString(10), pb::FieldCodec.ForAsyncMessage(18, global::ProtobufTestMessages.Proto3.TestAllTypes.Types.NestedMessage.Parser), 570);
+        = new pbc::MapField<string, global::ProtobufTestMessages.Proto3.TestAllTypes.Types.NestedMessage>.Codec(pb::FieldCodec.ForString(10), pb::FieldCodec.ForMessage(18, global::ProtobufTestMessages.Proto3.TestAllTypes.Types.NestedMessage.Parser), 570);
     private readonly pbc::MapField<string, global::ProtobufTestMessages.Proto3.TestAllTypes.Types.NestedMessage> mapStringNestedMessage_ = new pbc::MapField<string, global::ProtobufTestMessages.Proto3.TestAllTypes.Types.NestedMessage>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::MapField<string, global::ProtobufTestMessages.Proto3.TestAllTypes.Types.NestedMessage> MapStringNestedMessage {
@@ -1030,7 +1028,7 @@ namespace ProtobufTestMessages.Proto3 {
     /// <summary>Field number for the "map_string_foreign_message" field.</summary>
     public const int MapStringForeignMessageFieldNumber = 72;
     private static readonly pbc::MapField<string, global::ProtobufTestMessages.Proto3.ForeignMessage>.Codec _map_mapStringForeignMessage_codec
-        = new pbc::MapField<string, global::ProtobufTestMessages.Proto3.ForeignMessage>.Codec(pb::FieldCodec.ForString(10), pb::FieldCodec.ForAsyncMessage(18, global::ProtobufTestMessages.Proto3.ForeignMessage.Parser), 578);
+        = new pbc::MapField<string, global::ProtobufTestMessages.Proto3.ForeignMessage>.Codec(pb::FieldCodec.ForString(10), pb::FieldCodec.ForMessage(18, global::ProtobufTestMessages.Proto3.ForeignMessage.Parser), 578);
     private readonly pbc::MapField<string, global::ProtobufTestMessages.Proto3.ForeignMessage> mapStringForeignMessage_ = new pbc::MapField<string, global::ProtobufTestMessages.Proto3.ForeignMessage>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::MapField<string, global::ProtobufTestMessages.Proto3.ForeignMessage> MapStringForeignMessage {
@@ -1426,7 +1424,7 @@ namespace ProtobufTestMessages.Proto3 {
     /// <summary>Field number for the "repeated_duration" field.</summary>
     public const int RepeatedDurationFieldNumber = 311;
     private static readonly pb::FieldCodec<global::Google.Protobuf.WellKnownTypes.Duration> _repeated_repeatedDuration_codec
-        = pb::FieldCodec.ForAsyncMessage(2490, global::Google.Protobuf.WellKnownTypes.Duration.Parser);
+        = pb::FieldCodec.ForMessage(2490, global::Google.Protobuf.WellKnownTypes.Duration.Parser);
     private readonly pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.Duration> repeatedDuration_ = new pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.Duration>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.Duration> RepeatedDuration {
@@ -1436,7 +1434,7 @@ namespace ProtobufTestMessages.Proto3 {
     /// <summary>Field number for the "repeated_timestamp" field.</summary>
     public const int RepeatedTimestampFieldNumber = 312;
     private static readonly pb::FieldCodec<global::Google.Protobuf.WellKnownTypes.Timestamp> _repeated_repeatedTimestamp_codec
-        = pb::FieldCodec.ForAsyncMessage(2498, global::Google.Protobuf.WellKnownTypes.Timestamp.Parser);
+        = pb::FieldCodec.ForMessage(2498, global::Google.Protobuf.WellKnownTypes.Timestamp.Parser);
     private readonly pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.Timestamp> repeatedTimestamp_ = new pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.Timestamp>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.Timestamp> RepeatedTimestamp {
@@ -1446,7 +1444,7 @@ namespace ProtobufTestMessages.Proto3 {
     /// <summary>Field number for the "repeated_fieldmask" field.</summary>
     public const int RepeatedFieldmaskFieldNumber = 313;
     private static readonly pb::FieldCodec<global::Google.Protobuf.WellKnownTypes.FieldMask> _repeated_repeatedFieldmask_codec
-        = pb::FieldCodec.ForAsyncMessage(2506, global::Google.Protobuf.WellKnownTypes.FieldMask.Parser);
+        = pb::FieldCodec.ForMessage(2506, global::Google.Protobuf.WellKnownTypes.FieldMask.Parser);
     private readonly pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.FieldMask> repeatedFieldmask_ = new pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.FieldMask>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.FieldMask> RepeatedFieldmask {
@@ -1456,7 +1454,7 @@ namespace ProtobufTestMessages.Proto3 {
     /// <summary>Field number for the "repeated_struct" field.</summary>
     public const int RepeatedStructFieldNumber = 324;
     private static readonly pb::FieldCodec<global::Google.Protobuf.WellKnownTypes.Struct> _repeated_repeatedStruct_codec
-        = pb::FieldCodec.ForAsyncMessage(2594, global::Google.Protobuf.WellKnownTypes.Struct.Parser);
+        = pb::FieldCodec.ForMessage(2594, global::Google.Protobuf.WellKnownTypes.Struct.Parser);
     private readonly pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.Struct> repeatedStruct_ = new pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.Struct>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.Struct> RepeatedStruct {
@@ -1466,7 +1464,7 @@ namespace ProtobufTestMessages.Proto3 {
     /// <summary>Field number for the "repeated_any" field.</summary>
     public const int RepeatedAnyFieldNumber = 315;
     private static readonly pb::FieldCodec<global::Google.Protobuf.WellKnownTypes.Any> _repeated_repeatedAny_codec
-        = pb::FieldCodec.ForAsyncMessage(2522, global::Google.Protobuf.WellKnownTypes.Any.Parser);
+        = pb::FieldCodec.ForMessage(2522, global::Google.Protobuf.WellKnownTypes.Any.Parser);
     private readonly pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.Any> repeatedAny_ = new pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.Any>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.Any> RepeatedAny {
@@ -1476,7 +1474,7 @@ namespace ProtobufTestMessages.Proto3 {
     /// <summary>Field number for the "repeated_value" field.</summary>
     public const int RepeatedValueFieldNumber = 316;
     private static readonly pb::FieldCodec<global::Google.Protobuf.WellKnownTypes.Value> _repeated_repeatedValue_codec
-        = pb::FieldCodec.ForAsyncMessage(2530, global::Google.Protobuf.WellKnownTypes.Value.Parser);
+        = pb::FieldCodec.ForMessage(2530, global::Google.Protobuf.WellKnownTypes.Value.Parser);
     private readonly pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.Value> repeatedValue_ = new pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.Value>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.Value> RepeatedValue {
@@ -2283,314 +2281,6 @@ namespace ProtobufTestMessages.Proto3 {
         output.WriteInt32(FieldName18);
       }
     }
-
-    #if !NET35
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
-      if (OptionalInt32 != 0) {
-        await output.WriteRawTagAsync(8, cancellationToken).ConfigureAwait(false);
-        await output.WriteInt32Async(OptionalInt32, cancellationToken).ConfigureAwait(false);
-      }
-      if (OptionalInt64 != 0L) {
-        await output.WriteRawTagAsync(16, cancellationToken).ConfigureAwait(false);
-        await output.WriteInt64Async(OptionalInt64, cancellationToken).ConfigureAwait(false);
-      }
-      if (OptionalUint32 != 0) {
-        await output.WriteRawTagAsync(24, cancellationToken).ConfigureAwait(false);
-        await output.WriteUInt32Async(OptionalUint32, cancellationToken).ConfigureAwait(false);
-      }
-      if (OptionalUint64 != 0UL) {
-        await output.WriteRawTagAsync(32, cancellationToken).ConfigureAwait(false);
-        await output.WriteUInt64Async(OptionalUint64, cancellationToken).ConfigureAwait(false);
-      }
-      if (OptionalSint32 != 0) {
-        await output.WriteRawTagAsync(40, cancellationToken).ConfigureAwait(false);
-        await output.WriteSInt32Async(OptionalSint32, cancellationToken).ConfigureAwait(false);
-      }
-      if (OptionalSint64 != 0L) {
-        await output.WriteRawTagAsync(48, cancellationToken).ConfigureAwait(false);
-        await output.WriteSInt64Async(OptionalSint64, cancellationToken).ConfigureAwait(false);
-      }
-      if (OptionalFixed32 != 0) {
-        await output.WriteRawTagAsync(61, cancellationToken).ConfigureAwait(false);
-        await output.WriteFixed32Async(OptionalFixed32, cancellationToken).ConfigureAwait(false);
-      }
-      if (OptionalFixed64 != 0UL) {
-        await output.WriteRawTagAsync(65, cancellationToken).ConfigureAwait(false);
-        await output.WriteFixed64Async(OptionalFixed64, cancellationToken).ConfigureAwait(false);
-      }
-      if (OptionalSfixed32 != 0) {
-        await output.WriteRawTagAsync(77, cancellationToken).ConfigureAwait(false);
-        await output.WriteSFixed32Async(OptionalSfixed32, cancellationToken).ConfigureAwait(false);
-      }
-      if (OptionalSfixed64 != 0L) {
-        await output.WriteRawTagAsync(81, cancellationToken).ConfigureAwait(false);
-        await output.WriteSFixed64Async(OptionalSfixed64, cancellationToken).ConfigureAwait(false);
-      }
-      if (OptionalFloat != 0F) {
-        await output.WriteRawTagAsync(93, cancellationToken).ConfigureAwait(false);
-        await output.WriteFloatAsync(OptionalFloat, cancellationToken).ConfigureAwait(false);
-      }
-      if (OptionalDouble != 0D) {
-        await output.WriteRawTagAsync(97, cancellationToken).ConfigureAwait(false);
-        await output.WriteDoubleAsync(OptionalDouble, cancellationToken).ConfigureAwait(false);
-      }
-      if (OptionalBool != false) {
-        await output.WriteRawTagAsync(104, cancellationToken).ConfigureAwait(false);
-        await output.WriteBoolAsync(OptionalBool, cancellationToken).ConfigureAwait(false);
-      }
-      if (OptionalString.Length != 0) {
-        await output.WriteRawTagAsync(114, cancellationToken).ConfigureAwait(false);
-        await output.WriteStringAsync(OptionalString, cancellationToken).ConfigureAwait(false);
-      }
-      if (OptionalBytes.Length != 0) {
-        await output.WriteRawTagAsync(122, cancellationToken).ConfigureAwait(false);
-        await output.WriteBytesAsync(OptionalBytes, cancellationToken).ConfigureAwait(false);
-      }
-      if (optionalNestedMessage_ != null) {
-        await output.WriteRawTagAsync(146, 1, cancellationToken).ConfigureAwait(false);
-        await output.WriteMessageAsync(OptionalNestedMessage, cancellationToken).ConfigureAwait(false);
-      }
-      if (optionalForeignMessage_ != null) {
-        await output.WriteRawTagAsync(154, 1, cancellationToken).ConfigureAwait(false);
-        await output.WriteMessageAsync(OptionalForeignMessage, cancellationToken).ConfigureAwait(false);
-      }
-      if (OptionalNestedEnum != 0) {
-        await output.WriteRawTagAsync(168, 1, cancellationToken).ConfigureAwait(false);
-        await output.WriteEnumAsync((int) OptionalNestedEnum, cancellationToken).ConfigureAwait(false);
-      }
-      if (OptionalForeignEnum != 0) {
-        await output.WriteRawTagAsync(176, 1, cancellationToken).ConfigureAwait(false);
-        await output.WriteEnumAsync((int) OptionalForeignEnum, cancellationToken).ConfigureAwait(false);
-      }
-      if (OptionalStringPiece.Length != 0) {
-        await output.WriteRawTagAsync(194, 1, cancellationToken).ConfigureAwait(false);
-        await output.WriteStringAsync(OptionalStringPiece, cancellationToken).ConfigureAwait(false);
-      }
-      if (OptionalCord.Length != 0) {
-        await output.WriteRawTagAsync(202, 1, cancellationToken).ConfigureAwait(false);
-        await output.WriteStringAsync(OptionalCord, cancellationToken).ConfigureAwait(false);
-      }
-      if (recursiveMessage_ != null) {
-        await output.WriteRawTagAsync(218, 1, cancellationToken).ConfigureAwait(false);
-        await output.WriteMessageAsync(RecursiveMessage, cancellationToken).ConfigureAwait(false);
-      }
-      await repeatedInt32_.WriteToAsync(output, _repeated_repeatedInt32_codec, cancellationToken).ConfigureAwait(false);
-      await repeatedInt64_.WriteToAsync(output, _repeated_repeatedInt64_codec, cancellationToken).ConfigureAwait(false);
-      await repeatedUint32_.WriteToAsync(output, _repeated_repeatedUint32_codec, cancellationToken).ConfigureAwait(false);
-      await repeatedUint64_.WriteToAsync(output, _repeated_repeatedUint64_codec, cancellationToken).ConfigureAwait(false);
-      await repeatedSint32_.WriteToAsync(output, _repeated_repeatedSint32_codec, cancellationToken).ConfigureAwait(false);
-      await repeatedSint64_.WriteToAsync(output, _repeated_repeatedSint64_codec, cancellationToken).ConfigureAwait(false);
-      await repeatedFixed32_.WriteToAsync(output, _repeated_repeatedFixed32_codec, cancellationToken).ConfigureAwait(false);
-      await repeatedFixed64_.WriteToAsync(output, _repeated_repeatedFixed64_codec, cancellationToken).ConfigureAwait(false);
-      await repeatedSfixed32_.WriteToAsync(output, _repeated_repeatedSfixed32_codec, cancellationToken).ConfigureAwait(false);
-      await repeatedSfixed64_.WriteToAsync(output, _repeated_repeatedSfixed64_codec, cancellationToken).ConfigureAwait(false);
-      await repeatedFloat_.WriteToAsync(output, _repeated_repeatedFloat_codec, cancellationToken).ConfigureAwait(false);
-      await repeatedDouble_.WriteToAsync(output, _repeated_repeatedDouble_codec, cancellationToken).ConfigureAwait(false);
-      await repeatedBool_.WriteToAsync(output, _repeated_repeatedBool_codec, cancellationToken).ConfigureAwait(false);
-      await repeatedString_.WriteToAsync(output, _repeated_repeatedString_codec, cancellationToken).ConfigureAwait(false);
-      await repeatedBytes_.WriteToAsync(output, _repeated_repeatedBytes_codec, cancellationToken).ConfigureAwait(false);
-      await repeatedNestedMessage_.WriteToAsync(output, _repeated_repeatedNestedMessage_codec, cancellationToken).ConfigureAwait(false);
-      await repeatedForeignMessage_.WriteToAsync(output, _repeated_repeatedForeignMessage_codec, cancellationToken).ConfigureAwait(false);
-      await repeatedNestedEnum_.WriteToAsync(output, _repeated_repeatedNestedEnum_codec, cancellationToken).ConfigureAwait(false);
-      await repeatedForeignEnum_.WriteToAsync(output, _repeated_repeatedForeignEnum_codec, cancellationToken).ConfigureAwait(false);
-      await repeatedStringPiece_.WriteToAsync(output, _repeated_repeatedStringPiece_codec, cancellationToken).ConfigureAwait(false);
-      await repeatedCord_.WriteToAsync(output, _repeated_repeatedCord_codec, cancellationToken).ConfigureAwait(false);
-      await mapInt32Int32_.WriteToAsync(output, _map_mapInt32Int32_codec, cancellationToken).ConfigureAwait(false);
-      await mapInt64Int64_.WriteToAsync(output, _map_mapInt64Int64_codec, cancellationToken).ConfigureAwait(false);
-      await mapUint32Uint32_.WriteToAsync(output, _map_mapUint32Uint32_codec, cancellationToken).ConfigureAwait(false);
-      await mapUint64Uint64_.WriteToAsync(output, _map_mapUint64Uint64_codec, cancellationToken).ConfigureAwait(false);
-      await mapSint32Sint32_.WriteToAsync(output, _map_mapSint32Sint32_codec, cancellationToken).ConfigureAwait(false);
-      await mapSint64Sint64_.WriteToAsync(output, _map_mapSint64Sint64_codec, cancellationToken).ConfigureAwait(false);
-      await mapFixed32Fixed32_.WriteToAsync(output, _map_mapFixed32Fixed32_codec, cancellationToken).ConfigureAwait(false);
-      await mapFixed64Fixed64_.WriteToAsync(output, _map_mapFixed64Fixed64_codec, cancellationToken).ConfigureAwait(false);
-      await mapSfixed32Sfixed32_.WriteToAsync(output, _map_mapSfixed32Sfixed32_codec, cancellationToken).ConfigureAwait(false);
-      await mapSfixed64Sfixed64_.WriteToAsync(output, _map_mapSfixed64Sfixed64_codec, cancellationToken).ConfigureAwait(false);
-      await mapInt32Float_.WriteToAsync(output, _map_mapInt32Float_codec, cancellationToken).ConfigureAwait(false);
-      await mapInt32Double_.WriteToAsync(output, _map_mapInt32Double_codec, cancellationToken).ConfigureAwait(false);
-      await mapBoolBool_.WriteToAsync(output, _map_mapBoolBool_codec, cancellationToken).ConfigureAwait(false);
-      await mapStringString_.WriteToAsync(output, _map_mapStringString_codec, cancellationToken).ConfigureAwait(false);
-      await mapStringBytes_.WriteToAsync(output, _map_mapStringBytes_codec, cancellationToken).ConfigureAwait(false);
-      await mapStringNestedMessage_.WriteToAsync(output, _map_mapStringNestedMessage_codec, cancellationToken).ConfigureAwait(false);
-      await mapStringForeignMessage_.WriteToAsync(output, _map_mapStringForeignMessage_codec, cancellationToken).ConfigureAwait(false);
-      await mapStringNestedEnum_.WriteToAsync(output, _map_mapStringNestedEnum_codec, cancellationToken).ConfigureAwait(false);
-      await mapStringForeignEnum_.WriteToAsync(output, _map_mapStringForeignEnum_codec, cancellationToken).ConfigureAwait(false);
-      if (oneofFieldCase_ == OneofFieldOneofCase.OneofUint32) {
-        await output.WriteRawTagAsync(248, 6, cancellationToken).ConfigureAwait(false);
-        await output.WriteUInt32Async(OneofUint32, cancellationToken).ConfigureAwait(false);
-      }
-      if (oneofFieldCase_ == OneofFieldOneofCase.OneofNestedMessage) {
-        await output.WriteRawTagAsync(130, 7, cancellationToken).ConfigureAwait(false);
-        await output.WriteMessageAsync(OneofNestedMessage, cancellationToken).ConfigureAwait(false);
-      }
-      if (oneofFieldCase_ == OneofFieldOneofCase.OneofString) {
-        await output.WriteRawTagAsync(138, 7, cancellationToken).ConfigureAwait(false);
-        await output.WriteStringAsync(OneofString, cancellationToken).ConfigureAwait(false);
-      }
-      if (oneofFieldCase_ == OneofFieldOneofCase.OneofBytes) {
-        await output.WriteRawTagAsync(146, 7, cancellationToken).ConfigureAwait(false);
-        await output.WriteBytesAsync(OneofBytes, cancellationToken).ConfigureAwait(false);
-      }
-      if (oneofFieldCase_ == OneofFieldOneofCase.OneofBool) {
-        await output.WriteRawTagAsync(152, 7, cancellationToken).ConfigureAwait(false);
-        await output.WriteBoolAsync(OneofBool, cancellationToken).ConfigureAwait(false);
-      }
-      if (oneofFieldCase_ == OneofFieldOneofCase.OneofUint64) {
-        await output.WriteRawTagAsync(160, 7, cancellationToken).ConfigureAwait(false);
-        await output.WriteUInt64Async(OneofUint64, cancellationToken).ConfigureAwait(false);
-      }
-      if (oneofFieldCase_ == OneofFieldOneofCase.OneofFloat) {
-        await output.WriteRawTagAsync(173, 7, cancellationToken).ConfigureAwait(false);
-        await output.WriteFloatAsync(OneofFloat, cancellationToken).ConfigureAwait(false);
-      }
-      if (oneofFieldCase_ == OneofFieldOneofCase.OneofDouble) {
-        await output.WriteRawTagAsync(177, 7, cancellationToken).ConfigureAwait(false);
-        await output.WriteDoubleAsync(OneofDouble, cancellationToken).ConfigureAwait(false);
-      }
-      if (oneofFieldCase_ == OneofFieldOneofCase.OneofEnum) {
-        await output.WriteRawTagAsync(184, 7, cancellationToken).ConfigureAwait(false);
-        await output.WriteEnumAsync((int) OneofEnum, cancellationToken).ConfigureAwait(false);
-      }
-      if (optionalBoolWrapper_ != null) {
-        await _single_optionalBoolWrapper_codec.WriteTagAndValueAsync(output, OptionalBoolWrapper, cancellationToken).ConfigureAwait(false);
-      }
-      if (optionalInt32Wrapper_ != null) {
-        await _single_optionalInt32Wrapper_codec.WriteTagAndValueAsync(output, OptionalInt32Wrapper, cancellationToken).ConfigureAwait(false);
-      }
-      if (optionalInt64Wrapper_ != null) {
-        await _single_optionalInt64Wrapper_codec.WriteTagAndValueAsync(output, OptionalInt64Wrapper, cancellationToken).ConfigureAwait(false);
-      }
-      if (optionalUint32Wrapper_ != null) {
-        await _single_optionalUint32Wrapper_codec.WriteTagAndValueAsync(output, OptionalUint32Wrapper, cancellationToken).ConfigureAwait(false);
-      }
-      if (optionalUint64Wrapper_ != null) {
-        await _single_optionalUint64Wrapper_codec.WriteTagAndValueAsync(output, OptionalUint64Wrapper, cancellationToken).ConfigureAwait(false);
-      }
-      if (optionalFloatWrapper_ != null) {
-        await _single_optionalFloatWrapper_codec.WriteTagAndValueAsync(output, OptionalFloatWrapper, cancellationToken).ConfigureAwait(false);
-      }
-      if (optionalDoubleWrapper_ != null) {
-        await _single_optionalDoubleWrapper_codec.WriteTagAndValueAsync(output, OptionalDoubleWrapper, cancellationToken).ConfigureAwait(false);
-      }
-      if (optionalStringWrapper_ != null) {
-        await _single_optionalStringWrapper_codec.WriteTagAndValueAsync(output, OptionalStringWrapper, cancellationToken).ConfigureAwait(false);
-      }
-      if (optionalBytesWrapper_ != null) {
-        await _single_optionalBytesWrapper_codec.WriteTagAndValueAsync(output, OptionalBytesWrapper, cancellationToken).ConfigureAwait(false);
-      }
-      await repeatedBoolWrapper_.WriteToAsync(output, _repeated_repeatedBoolWrapper_codec, cancellationToken).ConfigureAwait(false);
-      await repeatedInt32Wrapper_.WriteToAsync(output, _repeated_repeatedInt32Wrapper_codec, cancellationToken).ConfigureAwait(false);
-      await repeatedInt64Wrapper_.WriteToAsync(output, _repeated_repeatedInt64Wrapper_codec, cancellationToken).ConfigureAwait(false);
-      await repeatedUint32Wrapper_.WriteToAsync(output, _repeated_repeatedUint32Wrapper_codec, cancellationToken).ConfigureAwait(false);
-      await repeatedUint64Wrapper_.WriteToAsync(output, _repeated_repeatedUint64Wrapper_codec, cancellationToken).ConfigureAwait(false);
-      await repeatedFloatWrapper_.WriteToAsync(output, _repeated_repeatedFloatWrapper_codec, cancellationToken).ConfigureAwait(false);
-      await repeatedDoubleWrapper_.WriteToAsync(output, _repeated_repeatedDoubleWrapper_codec, cancellationToken).ConfigureAwait(false);
-      await repeatedStringWrapper_.WriteToAsync(output, _repeated_repeatedStringWrapper_codec, cancellationToken).ConfigureAwait(false);
-      await repeatedBytesWrapper_.WriteToAsync(output, _repeated_repeatedBytesWrapper_codec, cancellationToken).ConfigureAwait(false);
-      if (optionalDuration_ != null) {
-        await output.WriteRawTagAsync(234, 18, cancellationToken).ConfigureAwait(false);
-        await output.WriteMessageAsync(OptionalDuration, cancellationToken).ConfigureAwait(false);
-      }
-      if (optionalTimestamp_ != null) {
-        await output.WriteRawTagAsync(242, 18, cancellationToken).ConfigureAwait(false);
-        await output.WriteMessageAsync(OptionalTimestamp, cancellationToken).ConfigureAwait(false);
-      }
-      if (optionalFieldMask_ != null) {
-        await output.WriteRawTagAsync(250, 18, cancellationToken).ConfigureAwait(false);
-        await output.WriteMessageAsync(OptionalFieldMask, cancellationToken).ConfigureAwait(false);
-      }
-      if (optionalStruct_ != null) {
-        await output.WriteRawTagAsync(130, 19, cancellationToken).ConfigureAwait(false);
-        await output.WriteMessageAsync(OptionalStruct, cancellationToken).ConfigureAwait(false);
-      }
-      if (optionalAny_ != null) {
-        await output.WriteRawTagAsync(138, 19, cancellationToken).ConfigureAwait(false);
-        await output.WriteMessageAsync(OptionalAny, cancellationToken).ConfigureAwait(false);
-      }
-      if (optionalValue_ != null) {
-        await output.WriteRawTagAsync(146, 19, cancellationToken).ConfigureAwait(false);
-        await output.WriteMessageAsync(OptionalValue, cancellationToken).ConfigureAwait(false);
-      }
-      await repeatedDuration_.WriteToAsync(output, _repeated_repeatedDuration_codec, cancellationToken).ConfigureAwait(false);
-      await repeatedTimestamp_.WriteToAsync(output, _repeated_repeatedTimestamp_codec, cancellationToken).ConfigureAwait(false);
-      await repeatedFieldmask_.WriteToAsync(output, _repeated_repeatedFieldmask_codec, cancellationToken).ConfigureAwait(false);
-      await repeatedAny_.WriteToAsync(output, _repeated_repeatedAny_codec, cancellationToken).ConfigureAwait(false);
-      await repeatedValue_.WriteToAsync(output, _repeated_repeatedValue_codec, cancellationToken).ConfigureAwait(false);
-      await repeatedStruct_.WriteToAsync(output, _repeated_repeatedStruct_codec, cancellationToken).ConfigureAwait(false);
-      if (Fieldname1 != 0) {
-        await output.WriteRawTagAsync(136, 25, cancellationToken).ConfigureAwait(false);
-        await output.WriteInt32Async(Fieldname1, cancellationToken).ConfigureAwait(false);
-      }
-      if (FieldName2 != 0) {
-        await output.WriteRawTagAsync(144, 25, cancellationToken).ConfigureAwait(false);
-        await output.WriteInt32Async(FieldName2, cancellationToken).ConfigureAwait(false);
-      }
-      if (FieldName3 != 0) {
-        await output.WriteRawTagAsync(152, 25, cancellationToken).ConfigureAwait(false);
-        await output.WriteInt32Async(FieldName3, cancellationToken).ConfigureAwait(false);
-      }
-      if (FieldName4 != 0) {
-        await output.WriteRawTagAsync(160, 25, cancellationToken).ConfigureAwait(false);
-        await output.WriteInt32Async(FieldName4, cancellationToken).ConfigureAwait(false);
-      }
-      if (Field0Name5 != 0) {
-        await output.WriteRawTagAsync(168, 25, cancellationToken).ConfigureAwait(false);
-        await output.WriteInt32Async(Field0Name5, cancellationToken).ConfigureAwait(false);
-      }
-      if (Field0Name6 != 0) {
-        await output.WriteRawTagAsync(176, 25, cancellationToken).ConfigureAwait(false);
-        await output.WriteInt32Async(Field0Name6, cancellationToken).ConfigureAwait(false);
-      }
-      if (FieldName7 != 0) {
-        await output.WriteRawTagAsync(184, 25, cancellationToken).ConfigureAwait(false);
-        await output.WriteInt32Async(FieldName7, cancellationToken).ConfigureAwait(false);
-      }
-      if (FieldName8 != 0) {
-        await output.WriteRawTagAsync(192, 25, cancellationToken).ConfigureAwait(false);
-        await output.WriteInt32Async(FieldName8, cancellationToken).ConfigureAwait(false);
-      }
-      if (FieldName9 != 0) {
-        await output.WriteRawTagAsync(200, 25, cancellationToken).ConfigureAwait(false);
-        await output.WriteInt32Async(FieldName9, cancellationToken).ConfigureAwait(false);
-      }
-      if (FieldName10 != 0) {
-        await output.WriteRawTagAsync(208, 25, cancellationToken).ConfigureAwait(false);
-        await output.WriteInt32Async(FieldName10, cancellationToken).ConfigureAwait(false);
-      }
-      if (FIELDNAME11 != 0) {
-        await output.WriteRawTagAsync(216, 25, cancellationToken).ConfigureAwait(false);
-        await output.WriteInt32Async(FIELDNAME11, cancellationToken).ConfigureAwait(false);
-      }
-      if (FIELDName12 != 0) {
-        await output.WriteRawTagAsync(224, 25, cancellationToken).ConfigureAwait(false);
-        await output.WriteInt32Async(FIELDName12, cancellationToken).ConfigureAwait(false);
-      }
-      if (FieldName13 != 0) {
-        await output.WriteRawTagAsync(232, 25, cancellationToken).ConfigureAwait(false);
-        await output.WriteInt32Async(FieldName13, cancellationToken).ConfigureAwait(false);
-      }
-      if (FieldName14 != 0) {
-        await output.WriteRawTagAsync(240, 25, cancellationToken).ConfigureAwait(false);
-        await output.WriteInt32Async(FieldName14, cancellationToken).ConfigureAwait(false);
-      }
-      if (FieldName15 != 0) {
-        await output.WriteRawTagAsync(248, 25, cancellationToken).ConfigureAwait(false);
-        await output.WriteInt32Async(FieldName15, cancellationToken).ConfigureAwait(false);
-      }
-      if (FieldName16 != 0) {
-        await output.WriteRawTagAsync(128, 26, cancellationToken).ConfigureAwait(false);
-        await output.WriteInt32Async(FieldName16, cancellationToken).ConfigureAwait(false);
-      }
-      if (FieldName17 != 0) {
-        await output.WriteRawTagAsync(136, 26, cancellationToken).ConfigureAwait(false);
-        await output.WriteInt32Async(FieldName17, cancellationToken).ConfigureAwait(false);
-      }
-      if (FieldName18 != 0) {
-        await output.WriteRawTagAsync(144, 26, cancellationToken).ConfigureAwait(false);
-        await output.WriteInt32Async(FieldName18, cancellationToken).ConfigureAwait(false);
-      }
-    }
-    #endif
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
@@ -3710,7 +3400,534 @@ namespace ProtobufTestMessages.Proto3 {
       }
     }
 
-    #if !NET35
+    #region Nested types
+    /// <summary>Container for nested types declared in the TestAllTypes message type.</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static partial class Types {
+      public enum NestedEnum {
+        [pbr::OriginalName("FOO")] Foo = 0,
+        [pbr::OriginalName("BAR")] Bar = 1,
+        [pbr::OriginalName("BAZ")] Baz = 2,
+        /// <summary>
+        /// Intentionally negative.
+        /// </summary>
+        [pbr::OriginalName("NEG")] Neg = -1,
+      }
+
+      public sealed partial class NestedMessage : pb::IMessage<NestedMessage> {
+        #if PROTOBUF_NO_ASYNC
+        private static readonly pb::MessageParser<NestedMessage> _parser = new pb::MessageParser<NestedMessage>(() => new NestedMessage());
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public static pb::MessageParser<NestedMessage> Parser { get { return _parser; } }
+        #endif
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public static pbr::MessageDescriptor Descriptor {
+          get { return global::ProtobufTestMessages.Proto3.TestAllTypes.Descriptor.NestedTypes[0]; }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        pbr::MessageDescriptor pb::IMessage.Descriptor {
+          get { return Descriptor; }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public NestedMessage() {
+          OnConstruction();
+        }
+
+        partial void OnConstruction();
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public NestedMessage(NestedMessage other) : this() {
+          a_ = other.a_;
+          Corecursive = other.corecursive_ != null ? other.Corecursive.Clone() : null;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public NestedMessage Clone() {
+          return new NestedMessage(this);
+        }
+
+        /// <summary>Field number for the "a" field.</summary>
+        public const int AFieldNumber = 1;
+        private int a_;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public int A {
+          get { return a_; }
+          set {
+            a_ = value;
+          }
+        }
+
+        /// <summary>Field number for the "corecursive" field.</summary>
+        public const int CorecursiveFieldNumber = 2;
+        private global::ProtobufTestMessages.Proto3.TestAllTypes corecursive_;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public global::ProtobufTestMessages.Proto3.TestAllTypes Corecursive {
+          get { return corecursive_; }
+          set {
+            corecursive_ = value;
+          }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public override bool Equals(object other) {
+          return Equals(other as NestedMessage);
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public bool Equals(NestedMessage other) {
+          if (ReferenceEquals(other, null)) {
+            return false;
+          }
+          if (ReferenceEquals(other, this)) {
+            return true;
+          }
+          if (A != other.A) return false;
+          if (!object.Equals(Corecursive, other.Corecursive)) return false;
+          return true;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public override int GetHashCode() {
+          int hash = 1;
+          if (A != 0) hash ^= A.GetHashCode();
+          if (corecursive_ != null) hash ^= Corecursive.GetHashCode();
+          return hash;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public override string ToString() {
+          return pb::JsonFormatter.ToDiagnosticString(this);
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public void WriteTo(pb::CodedOutputStream output) {
+          if (A != 0) {
+            output.WriteRawTag(8);
+            output.WriteInt32(A);
+          }
+          if (corecursive_ != null) {
+            output.WriteRawTag(18);
+            output.WriteMessage(Corecursive);
+          }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public int CalculateSize() {
+          int size = 0;
+          if (A != 0) {
+            size += 1 + pb::CodedOutputStream.ComputeInt32Size(A);
+          }
+          if (corecursive_ != null) {
+            size += 1 + pb::CodedOutputStream.ComputeMessageSize(Corecursive);
+          }
+          return size;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public void MergeFrom(NestedMessage other) {
+          if (other == null) {
+            return;
+          }
+          if (other.A != 0) {
+            A = other.A;
+          }
+          if (other.corecursive_ != null) {
+            if (corecursive_ == null) {
+              corecursive_ = new global::ProtobufTestMessages.Proto3.TestAllTypes();
+            }
+            Corecursive.MergeFrom(other.Corecursive);
+          }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public void MergeFrom(pb::CodedInputStream input) {
+          uint tag;
+          while ((tag = input.ReadTag()) != 0) {
+            switch(tag) {
+              default:
+                input.SkipLastField();
+                break;
+              case 8: {
+                A = input.ReadInt32();
+                break;
+              }
+              case 18: {
+                if (corecursive_ == null) {
+                  corecursive_ = new global::ProtobufTestMessages.Proto3.TestAllTypes();
+                }
+                input.ReadMessage(corecursive_);
+                break;
+              }
+            }
+          }
+        }
+
+      }
+
+      #if !PROTOBUF_NO_ASYNC
+      public sealed partial class NestedMessage : pb::IAsyncMessage<NestedMessage> {
+        private static readonly pb::AsyncMessageParser<NestedMessage> _parser = new pb::AsyncMessageParser<NestedMessage>(() => new NestedMessage());
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public static pb::AsyncMessageParser<NestedMessage> Parser { get { return _parser; } }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
+          if (A != 0) {
+            await output.WriteRawTagAsync(8, cancellationToken).ConfigureAwait(false);
+            await output.WriteInt32Async(A, cancellationToken).ConfigureAwait(false);
+          }
+          if (corecursive_ != null) {
+            await output.WriteRawTagAsync(18, cancellationToken).ConfigureAwait(false);
+            await output.WriteMessageAsync(Corecursive, cancellationToken).ConfigureAwait(false);
+          }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public async stt::Task MergeFromAsync(pb::CodedInputStream input, st::CancellationToken cancellationToken) {
+          uint tag;
+          while ((tag = await input.ReadTagAsync(cancellationToken).ConfigureAwait(false)) != 0) {
+            switch(tag) {
+              default:
+                await input.SkipLastFieldAsync(cancellationToken).ConfigureAwait(false);
+                break;
+              case 8: {
+                A = await input.ReadInt32Async(cancellationToken).ConfigureAwait(false);
+                break;
+              }
+              case 18: {
+                if (corecursive_ == null) {
+                  corecursive_ = new global::ProtobufTestMessages.Proto3.TestAllTypes();
+                }
+                await input.ReadMessageAsync(corecursive_, cancellationToken).ConfigureAwait(false);
+                break;
+              }
+            }
+          }
+        }
+
+      }
+      #endif
+
+    }
+    #endregion
+
+  }
+
+  #if !PROTOBUF_NO_ASYNC
+  public sealed partial class TestAllTypes : pb::IAsyncMessage<TestAllTypes> {
+    private static readonly pb::AsyncMessageParser<TestAllTypes> _parser = new pb::AsyncMessageParser<TestAllTypes>(() => new TestAllTypes());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::AsyncMessageParser<TestAllTypes> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
+      if (OptionalInt32 != 0) {
+        await output.WriteRawTagAsync(8, cancellationToken).ConfigureAwait(false);
+        await output.WriteInt32Async(OptionalInt32, cancellationToken).ConfigureAwait(false);
+      }
+      if (OptionalInt64 != 0L) {
+        await output.WriteRawTagAsync(16, cancellationToken).ConfigureAwait(false);
+        await output.WriteInt64Async(OptionalInt64, cancellationToken).ConfigureAwait(false);
+      }
+      if (OptionalUint32 != 0) {
+        await output.WriteRawTagAsync(24, cancellationToken).ConfigureAwait(false);
+        await output.WriteUInt32Async(OptionalUint32, cancellationToken).ConfigureAwait(false);
+      }
+      if (OptionalUint64 != 0UL) {
+        await output.WriteRawTagAsync(32, cancellationToken).ConfigureAwait(false);
+        await output.WriteUInt64Async(OptionalUint64, cancellationToken).ConfigureAwait(false);
+      }
+      if (OptionalSint32 != 0) {
+        await output.WriteRawTagAsync(40, cancellationToken).ConfigureAwait(false);
+        await output.WriteSInt32Async(OptionalSint32, cancellationToken).ConfigureAwait(false);
+      }
+      if (OptionalSint64 != 0L) {
+        await output.WriteRawTagAsync(48, cancellationToken).ConfigureAwait(false);
+        await output.WriteSInt64Async(OptionalSint64, cancellationToken).ConfigureAwait(false);
+      }
+      if (OptionalFixed32 != 0) {
+        await output.WriteRawTagAsync(61, cancellationToken).ConfigureAwait(false);
+        await output.WriteFixed32Async(OptionalFixed32, cancellationToken).ConfigureAwait(false);
+      }
+      if (OptionalFixed64 != 0UL) {
+        await output.WriteRawTagAsync(65, cancellationToken).ConfigureAwait(false);
+        await output.WriteFixed64Async(OptionalFixed64, cancellationToken).ConfigureAwait(false);
+      }
+      if (OptionalSfixed32 != 0) {
+        await output.WriteRawTagAsync(77, cancellationToken).ConfigureAwait(false);
+        await output.WriteSFixed32Async(OptionalSfixed32, cancellationToken).ConfigureAwait(false);
+      }
+      if (OptionalSfixed64 != 0L) {
+        await output.WriteRawTagAsync(81, cancellationToken).ConfigureAwait(false);
+        await output.WriteSFixed64Async(OptionalSfixed64, cancellationToken).ConfigureAwait(false);
+      }
+      if (OptionalFloat != 0F) {
+        await output.WriteRawTagAsync(93, cancellationToken).ConfigureAwait(false);
+        await output.WriteFloatAsync(OptionalFloat, cancellationToken).ConfigureAwait(false);
+      }
+      if (OptionalDouble != 0D) {
+        await output.WriteRawTagAsync(97, cancellationToken).ConfigureAwait(false);
+        await output.WriteDoubleAsync(OptionalDouble, cancellationToken).ConfigureAwait(false);
+      }
+      if (OptionalBool != false) {
+        await output.WriteRawTagAsync(104, cancellationToken).ConfigureAwait(false);
+        await output.WriteBoolAsync(OptionalBool, cancellationToken).ConfigureAwait(false);
+      }
+      if (OptionalString.Length != 0) {
+        await output.WriteRawTagAsync(114, cancellationToken).ConfigureAwait(false);
+        await output.WriteStringAsync(OptionalString, cancellationToken).ConfigureAwait(false);
+      }
+      if (OptionalBytes.Length != 0) {
+        await output.WriteRawTagAsync(122, cancellationToken).ConfigureAwait(false);
+        await output.WriteBytesAsync(OptionalBytes, cancellationToken).ConfigureAwait(false);
+      }
+      if (optionalNestedMessage_ != null) {
+        await output.WriteRawTagAsync(146, 1, cancellationToken).ConfigureAwait(false);
+        await output.WriteMessageAsync(OptionalNestedMessage, cancellationToken).ConfigureAwait(false);
+      }
+      if (optionalForeignMessage_ != null) {
+        await output.WriteRawTagAsync(154, 1, cancellationToken).ConfigureAwait(false);
+        await output.WriteMessageAsync(OptionalForeignMessage, cancellationToken).ConfigureAwait(false);
+      }
+      if (OptionalNestedEnum != 0) {
+        await output.WriteRawTagAsync(168, 1, cancellationToken).ConfigureAwait(false);
+        await output.WriteEnumAsync((int) OptionalNestedEnum, cancellationToken).ConfigureAwait(false);
+      }
+      if (OptionalForeignEnum != 0) {
+        await output.WriteRawTagAsync(176, 1, cancellationToken).ConfigureAwait(false);
+        await output.WriteEnumAsync((int) OptionalForeignEnum, cancellationToken).ConfigureAwait(false);
+      }
+      if (OptionalStringPiece.Length != 0) {
+        await output.WriteRawTagAsync(194, 1, cancellationToken).ConfigureAwait(false);
+        await output.WriteStringAsync(OptionalStringPiece, cancellationToken).ConfigureAwait(false);
+      }
+      if (OptionalCord.Length != 0) {
+        await output.WriteRawTagAsync(202, 1, cancellationToken).ConfigureAwait(false);
+        await output.WriteStringAsync(OptionalCord, cancellationToken).ConfigureAwait(false);
+      }
+      if (recursiveMessage_ != null) {
+        await output.WriteRawTagAsync(218, 1, cancellationToken).ConfigureAwait(false);
+        await output.WriteMessageAsync(RecursiveMessage, cancellationToken).ConfigureAwait(false);
+      }
+      await repeatedInt32_.WriteToAsync(output, _repeated_repeatedInt32_codec, cancellationToken).ConfigureAwait(false);
+      await repeatedInt64_.WriteToAsync(output, _repeated_repeatedInt64_codec, cancellationToken).ConfigureAwait(false);
+      await repeatedUint32_.WriteToAsync(output, _repeated_repeatedUint32_codec, cancellationToken).ConfigureAwait(false);
+      await repeatedUint64_.WriteToAsync(output, _repeated_repeatedUint64_codec, cancellationToken).ConfigureAwait(false);
+      await repeatedSint32_.WriteToAsync(output, _repeated_repeatedSint32_codec, cancellationToken).ConfigureAwait(false);
+      await repeatedSint64_.WriteToAsync(output, _repeated_repeatedSint64_codec, cancellationToken).ConfigureAwait(false);
+      await repeatedFixed32_.WriteToAsync(output, _repeated_repeatedFixed32_codec, cancellationToken).ConfigureAwait(false);
+      await repeatedFixed64_.WriteToAsync(output, _repeated_repeatedFixed64_codec, cancellationToken).ConfigureAwait(false);
+      await repeatedSfixed32_.WriteToAsync(output, _repeated_repeatedSfixed32_codec, cancellationToken).ConfigureAwait(false);
+      await repeatedSfixed64_.WriteToAsync(output, _repeated_repeatedSfixed64_codec, cancellationToken).ConfigureAwait(false);
+      await repeatedFloat_.WriteToAsync(output, _repeated_repeatedFloat_codec, cancellationToken).ConfigureAwait(false);
+      await repeatedDouble_.WriteToAsync(output, _repeated_repeatedDouble_codec, cancellationToken).ConfigureAwait(false);
+      await repeatedBool_.WriteToAsync(output, _repeated_repeatedBool_codec, cancellationToken).ConfigureAwait(false);
+      await repeatedString_.WriteToAsync(output, _repeated_repeatedString_codec, cancellationToken).ConfigureAwait(false);
+      await repeatedBytes_.WriteToAsync(output, _repeated_repeatedBytes_codec, cancellationToken).ConfigureAwait(false);
+      await repeatedNestedMessage_.WriteToAsync(output, _repeated_repeatedNestedMessage_codec, cancellationToken).ConfigureAwait(false);
+      await repeatedForeignMessage_.WriteToAsync(output, _repeated_repeatedForeignMessage_codec, cancellationToken).ConfigureAwait(false);
+      await repeatedNestedEnum_.WriteToAsync(output, _repeated_repeatedNestedEnum_codec, cancellationToken).ConfigureAwait(false);
+      await repeatedForeignEnum_.WriteToAsync(output, _repeated_repeatedForeignEnum_codec, cancellationToken).ConfigureAwait(false);
+      await repeatedStringPiece_.WriteToAsync(output, _repeated_repeatedStringPiece_codec, cancellationToken).ConfigureAwait(false);
+      await repeatedCord_.WriteToAsync(output, _repeated_repeatedCord_codec, cancellationToken).ConfigureAwait(false);
+      await mapInt32Int32_.WriteToAsync(output, _map_mapInt32Int32_codec, cancellationToken).ConfigureAwait(false);
+      await mapInt64Int64_.WriteToAsync(output, _map_mapInt64Int64_codec, cancellationToken).ConfigureAwait(false);
+      await mapUint32Uint32_.WriteToAsync(output, _map_mapUint32Uint32_codec, cancellationToken).ConfigureAwait(false);
+      await mapUint64Uint64_.WriteToAsync(output, _map_mapUint64Uint64_codec, cancellationToken).ConfigureAwait(false);
+      await mapSint32Sint32_.WriteToAsync(output, _map_mapSint32Sint32_codec, cancellationToken).ConfigureAwait(false);
+      await mapSint64Sint64_.WriteToAsync(output, _map_mapSint64Sint64_codec, cancellationToken).ConfigureAwait(false);
+      await mapFixed32Fixed32_.WriteToAsync(output, _map_mapFixed32Fixed32_codec, cancellationToken).ConfigureAwait(false);
+      await mapFixed64Fixed64_.WriteToAsync(output, _map_mapFixed64Fixed64_codec, cancellationToken).ConfigureAwait(false);
+      await mapSfixed32Sfixed32_.WriteToAsync(output, _map_mapSfixed32Sfixed32_codec, cancellationToken).ConfigureAwait(false);
+      await mapSfixed64Sfixed64_.WriteToAsync(output, _map_mapSfixed64Sfixed64_codec, cancellationToken).ConfigureAwait(false);
+      await mapInt32Float_.WriteToAsync(output, _map_mapInt32Float_codec, cancellationToken).ConfigureAwait(false);
+      await mapInt32Double_.WriteToAsync(output, _map_mapInt32Double_codec, cancellationToken).ConfigureAwait(false);
+      await mapBoolBool_.WriteToAsync(output, _map_mapBoolBool_codec, cancellationToken).ConfigureAwait(false);
+      await mapStringString_.WriteToAsync(output, _map_mapStringString_codec, cancellationToken).ConfigureAwait(false);
+      await mapStringBytes_.WriteToAsync(output, _map_mapStringBytes_codec, cancellationToken).ConfigureAwait(false);
+      await mapStringNestedMessage_.WriteToAsync(output, _map_mapStringNestedMessage_codec, cancellationToken).ConfigureAwait(false);
+      await mapStringForeignMessage_.WriteToAsync(output, _map_mapStringForeignMessage_codec, cancellationToken).ConfigureAwait(false);
+      await mapStringNestedEnum_.WriteToAsync(output, _map_mapStringNestedEnum_codec, cancellationToken).ConfigureAwait(false);
+      await mapStringForeignEnum_.WriteToAsync(output, _map_mapStringForeignEnum_codec, cancellationToken).ConfigureAwait(false);
+      if (oneofFieldCase_ == OneofFieldOneofCase.OneofUint32) {
+        await output.WriteRawTagAsync(248, 6, cancellationToken).ConfigureAwait(false);
+        await output.WriteUInt32Async(OneofUint32, cancellationToken).ConfigureAwait(false);
+      }
+      if (oneofFieldCase_ == OneofFieldOneofCase.OneofNestedMessage) {
+        await output.WriteRawTagAsync(130, 7, cancellationToken).ConfigureAwait(false);
+        await output.WriteMessageAsync(OneofNestedMessage, cancellationToken).ConfigureAwait(false);
+      }
+      if (oneofFieldCase_ == OneofFieldOneofCase.OneofString) {
+        await output.WriteRawTagAsync(138, 7, cancellationToken).ConfigureAwait(false);
+        await output.WriteStringAsync(OneofString, cancellationToken).ConfigureAwait(false);
+      }
+      if (oneofFieldCase_ == OneofFieldOneofCase.OneofBytes) {
+        await output.WriteRawTagAsync(146, 7, cancellationToken).ConfigureAwait(false);
+        await output.WriteBytesAsync(OneofBytes, cancellationToken).ConfigureAwait(false);
+      }
+      if (oneofFieldCase_ == OneofFieldOneofCase.OneofBool) {
+        await output.WriteRawTagAsync(152, 7, cancellationToken).ConfigureAwait(false);
+        await output.WriteBoolAsync(OneofBool, cancellationToken).ConfigureAwait(false);
+      }
+      if (oneofFieldCase_ == OneofFieldOneofCase.OneofUint64) {
+        await output.WriteRawTagAsync(160, 7, cancellationToken).ConfigureAwait(false);
+        await output.WriteUInt64Async(OneofUint64, cancellationToken).ConfigureAwait(false);
+      }
+      if (oneofFieldCase_ == OneofFieldOneofCase.OneofFloat) {
+        await output.WriteRawTagAsync(173, 7, cancellationToken).ConfigureAwait(false);
+        await output.WriteFloatAsync(OneofFloat, cancellationToken).ConfigureAwait(false);
+      }
+      if (oneofFieldCase_ == OneofFieldOneofCase.OneofDouble) {
+        await output.WriteRawTagAsync(177, 7, cancellationToken).ConfigureAwait(false);
+        await output.WriteDoubleAsync(OneofDouble, cancellationToken).ConfigureAwait(false);
+      }
+      if (oneofFieldCase_ == OneofFieldOneofCase.OneofEnum) {
+        await output.WriteRawTagAsync(184, 7, cancellationToken).ConfigureAwait(false);
+        await output.WriteEnumAsync((int) OneofEnum, cancellationToken).ConfigureAwait(false);
+      }
+      if (optionalBoolWrapper_ != null) {
+        await _single_optionalBoolWrapper_codec.WriteTagAndValueAsync(output, OptionalBoolWrapper, cancellationToken).ConfigureAwait(false);
+      }
+      if (optionalInt32Wrapper_ != null) {
+        await _single_optionalInt32Wrapper_codec.WriteTagAndValueAsync(output, OptionalInt32Wrapper, cancellationToken).ConfigureAwait(false);
+      }
+      if (optionalInt64Wrapper_ != null) {
+        await _single_optionalInt64Wrapper_codec.WriteTagAndValueAsync(output, OptionalInt64Wrapper, cancellationToken).ConfigureAwait(false);
+      }
+      if (optionalUint32Wrapper_ != null) {
+        await _single_optionalUint32Wrapper_codec.WriteTagAndValueAsync(output, OptionalUint32Wrapper, cancellationToken).ConfigureAwait(false);
+      }
+      if (optionalUint64Wrapper_ != null) {
+        await _single_optionalUint64Wrapper_codec.WriteTagAndValueAsync(output, OptionalUint64Wrapper, cancellationToken).ConfigureAwait(false);
+      }
+      if (optionalFloatWrapper_ != null) {
+        await _single_optionalFloatWrapper_codec.WriteTagAndValueAsync(output, OptionalFloatWrapper, cancellationToken).ConfigureAwait(false);
+      }
+      if (optionalDoubleWrapper_ != null) {
+        await _single_optionalDoubleWrapper_codec.WriteTagAndValueAsync(output, OptionalDoubleWrapper, cancellationToken).ConfigureAwait(false);
+      }
+      if (optionalStringWrapper_ != null) {
+        await _single_optionalStringWrapper_codec.WriteTagAndValueAsync(output, OptionalStringWrapper, cancellationToken).ConfigureAwait(false);
+      }
+      if (optionalBytesWrapper_ != null) {
+        await _single_optionalBytesWrapper_codec.WriteTagAndValueAsync(output, OptionalBytesWrapper, cancellationToken).ConfigureAwait(false);
+      }
+      await repeatedBoolWrapper_.WriteToAsync(output, _repeated_repeatedBoolWrapper_codec, cancellationToken).ConfigureAwait(false);
+      await repeatedInt32Wrapper_.WriteToAsync(output, _repeated_repeatedInt32Wrapper_codec, cancellationToken).ConfigureAwait(false);
+      await repeatedInt64Wrapper_.WriteToAsync(output, _repeated_repeatedInt64Wrapper_codec, cancellationToken).ConfigureAwait(false);
+      await repeatedUint32Wrapper_.WriteToAsync(output, _repeated_repeatedUint32Wrapper_codec, cancellationToken).ConfigureAwait(false);
+      await repeatedUint64Wrapper_.WriteToAsync(output, _repeated_repeatedUint64Wrapper_codec, cancellationToken).ConfigureAwait(false);
+      await repeatedFloatWrapper_.WriteToAsync(output, _repeated_repeatedFloatWrapper_codec, cancellationToken).ConfigureAwait(false);
+      await repeatedDoubleWrapper_.WriteToAsync(output, _repeated_repeatedDoubleWrapper_codec, cancellationToken).ConfigureAwait(false);
+      await repeatedStringWrapper_.WriteToAsync(output, _repeated_repeatedStringWrapper_codec, cancellationToken).ConfigureAwait(false);
+      await repeatedBytesWrapper_.WriteToAsync(output, _repeated_repeatedBytesWrapper_codec, cancellationToken).ConfigureAwait(false);
+      if (optionalDuration_ != null) {
+        await output.WriteRawTagAsync(234, 18, cancellationToken).ConfigureAwait(false);
+        await output.WriteMessageAsync(OptionalDuration, cancellationToken).ConfigureAwait(false);
+      }
+      if (optionalTimestamp_ != null) {
+        await output.WriteRawTagAsync(242, 18, cancellationToken).ConfigureAwait(false);
+        await output.WriteMessageAsync(OptionalTimestamp, cancellationToken).ConfigureAwait(false);
+      }
+      if (optionalFieldMask_ != null) {
+        await output.WriteRawTagAsync(250, 18, cancellationToken).ConfigureAwait(false);
+        await output.WriteMessageAsync(OptionalFieldMask, cancellationToken).ConfigureAwait(false);
+      }
+      if (optionalStruct_ != null) {
+        await output.WriteRawTagAsync(130, 19, cancellationToken).ConfigureAwait(false);
+        await output.WriteMessageAsync(OptionalStruct, cancellationToken).ConfigureAwait(false);
+      }
+      if (optionalAny_ != null) {
+        await output.WriteRawTagAsync(138, 19, cancellationToken).ConfigureAwait(false);
+        await output.WriteMessageAsync(OptionalAny, cancellationToken).ConfigureAwait(false);
+      }
+      if (optionalValue_ != null) {
+        await output.WriteRawTagAsync(146, 19, cancellationToken).ConfigureAwait(false);
+        await output.WriteMessageAsync(OptionalValue, cancellationToken).ConfigureAwait(false);
+      }
+      await repeatedDuration_.WriteToAsync(output, _repeated_repeatedDuration_codec, cancellationToken).ConfigureAwait(false);
+      await repeatedTimestamp_.WriteToAsync(output, _repeated_repeatedTimestamp_codec, cancellationToken).ConfigureAwait(false);
+      await repeatedFieldmask_.WriteToAsync(output, _repeated_repeatedFieldmask_codec, cancellationToken).ConfigureAwait(false);
+      await repeatedAny_.WriteToAsync(output, _repeated_repeatedAny_codec, cancellationToken).ConfigureAwait(false);
+      await repeatedValue_.WriteToAsync(output, _repeated_repeatedValue_codec, cancellationToken).ConfigureAwait(false);
+      await repeatedStruct_.WriteToAsync(output, _repeated_repeatedStruct_codec, cancellationToken).ConfigureAwait(false);
+      if (Fieldname1 != 0) {
+        await output.WriteRawTagAsync(136, 25, cancellationToken).ConfigureAwait(false);
+        await output.WriteInt32Async(Fieldname1, cancellationToken).ConfigureAwait(false);
+      }
+      if (FieldName2 != 0) {
+        await output.WriteRawTagAsync(144, 25, cancellationToken).ConfigureAwait(false);
+        await output.WriteInt32Async(FieldName2, cancellationToken).ConfigureAwait(false);
+      }
+      if (FieldName3 != 0) {
+        await output.WriteRawTagAsync(152, 25, cancellationToken).ConfigureAwait(false);
+        await output.WriteInt32Async(FieldName3, cancellationToken).ConfigureAwait(false);
+      }
+      if (FieldName4 != 0) {
+        await output.WriteRawTagAsync(160, 25, cancellationToken).ConfigureAwait(false);
+        await output.WriteInt32Async(FieldName4, cancellationToken).ConfigureAwait(false);
+      }
+      if (Field0Name5 != 0) {
+        await output.WriteRawTagAsync(168, 25, cancellationToken).ConfigureAwait(false);
+        await output.WriteInt32Async(Field0Name5, cancellationToken).ConfigureAwait(false);
+      }
+      if (Field0Name6 != 0) {
+        await output.WriteRawTagAsync(176, 25, cancellationToken).ConfigureAwait(false);
+        await output.WriteInt32Async(Field0Name6, cancellationToken).ConfigureAwait(false);
+      }
+      if (FieldName7 != 0) {
+        await output.WriteRawTagAsync(184, 25, cancellationToken).ConfigureAwait(false);
+        await output.WriteInt32Async(FieldName7, cancellationToken).ConfigureAwait(false);
+      }
+      if (FieldName8 != 0) {
+        await output.WriteRawTagAsync(192, 25, cancellationToken).ConfigureAwait(false);
+        await output.WriteInt32Async(FieldName8, cancellationToken).ConfigureAwait(false);
+      }
+      if (FieldName9 != 0) {
+        await output.WriteRawTagAsync(200, 25, cancellationToken).ConfigureAwait(false);
+        await output.WriteInt32Async(FieldName9, cancellationToken).ConfigureAwait(false);
+      }
+      if (FieldName10 != 0) {
+        await output.WriteRawTagAsync(208, 25, cancellationToken).ConfigureAwait(false);
+        await output.WriteInt32Async(FieldName10, cancellationToken).ConfigureAwait(false);
+      }
+      if (FIELDNAME11 != 0) {
+        await output.WriteRawTagAsync(216, 25, cancellationToken).ConfigureAwait(false);
+        await output.WriteInt32Async(FIELDNAME11, cancellationToken).ConfigureAwait(false);
+      }
+      if (FIELDName12 != 0) {
+        await output.WriteRawTagAsync(224, 25, cancellationToken).ConfigureAwait(false);
+        await output.WriteInt32Async(FIELDName12, cancellationToken).ConfigureAwait(false);
+      }
+      if (FieldName13 != 0) {
+        await output.WriteRawTagAsync(232, 25, cancellationToken).ConfigureAwait(false);
+        await output.WriteInt32Async(FieldName13, cancellationToken).ConfigureAwait(false);
+      }
+      if (FieldName14 != 0) {
+        await output.WriteRawTagAsync(240, 25, cancellationToken).ConfigureAwait(false);
+        await output.WriteInt32Async(FieldName14, cancellationToken).ConfigureAwait(false);
+      }
+      if (FieldName15 != 0) {
+        await output.WriteRawTagAsync(248, 25, cancellationToken).ConfigureAwait(false);
+        await output.WriteInt32Async(FieldName15, cancellationToken).ConfigureAwait(false);
+      }
+      if (FieldName16 != 0) {
+        await output.WriteRawTagAsync(128, 26, cancellationToken).ConfigureAwait(false);
+        await output.WriteInt32Async(FieldName16, cancellationToken).ConfigureAwait(false);
+      }
+      if (FieldName17 != 0) {
+        await output.WriteRawTagAsync(136, 26, cancellationToken).ConfigureAwait(false);
+        await output.WriteInt32Async(FieldName17, cancellationToken).ConfigureAwait(false);
+      }
+      if (FieldName18 != 0) {
+        await output.WriteRawTagAsync(144, 26, cancellationToken).ConfigureAwait(false);
+        await output.WriteInt32Async(FieldName18, cancellationToken).ConfigureAwait(false);
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public async stt::Task MergeFromAsync(pb::CodedInputStream input, st::CancellationToken cancellationToken) {
       uint tag;
@@ -4273,229 +4490,16 @@ namespace ProtobufTestMessages.Proto3 {
         }
       }
     }
-    #endif
-
-    #region Nested types
-    /// <summary>Container for nested types declared in the TestAllTypes message type.</summary>
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static partial class Types {
-      public enum NestedEnum {
-        [pbr::OriginalName("FOO")] Foo = 0,
-        [pbr::OriginalName("BAR")] Bar = 1,
-        [pbr::OriginalName("BAZ")] Baz = 2,
-        /// <summary>
-        /// Intentionally negative.
-        /// </summary>
-        [pbr::OriginalName("NEG")] Neg = -1,
-      }
-
-      #if !NET35
-      public sealed partial class NestedMessage : pb::IAsyncMessage<NestedMessage> {
-      #else
-      public sealed partial class NestedMessage : pb::IMessage<NestedMessage> {
-      #endif
-        private static readonly pb::MessageParser<NestedMessage> _parser = new pb::MessageParser<NestedMessage>(() => new NestedMessage());
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-        public static pb::MessageParser<NestedMessage> Parser { get { return _parser; } }
-
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-        public static pbr::MessageDescriptor Descriptor {
-          get { return global::ProtobufTestMessages.Proto3.TestAllTypes.Descriptor.NestedTypes[0]; }
-        }
-
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-        pbr::MessageDescriptor pb::IMessage.Descriptor {
-          get { return Descriptor; }
-        }
-
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-        public NestedMessage() {
-          OnConstruction();
-        }
-
-        partial void OnConstruction();
-
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-        public NestedMessage(NestedMessage other) : this() {
-          a_ = other.a_;
-          Corecursive = other.corecursive_ != null ? other.Corecursive.Clone() : null;
-        }
-
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-        public NestedMessage Clone() {
-          return new NestedMessage(this);
-        }
-
-        /// <summary>Field number for the "a" field.</summary>
-        public const int AFieldNumber = 1;
-        private int a_;
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-        public int A {
-          get { return a_; }
-          set {
-            a_ = value;
-          }
-        }
-
-        /// <summary>Field number for the "corecursive" field.</summary>
-        public const int CorecursiveFieldNumber = 2;
-        private global::ProtobufTestMessages.Proto3.TestAllTypes corecursive_;
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-        public global::ProtobufTestMessages.Proto3.TestAllTypes Corecursive {
-          get { return corecursive_; }
-          set {
-            corecursive_ = value;
-          }
-        }
-
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-        public override bool Equals(object other) {
-          return Equals(other as NestedMessage);
-        }
-
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-        public bool Equals(NestedMessage other) {
-          if (ReferenceEquals(other, null)) {
-            return false;
-          }
-          if (ReferenceEquals(other, this)) {
-            return true;
-          }
-          if (A != other.A) return false;
-          if (!object.Equals(Corecursive, other.Corecursive)) return false;
-          return true;
-        }
-
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-        public override int GetHashCode() {
-          int hash = 1;
-          if (A != 0) hash ^= A.GetHashCode();
-          if (corecursive_ != null) hash ^= Corecursive.GetHashCode();
-          return hash;
-        }
-
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-        public override string ToString() {
-          return pb::JsonFormatter.ToDiagnosticString(this);
-        }
-
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-        public void WriteTo(pb::CodedOutputStream output) {
-          if (A != 0) {
-            output.WriteRawTag(8);
-            output.WriteInt32(A);
-          }
-          if (corecursive_ != null) {
-            output.WriteRawTag(18);
-            output.WriteMessage(Corecursive);
-          }
-        }
-
-        #if !NET35
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-        public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
-          if (A != 0) {
-            await output.WriteRawTagAsync(8, cancellationToken).ConfigureAwait(false);
-            await output.WriteInt32Async(A, cancellationToken).ConfigureAwait(false);
-          }
-          if (corecursive_ != null) {
-            await output.WriteRawTagAsync(18, cancellationToken).ConfigureAwait(false);
-            await output.WriteMessageAsync(Corecursive, cancellationToken).ConfigureAwait(false);
-          }
-        }
-        #endif
-
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-        public int CalculateSize() {
-          int size = 0;
-          if (A != 0) {
-            size += 1 + pb::CodedOutputStream.ComputeInt32Size(A);
-          }
-          if (corecursive_ != null) {
-            size += 1 + pb::CodedOutputStream.ComputeMessageSize(Corecursive);
-          }
-          return size;
-        }
-
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-        public void MergeFrom(NestedMessage other) {
-          if (other == null) {
-            return;
-          }
-          if (other.A != 0) {
-            A = other.A;
-          }
-          if (other.corecursive_ != null) {
-            if (corecursive_ == null) {
-              corecursive_ = new global::ProtobufTestMessages.Proto3.TestAllTypes();
-            }
-            Corecursive.MergeFrom(other.Corecursive);
-          }
-        }
-
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-        public void MergeFrom(pb::CodedInputStream input) {
-          uint tag;
-          while ((tag = input.ReadTag()) != 0) {
-            switch(tag) {
-              default:
-                input.SkipLastField();
-                break;
-              case 8: {
-                A = input.ReadInt32();
-                break;
-              }
-              case 18: {
-                if (corecursive_ == null) {
-                  corecursive_ = new global::ProtobufTestMessages.Proto3.TestAllTypes();
-                }
-                input.ReadMessage(corecursive_);
-                break;
-              }
-            }
-          }
-        }
-
-        #if !NET35
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-        public async stt::Task MergeFromAsync(pb::CodedInputStream input, st::CancellationToken cancellationToken) {
-          uint tag;
-          while ((tag = await input.ReadTagAsync(cancellationToken).ConfigureAwait(false)) != 0) {
-            switch(tag) {
-              default:
-                await input.SkipLastFieldAsync(cancellationToken).ConfigureAwait(false);
-                break;
-              case 8: {
-                A = await input.ReadInt32Async(cancellationToken).ConfigureAwait(false);
-                break;
-              }
-              case 18: {
-                if (corecursive_ == null) {
-                  corecursive_ = new global::ProtobufTestMessages.Proto3.TestAllTypes();
-                }
-                await input.ReadMessageAsync(corecursive_, cancellationToken).ConfigureAwait(false);
-                break;
-              }
-            }
-          }
-        }
-        #endif
-
-      }
-
-    }
-    #endregion
 
   }
-
-  #if !NET35
-  public sealed partial class ForeignMessage : pb::IAsyncMessage<ForeignMessage> {
-  #else
-  public sealed partial class ForeignMessage : pb::IMessage<ForeignMessage> {
   #endif
+
+  public sealed partial class ForeignMessage : pb::IMessage<ForeignMessage> {
+    #if PROTOBUF_NO_ASYNC
     private static readonly pb::MessageParser<ForeignMessage> _parser = new pb::MessageParser<ForeignMessage>(() => new ForeignMessage());
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pb::MessageParser<ForeignMessage> Parser { get { return _parser; } }
+    #endif
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
@@ -4572,16 +4576,6 @@ namespace ProtobufTestMessages.Proto3 {
       }
     }
 
-    #if !NET35
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
-      if (C != 0) {
-        await output.WriteRawTagAsync(8, cancellationToken).ConfigureAwait(false);
-        await output.WriteInt32Async(C, cancellationToken).ConfigureAwait(false);
-      }
-    }
-    #endif
-
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
@@ -4617,7 +4611,22 @@ namespace ProtobufTestMessages.Proto3 {
       }
     }
 
-    #if !NET35
+  }
+
+  #if !PROTOBUF_NO_ASYNC
+  public sealed partial class ForeignMessage : pb::IAsyncMessage<ForeignMessage> {
+    private static readonly pb::AsyncMessageParser<ForeignMessage> _parser = new pb::AsyncMessageParser<ForeignMessage>(() => new ForeignMessage());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::AsyncMessageParser<ForeignMessage> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
+      if (C != 0) {
+        await output.WriteRawTagAsync(8, cancellationToken).ConfigureAwait(false);
+        await output.WriteInt32Async(C, cancellationToken).ConfigureAwait(false);
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public async stt::Task MergeFromAsync(pb::CodedInputStream input, st::CancellationToken cancellationToken) {
       uint tag;
@@ -4633,9 +4642,9 @@ namespace ProtobufTestMessages.Proto3 {
         }
       }
     }
-    #endif
 
   }
+  #endif
 
   #endregion
 

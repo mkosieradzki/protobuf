@@ -7,7 +7,7 @@ using pb = global::Google.Protobuf;
 using pbc = global::Google.Protobuf.Collections;
 using pbr = global::Google.Protobuf.Reflection;
 using scg = global::System.Collections.Generic;
-#if !NET35
+#if !PROTOBUF_NO_ASYNC
 using st = global::System.Threading;
 using stt = global::System.Threading.Tasks;
 #endif
@@ -84,7 +84,7 @@ namespace Google.Protobuf.Reflection {
             "ASgJEhMKC291dHB1dF90eXBlGAMgASgJEi8KB29wdGlvbnMYBCABKAsyHi5n",
             "b29nbGUucHJvdG9idWYuTWV0aG9kT3B0aW9ucxIfChBjbGllbnRfc3RyZWFt",
             "aW5nGAUgASgIOgVmYWxzZRIfChBzZXJ2ZXJfc3RyZWFtaW5nGAYgASgIOgVm",
-            "YWxzZSLRBQoLRmlsZU9wdGlvbnMSFAoMamF2YV9wYWNrYWdlGAEgASgJEhwK",
+            "YWxzZSK0BQoLRmlsZU9wdGlvbnMSFAoMamF2YV9wYWNrYWdlGAEgASgJEhwK",
             "FGphdmFfb3V0ZXJfY2xhc3NuYW1lGAggASgJEiIKE2phdmFfbXVsdGlwbGVf",
             "ZmlsZXMYCiABKAg6BWZhbHNlEikKHWphdmFfZ2VuZXJhdGVfZXF1YWxzX2Fu",
             "ZF9oYXNoGBQgASgIQgIYARIlChZqYXZhX3N0cmluZ19jaGVja191dGY4GBsg",
@@ -96,61 +96,61 @@ namespace Google.Protobuf.Reflection {
             "ZBgXIAEoCDoFZmFsc2USHwoQY2NfZW5hYmxlX2FyZW5hcxgfIAEoCDoFZmFs",
             "c2USGQoRb2JqY19jbGFzc19wcmVmaXgYJCABKAkSGAoQY3NoYXJwX25hbWVz",
             "cGFjZRglIAEoCRIUCgxzd2lmdF9wcmVmaXgYJyABKAkSGAoQcGhwX2NsYXNz",
-            "X3ByZWZpeBgoIAEoCRIbCgxjc2hhcnBfYXN5bmMYKSABKAg6BWZhbHNlEkMK",
+            "X3ByZWZpeBgoIAEoCRJDChR1bmludGVycHJldGVkX29wdGlvbhjnByADKAsy",
+            "JC5nb29nbGUucHJvdG9idWYuVW5pbnRlcnByZXRlZE9wdGlvbiI6CgxPcHRp",
+            "bWl6ZU1vZGUSCQoFU1BFRUQQARINCglDT0RFX1NJWkUQAhIQCgxMSVRFX1JV",
+            "TlRJTUUQAyoJCOgHEICAgIACSgQIJhAnIvIBCg5NZXNzYWdlT3B0aW9ucxIm",
+            "ChdtZXNzYWdlX3NldF93aXJlX2Zvcm1hdBgBIAEoCDoFZmFsc2USLgofbm9f",
+            "c3RhbmRhcmRfZGVzY3JpcHRvcl9hY2Nlc3NvchgCIAEoCDoFZmFsc2USGQoK",
+            "ZGVwcmVjYXRlZBgDIAEoCDoFZmFsc2USEQoJbWFwX2VudHJ5GAcgASgIEkMK",
             "FHVuaW50ZXJwcmV0ZWRfb3B0aW9uGOcHIAMoCzIkLmdvb2dsZS5wcm90b2J1",
-            "Zi5VbmludGVycHJldGVkT3B0aW9uIjoKDE9wdGltaXplTW9kZRIJCgVTUEVF",
-            "RBABEg0KCUNPREVfU0laRRACEhAKDExJVEVfUlVOVElNRRADKgkI6AcQgICA",
-            "gAJKBAgmECci8gEKDk1lc3NhZ2VPcHRpb25zEiYKF21lc3NhZ2Vfc2V0X3dp",
-            "cmVfZm9ybWF0GAEgASgIOgVmYWxzZRIuCh9ub19zdGFuZGFyZF9kZXNjcmlw",
-            "dG9yX2FjY2Vzc29yGAIgASgIOgVmYWxzZRIZCgpkZXByZWNhdGVkGAMgASgI",
-            "OgVmYWxzZRIRCgltYXBfZW50cnkYByABKAgSQwoUdW5pbnRlcnByZXRlZF9v",
-            "cHRpb24Y5wcgAygLMiQuZ29vZ2xlLnByb3RvYnVmLlVuaW50ZXJwcmV0ZWRP",
-            "cHRpb24qCQjoBxCAgICAAkoECAgQCUoECAkQCiKeAwoMRmllbGRPcHRpb25z",
-            "EjoKBWN0eXBlGAEgASgOMiMuZ29vZ2xlLnByb3RvYnVmLkZpZWxkT3B0aW9u",
-            "cy5DVHlwZToGU1RSSU5HEg4KBnBhY2tlZBgCIAEoCBI/CgZqc3R5cGUYBiAB",
-            "KA4yJC5nb29nbGUucHJvdG9idWYuRmllbGRPcHRpb25zLkpTVHlwZToJSlNf",
-            "Tk9STUFMEhMKBGxhenkYBSABKAg6BWZhbHNlEhkKCmRlcHJlY2F0ZWQYAyAB",
-            "KAg6BWZhbHNlEhMKBHdlYWsYCiABKAg6BWZhbHNlEkMKFHVuaW50ZXJwcmV0",
-            "ZWRfb3B0aW9uGOcHIAMoCzIkLmdvb2dsZS5wcm90b2J1Zi5VbmludGVycHJl",
-            "dGVkT3B0aW9uIi8KBUNUeXBlEgoKBlNUUklORxAAEggKBENPUkQQARIQCgxT",
-            "VFJJTkdfUElFQ0UQAiI1CgZKU1R5cGUSDQoJSlNfTk9STUFMEAASDQoJSlNf",
-            "U1RSSU5HEAESDQoJSlNfTlVNQkVSEAIqCQjoBxCAgICAAkoECAQQBSJeCgxP",
-            "bmVvZk9wdGlvbnMSQwoUdW5pbnRlcnByZXRlZF9vcHRpb24Y5wcgAygLMiQu",
-            "Z29vZ2xlLnByb3RvYnVmLlVuaW50ZXJwcmV0ZWRPcHRpb24qCQjoBxCAgICA",
-            "AiKTAQoLRW51bU9wdGlvbnMSEwoLYWxsb3dfYWxpYXMYAiABKAgSGQoKZGVw",
-            "cmVjYXRlZBgDIAEoCDoFZmFsc2USQwoUdW5pbnRlcnByZXRlZF9vcHRpb24Y",
-            "5wcgAygLMiQuZ29vZ2xlLnByb3RvYnVmLlVuaW50ZXJwcmV0ZWRPcHRpb24q",
-            "CQjoBxCAgICAAkoECAUQBiJ9ChBFbnVtVmFsdWVPcHRpb25zEhkKCmRlcHJl",
-            "Y2F0ZWQYASABKAg6BWZhbHNlEkMKFHVuaW50ZXJwcmV0ZWRfb3B0aW9uGOcH",
-            "IAMoCzIkLmdvb2dsZS5wcm90b2J1Zi5VbmludGVycHJldGVkT3B0aW9uKgkI",
-            "6AcQgICAgAIiewoOU2VydmljZU9wdGlvbnMSGQoKZGVwcmVjYXRlZBghIAEo",
-            "CDoFZmFsc2USQwoUdW5pbnRlcnByZXRlZF9vcHRpb24Y5wcgAygLMiQuZ29v",
-            "Z2xlLnByb3RvYnVmLlVuaW50ZXJwcmV0ZWRPcHRpb24qCQjoBxCAgICAAiKt",
-            "AgoNTWV0aG9kT3B0aW9ucxIZCgpkZXByZWNhdGVkGCEgASgIOgVmYWxzZRJf",
-            "ChFpZGVtcG90ZW5jeV9sZXZlbBgiIAEoDjIvLmdvb2dsZS5wcm90b2J1Zi5N",
-            "ZXRob2RPcHRpb25zLklkZW1wb3RlbmN5TGV2ZWw6E0lERU1QT1RFTkNZX1VO",
-            "S05PV04SQwoUdW5pbnRlcnByZXRlZF9vcHRpb24Y5wcgAygLMiQuZ29vZ2xl",
-            "LnByb3RvYnVmLlVuaW50ZXJwcmV0ZWRPcHRpb24iUAoQSWRlbXBvdGVuY3lM",
-            "ZXZlbBIXChNJREVNUE9URU5DWV9VTktOT1dOEAASEwoPTk9fU0lERV9FRkZF",
-            "Q1RTEAESDgoKSURFTVBPVEVOVBACKgkI6AcQgICAgAIingIKE1VuaW50ZXJw",
-            "cmV0ZWRPcHRpb24SOwoEbmFtZRgCIAMoCzItLmdvb2dsZS5wcm90b2J1Zi5V",
-            "bmludGVycHJldGVkT3B0aW9uLk5hbWVQYXJ0EhgKEGlkZW50aWZpZXJfdmFs",
-            "dWUYAyABKAkSGgoScG9zaXRpdmVfaW50X3ZhbHVlGAQgASgEEhoKEm5lZ2F0",
-            "aXZlX2ludF92YWx1ZRgFIAEoAxIUCgxkb3VibGVfdmFsdWUYBiABKAESFAoM",
-            "c3RyaW5nX3ZhbHVlGAcgASgMEhcKD2FnZ3JlZ2F0ZV92YWx1ZRgIIAEoCRoz",
-            "CghOYW1lUGFydBIRCgluYW1lX3BhcnQYASACKAkSFAoMaXNfZXh0ZW5zaW9u",
-            "GAIgAigIItUBCg5Tb3VyY2VDb2RlSW5mbxI6Cghsb2NhdGlvbhgBIAMoCzIo",
-            "Lmdvb2dsZS5wcm90b2J1Zi5Tb3VyY2VDb2RlSW5mby5Mb2NhdGlvbhqGAQoI",
-            "TG9jYXRpb24SEAoEcGF0aBgBIAMoBUICEAESEAoEc3BhbhgCIAMoBUICEAES",
-            "GAoQbGVhZGluZ19jb21tZW50cxgDIAEoCRIZChF0cmFpbGluZ19jb21tZW50",
-            "cxgEIAEoCRIhChlsZWFkaW5nX2RldGFjaGVkX2NvbW1lbnRzGAYgAygJIqcB",
-            "ChFHZW5lcmF0ZWRDb2RlSW5mbxJBCgphbm5vdGF0aW9uGAEgAygLMi0uZ29v",
-            "Z2xlLnByb3RvYnVmLkdlbmVyYXRlZENvZGVJbmZvLkFubm90YXRpb24aTwoK",
-            "QW5ub3RhdGlvbhIQCgRwYXRoGAEgAygFQgIQARITCgtzb3VyY2VfZmlsZRgC",
-            "IAEoCRINCgViZWdpbhgDIAEoBRILCgNlbmQYBCABKAVCjAEKE2NvbS5nb29n",
-            "bGUucHJvdG9idWZCEERlc2NyaXB0b3JQcm90b3NIAVo+Z2l0aHViLmNvbS9n",
-            "b2xhbmcvcHJvdG9idWYvcHJvdG9jLWdlbi1nby9kZXNjcmlwdG9yO2Rlc2Ny",
-            "aXB0b3KiAgNHUEKqAhpHb29nbGUuUHJvdG9idWYuUmVmbGVjdGlvbg=="));
+            "Zi5VbmludGVycHJldGVkT3B0aW9uKgkI6AcQgICAgAJKBAgIEAlKBAgJEAoi",
+            "ngMKDEZpZWxkT3B0aW9ucxI6CgVjdHlwZRgBIAEoDjIjLmdvb2dsZS5wcm90",
+            "b2J1Zi5GaWVsZE9wdGlvbnMuQ1R5cGU6BlNUUklORxIOCgZwYWNrZWQYAiAB",
+            "KAgSPwoGanN0eXBlGAYgASgOMiQuZ29vZ2xlLnByb3RvYnVmLkZpZWxkT3B0",
+            "aW9ucy5KU1R5cGU6CUpTX05PUk1BTBITCgRsYXp5GAUgASgIOgVmYWxzZRIZ",
+            "CgpkZXByZWNhdGVkGAMgASgIOgVmYWxzZRITCgR3ZWFrGAogASgIOgVmYWxz",
+            "ZRJDChR1bmludGVycHJldGVkX29wdGlvbhjnByADKAsyJC5nb29nbGUucHJv",
+            "dG9idWYuVW5pbnRlcnByZXRlZE9wdGlvbiIvCgVDVHlwZRIKCgZTVFJJTkcQ",
+            "ABIICgRDT1JEEAESEAoMU1RSSU5HX1BJRUNFEAIiNQoGSlNUeXBlEg0KCUpT",
+            "X05PUk1BTBAAEg0KCUpTX1NUUklORxABEg0KCUpTX05VTUJFUhACKgkI6AcQ",
+            "gICAgAJKBAgEEAUiXgoMT25lb2ZPcHRpb25zEkMKFHVuaW50ZXJwcmV0ZWRf",
+            "b3B0aW9uGOcHIAMoCzIkLmdvb2dsZS5wcm90b2J1Zi5VbmludGVycHJldGVk",
+            "T3B0aW9uKgkI6AcQgICAgAIikwEKC0VudW1PcHRpb25zEhMKC2FsbG93X2Fs",
+            "aWFzGAIgASgIEhkKCmRlcHJlY2F0ZWQYAyABKAg6BWZhbHNlEkMKFHVuaW50",
+            "ZXJwcmV0ZWRfb3B0aW9uGOcHIAMoCzIkLmdvb2dsZS5wcm90b2J1Zi5Vbmlu",
+            "dGVycHJldGVkT3B0aW9uKgkI6AcQgICAgAJKBAgFEAYifQoQRW51bVZhbHVl",
+            "T3B0aW9ucxIZCgpkZXByZWNhdGVkGAEgASgIOgVmYWxzZRJDChR1bmludGVy",
+            "cHJldGVkX29wdGlvbhjnByADKAsyJC5nb29nbGUucHJvdG9idWYuVW5pbnRl",
+            "cnByZXRlZE9wdGlvbioJCOgHEICAgIACInsKDlNlcnZpY2VPcHRpb25zEhkK",
+            "CmRlcHJlY2F0ZWQYISABKAg6BWZhbHNlEkMKFHVuaW50ZXJwcmV0ZWRfb3B0",
+            "aW9uGOcHIAMoCzIkLmdvb2dsZS5wcm90b2J1Zi5VbmludGVycHJldGVkT3B0",
+            "aW9uKgkI6AcQgICAgAIirQIKDU1ldGhvZE9wdGlvbnMSGQoKZGVwcmVjYXRl",
+            "ZBghIAEoCDoFZmFsc2USXwoRaWRlbXBvdGVuY3lfbGV2ZWwYIiABKA4yLy5n",
+            "b29nbGUucHJvdG9idWYuTWV0aG9kT3B0aW9ucy5JZGVtcG90ZW5jeUxldmVs",
+            "OhNJREVNUE9URU5DWV9VTktOT1dOEkMKFHVuaW50ZXJwcmV0ZWRfb3B0aW9u",
+            "GOcHIAMoCzIkLmdvb2dsZS5wcm90b2J1Zi5VbmludGVycHJldGVkT3B0aW9u",
+            "IlAKEElkZW1wb3RlbmN5TGV2ZWwSFwoTSURFTVBPVEVOQ1lfVU5LTk9XThAA",
+            "EhMKD05PX1NJREVfRUZGRUNUUxABEg4KCklERU1QT1RFTlQQAioJCOgHEICA",
+            "gIACIp4CChNVbmludGVycHJldGVkT3B0aW9uEjsKBG5hbWUYAiADKAsyLS5n",
+            "b29nbGUucHJvdG9idWYuVW5pbnRlcnByZXRlZE9wdGlvbi5OYW1lUGFydBIY",
+            "ChBpZGVudGlmaWVyX3ZhbHVlGAMgASgJEhoKEnBvc2l0aXZlX2ludF92YWx1",
+            "ZRgEIAEoBBIaChJuZWdhdGl2ZV9pbnRfdmFsdWUYBSABKAMSFAoMZG91Ymxl",
+            "X3ZhbHVlGAYgASgBEhQKDHN0cmluZ192YWx1ZRgHIAEoDBIXCg9hZ2dyZWdh",
+            "dGVfdmFsdWUYCCABKAkaMwoITmFtZVBhcnQSEQoJbmFtZV9wYXJ0GAEgAigJ",
+            "EhQKDGlzX2V4dGVuc2lvbhgCIAIoCCLVAQoOU291cmNlQ29kZUluZm8SOgoI",
+            "bG9jYXRpb24YASADKAsyKC5nb29nbGUucHJvdG9idWYuU291cmNlQ29kZUlu",
+            "Zm8uTG9jYXRpb24ahgEKCExvY2F0aW9uEhAKBHBhdGgYASADKAVCAhABEhAK",
+            "BHNwYW4YAiADKAVCAhABEhgKEGxlYWRpbmdfY29tbWVudHMYAyABKAkSGQoR",
+            "dHJhaWxpbmdfY29tbWVudHMYBCABKAkSIQoZbGVhZGluZ19kZXRhY2hlZF9j",
+            "b21tZW50cxgGIAMoCSKnAQoRR2VuZXJhdGVkQ29kZUluZm8SQQoKYW5ub3Rh",
+            "dGlvbhgBIAMoCzItLmdvb2dsZS5wcm90b2J1Zi5HZW5lcmF0ZWRDb2RlSW5m",
+            "by5Bbm5vdGF0aW9uGk8KCkFubm90YXRpb24SEAoEcGF0aBgBIAMoBUICEAES",
+            "EwoLc291cmNlX2ZpbGUYAiABKAkSDQoFYmVnaW4YAyABKAUSCwoDZW5kGAQg",
+            "ASgFQowBChNjb20uZ29vZ2xlLnByb3RvYnVmQhBEZXNjcmlwdG9yUHJvdG9z",
+            "SAFaPmdpdGh1Yi5jb20vZ29sYW5nL3Byb3RvYnVmL3Byb3RvYy1nZW4tZ28v",
+            "ZGVzY3JpcHRvcjtkZXNjcmlwdG9yogIDR1BCqgIaR29vZ2xlLlByb3RvYnVm",
+            "LlJlZmxlY3Rpb24="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
@@ -164,7 +164,7 @@ namespace Google.Protobuf.Reflection {
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Reflection.EnumValueDescriptorProto), global::Google.Protobuf.Reflection.EnumValueDescriptorProto.Parser, new[]{ "Name", "Number", "Options" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Reflection.ServiceDescriptorProto), global::Google.Protobuf.Reflection.ServiceDescriptorProto.Parser, new[]{ "Name", "Method", "Options" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Reflection.MethodDescriptorProto), global::Google.Protobuf.Reflection.MethodDescriptorProto.Parser, new[]{ "Name", "InputType", "OutputType", "Options", "ClientStreaming", "ServerStreaming" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Reflection.FileOptions), global::Google.Protobuf.Reflection.FileOptions.Parser, new[]{ "JavaPackage", "JavaOuterClassname", "JavaMultipleFiles", "JavaGenerateEqualsAndHash", "JavaStringCheckUtf8", "OptimizeFor", "GoPackage", "CcGenericServices", "JavaGenericServices", "PyGenericServices", "Deprecated", "CcEnableArenas", "ObjcClassPrefix", "CsharpNamespace", "SwiftPrefix", "PhpClassPrefix", "CsharpAsync", "UninterpretedOption" }, null, new[]{ typeof(global::Google.Protobuf.Reflection.FileOptions.Types.OptimizeMode) }, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Reflection.FileOptions), global::Google.Protobuf.Reflection.FileOptions.Parser, new[]{ "JavaPackage", "JavaOuterClassname", "JavaMultipleFiles", "JavaGenerateEqualsAndHash", "JavaStringCheckUtf8", "OptimizeFor", "GoPackage", "CcGenericServices", "JavaGenericServices", "PyGenericServices", "Deprecated", "CcEnableArenas", "ObjcClassPrefix", "CsharpNamespace", "SwiftPrefix", "PhpClassPrefix", "UninterpretedOption" }, null, new[]{ typeof(global::Google.Protobuf.Reflection.FileOptions.Types.OptimizeMode) }, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Reflection.MessageOptions), global::Google.Protobuf.Reflection.MessageOptions.Parser, new[]{ "MessageSetWireFormat", "NoStandardDescriptorAccessor", "Deprecated", "MapEntry", "UninterpretedOption" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Reflection.FieldOptions), global::Google.Protobuf.Reflection.FieldOptions.Parser, new[]{ "Ctype", "Packed", "Jstype", "Lazy", "Deprecated", "Weak", "UninterpretedOption" }, null, new[]{ typeof(global::Google.Protobuf.Reflection.FieldOptions.Types.CType), typeof(global::Google.Protobuf.Reflection.FieldOptions.Types.JSType) }, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Reflection.OneofOptions), global::Google.Protobuf.Reflection.OneofOptions.Parser, new[]{ "UninterpretedOption" }, null, null, null),
@@ -185,14 +185,12 @@ namespace Google.Protobuf.Reflection {
   /// The protocol compiler can output a FileDescriptorSet containing the .proto
   /// files it parses.
   /// </summary>
-  #if !NET35
-  internal sealed partial class FileDescriptorSet : pb::IAsyncMessage<FileDescriptorSet> {
-  #else
   internal sealed partial class FileDescriptorSet : pb::IMessage<FileDescriptorSet> {
-  #endif
+    #if PROTOBUF_NO_ASYNC
     private static readonly pb::MessageParser<FileDescriptorSet> _parser = new pb::MessageParser<FileDescriptorSet>(() => new FileDescriptorSet());
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pb::MessageParser<FileDescriptorSet> Parser { get { return _parser; } }
+    #endif
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
@@ -224,7 +222,7 @@ namespace Google.Protobuf.Reflection {
     /// <summary>Field number for the "file" field.</summary>
     public const int FileFieldNumber = 1;
     private static readonly pb::FieldCodec<global::Google.Protobuf.Reflection.FileDescriptorProto> _repeated_file_codec
-        = pb::FieldCodec.ForAsyncMessage(10, global::Google.Protobuf.Reflection.FileDescriptorProto.Parser);
+        = pb::FieldCodec.ForMessage(10, global::Google.Protobuf.Reflection.FileDescriptorProto.Parser);
     private readonly pbc::RepeatedField<global::Google.Protobuf.Reflection.FileDescriptorProto> file_ = new pbc::RepeatedField<global::Google.Protobuf.Reflection.FileDescriptorProto>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<global::Google.Protobuf.Reflection.FileDescriptorProto> File {
@@ -265,13 +263,6 @@ namespace Google.Protobuf.Reflection {
       file_.WriteTo(output, _repeated_file_codec);
     }
 
-    #if !NET35
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
-      await file_.WriteToAsync(output, _repeated_file_codec, cancellationToken).ConfigureAwait(false);
-    }
-    #endif
-
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
@@ -303,7 +294,19 @@ namespace Google.Protobuf.Reflection {
       }
     }
 
-    #if !NET35
+  }
+
+  #if !PROTOBUF_NO_ASYNC
+  internal sealed partial class FileDescriptorSet : pb::IAsyncMessage<FileDescriptorSet> {
+    private static readonly pb::AsyncMessageParser<FileDescriptorSet> _parser = new pb::AsyncMessageParser<FileDescriptorSet>(() => new FileDescriptorSet());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::AsyncMessageParser<FileDescriptorSet> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
+      await file_.WriteToAsync(output, _repeated_file_codec, cancellationToken).ConfigureAwait(false);
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public async stt::Task MergeFromAsync(pb::CodedInputStream input, st::CancellationToken cancellationToken) {
       uint tag;
@@ -319,21 +322,19 @@ namespace Google.Protobuf.Reflection {
         }
       }
     }
-    #endif
 
   }
+  #endif
 
   /// <summary>
   /// Describes a complete .proto file.
   /// </summary>
-  #if !NET35
-  internal sealed partial class FileDescriptorProto : pb::IAsyncMessage<FileDescriptorProto> {
-  #else
   internal sealed partial class FileDescriptorProto : pb::IMessage<FileDescriptorProto> {
-  #endif
+    #if PROTOBUF_NO_ASYNC
     private static readonly pb::MessageParser<FileDescriptorProto> _parser = new pb::MessageParser<FileDescriptorProto>(() => new FileDescriptorProto());
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pb::MessageParser<FileDescriptorProto> Parser { get { return _parser; } }
+    #endif
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
@@ -444,7 +445,7 @@ namespace Google.Protobuf.Reflection {
     /// <summary>Field number for the "message_type" field.</summary>
     public const int MessageTypeFieldNumber = 4;
     private static readonly pb::FieldCodec<global::Google.Protobuf.Reflection.DescriptorProto> _repeated_messageType_codec
-        = pb::FieldCodec.ForAsyncMessage(34, global::Google.Protobuf.Reflection.DescriptorProto.Parser);
+        = pb::FieldCodec.ForMessage(34, global::Google.Protobuf.Reflection.DescriptorProto.Parser);
     private readonly pbc::RepeatedField<global::Google.Protobuf.Reflection.DescriptorProto> messageType_ = new pbc::RepeatedField<global::Google.Protobuf.Reflection.DescriptorProto>();
     /// <summary>
     /// All top-level definitions in this file.
@@ -457,7 +458,7 @@ namespace Google.Protobuf.Reflection {
     /// <summary>Field number for the "enum_type" field.</summary>
     public const int EnumTypeFieldNumber = 5;
     private static readonly pb::FieldCodec<global::Google.Protobuf.Reflection.EnumDescriptorProto> _repeated_enumType_codec
-        = pb::FieldCodec.ForAsyncMessage(42, global::Google.Protobuf.Reflection.EnumDescriptorProto.Parser);
+        = pb::FieldCodec.ForMessage(42, global::Google.Protobuf.Reflection.EnumDescriptorProto.Parser);
     private readonly pbc::RepeatedField<global::Google.Protobuf.Reflection.EnumDescriptorProto> enumType_ = new pbc::RepeatedField<global::Google.Protobuf.Reflection.EnumDescriptorProto>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<global::Google.Protobuf.Reflection.EnumDescriptorProto> EnumType {
@@ -467,7 +468,7 @@ namespace Google.Protobuf.Reflection {
     /// <summary>Field number for the "service" field.</summary>
     public const int ServiceFieldNumber = 6;
     private static readonly pb::FieldCodec<global::Google.Protobuf.Reflection.ServiceDescriptorProto> _repeated_service_codec
-        = pb::FieldCodec.ForAsyncMessage(50, global::Google.Protobuf.Reflection.ServiceDescriptorProto.Parser);
+        = pb::FieldCodec.ForMessage(50, global::Google.Protobuf.Reflection.ServiceDescriptorProto.Parser);
     private readonly pbc::RepeatedField<global::Google.Protobuf.Reflection.ServiceDescriptorProto> service_ = new pbc::RepeatedField<global::Google.Protobuf.Reflection.ServiceDescriptorProto>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<global::Google.Protobuf.Reflection.ServiceDescriptorProto> Service {
@@ -477,7 +478,7 @@ namespace Google.Protobuf.Reflection {
     /// <summary>Field number for the "extension" field.</summary>
     public const int ExtensionFieldNumber = 7;
     private static readonly pb::FieldCodec<global::Google.Protobuf.Reflection.FieldDescriptorProto> _repeated_extension_codec
-        = pb::FieldCodec.ForAsyncMessage(58, global::Google.Protobuf.Reflection.FieldDescriptorProto.Parser);
+        = pb::FieldCodec.ForMessage(58, global::Google.Protobuf.Reflection.FieldDescriptorProto.Parser);
     private readonly pbc::RepeatedField<global::Google.Protobuf.Reflection.FieldDescriptorProto> extension_ = new pbc::RepeatedField<global::Google.Protobuf.Reflection.FieldDescriptorProto>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<global::Google.Protobuf.Reflection.FieldDescriptorProto> Extension {
@@ -608,39 +609,6 @@ namespace Google.Protobuf.Reflection {
         output.WriteString(Syntax);
       }
     }
-
-    #if !NET35
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
-      if (Name.Length != 0) {
-        await output.WriteRawTagAsync(10, cancellationToken).ConfigureAwait(false);
-        await output.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
-      }
-      if (Package.Length != 0) {
-        await output.WriteRawTagAsync(18, cancellationToken).ConfigureAwait(false);
-        await output.WriteStringAsync(Package, cancellationToken).ConfigureAwait(false);
-      }
-      await dependency_.WriteToAsync(output, _repeated_dependency_codec, cancellationToken).ConfigureAwait(false);
-      await messageType_.WriteToAsync(output, _repeated_messageType_codec, cancellationToken).ConfigureAwait(false);
-      await enumType_.WriteToAsync(output, _repeated_enumType_codec, cancellationToken).ConfigureAwait(false);
-      await service_.WriteToAsync(output, _repeated_service_codec, cancellationToken).ConfigureAwait(false);
-      await extension_.WriteToAsync(output, _repeated_extension_codec, cancellationToken).ConfigureAwait(false);
-      if (options_ != null) {
-        await output.WriteRawTagAsync(66, cancellationToken).ConfigureAwait(false);
-        await output.WriteMessageAsync(Options, cancellationToken).ConfigureAwait(false);
-      }
-      if (sourceCodeInfo_ != null) {
-        await output.WriteRawTagAsync(74, cancellationToken).ConfigureAwait(false);
-        await output.WriteMessageAsync(SourceCodeInfo, cancellationToken).ConfigureAwait(false);
-      }
-      await publicDependency_.WriteToAsync(output, _repeated_publicDependency_codec, cancellationToken).ConfigureAwait(false);
-      await weakDependency_.WriteToAsync(output, _repeated_weakDependency_codec, cancellationToken).ConfigureAwait(false);
-      if (Syntax.Length != 0) {
-        await output.WriteRawTagAsync(98, cancellationToken).ConfigureAwait(false);
-        await output.WriteStringAsync(Syntax, cancellationToken).ConfigureAwait(false);
-      }
-    }
-    #endif
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
@@ -773,7 +741,45 @@ namespace Google.Protobuf.Reflection {
       }
     }
 
-    #if !NET35
+  }
+
+  #if !PROTOBUF_NO_ASYNC
+  internal sealed partial class FileDescriptorProto : pb::IAsyncMessage<FileDescriptorProto> {
+    private static readonly pb::AsyncMessageParser<FileDescriptorProto> _parser = new pb::AsyncMessageParser<FileDescriptorProto>(() => new FileDescriptorProto());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::AsyncMessageParser<FileDescriptorProto> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
+      if (Name.Length != 0) {
+        await output.WriteRawTagAsync(10, cancellationToken).ConfigureAwait(false);
+        await output.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
+      }
+      if (Package.Length != 0) {
+        await output.WriteRawTagAsync(18, cancellationToken).ConfigureAwait(false);
+        await output.WriteStringAsync(Package, cancellationToken).ConfigureAwait(false);
+      }
+      await dependency_.WriteToAsync(output, _repeated_dependency_codec, cancellationToken).ConfigureAwait(false);
+      await messageType_.WriteToAsync(output, _repeated_messageType_codec, cancellationToken).ConfigureAwait(false);
+      await enumType_.WriteToAsync(output, _repeated_enumType_codec, cancellationToken).ConfigureAwait(false);
+      await service_.WriteToAsync(output, _repeated_service_codec, cancellationToken).ConfigureAwait(false);
+      await extension_.WriteToAsync(output, _repeated_extension_codec, cancellationToken).ConfigureAwait(false);
+      if (options_ != null) {
+        await output.WriteRawTagAsync(66, cancellationToken).ConfigureAwait(false);
+        await output.WriteMessageAsync(Options, cancellationToken).ConfigureAwait(false);
+      }
+      if (sourceCodeInfo_ != null) {
+        await output.WriteRawTagAsync(74, cancellationToken).ConfigureAwait(false);
+        await output.WriteMessageAsync(SourceCodeInfo, cancellationToken).ConfigureAwait(false);
+      }
+      await publicDependency_.WriteToAsync(output, _repeated_publicDependency_codec, cancellationToken).ConfigureAwait(false);
+      await weakDependency_.WriteToAsync(output, _repeated_weakDependency_codec, cancellationToken).ConfigureAwait(false);
+      if (Syntax.Length != 0) {
+        await output.WriteRawTagAsync(98, cancellationToken).ConfigureAwait(false);
+        await output.WriteStringAsync(Syntax, cancellationToken).ConfigureAwait(false);
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public async stt::Task MergeFromAsync(pb::CodedInputStream input, st::CancellationToken cancellationToken) {
       uint tag;
@@ -841,21 +847,19 @@ namespace Google.Protobuf.Reflection {
         }
       }
     }
-    #endif
 
   }
+  #endif
 
   /// <summary>
   /// Describes a message type.
   /// </summary>
-  #if !NET35
-  internal sealed partial class DescriptorProto : pb::IAsyncMessage<DescriptorProto> {
-  #else
   internal sealed partial class DescriptorProto : pb::IMessage<DescriptorProto> {
-  #endif
+    #if PROTOBUF_NO_ASYNC
     private static readonly pb::MessageParser<DescriptorProto> _parser = new pb::MessageParser<DescriptorProto>(() => new DescriptorProto());
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pb::MessageParser<DescriptorProto> Parser { get { return _parser; } }
+    #endif
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
@@ -907,7 +911,7 @@ namespace Google.Protobuf.Reflection {
     /// <summary>Field number for the "field" field.</summary>
     public const int FieldFieldNumber = 2;
     private static readonly pb::FieldCodec<global::Google.Protobuf.Reflection.FieldDescriptorProto> _repeated_field_codec
-        = pb::FieldCodec.ForAsyncMessage(18, global::Google.Protobuf.Reflection.FieldDescriptorProto.Parser);
+        = pb::FieldCodec.ForMessage(18, global::Google.Protobuf.Reflection.FieldDescriptorProto.Parser);
     private readonly pbc::RepeatedField<global::Google.Protobuf.Reflection.FieldDescriptorProto> field_ = new pbc::RepeatedField<global::Google.Protobuf.Reflection.FieldDescriptorProto>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<global::Google.Protobuf.Reflection.FieldDescriptorProto> Field {
@@ -917,7 +921,7 @@ namespace Google.Protobuf.Reflection {
     /// <summary>Field number for the "extension" field.</summary>
     public const int ExtensionFieldNumber = 6;
     private static readonly pb::FieldCodec<global::Google.Protobuf.Reflection.FieldDescriptorProto> _repeated_extension_codec
-        = pb::FieldCodec.ForAsyncMessage(50, global::Google.Protobuf.Reflection.FieldDescriptorProto.Parser);
+        = pb::FieldCodec.ForMessage(50, global::Google.Protobuf.Reflection.FieldDescriptorProto.Parser);
     private readonly pbc::RepeatedField<global::Google.Protobuf.Reflection.FieldDescriptorProto> extension_ = new pbc::RepeatedField<global::Google.Protobuf.Reflection.FieldDescriptorProto>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<global::Google.Protobuf.Reflection.FieldDescriptorProto> Extension {
@@ -927,7 +931,7 @@ namespace Google.Protobuf.Reflection {
     /// <summary>Field number for the "nested_type" field.</summary>
     public const int NestedTypeFieldNumber = 3;
     private static readonly pb::FieldCodec<global::Google.Protobuf.Reflection.DescriptorProto> _repeated_nestedType_codec
-        = pb::FieldCodec.ForAsyncMessage(26, global::Google.Protobuf.Reflection.DescriptorProto.Parser);
+        = pb::FieldCodec.ForMessage(26, global::Google.Protobuf.Reflection.DescriptorProto.Parser);
     private readonly pbc::RepeatedField<global::Google.Protobuf.Reflection.DescriptorProto> nestedType_ = new pbc::RepeatedField<global::Google.Protobuf.Reflection.DescriptorProto>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<global::Google.Protobuf.Reflection.DescriptorProto> NestedType {
@@ -937,7 +941,7 @@ namespace Google.Protobuf.Reflection {
     /// <summary>Field number for the "enum_type" field.</summary>
     public const int EnumTypeFieldNumber = 4;
     private static readonly pb::FieldCodec<global::Google.Protobuf.Reflection.EnumDescriptorProto> _repeated_enumType_codec
-        = pb::FieldCodec.ForAsyncMessage(34, global::Google.Protobuf.Reflection.EnumDescriptorProto.Parser);
+        = pb::FieldCodec.ForMessage(34, global::Google.Protobuf.Reflection.EnumDescriptorProto.Parser);
     private readonly pbc::RepeatedField<global::Google.Protobuf.Reflection.EnumDescriptorProto> enumType_ = new pbc::RepeatedField<global::Google.Protobuf.Reflection.EnumDescriptorProto>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<global::Google.Protobuf.Reflection.EnumDescriptorProto> EnumType {
@@ -947,7 +951,7 @@ namespace Google.Protobuf.Reflection {
     /// <summary>Field number for the "extension_range" field.</summary>
     public const int ExtensionRangeFieldNumber = 5;
     private static readonly pb::FieldCodec<global::Google.Protobuf.Reflection.DescriptorProto.Types.ExtensionRange> _repeated_extensionRange_codec
-        = pb::FieldCodec.ForAsyncMessage(42, global::Google.Protobuf.Reflection.DescriptorProto.Types.ExtensionRange.Parser);
+        = pb::FieldCodec.ForMessage(42, global::Google.Protobuf.Reflection.DescriptorProto.Types.ExtensionRange.Parser);
     private readonly pbc::RepeatedField<global::Google.Protobuf.Reflection.DescriptorProto.Types.ExtensionRange> extensionRange_ = new pbc::RepeatedField<global::Google.Protobuf.Reflection.DescriptorProto.Types.ExtensionRange>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<global::Google.Protobuf.Reflection.DescriptorProto.Types.ExtensionRange> ExtensionRange {
@@ -957,7 +961,7 @@ namespace Google.Protobuf.Reflection {
     /// <summary>Field number for the "oneof_decl" field.</summary>
     public const int OneofDeclFieldNumber = 8;
     private static readonly pb::FieldCodec<global::Google.Protobuf.Reflection.OneofDescriptorProto> _repeated_oneofDecl_codec
-        = pb::FieldCodec.ForAsyncMessage(66, global::Google.Protobuf.Reflection.OneofDescriptorProto.Parser);
+        = pb::FieldCodec.ForMessage(66, global::Google.Protobuf.Reflection.OneofDescriptorProto.Parser);
     private readonly pbc::RepeatedField<global::Google.Protobuf.Reflection.OneofDescriptorProto> oneofDecl_ = new pbc::RepeatedField<global::Google.Protobuf.Reflection.OneofDescriptorProto>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<global::Google.Protobuf.Reflection.OneofDescriptorProto> OneofDecl {
@@ -978,7 +982,7 @@ namespace Google.Protobuf.Reflection {
     /// <summary>Field number for the "reserved_range" field.</summary>
     public const int ReservedRangeFieldNumber = 9;
     private static readonly pb::FieldCodec<global::Google.Protobuf.Reflection.DescriptorProto.Types.ReservedRange> _repeated_reservedRange_codec
-        = pb::FieldCodec.ForAsyncMessage(74, global::Google.Protobuf.Reflection.DescriptorProto.Types.ReservedRange.Parser);
+        = pb::FieldCodec.ForMessage(74, global::Google.Protobuf.Reflection.DescriptorProto.Types.ReservedRange.Parser);
     private readonly pbc::RepeatedField<global::Google.Protobuf.Reflection.DescriptorProto.Types.ReservedRange> reservedRange_ = new pbc::RepeatedField<global::Google.Protobuf.Reflection.DescriptorProto.Types.ReservedRange>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<global::Google.Protobuf.Reflection.DescriptorProto.Types.ReservedRange> ReservedRange {
@@ -1065,28 +1069,6 @@ namespace Google.Protobuf.Reflection {
       reservedRange_.WriteTo(output, _repeated_reservedRange_codec);
       reservedName_.WriteTo(output, _repeated_reservedName_codec);
     }
-
-    #if !NET35
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
-      if (Name.Length != 0) {
-        await output.WriteRawTagAsync(10, cancellationToken).ConfigureAwait(false);
-        await output.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
-      }
-      await field_.WriteToAsync(output, _repeated_field_codec, cancellationToken).ConfigureAwait(false);
-      await nestedType_.WriteToAsync(output, _repeated_nestedType_codec, cancellationToken).ConfigureAwait(false);
-      await enumType_.WriteToAsync(output, _repeated_enumType_codec, cancellationToken).ConfigureAwait(false);
-      await extensionRange_.WriteToAsync(output, _repeated_extensionRange_codec, cancellationToken).ConfigureAwait(false);
-      await extension_.WriteToAsync(output, _repeated_extension_codec, cancellationToken).ConfigureAwait(false);
-      if (options_ != null) {
-        await output.WriteRawTagAsync(58, cancellationToken).ConfigureAwait(false);
-        await output.WriteMessageAsync(Options, cancellationToken).ConfigureAwait(false);
-      }
-      await oneofDecl_.WriteToAsync(output, _repeated_oneofDecl_codec, cancellationToken).ConfigureAwait(false);
-      await reservedRange_.WriteToAsync(output, _repeated_reservedRange_codec, cancellationToken).ConfigureAwait(false);
-      await reservedName_.WriteToAsync(output, _repeated_reservedName_codec, cancellationToken).ConfigureAwait(false);
-    }
-    #endif
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
@@ -1187,75 +1169,16 @@ namespace Google.Protobuf.Reflection {
       }
     }
 
-    #if !NET35
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public async stt::Task MergeFromAsync(pb::CodedInputStream input, st::CancellationToken cancellationToken) {
-      uint tag;
-      while ((tag = await input.ReadTagAsync(cancellationToken).ConfigureAwait(false)) != 0) {
-        switch(tag) {
-          default:
-            await input.SkipLastFieldAsync(cancellationToken).ConfigureAwait(false);
-            break;
-          case 10: {
-            Name = await input.ReadStringAsync(cancellationToken).ConfigureAwait(false);
-            break;
-          }
-          case 18: {
-            await field_.AddEntriesFromAsync(input, _repeated_field_codec, cancellationToken).ConfigureAwait(false);
-            break;
-          }
-          case 26: {
-            await nestedType_.AddEntriesFromAsync(input, _repeated_nestedType_codec, cancellationToken).ConfigureAwait(false);
-            break;
-          }
-          case 34: {
-            await enumType_.AddEntriesFromAsync(input, _repeated_enumType_codec, cancellationToken).ConfigureAwait(false);
-            break;
-          }
-          case 42: {
-            await extensionRange_.AddEntriesFromAsync(input, _repeated_extensionRange_codec, cancellationToken).ConfigureAwait(false);
-            break;
-          }
-          case 50: {
-            await extension_.AddEntriesFromAsync(input, _repeated_extension_codec, cancellationToken).ConfigureAwait(false);
-            break;
-          }
-          case 58: {
-            if (options_ == null) {
-              options_ = new global::Google.Protobuf.Reflection.MessageOptions();
-            }
-            await input.ReadMessageAsync(options_, cancellationToken).ConfigureAwait(false);
-            break;
-          }
-          case 66: {
-            await oneofDecl_.AddEntriesFromAsync(input, _repeated_oneofDecl_codec, cancellationToken).ConfigureAwait(false);
-            break;
-          }
-          case 74: {
-            await reservedRange_.AddEntriesFromAsync(input, _repeated_reservedRange_codec, cancellationToken).ConfigureAwait(false);
-            break;
-          }
-          case 82: {
-            await reservedName_.AddEntriesFromAsync(input, _repeated_reservedName_codec, cancellationToken).ConfigureAwait(false);
-            break;
-          }
-        }
-      }
-    }
-    #endif
-
     #region Nested types
     /// <summary>Container for nested types declared in the DescriptorProto message type.</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static partial class Types {
-      #if !NET35
-      internal sealed partial class ExtensionRange : pb::IAsyncMessage<ExtensionRange> {
-      #else
       internal sealed partial class ExtensionRange : pb::IMessage<ExtensionRange> {
-      #endif
+        #if PROTOBUF_NO_ASYNC
         private static readonly pb::MessageParser<ExtensionRange> _parser = new pb::MessageParser<ExtensionRange>(() => new ExtensionRange());
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public static pb::MessageParser<ExtensionRange> Parser { get { return _parser; } }
+        #endif
 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public static pbr::MessageDescriptor Descriptor {
@@ -1350,20 +1273,6 @@ namespace Google.Protobuf.Reflection {
           }
         }
 
-        #if !NET35
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-        public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
-          if (Start != 0) {
-            await output.WriteRawTagAsync(8, cancellationToken).ConfigureAwait(false);
-            await output.WriteInt32Async(Start, cancellationToken).ConfigureAwait(false);
-          }
-          if (End != 0) {
-            await output.WriteRawTagAsync(16, cancellationToken).ConfigureAwait(false);
-            await output.WriteInt32Async(End, cancellationToken).ConfigureAwait(false);
-          }
-        }
-        #endif
-
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public int CalculateSize() {
           int size = 0;
@@ -1409,7 +1318,26 @@ namespace Google.Protobuf.Reflection {
           }
         }
 
-        #if !NET35
+      }
+
+      #if !PROTOBUF_NO_ASYNC
+      internal sealed partial class ExtensionRange : pb::IAsyncMessage<ExtensionRange> {
+        private static readonly pb::AsyncMessageParser<ExtensionRange> _parser = new pb::AsyncMessageParser<ExtensionRange>(() => new ExtensionRange());
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public static pb::AsyncMessageParser<ExtensionRange> Parser { get { return _parser; } }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
+          if (Start != 0) {
+            await output.WriteRawTagAsync(8, cancellationToken).ConfigureAwait(false);
+            await output.WriteInt32Async(Start, cancellationToken).ConfigureAwait(false);
+          }
+          if (End != 0) {
+            await output.WriteRawTagAsync(16, cancellationToken).ConfigureAwait(false);
+            await output.WriteInt32Async(End, cancellationToken).ConfigureAwait(false);
+          }
+        }
+
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public async stt::Task MergeFromAsync(pb::CodedInputStream input, st::CancellationToken cancellationToken) {
           uint tag;
@@ -1429,23 +1357,21 @@ namespace Google.Protobuf.Reflection {
             }
           }
         }
-        #endif
 
       }
+      #endif
 
       /// <summary>
       /// Range of reserved tag numbers. Reserved tag numbers may not be used by
       /// fields or extension ranges in the same message. Reserved ranges may
       /// not overlap.
       /// </summary>
-      #if !NET35
-      internal sealed partial class ReservedRange : pb::IAsyncMessage<ReservedRange> {
-      #else
       internal sealed partial class ReservedRange : pb::IMessage<ReservedRange> {
-      #endif
+        #if PROTOBUF_NO_ASYNC
         private static readonly pb::MessageParser<ReservedRange> _parser = new pb::MessageParser<ReservedRange>(() => new ReservedRange());
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public static pb::MessageParser<ReservedRange> Parser { get { return _parser; } }
+        #endif
 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public static pbr::MessageDescriptor Descriptor {
@@ -1546,20 +1472,6 @@ namespace Google.Protobuf.Reflection {
           }
         }
 
-        #if !NET35
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-        public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
-          if (Start != 0) {
-            await output.WriteRawTagAsync(8, cancellationToken).ConfigureAwait(false);
-            await output.WriteInt32Async(Start, cancellationToken).ConfigureAwait(false);
-          }
-          if (End != 0) {
-            await output.WriteRawTagAsync(16, cancellationToken).ConfigureAwait(false);
-            await output.WriteInt32Async(End, cancellationToken).ConfigureAwait(false);
-          }
-        }
-        #endif
-
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public int CalculateSize() {
           int size = 0;
@@ -1605,7 +1517,26 @@ namespace Google.Protobuf.Reflection {
           }
         }
 
-        #if !NET35
+      }
+
+      #if !PROTOBUF_NO_ASYNC
+      internal sealed partial class ReservedRange : pb::IAsyncMessage<ReservedRange> {
+        private static readonly pb::AsyncMessageParser<ReservedRange> _parser = new pb::AsyncMessageParser<ReservedRange>(() => new ReservedRange());
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public static pb::AsyncMessageParser<ReservedRange> Parser { get { return _parser; } }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
+          if (Start != 0) {
+            await output.WriteRawTagAsync(8, cancellationToken).ConfigureAwait(false);
+            await output.WriteInt32Async(Start, cancellationToken).ConfigureAwait(false);
+          }
+          if (End != 0) {
+            await output.WriteRawTagAsync(16, cancellationToken).ConfigureAwait(false);
+            await output.WriteInt32Async(End, cancellationToken).ConfigureAwait(false);
+          }
+        }
+
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public async stt::Task MergeFromAsync(pb::CodedInputStream input, st::CancellationToken cancellationToken) {
           uint tag;
@@ -1625,26 +1556,108 @@ namespace Google.Protobuf.Reflection {
             }
           }
         }
-        #endif
 
       }
+      #endif
 
     }
     #endregion
 
   }
 
+  #if !PROTOBUF_NO_ASYNC
+  internal sealed partial class DescriptorProto : pb::IAsyncMessage<DescriptorProto> {
+    private static readonly pb::AsyncMessageParser<DescriptorProto> _parser = new pb::AsyncMessageParser<DescriptorProto>(() => new DescriptorProto());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::AsyncMessageParser<DescriptorProto> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
+      if (Name.Length != 0) {
+        await output.WriteRawTagAsync(10, cancellationToken).ConfigureAwait(false);
+        await output.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
+      }
+      await field_.WriteToAsync(output, _repeated_field_codec, cancellationToken).ConfigureAwait(false);
+      await nestedType_.WriteToAsync(output, _repeated_nestedType_codec, cancellationToken).ConfigureAwait(false);
+      await enumType_.WriteToAsync(output, _repeated_enumType_codec, cancellationToken).ConfigureAwait(false);
+      await extensionRange_.WriteToAsync(output, _repeated_extensionRange_codec, cancellationToken).ConfigureAwait(false);
+      await extension_.WriteToAsync(output, _repeated_extension_codec, cancellationToken).ConfigureAwait(false);
+      if (options_ != null) {
+        await output.WriteRawTagAsync(58, cancellationToken).ConfigureAwait(false);
+        await output.WriteMessageAsync(Options, cancellationToken).ConfigureAwait(false);
+      }
+      await oneofDecl_.WriteToAsync(output, _repeated_oneofDecl_codec, cancellationToken).ConfigureAwait(false);
+      await reservedRange_.WriteToAsync(output, _repeated_reservedRange_codec, cancellationToken).ConfigureAwait(false);
+      await reservedName_.WriteToAsync(output, _repeated_reservedName_codec, cancellationToken).ConfigureAwait(false);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async stt::Task MergeFromAsync(pb::CodedInputStream input, st::CancellationToken cancellationToken) {
+      uint tag;
+      while ((tag = await input.ReadTagAsync(cancellationToken).ConfigureAwait(false)) != 0) {
+        switch(tag) {
+          default:
+            await input.SkipLastFieldAsync(cancellationToken).ConfigureAwait(false);
+            break;
+          case 10: {
+            Name = await input.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+            break;
+          }
+          case 18: {
+            await field_.AddEntriesFromAsync(input, _repeated_field_codec, cancellationToken).ConfigureAwait(false);
+            break;
+          }
+          case 26: {
+            await nestedType_.AddEntriesFromAsync(input, _repeated_nestedType_codec, cancellationToken).ConfigureAwait(false);
+            break;
+          }
+          case 34: {
+            await enumType_.AddEntriesFromAsync(input, _repeated_enumType_codec, cancellationToken).ConfigureAwait(false);
+            break;
+          }
+          case 42: {
+            await extensionRange_.AddEntriesFromAsync(input, _repeated_extensionRange_codec, cancellationToken).ConfigureAwait(false);
+            break;
+          }
+          case 50: {
+            await extension_.AddEntriesFromAsync(input, _repeated_extension_codec, cancellationToken).ConfigureAwait(false);
+            break;
+          }
+          case 58: {
+            if (options_ == null) {
+              options_ = new global::Google.Protobuf.Reflection.MessageOptions();
+            }
+            await input.ReadMessageAsync(options_, cancellationToken).ConfigureAwait(false);
+            break;
+          }
+          case 66: {
+            await oneofDecl_.AddEntriesFromAsync(input, _repeated_oneofDecl_codec, cancellationToken).ConfigureAwait(false);
+            break;
+          }
+          case 74: {
+            await reservedRange_.AddEntriesFromAsync(input, _repeated_reservedRange_codec, cancellationToken).ConfigureAwait(false);
+            break;
+          }
+          case 82: {
+            await reservedName_.AddEntriesFromAsync(input, _repeated_reservedName_codec, cancellationToken).ConfigureAwait(false);
+            break;
+          }
+        }
+      }
+    }
+
+  }
+  #endif
+
   /// <summary>
   /// Describes a field within a message.
   /// </summary>
-  #if !NET35
-  internal sealed partial class FieldDescriptorProto : pb::IAsyncMessage<FieldDescriptorProto> {
-  #else
   internal sealed partial class FieldDescriptorProto : pb::IMessage<FieldDescriptorProto> {
-  #endif
+    #if PROTOBUF_NO_ASYNC
     private static readonly pb::MessageParser<FieldDescriptorProto> _parser = new pb::MessageParser<FieldDescriptorProto>(() => new FieldDescriptorProto());
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pb::MessageParser<FieldDescriptorProto> Parser { get { return _parser; } }
+    #endif
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
@@ -1915,52 +1928,6 @@ namespace Google.Protobuf.Reflection {
       }
     }
 
-    #if !NET35
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
-      if (Name.Length != 0) {
-        await output.WriteRawTagAsync(10, cancellationToken).ConfigureAwait(false);
-        await output.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
-      }
-      if (Extendee.Length != 0) {
-        await output.WriteRawTagAsync(18, cancellationToken).ConfigureAwait(false);
-        await output.WriteStringAsync(Extendee, cancellationToken).ConfigureAwait(false);
-      }
-      if (Number != 0) {
-        await output.WriteRawTagAsync(24, cancellationToken).ConfigureAwait(false);
-        await output.WriteInt32Async(Number, cancellationToken).ConfigureAwait(false);
-      }
-      if (Label != 0) {
-        await output.WriteRawTagAsync(32, cancellationToken).ConfigureAwait(false);
-        await output.WriteEnumAsync((int) Label, cancellationToken).ConfigureAwait(false);
-      }
-      if (Type != 0) {
-        await output.WriteRawTagAsync(40, cancellationToken).ConfigureAwait(false);
-        await output.WriteEnumAsync((int) Type, cancellationToken).ConfigureAwait(false);
-      }
-      if (TypeName.Length != 0) {
-        await output.WriteRawTagAsync(50, cancellationToken).ConfigureAwait(false);
-        await output.WriteStringAsync(TypeName, cancellationToken).ConfigureAwait(false);
-      }
-      if (DefaultValue.Length != 0) {
-        await output.WriteRawTagAsync(58, cancellationToken).ConfigureAwait(false);
-        await output.WriteStringAsync(DefaultValue, cancellationToken).ConfigureAwait(false);
-      }
-      if (options_ != null) {
-        await output.WriteRawTagAsync(66, cancellationToken).ConfigureAwait(false);
-        await output.WriteMessageAsync(Options, cancellationToken).ConfigureAwait(false);
-      }
-      if (OneofIndex != 0) {
-        await output.WriteRawTagAsync(72, cancellationToken).ConfigureAwait(false);
-        await output.WriteInt32Async(OneofIndex, cancellationToken).ConfigureAwait(false);
-      }
-      if (JsonName.Length != 0) {
-        await output.WriteRawTagAsync(82, cancellationToken).ConfigureAwait(false);
-        await output.WriteStringAsync(JsonName, cancellationToken).ConfigureAwait(false);
-      }
-    }
-    #endif
-
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
@@ -2092,63 +2059,6 @@ namespace Google.Protobuf.Reflection {
       }
     }
 
-    #if !NET35
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public async stt::Task MergeFromAsync(pb::CodedInputStream input, st::CancellationToken cancellationToken) {
-      uint tag;
-      while ((tag = await input.ReadTagAsync(cancellationToken).ConfigureAwait(false)) != 0) {
-        switch(tag) {
-          default:
-            await input.SkipLastFieldAsync(cancellationToken).ConfigureAwait(false);
-            break;
-          case 10: {
-            Name = await input.ReadStringAsync(cancellationToken).ConfigureAwait(false);
-            break;
-          }
-          case 18: {
-            Extendee = await input.ReadStringAsync(cancellationToken).ConfigureAwait(false);
-            break;
-          }
-          case 24: {
-            Number = await input.ReadInt32Async(cancellationToken).ConfigureAwait(false);
-            break;
-          }
-          case 32: {
-            label_ = (global::Google.Protobuf.Reflection.FieldDescriptorProto.Types.Label) await input.ReadEnumAsync(cancellationToken).ConfigureAwait(false);
-            break;
-          }
-          case 40: {
-            type_ = (global::Google.Protobuf.Reflection.FieldDescriptorProto.Types.Type) await input.ReadEnumAsync(cancellationToken).ConfigureAwait(false);
-            break;
-          }
-          case 50: {
-            TypeName = await input.ReadStringAsync(cancellationToken).ConfigureAwait(false);
-            break;
-          }
-          case 58: {
-            DefaultValue = await input.ReadStringAsync(cancellationToken).ConfigureAwait(false);
-            break;
-          }
-          case 66: {
-            if (options_ == null) {
-              options_ = new global::Google.Protobuf.Reflection.FieldOptions();
-            }
-            await input.ReadMessageAsync(options_, cancellationToken).ConfigureAwait(false);
-            break;
-          }
-          case 72: {
-            OneofIndex = await input.ReadInt32Async(cancellationToken).ConfigureAwait(false);
-            break;
-          }
-          case 82: {
-            JsonName = await input.ReadStringAsync(cancellationToken).ConfigureAwait(false);
-            break;
-          }
-        }
-      }
-    }
-    #endif
-
     #region Nested types
     /// <summary>Container for nested types declared in the FieldDescriptorProto message type.</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2218,17 +2128,123 @@ namespace Google.Protobuf.Reflection {
 
   }
 
+  #if !PROTOBUF_NO_ASYNC
+  internal sealed partial class FieldDescriptorProto : pb::IAsyncMessage<FieldDescriptorProto> {
+    private static readonly pb::AsyncMessageParser<FieldDescriptorProto> _parser = new pb::AsyncMessageParser<FieldDescriptorProto>(() => new FieldDescriptorProto());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::AsyncMessageParser<FieldDescriptorProto> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
+      if (Name.Length != 0) {
+        await output.WriteRawTagAsync(10, cancellationToken).ConfigureAwait(false);
+        await output.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
+      }
+      if (Extendee.Length != 0) {
+        await output.WriteRawTagAsync(18, cancellationToken).ConfigureAwait(false);
+        await output.WriteStringAsync(Extendee, cancellationToken).ConfigureAwait(false);
+      }
+      if (Number != 0) {
+        await output.WriteRawTagAsync(24, cancellationToken).ConfigureAwait(false);
+        await output.WriteInt32Async(Number, cancellationToken).ConfigureAwait(false);
+      }
+      if (Label != 0) {
+        await output.WriteRawTagAsync(32, cancellationToken).ConfigureAwait(false);
+        await output.WriteEnumAsync((int) Label, cancellationToken).ConfigureAwait(false);
+      }
+      if (Type != 0) {
+        await output.WriteRawTagAsync(40, cancellationToken).ConfigureAwait(false);
+        await output.WriteEnumAsync((int) Type, cancellationToken).ConfigureAwait(false);
+      }
+      if (TypeName.Length != 0) {
+        await output.WriteRawTagAsync(50, cancellationToken).ConfigureAwait(false);
+        await output.WriteStringAsync(TypeName, cancellationToken).ConfigureAwait(false);
+      }
+      if (DefaultValue.Length != 0) {
+        await output.WriteRawTagAsync(58, cancellationToken).ConfigureAwait(false);
+        await output.WriteStringAsync(DefaultValue, cancellationToken).ConfigureAwait(false);
+      }
+      if (options_ != null) {
+        await output.WriteRawTagAsync(66, cancellationToken).ConfigureAwait(false);
+        await output.WriteMessageAsync(Options, cancellationToken).ConfigureAwait(false);
+      }
+      if (OneofIndex != 0) {
+        await output.WriteRawTagAsync(72, cancellationToken).ConfigureAwait(false);
+        await output.WriteInt32Async(OneofIndex, cancellationToken).ConfigureAwait(false);
+      }
+      if (JsonName.Length != 0) {
+        await output.WriteRawTagAsync(82, cancellationToken).ConfigureAwait(false);
+        await output.WriteStringAsync(JsonName, cancellationToken).ConfigureAwait(false);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async stt::Task MergeFromAsync(pb::CodedInputStream input, st::CancellationToken cancellationToken) {
+      uint tag;
+      while ((tag = await input.ReadTagAsync(cancellationToken).ConfigureAwait(false)) != 0) {
+        switch(tag) {
+          default:
+            await input.SkipLastFieldAsync(cancellationToken).ConfigureAwait(false);
+            break;
+          case 10: {
+            Name = await input.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+            break;
+          }
+          case 18: {
+            Extendee = await input.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+            break;
+          }
+          case 24: {
+            Number = await input.ReadInt32Async(cancellationToken).ConfigureAwait(false);
+            break;
+          }
+          case 32: {
+            label_ = (global::Google.Protobuf.Reflection.FieldDescriptorProto.Types.Label) await input.ReadEnumAsync(cancellationToken).ConfigureAwait(false);
+            break;
+          }
+          case 40: {
+            type_ = (global::Google.Protobuf.Reflection.FieldDescriptorProto.Types.Type) await input.ReadEnumAsync(cancellationToken).ConfigureAwait(false);
+            break;
+          }
+          case 50: {
+            TypeName = await input.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+            break;
+          }
+          case 58: {
+            DefaultValue = await input.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+            break;
+          }
+          case 66: {
+            if (options_ == null) {
+              options_ = new global::Google.Protobuf.Reflection.FieldOptions();
+            }
+            await input.ReadMessageAsync(options_, cancellationToken).ConfigureAwait(false);
+            break;
+          }
+          case 72: {
+            OneofIndex = await input.ReadInt32Async(cancellationToken).ConfigureAwait(false);
+            break;
+          }
+          case 82: {
+            JsonName = await input.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+            break;
+          }
+        }
+      }
+    }
+
+  }
+  #endif
+
   /// <summary>
   /// Describes a oneof.
   /// </summary>
-  #if !NET35
-  internal sealed partial class OneofDescriptorProto : pb::IAsyncMessage<OneofDescriptorProto> {
-  #else
   internal sealed partial class OneofDescriptorProto : pb::IMessage<OneofDescriptorProto> {
-  #endif
+    #if PROTOBUF_NO_ASYNC
     private static readonly pb::MessageParser<OneofDescriptorProto> _parser = new pb::MessageParser<OneofDescriptorProto>(() => new OneofDescriptorProto());
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pb::MessageParser<OneofDescriptorProto> Parser { get { return _parser; } }
+    #endif
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
@@ -2323,20 +2339,6 @@ namespace Google.Protobuf.Reflection {
       }
     }
 
-    #if !NET35
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
-      if (Name.Length != 0) {
-        await output.WriteRawTagAsync(10, cancellationToken).ConfigureAwait(false);
-        await output.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
-      }
-      if (options_ != null) {
-        await output.WriteRawTagAsync(18, cancellationToken).ConfigureAwait(false);
-        await output.WriteMessageAsync(Options, cancellationToken).ConfigureAwait(false);
-      }
-    }
-    #endif
-
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
@@ -2388,7 +2390,26 @@ namespace Google.Protobuf.Reflection {
       }
     }
 
-    #if !NET35
+  }
+
+  #if !PROTOBUF_NO_ASYNC
+  internal sealed partial class OneofDescriptorProto : pb::IAsyncMessage<OneofDescriptorProto> {
+    private static readonly pb::AsyncMessageParser<OneofDescriptorProto> _parser = new pb::AsyncMessageParser<OneofDescriptorProto>(() => new OneofDescriptorProto());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::AsyncMessageParser<OneofDescriptorProto> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
+      if (Name.Length != 0) {
+        await output.WriteRawTagAsync(10, cancellationToken).ConfigureAwait(false);
+        await output.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
+      }
+      if (options_ != null) {
+        await output.WriteRawTagAsync(18, cancellationToken).ConfigureAwait(false);
+        await output.WriteMessageAsync(Options, cancellationToken).ConfigureAwait(false);
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public async stt::Task MergeFromAsync(pb::CodedInputStream input, st::CancellationToken cancellationToken) {
       uint tag;
@@ -2411,21 +2432,19 @@ namespace Google.Protobuf.Reflection {
         }
       }
     }
-    #endif
 
   }
+  #endif
 
   /// <summary>
   /// Describes an enum type.
   /// </summary>
-  #if !NET35
-  internal sealed partial class EnumDescriptorProto : pb::IAsyncMessage<EnumDescriptorProto> {
-  #else
   internal sealed partial class EnumDescriptorProto : pb::IMessage<EnumDescriptorProto> {
-  #endif
+    #if PROTOBUF_NO_ASYNC
     private static readonly pb::MessageParser<EnumDescriptorProto> _parser = new pb::MessageParser<EnumDescriptorProto>(() => new EnumDescriptorProto());
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pb::MessageParser<EnumDescriptorProto> Parser { get { return _parser; } }
+    #endif
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
@@ -2470,7 +2489,7 @@ namespace Google.Protobuf.Reflection {
     /// <summary>Field number for the "value" field.</summary>
     public const int ValueFieldNumber = 2;
     private static readonly pb::FieldCodec<global::Google.Protobuf.Reflection.EnumValueDescriptorProto> _repeated_value_codec
-        = pb::FieldCodec.ForAsyncMessage(18, global::Google.Protobuf.Reflection.EnumValueDescriptorProto.Parser);
+        = pb::FieldCodec.ForMessage(18, global::Google.Protobuf.Reflection.EnumValueDescriptorProto.Parser);
     private readonly pbc::RepeatedField<global::Google.Protobuf.Reflection.EnumValueDescriptorProto> value_ = new pbc::RepeatedField<global::Google.Protobuf.Reflection.EnumValueDescriptorProto>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<global::Google.Protobuf.Reflection.EnumValueDescriptorProto> Value {
@@ -2534,21 +2553,6 @@ namespace Google.Protobuf.Reflection {
       }
     }
 
-    #if !NET35
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
-      if (Name.Length != 0) {
-        await output.WriteRawTagAsync(10, cancellationToken).ConfigureAwait(false);
-        await output.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
-      }
-      await value_.WriteToAsync(output, _repeated_value_codec, cancellationToken).ConfigureAwait(false);
-      if (options_ != null) {
-        await output.WriteRawTagAsync(26, cancellationToken).ConfigureAwait(false);
-        await output.WriteMessageAsync(Options, cancellationToken).ConfigureAwait(false);
-      }
-    }
-    #endif
-
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
@@ -2606,7 +2610,27 @@ namespace Google.Protobuf.Reflection {
       }
     }
 
-    #if !NET35
+  }
+
+  #if !PROTOBUF_NO_ASYNC
+  internal sealed partial class EnumDescriptorProto : pb::IAsyncMessage<EnumDescriptorProto> {
+    private static readonly pb::AsyncMessageParser<EnumDescriptorProto> _parser = new pb::AsyncMessageParser<EnumDescriptorProto>(() => new EnumDescriptorProto());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::AsyncMessageParser<EnumDescriptorProto> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
+      if (Name.Length != 0) {
+        await output.WriteRawTagAsync(10, cancellationToken).ConfigureAwait(false);
+        await output.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
+      }
+      await value_.WriteToAsync(output, _repeated_value_codec, cancellationToken).ConfigureAwait(false);
+      if (options_ != null) {
+        await output.WriteRawTagAsync(26, cancellationToken).ConfigureAwait(false);
+        await output.WriteMessageAsync(Options, cancellationToken).ConfigureAwait(false);
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public async stt::Task MergeFromAsync(pb::CodedInputStream input, st::CancellationToken cancellationToken) {
       uint tag;
@@ -2633,21 +2657,19 @@ namespace Google.Protobuf.Reflection {
         }
       }
     }
-    #endif
 
   }
+  #endif
 
   /// <summary>
   /// Describes a value within an enum.
   /// </summary>
-  #if !NET35
-  internal sealed partial class EnumValueDescriptorProto : pb::IAsyncMessage<EnumValueDescriptorProto> {
-  #else
   internal sealed partial class EnumValueDescriptorProto : pb::IMessage<EnumValueDescriptorProto> {
-  #endif
+    #if PROTOBUF_NO_ASYNC
     private static readonly pb::MessageParser<EnumValueDescriptorProto> _parser = new pb::MessageParser<EnumValueDescriptorProto>(() => new EnumValueDescriptorProto());
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pb::MessageParser<EnumValueDescriptorProto> Parser { get { return _parser; } }
+    #endif
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
@@ -2760,24 +2782,6 @@ namespace Google.Protobuf.Reflection {
       }
     }
 
-    #if !NET35
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
-      if (Name.Length != 0) {
-        await output.WriteRawTagAsync(10, cancellationToken).ConfigureAwait(false);
-        await output.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
-      }
-      if (Number != 0) {
-        await output.WriteRawTagAsync(16, cancellationToken).ConfigureAwait(false);
-        await output.WriteInt32Async(Number, cancellationToken).ConfigureAwait(false);
-      }
-      if (options_ != null) {
-        await output.WriteRawTagAsync(26, cancellationToken).ConfigureAwait(false);
-        await output.WriteMessageAsync(Options, cancellationToken).ConfigureAwait(false);
-      }
-    }
-    #endif
-
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
@@ -2839,7 +2843,30 @@ namespace Google.Protobuf.Reflection {
       }
     }
 
-    #if !NET35
+  }
+
+  #if !PROTOBUF_NO_ASYNC
+  internal sealed partial class EnumValueDescriptorProto : pb::IAsyncMessage<EnumValueDescriptorProto> {
+    private static readonly pb::AsyncMessageParser<EnumValueDescriptorProto> _parser = new pb::AsyncMessageParser<EnumValueDescriptorProto>(() => new EnumValueDescriptorProto());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::AsyncMessageParser<EnumValueDescriptorProto> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
+      if (Name.Length != 0) {
+        await output.WriteRawTagAsync(10, cancellationToken).ConfigureAwait(false);
+        await output.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
+      }
+      if (Number != 0) {
+        await output.WriteRawTagAsync(16, cancellationToken).ConfigureAwait(false);
+        await output.WriteInt32Async(Number, cancellationToken).ConfigureAwait(false);
+      }
+      if (options_ != null) {
+        await output.WriteRawTagAsync(26, cancellationToken).ConfigureAwait(false);
+        await output.WriteMessageAsync(Options, cancellationToken).ConfigureAwait(false);
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public async stt::Task MergeFromAsync(pb::CodedInputStream input, st::CancellationToken cancellationToken) {
       uint tag;
@@ -2866,21 +2893,19 @@ namespace Google.Protobuf.Reflection {
         }
       }
     }
-    #endif
 
   }
+  #endif
 
   /// <summary>
   /// Describes a service.
   /// </summary>
-  #if !NET35
-  internal sealed partial class ServiceDescriptorProto : pb::IAsyncMessage<ServiceDescriptorProto> {
-  #else
   internal sealed partial class ServiceDescriptorProto : pb::IMessage<ServiceDescriptorProto> {
-  #endif
+    #if PROTOBUF_NO_ASYNC
     private static readonly pb::MessageParser<ServiceDescriptorProto> _parser = new pb::MessageParser<ServiceDescriptorProto>(() => new ServiceDescriptorProto());
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pb::MessageParser<ServiceDescriptorProto> Parser { get { return _parser; } }
+    #endif
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
@@ -2925,7 +2950,7 @@ namespace Google.Protobuf.Reflection {
     /// <summary>Field number for the "method" field.</summary>
     public const int MethodFieldNumber = 2;
     private static readonly pb::FieldCodec<global::Google.Protobuf.Reflection.MethodDescriptorProto> _repeated_method_codec
-        = pb::FieldCodec.ForAsyncMessage(18, global::Google.Protobuf.Reflection.MethodDescriptorProto.Parser);
+        = pb::FieldCodec.ForMessage(18, global::Google.Protobuf.Reflection.MethodDescriptorProto.Parser);
     private readonly pbc::RepeatedField<global::Google.Protobuf.Reflection.MethodDescriptorProto> method_ = new pbc::RepeatedField<global::Google.Protobuf.Reflection.MethodDescriptorProto>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<global::Google.Protobuf.Reflection.MethodDescriptorProto> Method {
@@ -2989,21 +3014,6 @@ namespace Google.Protobuf.Reflection {
       }
     }
 
-    #if !NET35
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
-      if (Name.Length != 0) {
-        await output.WriteRawTagAsync(10, cancellationToken).ConfigureAwait(false);
-        await output.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
-      }
-      await method_.WriteToAsync(output, _repeated_method_codec, cancellationToken).ConfigureAwait(false);
-      if (options_ != null) {
-        await output.WriteRawTagAsync(26, cancellationToken).ConfigureAwait(false);
-        await output.WriteMessageAsync(Options, cancellationToken).ConfigureAwait(false);
-      }
-    }
-    #endif
-
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
@@ -3061,7 +3071,27 @@ namespace Google.Protobuf.Reflection {
       }
     }
 
-    #if !NET35
+  }
+
+  #if !PROTOBUF_NO_ASYNC
+  internal sealed partial class ServiceDescriptorProto : pb::IAsyncMessage<ServiceDescriptorProto> {
+    private static readonly pb::AsyncMessageParser<ServiceDescriptorProto> _parser = new pb::AsyncMessageParser<ServiceDescriptorProto>(() => new ServiceDescriptorProto());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::AsyncMessageParser<ServiceDescriptorProto> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
+      if (Name.Length != 0) {
+        await output.WriteRawTagAsync(10, cancellationToken).ConfigureAwait(false);
+        await output.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
+      }
+      await method_.WriteToAsync(output, _repeated_method_codec, cancellationToken).ConfigureAwait(false);
+      if (options_ != null) {
+        await output.WriteRawTagAsync(26, cancellationToken).ConfigureAwait(false);
+        await output.WriteMessageAsync(Options, cancellationToken).ConfigureAwait(false);
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public async stt::Task MergeFromAsync(pb::CodedInputStream input, st::CancellationToken cancellationToken) {
       uint tag;
@@ -3088,21 +3118,19 @@ namespace Google.Protobuf.Reflection {
         }
       }
     }
-    #endif
 
   }
+  #endif
 
   /// <summary>
   /// Describes a method of a service.
   /// </summary>
-  #if !NET35
-  internal sealed partial class MethodDescriptorProto : pb::IAsyncMessage<MethodDescriptorProto> {
-  #else
   internal sealed partial class MethodDescriptorProto : pb::IMessage<MethodDescriptorProto> {
-  #endif
+    #if PROTOBUF_NO_ASYNC
     private static readonly pb::MessageParser<MethodDescriptorProto> _parser = new pb::MessageParser<MethodDescriptorProto>(() => new MethodDescriptorProto());
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pb::MessageParser<MethodDescriptorProto> Parser { get { return _parser; } }
+    #endif
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
@@ -3279,36 +3307,6 @@ namespace Google.Protobuf.Reflection {
       }
     }
 
-    #if !NET35
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
-      if (Name.Length != 0) {
-        await output.WriteRawTagAsync(10, cancellationToken).ConfigureAwait(false);
-        await output.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
-      }
-      if (InputType.Length != 0) {
-        await output.WriteRawTagAsync(18, cancellationToken).ConfigureAwait(false);
-        await output.WriteStringAsync(InputType, cancellationToken).ConfigureAwait(false);
-      }
-      if (OutputType.Length != 0) {
-        await output.WriteRawTagAsync(26, cancellationToken).ConfigureAwait(false);
-        await output.WriteStringAsync(OutputType, cancellationToken).ConfigureAwait(false);
-      }
-      if (options_ != null) {
-        await output.WriteRawTagAsync(34, cancellationToken).ConfigureAwait(false);
-        await output.WriteMessageAsync(Options, cancellationToken).ConfigureAwait(false);
-      }
-      if (ClientStreaming != false) {
-        await output.WriteRawTagAsync(40, cancellationToken).ConfigureAwait(false);
-        await output.WriteBoolAsync(ClientStreaming, cancellationToken).ConfigureAwait(false);
-      }
-      if (ServerStreaming != false) {
-        await output.WriteRawTagAsync(48, cancellationToken).ConfigureAwait(false);
-        await output.WriteBoolAsync(ServerStreaming, cancellationToken).ConfigureAwait(false);
-      }
-    }
-    #endif
-
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
@@ -3400,7 +3398,42 @@ namespace Google.Protobuf.Reflection {
       }
     }
 
-    #if !NET35
+  }
+
+  #if !PROTOBUF_NO_ASYNC
+  internal sealed partial class MethodDescriptorProto : pb::IAsyncMessage<MethodDescriptorProto> {
+    private static readonly pb::AsyncMessageParser<MethodDescriptorProto> _parser = new pb::AsyncMessageParser<MethodDescriptorProto>(() => new MethodDescriptorProto());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::AsyncMessageParser<MethodDescriptorProto> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
+      if (Name.Length != 0) {
+        await output.WriteRawTagAsync(10, cancellationToken).ConfigureAwait(false);
+        await output.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
+      }
+      if (InputType.Length != 0) {
+        await output.WriteRawTagAsync(18, cancellationToken).ConfigureAwait(false);
+        await output.WriteStringAsync(InputType, cancellationToken).ConfigureAwait(false);
+      }
+      if (OutputType.Length != 0) {
+        await output.WriteRawTagAsync(26, cancellationToken).ConfigureAwait(false);
+        await output.WriteStringAsync(OutputType, cancellationToken).ConfigureAwait(false);
+      }
+      if (options_ != null) {
+        await output.WriteRawTagAsync(34, cancellationToken).ConfigureAwait(false);
+        await output.WriteMessageAsync(Options, cancellationToken).ConfigureAwait(false);
+      }
+      if (ClientStreaming != false) {
+        await output.WriteRawTagAsync(40, cancellationToken).ConfigureAwait(false);
+        await output.WriteBoolAsync(ClientStreaming, cancellationToken).ConfigureAwait(false);
+      }
+      if (ServerStreaming != false) {
+        await output.WriteRawTagAsync(48, cancellationToken).ConfigureAwait(false);
+        await output.WriteBoolAsync(ServerStreaming, cancellationToken).ConfigureAwait(false);
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public async stt::Task MergeFromAsync(pb::CodedInputStream input, st::CancellationToken cancellationToken) {
       uint tag;
@@ -3439,18 +3472,16 @@ namespace Google.Protobuf.Reflection {
         }
       }
     }
-    #endif
 
   }
-
-  #if !NET35
-  internal sealed partial class FileOptions : pb::IAsyncMessage<FileOptions> {
-  #else
-  internal sealed partial class FileOptions : pb::IMessage<FileOptions> {
   #endif
+
+  internal sealed partial class FileOptions : pb::IMessage<FileOptions> {
+    #if PROTOBUF_NO_ASYNC
     private static readonly pb::MessageParser<FileOptions> _parser = new pb::MessageParser<FileOptions>(() => new FileOptions());
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pb::MessageParser<FileOptions> Parser { get { return _parser; } }
+    #endif
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
@@ -3489,7 +3520,6 @@ namespace Google.Protobuf.Reflection {
       csharpNamespace_ = other.csharpNamespace_;
       swiftPrefix_ = other.swiftPrefix_;
       phpClassPrefix_ = other.phpClassPrefix_;
-      csharpAsync_ = other.csharpAsync_;
       uninterpretedOption_ = other.uninterpretedOption_.Clone();
     }
 
@@ -3753,24 +3783,10 @@ namespace Google.Protobuf.Reflection {
       }
     }
 
-    /// <summary>Field number for the "csharp_async" field.</summary>
-    public const int CsharpAsyncFieldNumber = 41;
-    private bool csharpAsync_;
-    /// <summary>
-    /// Enables async-friendly code generation for C#.
-    /// </summary>
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool CsharpAsync {
-      get { return csharpAsync_; }
-      set {
-        csharpAsync_ = value;
-      }
-    }
-
     /// <summary>Field number for the "uninterpreted_option" field.</summary>
     public const int UninterpretedOptionFieldNumber = 999;
     private static readonly pb::FieldCodec<global::Google.Protobuf.Reflection.UninterpretedOption> _repeated_uninterpretedOption_codec
-        = pb::FieldCodec.ForAsyncMessage(7994, global::Google.Protobuf.Reflection.UninterpretedOption.Parser);
+        = pb::FieldCodec.ForMessage(7994, global::Google.Protobuf.Reflection.UninterpretedOption.Parser);
     private readonly pbc::RepeatedField<global::Google.Protobuf.Reflection.UninterpretedOption> uninterpretedOption_ = new pbc::RepeatedField<global::Google.Protobuf.Reflection.UninterpretedOption>();
     /// <summary>
     /// The parser stores options it doesn't recognize here. See above.
@@ -3809,7 +3825,6 @@ namespace Google.Protobuf.Reflection {
       if (CsharpNamespace != other.CsharpNamespace) return false;
       if (SwiftPrefix != other.SwiftPrefix) return false;
       if (PhpClassPrefix != other.PhpClassPrefix) return false;
-      if (CsharpAsync != other.CsharpAsync) return false;
       if(!uninterpretedOption_.Equals(other.uninterpretedOption_)) return false;
       return true;
     }
@@ -3833,7 +3848,6 @@ namespace Google.Protobuf.Reflection {
       if (CsharpNamespace.Length != 0) hash ^= CsharpNamespace.GetHashCode();
       if (SwiftPrefix.Length != 0) hash ^= SwiftPrefix.GetHashCode();
       if (PhpClassPrefix.Length != 0) hash ^= PhpClassPrefix.GetHashCode();
-      if (CsharpAsync != false) hash ^= CsharpAsync.GetHashCode();
       hash ^= uninterpretedOption_.GetHashCode();
       return hash;
     }
@@ -3909,87 +3923,8 @@ namespace Google.Protobuf.Reflection {
         output.WriteRawTag(194, 2);
         output.WriteString(PhpClassPrefix);
       }
-      if (CsharpAsync != false) {
-        output.WriteRawTag(200, 2);
-        output.WriteBool(CsharpAsync);
-      }
       uninterpretedOption_.WriteTo(output, _repeated_uninterpretedOption_codec);
     }
-
-    #if !NET35
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
-      if (JavaPackage.Length != 0) {
-        await output.WriteRawTagAsync(10, cancellationToken).ConfigureAwait(false);
-        await output.WriteStringAsync(JavaPackage, cancellationToken).ConfigureAwait(false);
-      }
-      if (JavaOuterClassname.Length != 0) {
-        await output.WriteRawTagAsync(66, cancellationToken).ConfigureAwait(false);
-        await output.WriteStringAsync(JavaOuterClassname, cancellationToken).ConfigureAwait(false);
-      }
-      if (OptimizeFor != 0) {
-        await output.WriteRawTagAsync(72, cancellationToken).ConfigureAwait(false);
-        await output.WriteEnumAsync((int) OptimizeFor, cancellationToken).ConfigureAwait(false);
-      }
-      if (JavaMultipleFiles != false) {
-        await output.WriteRawTagAsync(80, cancellationToken).ConfigureAwait(false);
-        await output.WriteBoolAsync(JavaMultipleFiles, cancellationToken).ConfigureAwait(false);
-      }
-      if (GoPackage.Length != 0) {
-        await output.WriteRawTagAsync(90, cancellationToken).ConfigureAwait(false);
-        await output.WriteStringAsync(GoPackage, cancellationToken).ConfigureAwait(false);
-      }
-      if (CcGenericServices != false) {
-        await output.WriteRawTagAsync(128, 1, cancellationToken).ConfigureAwait(false);
-        await output.WriteBoolAsync(CcGenericServices, cancellationToken).ConfigureAwait(false);
-      }
-      if (JavaGenericServices != false) {
-        await output.WriteRawTagAsync(136, 1, cancellationToken).ConfigureAwait(false);
-        await output.WriteBoolAsync(JavaGenericServices, cancellationToken).ConfigureAwait(false);
-      }
-      if (PyGenericServices != false) {
-        await output.WriteRawTagAsync(144, 1, cancellationToken).ConfigureAwait(false);
-        await output.WriteBoolAsync(PyGenericServices, cancellationToken).ConfigureAwait(false);
-      }
-      if (JavaGenerateEqualsAndHash != false) {
-        await output.WriteRawTagAsync(160, 1, cancellationToken).ConfigureAwait(false);
-        await output.WriteBoolAsync(JavaGenerateEqualsAndHash, cancellationToken).ConfigureAwait(false);
-      }
-      if (Deprecated != false) {
-        await output.WriteRawTagAsync(184, 1, cancellationToken).ConfigureAwait(false);
-        await output.WriteBoolAsync(Deprecated, cancellationToken).ConfigureAwait(false);
-      }
-      if (JavaStringCheckUtf8 != false) {
-        await output.WriteRawTagAsync(216, 1, cancellationToken).ConfigureAwait(false);
-        await output.WriteBoolAsync(JavaStringCheckUtf8, cancellationToken).ConfigureAwait(false);
-      }
-      if (CcEnableArenas != false) {
-        await output.WriteRawTagAsync(248, 1, cancellationToken).ConfigureAwait(false);
-        await output.WriteBoolAsync(CcEnableArenas, cancellationToken).ConfigureAwait(false);
-      }
-      if (ObjcClassPrefix.Length != 0) {
-        await output.WriteRawTagAsync(162, 2, cancellationToken).ConfigureAwait(false);
-        await output.WriteStringAsync(ObjcClassPrefix, cancellationToken).ConfigureAwait(false);
-      }
-      if (CsharpNamespace.Length != 0) {
-        await output.WriteRawTagAsync(170, 2, cancellationToken).ConfigureAwait(false);
-        await output.WriteStringAsync(CsharpNamespace, cancellationToken).ConfigureAwait(false);
-      }
-      if (SwiftPrefix.Length != 0) {
-        await output.WriteRawTagAsync(186, 2, cancellationToken).ConfigureAwait(false);
-        await output.WriteStringAsync(SwiftPrefix, cancellationToken).ConfigureAwait(false);
-      }
-      if (PhpClassPrefix.Length != 0) {
-        await output.WriteRawTagAsync(194, 2, cancellationToken).ConfigureAwait(false);
-        await output.WriteStringAsync(PhpClassPrefix, cancellationToken).ConfigureAwait(false);
-      }
-      if (CsharpAsync != false) {
-        await output.WriteRawTagAsync(200, 2, cancellationToken).ConfigureAwait(false);
-        await output.WriteBoolAsync(CsharpAsync, cancellationToken).ConfigureAwait(false);
-      }
-      await uninterpretedOption_.WriteToAsync(output, _repeated_uninterpretedOption_codec, cancellationToken).ConfigureAwait(false);
-    }
-    #endif
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
@@ -4041,9 +3976,6 @@ namespace Google.Protobuf.Reflection {
       }
       if (PhpClassPrefix.Length != 0) {
         size += 2 + pb::CodedOutputStream.ComputeStringSize(PhpClassPrefix);
-      }
-      if (CsharpAsync != false) {
-        size += 2 + 1;
       }
       size += uninterpretedOption_.CalculateSize(_repeated_uninterpretedOption_codec);
       return size;
@@ -4101,9 +4033,6 @@ namespace Google.Protobuf.Reflection {
       }
       if (other.PhpClassPrefix.Length != 0) {
         PhpClassPrefix = other.PhpClassPrefix;
-      }
-      if (other.CsharpAsync != false) {
-        CsharpAsync = other.CsharpAsync;
       }
       uninterpretedOption_.Add(other.uninterpretedOption_);
     }
@@ -4180,10 +4109,6 @@ namespace Google.Protobuf.Reflection {
             PhpClassPrefix = input.ReadString();
             break;
           }
-          case 328: {
-            CsharpAsync = input.ReadBool();
-            break;
-          }
           case 7994: {
             uninterpretedOption_.AddEntriesFrom(input, _repeated_uninterpretedOption_codec);
             break;
@@ -4192,7 +4117,108 @@ namespace Google.Protobuf.Reflection {
       }
     }
 
-    #if !NET35
+    #region Nested types
+    /// <summary>Container for nested types declared in the FileOptions message type.</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static partial class Types {
+      /// <summary>
+      /// Generated classes can be optimized for speed or code size.
+      /// </summary>
+      internal enum OptimizeMode {
+        /// <summary>
+        /// Generate complete code for parsing, serialization,
+        /// </summary>
+        [pbr::OriginalName("SPEED")] Speed = 1,
+        /// <summary>
+        /// etc.
+        /// </summary>
+        [pbr::OriginalName("CODE_SIZE")] CodeSize = 2,
+        /// <summary>
+        /// Generate code using MessageLite and the lite runtime.
+        /// </summary>
+        [pbr::OriginalName("LITE_RUNTIME")] LiteRuntime = 3,
+      }
+
+    }
+    #endregion
+
+  }
+
+  #if !PROTOBUF_NO_ASYNC
+  internal sealed partial class FileOptions : pb::IAsyncMessage<FileOptions> {
+    private static readonly pb::AsyncMessageParser<FileOptions> _parser = new pb::AsyncMessageParser<FileOptions>(() => new FileOptions());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::AsyncMessageParser<FileOptions> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
+      if (JavaPackage.Length != 0) {
+        await output.WriteRawTagAsync(10, cancellationToken).ConfigureAwait(false);
+        await output.WriteStringAsync(JavaPackage, cancellationToken).ConfigureAwait(false);
+      }
+      if (JavaOuterClassname.Length != 0) {
+        await output.WriteRawTagAsync(66, cancellationToken).ConfigureAwait(false);
+        await output.WriteStringAsync(JavaOuterClassname, cancellationToken).ConfigureAwait(false);
+      }
+      if (OptimizeFor != 0) {
+        await output.WriteRawTagAsync(72, cancellationToken).ConfigureAwait(false);
+        await output.WriteEnumAsync((int) OptimizeFor, cancellationToken).ConfigureAwait(false);
+      }
+      if (JavaMultipleFiles != false) {
+        await output.WriteRawTagAsync(80, cancellationToken).ConfigureAwait(false);
+        await output.WriteBoolAsync(JavaMultipleFiles, cancellationToken).ConfigureAwait(false);
+      }
+      if (GoPackage.Length != 0) {
+        await output.WriteRawTagAsync(90, cancellationToken).ConfigureAwait(false);
+        await output.WriteStringAsync(GoPackage, cancellationToken).ConfigureAwait(false);
+      }
+      if (CcGenericServices != false) {
+        await output.WriteRawTagAsync(128, 1, cancellationToken).ConfigureAwait(false);
+        await output.WriteBoolAsync(CcGenericServices, cancellationToken).ConfigureAwait(false);
+      }
+      if (JavaGenericServices != false) {
+        await output.WriteRawTagAsync(136, 1, cancellationToken).ConfigureAwait(false);
+        await output.WriteBoolAsync(JavaGenericServices, cancellationToken).ConfigureAwait(false);
+      }
+      if (PyGenericServices != false) {
+        await output.WriteRawTagAsync(144, 1, cancellationToken).ConfigureAwait(false);
+        await output.WriteBoolAsync(PyGenericServices, cancellationToken).ConfigureAwait(false);
+      }
+      if (JavaGenerateEqualsAndHash != false) {
+        await output.WriteRawTagAsync(160, 1, cancellationToken).ConfigureAwait(false);
+        await output.WriteBoolAsync(JavaGenerateEqualsAndHash, cancellationToken).ConfigureAwait(false);
+      }
+      if (Deprecated != false) {
+        await output.WriteRawTagAsync(184, 1, cancellationToken).ConfigureAwait(false);
+        await output.WriteBoolAsync(Deprecated, cancellationToken).ConfigureAwait(false);
+      }
+      if (JavaStringCheckUtf8 != false) {
+        await output.WriteRawTagAsync(216, 1, cancellationToken).ConfigureAwait(false);
+        await output.WriteBoolAsync(JavaStringCheckUtf8, cancellationToken).ConfigureAwait(false);
+      }
+      if (CcEnableArenas != false) {
+        await output.WriteRawTagAsync(248, 1, cancellationToken).ConfigureAwait(false);
+        await output.WriteBoolAsync(CcEnableArenas, cancellationToken).ConfigureAwait(false);
+      }
+      if (ObjcClassPrefix.Length != 0) {
+        await output.WriteRawTagAsync(162, 2, cancellationToken).ConfigureAwait(false);
+        await output.WriteStringAsync(ObjcClassPrefix, cancellationToken).ConfigureAwait(false);
+      }
+      if (CsharpNamespace.Length != 0) {
+        await output.WriteRawTagAsync(170, 2, cancellationToken).ConfigureAwait(false);
+        await output.WriteStringAsync(CsharpNamespace, cancellationToken).ConfigureAwait(false);
+      }
+      if (SwiftPrefix.Length != 0) {
+        await output.WriteRawTagAsync(186, 2, cancellationToken).ConfigureAwait(false);
+        await output.WriteStringAsync(SwiftPrefix, cancellationToken).ConfigureAwait(false);
+      }
+      if (PhpClassPrefix.Length != 0) {
+        await output.WriteRawTagAsync(194, 2, cancellationToken).ConfigureAwait(false);
+        await output.WriteStringAsync(PhpClassPrefix, cancellationToken).ConfigureAwait(false);
+      }
+      await uninterpretedOption_.WriteToAsync(output, _repeated_uninterpretedOption_codec, cancellationToken).ConfigureAwait(false);
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public async stt::Task MergeFromAsync(pb::CodedInputStream input, st::CancellationToken cancellationToken) {
       uint tag;
@@ -4265,10 +4291,6 @@ namespace Google.Protobuf.Reflection {
             PhpClassPrefix = await input.ReadStringAsync(cancellationToken).ConfigureAwait(false);
             break;
           }
-          case 328: {
-            CsharpAsync = await input.ReadBoolAsync(cancellationToken).ConfigureAwait(false);
-            break;
-          }
           case 7994: {
             await uninterpretedOption_.AddEntriesFromAsync(input, _repeated_uninterpretedOption_codec, cancellationToken).ConfigureAwait(false);
             break;
@@ -4276,43 +4298,16 @@ namespace Google.Protobuf.Reflection {
         }
       }
     }
-    #endif
-
-    #region Nested types
-    /// <summary>Container for nested types declared in the FileOptions message type.</summary>
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static partial class Types {
-      /// <summary>
-      /// Generated classes can be optimized for speed or code size.
-      /// </summary>
-      internal enum OptimizeMode {
-        /// <summary>
-        /// Generate complete code for parsing, serialization,
-        /// </summary>
-        [pbr::OriginalName("SPEED")] Speed = 1,
-        /// <summary>
-        /// etc.
-        /// </summary>
-        [pbr::OriginalName("CODE_SIZE")] CodeSize = 2,
-        /// <summary>
-        /// Generate code using MessageLite and the lite runtime.
-        /// </summary>
-        [pbr::OriginalName("LITE_RUNTIME")] LiteRuntime = 3,
-      }
-
-    }
-    #endregion
 
   }
-
-  #if !NET35
-  internal sealed partial class MessageOptions : pb::IAsyncMessage<MessageOptions> {
-  #else
-  internal sealed partial class MessageOptions : pb::IMessage<MessageOptions> {
   #endif
+
+  internal sealed partial class MessageOptions : pb::IMessage<MessageOptions> {
+    #if PROTOBUF_NO_ASYNC
     private static readonly pb::MessageParser<MessageOptions> _parser = new pb::MessageParser<MessageOptions>(() => new MessageOptions());
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pb::MessageParser<MessageOptions> Parser { get { return _parser; } }
+    #endif
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
@@ -4448,7 +4443,7 @@ namespace Google.Protobuf.Reflection {
     /// <summary>Field number for the "uninterpreted_option" field.</summary>
     public const int UninterpretedOptionFieldNumber = 999;
     private static readonly pb::FieldCodec<global::Google.Protobuf.Reflection.UninterpretedOption> _repeated_uninterpretedOption_codec
-        = pb::FieldCodec.ForAsyncMessage(7994, global::Google.Protobuf.Reflection.UninterpretedOption.Parser);
+        = pb::FieldCodec.ForMessage(7994, global::Google.Protobuf.Reflection.UninterpretedOption.Parser);
     private readonly pbc::RepeatedField<global::Google.Protobuf.Reflection.UninterpretedOption> uninterpretedOption_ = new pbc::RepeatedField<global::Google.Protobuf.Reflection.UninterpretedOption>();
     /// <summary>
     /// The parser stores options it doesn't recognize here. See above.
@@ -4515,29 +4510,6 @@ namespace Google.Protobuf.Reflection {
       }
       uninterpretedOption_.WriteTo(output, _repeated_uninterpretedOption_codec);
     }
-
-    #if !NET35
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
-      if (MessageSetWireFormat != false) {
-        await output.WriteRawTagAsync(8, cancellationToken).ConfigureAwait(false);
-        await output.WriteBoolAsync(MessageSetWireFormat, cancellationToken).ConfigureAwait(false);
-      }
-      if (NoStandardDescriptorAccessor != false) {
-        await output.WriteRawTagAsync(16, cancellationToken).ConfigureAwait(false);
-        await output.WriteBoolAsync(NoStandardDescriptorAccessor, cancellationToken).ConfigureAwait(false);
-      }
-      if (Deprecated != false) {
-        await output.WriteRawTagAsync(24, cancellationToken).ConfigureAwait(false);
-        await output.WriteBoolAsync(Deprecated, cancellationToken).ConfigureAwait(false);
-      }
-      if (MapEntry != false) {
-        await output.WriteRawTagAsync(56, cancellationToken).ConfigureAwait(false);
-        await output.WriteBoolAsync(MapEntry, cancellationToken).ConfigureAwait(false);
-      }
-      await uninterpretedOption_.WriteToAsync(output, _repeated_uninterpretedOption_codec, cancellationToken).ConfigureAwait(false);
-    }
-    #endif
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
@@ -4610,7 +4582,35 @@ namespace Google.Protobuf.Reflection {
       }
     }
 
-    #if !NET35
+  }
+
+  #if !PROTOBUF_NO_ASYNC
+  internal sealed partial class MessageOptions : pb::IAsyncMessage<MessageOptions> {
+    private static readonly pb::AsyncMessageParser<MessageOptions> _parser = new pb::AsyncMessageParser<MessageOptions>(() => new MessageOptions());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::AsyncMessageParser<MessageOptions> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
+      if (MessageSetWireFormat != false) {
+        await output.WriteRawTagAsync(8, cancellationToken).ConfigureAwait(false);
+        await output.WriteBoolAsync(MessageSetWireFormat, cancellationToken).ConfigureAwait(false);
+      }
+      if (NoStandardDescriptorAccessor != false) {
+        await output.WriteRawTagAsync(16, cancellationToken).ConfigureAwait(false);
+        await output.WriteBoolAsync(NoStandardDescriptorAccessor, cancellationToken).ConfigureAwait(false);
+      }
+      if (Deprecated != false) {
+        await output.WriteRawTagAsync(24, cancellationToken).ConfigureAwait(false);
+        await output.WriteBoolAsync(Deprecated, cancellationToken).ConfigureAwait(false);
+      }
+      if (MapEntry != false) {
+        await output.WriteRawTagAsync(56, cancellationToken).ConfigureAwait(false);
+        await output.WriteBoolAsync(MapEntry, cancellationToken).ConfigureAwait(false);
+      }
+      await uninterpretedOption_.WriteToAsync(output, _repeated_uninterpretedOption_codec, cancellationToken).ConfigureAwait(false);
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public async stt::Task MergeFromAsync(pb::CodedInputStream input, st::CancellationToken cancellationToken) {
       uint tag;
@@ -4642,18 +4642,16 @@ namespace Google.Protobuf.Reflection {
         }
       }
     }
-    #endif
 
   }
-
-  #if !NET35
-  internal sealed partial class FieldOptions : pb::IAsyncMessage<FieldOptions> {
-  #else
-  internal sealed partial class FieldOptions : pb::IMessage<FieldOptions> {
   #endif
+
+  internal sealed partial class FieldOptions : pb::IMessage<FieldOptions> {
+    #if PROTOBUF_NO_ASYNC
     private static readonly pb::MessageParser<FieldOptions> _parser = new pb::MessageParser<FieldOptions>(() => new FieldOptions());
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pb::MessageParser<FieldOptions> Parser { get { return _parser; } }
+    #endif
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
@@ -4821,7 +4819,7 @@ namespace Google.Protobuf.Reflection {
     /// <summary>Field number for the "uninterpreted_option" field.</summary>
     public const int UninterpretedOptionFieldNumber = 999;
     private static readonly pb::FieldCodec<global::Google.Protobuf.Reflection.UninterpretedOption> _repeated_uninterpretedOption_codec
-        = pb::FieldCodec.ForAsyncMessage(7994, global::Google.Protobuf.Reflection.UninterpretedOption.Parser);
+        = pb::FieldCodec.ForMessage(7994, global::Google.Protobuf.Reflection.UninterpretedOption.Parser);
     private readonly pbc::RepeatedField<global::Google.Protobuf.Reflection.UninterpretedOption> uninterpretedOption_ = new pbc::RepeatedField<global::Google.Protobuf.Reflection.UninterpretedOption>();
     /// <summary>
     /// The parser stores options it doesn't recognize here. See above.
@@ -4900,37 +4898,6 @@ namespace Google.Protobuf.Reflection {
       }
       uninterpretedOption_.WriteTo(output, _repeated_uninterpretedOption_codec);
     }
-
-    #if !NET35
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
-      if (Ctype != 0) {
-        await output.WriteRawTagAsync(8, cancellationToken).ConfigureAwait(false);
-        await output.WriteEnumAsync((int) Ctype, cancellationToken).ConfigureAwait(false);
-      }
-      if (Packed != false) {
-        await output.WriteRawTagAsync(16, cancellationToken).ConfigureAwait(false);
-        await output.WriteBoolAsync(Packed, cancellationToken).ConfigureAwait(false);
-      }
-      if (Deprecated != false) {
-        await output.WriteRawTagAsync(24, cancellationToken).ConfigureAwait(false);
-        await output.WriteBoolAsync(Deprecated, cancellationToken).ConfigureAwait(false);
-      }
-      if (Lazy != false) {
-        await output.WriteRawTagAsync(40, cancellationToken).ConfigureAwait(false);
-        await output.WriteBoolAsync(Lazy, cancellationToken).ConfigureAwait(false);
-      }
-      if (Jstype != 0) {
-        await output.WriteRawTagAsync(48, cancellationToken).ConfigureAwait(false);
-        await output.WriteEnumAsync((int) Jstype, cancellationToken).ConfigureAwait(false);
-      }
-      if (Weak != false) {
-        await output.WriteRawTagAsync(80, cancellationToken).ConfigureAwait(false);
-        await output.WriteBoolAsync(Weak, cancellationToken).ConfigureAwait(false);
-      }
-      await uninterpretedOption_.WriteToAsync(output, _repeated_uninterpretedOption_codec, cancellationToken).ConfigureAwait(false);
-    }
-    #endif
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
@@ -5023,7 +4990,74 @@ namespace Google.Protobuf.Reflection {
       }
     }
 
-    #if !NET35
+    #region Nested types
+    /// <summary>Container for nested types declared in the FieldOptions message type.</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static partial class Types {
+      internal enum CType {
+        /// <summary>
+        /// Default mode.
+        /// </summary>
+        [pbr::OriginalName("STRING")] String = 0,
+        [pbr::OriginalName("CORD")] Cord = 1,
+        [pbr::OriginalName("STRING_PIECE")] StringPiece = 2,
+      }
+
+      internal enum JSType {
+        /// <summary>
+        /// Use the default type.
+        /// </summary>
+        [pbr::OriginalName("JS_NORMAL")] JsNormal = 0,
+        /// <summary>
+        /// Use JavaScript strings.
+        /// </summary>
+        [pbr::OriginalName("JS_STRING")] JsString = 1,
+        /// <summary>
+        /// Use JavaScript numbers.
+        /// </summary>
+        [pbr::OriginalName("JS_NUMBER")] JsNumber = 2,
+      }
+
+    }
+    #endregion
+
+  }
+
+  #if !PROTOBUF_NO_ASYNC
+  internal sealed partial class FieldOptions : pb::IAsyncMessage<FieldOptions> {
+    private static readonly pb::AsyncMessageParser<FieldOptions> _parser = new pb::AsyncMessageParser<FieldOptions>(() => new FieldOptions());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::AsyncMessageParser<FieldOptions> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
+      if (Ctype != 0) {
+        await output.WriteRawTagAsync(8, cancellationToken).ConfigureAwait(false);
+        await output.WriteEnumAsync((int) Ctype, cancellationToken).ConfigureAwait(false);
+      }
+      if (Packed != false) {
+        await output.WriteRawTagAsync(16, cancellationToken).ConfigureAwait(false);
+        await output.WriteBoolAsync(Packed, cancellationToken).ConfigureAwait(false);
+      }
+      if (Deprecated != false) {
+        await output.WriteRawTagAsync(24, cancellationToken).ConfigureAwait(false);
+        await output.WriteBoolAsync(Deprecated, cancellationToken).ConfigureAwait(false);
+      }
+      if (Lazy != false) {
+        await output.WriteRawTagAsync(40, cancellationToken).ConfigureAwait(false);
+        await output.WriteBoolAsync(Lazy, cancellationToken).ConfigureAwait(false);
+      }
+      if (Jstype != 0) {
+        await output.WriteRawTagAsync(48, cancellationToken).ConfigureAwait(false);
+        await output.WriteEnumAsync((int) Jstype, cancellationToken).ConfigureAwait(false);
+      }
+      if (Weak != false) {
+        await output.WriteRawTagAsync(80, cancellationToken).ConfigureAwait(false);
+        await output.WriteBoolAsync(Weak, cancellationToken).ConfigureAwait(false);
+      }
+      await uninterpretedOption_.WriteToAsync(output, _repeated_uninterpretedOption_codec, cancellationToken).ConfigureAwait(false);
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public async stt::Task MergeFromAsync(pb::CodedInputStream input, st::CancellationToken cancellationToken) {
       uint tag;
@@ -5063,49 +5097,16 @@ namespace Google.Protobuf.Reflection {
         }
       }
     }
-    #endif
-
-    #region Nested types
-    /// <summary>Container for nested types declared in the FieldOptions message type.</summary>
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static partial class Types {
-      internal enum CType {
-        /// <summary>
-        /// Default mode.
-        /// </summary>
-        [pbr::OriginalName("STRING")] String = 0,
-        [pbr::OriginalName("CORD")] Cord = 1,
-        [pbr::OriginalName("STRING_PIECE")] StringPiece = 2,
-      }
-
-      internal enum JSType {
-        /// <summary>
-        /// Use the default type.
-        /// </summary>
-        [pbr::OriginalName("JS_NORMAL")] JsNormal = 0,
-        /// <summary>
-        /// Use JavaScript strings.
-        /// </summary>
-        [pbr::OriginalName("JS_STRING")] JsString = 1,
-        /// <summary>
-        /// Use JavaScript numbers.
-        /// </summary>
-        [pbr::OriginalName("JS_NUMBER")] JsNumber = 2,
-      }
-
-    }
-    #endregion
 
   }
-
-  #if !NET35
-  internal sealed partial class OneofOptions : pb::IAsyncMessage<OneofOptions> {
-  #else
-  internal sealed partial class OneofOptions : pb::IMessage<OneofOptions> {
   #endif
+
+  internal sealed partial class OneofOptions : pb::IMessage<OneofOptions> {
+    #if PROTOBUF_NO_ASYNC
     private static readonly pb::MessageParser<OneofOptions> _parser = new pb::MessageParser<OneofOptions>(() => new OneofOptions());
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pb::MessageParser<OneofOptions> Parser { get { return _parser; } }
+    #endif
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
@@ -5139,7 +5140,7 @@ namespace Google.Protobuf.Reflection {
     /// <summary>Field number for the "uninterpreted_option" field.</summary>
     public const int UninterpretedOptionFieldNumber = 999;
     private static readonly pb::FieldCodec<global::Google.Protobuf.Reflection.UninterpretedOption> _repeated_uninterpretedOption_codec
-        = pb::FieldCodec.ForAsyncMessage(7994, global::Google.Protobuf.Reflection.UninterpretedOption.Parser);
+        = pb::FieldCodec.ForMessage(7994, global::Google.Protobuf.Reflection.UninterpretedOption.Parser);
     private readonly pbc::RepeatedField<global::Google.Protobuf.Reflection.UninterpretedOption> uninterpretedOption_ = new pbc::RepeatedField<global::Google.Protobuf.Reflection.UninterpretedOption>();
     /// <summary>
     /// The parser stores options it doesn't recognize here. See above.
@@ -5183,13 +5184,6 @@ namespace Google.Protobuf.Reflection {
       uninterpretedOption_.WriteTo(output, _repeated_uninterpretedOption_codec);
     }
 
-    #if !NET35
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
-      await uninterpretedOption_.WriteToAsync(output, _repeated_uninterpretedOption_codec, cancellationToken).ConfigureAwait(false);
-    }
-    #endif
-
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
@@ -5221,7 +5215,19 @@ namespace Google.Protobuf.Reflection {
       }
     }
 
-    #if !NET35
+  }
+
+  #if !PROTOBUF_NO_ASYNC
+  internal sealed partial class OneofOptions : pb::IAsyncMessage<OneofOptions> {
+    private static readonly pb::AsyncMessageParser<OneofOptions> _parser = new pb::AsyncMessageParser<OneofOptions>(() => new OneofOptions());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::AsyncMessageParser<OneofOptions> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
+      await uninterpretedOption_.WriteToAsync(output, _repeated_uninterpretedOption_codec, cancellationToken).ConfigureAwait(false);
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public async stt::Task MergeFromAsync(pb::CodedInputStream input, st::CancellationToken cancellationToken) {
       uint tag;
@@ -5237,18 +5243,16 @@ namespace Google.Protobuf.Reflection {
         }
       }
     }
-    #endif
 
   }
-
-  #if !NET35
-  internal sealed partial class EnumOptions : pb::IAsyncMessage<EnumOptions> {
-  #else
-  internal sealed partial class EnumOptions : pb::IMessage<EnumOptions> {
   #endif
+
+  internal sealed partial class EnumOptions : pb::IMessage<EnumOptions> {
+    #if PROTOBUF_NO_ASYNC
     private static readonly pb::MessageParser<EnumOptions> _parser = new pb::MessageParser<EnumOptions>(() => new EnumOptions());
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pb::MessageParser<EnumOptions> Parser { get { return _parser; } }
+    #endif
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
@@ -5316,7 +5320,7 @@ namespace Google.Protobuf.Reflection {
     /// <summary>Field number for the "uninterpreted_option" field.</summary>
     public const int UninterpretedOptionFieldNumber = 999;
     private static readonly pb::FieldCodec<global::Google.Protobuf.Reflection.UninterpretedOption> _repeated_uninterpretedOption_codec
-        = pb::FieldCodec.ForAsyncMessage(7994, global::Google.Protobuf.Reflection.UninterpretedOption.Parser);
+        = pb::FieldCodec.ForMessage(7994, global::Google.Protobuf.Reflection.UninterpretedOption.Parser);
     private readonly pbc::RepeatedField<global::Google.Protobuf.Reflection.UninterpretedOption> uninterpretedOption_ = new pbc::RepeatedField<global::Google.Protobuf.Reflection.UninterpretedOption>();
     /// <summary>
     /// The parser stores options it doesn't recognize here. See above.
@@ -5372,21 +5376,6 @@ namespace Google.Protobuf.Reflection {
       uninterpretedOption_.WriteTo(output, _repeated_uninterpretedOption_codec);
     }
 
-    #if !NET35
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
-      if (AllowAlias != false) {
-        await output.WriteRawTagAsync(16, cancellationToken).ConfigureAwait(false);
-        await output.WriteBoolAsync(AllowAlias, cancellationToken).ConfigureAwait(false);
-      }
-      if (Deprecated != false) {
-        await output.WriteRawTagAsync(24, cancellationToken).ConfigureAwait(false);
-        await output.WriteBoolAsync(Deprecated, cancellationToken).ConfigureAwait(false);
-      }
-      await uninterpretedOption_.WriteToAsync(output, _repeated_uninterpretedOption_codec, cancellationToken).ConfigureAwait(false);
-    }
-    #endif
-
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
@@ -5438,7 +5427,27 @@ namespace Google.Protobuf.Reflection {
       }
     }
 
-    #if !NET35
+  }
+
+  #if !PROTOBUF_NO_ASYNC
+  internal sealed partial class EnumOptions : pb::IAsyncMessage<EnumOptions> {
+    private static readonly pb::AsyncMessageParser<EnumOptions> _parser = new pb::AsyncMessageParser<EnumOptions>(() => new EnumOptions());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::AsyncMessageParser<EnumOptions> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
+      if (AllowAlias != false) {
+        await output.WriteRawTagAsync(16, cancellationToken).ConfigureAwait(false);
+        await output.WriteBoolAsync(AllowAlias, cancellationToken).ConfigureAwait(false);
+      }
+      if (Deprecated != false) {
+        await output.WriteRawTagAsync(24, cancellationToken).ConfigureAwait(false);
+        await output.WriteBoolAsync(Deprecated, cancellationToken).ConfigureAwait(false);
+      }
+      await uninterpretedOption_.WriteToAsync(output, _repeated_uninterpretedOption_codec, cancellationToken).ConfigureAwait(false);
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public async stt::Task MergeFromAsync(pb::CodedInputStream input, st::CancellationToken cancellationToken) {
       uint tag;
@@ -5462,18 +5471,16 @@ namespace Google.Protobuf.Reflection {
         }
       }
     }
-    #endif
 
   }
-
-  #if !NET35
-  internal sealed partial class EnumValueOptions : pb::IAsyncMessage<EnumValueOptions> {
-  #else
-  internal sealed partial class EnumValueOptions : pb::IMessage<EnumValueOptions> {
   #endif
+
+  internal sealed partial class EnumValueOptions : pb::IMessage<EnumValueOptions> {
+    #if PROTOBUF_NO_ASYNC
     private static readonly pb::MessageParser<EnumValueOptions> _parser = new pb::MessageParser<EnumValueOptions>(() => new EnumValueOptions());
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pb::MessageParser<EnumValueOptions> Parser { get { return _parser; } }
+    #endif
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
@@ -5525,7 +5532,7 @@ namespace Google.Protobuf.Reflection {
     /// <summary>Field number for the "uninterpreted_option" field.</summary>
     public const int UninterpretedOptionFieldNumber = 999;
     private static readonly pb::FieldCodec<global::Google.Protobuf.Reflection.UninterpretedOption> _repeated_uninterpretedOption_codec
-        = pb::FieldCodec.ForAsyncMessage(7994, global::Google.Protobuf.Reflection.UninterpretedOption.Parser);
+        = pb::FieldCodec.ForMessage(7994, global::Google.Protobuf.Reflection.UninterpretedOption.Parser);
     private readonly pbc::RepeatedField<global::Google.Protobuf.Reflection.UninterpretedOption> uninterpretedOption_ = new pbc::RepeatedField<global::Google.Protobuf.Reflection.UninterpretedOption>();
     /// <summary>
     /// The parser stores options it doesn't recognize here. See above.
@@ -5575,17 +5582,6 @@ namespace Google.Protobuf.Reflection {
       uninterpretedOption_.WriteTo(output, _repeated_uninterpretedOption_codec);
     }
 
-    #if !NET35
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
-      if (Deprecated != false) {
-        await output.WriteRawTagAsync(8, cancellationToken).ConfigureAwait(false);
-        await output.WriteBoolAsync(Deprecated, cancellationToken).ConfigureAwait(false);
-      }
-      await uninterpretedOption_.WriteToAsync(output, _repeated_uninterpretedOption_codec, cancellationToken).ConfigureAwait(false);
-    }
-    #endif
-
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
@@ -5627,7 +5623,23 @@ namespace Google.Protobuf.Reflection {
       }
     }
 
-    #if !NET35
+  }
+
+  #if !PROTOBUF_NO_ASYNC
+  internal sealed partial class EnumValueOptions : pb::IAsyncMessage<EnumValueOptions> {
+    private static readonly pb::AsyncMessageParser<EnumValueOptions> _parser = new pb::AsyncMessageParser<EnumValueOptions>(() => new EnumValueOptions());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::AsyncMessageParser<EnumValueOptions> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
+      if (Deprecated != false) {
+        await output.WriteRawTagAsync(8, cancellationToken).ConfigureAwait(false);
+        await output.WriteBoolAsync(Deprecated, cancellationToken).ConfigureAwait(false);
+      }
+      await uninterpretedOption_.WriteToAsync(output, _repeated_uninterpretedOption_codec, cancellationToken).ConfigureAwait(false);
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public async stt::Task MergeFromAsync(pb::CodedInputStream input, st::CancellationToken cancellationToken) {
       uint tag;
@@ -5647,18 +5659,16 @@ namespace Google.Protobuf.Reflection {
         }
       }
     }
-    #endif
 
   }
-
-  #if !NET35
-  internal sealed partial class ServiceOptions : pb::IAsyncMessage<ServiceOptions> {
-  #else
-  internal sealed partial class ServiceOptions : pb::IMessage<ServiceOptions> {
   #endif
+
+  internal sealed partial class ServiceOptions : pb::IMessage<ServiceOptions> {
+    #if PROTOBUF_NO_ASYNC
     private static readonly pb::MessageParser<ServiceOptions> _parser = new pb::MessageParser<ServiceOptions>(() => new ServiceOptions());
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pb::MessageParser<ServiceOptions> Parser { get { return _parser; } }
+    #endif
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
@@ -5710,7 +5720,7 @@ namespace Google.Protobuf.Reflection {
     /// <summary>Field number for the "uninterpreted_option" field.</summary>
     public const int UninterpretedOptionFieldNumber = 999;
     private static readonly pb::FieldCodec<global::Google.Protobuf.Reflection.UninterpretedOption> _repeated_uninterpretedOption_codec
-        = pb::FieldCodec.ForAsyncMessage(7994, global::Google.Protobuf.Reflection.UninterpretedOption.Parser);
+        = pb::FieldCodec.ForMessage(7994, global::Google.Protobuf.Reflection.UninterpretedOption.Parser);
     private readonly pbc::RepeatedField<global::Google.Protobuf.Reflection.UninterpretedOption> uninterpretedOption_ = new pbc::RepeatedField<global::Google.Protobuf.Reflection.UninterpretedOption>();
     /// <summary>
     /// The parser stores options it doesn't recognize here. See above.
@@ -5760,17 +5770,6 @@ namespace Google.Protobuf.Reflection {
       uninterpretedOption_.WriteTo(output, _repeated_uninterpretedOption_codec);
     }
 
-    #if !NET35
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
-      if (Deprecated != false) {
-        await output.WriteRawTagAsync(136, 2, cancellationToken).ConfigureAwait(false);
-        await output.WriteBoolAsync(Deprecated, cancellationToken).ConfigureAwait(false);
-      }
-      await uninterpretedOption_.WriteToAsync(output, _repeated_uninterpretedOption_codec, cancellationToken).ConfigureAwait(false);
-    }
-    #endif
-
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
@@ -5812,7 +5811,23 @@ namespace Google.Protobuf.Reflection {
       }
     }
 
-    #if !NET35
+  }
+
+  #if !PROTOBUF_NO_ASYNC
+  internal sealed partial class ServiceOptions : pb::IAsyncMessage<ServiceOptions> {
+    private static readonly pb::AsyncMessageParser<ServiceOptions> _parser = new pb::AsyncMessageParser<ServiceOptions>(() => new ServiceOptions());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::AsyncMessageParser<ServiceOptions> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
+      if (Deprecated != false) {
+        await output.WriteRawTagAsync(136, 2, cancellationToken).ConfigureAwait(false);
+        await output.WriteBoolAsync(Deprecated, cancellationToken).ConfigureAwait(false);
+      }
+      await uninterpretedOption_.WriteToAsync(output, _repeated_uninterpretedOption_codec, cancellationToken).ConfigureAwait(false);
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public async stt::Task MergeFromAsync(pb::CodedInputStream input, st::CancellationToken cancellationToken) {
       uint tag;
@@ -5832,18 +5847,16 @@ namespace Google.Protobuf.Reflection {
         }
       }
     }
-    #endif
 
   }
-
-  #if !NET35
-  internal sealed partial class MethodOptions : pb::IAsyncMessage<MethodOptions> {
-  #else
-  internal sealed partial class MethodOptions : pb::IMessage<MethodOptions> {
   #endif
+
+  internal sealed partial class MethodOptions : pb::IMessage<MethodOptions> {
+    #if PROTOBUF_NO_ASYNC
     private static readonly pb::MessageParser<MethodOptions> _parser = new pb::MessageParser<MethodOptions>(() => new MethodOptions());
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pb::MessageParser<MethodOptions> Parser { get { return _parser; } }
+    #endif
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
@@ -5907,7 +5920,7 @@ namespace Google.Protobuf.Reflection {
     /// <summary>Field number for the "uninterpreted_option" field.</summary>
     public const int UninterpretedOptionFieldNumber = 999;
     private static readonly pb::FieldCodec<global::Google.Protobuf.Reflection.UninterpretedOption> _repeated_uninterpretedOption_codec
-        = pb::FieldCodec.ForAsyncMessage(7994, global::Google.Protobuf.Reflection.UninterpretedOption.Parser);
+        = pb::FieldCodec.ForMessage(7994, global::Google.Protobuf.Reflection.UninterpretedOption.Parser);
     private readonly pbc::RepeatedField<global::Google.Protobuf.Reflection.UninterpretedOption> uninterpretedOption_ = new pbc::RepeatedField<global::Google.Protobuf.Reflection.UninterpretedOption>();
     /// <summary>
     /// The parser stores options it doesn't recognize here. See above.
@@ -5963,21 +5976,6 @@ namespace Google.Protobuf.Reflection {
       uninterpretedOption_.WriteTo(output, _repeated_uninterpretedOption_codec);
     }
 
-    #if !NET35
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
-      if (Deprecated != false) {
-        await output.WriteRawTagAsync(136, 2, cancellationToken).ConfigureAwait(false);
-        await output.WriteBoolAsync(Deprecated, cancellationToken).ConfigureAwait(false);
-      }
-      if (IdempotencyLevel != 0) {
-        await output.WriteRawTagAsync(144, 2, cancellationToken).ConfigureAwait(false);
-        await output.WriteEnumAsync((int) IdempotencyLevel, cancellationToken).ConfigureAwait(false);
-      }
-      await uninterpretedOption_.WriteToAsync(output, _repeated_uninterpretedOption_codec, cancellationToken).ConfigureAwait(false);
-    }
-    #endif
-
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
@@ -6029,32 +6027,6 @@ namespace Google.Protobuf.Reflection {
       }
     }
 
-    #if !NET35
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public async stt::Task MergeFromAsync(pb::CodedInputStream input, st::CancellationToken cancellationToken) {
-      uint tag;
-      while ((tag = await input.ReadTagAsync(cancellationToken).ConfigureAwait(false)) != 0) {
-        switch(tag) {
-          default:
-            CustomOptions = await CustomOptions.ReadOrSkipUnknownFieldAsync(input, cancellationToken).ConfigureAwait(false);
-            break;
-          case 264: {
-            Deprecated = await input.ReadBoolAsync(cancellationToken).ConfigureAwait(false);
-            break;
-          }
-          case 272: {
-            idempotencyLevel_ = (global::Google.Protobuf.Reflection.MethodOptions.Types.IdempotencyLevel) await input.ReadEnumAsync(cancellationToken).ConfigureAwait(false);
-            break;
-          }
-          case 7994: {
-            await uninterpretedOption_.AddEntriesFromAsync(input, _repeated_uninterpretedOption_codec, cancellationToken).ConfigureAwait(false);
-            break;
-          }
-        }
-      }
-    }
-    #endif
-
     #region Nested types
     /// <summary>Container for nested types declared in the MethodOptions message type.</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -6081,6 +6053,52 @@ namespace Google.Protobuf.Reflection {
 
   }
 
+  #if !PROTOBUF_NO_ASYNC
+  internal sealed partial class MethodOptions : pb::IAsyncMessage<MethodOptions> {
+    private static readonly pb::AsyncMessageParser<MethodOptions> _parser = new pb::AsyncMessageParser<MethodOptions>(() => new MethodOptions());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::AsyncMessageParser<MethodOptions> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
+      if (Deprecated != false) {
+        await output.WriteRawTagAsync(136, 2, cancellationToken).ConfigureAwait(false);
+        await output.WriteBoolAsync(Deprecated, cancellationToken).ConfigureAwait(false);
+      }
+      if (IdempotencyLevel != 0) {
+        await output.WriteRawTagAsync(144, 2, cancellationToken).ConfigureAwait(false);
+        await output.WriteEnumAsync((int) IdempotencyLevel, cancellationToken).ConfigureAwait(false);
+      }
+      await uninterpretedOption_.WriteToAsync(output, _repeated_uninterpretedOption_codec, cancellationToken).ConfigureAwait(false);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async stt::Task MergeFromAsync(pb::CodedInputStream input, st::CancellationToken cancellationToken) {
+      uint tag;
+      while ((tag = await input.ReadTagAsync(cancellationToken).ConfigureAwait(false)) != 0) {
+        switch(tag) {
+          default:
+            CustomOptions = await CustomOptions.ReadOrSkipUnknownFieldAsync(input, cancellationToken).ConfigureAwait(false);
+            break;
+          case 264: {
+            Deprecated = await input.ReadBoolAsync(cancellationToken).ConfigureAwait(false);
+            break;
+          }
+          case 272: {
+            idempotencyLevel_ = (global::Google.Protobuf.Reflection.MethodOptions.Types.IdempotencyLevel) await input.ReadEnumAsync(cancellationToken).ConfigureAwait(false);
+            break;
+          }
+          case 7994: {
+            await uninterpretedOption_.AddEntriesFromAsync(input, _repeated_uninterpretedOption_codec, cancellationToken).ConfigureAwait(false);
+            break;
+          }
+        }
+      }
+    }
+
+  }
+  #endif
+
   /// <summary>
   /// A message representing a option the parser does not recognize. This only
   /// appears in options protos created by the compiler::Parser class.
@@ -6089,14 +6107,12 @@ namespace Google.Protobuf.Reflection {
   /// or produced by Descriptor::CopyTo()) will never have UninterpretedOptions
   /// in them.
   /// </summary>
-  #if !NET35
-  internal sealed partial class UninterpretedOption : pb::IAsyncMessage<UninterpretedOption> {
-  #else
   internal sealed partial class UninterpretedOption : pb::IMessage<UninterpretedOption> {
-  #endif
+    #if PROTOBUF_NO_ASYNC
     private static readonly pb::MessageParser<UninterpretedOption> _parser = new pb::MessageParser<UninterpretedOption>(() => new UninterpretedOption());
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pb::MessageParser<UninterpretedOption> Parser { get { return _parser; } }
+    #endif
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
@@ -6134,7 +6150,7 @@ namespace Google.Protobuf.Reflection {
     /// <summary>Field number for the "name" field.</summary>
     public const int NameFieldNumber = 2;
     private static readonly pb::FieldCodec<global::Google.Protobuf.Reflection.UninterpretedOption.Types.NamePart> _repeated_name_codec
-        = pb::FieldCodec.ForAsyncMessage(18, global::Google.Protobuf.Reflection.UninterpretedOption.Types.NamePart.Parser);
+        = pb::FieldCodec.ForMessage(18, global::Google.Protobuf.Reflection.UninterpretedOption.Types.NamePart.Parser);
     private readonly pbc::RepeatedField<global::Google.Protobuf.Reflection.UninterpretedOption.Types.NamePart> name_ = new pbc::RepeatedField<global::Google.Protobuf.Reflection.UninterpretedOption.Types.NamePart>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<global::Google.Protobuf.Reflection.UninterpretedOption.Types.NamePart> Name {
@@ -6281,37 +6297,6 @@ namespace Google.Protobuf.Reflection {
       }
     }
 
-    #if !NET35
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
-      await name_.WriteToAsync(output, _repeated_name_codec, cancellationToken).ConfigureAwait(false);
-      if (IdentifierValue.Length != 0) {
-        await output.WriteRawTagAsync(26, cancellationToken).ConfigureAwait(false);
-        await output.WriteStringAsync(IdentifierValue, cancellationToken).ConfigureAwait(false);
-      }
-      if (PositiveIntValue != 0UL) {
-        await output.WriteRawTagAsync(32, cancellationToken).ConfigureAwait(false);
-        await output.WriteUInt64Async(PositiveIntValue, cancellationToken).ConfigureAwait(false);
-      }
-      if (NegativeIntValue != 0L) {
-        await output.WriteRawTagAsync(40, cancellationToken).ConfigureAwait(false);
-        await output.WriteInt64Async(NegativeIntValue, cancellationToken).ConfigureAwait(false);
-      }
-      if (DoubleValue != 0D) {
-        await output.WriteRawTagAsync(49, cancellationToken).ConfigureAwait(false);
-        await output.WriteDoubleAsync(DoubleValue, cancellationToken).ConfigureAwait(false);
-      }
-      if (StringValue.Length != 0) {
-        await output.WriteRawTagAsync(58, cancellationToken).ConfigureAwait(false);
-        await output.WriteBytesAsync(StringValue, cancellationToken).ConfigureAwait(false);
-      }
-      if (AggregateValue.Length != 0) {
-        await output.WriteRawTagAsync(66, cancellationToken).ConfigureAwait(false);
-        await output.WriteStringAsync(AggregateValue, cancellationToken).ConfigureAwait(false);
-      }
-    }
-    #endif
-
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
@@ -6403,48 +6388,6 @@ namespace Google.Protobuf.Reflection {
       }
     }
 
-    #if !NET35
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public async stt::Task MergeFromAsync(pb::CodedInputStream input, st::CancellationToken cancellationToken) {
-      uint tag;
-      while ((tag = await input.ReadTagAsync(cancellationToken).ConfigureAwait(false)) != 0) {
-        switch(tag) {
-          default:
-            await input.SkipLastFieldAsync(cancellationToken).ConfigureAwait(false);
-            break;
-          case 18: {
-            await name_.AddEntriesFromAsync(input, _repeated_name_codec, cancellationToken).ConfigureAwait(false);
-            break;
-          }
-          case 26: {
-            IdentifierValue = await input.ReadStringAsync(cancellationToken).ConfigureAwait(false);
-            break;
-          }
-          case 32: {
-            PositiveIntValue = await input.ReadUInt64Async(cancellationToken).ConfigureAwait(false);
-            break;
-          }
-          case 40: {
-            NegativeIntValue = await input.ReadInt64Async(cancellationToken).ConfigureAwait(false);
-            break;
-          }
-          case 49: {
-            DoubleValue = await input.ReadDoubleAsync(cancellationToken).ConfigureAwait(false);
-            break;
-          }
-          case 58: {
-            StringValue = await input.ReadBytesAsync(cancellationToken).ConfigureAwait(false);
-            break;
-          }
-          case 66: {
-            AggregateValue = await input.ReadStringAsync(cancellationToken).ConfigureAwait(false);
-            break;
-          }
-        }
-      }
-    }
-    #endif
-
     #region Nested types
     /// <summary>Container for nested types declared in the UninterpretedOption message type.</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -6456,14 +6399,12 @@ namespace Google.Protobuf.Reflection {
       /// E.g.,{ ["foo", false], ["bar.baz", true], ["qux", false] } represents
       /// "foo.(bar.baz).qux".
       /// </summary>
-      #if !NET35
-      internal sealed partial class NamePart : pb::IAsyncMessage<NamePart> {
-      #else
       internal sealed partial class NamePart : pb::IMessage<NamePart> {
-      #endif
+        #if PROTOBUF_NO_ASYNC
         private static readonly pb::MessageParser<NamePart> _parser = new pb::MessageParser<NamePart>(() => new NamePart());
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public static pb::MessageParser<NamePart> Parser { get { return _parser; } }
+        #endif
 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public static pbr::MessageDescriptor Descriptor {
@@ -6558,20 +6499,6 @@ namespace Google.Protobuf.Reflection {
           }
         }
 
-        #if !NET35
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-        public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
-          if (NamePart_.Length != 0) {
-            await output.WriteRawTagAsync(10, cancellationToken).ConfigureAwait(false);
-            await output.WriteStringAsync(NamePart_, cancellationToken).ConfigureAwait(false);
-          }
-          if (IsExtension != false) {
-            await output.WriteRawTagAsync(16, cancellationToken).ConfigureAwait(false);
-            await output.WriteBoolAsync(IsExtension, cancellationToken).ConfigureAwait(false);
-          }
-        }
-        #endif
-
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public int CalculateSize() {
           int size = 0;
@@ -6617,7 +6544,26 @@ namespace Google.Protobuf.Reflection {
           }
         }
 
-        #if !NET35
+      }
+
+      #if !PROTOBUF_NO_ASYNC
+      internal sealed partial class NamePart : pb::IAsyncMessage<NamePart> {
+        private static readonly pb::AsyncMessageParser<NamePart> _parser = new pb::AsyncMessageParser<NamePart>(() => new NamePart());
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public static pb::AsyncMessageParser<NamePart> Parser { get { return _parser; } }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
+          if (NamePart_.Length != 0) {
+            await output.WriteRawTagAsync(10, cancellationToken).ConfigureAwait(false);
+            await output.WriteStringAsync(NamePart_, cancellationToken).ConfigureAwait(false);
+          }
+          if (IsExtension != false) {
+            await output.WriteRawTagAsync(16, cancellationToken).ConfigureAwait(false);
+            await output.WriteBoolAsync(IsExtension, cancellationToken).ConfigureAwait(false);
+          }
+        }
+
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public async stt::Task MergeFromAsync(pb::CodedInputStream input, st::CancellationToken cancellationToken) {
           uint tag;
@@ -6637,27 +6583,103 @@ namespace Google.Protobuf.Reflection {
             }
           }
         }
-        #endif
 
       }
+      #endif
 
     }
     #endregion
 
   }
 
+  #if !PROTOBUF_NO_ASYNC
+  internal sealed partial class UninterpretedOption : pb::IAsyncMessage<UninterpretedOption> {
+    private static readonly pb::AsyncMessageParser<UninterpretedOption> _parser = new pb::AsyncMessageParser<UninterpretedOption>(() => new UninterpretedOption());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::AsyncMessageParser<UninterpretedOption> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
+      await name_.WriteToAsync(output, _repeated_name_codec, cancellationToken).ConfigureAwait(false);
+      if (IdentifierValue.Length != 0) {
+        await output.WriteRawTagAsync(26, cancellationToken).ConfigureAwait(false);
+        await output.WriteStringAsync(IdentifierValue, cancellationToken).ConfigureAwait(false);
+      }
+      if (PositiveIntValue != 0UL) {
+        await output.WriteRawTagAsync(32, cancellationToken).ConfigureAwait(false);
+        await output.WriteUInt64Async(PositiveIntValue, cancellationToken).ConfigureAwait(false);
+      }
+      if (NegativeIntValue != 0L) {
+        await output.WriteRawTagAsync(40, cancellationToken).ConfigureAwait(false);
+        await output.WriteInt64Async(NegativeIntValue, cancellationToken).ConfigureAwait(false);
+      }
+      if (DoubleValue != 0D) {
+        await output.WriteRawTagAsync(49, cancellationToken).ConfigureAwait(false);
+        await output.WriteDoubleAsync(DoubleValue, cancellationToken).ConfigureAwait(false);
+      }
+      if (StringValue.Length != 0) {
+        await output.WriteRawTagAsync(58, cancellationToken).ConfigureAwait(false);
+        await output.WriteBytesAsync(StringValue, cancellationToken).ConfigureAwait(false);
+      }
+      if (AggregateValue.Length != 0) {
+        await output.WriteRawTagAsync(66, cancellationToken).ConfigureAwait(false);
+        await output.WriteStringAsync(AggregateValue, cancellationToken).ConfigureAwait(false);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async stt::Task MergeFromAsync(pb::CodedInputStream input, st::CancellationToken cancellationToken) {
+      uint tag;
+      while ((tag = await input.ReadTagAsync(cancellationToken).ConfigureAwait(false)) != 0) {
+        switch(tag) {
+          default:
+            await input.SkipLastFieldAsync(cancellationToken).ConfigureAwait(false);
+            break;
+          case 18: {
+            await name_.AddEntriesFromAsync(input, _repeated_name_codec, cancellationToken).ConfigureAwait(false);
+            break;
+          }
+          case 26: {
+            IdentifierValue = await input.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+            break;
+          }
+          case 32: {
+            PositiveIntValue = await input.ReadUInt64Async(cancellationToken).ConfigureAwait(false);
+            break;
+          }
+          case 40: {
+            NegativeIntValue = await input.ReadInt64Async(cancellationToken).ConfigureAwait(false);
+            break;
+          }
+          case 49: {
+            DoubleValue = await input.ReadDoubleAsync(cancellationToken).ConfigureAwait(false);
+            break;
+          }
+          case 58: {
+            StringValue = await input.ReadBytesAsync(cancellationToken).ConfigureAwait(false);
+            break;
+          }
+          case 66: {
+            AggregateValue = await input.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+            break;
+          }
+        }
+      }
+    }
+
+  }
+  #endif
+
   /// <summary>
   /// Encapsulates information about the original source file from which a
   /// FileDescriptorProto was generated.
   /// </summary>
-  #if !NET35
-  internal sealed partial class SourceCodeInfo : pb::IAsyncMessage<SourceCodeInfo> {
-  #else
   internal sealed partial class SourceCodeInfo : pb::IMessage<SourceCodeInfo> {
-  #endif
+    #if PROTOBUF_NO_ASYNC
     private static readonly pb::MessageParser<SourceCodeInfo> _parser = new pb::MessageParser<SourceCodeInfo>(() => new SourceCodeInfo());
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pb::MessageParser<SourceCodeInfo> Parser { get { return _parser; } }
+    #endif
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
@@ -6689,7 +6711,7 @@ namespace Google.Protobuf.Reflection {
     /// <summary>Field number for the "location" field.</summary>
     public const int LocationFieldNumber = 1;
     private static readonly pb::FieldCodec<global::Google.Protobuf.Reflection.SourceCodeInfo.Types.Location> _repeated_location_codec
-        = pb::FieldCodec.ForAsyncMessage(10, global::Google.Protobuf.Reflection.SourceCodeInfo.Types.Location.Parser);
+        = pb::FieldCodec.ForMessage(10, global::Google.Protobuf.Reflection.SourceCodeInfo.Types.Location.Parser);
     private readonly pbc::RepeatedField<global::Google.Protobuf.Reflection.SourceCodeInfo.Types.Location> location_ = new pbc::RepeatedField<global::Google.Protobuf.Reflection.SourceCodeInfo.Types.Location>();
     /// <summary>
     /// A Location identifies a piece of source code in a .proto file which
@@ -6775,13 +6797,6 @@ namespace Google.Protobuf.Reflection {
       location_.WriteTo(output, _repeated_location_codec);
     }
 
-    #if !NET35
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
-      await location_.WriteToAsync(output, _repeated_location_codec, cancellationToken).ConfigureAwait(false);
-    }
-    #endif
-
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
@@ -6813,36 +6828,16 @@ namespace Google.Protobuf.Reflection {
       }
     }
 
-    #if !NET35
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public async stt::Task MergeFromAsync(pb::CodedInputStream input, st::CancellationToken cancellationToken) {
-      uint tag;
-      while ((tag = await input.ReadTagAsync(cancellationToken).ConfigureAwait(false)) != 0) {
-        switch(tag) {
-          default:
-            await input.SkipLastFieldAsync(cancellationToken).ConfigureAwait(false);
-            break;
-          case 10: {
-            await location_.AddEntriesFromAsync(input, _repeated_location_codec, cancellationToken).ConfigureAwait(false);
-            break;
-          }
-        }
-      }
-    }
-    #endif
-
     #region Nested types
     /// <summary>Container for nested types declared in the SourceCodeInfo message type.</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static partial class Types {
-      #if !NET35
-      internal sealed partial class Location : pb::IAsyncMessage<Location> {
-      #else
       internal sealed partial class Location : pb::IMessage<Location> {
-      #endif
+        #if PROTOBUF_NO_ASYNC
         private static readonly pb::MessageParser<Location> _parser = new pb::MessageParser<Location>(() => new Location());
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public static pb::MessageParser<Location> Parser { get { return _parser; } }
+        #endif
 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public static pbr::MessageDescriptor Descriptor {
@@ -7060,23 +7055,6 @@ namespace Google.Protobuf.Reflection {
           leadingDetachedComments_.WriteTo(output, _repeated_leadingDetachedComments_codec);
         }
 
-        #if !NET35
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-        public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
-          await path_.WriteToAsync(output, _repeated_path_codec, cancellationToken).ConfigureAwait(false);
-          await span_.WriteToAsync(output, _repeated_span_codec, cancellationToken).ConfigureAwait(false);
-          if (LeadingComments.Length != 0) {
-            await output.WriteRawTagAsync(26, cancellationToken).ConfigureAwait(false);
-            await output.WriteStringAsync(LeadingComments, cancellationToken).ConfigureAwait(false);
-          }
-          if (TrailingComments.Length != 0) {
-            await output.WriteRawTagAsync(34, cancellationToken).ConfigureAwait(false);
-            await output.WriteStringAsync(TrailingComments, cancellationToken).ConfigureAwait(false);
-          }
-          await leadingDetachedComments_.WriteToAsync(output, _repeated_leadingDetachedComments_codec, cancellationToken).ConfigureAwait(false);
-        }
-        #endif
-
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public int CalculateSize() {
           int size = 0;
@@ -7142,7 +7120,29 @@ namespace Google.Protobuf.Reflection {
           }
         }
 
-        #if !NET35
+      }
+
+      #if !PROTOBUF_NO_ASYNC
+      internal sealed partial class Location : pb::IAsyncMessage<Location> {
+        private static readonly pb::AsyncMessageParser<Location> _parser = new pb::AsyncMessageParser<Location>(() => new Location());
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public static pb::AsyncMessageParser<Location> Parser { get { return _parser; } }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
+          await path_.WriteToAsync(output, _repeated_path_codec, cancellationToken).ConfigureAwait(false);
+          await span_.WriteToAsync(output, _repeated_span_codec, cancellationToken).ConfigureAwait(false);
+          if (LeadingComments.Length != 0) {
+            await output.WriteRawTagAsync(26, cancellationToken).ConfigureAwait(false);
+            await output.WriteStringAsync(LeadingComments, cancellationToken).ConfigureAwait(false);
+          }
+          if (TrailingComments.Length != 0) {
+            await output.WriteRawTagAsync(34, cancellationToken).ConfigureAwait(false);
+            await output.WriteStringAsync(TrailingComments, cancellationToken).ConfigureAwait(false);
+          }
+          await leadingDetachedComments_.WriteToAsync(output, _repeated_leadingDetachedComments_codec, cancellationToken).ConfigureAwait(false);
+        }
+
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public async stt::Task MergeFromAsync(pb::CodedInputStream input, st::CancellationToken cancellationToken) {
           uint tag;
@@ -7176,28 +7176,56 @@ namespace Google.Protobuf.Reflection {
             }
           }
         }
-        #endif
 
       }
+      #endif
 
     }
     #endregion
 
   }
 
+  #if !PROTOBUF_NO_ASYNC
+  internal sealed partial class SourceCodeInfo : pb::IAsyncMessage<SourceCodeInfo> {
+    private static readonly pb::AsyncMessageParser<SourceCodeInfo> _parser = new pb::AsyncMessageParser<SourceCodeInfo>(() => new SourceCodeInfo());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::AsyncMessageParser<SourceCodeInfo> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
+      await location_.WriteToAsync(output, _repeated_location_codec, cancellationToken).ConfigureAwait(false);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async stt::Task MergeFromAsync(pb::CodedInputStream input, st::CancellationToken cancellationToken) {
+      uint tag;
+      while ((tag = await input.ReadTagAsync(cancellationToken).ConfigureAwait(false)) != 0) {
+        switch(tag) {
+          default:
+            await input.SkipLastFieldAsync(cancellationToken).ConfigureAwait(false);
+            break;
+          case 10: {
+            await location_.AddEntriesFromAsync(input, _repeated_location_codec, cancellationToken).ConfigureAwait(false);
+            break;
+          }
+        }
+      }
+    }
+
+  }
+  #endif
+
   /// <summary>
   /// Describes the relationship between generated code and its original source
   /// file. A GeneratedCodeInfo message is associated with only one generated
   /// source file, but may contain references to different source .proto files.
   /// </summary>
-  #if !NET35
-  internal sealed partial class GeneratedCodeInfo : pb::IAsyncMessage<GeneratedCodeInfo> {
-  #else
   internal sealed partial class GeneratedCodeInfo : pb::IMessage<GeneratedCodeInfo> {
-  #endif
+    #if PROTOBUF_NO_ASYNC
     private static readonly pb::MessageParser<GeneratedCodeInfo> _parser = new pb::MessageParser<GeneratedCodeInfo>(() => new GeneratedCodeInfo());
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pb::MessageParser<GeneratedCodeInfo> Parser { get { return _parser; } }
+    #endif
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
@@ -7229,7 +7257,7 @@ namespace Google.Protobuf.Reflection {
     /// <summary>Field number for the "annotation" field.</summary>
     public const int AnnotationFieldNumber = 1;
     private static readonly pb::FieldCodec<global::Google.Protobuf.Reflection.GeneratedCodeInfo.Types.Annotation> _repeated_annotation_codec
-        = pb::FieldCodec.ForAsyncMessage(10, global::Google.Protobuf.Reflection.GeneratedCodeInfo.Types.Annotation.Parser);
+        = pb::FieldCodec.ForMessage(10, global::Google.Protobuf.Reflection.GeneratedCodeInfo.Types.Annotation.Parser);
     private readonly pbc::RepeatedField<global::Google.Protobuf.Reflection.GeneratedCodeInfo.Types.Annotation> annotation_ = new pbc::RepeatedField<global::Google.Protobuf.Reflection.GeneratedCodeInfo.Types.Annotation>();
     /// <summary>
     /// An Annotation connects some span of text in generated code to an element
@@ -7274,13 +7302,6 @@ namespace Google.Protobuf.Reflection {
       annotation_.WriteTo(output, _repeated_annotation_codec);
     }
 
-    #if !NET35
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
-      await annotation_.WriteToAsync(output, _repeated_annotation_codec, cancellationToken).ConfigureAwait(false);
-    }
-    #endif
-
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
@@ -7312,36 +7333,16 @@ namespace Google.Protobuf.Reflection {
       }
     }
 
-    #if !NET35
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public async stt::Task MergeFromAsync(pb::CodedInputStream input, st::CancellationToken cancellationToken) {
-      uint tag;
-      while ((tag = await input.ReadTagAsync(cancellationToken).ConfigureAwait(false)) != 0) {
-        switch(tag) {
-          default:
-            await input.SkipLastFieldAsync(cancellationToken).ConfigureAwait(false);
-            break;
-          case 10: {
-            await annotation_.AddEntriesFromAsync(input, _repeated_annotation_codec, cancellationToken).ConfigureAwait(false);
-            break;
-          }
-        }
-      }
-    }
-    #endif
-
     #region Nested types
     /// <summary>Container for nested types declared in the GeneratedCodeInfo message type.</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static partial class Types {
-      #if !NET35
-      internal sealed partial class Annotation : pb::IAsyncMessage<Annotation> {
-      #else
       internal sealed partial class Annotation : pb::IMessage<Annotation> {
-      #endif
+        #if PROTOBUF_NO_ASYNC
         private static readonly pb::MessageParser<Annotation> _parser = new pb::MessageParser<Annotation>(() => new Annotation());
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public static pb::MessageParser<Annotation> Parser { get { return _parser; } }
+        #endif
 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public static pbr::MessageDescriptor Descriptor {
@@ -7484,25 +7485,6 @@ namespace Google.Protobuf.Reflection {
           }
         }
 
-        #if !NET35
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-        public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
-          await path_.WriteToAsync(output, _repeated_path_codec, cancellationToken).ConfigureAwait(false);
-          if (SourceFile.Length != 0) {
-            await output.WriteRawTagAsync(18, cancellationToken).ConfigureAwait(false);
-            await output.WriteStringAsync(SourceFile, cancellationToken).ConfigureAwait(false);
-          }
-          if (Begin != 0) {
-            await output.WriteRawTagAsync(24, cancellationToken).ConfigureAwait(false);
-            await output.WriteInt32Async(Begin, cancellationToken).ConfigureAwait(false);
-          }
-          if (End != 0) {
-            await output.WriteRawTagAsync(32, cancellationToken).ConfigureAwait(false);
-            await output.WriteInt32Async(End, cancellationToken).ConfigureAwait(false);
-          }
-        }
-        #endif
-
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public int CalculateSize() {
           int size = 0;
@@ -7565,7 +7547,31 @@ namespace Google.Protobuf.Reflection {
           }
         }
 
-        #if !NET35
+      }
+
+      #if !PROTOBUF_NO_ASYNC
+      internal sealed partial class Annotation : pb::IAsyncMessage<Annotation> {
+        private static readonly pb::AsyncMessageParser<Annotation> _parser = new pb::AsyncMessageParser<Annotation>(() => new Annotation());
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public static pb::AsyncMessageParser<Annotation> Parser { get { return _parser; } }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
+          await path_.WriteToAsync(output, _repeated_path_codec, cancellationToken).ConfigureAwait(false);
+          if (SourceFile.Length != 0) {
+            await output.WriteRawTagAsync(18, cancellationToken).ConfigureAwait(false);
+            await output.WriteStringAsync(SourceFile, cancellationToken).ConfigureAwait(false);
+          }
+          if (Begin != 0) {
+            await output.WriteRawTagAsync(24, cancellationToken).ConfigureAwait(false);
+            await output.WriteInt32Async(Begin, cancellationToken).ConfigureAwait(false);
+          }
+          if (End != 0) {
+            await output.WriteRawTagAsync(32, cancellationToken).ConfigureAwait(false);
+            await output.WriteInt32Async(End, cancellationToken).ConfigureAwait(false);
+          }
+        }
+
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public async stt::Task MergeFromAsync(pb::CodedInputStream input, st::CancellationToken cancellationToken) {
           uint tag;
@@ -7594,14 +7600,44 @@ namespace Google.Protobuf.Reflection {
             }
           }
         }
-        #endif
 
       }
+      #endif
 
     }
     #endregion
 
   }
+
+  #if !PROTOBUF_NO_ASYNC
+  internal sealed partial class GeneratedCodeInfo : pb::IAsyncMessage<GeneratedCodeInfo> {
+    private static readonly pb::AsyncMessageParser<GeneratedCodeInfo> _parser = new pb::AsyncMessageParser<GeneratedCodeInfo>(() => new GeneratedCodeInfo());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::AsyncMessageParser<GeneratedCodeInfo> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
+      await annotation_.WriteToAsync(output, _repeated_annotation_codec, cancellationToken).ConfigureAwait(false);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async stt::Task MergeFromAsync(pb::CodedInputStream input, st::CancellationToken cancellationToken) {
+      uint tag;
+      while ((tag = await input.ReadTagAsync(cancellationToken).ConfigureAwait(false)) != 0) {
+        switch(tag) {
+          default:
+            await input.SkipLastFieldAsync(cancellationToken).ConfigureAwait(false);
+            break;
+          case 10: {
+            await annotation_.AddEntriesFromAsync(input, _repeated_annotation_codec, cancellationToken).ConfigureAwait(false);
+            break;
+          }
+        }
+      }
+    }
+
+  }
+  #endif
 
   #endregion
 

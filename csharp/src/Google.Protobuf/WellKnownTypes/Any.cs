@@ -7,7 +7,7 @@ using pb = global::Google.Protobuf;
 using pbc = global::Google.Protobuf.Collections;
 using pbr = global::Google.Protobuf.Reflection;
 using scg = global::System.Collections.Generic;
-#if !NET35
+#if !PROTOBUF_NO_ASYNC
 using st = global::System.Threading;
 using stt = global::System.Threading.Tasks;
 #endif
@@ -111,14 +111,12 @@ namespace Google.Protobuf.WellKnownTypes {
   ///       "value": "1.212s"
   ///     }
   /// </summary>
-  #if !NET35
-  public sealed partial class Any : pb::IAsyncMessage<Any> {
-  #else
   public sealed partial class Any : pb::IMessage<Any> {
-  #endif
+    #if PROTOBUF_NO_ASYNC
     private static readonly pb::MessageParser<Any> _parser = new pb::MessageParser<Any>(() => new Any());
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pb::MessageParser<Any> Parser { get { return _parser; } }
+    #endif
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
@@ -239,20 +237,6 @@ namespace Google.Protobuf.WellKnownTypes {
       }
     }
 
-    #if !NET35
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
-      if (TypeUrl.Length != 0) {
-        await output.WriteRawTagAsync(10, cancellationToken).ConfigureAwait(false);
-        await output.WriteStringAsync(TypeUrl, cancellationToken).ConfigureAwait(false);
-      }
-      if (Value.Length != 0) {
-        await output.WriteRawTagAsync(18, cancellationToken).ConfigureAwait(false);
-        await output.WriteBytesAsync(Value, cancellationToken).ConfigureAwait(false);
-      }
-    }
-    #endif
-
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
@@ -298,7 +282,26 @@ namespace Google.Protobuf.WellKnownTypes {
       }
     }
 
-    #if !NET35
+  }
+
+  #if !PROTOBUF_NO_ASYNC
+  public sealed partial class Any : pb::IAsyncMessage<Any> {
+    private static readonly pb::AsyncMessageParser<Any> _parser = new pb::AsyncMessageParser<Any>(() => new Any());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::AsyncMessageParser<Any> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
+      if (TypeUrl.Length != 0) {
+        await output.WriteRawTagAsync(10, cancellationToken).ConfigureAwait(false);
+        await output.WriteStringAsync(TypeUrl, cancellationToken).ConfigureAwait(false);
+      }
+      if (Value.Length != 0) {
+        await output.WriteRawTagAsync(18, cancellationToken).ConfigureAwait(false);
+        await output.WriteBytesAsync(Value, cancellationToken).ConfigureAwait(false);
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public async stt::Task MergeFromAsync(pb::CodedInputStream input, st::CancellationToken cancellationToken) {
       uint tag;
@@ -318,9 +321,9 @@ namespace Google.Protobuf.WellKnownTypes {
         }
       }
     }
-    #endif
 
   }
+  #endif
 
   #endregion
 

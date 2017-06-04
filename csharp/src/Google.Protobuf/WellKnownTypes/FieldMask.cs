@@ -7,7 +7,7 @@ using pb = global::Google.Protobuf;
 using pbc = global::Google.Protobuf.Collections;
 using pbr = global::Google.Protobuf.Reflection;
 using scg = global::System.Collections.Generic;
-#if !NET35
+#if !PROTOBUF_NO_ASYNC
 using st = global::System.Threading;
 using stt = global::System.Threading.Tasks;
 #endif
@@ -244,14 +244,12 @@ namespace Google.Protobuf.WellKnownTypes {
   /// Note that oneof type names ("test_oneof" in this case) cannot be used in
   /// paths.
   /// </summary>
-  #if !NET35
-  public sealed partial class FieldMask : pb::IAsyncMessage<FieldMask> {
-  #else
   public sealed partial class FieldMask : pb::IMessage<FieldMask> {
-  #endif
+    #if PROTOBUF_NO_ASYNC
     private static readonly pb::MessageParser<FieldMask> _parser = new pb::MessageParser<FieldMask>(() => new FieldMask());
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pb::MessageParser<FieldMask> Parser { get { return _parser; } }
+    #endif
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
@@ -327,13 +325,6 @@ namespace Google.Protobuf.WellKnownTypes {
       paths_.WriteTo(output, _repeated_paths_codec);
     }
 
-    #if !NET35
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
-      await paths_.WriteToAsync(output, _repeated_paths_codec, cancellationToken).ConfigureAwait(false);
-    }
-    #endif
-
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
@@ -365,7 +356,19 @@ namespace Google.Protobuf.WellKnownTypes {
       }
     }
 
-    #if !NET35
+  }
+
+  #if !PROTOBUF_NO_ASYNC
+  public sealed partial class FieldMask : pb::IAsyncMessage<FieldMask> {
+    private static readonly pb::AsyncMessageParser<FieldMask> _parser = new pb::AsyncMessageParser<FieldMask>(() => new FieldMask());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::AsyncMessageParser<FieldMask> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
+      await paths_.WriteToAsync(output, _repeated_paths_codec, cancellationToken).ConfigureAwait(false);
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public async stt::Task MergeFromAsync(pb::CodedInputStream input, st::CancellationToken cancellationToken) {
       uint tag;
@@ -381,9 +384,9 @@ namespace Google.Protobuf.WellKnownTypes {
         }
       }
     }
-    #endif
 
   }
+  #endif
 
   #endregion
 
