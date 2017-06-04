@@ -178,7 +178,7 @@ namespace Google.Protobuf
             uint tag;
             while (true)
             {
-                tag = await ReadTagAsync(cancellationToken);
+                tag = await ReadTagAsync(cancellationToken).ConfigureAwait(false);
                 if (tag == 0)
                 {
                     throw InvalidProtocolBufferException.TruncatedMessage();
@@ -264,7 +264,7 @@ namespace Google.Protobuf
         /// </summary>
         public async Task<bool> ReadBoolAsync(CancellationToken cancellationToken)
         {
-            return await ReadRawVarint32Async(cancellationToken) != 0;
+            return await ReadRawVarint32Async(cancellationToken).ConfigureAwait(false) != 0;
         }
 
         /// <summary>
@@ -293,7 +293,7 @@ namespace Google.Protobuf
         /// <summary>
         /// Reads an embedded message field value from the stream.
         /// </summary>   
-        public async Task ReadMessageAsync(IMessage builder, CancellationToken cancellationToken)
+        public async Task ReadMessageAsync(IAsyncMessage builder, CancellationToken cancellationToken)
         {
             int length = await ReadLengthAsync(cancellationToken).ConfigureAwait(false);
             if (recursionDepth >= recursionLimit)
@@ -303,14 +303,7 @@ namespace Google.Protobuf
             int oldLimit = PushLimit(length);
             ++recursionDepth;
 
-            if (builder is IAsyncMessage asyncMessage)
-            {
-                await asyncMessage.MergeFromAsync(this, cancellationToken).ConfigureAwait(false);
-            }
-            else
-            {
-                builder.MergeFrom(this);
-            }
+            await builder.MergeFromAsync(this, cancellationToken).ConfigureAwait(false);
 
             CheckReadEndOfStreamTag();
             // Check that we've read exactly as much data as expected.
@@ -531,47 +524,51 @@ namespace Google.Protobuf
             return (uint)result;
         }
 
-        ///// <summary>
-        ///// Reads a varint from the input one byte at a time, so that it does not
-        ///// read any bytes after the end of the varint. If you simply wrapped the
-        ///// stream in a CodedInputStream and used ReadRawVarint32(Stream)
-        ///// then you would probably end up reading past the end of the varint since
-        ///// CodedInputStream buffers its input.
-        ///// </summary>
-        ///// <param name="input"></param>
-        ///// <returns></returns>
-        //internal static uint ReadRawVarint32(Stream input)
-        //{
-        //    int result = 0;
-        //    int offset = 0;
-        //    for (; offset < 32; offset += 7)
-        //    {
-        //        int b = input.ReadByte();
-        //        if (b == -1)
-        //        {
-        //            throw InvalidProtocolBufferException.TruncatedMessage();
-        //        }
-        //        result |= (b & 0x7f) << offset;
-        //        if ((b & 0x80) == 0)
-        //        {
-        //            return (uint) result;
-        //        }
-        //    }
-        //    // Keep reading up to 64 bits.
-        //    for (; offset < 64; offset += 7)
-        //    {
-        //        int b = input.ReadByte();
-        //        if (b == -1)
-        //        {
-        //            throw InvalidProtocolBufferException.TruncatedMessage();
-        //        }
-        //        if ((b & 0x80) == 0)
-        //        {
-        //            return (uint) result;
-        //        }
-        //    }
-        //    throw InvalidProtocolBufferException.MalformedVarint();
-        //}
+        /// <summary>
+        /// Reads a varint from the input one byte at a time, so that it does not
+        /// read any bytes after the end of the varint. If you simply wrapped the
+        /// stream in a CodedInputStream and used ReadRawVarint32(Stream)
+        /// then you would probably end up reading past the end of the varint since
+        /// CodedInputStream buffers its input.
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        internal static async Task<uint> ReadRawVarint32Async(Stream input, CancellationToken cancellationToken)
+        {
+            int result = 0;
+            int offset = 0;
+            for (; offset < 32; offset += 7)
+            {
+                var buff = new byte[1];
+                await input.ReadAsync(buff, 0, 1, cancellationToken).ConfigureAwait(false);
+                int b = buff[0];
+                if (b == -1)
+                {
+                    throw InvalidProtocolBufferException.TruncatedMessage();
+                }
+                result |= (b & 0x7f) << offset;
+                if ((b & 0x80) == 0)
+                {
+                    return (uint)result;
+                }
+            }
+            // Keep reading up to 64 bits.
+            for (; offset < 64; offset += 7)
+            {
+                var buff = new byte[1];
+                await input.ReadAsync(buff, 0, 1, cancellationToken).ConfigureAwait(false);
+                int b = buff[0];
+                if (b == -1)
+                {
+                    throw InvalidProtocolBufferException.TruncatedMessage();
+                }
+                if ((b & 0x80) == 0)
+                {
+                    return (uint)result;
+                }
+            }
+            throw InvalidProtocolBufferException.MalformedVarint();
+        }
 
         /// <summary>
         /// Reads a raw varint from the stream.

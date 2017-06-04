@@ -29,9 +29,11 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #endregion
-    
+
 using System;
 using System.IO;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Google.Protobuf
 {
@@ -86,6 +88,17 @@ namespace Google.Protobuf
             if (bytesLeft > 0)
             {
                 int bytesRead = proxied.Read(buffer, offset, Math.Min(bytesLeft, count));
+                bytesLeft -= bytesRead;
+                return bytesRead;
+            }
+            return 0;
+        }
+
+        public async override Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+        {
+            if (bytesLeft > 0)
+            {
+                int bytesRead = await proxied.ReadAsync(buffer, offset, Math.Min(bytesLeft, count), cancellationToken).ConfigureAwait(false);
                 bytesLeft -= bytesRead;
                 return bytesRead;
             }
