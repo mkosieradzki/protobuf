@@ -34,7 +34,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-#if !NET35
+#if !PROTOBUF_NO_ASYNC
 using System.Threading;
 using System.Threading.Tasks;
 #endif
@@ -127,7 +127,7 @@ namespace Google.Protobuf.Collections
             }
         }
 
-#if !NET35
+#if !PROTOBUF_NO_ASYNC
         /// <summary>
         /// Adds the entries from the given input stream, decoding them with the specified codec.
         /// </summary>
@@ -253,7 +253,7 @@ namespace Google.Protobuf.Collections
             }
         }
 
-#if !NET35
+#if !PROTOBUF_NO_ASYNC
         /// <summary>
         /// Writes the contents of this collection to the given <see cref="CodedOutputStream"/>,
         /// encoding each value using the specified codec.

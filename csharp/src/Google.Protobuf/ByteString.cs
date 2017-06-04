@@ -186,7 +186,7 @@ namespace Google.Protobuf
             var memoryStream = new MemoryStream(capacity);
             // We have to specify the buffer size here, as there's no overload accepting the cancellation token
             // alone. But it's documented to use 81920 by default if not specified.
-            await stream.CopyToAsync(memoryStream, 81920, cancellationToken);
+            await stream.CopyToAsync(memoryStream, 81920, cancellationToken).ConfigureAwait(false);
 #if NETSTANDARD1_0
             byte[] bytes = memoryStream.ToArray();
 #else
@@ -382,7 +382,7 @@ namespace Google.Protobuf
             outputStream.WriteRawBytes(bytes, 0, bytes.Length);
         }
 
-#if !NET35
+#if !PROTOBUF_NO_ASYNC
         internal Task WriteRawBytesToAsync(CodedOutputStream outputStream, CancellationToken cancellationToken) => outputStream.WriteRawBytesAsync(bytes, 0, bytes.Length, cancellationToken);
 #endif
 

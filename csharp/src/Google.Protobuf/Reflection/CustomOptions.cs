@@ -32,7 +32,7 @@
 
 using System;
 using System.Collections.Generic;
-#if !NET35
+#if !PROTOBUF_NO_ASYNC
 using System.Threading;
 using System.Threading.Tasks;
 #endif
@@ -355,7 +355,7 @@ namespace Google.Protobuf.Reflection
             }
         }
 
-#if !NET35
+#if !PROTOBUF_NO_ASYNC
         /// <summary>
         /// Reads an unknown field, either parsing it and storing it or skipping it.
         /// </summary>

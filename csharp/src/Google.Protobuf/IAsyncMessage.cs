@@ -30,7 +30,7 @@
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #endregion
 
-using System;
+#if !PROTOBUF_NO_ASYNC
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -47,3 +47,5 @@ namespace Google.Protobuf
 
     }
 }
+
+#endif

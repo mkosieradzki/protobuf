@@ -448,7 +448,7 @@ namespace Google.Protobuf.Collections
             }
         }
 
-#if !NET35
+#if !PROTOBUF_NO_ASYNC
         /// <summary>
         /// Adds entries to the map from the given stream.
         /// </summary>
@@ -652,7 +652,7 @@ namespace Google.Protobuf.Collections
             /// This is nested inside Codec as it's tightly coupled to the associated codec,
             /// and it's simpler if it has direct access to all its fields.
             /// </summary>
-#if !NET35
+#if !PROTOBUF_NO_ASYNC
             internal class MessageAdapter : IAsyncMessage
 #else
             internal class MessageAdapter : IMessage
@@ -708,7 +708,7 @@ namespace Google.Protobuf.Collections
                     codec.valueCodec.WriteTagAndValue(output, Value);
                 }
 
-#if !NET35
+#if !PROTOBUF_NO_ASYNC
                 public async Task MergeFromAsync(CodedInputStream input, CancellationToken cancellationToken)
                 {
                     uint tag;
