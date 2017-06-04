@@ -540,12 +540,11 @@ namespace Google.Protobuf
             for (; offset < 32; offset += 7)
             {
                 var buff = new byte[1];
-                await input.ReadAsync(buff, 0, 1, cancellationToken).ConfigureAwait(false);
-                int b = buff[0];
-                if (b == -1)
+                if (await input.ReadAsync(buff, 0, 1, cancellationToken).ConfigureAwait(false) == 0)
                 {
                     throw InvalidProtocolBufferException.TruncatedMessage();
                 }
+                int b = buff[0];
                 result |= (b & 0x7f) << offset;
                 if ((b & 0x80) == 0)
                 {
@@ -556,12 +555,11 @@ namespace Google.Protobuf
             for (; offset < 64; offset += 7)
             {
                 var buff = new byte[1];
-                await input.ReadAsync(buff, 0, 1, cancellationToken).ConfigureAwait(false);
-                int b = buff[0];
-                if (b == -1)
+                if (await input.ReadAsync(buff, 0, 1, cancellationToken).ConfigureAwait(false) == 0)
                 {
                     throw InvalidProtocolBufferException.TruncatedMessage();
                 }
+                int b = buff[0];
                 if ((b & 0x80) == 0)
                 {
                     return (uint)result;
