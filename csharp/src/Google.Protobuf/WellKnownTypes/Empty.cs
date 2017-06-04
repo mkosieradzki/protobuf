@@ -41,6 +41,31 @@ namespace Google.Protobuf.WellKnownTypes {
 
   }
   #region Messages
+  #if !PROTOBUF_NO_ASYNC
+  public sealed partial class Empty : pb::IAsyncMessage<Empty> {
+    private static readonly pb::AsyncMessageParser<Empty> _parser = new pb::AsyncMessageParser<Empty>(() => new Empty());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::AsyncMessageParser<Empty> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async stt::Task MergeFromAsync(pb::CodedInputStream input, st::CancellationToken cancellationToken) {
+      uint tag;
+      while ((tag = await input.ReadTagAsync(cancellationToken).ConfigureAwait(false)) != 0) {
+        switch(tag) {
+          default:
+            await input.SkipLastFieldAsync(cancellationToken).ConfigureAwait(false);
+            break;
+        }
+      }
+    }
+
+  }
+  #endif
+
   /// <summary>
   /// A generic empty message that you can re-use to avoid defining duplicated
   /// empty messages in your APIs. A typical example is to use it as the request
@@ -142,31 +167,6 @@ namespace Google.Protobuf.WellKnownTypes {
     }
 
   }
-
-  #if !PROTOBUF_NO_ASYNC
-  public sealed partial class Empty : pb::IAsyncMessage<Empty> {
-    private static readonly pb::AsyncMessageParser<Empty> _parser = new pb::AsyncMessageParser<Empty>(() => new Empty());
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::AsyncMessageParser<Empty> Parser { get { return _parser; } }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public async stt::Task MergeFromAsync(pb::CodedInputStream input, st::CancellationToken cancellationToken) {
-      uint tag;
-      while ((tag = await input.ReadTagAsync(cancellationToken).ConfigureAwait(false)) != 0) {
-        switch(tag) {
-          default:
-            await input.SkipLastFieldAsync(cancellationToken).ConfigureAwait(false);
-            break;
-        }
-      }
-    }
-
-  }
-  #endif
 
   #endregion
 

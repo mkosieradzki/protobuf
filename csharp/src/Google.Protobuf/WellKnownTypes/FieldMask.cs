@@ -42,6 +42,36 @@ namespace Google.Protobuf.WellKnownTypes {
 
   }
   #region Messages
+  #if !PROTOBUF_NO_ASYNC
+  public sealed partial class FieldMask : pb::IAsyncMessage<FieldMask> {
+    private static readonly pb::AsyncMessageParser<FieldMask> _parser = new pb::AsyncMessageParser<FieldMask>(() => new FieldMask());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::AsyncMessageParser<FieldMask> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
+      await paths_.WriteToAsync(output, _repeated_paths_codec, cancellationToken).ConfigureAwait(false);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async stt::Task MergeFromAsync(pb::CodedInputStream input, st::CancellationToken cancellationToken) {
+      uint tag;
+      while ((tag = await input.ReadTagAsync(cancellationToken).ConfigureAwait(false)) != 0) {
+        switch(tag) {
+          default:
+            await input.SkipLastFieldAsync(cancellationToken).ConfigureAwait(false);
+            break;
+          case 10: {
+            await paths_.AddEntriesFromAsync(input, _repeated_paths_codec, cancellationToken).ConfigureAwait(false);
+            break;
+          }
+        }
+      }
+    }
+
+  }
+  #endif
+
   /// <summary>
   /// `FieldMask` represents a set of symbolic field paths, for example:
   ///
@@ -357,36 +387,6 @@ namespace Google.Protobuf.WellKnownTypes {
     }
 
   }
-
-  #if !PROTOBUF_NO_ASYNC
-  public sealed partial class FieldMask : pb::IAsyncMessage<FieldMask> {
-    private static readonly pb::AsyncMessageParser<FieldMask> _parser = new pb::AsyncMessageParser<FieldMask>(() => new FieldMask());
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::AsyncMessageParser<FieldMask> Parser { get { return _parser; } }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
-      await paths_.WriteToAsync(output, _repeated_paths_codec, cancellationToken).ConfigureAwait(false);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public async stt::Task MergeFromAsync(pb::CodedInputStream input, st::CancellationToken cancellationToken) {
-      uint tag;
-      while ((tag = await input.ReadTagAsync(cancellationToken).ConfigureAwait(false)) != 0) {
-        switch(tag) {
-          default:
-            await input.SkipLastFieldAsync(cancellationToken).ConfigureAwait(false);
-            break;
-          case 10: {
-            await paths_.AddEntriesFromAsync(input, _repeated_paths_codec, cancellationToken).ConfigureAwait(false);
-            break;
-          }
-        }
-      }
-    }
-
-  }
-  #endif
 
   #endregion
 

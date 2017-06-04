@@ -175,6 +175,116 @@ namespace Google.Protobuf.TestProtos {
   #endregion
 
   #region Messages
+  #if !PROTOBUF_NO_ASYNC
+  public sealed partial class TestMap : pb::IAsyncMessage<TestMap> {
+    private static readonly pb::AsyncMessageParser<TestMap> _parser = new pb::AsyncMessageParser<TestMap>(() => new TestMap());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::AsyncMessageParser<TestMap> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
+      await mapInt32Int32_.WriteToAsync(output, _map_mapInt32Int32_codec, cancellationToken).ConfigureAwait(false);
+      await mapInt64Int64_.WriteToAsync(output, _map_mapInt64Int64_codec, cancellationToken).ConfigureAwait(false);
+      await mapUint32Uint32_.WriteToAsync(output, _map_mapUint32Uint32_codec, cancellationToken).ConfigureAwait(false);
+      await mapUint64Uint64_.WriteToAsync(output, _map_mapUint64Uint64_codec, cancellationToken).ConfigureAwait(false);
+      await mapSint32Sint32_.WriteToAsync(output, _map_mapSint32Sint32_codec, cancellationToken).ConfigureAwait(false);
+      await mapSint64Sint64_.WriteToAsync(output, _map_mapSint64Sint64_codec, cancellationToken).ConfigureAwait(false);
+      await mapFixed32Fixed32_.WriteToAsync(output, _map_mapFixed32Fixed32_codec, cancellationToken).ConfigureAwait(false);
+      await mapFixed64Fixed64_.WriteToAsync(output, _map_mapFixed64Fixed64_codec, cancellationToken).ConfigureAwait(false);
+      await mapSfixed32Sfixed32_.WriteToAsync(output, _map_mapSfixed32Sfixed32_codec, cancellationToken).ConfigureAwait(false);
+      await mapSfixed64Sfixed64_.WriteToAsync(output, _map_mapSfixed64Sfixed64_codec, cancellationToken).ConfigureAwait(false);
+      await mapInt32Float_.WriteToAsync(output, _map_mapInt32Float_codec, cancellationToken).ConfigureAwait(false);
+      await mapInt32Double_.WriteToAsync(output, _map_mapInt32Double_codec, cancellationToken).ConfigureAwait(false);
+      await mapBoolBool_.WriteToAsync(output, _map_mapBoolBool_codec, cancellationToken).ConfigureAwait(false);
+      await mapStringString_.WriteToAsync(output, _map_mapStringString_codec, cancellationToken).ConfigureAwait(false);
+      await mapInt32Bytes_.WriteToAsync(output, _map_mapInt32Bytes_codec, cancellationToken).ConfigureAwait(false);
+      await mapInt32Enum_.WriteToAsync(output, _map_mapInt32Enum_codec, cancellationToken).ConfigureAwait(false);
+      await mapInt32ForeignMessage_.WriteToAsync(output, _map_mapInt32ForeignMessage_codec, cancellationToken).ConfigureAwait(false);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async stt::Task MergeFromAsync(pb::CodedInputStream input, st::CancellationToken cancellationToken) {
+      uint tag;
+      while ((tag = await input.ReadTagAsync(cancellationToken).ConfigureAwait(false)) != 0) {
+        switch(tag) {
+          default:
+            await input.SkipLastFieldAsync(cancellationToken).ConfigureAwait(false);
+            break;
+          case 10: {
+            await mapInt32Int32_.AddEntriesFromAsync(input, _map_mapInt32Int32_codec, cancellationToken).ConfigureAwait(false);
+            break;
+          }
+          case 18: {
+            await mapInt64Int64_.AddEntriesFromAsync(input, _map_mapInt64Int64_codec, cancellationToken).ConfigureAwait(false);
+            break;
+          }
+          case 26: {
+            await mapUint32Uint32_.AddEntriesFromAsync(input, _map_mapUint32Uint32_codec, cancellationToken).ConfigureAwait(false);
+            break;
+          }
+          case 34: {
+            await mapUint64Uint64_.AddEntriesFromAsync(input, _map_mapUint64Uint64_codec, cancellationToken).ConfigureAwait(false);
+            break;
+          }
+          case 42: {
+            await mapSint32Sint32_.AddEntriesFromAsync(input, _map_mapSint32Sint32_codec, cancellationToken).ConfigureAwait(false);
+            break;
+          }
+          case 50: {
+            await mapSint64Sint64_.AddEntriesFromAsync(input, _map_mapSint64Sint64_codec, cancellationToken).ConfigureAwait(false);
+            break;
+          }
+          case 58: {
+            await mapFixed32Fixed32_.AddEntriesFromAsync(input, _map_mapFixed32Fixed32_codec, cancellationToken).ConfigureAwait(false);
+            break;
+          }
+          case 66: {
+            await mapFixed64Fixed64_.AddEntriesFromAsync(input, _map_mapFixed64Fixed64_codec, cancellationToken).ConfigureAwait(false);
+            break;
+          }
+          case 74: {
+            await mapSfixed32Sfixed32_.AddEntriesFromAsync(input, _map_mapSfixed32Sfixed32_codec, cancellationToken).ConfigureAwait(false);
+            break;
+          }
+          case 82: {
+            await mapSfixed64Sfixed64_.AddEntriesFromAsync(input, _map_mapSfixed64Sfixed64_codec, cancellationToken).ConfigureAwait(false);
+            break;
+          }
+          case 90: {
+            await mapInt32Float_.AddEntriesFromAsync(input, _map_mapInt32Float_codec, cancellationToken).ConfigureAwait(false);
+            break;
+          }
+          case 98: {
+            await mapInt32Double_.AddEntriesFromAsync(input, _map_mapInt32Double_codec, cancellationToken).ConfigureAwait(false);
+            break;
+          }
+          case 106: {
+            await mapBoolBool_.AddEntriesFromAsync(input, _map_mapBoolBool_codec, cancellationToken).ConfigureAwait(false);
+            break;
+          }
+          case 114: {
+            await mapStringString_.AddEntriesFromAsync(input, _map_mapStringString_codec, cancellationToken).ConfigureAwait(false);
+            break;
+          }
+          case 122: {
+            await mapInt32Bytes_.AddEntriesFromAsync(input, _map_mapInt32Bytes_codec, cancellationToken).ConfigureAwait(false);
+            break;
+          }
+          case 130: {
+            await mapInt32Enum_.AddEntriesFromAsync(input, _map_mapInt32Enum_codec, cancellationToken).ConfigureAwait(false);
+            break;
+          }
+          case 138: {
+            await mapInt32ForeignMessage_.AddEntriesFromAsync(input, _map_mapInt32ForeignMessage_codec, cancellationToken).ConfigureAwait(false);
+            break;
+          }
+        }
+      }
+    }
+
+  }
+  #endif
+
   /// <summary>
   /// Tests maps.
   /// </summary>
@@ -610,30 +720,17 @@ namespace Google.Protobuf.TestProtos {
   }
 
   #if !PROTOBUF_NO_ASYNC
-  public sealed partial class TestMap : pb::IAsyncMessage<TestMap> {
-    private static readonly pb::AsyncMessageParser<TestMap> _parser = new pb::AsyncMessageParser<TestMap>(() => new TestMap());
+  public sealed partial class TestMapSubmessage : pb::IAsyncMessage<TestMapSubmessage> {
+    private static readonly pb::AsyncMessageParser<TestMapSubmessage> _parser = new pb::AsyncMessageParser<TestMapSubmessage>(() => new TestMapSubmessage());
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::AsyncMessageParser<TestMap> Parser { get { return _parser; } }
+    public static pb::AsyncMessageParser<TestMapSubmessage> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
-      await mapInt32Int32_.WriteToAsync(output, _map_mapInt32Int32_codec, cancellationToken).ConfigureAwait(false);
-      await mapInt64Int64_.WriteToAsync(output, _map_mapInt64Int64_codec, cancellationToken).ConfigureAwait(false);
-      await mapUint32Uint32_.WriteToAsync(output, _map_mapUint32Uint32_codec, cancellationToken).ConfigureAwait(false);
-      await mapUint64Uint64_.WriteToAsync(output, _map_mapUint64Uint64_codec, cancellationToken).ConfigureAwait(false);
-      await mapSint32Sint32_.WriteToAsync(output, _map_mapSint32Sint32_codec, cancellationToken).ConfigureAwait(false);
-      await mapSint64Sint64_.WriteToAsync(output, _map_mapSint64Sint64_codec, cancellationToken).ConfigureAwait(false);
-      await mapFixed32Fixed32_.WriteToAsync(output, _map_mapFixed32Fixed32_codec, cancellationToken).ConfigureAwait(false);
-      await mapFixed64Fixed64_.WriteToAsync(output, _map_mapFixed64Fixed64_codec, cancellationToken).ConfigureAwait(false);
-      await mapSfixed32Sfixed32_.WriteToAsync(output, _map_mapSfixed32Sfixed32_codec, cancellationToken).ConfigureAwait(false);
-      await mapSfixed64Sfixed64_.WriteToAsync(output, _map_mapSfixed64Sfixed64_codec, cancellationToken).ConfigureAwait(false);
-      await mapInt32Float_.WriteToAsync(output, _map_mapInt32Float_codec, cancellationToken).ConfigureAwait(false);
-      await mapInt32Double_.WriteToAsync(output, _map_mapInt32Double_codec, cancellationToken).ConfigureAwait(false);
-      await mapBoolBool_.WriteToAsync(output, _map_mapBoolBool_codec, cancellationToken).ConfigureAwait(false);
-      await mapStringString_.WriteToAsync(output, _map_mapStringString_codec, cancellationToken).ConfigureAwait(false);
-      await mapInt32Bytes_.WriteToAsync(output, _map_mapInt32Bytes_codec, cancellationToken).ConfigureAwait(false);
-      await mapInt32Enum_.WriteToAsync(output, _map_mapInt32Enum_codec, cancellationToken).ConfigureAwait(false);
-      await mapInt32ForeignMessage_.WriteToAsync(output, _map_mapInt32ForeignMessage_codec, cancellationToken).ConfigureAwait(false);
+      if (testMap_ != null) {
+        await output.WriteRawTagAsync(10, cancellationToken).ConfigureAwait(false);
+        await output.WriteMessageAsync(TestMap, cancellationToken).ConfigureAwait(false);
+      }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -645,71 +742,10 @@ namespace Google.Protobuf.TestProtos {
             await input.SkipLastFieldAsync(cancellationToken).ConfigureAwait(false);
             break;
           case 10: {
-            await mapInt32Int32_.AddEntriesFromAsync(input, _map_mapInt32Int32_codec, cancellationToken).ConfigureAwait(false);
-            break;
-          }
-          case 18: {
-            await mapInt64Int64_.AddEntriesFromAsync(input, _map_mapInt64Int64_codec, cancellationToken).ConfigureAwait(false);
-            break;
-          }
-          case 26: {
-            await mapUint32Uint32_.AddEntriesFromAsync(input, _map_mapUint32Uint32_codec, cancellationToken).ConfigureAwait(false);
-            break;
-          }
-          case 34: {
-            await mapUint64Uint64_.AddEntriesFromAsync(input, _map_mapUint64Uint64_codec, cancellationToken).ConfigureAwait(false);
-            break;
-          }
-          case 42: {
-            await mapSint32Sint32_.AddEntriesFromAsync(input, _map_mapSint32Sint32_codec, cancellationToken).ConfigureAwait(false);
-            break;
-          }
-          case 50: {
-            await mapSint64Sint64_.AddEntriesFromAsync(input, _map_mapSint64Sint64_codec, cancellationToken).ConfigureAwait(false);
-            break;
-          }
-          case 58: {
-            await mapFixed32Fixed32_.AddEntriesFromAsync(input, _map_mapFixed32Fixed32_codec, cancellationToken).ConfigureAwait(false);
-            break;
-          }
-          case 66: {
-            await mapFixed64Fixed64_.AddEntriesFromAsync(input, _map_mapFixed64Fixed64_codec, cancellationToken).ConfigureAwait(false);
-            break;
-          }
-          case 74: {
-            await mapSfixed32Sfixed32_.AddEntriesFromAsync(input, _map_mapSfixed32Sfixed32_codec, cancellationToken).ConfigureAwait(false);
-            break;
-          }
-          case 82: {
-            await mapSfixed64Sfixed64_.AddEntriesFromAsync(input, _map_mapSfixed64Sfixed64_codec, cancellationToken).ConfigureAwait(false);
-            break;
-          }
-          case 90: {
-            await mapInt32Float_.AddEntriesFromAsync(input, _map_mapInt32Float_codec, cancellationToken).ConfigureAwait(false);
-            break;
-          }
-          case 98: {
-            await mapInt32Double_.AddEntriesFromAsync(input, _map_mapInt32Double_codec, cancellationToken).ConfigureAwait(false);
-            break;
-          }
-          case 106: {
-            await mapBoolBool_.AddEntriesFromAsync(input, _map_mapBoolBool_codec, cancellationToken).ConfigureAwait(false);
-            break;
-          }
-          case 114: {
-            await mapStringString_.AddEntriesFromAsync(input, _map_mapStringString_codec, cancellationToken).ConfigureAwait(false);
-            break;
-          }
-          case 122: {
-            await mapInt32Bytes_.AddEntriesFromAsync(input, _map_mapInt32Bytes_codec, cancellationToken).ConfigureAwait(false);
-            break;
-          }
-          case 130: {
-            await mapInt32Enum_.AddEntriesFromAsync(input, _map_mapInt32Enum_codec, cancellationToken).ConfigureAwait(false);
-            break;
-          }
-          case 138: {
-            await mapInt32ForeignMessage_.AddEntriesFromAsync(input, _map_mapInt32ForeignMessage_codec, cancellationToken).ConfigureAwait(false);
+            if (testMap_ == null) {
+              testMap_ = new global::Google.Protobuf.TestProtos.TestMap();
+            }
+            await input.ReadMessageAsync(testMap_, cancellationToken).ConfigureAwait(false);
             break;
           }
         }
@@ -845,17 +881,14 @@ namespace Google.Protobuf.TestProtos {
   }
 
   #if !PROTOBUF_NO_ASYNC
-  public sealed partial class TestMapSubmessage : pb::IAsyncMessage<TestMapSubmessage> {
-    private static readonly pb::AsyncMessageParser<TestMapSubmessage> _parser = new pb::AsyncMessageParser<TestMapSubmessage>(() => new TestMapSubmessage());
+  public sealed partial class TestMessageMap : pb::IAsyncMessage<TestMessageMap> {
+    private static readonly pb::AsyncMessageParser<TestMessageMap> _parser = new pb::AsyncMessageParser<TestMessageMap>(() => new TestMessageMap());
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::AsyncMessageParser<TestMapSubmessage> Parser { get { return _parser; } }
+    public static pb::AsyncMessageParser<TestMessageMap> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
-      if (testMap_ != null) {
-        await output.WriteRawTagAsync(10, cancellationToken).ConfigureAwait(false);
-        await output.WriteMessageAsync(TestMap, cancellationToken).ConfigureAwait(false);
-      }
+      await mapInt32Message_.WriteToAsync(output, _map_mapInt32Message_codec, cancellationToken).ConfigureAwait(false);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -867,10 +900,7 @@ namespace Google.Protobuf.TestProtos {
             await input.SkipLastFieldAsync(cancellationToken).ConfigureAwait(false);
             break;
           case 10: {
-            if (testMap_ == null) {
-              testMap_ = new global::Google.Protobuf.TestProtos.TestMap();
-            }
-            await input.ReadMessageAsync(testMap_, cancellationToken).ConfigureAwait(false);
+            await mapInt32Message_.AddEntriesFromAsync(input, _map_mapInt32Message_codec, cancellationToken).ConfigureAwait(false);
             break;
           }
         }
@@ -992,14 +1022,15 @@ namespace Google.Protobuf.TestProtos {
   }
 
   #if !PROTOBUF_NO_ASYNC
-  public sealed partial class TestMessageMap : pb::IAsyncMessage<TestMessageMap> {
-    private static readonly pb::AsyncMessageParser<TestMessageMap> _parser = new pb::AsyncMessageParser<TestMessageMap>(() => new TestMessageMap());
+  public sealed partial class TestSameTypeMap : pb::IAsyncMessage<TestSameTypeMap> {
+    private static readonly pb::AsyncMessageParser<TestSameTypeMap> _parser = new pb::AsyncMessageParser<TestSameTypeMap>(() => new TestSameTypeMap());
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::AsyncMessageParser<TestMessageMap> Parser { get { return _parser; } }
+    public static pb::AsyncMessageParser<TestSameTypeMap> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
-      await mapInt32Message_.WriteToAsync(output, _map_mapInt32Message_codec, cancellationToken).ConfigureAwait(false);
+      await map1_.WriteToAsync(output, _map_map1_codec, cancellationToken).ConfigureAwait(false);
+      await map2_.WriteToAsync(output, _map_map2_codec, cancellationToken).ConfigureAwait(false);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1011,7 +1042,11 @@ namespace Google.Protobuf.TestProtos {
             await input.SkipLastFieldAsync(cancellationToken).ConfigureAwait(false);
             break;
           case 10: {
-            await mapInt32Message_.AddEntriesFromAsync(input, _map_mapInt32Message_codec, cancellationToken).ConfigureAwait(false);
+            await map1_.AddEntriesFromAsync(input, _map_map1_codec, cancellationToken).ConfigureAwait(false);
+            break;
+          }
+          case 18: {
+            await map2_.AddEntriesFromAsync(input, _map_map2_codec, cancellationToken).ConfigureAwait(false);
             break;
           }
         }
@@ -1156,15 +1191,28 @@ namespace Google.Protobuf.TestProtos {
   }
 
   #if !PROTOBUF_NO_ASYNC
-  public sealed partial class TestSameTypeMap : pb::IAsyncMessage<TestSameTypeMap> {
-    private static readonly pb::AsyncMessageParser<TestSameTypeMap> _parser = new pb::AsyncMessageParser<TestSameTypeMap>(() => new TestSameTypeMap());
+  public sealed partial class TestArenaMap : pb::IAsyncMessage<TestArenaMap> {
+    private static readonly pb::AsyncMessageParser<TestArenaMap> _parser = new pb::AsyncMessageParser<TestArenaMap>(() => new TestArenaMap());
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::AsyncMessageParser<TestSameTypeMap> Parser { get { return _parser; } }
+    public static pb::AsyncMessageParser<TestArenaMap> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
-      await map1_.WriteToAsync(output, _map_map1_codec, cancellationToken).ConfigureAwait(false);
-      await map2_.WriteToAsync(output, _map_map2_codec, cancellationToken).ConfigureAwait(false);
+      await mapInt32Int32_.WriteToAsync(output, _map_mapInt32Int32_codec, cancellationToken).ConfigureAwait(false);
+      await mapInt64Int64_.WriteToAsync(output, _map_mapInt64Int64_codec, cancellationToken).ConfigureAwait(false);
+      await mapUint32Uint32_.WriteToAsync(output, _map_mapUint32Uint32_codec, cancellationToken).ConfigureAwait(false);
+      await mapUint64Uint64_.WriteToAsync(output, _map_mapUint64Uint64_codec, cancellationToken).ConfigureAwait(false);
+      await mapSint32Sint32_.WriteToAsync(output, _map_mapSint32Sint32_codec, cancellationToken).ConfigureAwait(false);
+      await mapSint64Sint64_.WriteToAsync(output, _map_mapSint64Sint64_codec, cancellationToken).ConfigureAwait(false);
+      await mapFixed32Fixed32_.WriteToAsync(output, _map_mapFixed32Fixed32_codec, cancellationToken).ConfigureAwait(false);
+      await mapFixed64Fixed64_.WriteToAsync(output, _map_mapFixed64Fixed64_codec, cancellationToken).ConfigureAwait(false);
+      await mapSfixed32Sfixed32_.WriteToAsync(output, _map_mapSfixed32Sfixed32_codec, cancellationToken).ConfigureAwait(false);
+      await mapSfixed64Sfixed64_.WriteToAsync(output, _map_mapSfixed64Sfixed64_codec, cancellationToken).ConfigureAwait(false);
+      await mapInt32Float_.WriteToAsync(output, _map_mapInt32Float_codec, cancellationToken).ConfigureAwait(false);
+      await mapInt32Double_.WriteToAsync(output, _map_mapInt32Double_codec, cancellationToken).ConfigureAwait(false);
+      await mapBoolBool_.WriteToAsync(output, _map_mapBoolBool_codec, cancellationToken).ConfigureAwait(false);
+      await mapInt32Enum_.WriteToAsync(output, _map_mapInt32Enum_codec, cancellationToken).ConfigureAwait(false);
+      await mapInt32ForeignMessage_.WriteToAsync(output, _map_mapInt32ForeignMessage_codec, cancellationToken).ConfigureAwait(false);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1176,11 +1224,63 @@ namespace Google.Protobuf.TestProtos {
             await input.SkipLastFieldAsync(cancellationToken).ConfigureAwait(false);
             break;
           case 10: {
-            await map1_.AddEntriesFromAsync(input, _map_map1_codec, cancellationToken).ConfigureAwait(false);
+            await mapInt32Int32_.AddEntriesFromAsync(input, _map_mapInt32Int32_codec, cancellationToken).ConfigureAwait(false);
             break;
           }
           case 18: {
-            await map2_.AddEntriesFromAsync(input, _map_map2_codec, cancellationToken).ConfigureAwait(false);
+            await mapInt64Int64_.AddEntriesFromAsync(input, _map_mapInt64Int64_codec, cancellationToken).ConfigureAwait(false);
+            break;
+          }
+          case 26: {
+            await mapUint32Uint32_.AddEntriesFromAsync(input, _map_mapUint32Uint32_codec, cancellationToken).ConfigureAwait(false);
+            break;
+          }
+          case 34: {
+            await mapUint64Uint64_.AddEntriesFromAsync(input, _map_mapUint64Uint64_codec, cancellationToken).ConfigureAwait(false);
+            break;
+          }
+          case 42: {
+            await mapSint32Sint32_.AddEntriesFromAsync(input, _map_mapSint32Sint32_codec, cancellationToken).ConfigureAwait(false);
+            break;
+          }
+          case 50: {
+            await mapSint64Sint64_.AddEntriesFromAsync(input, _map_mapSint64Sint64_codec, cancellationToken).ConfigureAwait(false);
+            break;
+          }
+          case 58: {
+            await mapFixed32Fixed32_.AddEntriesFromAsync(input, _map_mapFixed32Fixed32_codec, cancellationToken).ConfigureAwait(false);
+            break;
+          }
+          case 66: {
+            await mapFixed64Fixed64_.AddEntriesFromAsync(input, _map_mapFixed64Fixed64_codec, cancellationToken).ConfigureAwait(false);
+            break;
+          }
+          case 74: {
+            await mapSfixed32Sfixed32_.AddEntriesFromAsync(input, _map_mapSfixed32Sfixed32_codec, cancellationToken).ConfigureAwait(false);
+            break;
+          }
+          case 82: {
+            await mapSfixed64Sfixed64_.AddEntriesFromAsync(input, _map_mapSfixed64Sfixed64_codec, cancellationToken).ConfigureAwait(false);
+            break;
+          }
+          case 90: {
+            await mapInt32Float_.AddEntriesFromAsync(input, _map_mapInt32Float_codec, cancellationToken).ConfigureAwait(false);
+            break;
+          }
+          case 98: {
+            await mapInt32Double_.AddEntriesFromAsync(input, _map_mapInt32Double_codec, cancellationToken).ConfigureAwait(false);
+            break;
+          }
+          case 106: {
+            await mapBoolBool_.AddEntriesFromAsync(input, _map_mapBoolBool_codec, cancellationToken).ConfigureAwait(false);
+            break;
+          }
+          case 114: {
+            await mapInt32Enum_.AddEntriesFromAsync(input, _map_mapInt32Enum_codec, cancellationToken).ConfigureAwait(false);
+            break;
+          }
+          case 122: {
+            await mapInt32ForeignMessage_.AddEntriesFromAsync(input, _map_mapInt32ForeignMessage_codec, cancellationToken).ConfigureAwait(false);
             break;
           }
         }
@@ -1582,28 +1682,14 @@ namespace Google.Protobuf.TestProtos {
   }
 
   #if !PROTOBUF_NO_ASYNC
-  public sealed partial class TestArenaMap : pb::IAsyncMessage<TestArenaMap> {
-    private static readonly pb::AsyncMessageParser<TestArenaMap> _parser = new pb::AsyncMessageParser<TestArenaMap>(() => new TestArenaMap());
+  public sealed partial class MessageContainingEnumCalledType : pb::IAsyncMessage<MessageContainingEnumCalledType> {
+    private static readonly pb::AsyncMessageParser<MessageContainingEnumCalledType> _parser = new pb::AsyncMessageParser<MessageContainingEnumCalledType>(() => new MessageContainingEnumCalledType());
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::AsyncMessageParser<TestArenaMap> Parser { get { return _parser; } }
+    public static pb::AsyncMessageParser<MessageContainingEnumCalledType> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
-      await mapInt32Int32_.WriteToAsync(output, _map_mapInt32Int32_codec, cancellationToken).ConfigureAwait(false);
-      await mapInt64Int64_.WriteToAsync(output, _map_mapInt64Int64_codec, cancellationToken).ConfigureAwait(false);
-      await mapUint32Uint32_.WriteToAsync(output, _map_mapUint32Uint32_codec, cancellationToken).ConfigureAwait(false);
-      await mapUint64Uint64_.WriteToAsync(output, _map_mapUint64Uint64_codec, cancellationToken).ConfigureAwait(false);
-      await mapSint32Sint32_.WriteToAsync(output, _map_mapSint32Sint32_codec, cancellationToken).ConfigureAwait(false);
-      await mapSint64Sint64_.WriteToAsync(output, _map_mapSint64Sint64_codec, cancellationToken).ConfigureAwait(false);
-      await mapFixed32Fixed32_.WriteToAsync(output, _map_mapFixed32Fixed32_codec, cancellationToken).ConfigureAwait(false);
-      await mapFixed64Fixed64_.WriteToAsync(output, _map_mapFixed64Fixed64_codec, cancellationToken).ConfigureAwait(false);
-      await mapSfixed32Sfixed32_.WriteToAsync(output, _map_mapSfixed32Sfixed32_codec, cancellationToken).ConfigureAwait(false);
-      await mapSfixed64Sfixed64_.WriteToAsync(output, _map_mapSfixed64Sfixed64_codec, cancellationToken).ConfigureAwait(false);
-      await mapInt32Float_.WriteToAsync(output, _map_mapInt32Float_codec, cancellationToken).ConfigureAwait(false);
-      await mapInt32Double_.WriteToAsync(output, _map_mapInt32Double_codec, cancellationToken).ConfigureAwait(false);
-      await mapBoolBool_.WriteToAsync(output, _map_mapBoolBool_codec, cancellationToken).ConfigureAwait(false);
-      await mapInt32Enum_.WriteToAsync(output, _map_mapInt32Enum_codec, cancellationToken).ConfigureAwait(false);
-      await mapInt32ForeignMessage_.WriteToAsync(output, _map_mapInt32ForeignMessage_codec, cancellationToken).ConfigureAwait(false);
+      await type_.WriteToAsync(output, _map_type_codec, cancellationToken).ConfigureAwait(false);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1615,63 +1701,7 @@ namespace Google.Protobuf.TestProtos {
             await input.SkipLastFieldAsync(cancellationToken).ConfigureAwait(false);
             break;
           case 10: {
-            await mapInt32Int32_.AddEntriesFromAsync(input, _map_mapInt32Int32_codec, cancellationToken).ConfigureAwait(false);
-            break;
-          }
-          case 18: {
-            await mapInt64Int64_.AddEntriesFromAsync(input, _map_mapInt64Int64_codec, cancellationToken).ConfigureAwait(false);
-            break;
-          }
-          case 26: {
-            await mapUint32Uint32_.AddEntriesFromAsync(input, _map_mapUint32Uint32_codec, cancellationToken).ConfigureAwait(false);
-            break;
-          }
-          case 34: {
-            await mapUint64Uint64_.AddEntriesFromAsync(input, _map_mapUint64Uint64_codec, cancellationToken).ConfigureAwait(false);
-            break;
-          }
-          case 42: {
-            await mapSint32Sint32_.AddEntriesFromAsync(input, _map_mapSint32Sint32_codec, cancellationToken).ConfigureAwait(false);
-            break;
-          }
-          case 50: {
-            await mapSint64Sint64_.AddEntriesFromAsync(input, _map_mapSint64Sint64_codec, cancellationToken).ConfigureAwait(false);
-            break;
-          }
-          case 58: {
-            await mapFixed32Fixed32_.AddEntriesFromAsync(input, _map_mapFixed32Fixed32_codec, cancellationToken).ConfigureAwait(false);
-            break;
-          }
-          case 66: {
-            await mapFixed64Fixed64_.AddEntriesFromAsync(input, _map_mapFixed64Fixed64_codec, cancellationToken).ConfigureAwait(false);
-            break;
-          }
-          case 74: {
-            await mapSfixed32Sfixed32_.AddEntriesFromAsync(input, _map_mapSfixed32Sfixed32_codec, cancellationToken).ConfigureAwait(false);
-            break;
-          }
-          case 82: {
-            await mapSfixed64Sfixed64_.AddEntriesFromAsync(input, _map_mapSfixed64Sfixed64_codec, cancellationToken).ConfigureAwait(false);
-            break;
-          }
-          case 90: {
-            await mapInt32Float_.AddEntriesFromAsync(input, _map_mapInt32Float_codec, cancellationToken).ConfigureAwait(false);
-            break;
-          }
-          case 98: {
-            await mapInt32Double_.AddEntriesFromAsync(input, _map_mapInt32Double_codec, cancellationToken).ConfigureAwait(false);
-            break;
-          }
-          case 106: {
-            await mapBoolBool_.AddEntriesFromAsync(input, _map_mapBoolBool_codec, cancellationToken).ConfigureAwait(false);
-            break;
-          }
-          case 114: {
-            await mapInt32Enum_.AddEntriesFromAsync(input, _map_mapInt32Enum_codec, cancellationToken).ConfigureAwait(false);
-            break;
-          }
-          case 122: {
-            await mapInt32ForeignMessage_.AddEntriesFromAsync(input, _map_mapInt32ForeignMessage_codec, cancellationToken).ConfigureAwait(false);
+            await type_.AddEntriesFromAsync(input, _map_type_codec, cancellationToken).ConfigureAwait(false);
             break;
           }
         }
@@ -1808,14 +1838,14 @@ namespace Google.Protobuf.TestProtos {
   }
 
   #if !PROTOBUF_NO_ASYNC
-  public sealed partial class MessageContainingEnumCalledType : pb::IAsyncMessage<MessageContainingEnumCalledType> {
-    private static readonly pb::AsyncMessageParser<MessageContainingEnumCalledType> _parser = new pb::AsyncMessageParser<MessageContainingEnumCalledType>(() => new MessageContainingEnumCalledType());
+  public sealed partial class MessageContainingMapCalledEntry : pb::IAsyncMessage<MessageContainingMapCalledEntry> {
+    private static readonly pb::AsyncMessageParser<MessageContainingMapCalledEntry> _parser = new pb::AsyncMessageParser<MessageContainingMapCalledEntry>(() => new MessageContainingMapCalledEntry());
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::AsyncMessageParser<MessageContainingEnumCalledType> Parser { get { return _parser; } }
+    public static pb::AsyncMessageParser<MessageContainingMapCalledEntry> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
-      await type_.WriteToAsync(output, _map_type_codec, cancellationToken).ConfigureAwait(false);
+      await entry_.WriteToAsync(output, _map_entry_codec, cancellationToken).ConfigureAwait(false);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1827,7 +1857,7 @@ namespace Google.Protobuf.TestProtos {
             await input.SkipLastFieldAsync(cancellationToken).ConfigureAwait(false);
             break;
           case 10: {
-            await type_.AddEntriesFromAsync(input, _map_type_codec, cancellationToken).ConfigureAwait(false);
+            await entry_.AddEntriesFromAsync(input, _map_entry_codec, cancellationToken).ConfigureAwait(false);
             break;
           }
         }
@@ -1950,36 +1980,6 @@ namespace Google.Protobuf.TestProtos {
     }
 
   }
-
-  #if !PROTOBUF_NO_ASYNC
-  public sealed partial class MessageContainingMapCalledEntry : pb::IAsyncMessage<MessageContainingMapCalledEntry> {
-    private static readonly pb::AsyncMessageParser<MessageContainingMapCalledEntry> _parser = new pb::AsyncMessageParser<MessageContainingMapCalledEntry>(() => new MessageContainingMapCalledEntry());
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::AsyncMessageParser<MessageContainingMapCalledEntry> Parser { get { return _parser; } }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
-      await entry_.WriteToAsync(output, _map_entry_codec, cancellationToken).ConfigureAwait(false);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public async stt::Task MergeFromAsync(pb::CodedInputStream input, st::CancellationToken cancellationToken) {
-      uint tag;
-      while ((tag = await input.ReadTagAsync(cancellationToken).ConfigureAwait(false)) != 0) {
-        switch(tag) {
-          default:
-            await input.SkipLastFieldAsync(cancellationToken).ConfigureAwait(false);
-            break;
-          case 10: {
-            await entry_.AddEntriesFromAsync(input, _map_entry_codec, cancellationToken).ConfigureAwait(false);
-            break;
-          }
-        }
-      }
-    }
-
-  }
-  #endif
 
   #endregion
 

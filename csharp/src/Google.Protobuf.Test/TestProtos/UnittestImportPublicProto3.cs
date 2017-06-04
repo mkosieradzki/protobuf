@@ -40,6 +40,39 @@ namespace Google.Protobuf.TestProtos {
 
   }
   #region Messages
+  #if !PROTOBUF_NO_ASYNC
+  public sealed partial class PublicImportMessage : pb::IAsyncMessage<PublicImportMessage> {
+    private static readonly pb::AsyncMessageParser<PublicImportMessage> _parser = new pb::AsyncMessageParser<PublicImportMessage>(() => new PublicImportMessage());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::AsyncMessageParser<PublicImportMessage> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
+      if (E != 0) {
+        await output.WriteRawTagAsync(8, cancellationToken).ConfigureAwait(false);
+        await output.WriteInt32Async(E, cancellationToken).ConfigureAwait(false);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async stt::Task MergeFromAsync(pb::CodedInputStream input, st::CancellationToken cancellationToken) {
+      uint tag;
+      while ((tag = await input.ReadTagAsync(cancellationToken).ConfigureAwait(false)) != 0) {
+        switch(tag) {
+          default:
+            await input.SkipLastFieldAsync(cancellationToken).ConfigureAwait(false);
+            break;
+          case 8: {
+            E = await input.ReadInt32Async(cancellationToken).ConfigureAwait(false);
+            break;
+          }
+        }
+      }
+    }
+
+  }
+  #endif
+
   public sealed partial class PublicImportMessage : pb::IMessage<PublicImportMessage> {
     #if PROTOBUF_NO_ASYNC
     private static readonly pb::MessageParser<PublicImportMessage> _parser = new pb::MessageParser<PublicImportMessage>(() => new PublicImportMessage());
@@ -158,39 +191,6 @@ namespace Google.Protobuf.TestProtos {
     }
 
   }
-
-  #if !PROTOBUF_NO_ASYNC
-  public sealed partial class PublicImportMessage : pb::IAsyncMessage<PublicImportMessage> {
-    private static readonly pb::AsyncMessageParser<PublicImportMessage> _parser = new pb::AsyncMessageParser<PublicImportMessage>(() => new PublicImportMessage());
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::AsyncMessageParser<PublicImportMessage> Parser { get { return _parser; } }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
-      if (E != 0) {
-        await output.WriteRawTagAsync(8, cancellationToken).ConfigureAwait(false);
-        await output.WriteInt32Async(E, cancellationToken).ConfigureAwait(false);
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public async stt::Task MergeFromAsync(pb::CodedInputStream input, st::CancellationToken cancellationToken) {
-      uint tag;
-      while ((tag = await input.ReadTagAsync(cancellationToken).ConfigureAwait(false)) != 0) {
-        switch(tag) {
-          default:
-            await input.SkipLastFieldAsync(cancellationToken).ConfigureAwait(false);
-            break;
-          case 8: {
-            E = await input.ReadInt32Async(cancellationToken).ConfigureAwait(false);
-            break;
-          }
-        }
-      }
-    }
-
-  }
-  #endif
 
   #endregion
 

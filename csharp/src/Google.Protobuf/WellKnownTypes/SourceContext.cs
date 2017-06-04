@@ -42,6 +42,39 @@ namespace Google.Protobuf.WellKnownTypes {
 
   }
   #region Messages
+  #if !PROTOBUF_NO_ASYNC
+  public sealed partial class SourceContext : pb::IAsyncMessage<SourceContext> {
+    private static readonly pb::AsyncMessageParser<SourceContext> _parser = new pb::AsyncMessageParser<SourceContext>(() => new SourceContext());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::AsyncMessageParser<SourceContext> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
+      if (FileName.Length != 0) {
+        await output.WriteRawTagAsync(10, cancellationToken).ConfigureAwait(false);
+        await output.WriteStringAsync(FileName, cancellationToken).ConfigureAwait(false);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async stt::Task MergeFromAsync(pb::CodedInputStream input, st::CancellationToken cancellationToken) {
+      uint tag;
+      while ((tag = await input.ReadTagAsync(cancellationToken).ConfigureAwait(false)) != 0) {
+        switch(tag) {
+          default:
+            await input.SkipLastFieldAsync(cancellationToken).ConfigureAwait(false);
+            break;
+          case 10: {
+            FileName = await input.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+            break;
+          }
+        }
+      }
+    }
+
+  }
+  #endif
+
   /// <summary>
   /// `SourceContext` represents information about the source of a
   /// protobuf element, like the file in which it is defined.
@@ -168,39 +201,6 @@ namespace Google.Protobuf.WellKnownTypes {
     }
 
   }
-
-  #if !PROTOBUF_NO_ASYNC
-  public sealed partial class SourceContext : pb::IAsyncMessage<SourceContext> {
-    private static readonly pb::AsyncMessageParser<SourceContext> _parser = new pb::AsyncMessageParser<SourceContext>(() => new SourceContext());
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::AsyncMessageParser<SourceContext> Parser { get { return _parser; } }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
-      if (FileName.Length != 0) {
-        await output.WriteRawTagAsync(10, cancellationToken).ConfigureAwait(false);
-        await output.WriteStringAsync(FileName, cancellationToken).ConfigureAwait(false);
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public async stt::Task MergeFromAsync(pb::CodedInputStream input, st::CancellationToken cancellationToken) {
-      uint tag;
-      while ((tag = await input.ReadTagAsync(cancellationToken).ConfigureAwait(false)) != 0) {
-        switch(tag) {
-          default:
-            await input.SkipLastFieldAsync(cancellationToken).ConfigureAwait(false);
-            break;
-          case 10: {
-            FileName = await input.ReadStringAsync(cancellationToken).ConfigureAwait(false);
-            break;
-          }
-        }
-      }
-    }
-
-  }
-  #endif
 
   #endregion
 

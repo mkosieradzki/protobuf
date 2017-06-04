@@ -41,6 +41,47 @@ namespace Google.Protobuf.WellKnownTypes {
 
   }
   #region Messages
+  #if !PROTOBUF_NO_ASYNC
+  public sealed partial class Any : pb::IAsyncMessage<Any> {
+    private static readonly pb::AsyncMessageParser<Any> _parser = new pb::AsyncMessageParser<Any>(() => new Any());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::AsyncMessageParser<Any> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
+      if (TypeUrl.Length != 0) {
+        await output.WriteRawTagAsync(10, cancellationToken).ConfigureAwait(false);
+        await output.WriteStringAsync(TypeUrl, cancellationToken).ConfigureAwait(false);
+      }
+      if (Value.Length != 0) {
+        await output.WriteRawTagAsync(18, cancellationToken).ConfigureAwait(false);
+        await output.WriteBytesAsync(Value, cancellationToken).ConfigureAwait(false);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async stt::Task MergeFromAsync(pb::CodedInputStream input, st::CancellationToken cancellationToken) {
+      uint tag;
+      while ((tag = await input.ReadTagAsync(cancellationToken).ConfigureAwait(false)) != 0) {
+        switch(tag) {
+          default:
+            await input.SkipLastFieldAsync(cancellationToken).ConfigureAwait(false);
+            break;
+          case 10: {
+            TypeUrl = await input.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+            break;
+          }
+          case 18: {
+            Value = await input.ReadBytesAsync(cancellationToken).ConfigureAwait(false);
+            break;
+          }
+        }
+      }
+    }
+
+  }
+  #endif
+
   /// <summary>
   /// `Any` contains an arbitrary serialized protocol buffer message along with a
   /// URL that describes the type of the serialized message.
@@ -283,47 +324,6 @@ namespace Google.Protobuf.WellKnownTypes {
     }
 
   }
-
-  #if !PROTOBUF_NO_ASYNC
-  public sealed partial class Any : pb::IAsyncMessage<Any> {
-    private static readonly pb::AsyncMessageParser<Any> _parser = new pb::AsyncMessageParser<Any>(() => new Any());
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::AsyncMessageParser<Any> Parser { get { return _parser; } }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
-      if (TypeUrl.Length != 0) {
-        await output.WriteRawTagAsync(10, cancellationToken).ConfigureAwait(false);
-        await output.WriteStringAsync(TypeUrl, cancellationToken).ConfigureAwait(false);
-      }
-      if (Value.Length != 0) {
-        await output.WriteRawTagAsync(18, cancellationToken).ConfigureAwait(false);
-        await output.WriteBytesAsync(Value, cancellationToken).ConfigureAwait(false);
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public async stt::Task MergeFromAsync(pb::CodedInputStream input, st::CancellationToken cancellationToken) {
-      uint tag;
-      while ((tag = await input.ReadTagAsync(cancellationToken).ConfigureAwait(false)) != 0) {
-        switch(tag) {
-          default:
-            await input.SkipLastFieldAsync(cancellationToken).ConfigureAwait(false);
-            break;
-          case 10: {
-            TypeUrl = await input.ReadStringAsync(cancellationToken).ConfigureAwait(false);
-            break;
-          }
-          case 18: {
-            Value = await input.ReadBytesAsync(cancellationToken).ConfigureAwait(false);
-            break;
-          }
-        }
-      }
-    }
-
-  }
-  #endif
 
   #endregion
 

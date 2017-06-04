@@ -42,6 +42,47 @@ namespace Google.Protobuf.WellKnownTypes {
 
   }
   #region Messages
+  #if !PROTOBUF_NO_ASYNC
+  public sealed partial class Timestamp : pb::IAsyncMessage<Timestamp> {
+    private static readonly pb::AsyncMessageParser<Timestamp> _parser = new pb::AsyncMessageParser<Timestamp>(() => new Timestamp());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::AsyncMessageParser<Timestamp> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
+      if (Seconds != 0L) {
+        await output.WriteRawTagAsync(8, cancellationToken).ConfigureAwait(false);
+        await output.WriteInt64Async(Seconds, cancellationToken).ConfigureAwait(false);
+      }
+      if (Nanos != 0) {
+        await output.WriteRawTagAsync(16, cancellationToken).ConfigureAwait(false);
+        await output.WriteInt32Async(Nanos, cancellationToken).ConfigureAwait(false);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async stt::Task MergeFromAsync(pb::CodedInputStream input, st::CancellationToken cancellationToken) {
+      uint tag;
+      while ((tag = await input.ReadTagAsync(cancellationToken).ConfigureAwait(false)) != 0) {
+        switch(tag) {
+          default:
+            await input.SkipLastFieldAsync(cancellationToken).ConfigureAwait(false);
+            break;
+          case 8: {
+            Seconds = await input.ReadInt64Async(cancellationToken).ConfigureAwait(false);
+            break;
+          }
+          case 16: {
+            Nanos = await input.ReadInt32Async(cancellationToken).ConfigureAwait(false);
+            break;
+          }
+        }
+      }
+    }
+
+  }
+  #endif
+
   /// <summary>
   /// A Timestamp represents a point in time independent of any time zone
   /// or calendar, represented as seconds and fractions of seconds at
@@ -276,47 +317,6 @@ namespace Google.Protobuf.WellKnownTypes {
     }
 
   }
-
-  #if !PROTOBUF_NO_ASYNC
-  public sealed partial class Timestamp : pb::IAsyncMessage<Timestamp> {
-    private static readonly pb::AsyncMessageParser<Timestamp> _parser = new pb::AsyncMessageParser<Timestamp>(() => new Timestamp());
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::AsyncMessageParser<Timestamp> Parser { get { return _parser; } }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
-      if (Seconds != 0L) {
-        await output.WriteRawTagAsync(8, cancellationToken).ConfigureAwait(false);
-        await output.WriteInt64Async(Seconds, cancellationToken).ConfigureAwait(false);
-      }
-      if (Nanos != 0) {
-        await output.WriteRawTagAsync(16, cancellationToken).ConfigureAwait(false);
-        await output.WriteInt32Async(Nanos, cancellationToken).ConfigureAwait(false);
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public async stt::Task MergeFromAsync(pb::CodedInputStream input, st::CancellationToken cancellationToken) {
-      uint tag;
-      while ((tag = await input.ReadTagAsync(cancellationToken).ConfigureAwait(false)) != 0) {
-        switch(tag) {
-          default:
-            await input.SkipLastFieldAsync(cancellationToken).ConfigureAwait(false);
-            break;
-          case 8: {
-            Seconds = await input.ReadInt64Async(cancellationToken).ConfigureAwait(false);
-            break;
-          }
-          case 16: {
-            Nanos = await input.ReadInt32Async(cancellationToken).ConfigureAwait(false);
-            break;
-          }
-        }
-      }
-    }
-
-  }
-  #endif
 
   #endregion
 

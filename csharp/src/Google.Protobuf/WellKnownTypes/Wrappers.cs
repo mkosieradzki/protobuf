@@ -54,6 +54,39 @@ namespace Google.Protobuf.WellKnownTypes {
 
   }
   #region Messages
+  #if !PROTOBUF_NO_ASYNC
+  public sealed partial class DoubleValue : pb::IAsyncMessage<DoubleValue> {
+    private static readonly pb::AsyncMessageParser<DoubleValue> _parser = new pb::AsyncMessageParser<DoubleValue>(() => new DoubleValue());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::AsyncMessageParser<DoubleValue> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
+      if (Value != 0D) {
+        await output.WriteRawTagAsync(9, cancellationToken).ConfigureAwait(false);
+        await output.WriteDoubleAsync(Value, cancellationToken).ConfigureAwait(false);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async stt::Task MergeFromAsync(pb::CodedInputStream input, st::CancellationToken cancellationToken) {
+      uint tag;
+      while ((tag = await input.ReadTagAsync(cancellationToken).ConfigureAwait(false)) != 0) {
+        switch(tag) {
+          default:
+            await input.SkipLastFieldAsync(cancellationToken).ConfigureAwait(false);
+            break;
+          case 9: {
+            Value = await input.ReadDoubleAsync(cancellationToken).ConfigureAwait(false);
+            break;
+          }
+        }
+      }
+    }
+
+  }
+  #endif
+
   /// <summary>
   /// Wrapper message for `double`.
   ///
@@ -182,16 +215,16 @@ namespace Google.Protobuf.WellKnownTypes {
   }
 
   #if !PROTOBUF_NO_ASYNC
-  public sealed partial class DoubleValue : pb::IAsyncMessage<DoubleValue> {
-    private static readonly pb::AsyncMessageParser<DoubleValue> _parser = new pb::AsyncMessageParser<DoubleValue>(() => new DoubleValue());
+  public sealed partial class FloatValue : pb::IAsyncMessage<FloatValue> {
+    private static readonly pb::AsyncMessageParser<FloatValue> _parser = new pb::AsyncMessageParser<FloatValue>(() => new FloatValue());
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::AsyncMessageParser<DoubleValue> Parser { get { return _parser; } }
+    public static pb::AsyncMessageParser<FloatValue> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
-      if (Value != 0D) {
-        await output.WriteRawTagAsync(9, cancellationToken).ConfigureAwait(false);
-        await output.WriteDoubleAsync(Value, cancellationToken).ConfigureAwait(false);
+      if (Value != 0F) {
+        await output.WriteRawTagAsync(13, cancellationToken).ConfigureAwait(false);
+        await output.WriteFloatAsync(Value, cancellationToken).ConfigureAwait(false);
       }
     }
 
@@ -203,8 +236,8 @@ namespace Google.Protobuf.WellKnownTypes {
           default:
             await input.SkipLastFieldAsync(cancellationToken).ConfigureAwait(false);
             break;
-          case 9: {
-            Value = await input.ReadDoubleAsync(cancellationToken).ConfigureAwait(false);
+          case 13: {
+            Value = await input.ReadFloatAsync(cancellationToken).ConfigureAwait(false);
             break;
           }
         }
@@ -342,16 +375,16 @@ namespace Google.Protobuf.WellKnownTypes {
   }
 
   #if !PROTOBUF_NO_ASYNC
-  public sealed partial class FloatValue : pb::IAsyncMessage<FloatValue> {
-    private static readonly pb::AsyncMessageParser<FloatValue> _parser = new pb::AsyncMessageParser<FloatValue>(() => new FloatValue());
+  public sealed partial class Int64Value : pb::IAsyncMessage<Int64Value> {
+    private static readonly pb::AsyncMessageParser<Int64Value> _parser = new pb::AsyncMessageParser<Int64Value>(() => new Int64Value());
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::AsyncMessageParser<FloatValue> Parser { get { return _parser; } }
+    public static pb::AsyncMessageParser<Int64Value> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
-      if (Value != 0F) {
-        await output.WriteRawTagAsync(13, cancellationToken).ConfigureAwait(false);
-        await output.WriteFloatAsync(Value, cancellationToken).ConfigureAwait(false);
+      if (Value != 0L) {
+        await output.WriteRawTagAsync(8, cancellationToken).ConfigureAwait(false);
+        await output.WriteInt64Async(Value, cancellationToken).ConfigureAwait(false);
       }
     }
 
@@ -363,8 +396,8 @@ namespace Google.Protobuf.WellKnownTypes {
           default:
             await input.SkipLastFieldAsync(cancellationToken).ConfigureAwait(false);
             break;
-          case 13: {
-            Value = await input.ReadFloatAsync(cancellationToken).ConfigureAwait(false);
+          case 8: {
+            Value = await input.ReadInt64Async(cancellationToken).ConfigureAwait(false);
             break;
           }
         }
@@ -502,16 +535,16 @@ namespace Google.Protobuf.WellKnownTypes {
   }
 
   #if !PROTOBUF_NO_ASYNC
-  public sealed partial class Int64Value : pb::IAsyncMessage<Int64Value> {
-    private static readonly pb::AsyncMessageParser<Int64Value> _parser = new pb::AsyncMessageParser<Int64Value>(() => new Int64Value());
+  public sealed partial class UInt64Value : pb::IAsyncMessage<UInt64Value> {
+    private static readonly pb::AsyncMessageParser<UInt64Value> _parser = new pb::AsyncMessageParser<UInt64Value>(() => new UInt64Value());
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::AsyncMessageParser<Int64Value> Parser { get { return _parser; } }
+    public static pb::AsyncMessageParser<UInt64Value> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
-      if (Value != 0L) {
+      if (Value != 0UL) {
         await output.WriteRawTagAsync(8, cancellationToken).ConfigureAwait(false);
-        await output.WriteInt64Async(Value, cancellationToken).ConfigureAwait(false);
+        await output.WriteUInt64Async(Value, cancellationToken).ConfigureAwait(false);
       }
     }
 
@@ -524,7 +557,7 @@ namespace Google.Protobuf.WellKnownTypes {
             await input.SkipLastFieldAsync(cancellationToken).ConfigureAwait(false);
             break;
           case 8: {
-            Value = await input.ReadInt64Async(cancellationToken).ConfigureAwait(false);
+            Value = await input.ReadUInt64Async(cancellationToken).ConfigureAwait(false);
             break;
           }
         }
@@ -662,16 +695,16 @@ namespace Google.Protobuf.WellKnownTypes {
   }
 
   #if !PROTOBUF_NO_ASYNC
-  public sealed partial class UInt64Value : pb::IAsyncMessage<UInt64Value> {
-    private static readonly pb::AsyncMessageParser<UInt64Value> _parser = new pb::AsyncMessageParser<UInt64Value>(() => new UInt64Value());
+  public sealed partial class Int32Value : pb::IAsyncMessage<Int32Value> {
+    private static readonly pb::AsyncMessageParser<Int32Value> _parser = new pb::AsyncMessageParser<Int32Value>(() => new Int32Value());
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::AsyncMessageParser<UInt64Value> Parser { get { return _parser; } }
+    public static pb::AsyncMessageParser<Int32Value> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
-      if (Value != 0UL) {
+      if (Value != 0) {
         await output.WriteRawTagAsync(8, cancellationToken).ConfigureAwait(false);
-        await output.WriteUInt64Async(Value, cancellationToken).ConfigureAwait(false);
+        await output.WriteInt32Async(Value, cancellationToken).ConfigureAwait(false);
       }
     }
 
@@ -684,7 +717,7 @@ namespace Google.Protobuf.WellKnownTypes {
             await input.SkipLastFieldAsync(cancellationToken).ConfigureAwait(false);
             break;
           case 8: {
-            Value = await input.ReadUInt64Async(cancellationToken).ConfigureAwait(false);
+            Value = await input.ReadInt32Async(cancellationToken).ConfigureAwait(false);
             break;
           }
         }
@@ -822,16 +855,16 @@ namespace Google.Protobuf.WellKnownTypes {
   }
 
   #if !PROTOBUF_NO_ASYNC
-  public sealed partial class Int32Value : pb::IAsyncMessage<Int32Value> {
-    private static readonly pb::AsyncMessageParser<Int32Value> _parser = new pb::AsyncMessageParser<Int32Value>(() => new Int32Value());
+  public sealed partial class UInt32Value : pb::IAsyncMessage<UInt32Value> {
+    private static readonly pb::AsyncMessageParser<UInt32Value> _parser = new pb::AsyncMessageParser<UInt32Value>(() => new UInt32Value());
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::AsyncMessageParser<Int32Value> Parser { get { return _parser; } }
+    public static pb::AsyncMessageParser<UInt32Value> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
       if (Value != 0) {
         await output.WriteRawTagAsync(8, cancellationToken).ConfigureAwait(false);
-        await output.WriteInt32Async(Value, cancellationToken).ConfigureAwait(false);
+        await output.WriteUInt32Async(Value, cancellationToken).ConfigureAwait(false);
       }
     }
 
@@ -844,7 +877,7 @@ namespace Google.Protobuf.WellKnownTypes {
             await input.SkipLastFieldAsync(cancellationToken).ConfigureAwait(false);
             break;
           case 8: {
-            Value = await input.ReadInt32Async(cancellationToken).ConfigureAwait(false);
+            Value = await input.ReadUInt32Async(cancellationToken).ConfigureAwait(false);
             break;
           }
         }
@@ -982,16 +1015,16 @@ namespace Google.Protobuf.WellKnownTypes {
   }
 
   #if !PROTOBUF_NO_ASYNC
-  public sealed partial class UInt32Value : pb::IAsyncMessage<UInt32Value> {
-    private static readonly pb::AsyncMessageParser<UInt32Value> _parser = new pb::AsyncMessageParser<UInt32Value>(() => new UInt32Value());
+  public sealed partial class BoolValue : pb::IAsyncMessage<BoolValue> {
+    private static readonly pb::AsyncMessageParser<BoolValue> _parser = new pb::AsyncMessageParser<BoolValue>(() => new BoolValue());
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::AsyncMessageParser<UInt32Value> Parser { get { return _parser; } }
+    public static pb::AsyncMessageParser<BoolValue> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
-      if (Value != 0) {
+      if (Value != false) {
         await output.WriteRawTagAsync(8, cancellationToken).ConfigureAwait(false);
-        await output.WriteUInt32Async(Value, cancellationToken).ConfigureAwait(false);
+        await output.WriteBoolAsync(Value, cancellationToken).ConfigureAwait(false);
       }
     }
 
@@ -1004,7 +1037,7 @@ namespace Google.Protobuf.WellKnownTypes {
             await input.SkipLastFieldAsync(cancellationToken).ConfigureAwait(false);
             break;
           case 8: {
-            Value = await input.ReadUInt32Async(cancellationToken).ConfigureAwait(false);
+            Value = await input.ReadBoolAsync(cancellationToken).ConfigureAwait(false);
             break;
           }
         }
@@ -1142,16 +1175,16 @@ namespace Google.Protobuf.WellKnownTypes {
   }
 
   #if !PROTOBUF_NO_ASYNC
-  public sealed partial class BoolValue : pb::IAsyncMessage<BoolValue> {
-    private static readonly pb::AsyncMessageParser<BoolValue> _parser = new pb::AsyncMessageParser<BoolValue>(() => new BoolValue());
+  public sealed partial class StringValue : pb::IAsyncMessage<StringValue> {
+    private static readonly pb::AsyncMessageParser<StringValue> _parser = new pb::AsyncMessageParser<StringValue>(() => new StringValue());
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::AsyncMessageParser<BoolValue> Parser { get { return _parser; } }
+    public static pb::AsyncMessageParser<StringValue> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
-      if (Value != false) {
-        await output.WriteRawTagAsync(8, cancellationToken).ConfigureAwait(false);
-        await output.WriteBoolAsync(Value, cancellationToken).ConfigureAwait(false);
+      if (Value.Length != 0) {
+        await output.WriteRawTagAsync(10, cancellationToken).ConfigureAwait(false);
+        await output.WriteStringAsync(Value, cancellationToken).ConfigureAwait(false);
       }
     }
 
@@ -1163,8 +1196,8 @@ namespace Google.Protobuf.WellKnownTypes {
           default:
             await input.SkipLastFieldAsync(cancellationToken).ConfigureAwait(false);
             break;
-          case 8: {
-            Value = await input.ReadBoolAsync(cancellationToken).ConfigureAwait(false);
+          case 10: {
+            Value = await input.ReadStringAsync(cancellationToken).ConfigureAwait(false);
             break;
           }
         }
@@ -1302,16 +1335,16 @@ namespace Google.Protobuf.WellKnownTypes {
   }
 
   #if !PROTOBUF_NO_ASYNC
-  public sealed partial class StringValue : pb::IAsyncMessage<StringValue> {
-    private static readonly pb::AsyncMessageParser<StringValue> _parser = new pb::AsyncMessageParser<StringValue>(() => new StringValue());
+  public sealed partial class BytesValue : pb::IAsyncMessage<BytesValue> {
+    private static readonly pb::AsyncMessageParser<BytesValue> _parser = new pb::AsyncMessageParser<BytesValue>(() => new BytesValue());
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::AsyncMessageParser<StringValue> Parser { get { return _parser; } }
+    public static pb::AsyncMessageParser<BytesValue> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
       if (Value.Length != 0) {
         await output.WriteRawTagAsync(10, cancellationToken).ConfigureAwait(false);
-        await output.WriteStringAsync(Value, cancellationToken).ConfigureAwait(false);
+        await output.WriteBytesAsync(Value, cancellationToken).ConfigureAwait(false);
       }
     }
 
@@ -1324,7 +1357,7 @@ namespace Google.Protobuf.WellKnownTypes {
             await input.SkipLastFieldAsync(cancellationToken).ConfigureAwait(false);
             break;
           case 10: {
-            Value = await input.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+            Value = await input.ReadBytesAsync(cancellationToken).ConfigureAwait(false);
             break;
           }
         }
@@ -1460,39 +1493,6 @@ namespace Google.Protobuf.WellKnownTypes {
     }
 
   }
-
-  #if !PROTOBUF_NO_ASYNC
-  public sealed partial class BytesValue : pb::IAsyncMessage<BytesValue> {
-    private static readonly pb::AsyncMessageParser<BytesValue> _parser = new pb::AsyncMessageParser<BytesValue>(() => new BytesValue());
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::AsyncMessageParser<BytesValue> Parser { get { return _parser; } }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
-      if (Value.Length != 0) {
-        await output.WriteRawTagAsync(10, cancellationToken).ConfigureAwait(false);
-        await output.WriteBytesAsync(Value, cancellationToken).ConfigureAwait(false);
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public async stt::Task MergeFromAsync(pb::CodedInputStream input, st::CancellationToken cancellationToken) {
-      uint tag;
-      while ((tag = await input.ReadTagAsync(cancellationToken).ConfigureAwait(false)) != 0) {
-        switch(tag) {
-          default:
-            await input.SkipLastFieldAsync(cancellationToken).ConfigureAwait(false);
-            break;
-          case 10: {
-            Value = await input.ReadBytesAsync(cancellationToken).ConfigureAwait(false);
-            break;
-          }
-        }
-      }
-    }
-
-  }
-  #endif
 
   #endregion
 
