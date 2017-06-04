@@ -7,7 +7,7 @@ using pb = global::Google.Protobuf;
 using pbc = global::Google.Protobuf.Collections;
 using pbr = global::Google.Protobuf.Reflection;
 using scg = global::System.Collections.Generic;
-#if !NET35
+#if !PROTOBUF_NO_ASYNC
 using st = global::System.Threading;
 using stt = global::System.Threading.Tasks;
 #endif
@@ -58,14 +58,12 @@ namespace Google.Protobuf.WellKnownTypes {
   /// <summary>
   /// Api is a light-weight descriptor for a protocol buffer service.
   /// </summary>
-  #if !NET35
-  public sealed partial class Api : pb::IAsyncMessage<Api> {
-  #else
   public sealed partial class Api : pb::IMessage<Api> {
-  #endif
+    #if PROTOBUF_NO_ASYNC
     private static readonly pb::MessageParser<Api> _parser = new pb::MessageParser<Api>(() => new Api());
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pb::MessageParser<Api> Parser { get { return _parser; } }
+    #endif
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
@@ -118,7 +116,7 @@ namespace Google.Protobuf.WellKnownTypes {
     /// <summary>Field number for the "methods" field.</summary>
     public const int MethodsFieldNumber = 2;
     private static readonly pb::FieldCodec<global::Google.Protobuf.WellKnownTypes.Method> _repeated_methods_codec
-        = pb::FieldCodec.ForAsyncMessage(18, global::Google.Protobuf.WellKnownTypes.Method.Parser);
+        = pb::FieldCodec.ForMessage(18, global::Google.Protobuf.WellKnownTypes.Method.Parser);
     private readonly pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.Method> methods_ = new pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.Method>();
     /// <summary>
     /// The methods of this api, in unspecified order.
@@ -131,7 +129,7 @@ namespace Google.Protobuf.WellKnownTypes {
     /// <summary>Field number for the "options" field.</summary>
     public const int OptionsFieldNumber = 3;
     private static readonly pb::FieldCodec<global::Google.Protobuf.WellKnownTypes.Option> _repeated_options_codec
-        = pb::FieldCodec.ForAsyncMessage(26, global::Google.Protobuf.WellKnownTypes.Option.Parser);
+        = pb::FieldCodec.ForMessage(26, global::Google.Protobuf.WellKnownTypes.Option.Parser);
     private readonly pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.Option> options_ = new pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.Option>();
     /// <summary>
     /// Any metadata attached to the API.
@@ -192,7 +190,7 @@ namespace Google.Protobuf.WellKnownTypes {
     /// <summary>Field number for the "mixins" field.</summary>
     public const int MixinsFieldNumber = 6;
     private static readonly pb::FieldCodec<global::Google.Protobuf.WellKnownTypes.Mixin> _repeated_mixins_codec
-        = pb::FieldCodec.ForAsyncMessage(50, global::Google.Protobuf.WellKnownTypes.Mixin.Parser);
+        = pb::FieldCodec.ForMessage(50, global::Google.Protobuf.WellKnownTypes.Mixin.Parser);
     private readonly pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.Mixin> mixins_ = new pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.Mixin>();
     /// <summary>
     /// Included APIs. See [Mixin][].
@@ -279,31 +277,6 @@ namespace Google.Protobuf.WellKnownTypes {
         output.WriteEnum((int) Syntax);
       }
     }
-
-    #if !NET35
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
-      if (Name.Length != 0) {
-        await output.WriteRawTagAsync(10, cancellationToken).ConfigureAwait(false);
-        await output.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
-      }
-      await methods_.WriteToAsync(output, _repeated_methods_codec, cancellationToken).ConfigureAwait(false);
-      await options_.WriteToAsync(output, _repeated_options_codec, cancellationToken).ConfigureAwait(false);
-      if (Version.Length != 0) {
-        await output.WriteRawTagAsync(34, cancellationToken).ConfigureAwait(false);
-        await output.WriteStringAsync(Version, cancellationToken).ConfigureAwait(false);
-      }
-      if (sourceContext_ != null) {
-        await output.WriteRawTagAsync(42, cancellationToken).ConfigureAwait(false);
-        await output.WriteMessageAsync(SourceContext, cancellationToken).ConfigureAwait(false);
-      }
-      await mixins_.WriteToAsync(output, _repeated_mixins_codec, cancellationToken).ConfigureAwait(false);
-      if (Syntax != 0) {
-        await output.WriteRawTagAsync(56, cancellationToken).ConfigureAwait(false);
-        await output.WriteEnumAsync((int) Syntax, cancellationToken).ConfigureAwait(false);
-      }
-    }
-    #endif
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
@@ -394,7 +367,37 @@ namespace Google.Protobuf.WellKnownTypes {
       }
     }
 
-    #if !NET35
+  }
+
+  #if !PROTOBUF_NO_ASYNC
+  public sealed partial class Api : pb::IAsyncMessage<Api> {
+    private static readonly pb::AsyncMessageParser<Api> _parser = new pb::AsyncMessageParser<Api>(() => new Api());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::AsyncMessageParser<Api> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
+      if (Name.Length != 0) {
+        await output.WriteRawTagAsync(10, cancellationToken).ConfigureAwait(false);
+        await output.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
+      }
+      await methods_.WriteToAsync(output, _repeated_methods_codec, cancellationToken).ConfigureAwait(false);
+      await options_.WriteToAsync(output, _repeated_options_codec, cancellationToken).ConfigureAwait(false);
+      if (Version.Length != 0) {
+        await output.WriteRawTagAsync(34, cancellationToken).ConfigureAwait(false);
+        await output.WriteStringAsync(Version, cancellationToken).ConfigureAwait(false);
+      }
+      if (sourceContext_ != null) {
+        await output.WriteRawTagAsync(42, cancellationToken).ConfigureAwait(false);
+        await output.WriteMessageAsync(SourceContext, cancellationToken).ConfigureAwait(false);
+      }
+      await mixins_.WriteToAsync(output, _repeated_mixins_codec, cancellationToken).ConfigureAwait(false);
+      if (Syntax != 0) {
+        await output.WriteRawTagAsync(56, cancellationToken).ConfigureAwait(false);
+        await output.WriteEnumAsync((int) Syntax, cancellationToken).ConfigureAwait(false);
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public async stt::Task MergeFromAsync(pb::CodedInputStream input, st::CancellationToken cancellationToken) {
       uint tag;
@@ -437,21 +440,19 @@ namespace Google.Protobuf.WellKnownTypes {
         }
       }
     }
-    #endif
 
   }
+  #endif
 
   /// <summary>
   /// Method represents a method of an api.
   /// </summary>
-  #if !NET35
-  public sealed partial class Method : pb::IAsyncMessage<Method> {
-  #else
   public sealed partial class Method : pb::IMessage<Method> {
-  #endif
+    #if PROTOBUF_NO_ASYNC
     private static readonly pb::MessageParser<Method> _parser = new pb::MessageParser<Method>(() => new Method());
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pb::MessageParser<Method> Parser { get { return _parser; } }
+    #endif
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
@@ -559,7 +560,7 @@ namespace Google.Protobuf.WellKnownTypes {
     /// <summary>Field number for the "options" field.</summary>
     public const int OptionsFieldNumber = 6;
     private static readonly pb::FieldCodec<global::Google.Protobuf.WellKnownTypes.Option> _repeated_options_codec
-        = pb::FieldCodec.ForAsyncMessage(50, global::Google.Protobuf.WellKnownTypes.Option.Parser);
+        = pb::FieldCodec.ForMessage(50, global::Google.Protobuf.WellKnownTypes.Option.Parser);
     private readonly pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.Option> options_ = new pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.Option>();
     /// <summary>
     /// Any metadata attached to the method.
@@ -653,37 +654,6 @@ namespace Google.Protobuf.WellKnownTypes {
       }
     }
 
-    #if !NET35
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
-      if (Name.Length != 0) {
-        await output.WriteRawTagAsync(10, cancellationToken).ConfigureAwait(false);
-        await output.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
-      }
-      if (RequestTypeUrl.Length != 0) {
-        await output.WriteRawTagAsync(18, cancellationToken).ConfigureAwait(false);
-        await output.WriteStringAsync(RequestTypeUrl, cancellationToken).ConfigureAwait(false);
-      }
-      if (RequestStreaming != false) {
-        await output.WriteRawTagAsync(24, cancellationToken).ConfigureAwait(false);
-        await output.WriteBoolAsync(RequestStreaming, cancellationToken).ConfigureAwait(false);
-      }
-      if (ResponseTypeUrl.Length != 0) {
-        await output.WriteRawTagAsync(34, cancellationToken).ConfigureAwait(false);
-        await output.WriteStringAsync(ResponseTypeUrl, cancellationToken).ConfigureAwait(false);
-      }
-      if (ResponseStreaming != false) {
-        await output.WriteRawTagAsync(40, cancellationToken).ConfigureAwait(false);
-        await output.WriteBoolAsync(ResponseStreaming, cancellationToken).ConfigureAwait(false);
-      }
-      await options_.WriteToAsync(output, _repeated_options_codec, cancellationToken).ConfigureAwait(false);
-      if (Syntax != 0) {
-        await output.WriteRawTagAsync(56, cancellationToken).ConfigureAwait(false);
-        await output.WriteEnumAsync((int) Syntax, cancellationToken).ConfigureAwait(false);
-      }
-    }
-    #endif
-
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
@@ -775,7 +745,43 @@ namespace Google.Protobuf.WellKnownTypes {
       }
     }
 
-    #if !NET35
+  }
+
+  #if !PROTOBUF_NO_ASYNC
+  public sealed partial class Method : pb::IAsyncMessage<Method> {
+    private static readonly pb::AsyncMessageParser<Method> _parser = new pb::AsyncMessageParser<Method>(() => new Method());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::AsyncMessageParser<Method> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
+      if (Name.Length != 0) {
+        await output.WriteRawTagAsync(10, cancellationToken).ConfigureAwait(false);
+        await output.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
+      }
+      if (RequestTypeUrl.Length != 0) {
+        await output.WriteRawTagAsync(18, cancellationToken).ConfigureAwait(false);
+        await output.WriteStringAsync(RequestTypeUrl, cancellationToken).ConfigureAwait(false);
+      }
+      if (RequestStreaming != false) {
+        await output.WriteRawTagAsync(24, cancellationToken).ConfigureAwait(false);
+        await output.WriteBoolAsync(RequestStreaming, cancellationToken).ConfigureAwait(false);
+      }
+      if (ResponseTypeUrl.Length != 0) {
+        await output.WriteRawTagAsync(34, cancellationToken).ConfigureAwait(false);
+        await output.WriteStringAsync(ResponseTypeUrl, cancellationToken).ConfigureAwait(false);
+      }
+      if (ResponseStreaming != false) {
+        await output.WriteRawTagAsync(40, cancellationToken).ConfigureAwait(false);
+        await output.WriteBoolAsync(ResponseStreaming, cancellationToken).ConfigureAwait(false);
+      }
+      await options_.WriteToAsync(output, _repeated_options_codec, cancellationToken).ConfigureAwait(false);
+      if (Syntax != 0) {
+        await output.WriteRawTagAsync(56, cancellationToken).ConfigureAwait(false);
+        await output.WriteEnumAsync((int) Syntax, cancellationToken).ConfigureAwait(false);
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public async stt::Task MergeFromAsync(pb::CodedInputStream input, st::CancellationToken cancellationToken) {
       uint tag;
@@ -815,9 +821,9 @@ namespace Google.Protobuf.WellKnownTypes {
         }
       }
     }
-    #endif
 
   }
+  #endif
 
   /// <summary>
   /// Declares an API to be included in this API. The including API must
@@ -898,14 +904,12 @@ namespace Google.Protobuf.WellKnownTypes {
   ///       ...
   ///     }
   /// </summary>
-  #if !NET35
-  public sealed partial class Mixin : pb::IAsyncMessage<Mixin> {
-  #else
   public sealed partial class Mixin : pb::IMessage<Mixin> {
-  #endif
+    #if PROTOBUF_NO_ASYNC
     private static readonly pb::MessageParser<Mixin> _parser = new pb::MessageParser<Mixin>(() => new Mixin());
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pb::MessageParser<Mixin> Parser { get { return _parser; } }
+    #endif
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
@@ -1007,20 +1011,6 @@ namespace Google.Protobuf.WellKnownTypes {
       }
     }
 
-    #if !NET35
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
-      if (Name.Length != 0) {
-        await output.WriteRawTagAsync(10, cancellationToken).ConfigureAwait(false);
-        await output.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
-      }
-      if (Root.Length != 0) {
-        await output.WriteRawTagAsync(18, cancellationToken).ConfigureAwait(false);
-        await output.WriteStringAsync(Root, cancellationToken).ConfigureAwait(false);
-      }
-    }
-    #endif
-
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
@@ -1066,7 +1056,26 @@ namespace Google.Protobuf.WellKnownTypes {
       }
     }
 
-    #if !NET35
+  }
+
+  #if !PROTOBUF_NO_ASYNC
+  public sealed partial class Mixin : pb::IAsyncMessage<Mixin> {
+    private static readonly pb::AsyncMessageParser<Mixin> _parser = new pb::AsyncMessageParser<Mixin>(() => new Mixin());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::AsyncMessageParser<Mixin> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
+      if (Name.Length != 0) {
+        await output.WriteRawTagAsync(10, cancellationToken).ConfigureAwait(false);
+        await output.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
+      }
+      if (Root.Length != 0) {
+        await output.WriteRawTagAsync(18, cancellationToken).ConfigureAwait(false);
+        await output.WriteStringAsync(Root, cancellationToken).ConfigureAwait(false);
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public async stt::Task MergeFromAsync(pb::CodedInputStream input, st::CancellationToken cancellationToken) {
       uint tag;
@@ -1086,9 +1095,9 @@ namespace Google.Protobuf.WellKnownTypes {
         }
       }
     }
-    #endif
 
   }
+  #endif
 
   #endregion
 

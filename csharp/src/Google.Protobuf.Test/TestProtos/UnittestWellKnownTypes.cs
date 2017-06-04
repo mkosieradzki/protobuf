@@ -7,7 +7,7 @@ using pb = global::Google.Protobuf;
 using pbc = global::Google.Protobuf.Collections;
 using pbr = global::Google.Protobuf.Reflection;
 using scg = global::System.Collections.Generic;
-#if !NET35
+#if !PROTOBUF_NO_ASYNC
 using st = global::System.Threading;
 using stt = global::System.Threading.Tasks;
 #endif
@@ -181,14 +181,12 @@ namespace Google.Protobuf.TestProtos {
   /// Each wrapper type is included separately, as languages
   /// map handle different wrappers in different ways.
   /// </summary>
-  #if !NET35
-  public sealed partial class TestWellKnownTypes : pb::IAsyncMessage<TestWellKnownTypes> {
-  #else
   public sealed partial class TestWellKnownTypes : pb::IMessage<TestWellKnownTypes> {
-  #endif
+    #if PROTOBUF_NO_ASYNC
     private static readonly pb::MessageParser<TestWellKnownTypes> _parser = new pb::MessageParser<TestWellKnownTypes>(() => new TestWellKnownTypes());
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pb::MessageParser<TestWellKnownTypes> Parser { get { return _parser; } }
+    #endif
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
@@ -592,79 +590,6 @@ namespace Google.Protobuf.TestProtos {
       }
     }
 
-    #if !NET35
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
-      if (anyField_ != null) {
-        await output.WriteRawTagAsync(10, cancellationToken).ConfigureAwait(false);
-        await output.WriteMessageAsync(AnyField, cancellationToken).ConfigureAwait(false);
-      }
-      if (apiField_ != null) {
-        await output.WriteRawTagAsync(18, cancellationToken).ConfigureAwait(false);
-        await output.WriteMessageAsync(ApiField, cancellationToken).ConfigureAwait(false);
-      }
-      if (durationField_ != null) {
-        await output.WriteRawTagAsync(26, cancellationToken).ConfigureAwait(false);
-        await output.WriteMessageAsync(DurationField, cancellationToken).ConfigureAwait(false);
-      }
-      if (emptyField_ != null) {
-        await output.WriteRawTagAsync(34, cancellationToken).ConfigureAwait(false);
-        await output.WriteMessageAsync(EmptyField, cancellationToken).ConfigureAwait(false);
-      }
-      if (fieldMaskField_ != null) {
-        await output.WriteRawTagAsync(42, cancellationToken).ConfigureAwait(false);
-        await output.WriteMessageAsync(FieldMaskField, cancellationToken).ConfigureAwait(false);
-      }
-      if (sourceContextField_ != null) {
-        await output.WriteRawTagAsync(50, cancellationToken).ConfigureAwait(false);
-        await output.WriteMessageAsync(SourceContextField, cancellationToken).ConfigureAwait(false);
-      }
-      if (structField_ != null) {
-        await output.WriteRawTagAsync(58, cancellationToken).ConfigureAwait(false);
-        await output.WriteMessageAsync(StructField, cancellationToken).ConfigureAwait(false);
-      }
-      if (timestampField_ != null) {
-        await output.WriteRawTagAsync(66, cancellationToken).ConfigureAwait(false);
-        await output.WriteMessageAsync(TimestampField, cancellationToken).ConfigureAwait(false);
-      }
-      if (typeField_ != null) {
-        await output.WriteRawTagAsync(74, cancellationToken).ConfigureAwait(false);
-        await output.WriteMessageAsync(TypeField, cancellationToken).ConfigureAwait(false);
-      }
-      if (doubleField_ != null) {
-        await _single_doubleField_codec.WriteTagAndValueAsync(output, DoubleField, cancellationToken).ConfigureAwait(false);
-      }
-      if (floatField_ != null) {
-        await _single_floatField_codec.WriteTagAndValueAsync(output, FloatField, cancellationToken).ConfigureAwait(false);
-      }
-      if (int64Field_ != null) {
-        await _single_int64Field_codec.WriteTagAndValueAsync(output, Int64Field, cancellationToken).ConfigureAwait(false);
-      }
-      if (uint64Field_ != null) {
-        await _single_uint64Field_codec.WriteTagAndValueAsync(output, Uint64Field, cancellationToken).ConfigureAwait(false);
-      }
-      if (int32Field_ != null) {
-        await _single_int32Field_codec.WriteTagAndValueAsync(output, Int32Field, cancellationToken).ConfigureAwait(false);
-      }
-      if (uint32Field_ != null) {
-        await _single_uint32Field_codec.WriteTagAndValueAsync(output, Uint32Field, cancellationToken).ConfigureAwait(false);
-      }
-      if (boolField_ != null) {
-        await _single_boolField_codec.WriteTagAndValueAsync(output, BoolField, cancellationToken).ConfigureAwait(false);
-      }
-      if (stringField_ != null) {
-        await _single_stringField_codec.WriteTagAndValueAsync(output, StringField, cancellationToken).ConfigureAwait(false);
-      }
-      if (bytesField_ != null) {
-        await _single_bytesField_codec.WriteTagAndValueAsync(output, BytesField, cancellationToken).ConfigureAwait(false);
-      }
-      if (valueField_ != null) {
-        await output.WriteRawTagAsync(154, 1, cancellationToken).ConfigureAwait(false);
-        await output.WriteMessageAsync(ValueField, cancellationToken).ConfigureAwait(false);
-      }
-    }
-    #endif
-
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
@@ -985,7 +910,85 @@ namespace Google.Protobuf.TestProtos {
       }
     }
 
-    #if !NET35
+  }
+
+  #if !PROTOBUF_NO_ASYNC
+  public sealed partial class TestWellKnownTypes : pb::IAsyncMessage<TestWellKnownTypes> {
+    private static readonly pb::AsyncMessageParser<TestWellKnownTypes> _parser = new pb::AsyncMessageParser<TestWellKnownTypes>(() => new TestWellKnownTypes());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::AsyncMessageParser<TestWellKnownTypes> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
+      if (anyField_ != null) {
+        await output.WriteRawTagAsync(10, cancellationToken).ConfigureAwait(false);
+        await output.WriteMessageAsync(AnyField, cancellationToken).ConfigureAwait(false);
+      }
+      if (apiField_ != null) {
+        await output.WriteRawTagAsync(18, cancellationToken).ConfigureAwait(false);
+        await output.WriteMessageAsync(ApiField, cancellationToken).ConfigureAwait(false);
+      }
+      if (durationField_ != null) {
+        await output.WriteRawTagAsync(26, cancellationToken).ConfigureAwait(false);
+        await output.WriteMessageAsync(DurationField, cancellationToken).ConfigureAwait(false);
+      }
+      if (emptyField_ != null) {
+        await output.WriteRawTagAsync(34, cancellationToken).ConfigureAwait(false);
+        await output.WriteMessageAsync(EmptyField, cancellationToken).ConfigureAwait(false);
+      }
+      if (fieldMaskField_ != null) {
+        await output.WriteRawTagAsync(42, cancellationToken).ConfigureAwait(false);
+        await output.WriteMessageAsync(FieldMaskField, cancellationToken).ConfigureAwait(false);
+      }
+      if (sourceContextField_ != null) {
+        await output.WriteRawTagAsync(50, cancellationToken).ConfigureAwait(false);
+        await output.WriteMessageAsync(SourceContextField, cancellationToken).ConfigureAwait(false);
+      }
+      if (structField_ != null) {
+        await output.WriteRawTagAsync(58, cancellationToken).ConfigureAwait(false);
+        await output.WriteMessageAsync(StructField, cancellationToken).ConfigureAwait(false);
+      }
+      if (timestampField_ != null) {
+        await output.WriteRawTagAsync(66, cancellationToken).ConfigureAwait(false);
+        await output.WriteMessageAsync(TimestampField, cancellationToken).ConfigureAwait(false);
+      }
+      if (typeField_ != null) {
+        await output.WriteRawTagAsync(74, cancellationToken).ConfigureAwait(false);
+        await output.WriteMessageAsync(TypeField, cancellationToken).ConfigureAwait(false);
+      }
+      if (doubleField_ != null) {
+        await _single_doubleField_codec.WriteTagAndValueAsync(output, DoubleField, cancellationToken).ConfigureAwait(false);
+      }
+      if (floatField_ != null) {
+        await _single_floatField_codec.WriteTagAndValueAsync(output, FloatField, cancellationToken).ConfigureAwait(false);
+      }
+      if (int64Field_ != null) {
+        await _single_int64Field_codec.WriteTagAndValueAsync(output, Int64Field, cancellationToken).ConfigureAwait(false);
+      }
+      if (uint64Field_ != null) {
+        await _single_uint64Field_codec.WriteTagAndValueAsync(output, Uint64Field, cancellationToken).ConfigureAwait(false);
+      }
+      if (int32Field_ != null) {
+        await _single_int32Field_codec.WriteTagAndValueAsync(output, Int32Field, cancellationToken).ConfigureAwait(false);
+      }
+      if (uint32Field_ != null) {
+        await _single_uint32Field_codec.WriteTagAndValueAsync(output, Uint32Field, cancellationToken).ConfigureAwait(false);
+      }
+      if (boolField_ != null) {
+        await _single_boolField_codec.WriteTagAndValueAsync(output, BoolField, cancellationToken).ConfigureAwait(false);
+      }
+      if (stringField_ != null) {
+        await _single_stringField_codec.WriteTagAndValueAsync(output, StringField, cancellationToken).ConfigureAwait(false);
+      }
+      if (bytesField_ != null) {
+        await _single_bytesField_codec.WriteTagAndValueAsync(output, BytesField, cancellationToken).ConfigureAwait(false);
+      }
+      if (valueField_ != null) {
+        await output.WriteRawTagAsync(154, 1, cancellationToken).ConfigureAwait(false);
+        await output.WriteMessageAsync(ValueField, cancellationToken).ConfigureAwait(false);
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public async stt::Task MergeFromAsync(pb::CodedInputStream input, st::CancellationToken cancellationToken) {
       uint tag;
@@ -1130,21 +1133,19 @@ namespace Google.Protobuf.TestProtos {
         }
       }
     }
-    #endif
 
   }
+  #endif
 
   /// <summary>
   /// A repeated field for each well-known type.
   /// </summary>
-  #if !NET35
-  public sealed partial class RepeatedWellKnownTypes : pb::IAsyncMessage<RepeatedWellKnownTypes> {
-  #else
   public sealed partial class RepeatedWellKnownTypes : pb::IMessage<RepeatedWellKnownTypes> {
-  #endif
+    #if PROTOBUF_NO_ASYNC
     private static readonly pb::MessageParser<RepeatedWellKnownTypes> _parser = new pb::MessageParser<RepeatedWellKnownTypes>(() => new RepeatedWellKnownTypes());
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pb::MessageParser<RepeatedWellKnownTypes> Parser { get { return _parser; } }
+    #endif
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
@@ -1193,7 +1194,7 @@ namespace Google.Protobuf.TestProtos {
     /// <summary>Field number for the "any_field" field.</summary>
     public const int AnyFieldFieldNumber = 1;
     private static readonly pb::FieldCodec<global::Google.Protobuf.WellKnownTypes.Any> _repeated_anyField_codec
-        = pb::FieldCodec.ForAsyncMessage(10, global::Google.Protobuf.WellKnownTypes.Any.Parser);
+        = pb::FieldCodec.ForMessage(10, global::Google.Protobuf.WellKnownTypes.Any.Parser);
     private readonly pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.Any> anyField_ = new pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.Any>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.Any> AnyField {
@@ -1203,7 +1204,7 @@ namespace Google.Protobuf.TestProtos {
     /// <summary>Field number for the "api_field" field.</summary>
     public const int ApiFieldFieldNumber = 2;
     private static readonly pb::FieldCodec<global::Google.Protobuf.WellKnownTypes.Api> _repeated_apiField_codec
-        = pb::FieldCodec.ForAsyncMessage(18, global::Google.Protobuf.WellKnownTypes.Api.Parser);
+        = pb::FieldCodec.ForMessage(18, global::Google.Protobuf.WellKnownTypes.Api.Parser);
     private readonly pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.Api> apiField_ = new pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.Api>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.Api> ApiField {
@@ -1213,7 +1214,7 @@ namespace Google.Protobuf.TestProtos {
     /// <summary>Field number for the "duration_field" field.</summary>
     public const int DurationFieldFieldNumber = 3;
     private static readonly pb::FieldCodec<global::Google.Protobuf.WellKnownTypes.Duration> _repeated_durationField_codec
-        = pb::FieldCodec.ForAsyncMessage(26, global::Google.Protobuf.WellKnownTypes.Duration.Parser);
+        = pb::FieldCodec.ForMessage(26, global::Google.Protobuf.WellKnownTypes.Duration.Parser);
     private readonly pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.Duration> durationField_ = new pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.Duration>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.Duration> DurationField {
@@ -1223,7 +1224,7 @@ namespace Google.Protobuf.TestProtos {
     /// <summary>Field number for the "empty_field" field.</summary>
     public const int EmptyFieldFieldNumber = 4;
     private static readonly pb::FieldCodec<global::Google.Protobuf.WellKnownTypes.Empty> _repeated_emptyField_codec
-        = pb::FieldCodec.ForAsyncMessage(34, global::Google.Protobuf.WellKnownTypes.Empty.Parser);
+        = pb::FieldCodec.ForMessage(34, global::Google.Protobuf.WellKnownTypes.Empty.Parser);
     private readonly pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.Empty> emptyField_ = new pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.Empty>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.Empty> EmptyField {
@@ -1233,7 +1234,7 @@ namespace Google.Protobuf.TestProtos {
     /// <summary>Field number for the "field_mask_field" field.</summary>
     public const int FieldMaskFieldFieldNumber = 5;
     private static readonly pb::FieldCodec<global::Google.Protobuf.WellKnownTypes.FieldMask> _repeated_fieldMaskField_codec
-        = pb::FieldCodec.ForAsyncMessage(42, global::Google.Protobuf.WellKnownTypes.FieldMask.Parser);
+        = pb::FieldCodec.ForMessage(42, global::Google.Protobuf.WellKnownTypes.FieldMask.Parser);
     private readonly pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.FieldMask> fieldMaskField_ = new pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.FieldMask>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.FieldMask> FieldMaskField {
@@ -1243,7 +1244,7 @@ namespace Google.Protobuf.TestProtos {
     /// <summary>Field number for the "source_context_field" field.</summary>
     public const int SourceContextFieldFieldNumber = 6;
     private static readonly pb::FieldCodec<global::Google.Protobuf.WellKnownTypes.SourceContext> _repeated_sourceContextField_codec
-        = pb::FieldCodec.ForAsyncMessage(50, global::Google.Protobuf.WellKnownTypes.SourceContext.Parser);
+        = pb::FieldCodec.ForMessage(50, global::Google.Protobuf.WellKnownTypes.SourceContext.Parser);
     private readonly pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.SourceContext> sourceContextField_ = new pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.SourceContext>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.SourceContext> SourceContextField {
@@ -1253,7 +1254,7 @@ namespace Google.Protobuf.TestProtos {
     /// <summary>Field number for the "struct_field" field.</summary>
     public const int StructFieldFieldNumber = 7;
     private static readonly pb::FieldCodec<global::Google.Protobuf.WellKnownTypes.Struct> _repeated_structField_codec
-        = pb::FieldCodec.ForAsyncMessage(58, global::Google.Protobuf.WellKnownTypes.Struct.Parser);
+        = pb::FieldCodec.ForMessage(58, global::Google.Protobuf.WellKnownTypes.Struct.Parser);
     private readonly pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.Struct> structField_ = new pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.Struct>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.Struct> StructField {
@@ -1263,7 +1264,7 @@ namespace Google.Protobuf.TestProtos {
     /// <summary>Field number for the "timestamp_field" field.</summary>
     public const int TimestampFieldFieldNumber = 8;
     private static readonly pb::FieldCodec<global::Google.Protobuf.WellKnownTypes.Timestamp> _repeated_timestampField_codec
-        = pb::FieldCodec.ForAsyncMessage(66, global::Google.Protobuf.WellKnownTypes.Timestamp.Parser);
+        = pb::FieldCodec.ForMessage(66, global::Google.Protobuf.WellKnownTypes.Timestamp.Parser);
     private readonly pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.Timestamp> timestampField_ = new pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.Timestamp>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.Timestamp> TimestampField {
@@ -1273,7 +1274,7 @@ namespace Google.Protobuf.TestProtos {
     /// <summary>Field number for the "type_field" field.</summary>
     public const int TypeFieldFieldNumber = 9;
     private static readonly pb::FieldCodec<global::Google.Protobuf.WellKnownTypes.Type> _repeated_typeField_codec
-        = pb::FieldCodec.ForAsyncMessage(74, global::Google.Protobuf.WellKnownTypes.Type.Parser);
+        = pb::FieldCodec.ForMessage(74, global::Google.Protobuf.WellKnownTypes.Type.Parser);
     private readonly pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.Type> typeField_ = new pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.Type>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.Type> TypeField {
@@ -1458,30 +1459,6 @@ namespace Google.Protobuf.TestProtos {
       bytesField_.WriteTo(output, _repeated_bytesField_codec);
     }
 
-    #if !NET35
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
-      await anyField_.WriteToAsync(output, _repeated_anyField_codec, cancellationToken).ConfigureAwait(false);
-      await apiField_.WriteToAsync(output, _repeated_apiField_codec, cancellationToken).ConfigureAwait(false);
-      await durationField_.WriteToAsync(output, _repeated_durationField_codec, cancellationToken).ConfigureAwait(false);
-      await emptyField_.WriteToAsync(output, _repeated_emptyField_codec, cancellationToken).ConfigureAwait(false);
-      await fieldMaskField_.WriteToAsync(output, _repeated_fieldMaskField_codec, cancellationToken).ConfigureAwait(false);
-      await sourceContextField_.WriteToAsync(output, _repeated_sourceContextField_codec, cancellationToken).ConfigureAwait(false);
-      await structField_.WriteToAsync(output, _repeated_structField_codec, cancellationToken).ConfigureAwait(false);
-      await timestampField_.WriteToAsync(output, _repeated_timestampField_codec, cancellationToken).ConfigureAwait(false);
-      await typeField_.WriteToAsync(output, _repeated_typeField_codec, cancellationToken).ConfigureAwait(false);
-      await doubleField_.WriteToAsync(output, _repeated_doubleField_codec, cancellationToken).ConfigureAwait(false);
-      await floatField_.WriteToAsync(output, _repeated_floatField_codec, cancellationToken).ConfigureAwait(false);
-      await int64Field_.WriteToAsync(output, _repeated_int64Field_codec, cancellationToken).ConfigureAwait(false);
-      await uint64Field_.WriteToAsync(output, _repeated_uint64Field_codec, cancellationToken).ConfigureAwait(false);
-      await int32Field_.WriteToAsync(output, _repeated_int32Field_codec, cancellationToken).ConfigureAwait(false);
-      await uint32Field_.WriteToAsync(output, _repeated_uint32Field_codec, cancellationToken).ConfigureAwait(false);
-      await boolField_.WriteToAsync(output, _repeated_boolField_codec, cancellationToken).ConfigureAwait(false);
-      await stringField_.WriteToAsync(output, _repeated_stringField_codec, cancellationToken).ConfigureAwait(false);
-      await bytesField_.WriteToAsync(output, _repeated_bytesField_codec, cancellationToken).ConfigureAwait(false);
-    }
-    #endif
-
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
@@ -1615,7 +1592,36 @@ namespace Google.Protobuf.TestProtos {
       }
     }
 
-    #if !NET35
+  }
+
+  #if !PROTOBUF_NO_ASYNC
+  public sealed partial class RepeatedWellKnownTypes : pb::IAsyncMessage<RepeatedWellKnownTypes> {
+    private static readonly pb::AsyncMessageParser<RepeatedWellKnownTypes> _parser = new pb::AsyncMessageParser<RepeatedWellKnownTypes>(() => new RepeatedWellKnownTypes());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::AsyncMessageParser<RepeatedWellKnownTypes> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
+      await anyField_.WriteToAsync(output, _repeated_anyField_codec, cancellationToken).ConfigureAwait(false);
+      await apiField_.WriteToAsync(output, _repeated_apiField_codec, cancellationToken).ConfigureAwait(false);
+      await durationField_.WriteToAsync(output, _repeated_durationField_codec, cancellationToken).ConfigureAwait(false);
+      await emptyField_.WriteToAsync(output, _repeated_emptyField_codec, cancellationToken).ConfigureAwait(false);
+      await fieldMaskField_.WriteToAsync(output, _repeated_fieldMaskField_codec, cancellationToken).ConfigureAwait(false);
+      await sourceContextField_.WriteToAsync(output, _repeated_sourceContextField_codec, cancellationToken).ConfigureAwait(false);
+      await structField_.WriteToAsync(output, _repeated_structField_codec, cancellationToken).ConfigureAwait(false);
+      await timestampField_.WriteToAsync(output, _repeated_timestampField_codec, cancellationToken).ConfigureAwait(false);
+      await typeField_.WriteToAsync(output, _repeated_typeField_codec, cancellationToken).ConfigureAwait(false);
+      await doubleField_.WriteToAsync(output, _repeated_doubleField_codec, cancellationToken).ConfigureAwait(false);
+      await floatField_.WriteToAsync(output, _repeated_floatField_codec, cancellationToken).ConfigureAwait(false);
+      await int64Field_.WriteToAsync(output, _repeated_int64Field_codec, cancellationToken).ConfigureAwait(false);
+      await uint64Field_.WriteToAsync(output, _repeated_uint64Field_codec, cancellationToken).ConfigureAwait(false);
+      await int32Field_.WriteToAsync(output, _repeated_int32Field_codec, cancellationToken).ConfigureAwait(false);
+      await uint32Field_.WriteToAsync(output, _repeated_uint32Field_codec, cancellationToken).ConfigureAwait(false);
+      await boolField_.WriteToAsync(output, _repeated_boolField_codec, cancellationToken).ConfigureAwait(false);
+      await stringField_.WriteToAsync(output, _repeated_stringField_codec, cancellationToken).ConfigureAwait(false);
+      await bytesField_.WriteToAsync(output, _repeated_bytesField_codec, cancellationToken).ConfigureAwait(false);
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public async stt::Task MergeFromAsync(pb::CodedInputStream input, st::CancellationToken cancellationToken) {
       uint tag;
@@ -1699,18 +1705,16 @@ namespace Google.Protobuf.TestProtos {
         }
       }
     }
-    #endif
 
   }
-
-  #if !NET35
-  public sealed partial class OneofWellKnownTypes : pb::IAsyncMessage<OneofWellKnownTypes> {
-  #else
-  public sealed partial class OneofWellKnownTypes : pb::IMessage<OneofWellKnownTypes> {
   #endif
+
+  public sealed partial class OneofWellKnownTypes : pb::IMessage<OneofWellKnownTypes> {
+    #if PROTOBUF_NO_ASYNC
     private static readonly pb::MessageParser<OneofWellKnownTypes> _parser = new pb::MessageParser<OneofWellKnownTypes>(() => new OneofWellKnownTypes());
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pb::MessageParser<OneofWellKnownTypes> Parser { get { return _parser; } }
+    #endif
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
@@ -2169,75 +2173,6 @@ namespace Google.Protobuf.TestProtos {
       }
     }
 
-    #if !NET35
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
-      if (oneofFieldCase_ == OneofFieldOneofCase.AnyField) {
-        await output.WriteRawTagAsync(10, cancellationToken).ConfigureAwait(false);
-        await output.WriteMessageAsync(AnyField, cancellationToken).ConfigureAwait(false);
-      }
-      if (oneofFieldCase_ == OneofFieldOneofCase.ApiField) {
-        await output.WriteRawTagAsync(18, cancellationToken).ConfigureAwait(false);
-        await output.WriteMessageAsync(ApiField, cancellationToken).ConfigureAwait(false);
-      }
-      if (oneofFieldCase_ == OneofFieldOneofCase.DurationField) {
-        await output.WriteRawTagAsync(26, cancellationToken).ConfigureAwait(false);
-        await output.WriteMessageAsync(DurationField, cancellationToken).ConfigureAwait(false);
-      }
-      if (oneofFieldCase_ == OneofFieldOneofCase.EmptyField) {
-        await output.WriteRawTagAsync(34, cancellationToken).ConfigureAwait(false);
-        await output.WriteMessageAsync(EmptyField, cancellationToken).ConfigureAwait(false);
-      }
-      if (oneofFieldCase_ == OneofFieldOneofCase.FieldMaskField) {
-        await output.WriteRawTagAsync(42, cancellationToken).ConfigureAwait(false);
-        await output.WriteMessageAsync(FieldMaskField, cancellationToken).ConfigureAwait(false);
-      }
-      if (oneofFieldCase_ == OneofFieldOneofCase.SourceContextField) {
-        await output.WriteRawTagAsync(50, cancellationToken).ConfigureAwait(false);
-        await output.WriteMessageAsync(SourceContextField, cancellationToken).ConfigureAwait(false);
-      }
-      if (oneofFieldCase_ == OneofFieldOneofCase.StructField) {
-        await output.WriteRawTagAsync(58, cancellationToken).ConfigureAwait(false);
-        await output.WriteMessageAsync(StructField, cancellationToken).ConfigureAwait(false);
-      }
-      if (oneofFieldCase_ == OneofFieldOneofCase.TimestampField) {
-        await output.WriteRawTagAsync(66, cancellationToken).ConfigureAwait(false);
-        await output.WriteMessageAsync(TimestampField, cancellationToken).ConfigureAwait(false);
-      }
-      if (oneofFieldCase_ == OneofFieldOneofCase.TypeField) {
-        await output.WriteRawTagAsync(74, cancellationToken).ConfigureAwait(false);
-        await output.WriteMessageAsync(TypeField, cancellationToken).ConfigureAwait(false);
-      }
-      if (oneofFieldCase_ == OneofFieldOneofCase.DoubleField) {
-        await _oneof_doubleField_codec.WriteTagAndValueAsync(output, (double?) oneofField_, cancellationToken).ConfigureAwait(false);
-      }
-      if (oneofFieldCase_ == OneofFieldOneofCase.FloatField) {
-        await _oneof_floatField_codec.WriteTagAndValueAsync(output, (float?) oneofField_, cancellationToken).ConfigureAwait(false);
-      }
-      if (oneofFieldCase_ == OneofFieldOneofCase.Int64Field) {
-        await _oneof_int64Field_codec.WriteTagAndValueAsync(output, (long?) oneofField_, cancellationToken).ConfigureAwait(false);
-      }
-      if (oneofFieldCase_ == OneofFieldOneofCase.Uint64Field) {
-        await _oneof_uint64Field_codec.WriteTagAndValueAsync(output, (ulong?) oneofField_, cancellationToken).ConfigureAwait(false);
-      }
-      if (oneofFieldCase_ == OneofFieldOneofCase.Int32Field) {
-        await _oneof_int32Field_codec.WriteTagAndValueAsync(output, (int?) oneofField_, cancellationToken).ConfigureAwait(false);
-      }
-      if (oneofFieldCase_ == OneofFieldOneofCase.Uint32Field) {
-        await _oneof_uint32Field_codec.WriteTagAndValueAsync(output, (uint?) oneofField_, cancellationToken).ConfigureAwait(false);
-      }
-      if (oneofFieldCase_ == OneofFieldOneofCase.BoolField) {
-        await _oneof_boolField_codec.WriteTagAndValueAsync(output, (bool?) oneofField_, cancellationToken).ConfigureAwait(false);
-      }
-      if (oneofFieldCase_ == OneofFieldOneofCase.StringField) {
-        await _oneof_stringField_codec.WriteTagAndValueAsync(output, (string) oneofField_, cancellationToken).ConfigureAwait(false);
-      }
-      if (oneofFieldCase_ == OneofFieldOneofCase.BytesField) {
-        await _oneof_bytesField_codec.WriteTagAndValueAsync(output, (pb::ByteString) oneofField_, cancellationToken).ConfigureAwait(false);
-      }
-    }
-    #endif
-
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
@@ -2491,7 +2426,81 @@ namespace Google.Protobuf.TestProtos {
       }
     }
 
-    #if !NET35
+  }
+
+  #if !PROTOBUF_NO_ASYNC
+  public sealed partial class OneofWellKnownTypes : pb::IAsyncMessage<OneofWellKnownTypes> {
+    private static readonly pb::AsyncMessageParser<OneofWellKnownTypes> _parser = new pb::AsyncMessageParser<OneofWellKnownTypes>(() => new OneofWellKnownTypes());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::AsyncMessageParser<OneofWellKnownTypes> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
+      if (oneofFieldCase_ == OneofFieldOneofCase.AnyField) {
+        await output.WriteRawTagAsync(10, cancellationToken).ConfigureAwait(false);
+        await output.WriteMessageAsync(AnyField, cancellationToken).ConfigureAwait(false);
+      }
+      if (oneofFieldCase_ == OneofFieldOneofCase.ApiField) {
+        await output.WriteRawTagAsync(18, cancellationToken).ConfigureAwait(false);
+        await output.WriteMessageAsync(ApiField, cancellationToken).ConfigureAwait(false);
+      }
+      if (oneofFieldCase_ == OneofFieldOneofCase.DurationField) {
+        await output.WriteRawTagAsync(26, cancellationToken).ConfigureAwait(false);
+        await output.WriteMessageAsync(DurationField, cancellationToken).ConfigureAwait(false);
+      }
+      if (oneofFieldCase_ == OneofFieldOneofCase.EmptyField) {
+        await output.WriteRawTagAsync(34, cancellationToken).ConfigureAwait(false);
+        await output.WriteMessageAsync(EmptyField, cancellationToken).ConfigureAwait(false);
+      }
+      if (oneofFieldCase_ == OneofFieldOneofCase.FieldMaskField) {
+        await output.WriteRawTagAsync(42, cancellationToken).ConfigureAwait(false);
+        await output.WriteMessageAsync(FieldMaskField, cancellationToken).ConfigureAwait(false);
+      }
+      if (oneofFieldCase_ == OneofFieldOneofCase.SourceContextField) {
+        await output.WriteRawTagAsync(50, cancellationToken).ConfigureAwait(false);
+        await output.WriteMessageAsync(SourceContextField, cancellationToken).ConfigureAwait(false);
+      }
+      if (oneofFieldCase_ == OneofFieldOneofCase.StructField) {
+        await output.WriteRawTagAsync(58, cancellationToken).ConfigureAwait(false);
+        await output.WriteMessageAsync(StructField, cancellationToken).ConfigureAwait(false);
+      }
+      if (oneofFieldCase_ == OneofFieldOneofCase.TimestampField) {
+        await output.WriteRawTagAsync(66, cancellationToken).ConfigureAwait(false);
+        await output.WriteMessageAsync(TimestampField, cancellationToken).ConfigureAwait(false);
+      }
+      if (oneofFieldCase_ == OneofFieldOneofCase.TypeField) {
+        await output.WriteRawTagAsync(74, cancellationToken).ConfigureAwait(false);
+        await output.WriteMessageAsync(TypeField, cancellationToken).ConfigureAwait(false);
+      }
+      if (oneofFieldCase_ == OneofFieldOneofCase.DoubleField) {
+        await _oneof_doubleField_codec.WriteTagAndValueAsync(output, (double?) oneofField_, cancellationToken).ConfigureAwait(false);
+      }
+      if (oneofFieldCase_ == OneofFieldOneofCase.FloatField) {
+        await _oneof_floatField_codec.WriteTagAndValueAsync(output, (float?) oneofField_, cancellationToken).ConfigureAwait(false);
+      }
+      if (oneofFieldCase_ == OneofFieldOneofCase.Int64Field) {
+        await _oneof_int64Field_codec.WriteTagAndValueAsync(output, (long?) oneofField_, cancellationToken).ConfigureAwait(false);
+      }
+      if (oneofFieldCase_ == OneofFieldOneofCase.Uint64Field) {
+        await _oneof_uint64Field_codec.WriteTagAndValueAsync(output, (ulong?) oneofField_, cancellationToken).ConfigureAwait(false);
+      }
+      if (oneofFieldCase_ == OneofFieldOneofCase.Int32Field) {
+        await _oneof_int32Field_codec.WriteTagAndValueAsync(output, (int?) oneofField_, cancellationToken).ConfigureAwait(false);
+      }
+      if (oneofFieldCase_ == OneofFieldOneofCase.Uint32Field) {
+        await _oneof_uint32Field_codec.WriteTagAndValueAsync(output, (uint?) oneofField_, cancellationToken).ConfigureAwait(false);
+      }
+      if (oneofFieldCase_ == OneofFieldOneofCase.BoolField) {
+        await _oneof_boolField_codec.WriteTagAndValueAsync(output, (bool?) oneofField_, cancellationToken).ConfigureAwait(false);
+      }
+      if (oneofFieldCase_ == OneofFieldOneofCase.StringField) {
+        await _oneof_stringField_codec.WriteTagAndValueAsync(output, (string) oneofField_, cancellationToken).ConfigureAwait(false);
+      }
+      if (oneofFieldCase_ == OneofFieldOneofCase.BytesField) {
+        await _oneof_bytesField_codec.WriteTagAndValueAsync(output, (pb::ByteString) oneofField_, cancellationToken).ConfigureAwait(false);
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public async stt::Task MergeFromAsync(pb::CodedInputStream input, st::CancellationToken cancellationToken) {
       uint tag;
@@ -2620,23 +2629,21 @@ namespace Google.Protobuf.TestProtos {
         }
       }
     }
-    #endif
 
   }
+  #endif
 
   /// <summary>
   /// A map field for each well-known type. We only
   /// need to worry about the value part of the map being the
   /// well-known types, as messages can't be map keys.
   /// </summary>
-  #if !NET35
-  public sealed partial class MapWellKnownTypes : pb::IAsyncMessage<MapWellKnownTypes> {
-  #else
   public sealed partial class MapWellKnownTypes : pb::IMessage<MapWellKnownTypes> {
-  #endif
+    #if PROTOBUF_NO_ASYNC
     private static readonly pb::MessageParser<MapWellKnownTypes> _parser = new pb::MessageParser<MapWellKnownTypes>(() => new MapWellKnownTypes());
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pb::MessageParser<MapWellKnownTypes> Parser { get { return _parser; } }
+    #endif
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
@@ -2685,7 +2692,7 @@ namespace Google.Protobuf.TestProtos {
     /// <summary>Field number for the "any_field" field.</summary>
     public const int AnyFieldFieldNumber = 1;
     private static readonly pbc::MapField<int, global::Google.Protobuf.WellKnownTypes.Any>.Codec _map_anyField_codec
-        = new pbc::MapField<int, global::Google.Protobuf.WellKnownTypes.Any>.Codec(pb::FieldCodec.ForInt32(8), pb::FieldCodec.ForAsyncMessage(18, global::Google.Protobuf.WellKnownTypes.Any.Parser), 10);
+        = new pbc::MapField<int, global::Google.Protobuf.WellKnownTypes.Any>.Codec(pb::FieldCodec.ForInt32(8), pb::FieldCodec.ForMessage(18, global::Google.Protobuf.WellKnownTypes.Any.Parser), 10);
     private readonly pbc::MapField<int, global::Google.Protobuf.WellKnownTypes.Any> anyField_ = new pbc::MapField<int, global::Google.Protobuf.WellKnownTypes.Any>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::MapField<int, global::Google.Protobuf.WellKnownTypes.Any> AnyField {
@@ -2695,7 +2702,7 @@ namespace Google.Protobuf.TestProtos {
     /// <summary>Field number for the "api_field" field.</summary>
     public const int ApiFieldFieldNumber = 2;
     private static readonly pbc::MapField<int, global::Google.Protobuf.WellKnownTypes.Api>.Codec _map_apiField_codec
-        = new pbc::MapField<int, global::Google.Protobuf.WellKnownTypes.Api>.Codec(pb::FieldCodec.ForInt32(8), pb::FieldCodec.ForAsyncMessage(18, global::Google.Protobuf.WellKnownTypes.Api.Parser), 18);
+        = new pbc::MapField<int, global::Google.Protobuf.WellKnownTypes.Api>.Codec(pb::FieldCodec.ForInt32(8), pb::FieldCodec.ForMessage(18, global::Google.Protobuf.WellKnownTypes.Api.Parser), 18);
     private readonly pbc::MapField<int, global::Google.Protobuf.WellKnownTypes.Api> apiField_ = new pbc::MapField<int, global::Google.Protobuf.WellKnownTypes.Api>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::MapField<int, global::Google.Protobuf.WellKnownTypes.Api> ApiField {
@@ -2705,7 +2712,7 @@ namespace Google.Protobuf.TestProtos {
     /// <summary>Field number for the "duration_field" field.</summary>
     public const int DurationFieldFieldNumber = 3;
     private static readonly pbc::MapField<int, global::Google.Protobuf.WellKnownTypes.Duration>.Codec _map_durationField_codec
-        = new pbc::MapField<int, global::Google.Protobuf.WellKnownTypes.Duration>.Codec(pb::FieldCodec.ForInt32(8), pb::FieldCodec.ForAsyncMessage(18, global::Google.Protobuf.WellKnownTypes.Duration.Parser), 26);
+        = new pbc::MapField<int, global::Google.Protobuf.WellKnownTypes.Duration>.Codec(pb::FieldCodec.ForInt32(8), pb::FieldCodec.ForMessage(18, global::Google.Protobuf.WellKnownTypes.Duration.Parser), 26);
     private readonly pbc::MapField<int, global::Google.Protobuf.WellKnownTypes.Duration> durationField_ = new pbc::MapField<int, global::Google.Protobuf.WellKnownTypes.Duration>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::MapField<int, global::Google.Protobuf.WellKnownTypes.Duration> DurationField {
@@ -2715,7 +2722,7 @@ namespace Google.Protobuf.TestProtos {
     /// <summary>Field number for the "empty_field" field.</summary>
     public const int EmptyFieldFieldNumber = 4;
     private static readonly pbc::MapField<int, global::Google.Protobuf.WellKnownTypes.Empty>.Codec _map_emptyField_codec
-        = new pbc::MapField<int, global::Google.Protobuf.WellKnownTypes.Empty>.Codec(pb::FieldCodec.ForInt32(8), pb::FieldCodec.ForAsyncMessage(18, global::Google.Protobuf.WellKnownTypes.Empty.Parser), 34);
+        = new pbc::MapField<int, global::Google.Protobuf.WellKnownTypes.Empty>.Codec(pb::FieldCodec.ForInt32(8), pb::FieldCodec.ForMessage(18, global::Google.Protobuf.WellKnownTypes.Empty.Parser), 34);
     private readonly pbc::MapField<int, global::Google.Protobuf.WellKnownTypes.Empty> emptyField_ = new pbc::MapField<int, global::Google.Protobuf.WellKnownTypes.Empty>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::MapField<int, global::Google.Protobuf.WellKnownTypes.Empty> EmptyField {
@@ -2725,7 +2732,7 @@ namespace Google.Protobuf.TestProtos {
     /// <summary>Field number for the "field_mask_field" field.</summary>
     public const int FieldMaskFieldFieldNumber = 5;
     private static readonly pbc::MapField<int, global::Google.Protobuf.WellKnownTypes.FieldMask>.Codec _map_fieldMaskField_codec
-        = new pbc::MapField<int, global::Google.Protobuf.WellKnownTypes.FieldMask>.Codec(pb::FieldCodec.ForInt32(8), pb::FieldCodec.ForAsyncMessage(18, global::Google.Protobuf.WellKnownTypes.FieldMask.Parser), 42);
+        = new pbc::MapField<int, global::Google.Protobuf.WellKnownTypes.FieldMask>.Codec(pb::FieldCodec.ForInt32(8), pb::FieldCodec.ForMessage(18, global::Google.Protobuf.WellKnownTypes.FieldMask.Parser), 42);
     private readonly pbc::MapField<int, global::Google.Protobuf.WellKnownTypes.FieldMask> fieldMaskField_ = new pbc::MapField<int, global::Google.Protobuf.WellKnownTypes.FieldMask>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::MapField<int, global::Google.Protobuf.WellKnownTypes.FieldMask> FieldMaskField {
@@ -2735,7 +2742,7 @@ namespace Google.Protobuf.TestProtos {
     /// <summary>Field number for the "source_context_field" field.</summary>
     public const int SourceContextFieldFieldNumber = 6;
     private static readonly pbc::MapField<int, global::Google.Protobuf.WellKnownTypes.SourceContext>.Codec _map_sourceContextField_codec
-        = new pbc::MapField<int, global::Google.Protobuf.WellKnownTypes.SourceContext>.Codec(pb::FieldCodec.ForInt32(8), pb::FieldCodec.ForAsyncMessage(18, global::Google.Protobuf.WellKnownTypes.SourceContext.Parser), 50);
+        = new pbc::MapField<int, global::Google.Protobuf.WellKnownTypes.SourceContext>.Codec(pb::FieldCodec.ForInt32(8), pb::FieldCodec.ForMessage(18, global::Google.Protobuf.WellKnownTypes.SourceContext.Parser), 50);
     private readonly pbc::MapField<int, global::Google.Protobuf.WellKnownTypes.SourceContext> sourceContextField_ = new pbc::MapField<int, global::Google.Protobuf.WellKnownTypes.SourceContext>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::MapField<int, global::Google.Protobuf.WellKnownTypes.SourceContext> SourceContextField {
@@ -2745,7 +2752,7 @@ namespace Google.Protobuf.TestProtos {
     /// <summary>Field number for the "struct_field" field.</summary>
     public const int StructFieldFieldNumber = 7;
     private static readonly pbc::MapField<int, global::Google.Protobuf.WellKnownTypes.Struct>.Codec _map_structField_codec
-        = new pbc::MapField<int, global::Google.Protobuf.WellKnownTypes.Struct>.Codec(pb::FieldCodec.ForInt32(8), pb::FieldCodec.ForAsyncMessage(18, global::Google.Protobuf.WellKnownTypes.Struct.Parser), 58);
+        = new pbc::MapField<int, global::Google.Protobuf.WellKnownTypes.Struct>.Codec(pb::FieldCodec.ForInt32(8), pb::FieldCodec.ForMessage(18, global::Google.Protobuf.WellKnownTypes.Struct.Parser), 58);
     private readonly pbc::MapField<int, global::Google.Protobuf.WellKnownTypes.Struct> structField_ = new pbc::MapField<int, global::Google.Protobuf.WellKnownTypes.Struct>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::MapField<int, global::Google.Protobuf.WellKnownTypes.Struct> StructField {
@@ -2755,7 +2762,7 @@ namespace Google.Protobuf.TestProtos {
     /// <summary>Field number for the "timestamp_field" field.</summary>
     public const int TimestampFieldFieldNumber = 8;
     private static readonly pbc::MapField<int, global::Google.Protobuf.WellKnownTypes.Timestamp>.Codec _map_timestampField_codec
-        = new pbc::MapField<int, global::Google.Protobuf.WellKnownTypes.Timestamp>.Codec(pb::FieldCodec.ForInt32(8), pb::FieldCodec.ForAsyncMessage(18, global::Google.Protobuf.WellKnownTypes.Timestamp.Parser), 66);
+        = new pbc::MapField<int, global::Google.Protobuf.WellKnownTypes.Timestamp>.Codec(pb::FieldCodec.ForInt32(8), pb::FieldCodec.ForMessage(18, global::Google.Protobuf.WellKnownTypes.Timestamp.Parser), 66);
     private readonly pbc::MapField<int, global::Google.Protobuf.WellKnownTypes.Timestamp> timestampField_ = new pbc::MapField<int, global::Google.Protobuf.WellKnownTypes.Timestamp>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::MapField<int, global::Google.Protobuf.WellKnownTypes.Timestamp> TimestampField {
@@ -2765,7 +2772,7 @@ namespace Google.Protobuf.TestProtos {
     /// <summary>Field number for the "type_field" field.</summary>
     public const int TypeFieldFieldNumber = 9;
     private static readonly pbc::MapField<int, global::Google.Protobuf.WellKnownTypes.Type>.Codec _map_typeField_codec
-        = new pbc::MapField<int, global::Google.Protobuf.WellKnownTypes.Type>.Codec(pb::FieldCodec.ForInt32(8), pb::FieldCodec.ForAsyncMessage(18, global::Google.Protobuf.WellKnownTypes.Type.Parser), 74);
+        = new pbc::MapField<int, global::Google.Protobuf.WellKnownTypes.Type>.Codec(pb::FieldCodec.ForInt32(8), pb::FieldCodec.ForMessage(18, global::Google.Protobuf.WellKnownTypes.Type.Parser), 74);
     private readonly pbc::MapField<int, global::Google.Protobuf.WellKnownTypes.Type> typeField_ = new pbc::MapField<int, global::Google.Protobuf.WellKnownTypes.Type>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::MapField<int, global::Google.Protobuf.WellKnownTypes.Type> TypeField {
@@ -2947,30 +2954,6 @@ namespace Google.Protobuf.TestProtos {
       bytesField_.WriteTo(output, _map_bytesField_codec);
     }
 
-    #if !NET35
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
-      await anyField_.WriteToAsync(output, _map_anyField_codec, cancellationToken).ConfigureAwait(false);
-      await apiField_.WriteToAsync(output, _map_apiField_codec, cancellationToken).ConfigureAwait(false);
-      await durationField_.WriteToAsync(output, _map_durationField_codec, cancellationToken).ConfigureAwait(false);
-      await emptyField_.WriteToAsync(output, _map_emptyField_codec, cancellationToken).ConfigureAwait(false);
-      await fieldMaskField_.WriteToAsync(output, _map_fieldMaskField_codec, cancellationToken).ConfigureAwait(false);
-      await sourceContextField_.WriteToAsync(output, _map_sourceContextField_codec, cancellationToken).ConfigureAwait(false);
-      await structField_.WriteToAsync(output, _map_structField_codec, cancellationToken).ConfigureAwait(false);
-      await timestampField_.WriteToAsync(output, _map_timestampField_codec, cancellationToken).ConfigureAwait(false);
-      await typeField_.WriteToAsync(output, _map_typeField_codec, cancellationToken).ConfigureAwait(false);
-      await doubleField_.WriteToAsync(output, _map_doubleField_codec, cancellationToken).ConfigureAwait(false);
-      await floatField_.WriteToAsync(output, _map_floatField_codec, cancellationToken).ConfigureAwait(false);
-      await int64Field_.WriteToAsync(output, _map_int64Field_codec, cancellationToken).ConfigureAwait(false);
-      await uint64Field_.WriteToAsync(output, _map_uint64Field_codec, cancellationToken).ConfigureAwait(false);
-      await int32Field_.WriteToAsync(output, _map_int32Field_codec, cancellationToken).ConfigureAwait(false);
-      await uint32Field_.WriteToAsync(output, _map_uint32Field_codec, cancellationToken).ConfigureAwait(false);
-      await boolField_.WriteToAsync(output, _map_boolField_codec, cancellationToken).ConfigureAwait(false);
-      await stringField_.WriteToAsync(output, _map_stringField_codec, cancellationToken).ConfigureAwait(false);
-      await bytesField_.WriteToAsync(output, _map_bytesField_codec, cancellationToken).ConfigureAwait(false);
-    }
-    #endif
-
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
@@ -3104,7 +3087,36 @@ namespace Google.Protobuf.TestProtos {
       }
     }
 
-    #if !NET35
+  }
+
+  #if !PROTOBUF_NO_ASYNC
+  public sealed partial class MapWellKnownTypes : pb::IAsyncMessage<MapWellKnownTypes> {
+    private static readonly pb::AsyncMessageParser<MapWellKnownTypes> _parser = new pb::AsyncMessageParser<MapWellKnownTypes>(() => new MapWellKnownTypes());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::AsyncMessageParser<MapWellKnownTypes> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public async stt::Task WriteToAsync(pb::CodedOutputStream output, st::CancellationToken cancellationToken) {
+      await anyField_.WriteToAsync(output, _map_anyField_codec, cancellationToken).ConfigureAwait(false);
+      await apiField_.WriteToAsync(output, _map_apiField_codec, cancellationToken).ConfigureAwait(false);
+      await durationField_.WriteToAsync(output, _map_durationField_codec, cancellationToken).ConfigureAwait(false);
+      await emptyField_.WriteToAsync(output, _map_emptyField_codec, cancellationToken).ConfigureAwait(false);
+      await fieldMaskField_.WriteToAsync(output, _map_fieldMaskField_codec, cancellationToken).ConfigureAwait(false);
+      await sourceContextField_.WriteToAsync(output, _map_sourceContextField_codec, cancellationToken).ConfigureAwait(false);
+      await structField_.WriteToAsync(output, _map_structField_codec, cancellationToken).ConfigureAwait(false);
+      await timestampField_.WriteToAsync(output, _map_timestampField_codec, cancellationToken).ConfigureAwait(false);
+      await typeField_.WriteToAsync(output, _map_typeField_codec, cancellationToken).ConfigureAwait(false);
+      await doubleField_.WriteToAsync(output, _map_doubleField_codec, cancellationToken).ConfigureAwait(false);
+      await floatField_.WriteToAsync(output, _map_floatField_codec, cancellationToken).ConfigureAwait(false);
+      await int64Field_.WriteToAsync(output, _map_int64Field_codec, cancellationToken).ConfigureAwait(false);
+      await uint64Field_.WriteToAsync(output, _map_uint64Field_codec, cancellationToken).ConfigureAwait(false);
+      await int32Field_.WriteToAsync(output, _map_int32Field_codec, cancellationToken).ConfigureAwait(false);
+      await uint32Field_.WriteToAsync(output, _map_uint32Field_codec, cancellationToken).ConfigureAwait(false);
+      await boolField_.WriteToAsync(output, _map_boolField_codec, cancellationToken).ConfigureAwait(false);
+      await stringField_.WriteToAsync(output, _map_stringField_codec, cancellationToken).ConfigureAwait(false);
+      await bytesField_.WriteToAsync(output, _map_bytesField_codec, cancellationToken).ConfigureAwait(false);
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public async stt::Task MergeFromAsync(pb::CodedInputStream input, st::CancellationToken cancellationToken) {
       uint tag;
@@ -3188,9 +3200,9 @@ namespace Google.Protobuf.TestProtos {
         }
       }
     }
-    #endif
 
   }
+  #endif
 
   #endregion
 

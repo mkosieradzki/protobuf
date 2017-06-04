@@ -188,15 +188,6 @@ class FileOptions extends \Google\Protobuf\Internal\Message
     private $has_php_class_prefix = false;
     /**
      * <pre>
-     * Enables async-friendly code generation for C#.
-     * </pre>
-     *
-     * <code>optional bool csharp_async = 41 [default = false];</code>
-     */
-    private $csharp_async = false;
-    private $has_csharp_async = false;
-    /**
-     * <pre>
      * The parser stores options it doesn't recognize here. See above.
      * </pre>
      *
@@ -788,39 +779,6 @@ class FileOptions extends \Google\Protobuf\Internal\Message
     public function hasPhpClassPrefix()
     {
         return $this->has_php_class_prefix;
-    }
-
-    /**
-     * <pre>
-     * Enables async-friendly code generation for C#.
-     * </pre>
-     *
-     * <code>optional bool csharp_async = 41 [default = false];</code>
-     */
-    public function getCsharpAsync()
-    {
-        return $this->csharp_async;
-    }
-
-    /**
-     * <pre>
-     * Enables async-friendly code generation for C#.
-     * </pre>
-     *
-     * <code>optional bool csharp_async = 41 [default = false];</code>
-     */
-    public function setCsharpAsync($var)
-    {
-        GPBUtil::checkBool($var);
-        $this->csharp_async = $var;
-        $this->has_csharp_async = true;
-
-        return $this;
-    }
-
-    public function hasCsharpAsync()
-    {
-        return $this->has_csharp_async;
     }
 
     /**
