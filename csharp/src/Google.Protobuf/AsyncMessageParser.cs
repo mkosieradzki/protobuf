@@ -29,13 +29,12 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #endregion
-    
+
+#if !PROTOBUF_NO_ASYNC
 using System;
 using System.IO;
-#if !NET35
 using System.Threading;
 using System.Threading.Tasks;
-#endif
 
 namespace Google.Protobuf
 {
@@ -294,3 +293,5 @@ namespace Google.Protobuf
         }
     }
 }
+
+#endif

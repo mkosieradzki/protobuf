@@ -30,7 +30,7 @@
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #endregion
 
-using Google.Protobuf.Collections;
+#if !PROTOBUF_NO_ASYNC
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -898,3 +898,4 @@ namespace Google.Protobuf
         #endregion
     }
 }
+#endif

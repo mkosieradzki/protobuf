@@ -77,6 +77,7 @@ csharp_EXTRA_DIST=                                                           \
   csharp/src/Google.Protobuf.Test/ByteStringTest.cs                          \
   csharp/src/Google.Protobuf.Test/CodedInputStreamExtensions.cs              \
   csharp/src/Google.Protobuf.Test/CodedInputStreamTest.cs                    \
+  csharp/src/Google.Protobuf.Test/CodedInputStreamAsyncTest.cs               \
   csharp/src/Google.Protobuf.Test/CodedOutputStreamTest.cs                   \
   csharp/src/Google.Protobuf.Test/Collections/MapFieldTest.cs                \
   csharp/src/Google.Protobuf.Test/Collections/RepeatedFieldTest.cs           \
@@ -115,6 +116,8 @@ csharp_EXTRA_DIST=                                                           \
   csharp/src/Google.Protobuf.Test/WellKnownTypes/TimestampTest.cs            \
   csharp/src/Google.Protobuf.Test/WellKnownTypes/WrappersTest.cs             \
   csharp/src/Google.Protobuf.sln                                             \
+  csharp/src/Google.Protobuf/AsyncMessageParser.cs                           \
+  csharp/src/Google.Protobuf/AsyncMessageExtensions.cs                       \
   csharp/src/Google.Protobuf/ByteArray.cs                                    \
   csharp/src/Google.Protobuf/ByteString.cs                                   \
   csharp/src/Google.Protobuf/CodedInputStream.Async.cs                       \
