@@ -115,9 +115,9 @@ void ReflectionClassGenerator::WriteIntroduction(io::Printer* printer) {
     "using scg = global::System.Collections.Generic;\n",
     "file_name", file_->name());
 
-  if (file_->options().csharp_async() || options()->async) {
+  if (options()->async) {
     printer->Print(
-      "#if !NET35\n"
+      "#if !PROTOBUF_NO_ASYNC\n"
       "using st = global::System.Threading;\n"
       "using stt = global::System.Threading.Tasks;\n"
       "#endif\n");
