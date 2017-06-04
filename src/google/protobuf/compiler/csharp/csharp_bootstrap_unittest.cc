@@ -181,6 +181,7 @@ TEST(CsharpBootstrapTest, GeneratedCsharpDescriptorMatches) {
                     "Addressbook.cs",
                     "../csharp/src/AddressBook/Addressbook.cs");
 
+  generate_test.SetParameter("");
   source_tree.MapPath("", TestSourceDir() + "/../conformance");
   generate_test.Run(importer.Import("conformance.proto"),
                     "Conformance.cs",
