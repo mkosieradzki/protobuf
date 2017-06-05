@@ -67,7 +67,7 @@ namespace Google.Protobuf
 
             input = new CodedInputStream(data);
             Assert.AreEqual(value, await input.ReadRawVarint64Async(CancellationToken.None));
-            Assert.IsTrue(input.IsAtEnd);
+            Assert.IsTrue(await input.IsAtEndAsync(CancellationToken.None));
 
             // Try different block sizes.
             for (int bufferSize = 1; bufferSize <= 16; bufferSize *= 2)
@@ -77,7 +77,7 @@ namespace Google.Protobuf
 
                 input = new CodedInputStream(new SmallBlockInputStream(data, bufferSize));
                 Assert.AreEqual(value, await input.ReadRawVarint64Async(CancellationToken.None));
-                Assert.IsTrue(input.IsAtEnd);
+                Assert.IsTrue(await input.IsAtEndAsync(CancellationToken.None));
             }
 
             // Try reading directly from a MemoryStream. We want to verify that it
@@ -87,7 +87,7 @@ namespace Google.Protobuf
             memoryStream.Write(data, 0, data.Length);
             memoryStream.WriteByte(0);
             memoryStream.Position = 0;
-            Assert.AreEqual((uint) value, await CodedInputStream.ReadRawVarint32Async(memoryStream, CancellationToken.None));
+            Assert.AreEqual((uint) value, await CodedInputStream.ReadRawVarint32Async(new AsyncOnlyStreamWrapper(memoryStream), CancellationToken.None));
             Assert.AreEqual(data.Length, memoryStream.Position);
         }
 
@@ -98,11 +98,11 @@ namespace Google.Protobuf
         /// </summary>
         private static void AssertReadVarintFailure(InvalidProtocolBufferException expected, byte[] data)
         {
-            CodedInputStream input = new CodedInputStream(data);
+            CodedInputStream input = new CodedInputStream(new AsyncOnlyStreamWrapper(data));
             var exception = Assert.ThrowsAsync<InvalidProtocolBufferException>(() => input.ReadRawVarint32Async(CancellationToken.None));
             Assert.AreEqual(expected.Message, exception.Message);
 
-            input = new CodedInputStream(data);
+            input = new CodedInputStream(new AsyncOnlyStreamWrapper(data));
             exception = Assert.ThrowsAsync<InvalidProtocolBufferException>(() => input.ReadRawVarint64Async(CancellationToken.None));
             Assert.AreEqual(expected.Message, exception.Message);
 
@@ -155,17 +155,17 @@ namespace Google.Protobuf
         /// </summary>
         private static async Task AssertReadLittleEndian32(byte[] data, uint value)
         {
-            CodedInputStream input = new CodedInputStream(data);
+            CodedInputStream input = new CodedInputStream(new AsyncOnlyStreamWrapper(data));
             Assert.AreEqual(value, await input.ReadRawLittleEndian32Async(CancellationToken.None));
-            Assert.IsTrue(input.IsAtEnd);
+            Assert.IsTrue(await input.IsAtEndAsync(CancellationToken.None));
 
             // Try different block sizes.
             for (int blockSize = 1; blockSize <= 16; blockSize *= 2)
             {
                 input = new CodedInputStream(
-                    new SmallBlockInputStream(data, blockSize));
+                    new AsyncOnlyStreamWrapper(new SmallBlockInputStream(data, blockSize)));
                 Assert.AreEqual(value, await input.ReadRawLittleEndian32Async(CancellationToken.None));
-                Assert.IsTrue(input.IsAtEnd);
+                Assert.IsTrue(await input.IsAtEndAsync(CancellationToken.None));
             }
         }
 
@@ -175,17 +175,17 @@ namespace Google.Protobuf
         /// </summary>
         private static async Task AssertReadLittleEndian64(byte[] data, ulong value)
         {
-            CodedInputStream input = new CodedInputStream(data);
+            CodedInputStream input = new CodedInputStream(new AsyncOnlyStreamWrapper(data));
             Assert.AreEqual(value, await input.ReadRawLittleEndian64Async(CancellationToken.None));
-            Assert.IsTrue(input.IsAtEnd);
+            Assert.IsTrue(await input.IsAtEndAsync(CancellationToken.None));
 
             // Try different block sizes.
             for (int blockSize = 1; blockSize <= 16; blockSize *= 2)
             {
                 input = new CodedInputStream(
-                    new SmallBlockInputStream(data, blockSize));
+                    new AsyncOnlyStreamWrapper(new SmallBlockInputStream(data, blockSize)));
                 Assert.AreEqual(value, await input.ReadRawLittleEndian64Async(CancellationToken.None));
-                Assert.IsTrue(input.IsAtEnd);
+                Assert.IsTrue(await input.IsAtEndAsync(CancellationToken.None));
             }
         }
 
@@ -214,7 +214,7 @@ namespace Google.Protobuf
             // Try different block sizes.
             for (int blockSize = 1; blockSize < 256; blockSize *= 2)
             {
-                message2 = await TestAllTypes.Parser.ParseFromAsync(new SmallBlockInputStream(rawBytes, blockSize), CancellationToken.None);
+                message2 = await TestAllTypes.Parser.ParseFromAsync(new AsyncOnlyStreamWrapper(new SmallBlockInputStream(rawBytes, blockSize)), CancellationToken.None);
                 Assert.AreEqual(message, message2);
             }
         }
@@ -223,7 +223,7 @@ namespace Google.Protobuf
         public async Task ReadMaliciouslyLargeBlob()
         {
             MemoryStream ms = new MemoryStream();
-            CodedOutputStream output = new CodedOutputStream(ms);
+            CodedOutputStream output = new CodedOutputStream(new AsyncOnlyStreamWrapper(ms));
 
             uint tag = WireFormat.MakeTag(1, WireFormat.WireType.LengthDelimited);
             await output.WriteRawVarint32Async(tag, CancellationToken.None);
@@ -232,7 +232,7 @@ namespace Google.Protobuf
             await output.FlushAsync(CancellationToken.None);
             ms.Position = 0;
 
-            CodedInputStream input = new CodedInputStream(ms);
+            CodedInputStream input = new CodedInputStream(new AsyncOnlyStreamWrapper(ms));
             Assert.AreEqual(tag, await input.ReadTagAsync(CancellationToken.None));
 
             Assert.ThrowsAsync<InvalidProtocolBufferException>(() => input.ReadBytesAsync(CancellationToken.None));
@@ -283,7 +283,7 @@ namespace Google.Protobuf
         public async Task ReadInvalidUtf8()
         {
             MemoryStream ms = new MemoryStream();
-            CodedOutputStream output = new CodedOutputStream(ms);
+            CodedOutputStream output = new CodedOutputStream(new AsyncOnlyStreamWrapper(ms));
 
             uint tag = WireFormat.MakeTag(1, WireFormat.WireType.LengthDelimited);
             await output.WriteRawVarint32Async(tag, CancellationToken.None);
@@ -292,7 +292,7 @@ namespace Google.Protobuf
             await output.FlushAsync(CancellationToken.None);
             ms.Position = 0;
 
-            CodedInputStream input = new CodedInputStream(ms);
+            CodedInputStream input = new CodedInputStream(new AsyncOnlyStreamWrapper(ms));
 
             Assert.AreEqual(tag, await input.ReadTagAsync(CancellationToken.None));
             string text = await input.ReadStringAsync(CancellationToken.None);
@@ -324,9 +324,9 @@ namespace Google.Protobuf
         public async Task TestNegativeEnum()
         {
             byte[] bytes = { 0xFE, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0x01 };
-            CodedInputStream input = new CodedInputStream(bytes);
+            CodedInputStream input = new CodedInputStream(new AsyncOnlyStreamWrapper(bytes));
             Assert.AreEqual((int)SampleEnum.NegativeValue, await input.ReadEnumAsync(CancellationToken.None));
-            Assert.IsTrue(input.IsAtEnd);
+            Assert.IsTrue(await input.IsAtEndAsync(CancellationToken.None));
         }
 
         //Issue 71:	CodedInputStream.ReadBytes go to slow path unnecessarily
@@ -335,7 +335,7 @@ namespace Google.Protobuf
         {
             using (var ms = new MemoryStream())
             {
-                CodedOutputStream output = new CodedOutputStream(ms);
+                CodedOutputStream output = new CodedOutputStream(new AsyncOnlyStreamWrapper(ms));
                 await output.WriteTagAsync(1, WireFormat.WireType.LengthDelimited, CancellationToken.None);
                 await output.WriteBytesAsync(ByteString.CopyFrom(new byte[100]), CancellationToken.None);
                 await output.WriteTagAsync(2, WireFormat.WireType.LengthDelimited, CancellationToken.None);
@@ -343,7 +343,7 @@ namespace Google.Protobuf
                 await output.FlushAsync(CancellationToken.None);
 
                 ms.Position = 0;
-                CodedInputStream input = new CodedInputStream(ms, new byte[ms.Length / 2], 0, 0);
+                CodedInputStream input = new CodedInputStream(new AsyncOnlyStreamWrapper(ms), new byte[ms.Length / 2], 0, 0);
 
                 uint tag = await input.ReadTagAsync(CancellationToken.None);
                 Assert.AreEqual(1, WireFormat.GetTagFieldNumber(tag));
@@ -358,7 +358,7 @@ namespace Google.Protobuf
         [Test]
         public void Tag0Throws()
         {
-            var input = new CodedInputStream(new byte[] { 0 });
+            var input = new CodedInputStream(new AsyncOnlyStreamWrapper(new byte[] { 0 }));
             Assert.ThrowsAsync<InvalidProtocolBufferException>(() => input.ReadTagAsync(CancellationToken.None));
         }
 
@@ -374,7 +374,7 @@ namespace Google.Protobuf
             //      Field 1: fixed int64 value 1000
             // Field 3: string "field 3"
             var stream = new MemoryStream();
-            var output = new CodedOutputStream(stream);
+            var output = new CodedOutputStream(new AsyncOnlyStreamWrapper(stream));
             await output.WriteTagAsync(1, WireFormat.WireType.LengthDelimited, CancellationToken.None);
             await output.WriteStringAsync("field 1", CancellationToken.None);
             
@@ -400,7 +400,7 @@ namespace Google.Protobuf
             stream.Position = 0;
 
             // Now act like a generated client
-            var input = new CodedInputStream(stream);
+            var input = new CodedInputStream(new AsyncOnlyStreamWrapper(stream));
             Assert.AreEqual(WireFormat.MakeTag(1, WireFormat.WireType.LengthDelimited), await input.ReadTagAsync(CancellationToken.None));
             Assert.AreEqual("field 1", await input.ReadStringAsync(CancellationToken.None));
             Assert.AreEqual(WireFormat.MakeTag(2, WireFormat.WireType.StartGroup), await input.ReadTagAsync(CancellationToken.None));
@@ -418,7 +418,7 @@ namespace Google.Protobuf
             //   Field 3: fixed int32
             // End group 4 (should give an error)
             var stream = new MemoryStream();
-            var output = new CodedOutputStream(stream);
+            var output = new CodedOutputStream(new AsyncOnlyStreamWrapper(stream));
             await output.WriteTagAsync(1, WireFormat.WireType.LengthDelimited, CancellationToken.None);
             await output.WriteStringAsync("field 1", CancellationToken.None);
 
@@ -431,7 +431,7 @@ namespace Google.Protobuf
             stream.Position = 0;
 
             // Now act like a generated client
-            var input = new CodedInputStream(stream);
+            var input = new CodedInputStream(new AsyncOnlyStreamWrapper(stream));
             Assert.AreEqual(WireFormat.MakeTag(1, WireFormat.WireType.LengthDelimited), await input.ReadTagAsync(CancellationToken.None));
             Assert.AreEqual("field 1", await input.ReadStringAsync(CancellationToken.None));
             Assert.AreEqual(WireFormat.MakeTag(2, WireFormat.WireType.StartGroup), await input.ReadTagAsync(CancellationToken.None));
@@ -445,12 +445,12 @@ namespace Google.Protobuf
             // code will just call SkipLastField... so that should fail.
 
             var stream = new MemoryStream();
-            var output = new CodedOutputStream(stream);
+            var output = new CodedOutputStream(new AsyncOnlyStreamWrapper(stream));
             await output.WriteTagAsync(1, WireFormat.WireType.EndGroup, CancellationToken.None);
             await output.FlushAsync(CancellationToken.None);
             stream.Position = 0;
 
-            var input = new CodedInputStream(stream);
+            var input = new CodedInputStream(new AsyncOnlyStreamWrapper(stream));
             Assert.AreEqual(WireFormat.MakeTag(1, WireFormat.WireType.EndGroup), await input.ReadTagAsync(CancellationToken.None));
             Assert.ThrowsAsync<InvalidProtocolBufferException>(() => input.SkipLastFieldAsync(CancellationToken.None));
         }
@@ -459,7 +459,7 @@ namespace Google.Protobuf
         public async Task EndOfStreamReachedWhileSkippingGroup()
         {
             var stream = new MemoryStream();
-            var output = new CodedOutputStream(stream);
+            var output = new CodedOutputStream(new AsyncOnlyStreamWrapper(stream));
             await output.WriteTagAsync(1, WireFormat.WireType.StartGroup, CancellationToken.None);
             await output.WriteTagAsync(2, WireFormat.WireType.StartGroup, CancellationToken.None);
             await output.WriteTagAsync(2, WireFormat.WireType.EndGroup, CancellationToken.None);
@@ -468,16 +468,16 @@ namespace Google.Protobuf
             stream.Position = 0;
 
             // Now act like a generated client
-            var input = new CodedInputStream(stream);
+            var input = new CodedInputStream(new AsyncOnlyStreamWrapper(stream));
             await input.ReadTagAsync(CancellationToken.None);
-            Assert.Throws<InvalidProtocolBufferException>(input.SkipLastField);
+            Assert.ThrowsAsync<InvalidProtocolBufferException>(() => input.SkipLastFieldAsync(CancellationToken.None));
         }
 
         [Test]
         public async Task RecursionLimitAppliedWhileSkippingGroup()
         {
             var stream = new MemoryStream();
-            var output = new CodedOutputStream(stream);
+            var output = new CodedOutputStream(new AsyncOnlyStreamWrapper(stream));
             for (int i = 0; i < CodedInputStream.DefaultRecursionLimit + 1; i++)
             {
                 await output.WriteTagAsync(1, WireFormat.WireType.StartGroup, CancellationToken.None);
@@ -490,8 +490,8 @@ namespace Google.Protobuf
             stream.Position = 0;
 
             // Now act like a generated client
-            var input = new CodedInputStream(stream);
-            Assert.AreEqual(WireFormat.MakeTag(1, WireFormat.WireType.StartGroup), input.ReadTag());
+            var input = new CodedInputStream(new AsyncOnlyStreamWrapper(stream));
+            Assert.AreEqual(WireFormat.MakeTag(1, WireFormat.WireType.StartGroup), await input.ReadTagAsync(CancellationToken.None));
             Assert.ThrowsAsync<InvalidProtocolBufferException>(() => input.SkipLastFieldAsync(CancellationToken.None));
         }
     }

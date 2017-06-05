@@ -107,7 +107,7 @@ namespace Google.Protobuf
             }
             else
             {
-                if (IsAtEnd)
+                if (await IsAtEndAsync(cancellationToken).ConfigureAwait(false))
                 {
                     lastTag = 0;
                     return 0; // This is the only case in which we return 0.
@@ -621,6 +621,16 @@ namespace Google.Protobuf
         #endregion
 
         #region Internal reading and buffer management
+
+        /// <summary>
+        /// Returns true if the stream has reached the end of the input. This is the
+        /// case if either the end of the underlying input source has been reached or
+        /// the stream has reached a limit created using PushLimit.
+        /// </summary>
+        public async Task<bool> IsAtEndAsync(CancellationToken cancellationToken)
+        {
+            return bufferPos == bufferSize && !await RefillBufferAsync(false, cancellationToken).ConfigureAwait(false);
+        }
 
         /// <summary>
         /// Called when buffer is empty to read more bytes from the
