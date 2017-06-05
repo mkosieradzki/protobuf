@@ -188,6 +188,17 @@ class FileOptions extends \Google\Protobuf\Internal\Message
     private $has_php_class_prefix = false;
     /**
      * <pre>
+     * Use this option to change the namespace of php generated classes. Default
+     * is empty. When this option is empty, the package name will be used for
+     * determining the namespace.
+     * </pre>
+     *
+     * <code>optional string php_namespace = 41;</code>
+     */
+    private $php_namespace = '';
+    private $has_php_namespace = false;
+    /**
+     * <pre>
      * The parser stores options it doesn't recognize here. See above.
      * </pre>
      *
@@ -779,6 +790,43 @@ class FileOptions extends \Google\Protobuf\Internal\Message
     public function hasPhpClassPrefix()
     {
         return $this->has_php_class_prefix;
+    }
+
+    /**
+     * <pre>
+     * Use this option to change the namespace of php generated classes. Default
+     * is empty. When this option is empty, the package name will be used for
+     * determining the namespace.
+     * </pre>
+     *
+     * <code>optional string php_namespace = 41;</code>
+     */
+    public function getPhpNamespace()
+    {
+        return $this->php_namespace;
+    }
+
+    /**
+     * <pre>
+     * Use this option to change the namespace of php generated classes. Default
+     * is empty. When this option is empty, the package name will be used for
+     * determining the namespace.
+     * </pre>
+     *
+     * <code>optional string php_namespace = 41;</code>
+     */
+    public function setPhpNamespace($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->php_namespace = $var;
+        $this->has_php_namespace = true;
+
+        return $this;
+    }
+
+    public function hasPhpNamespace()
+    {
+        return $this->has_php_namespace;
     }
 
     /**
