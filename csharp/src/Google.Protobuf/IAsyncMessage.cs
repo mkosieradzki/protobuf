@@ -36,16 +36,35 @@ using System.Threading.Tasks;
 
 namespace Google.Protobuf
 {
+    /// <summary>
+    /// Extension interface for a Protocol Buffers message, supporting
+    /// basic asynchronous operations required for serialization.
+    /// </summary>
     public interface IAsyncMessage : IMessage
     {
+        /// <summary>
+        /// Merges the data from the specified coded input stream with the current message.
+        /// </summary>
+        /// <remarks>See the user guide for precise merge semantics.</remarks>
+        /// <param name="input"></param>
+        /// <param name="cancellationToken"></param>
         Task MergeFromAsync(CodedInputStream input, CancellationToken cancellationToken);
+
+        /// <summary>
+        /// Writes the data to the given coded output stream.
+        /// </summary>
+        /// <param name="output">Coded output stream to write the data to. Must not be null.</param>
+        /// <param name="cancellationToken"></param>
         Task WriteToAsync(CodedOutputStream output, CancellationToken cancellationToken);
     }
 
-    public interface IAsyncMessage<T> : IMessage<T>, IAsyncMessage where T : IAsyncMessage<T>
-    {
-
-    }
+    /// <summary>
+    /// Generic interface for a Protocol Buffers message,
+    /// where the type parameter is expected to be the same type as
+    /// the implementation class.
+    /// </summary>
+    /// <typeparam name="T">The message type.</typeparam>
+    public interface IAsyncMessage<T> : IMessage<T>, IAsyncMessage where T : IAsyncMessage<T> { }
 }
 
 #endif

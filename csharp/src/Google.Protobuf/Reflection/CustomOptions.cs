@@ -365,6 +365,7 @@ namespace Google.Protobuf.Reflection
         /// us to start with a singleton empty set of options and just create new ones where necessary.
         /// </remarks>
         /// <param name="input">Input stream to read from. </param>
+        /// <param name="cancellationToken"></param>
         /// <returns>The resulting set of custom options, either <c>this</c> or a new set.</returns>
         internal async Task<CustomOptions> ReadOrSkipUnknownFieldAsync(CodedInputStream input, CancellationToken cancellationToken)
         {

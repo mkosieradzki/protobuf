@@ -37,7 +37,14 @@ using System.Threading.Tasks;
 
 namespace Google.Protobuf
 {
+    /// <summary>
+    /// Delegate type for FieldCodec asynchronous read handler
+    /// </summary>
     public delegate Task<T> AsyncReadDelegate<T>(CodedInputStream inputStream, CancellationToken cancellationToken);
+
+    /// <summary>
+    /// Delegate type for FieldCodec asynchronous write handler
+    /// </summary>
     public delegate Task AsyncWriteDelegate<T>(CodedOutputStream outputStream, T value, CancellationToken cancellationToken);
 
     public static partial class FieldCodec
@@ -149,6 +156,7 @@ namespace Google.Protobuf
         /// Reads a value of the codec type from the given <see cref="CodedInputStream"/>.
         /// </summary>
         /// <param name="input">The input stream to read from.</param>
+        /// <param name="cancellationToken"></param>
         /// <returns>The value read from the stream.</returns>
         public Task<T> ReadAsync(CodedInputStream input, CancellationToken cancellationToken) => ValueAsyncReader(input, cancellationToken);
     }

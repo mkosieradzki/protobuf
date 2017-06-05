@@ -133,6 +133,7 @@ namespace Google.Protobuf.Collections
         /// </summary>
         /// <param name="input">The input stream to read from.</param>
         /// <param name="codec">The codec to use in order to read each entry.</param>
+        /// <param name="cancellationToken"></param>
         public async Task AddEntriesFromAsync(CodedInputStream input, FieldCodec<T> codec, CancellationToken cancellationToken)
         {
             // TODO: Inline some of the Add code, so we can avoid checking the size on every
@@ -260,6 +261,7 @@ namespace Google.Protobuf.Collections
         /// </summary>
         /// <param name="output">The output stream to write to.</param>
         /// <param name="codec">The codec to use when encoding each value.</param>
+        /// <param name="cancellationToken"></param>
         public async Task WriteToAsync(CodedOutputStream output, FieldCodec<T> codec, CancellationToken cancellationToken)
         {
             if (count == 0)

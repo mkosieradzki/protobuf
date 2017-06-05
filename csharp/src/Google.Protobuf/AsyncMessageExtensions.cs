@@ -47,6 +47,7 @@ namespace Google.Protobuf
         /// </summary>
         /// <param name="message">The message to merge the data into.</param>
         /// <param name="data">The data to merge, which must be protobuf-encoded binary data.</param>
+        /// <param name="cancellationToken"></param>
         public static async Task MergeFrom(this IAsyncMessage message, byte[] data, CancellationToken cancellationToken)
         {
             ProtoPreconditions.CheckNotNull(message, "message");
@@ -61,6 +62,7 @@ namespace Google.Protobuf
         /// </summary>
         /// <param name="message">The message to merge the data into.</param>
         /// <param name="input">Stream containing the data to merge, which must be protobuf-encoded binary data.</param>
+        /// <param name="cancellationToken"></param>
         public static async Task MergeFromAsync(this IAsyncMessage message, Stream input, CancellationToken cancellationToken)
         {
             ProtoPreconditions.CheckNotNull(message, "message");
@@ -79,6 +81,7 @@ namespace Google.Protobuf
         /// </remarks>
         /// <param name="message">The message to merge the data into.</param>
         /// <param name="input">Stream containing the data to merge, which must be protobuf-encoded binary data.</param>
+        /// <param name="cancellationToken"></param>
         public static async Task MergeDelimitedFromAsync(this IAsyncMessage message, Stream input, CancellationToken cancellationToken)
         {
             ProtoPreconditions.CheckNotNull(message, "message");
@@ -93,6 +96,7 @@ namespace Google.Protobuf
         /// </summary>
         /// <param name="message">The message to write to the stream.</param>
         /// <param name="output">The stream to write to.</param>
+        /// <param name="cancellationToken"></param>
         public static async Task WriteToAsync(this IAsyncMessage message, Stream output, CancellationToken cancellationToken)
         {
             ProtoPreconditions.CheckNotNull(message, "message");
@@ -107,6 +111,7 @@ namespace Google.Protobuf
         /// </summary>
         /// <param name="message">The message to write.</param>
         /// <param name="output">The output stream to write to.</param>
+        /// <param name="cancellationToken"></param>
         public static async Task WriteDelimitedToAsync(this IAsyncMessage message, Stream output, CancellationToken cancellationToken)
         {
             ProtoPreconditions.CheckNotNull(message, "message");

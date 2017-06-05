@@ -56,7 +56,7 @@ namespace Google.Protobuf
         /// Creates a template instance ready for population.
         /// </summary>
         /// <returns>An empty message.</returns>
-        new internal IAsyncMessage CreateTemplate()
+        internal new IAsyncMessage CreateTemplate()
         {
             return factory();
         }
@@ -66,7 +66,7 @@ namespace Google.Protobuf
         /// </summary>
         /// <param name="data">The byte array containing the message. Must not be null.</param>
         /// <returns>The newly parsed message.</returns>
-        new public IAsyncMessage ParseFrom(byte[] data)
+        public new IAsyncMessage ParseFrom(byte[] data)
         {
             ProtoPreconditions.CheckNotNull(data, "data");
             IAsyncMessage message = factory();
@@ -79,7 +79,7 @@ namespace Google.Protobuf
         /// </summary>
         /// <param name="data">The data to parse.</param>
         /// <returns>The parsed message.</returns>
-        new public IAsyncMessage ParseFrom(ByteString data)
+        public new IAsyncMessage ParseFrom(ByteString data)
         {
             ProtoPreconditions.CheckNotNull(data, "data");
             IAsyncMessage message = factory();
@@ -92,7 +92,7 @@ namespace Google.Protobuf
         /// </summary>
         /// <param name="input">The stream to parse.</param>
         /// <returns>The parsed message.</returns>
-        new public IAsyncMessage ParseFrom(Stream input)
+        public new IAsyncMessage ParseFrom(Stream input)
         {
             IAsyncMessage message = factory();
             message.MergeFrom(input);
@@ -108,7 +108,7 @@ namespace Google.Protobuf
         /// </remarks>
         /// <param name="input">The stream to parse.</param>
         /// <returns>The parsed message.</returns>
-        new public IAsyncMessage ParseDelimitedFrom(Stream input)
+        public new IAsyncMessage ParseDelimitedFrom(Stream input)
         {
             IAsyncMessage message = factory();
             message.MergeDelimitedFrom(input);
@@ -120,7 +120,7 @@ namespace Google.Protobuf
         /// </summary>
         /// <param name="input">The stream to parse.</param>
         /// <returns>The parsed message.</returns>
-        new public IAsyncMessage ParseFrom(CodedInputStream input)
+        public new IAsyncMessage ParseFrom(CodedInputStream input)
         {
             IAsyncMessage message = factory();
             message.MergeFrom(input);
@@ -131,8 +131,9 @@ namespace Google.Protobuf
         /// Parses a message from the given coded input stream.
         /// </summary>
         /// <param name="input">The stream to parse.</param>
+        /// <param name="cancellationToken"></param>
         /// <returns>The parsed message.</returns>
-        new public async Task<IAsyncMessage> ParseFromAsync(CodedInputStream input, CancellationToken cancellationToken)
+        public async Task<IAsyncMessage> ParseFromAsync(CodedInputStream input, CancellationToken cancellationToken)
         {
             IAsyncMessage message = factory();
             await message.MergeFromAsync(input, cancellationToken).ConfigureAwait(false);
@@ -242,8 +243,9 @@ namespace Google.Protobuf
         /// Parses a message from the given stream.
         /// </summary>
         /// <param name="input">The stream to parse.</param>
+        /// <param name="cancellationToken"></param>
         /// <returns>The parsed message.</returns>
-        public async new Task<T> ParseFromAsync(Stream input, CancellationToken cancellationToken)
+        public async Task<T> ParseFromAsync(Stream input, CancellationToken cancellationToken)
         {
             T message = factory();
             await message.MergeFromAsync(input, cancellationToken).ConfigureAwait(false);
@@ -275,6 +277,19 @@ namespace Google.Protobuf
         {
             T message = factory();
             message.MergeFrom(input);
+            return message;
+        }
+
+        /// <summary>
+        /// Parses a message from the given coded input stream.
+        /// </summary>
+        /// <param name="input">The stream to parse.</param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>The parsed message.</returns>
+        public async new Task<T> ParseFromAsync(CodedInputStream input, CancellationToken cancellationToken)
+        {
+            T message = factory();
+            await message.MergeFromAsync(input, cancellationToken);
             return message;
         }
 

@@ -532,6 +532,7 @@ namespace Google.Protobuf
         /// CodedInputStream buffers its input.
         /// </summary>
         /// <param name="input"></param>
+        /// <param name="cancellationToken"></param>
         /// <returns></returns>
         internal static async Task<uint> ReadRawVarint32Async(Stream input, CancellationToken cancellationToken)
         {
@@ -629,6 +630,7 @@ namespace Google.Protobuf
         /// RefillBuffer() returns false if no more bytes were available.
         /// </summary>
         /// <param name="mustSucceed"></param>
+        /// <param name="cancellationToken"></param>
         /// <returns></returns>
         private async Task<bool> RefillBufferAsync(bool mustSucceed, CancellationToken cancellationToken)
         {

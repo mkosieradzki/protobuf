@@ -459,6 +459,7 @@ namespace Google.Protobuf.Collections
         /// </remarks>
         /// <param name="input">Stream to read from</param>
         /// <param name="codec">Codec describing how the key/value pairs are encoded</param>
+        /// <param name="cancellationToken"></param>
         public async Task AddEntriesFromAsync(CodedInputStream input, Codec codec, CancellationToken cancellationToken)
         {
             var adapter = new Codec.MessageAdapter(codec);
@@ -476,6 +477,7 @@ namespace Google.Protobuf.Collections
         /// </summary>
         /// <param name="output">The output stream to write to.</param>
         /// <param name="codec">The codec to use for each entry.</param>
+        /// <param name="cancellationToken"></param>
         public async Task WriteToAsync(CodedOutputStream output, Codec codec, CancellationToken cancellationToken)
         {
             var message = new Codec.MessageAdapter(codec);

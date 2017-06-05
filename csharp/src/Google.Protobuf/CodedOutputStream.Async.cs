@@ -45,12 +45,14 @@ namespace Google.Protobuf
         /// Writes a double field value, without a tag, to the stream.
         /// </summary>
         /// <param name="value">The value to write</param>
+        /// <param name="cancellationToken"></param>
         public Task WriteDoubleAsync(double value, CancellationToken cancellationToken) => WriteRawLittleEndian64Async((ulong)BitConverter.DoubleToInt64Bits(value), cancellationToken);
 
         /// <summary>
         /// Writes a float field value, without a tag, to the stream.
         /// </summary>
         /// <param name="value">The value to write</param>
+        /// <param name="cancellationToken"></param>
         public async Task WriteFloatAsync(float value, CancellationToken cancellationToken)
         {
             byte[] rawBytes = BitConverter.GetBytes(value);
@@ -76,18 +78,21 @@ namespace Google.Protobuf
         /// Writes a uint64 field value, without a tag, to the stream.
         /// </summary>
         /// <param name="value">The value to write</param>
+        /// <param name="cancellationToken"></param>
         public Task WriteUInt64Async(ulong value, CancellationToken cancellationToken) => WriteRawVarint64Async(value, cancellationToken);
 
         /// <summary>
         /// Writes an int64 field value, without a tag, to the stream.
         /// </summary>
         /// <param name="value">The value to write</param>
+        /// <param name="cancellationToken"></param>
         public Task WriteInt64Async(long value, CancellationToken cancellationToken) => WriteRawVarint64Async((ulong)value, cancellationToken);
 
         /// <summary>
         /// Writes an int32 field value, without a tag, to the stream.
         /// </summary>
         /// <param name="value">The value to write</param>
+        /// <param name="cancellationToken"></param>
         public Task WriteInt32Async(int value, CancellationToken cancellationToken)
         {
             if (value >= 0)
@@ -105,18 +110,21 @@ namespace Google.Protobuf
         /// Writes a fixed64 field value, without a tag, to the stream.
         /// </summary>
         /// <param name="value">The value to write</param>
+        /// <param name="cancellationToken"></param>
         public Task WriteFixed64Async(ulong value, CancellationToken cancellationToken) => WriteRawLittleEndian64Async(value, cancellationToken);
 
         /// <summary>
         /// Writes a fixed32 field value, without a tag, to the stream.
         /// </summary>
         /// <param name="value">The value to write</param>
+        /// <param name="cancellationToken"></param>
         public Task WriteFixed32Async(uint value, CancellationToken cancellationToken) => WriteRawLittleEndian32Async(value, cancellationToken);
 
         /// <summary>
         /// Writes a bool field value, without a tag, to the stream.
         /// </summary>
         /// <param name="value">The value to write</param>
+        /// <param name="cancellationToken"></param>
         public Task WriteBoolAsync(bool value, CancellationToken cancellationToken) => WriteRawByteAsync(value ? (byte)1 : (byte)0, cancellationToken);
 
         /// <summary>
@@ -124,6 +132,7 @@ namespace Google.Protobuf
         /// The data is length-prefixed.
         /// </summary>
         /// <param name="value">The value to write</param>
+        /// <param name="cancellationToken"></param>
         public async Task WriteStringAsync(string value, CancellationToken cancellationToken)
         {
             // Optimise the case where we have enough space to write
@@ -157,12 +166,19 @@ namespace Google.Protobuf
         /// The data is length-prefixed.
         /// </summary>
         /// <param name="value">The value to write</param>
+        /// <param name="cancellationToken"></param>
         public async Task WriteMessageAsync(IMessage value, CancellationToken cancellationToken)
         {
             await WriteLengthAsync(value.CalculateSize(), cancellationToken).ConfigureAwait(false);
             value.WriteTo(this);
         }
 
+        /// <summary>
+        /// Writes a message, without a tag, to the stream.
+        /// The data is length-prefixed.
+        /// </summary>
+        /// <param name="value">The value to write</param>
+        /// <param name="cancellationToken"></param>
         public async Task WriteMessageAsync(IAsyncMessage value, CancellationToken cancellationToken)
         {
             await WriteLengthAsync(value.CalculateSize(), cancellationToken).ConfigureAwait(false);
@@ -174,6 +190,7 @@ namespace Google.Protobuf
         /// The data is length-prefixed.
         /// </summary>
         /// <param name="value">The value to write</param>
+        /// <param name="cancellationToken"></param>
         public async Task WriteBytesAsync(ByteString value, CancellationToken cancellationToken)
         {
             await WriteLengthAsync(value.Length, cancellationToken).ConfigureAwait(false);
@@ -184,36 +201,42 @@ namespace Google.Protobuf
         /// Writes a uint32 value, without a tag, to the stream.
         /// </summary>
         /// <param name="value">The value to write</param>
+        /// <param name="cancellationToken"></param>
         public Task WriteUInt32Async(uint value, CancellationToken cancellationToken) => WriteRawVarint32Async(value, cancellationToken);
 
         /// <summary>
         /// Writes an enum value, without a tag, to the stream.
         /// </summary>
         /// <param name="value">The value to write</param>
+        /// <param name="cancellationToken"></param>
         public Task WriteEnumAsync(int value, CancellationToken cancellationToken) => WriteInt32Async(value, cancellationToken);
 
         /// <summary>
         /// Writes an sfixed32 value, without a tag, to the stream.
         /// </summary>
         /// <param name="value">The value to write.</param>
+        /// <param name="cancellationToken"></param>
         public Task WriteSFixed32Async(int value, CancellationToken cancellationToken) => WriteRawLittleEndian32Async((uint)value, cancellationToken);
 
         /// <summary>
         /// Writes an sfixed64 value, without a tag, to the stream.
         /// </summary>
         /// <param name="value">The value to write</param>
+        /// <param name="cancellationToken"></param>
         public Task WriteSFixed64Async(long value, CancellationToken cancellationToken) => WriteRawLittleEndian64Async((ulong)value, cancellationToken);
 
         /// <summary>
         /// Writes an sint32 value, without a tag, to the stream.
         /// </summary>
         /// <param name="value">The value to write</param>
+        /// <param name="cancellationToken"></param>
         public Task WriteSInt32Async(int value, CancellationToken cancellationToken) => WriteRawVarint32Async(EncodeZigZag32(value), cancellationToken);
 
         /// <summary>
         /// Writes an sint64 value, without a tag, to the stream.
         /// </summary>
         /// <param name="value">The value to write</param>
+        /// <param name="cancellationToken"></param>
         public Task WriteSInt64Async(long value, CancellationToken cancellationToken) => WriteRawVarint64Async(EncodeZigZag64(value), cancellationToken);
 
         /// <summary>
@@ -223,6 +246,7 @@ namespace Google.Protobuf
         /// This method simply writes a rawint, but exists for clarity in calling code.
         /// </remarks>
         /// <param name="length">Length value, in bytes.</param>
+        /// <param name="cancellationToken"></param>
         public Task WriteLengthAsync(int length, CancellationToken cancellationToken) => WriteRawVarint32Async((uint)length, cancellationToken);
 
         #endregion
@@ -233,18 +257,21 @@ namespace Google.Protobuf
         /// </summary>
         /// <param name="fieldNumber">The number of the field to write the tag for</param>
         /// <param name="type">The wire format type of the tag to write</param>
+        /// <param name="cancellationToken"></param>
         public Task WriteTagAsync(int fieldNumber, WireFormat.WireType type, CancellationToken cancellationToken) => WriteRawVarint32Async(WireFormat.MakeTag(fieldNumber, type), cancellationToken);
 
         /// <summary>
         /// Writes an already-encoded tag.
         /// </summary>
         /// <param name="tag">The encoded tag</param>
+        /// <param name="cancellationToken"></param>
         public Task WriteTagAsync(uint tag, CancellationToken cancellationToken) => WriteRawVarint32Async(tag, cancellationToken);
 
         /// <summary>
         /// Writes the given single-byte tag directly to the stream.
         /// </summary>
         /// <param name="b1">The encoded tag</param>
+        /// <param name="cancellationToken"></param>
         public Task WriteRawTagAsync(byte b1, CancellationToken cancellationToken) => WriteRawByteAsync(b1, cancellationToken);
 
         /// <summary>
@@ -252,6 +279,7 @@ namespace Google.Protobuf
         /// </summary>
         /// <param name="b1">The first byte of the encoded tag</param>
         /// <param name="b2">The second byte of the encoded tag</param>
+        /// <param name="cancellationToken"></param>
         public async Task WriteRawTagAsync(byte b1, byte b2, CancellationToken cancellationToken)
         {
             await WriteRawByteAsync(b1, cancellationToken).ConfigureAwait(false);
@@ -264,6 +292,7 @@ namespace Google.Protobuf
         /// <param name="b1">The first byte of the encoded tag</param>
         /// <param name="b2">The second byte of the encoded tag</param>
         /// <param name="b3">The third byte of the encoded tag</param>
+        /// <param name="cancellationToken"></param>
         public async Task WriteRawTagAsync(byte b1, byte b2, byte b3, CancellationToken cancellationToken)
         {
             await WriteRawByteAsync(b1, cancellationToken).ConfigureAwait(false);
@@ -278,6 +307,7 @@ namespace Google.Protobuf
         /// <param name="b2">The second byte of the encoded tag</param>
         /// <param name="b3">The third byte of the encoded tag</param>
         /// <param name="b4">The fourth byte of the encoded tag</param>
+        /// <param name="cancellationToken"></param>
         public async Task WriteRawTagAsync(byte b1, byte b2, byte b3, byte b4, CancellationToken cancellationToken)
         {
             await WriteRawByteAsync(b1, cancellationToken).ConfigureAwait(false);
@@ -294,6 +324,7 @@ namespace Google.Protobuf
         /// <param name="b3">The third byte of the encoded tag</param>
         /// <param name="b4">The fourth byte of the encoded tag</param>
         /// <param name="b5">The fifth byte of the encoded tag</param>
+        /// <param name="cancellationToken"></param>
         public async Task WriteRawTagAsync(byte b1, byte b2, byte b3, byte b4, byte b5, CancellationToken cancellationToken)
         {
             await WriteRawByteAsync(b1, cancellationToken).ConfigureAwait(false);
