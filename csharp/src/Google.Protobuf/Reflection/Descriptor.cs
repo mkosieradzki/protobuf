@@ -3548,6 +3548,10 @@ namespace Google.Protobuf.Reflection {
         await output.WriteRawTagAsync(194, 2, cancellationToken).ConfigureAwait(false);
         await output.WriteStringAsync(PhpClassPrefix, cancellationToken).ConfigureAwait(false);
       }
+      if (PhpNamespace.Length != 0) {
+        await output.WriteRawTagAsync(202, 2, cancellationToken).ConfigureAwait(false);
+        await output.WriteStringAsync(PhpNamespace, cancellationToken).ConfigureAwait(false);
+      }
       await uninterpretedOption_.WriteToAsync(output, _repeated_uninterpretedOption_codec, cancellationToken).ConfigureAwait(false);
     }
 
@@ -3621,6 +3625,10 @@ namespace Google.Protobuf.Reflection {
           }
           case 322: {
             PhpClassPrefix = await input.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+            break;
+          }
+          case 330: {
+            PhpNamespace = await input.ReadStringAsync(cancellationToken).ConfigureAwait(false);
             break;
           }
           case 7994: {
