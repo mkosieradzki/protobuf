@@ -52,7 +52,7 @@ namespace Google.Protobuf
             if ((value >> 32) == 0)
             {
                 MemoryStream rawOutput = new MemoryStream();
-                CodedOutputStream output = new CodedOutputStream(rawOutput);
+                CodedOutputStream output = new CodedOutputStream(new AsyncOnlyStreamWrapper(rawOutput));
                 await output.WriteRawVarint32Async((uint) value, CancellationToken.None);
                 await output.FlushAsync(CancellationToken.None);
                 Assert.AreEqual(data, rawOutput.ToArray());
@@ -62,7 +62,7 @@ namespace Google.Protobuf
 
             {
                 MemoryStream rawOutput = new MemoryStream();
-                CodedOutputStream output = new CodedOutputStream(rawOutput);
+                CodedOutputStream output = new CodedOutputStream(new AsyncOnlyStreamWrapper(rawOutput));
                 await output.WriteRawVarint64Async(value, CancellationToken.None);
                 await output.FlushAsync(CancellationToken.None);
                 Assert.AreEqual(data, rawOutput.ToArray());
@@ -79,7 +79,7 @@ namespace Google.Protobuf
                 {
                     MemoryStream rawOutput = new MemoryStream();
                     CodedOutputStream output =
-                        new CodedOutputStream(rawOutput, bufferSize);
+                        new CodedOutputStream(new AsyncOnlyStreamWrapper(rawOutput), bufferSize);
                     await output.WriteRawVarint32Async((uint) value, CancellationToken.None);
                     await output.FlushAsync(CancellationToken.None);
                     Assert.AreEqual(data, rawOutput.ToArray());
@@ -87,7 +87,7 @@ namespace Google.Protobuf
 
                 {
                     MemoryStream rawOutput = new MemoryStream();
-                    CodedOutputStream output = new CodedOutputStream(rawOutput, bufferSize);
+                    CodedOutputStream output = new CodedOutputStream(new AsyncOnlyStreamWrapper(rawOutput), bufferSize);
                     await output.WriteRawVarint64Async(value, CancellationToken.None);
                     await output.FlushAsync(CancellationToken.None);
                     Assert.AreEqual(data, rawOutput.ToArray());
@@ -137,7 +137,7 @@ namespace Google.Protobuf
         private static async Task AssertWriteLittleEndian32(byte[] data, uint value)
         {
             MemoryStream rawOutput = new MemoryStream();
-            CodedOutputStream output = new CodedOutputStream(rawOutput);
+            CodedOutputStream output = new CodedOutputStream(new AsyncOnlyStreamWrapper(rawOutput));
             await output.WriteRawLittleEndian32Async(value, CancellationToken.None);
             await output.FlushAsync(CancellationToken.None);
             Assert.AreEqual(data, rawOutput.ToArray());
@@ -146,7 +146,7 @@ namespace Google.Protobuf
             for (int bufferSize = 1; bufferSize <= 16; bufferSize *= 2)
             {
                 rawOutput = new MemoryStream();
-                output = new CodedOutputStream(rawOutput, bufferSize);
+                output = new CodedOutputStream(new AsyncOnlyStreamWrapper(rawOutput), bufferSize);
                 await output.WriteRawLittleEndian32Async(value, CancellationToken.None);
                 await output.FlushAsync(CancellationToken.None);
                 Assert.AreEqual(data, rawOutput.ToArray());
@@ -160,7 +160,7 @@ namespace Google.Protobuf
         private static async Task AssertWriteLittleEndian64(byte[] data, ulong value)
         {
             MemoryStream rawOutput = new MemoryStream();
-            CodedOutputStream output = new CodedOutputStream(rawOutput);
+            CodedOutputStream output = new CodedOutputStream(new AsyncOnlyStreamWrapper(rawOutput));
             await output.WriteRawLittleEndian64Async(value, CancellationToken.None);
             await output.FlushAsync(CancellationToken.None);
             Assert.AreEqual(data, rawOutput.ToArray());
@@ -169,7 +169,7 @@ namespace Google.Protobuf
             for (int blockSize = 1; blockSize <= 16; blockSize *= 2)
             {
                 rawOutput = new MemoryStream();
-                output = new CodedOutputStream(rawOutput, blockSize);
+                output = new CodedOutputStream(new AsyncOnlyStreamWrapper(rawOutput), blockSize);
                 await output.WriteRawLittleEndian64Async(value, CancellationToken.None);
                 await output.FlushAsync(CancellationToken.None);
                 Assert.AreEqual(data, rawOutput.ToArray());
@@ -204,7 +204,7 @@ namespace Google.Protobuf
             for (int blockSize = 1; blockSize < 256; blockSize *= 2)
             {
                 MemoryStream rawOutput = new MemoryStream();
-                CodedOutputStream output = new CodedOutputStream(rawOutput, blockSize);
+                CodedOutputStream output = new CodedOutputStream(new AsyncOnlyStreamWrapper(rawOutput), blockSize);
                 await message.WriteToAsync(output, CancellationToken.None);
                 await output.FlushAsync(CancellationToken.None);
                 Assert.AreEqual(rawBytes, rawOutput.ToArray());
@@ -218,6 +218,7 @@ namespace Google.Protobuf
             Assert.AreEqual(10, CodedOutputStream.ComputeEnumSize((int) SampleEnum.NegativeValue));
 
             byte[] bytes = new byte[10];
+            // No AsyncOnlyStreamWrapper, because SpaceLeft can be called only on streams writing to a flat array
             CodedOutputStream output = new CodedOutputStream(bytes);
             await output.WriteEnumAsync((int) SampleEnum.NegativeValue, CancellationToken.None);
 
@@ -235,7 +236,7 @@ namespace Google.Protobuf
             byte[] child = new byte[120];
             {
                 MemoryStream ms = new MemoryStream(child);
-                CodedOutputStream cout = new CodedOutputStream(ms, 20);
+                CodedOutputStream cout = new CodedOutputStream(new AsyncOnlyStreamWrapper(ms), 20);
                 // Field 11: numeric value: 500
                 await cout.WriteTagAsync(11, WireFormat.WireType.Varint, CancellationToken.None);
                 Assert.AreEqual(1, cout.Position);
@@ -256,7 +257,7 @@ namespace Google.Protobuf
 
             byte[] bytes = new byte[130];
             {
-                CodedOutputStream cout = new CodedOutputStream(bytes);
+                CodedOutputStream cout = new CodedOutputStream(new AsyncOnlyStreamWrapper(bytes));
                 // Field 1: numeric value: 500
                 await cout.WriteTagAsync(1, WireFormat.WireType.Varint, CancellationToken.None);
                 Assert.AreEqual(1, cout.Position);
@@ -276,7 +277,7 @@ namespace Google.Protobuf
             }
             // Now test Input stream:
             {
-                CodedInputStream cin = new CodedInputStream(new MemoryStream(bytes), new byte[50], 0, 0);
+                CodedInputStream cin = new CodedInputStream(new AsyncOnlyStreamWrapper(new MemoryStream(bytes)), new byte[50], 0, 0);
                 Assert.AreEqual(0, cin.Position);
                 // Field 1:
                 uint tag = await cin.ReadTagAsync(CancellationToken.None);
@@ -335,6 +336,7 @@ namespace Google.Protobuf
         {
             var memoryStream = new MemoryStream();
             Assert.IsTrue(memoryStream.CanWrite);
+            // No AsyncOnlyStreamWrapper, because Dispose is synchronous by design
             using (var cos = new CodedOutputStream(memoryStream))
             {
                 await cos.WriteRawByteAsync(0, CancellationToken.None);
@@ -349,6 +351,7 @@ namespace Google.Protobuf
         {
             var memoryStream = new MemoryStream();
             Assert.IsTrue(memoryStream.CanWrite);
+            // No AsyncOnlyStreamWrapper, because Dispose is synchronous by design
             using (var cos = new CodedOutputStream(memoryStream, true))
             {
                 await cos.WriteRawByteAsync(0, CancellationToken.None);
