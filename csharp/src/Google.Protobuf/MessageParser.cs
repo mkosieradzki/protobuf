@@ -154,7 +154,7 @@ namespace Google.Protobuf
     /// </p>
     /// </remarks>
     /// <typeparam name="T">The type of message to be parsed.</typeparam>
-    public sealed class MessageParser<T> : MessageParser where T : IMessage<T>
+    public class MessageParser<T> : MessageParser where T : IMessage<T>
     {
         // Implementation note: all the methods here *could* just delegate up to the base class and cast the result.
         // The current implementation avoids a virtual method call and a cast, which *may* be significant in some cases.

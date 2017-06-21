@@ -117,14 +117,8 @@ namespace Google.Protobuf
     /// </p>
     /// </remarks>
     /// <typeparam name="T">The type of message to be parsed.</typeparam>
-    public sealed class AsyncMessageParser<T> : MessageParser, IAsyncMessageParser where T : IAsyncMessage<T>
+    public sealed class AsyncMessageParser<T> : MessageParser<T>, IAsyncMessageParser where T : IAsyncMessage<T>
     {
-        // Implementation note: all the methods here *could* just delegate up to the base class and cast the result.
-        // The current implementation avoids a virtual method call and a cast, which *may* be significant in some cases.
-        // Benchmarking work is required to measure the significance - but it's only a few lines of code in any case.
-        // The API wouldn't change anyway - just the implementation - so this work can be deferred.
-        private readonly Func<T> factory; 
-
         /// <summary>
         /// Creates a new parser.
         /// </summary>
@@ -133,55 +127,18 @@ namespace Google.Protobuf
         /// to require a parameterless constructor: delegates are significantly faster to execute.
         /// </remarks>
         /// <param name="factory">Function to invoke when a new, empty message is required.</param>
-        public AsyncMessageParser(Func<T> factory) : base(() => factory())
-        {
-            this.factory = factory;
-        }
+        public AsyncMessageParser(Func<T> factory) : base(factory) { }
 
         /// <summary>
-        /// Creates a template instance ready for population.
-        /// </summary>
-        /// <returns>An empty message.</returns>
-        internal new T CreateTemplate()
-        {
-            return factory();
-        }
-
-        /// <summary>
-        /// Parses a message from a byte array.
-        /// </summary>
-        /// <param name="data">The byte array containing the message. Must not be null.</param>
-        /// <returns>The newly parsed message.</returns>
-        public new T ParseFrom(byte[] data)
-        {
-            ProtoPreconditions.CheckNotNull(data, "data");
-            T message = factory();
-            message.MergeFrom(data);
-            return message;
-        }
-
-        /// <summary>
-        /// Parses a message from the given byte string.
-        /// </summary>
-        /// <param name="data">The data to parse.</param>
-        /// <returns>The parsed message.</returns>
-        public new T ParseFrom(ByteString data)
-        {
-            ProtoPreconditions.CheckNotNull(data, "data");
-            T message = factory();
-            message.MergeFrom(data);
-            return message;
-        }
-
-        /// <summary>
-        /// Parses a message from the given stream.
+        /// Parses a message from the given coded input stream.
         /// </summary>
         /// <param name="input">The stream to parse.</param>
+        /// <param name="cancellationToken"></param>
         /// <returns>The parsed message.</returns>
-        public new T ParseFrom(Stream input)
+        public async Task<T> ParseFromAsync(CodedInputStream input, CancellationToken cancellationToken)
         {
-            T message = factory();
-            message.MergeFrom(input);
+            T message = CreateTemplate();
+            await message.MergeFromAsync(input, cancellationToken).ConfigureAwait(false);
             return message;
         }
 
@@ -193,63 +150,8 @@ namespace Google.Protobuf
         /// <returns>The parsed message.</returns>
         public async Task<T> ParseFromAsync(Stream input, CancellationToken cancellationToken)
         {
-            T message = factory();
+            T message = CreateTemplate();
             await message.MergeFromAsync(input, cancellationToken).ConfigureAwait(false);
-            return message;
-        }
-
-        /// <summary>
-        /// Parses a length-delimited message from the given stream.
-        /// </summary>
-        /// <remarks>
-        /// The stream is expected to contain a length and then the data. Only the amount of data
-        /// specified by the length will be consumed.
-        /// </remarks>
-        /// <param name="input">The stream to parse.</param>
-        /// <returns>The parsed message.</returns>
-        public new T ParseDelimitedFrom(Stream input)
-        {
-            T message = factory();
-            message.MergeDelimitedFrom(input);
-            return message;
-        }
-
-        /// <summary>
-        /// Parses a message from the given coded input stream.
-        /// </summary>
-        /// <param name="input">The stream to parse.</param>
-        /// <returns>The parsed message.</returns>
-        public new T ParseFrom(CodedInputStream input)
-        {
-            T message = factory();
-            message.MergeFrom(input);
-            return message;
-        }
-
-        /// <summary>
-        /// Parses a message from the given coded input stream.
-        /// </summary>
-        /// <param name="input">The stream to parse.</param>
-        /// <param name="cancellationToken"></param>
-        /// <returns>The parsed message.</returns>
-        public async Task<T> ParseFromAsync(CodedInputStream input, CancellationToken cancellationToken)
-        {
-            T message = factory();
-            await message.MergeFromAsync(input, cancellationToken);
-            return message;
-        }
-
-        /// <summary>
-        /// Parses a message from the given JSON.
-        /// </summary>
-        /// <param name="json">The JSON to parse.</param>
-        /// <returns>The parsed message.</returns>
-        /// <exception cref="InvalidJsonException">The JSON does not comply with RFC 7159</exception>
-        /// <exception cref="InvalidProtocolBufferException">The JSON does not represent a Protocol Buffers message correctly</exception>
-        public new T ParseJson(string json)
-        {
-            T message = factory();
-            JsonParser.Default.Merge(message, json);
             return message;
         }
 
