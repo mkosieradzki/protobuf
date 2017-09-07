@@ -116,9 +116,9 @@ namespace Google.Protobuf.Examples.Fast.AddressBook
         public override int GetHashCode()
         {
             int hash = 1;
-            if (Name.Length != 0) hash ^= Name.GetHashCode();
+            if (!Name.IsEmpty) hash ^= Name.GetHashCode();
             if (Id != 0) hash ^= Id.GetHashCode();
-            if (Email.Length != 0) hash ^= Email.GetHashCode();
+            if (!Email.IsEmpty) hash ^= Email.GetHashCode();
             hash ^= phones_.GetHashCode();
             return hash;
         }
@@ -132,7 +132,7 @@ namespace Google.Protobuf.Examples.Fast.AddressBook
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public void WriteTo(pb::CodedOutputStream output)
         {
-            if (Name.Length != 0)
+            if (!Name.IsEmpty)
             {
                 output.WriteRawTag(10);
                 output.WriteString(Name);
@@ -142,7 +142,7 @@ namespace Google.Protobuf.Examples.Fast.AddressBook
                 output.WriteRawTag(16);
                 output.WriteInt32(Id);
             }
-            if (Email.Length != 0)
+            if (!Email.IsEmpty)
             {
                 output.WriteRawTag(26);
                 output.WriteString(Email);
@@ -154,7 +154,7 @@ namespace Google.Protobuf.Examples.Fast.AddressBook
         public int CalculateSize()
         {
             int size = 0;
-            if (Name.Length != 0)
+            if (!Name.IsEmpty)
             {
                 size += 1 + pb::CodedOutputStream.ComputeStringSize(Name);
             }
@@ -162,7 +162,7 @@ namespace Google.Protobuf.Examples.Fast.AddressBook
             {
                 size += 1 + pb::CodedOutputStream.ComputeInt32Size(Id);
             }
-            if (Email.Length != 0)
+            if (!Email.IsEmpty)
             {
                 size += 1 + pb::CodedOutputStream.ComputeStringSize(Email);
             }
@@ -205,7 +205,7 @@ namespace Google.Protobuf.Examples.Fast.AddressBook
                         break;
                     case 10:
                         {
-                            Name = input.ReadString();
+                            input.ReadString(ref name_, allocator);
                             break;
                         }
                     case 16:
@@ -215,7 +215,7 @@ namespace Google.Protobuf.Examples.Fast.AddressBook
                         }
                     case 26:
                         {
-                            Email = input.ReadString();
+                            input.ReadString(ref email_, allocator);
                             break;
                         }
                     case 34:
@@ -313,7 +313,7 @@ namespace Google.Protobuf.Examples.Fast.AddressBook
                 public override int GetHashCode()
                 {
                     int hash = 1;
-                    if (Number.Length != 0) hash ^= Number.GetHashCode();
+                    if (!Number.IsEmpty) hash ^= Number.GetHashCode();
                     if (Type != 0) hash ^= Type.GetHashCode();
                     return hash;
                 }
@@ -327,7 +327,7 @@ namespace Google.Protobuf.Examples.Fast.AddressBook
                 [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
                 public void WriteTo(pb::CodedOutputStream output)
                 {
-                    if (Number.Length != 0)
+                    if (!Number.IsEmpty)
                     {
                         output.WriteRawTag(10);
                         output.WriteString(Number);
@@ -343,7 +343,7 @@ namespace Google.Protobuf.Examples.Fast.AddressBook
                 public int CalculateSize()
                 {
                     int size = 0;
-                    if (Number.Length != 0)
+                    if (!Number.IsEmpty)
                     {
                         size += 1 + pb::CodedOutputStream.ComputeStringSize(Number);
                     }
@@ -384,7 +384,7 @@ namespace Google.Protobuf.Examples.Fast.AddressBook
                                 break;
                             case 10:
                                 {
-                                    Number = input.ReadString();
+                                    input.ReadString(ref this.number_, allocator);
                                     break;
                                 }
                             case 16:

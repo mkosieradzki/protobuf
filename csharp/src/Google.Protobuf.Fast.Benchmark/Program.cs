@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿using System;
+using System.Diagnostics;
+using System.IO;
 using Google.Protobuf.Examples.Fast.AddressBook;
 
 namespace Google.Protobuf.Fast.Benchmark
@@ -10,12 +12,23 @@ namespace Google.Protobuf.Fast.Benchmark
             var buff = File.ReadAllBytes(@"C:\protobench\addressbook1.bin");
             var addressBook = new AddressBook();
 
-            var inputStream = new CodedInputStream(buff);
+            var allocator = new SingleThreadedTrivialArenaAllocator(250000);
+            //addressBook.MergeFrom(inputStream, allocator);
 
-            var allocator = new SingleThreadedTrivialArenaAllocator(100000);
-            addressBook.MergeFrom(inputStream, allocator);
-            ref var p = ref addressBook.People[5];
-            var a = p.Phones[1].Number;
+            var sw = Stopwatch.StartNew();
+            for (int i = 0; i < 10000; i++)
+            {
+                using (var inputStream = new CodedInputStream(buff))
+                {
+                    addressBook = new AddressBook();
+                    addressBook.MergeFrom(inputStream, allocator);
+                }
+                allocator.Clear();
+            }
+
+            sw.Stop();
+            Console.WriteLine($"Ellapsed: {sw.ElapsedMilliseconds}ms");
+            Console.ReadLine();
         }
     }
 }

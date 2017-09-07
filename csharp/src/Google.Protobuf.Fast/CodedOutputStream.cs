@@ -264,8 +264,10 @@ namespace Google.Protobuf.Fast
         /// The data is length-prefixed.
         /// </summary>
         /// <param name="value">The value to write</param>
-        public void WriteString(string value)
+        public void WriteString(Utf8String str)
         {
+            //TODO: Reimplement
+            var value = str.AsString();
             // Optimise the case where we have enough space to write
             // the string directly to the buffer, which should be common.
             int length = Utf8Encoding.GetByteCount(value);

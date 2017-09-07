@@ -126,9 +126,9 @@ namespace Google.Protobuf.Fast
         /// Computes the number of bytes that would be needed to encode a
         /// string field, including the tag.
         /// </summary>
-        public static int ComputeStringSize(String value)
+        public static int ComputeStringSize(Utf8String value)
         {
-            int byteArraySize = Utf8Encoding.GetByteCount(value);
+            var byteArraySize = value.ByteLength;
             return ComputeLengthSize(byteArraySize) + byteArraySize;
         }
 

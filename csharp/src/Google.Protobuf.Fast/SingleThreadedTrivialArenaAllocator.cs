@@ -13,6 +13,12 @@ namespace Google.Protobuf.Fast
             memory = new byte[totalSize];
         }
 
+        public void Clear()
+        {
+            Unsafe.InitBlock(ref memory[0], 0, (uint)memory.Length);
+            pos = 0;
+        }
+
         public unsafe ref T Alloc<T>() where T : struct
         {
             var size = (uint)Unsafe.SizeOf<T>();

@@ -34,6 +34,7 @@ using Google.Protobuf.Fast.Collections;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Runtime.CompilerServices;
 
 namespace Google.Protobuf.Fast
 {
@@ -540,24 +541,27 @@ namespace Google.Protobuf.Fast
         /// <summary>
         /// Reads a string field from the stream.
         /// </summary>
-        public string ReadString()
+        public unsafe void ReadString(ref Utf8String str, IAllocator allocator)
         {
             int length = ReadLength();
             // No need to read any data for an empty string.
-            if (length == 0)
-            {
-                return "";
-            }
+            if (length == 0) return;
+            var retBuff = (void*)allocator.AllocMem((uint)length);
             if (length <= bufferSize - bufferPos)
             {
-                // Fast path:  We already have the bytes in a contiguous buffer, so
-                //   just copy directly from it.
-                String result = CodedOutputStream.Utf8Encoding.GetString(buffer, bufferPos, length);
+                fixed (byte* ptr = buffer)
+                    Unsafe.CopyBlock(retBuff, ptr + bufferPos, (uint)length);
                 bufferPos += length;
-                return result;
+                str.Initialize((byte*)retBuff, length);
+                return;
             }
             // Slow path: Build a byte array first then copy it.
-            return CodedOutputStream.Utf8Encoding.GetString(ReadRawBytes(length), 0, length);
+            //TODO: Improve read raw bytes implementation
+            var strBuff = ReadRawBytes(length);
+            fixed (byte* ptr = strBuff)
+                Unsafe.CopyBlock(retBuff, ptr, (uint)length);
+            bufferPos += length;
+            str.Initialize((byte*)retBuff, length);
         }
 
         /// <summary>
