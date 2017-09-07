@@ -24,9 +24,7 @@ namespace Google.ProtobufBenchmark
             }
 
             sw.Stop();
-
-            Console.WriteLine($"Ellapsed: {sw.ElapsedMilliseconds}ms");
-            Console.ReadLine();
+            Console.WriteLine($"Elapsed: {sw.ElapsedMilliseconds}ms GC0={GC.CollectionCount(0)} GC1={GC.CollectionCount(1)} GC2={GC.CollectionCount(2)} PeakMem={Process.GetCurrentProcess().PeakWorkingSet64}");
         }
     }
 }
