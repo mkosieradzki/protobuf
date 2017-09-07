@@ -1,32 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Google.Protobuf.Fast
 {
     public delegate void ValueWriter<T>(CodedOutputStream codedOutputStream, ref T value);
-    public delegate void ValueReader<T>(CodedInputStream codedInputStream, ref T value);
+    public delegate void ValueReader<T>(CodedInputStream codedInputStream, ref T value, IAllocator allocator);
     public delegate int ValueSizeCalculator<T>(ref T value);
+
+    public static class FieldCodec
+    {
+        /// <summary>
+        /// Retrieves a codec suitable for a message field with the given tag.
+        /// </summary>
+        /// <param name="tag">The tag.</param>
+        /// <param name="parser">A parser to use for the message type.</param>
+        /// <returns>A codec for the given tag.</returns>
+        public static FieldCodec<T> ForMessage<T>(uint tag) where T : struct, IMessage<T> => new FieldCodec<T>(
+            (CodedInputStream input, ref T message, IAllocator allocator) => input.ReadMessage(ref message, allocator),
+            (CodedOutputStream output, ref T message) => output.WriteMessage(message),
+            (ref T message) => CodedOutputStream.ComputeMessageSize(message),
+            tag);
+    }
 
     public sealed class FieldCodec<T> where T : struct
     {
-        //private static readonly T DefaultDefault;
-        //// Only non-nullable value types support packing. This is the simplest way of detecting that.
-        //private static readonly bool TypeSupportsPacking = default(T) != null;
-
-        //static FieldCodec()
-        //{
-        //    if (typeof(T) == typeof(string))
-        //    {
-        //        DefaultDefault = (T)(object)"";
-        //    }
-        //    else if (typeof(T) == typeof(ByteString))
-        //    {
-        //        DefaultDefault = (T)(object)ByteString.Empty;
-        //    }
-        //    // Otherwise it's the default value of the CLR type
-        //}
-
-        private bool supportsPacking;
+        //NOTE: Only primitive types support packing
+        private bool isPrimitiveType;
 
         internal bool PackedRepeatedField { get; }
 
@@ -71,12 +69,13 @@ namespace Google.Protobuf.Fast
 
         private readonly int tagSize;
 
-        internal FieldCodec(ValueReader<T> reader, ValueWriter<T> writer, int fixedSize, uint tag) : this(reader, writer _ => fixedSize, tag)
+        internal FieldCodec(bool isPrimitiveType, ValueReader<T> reader, ValueWriter<T> writer, int fixedSize, uint tag) : this(reader, writer, (ref T val) => fixedSize, tag)
         {
+            this.isPrimitiveType = isPrimitiveType;
             FixedSize = fixedSize;
         }
 
-        internal FieldCodec(ValueReader<T> reader, ValueWriter<T> writer, ValueSizeCalculator<T> sizeCalculator, uint tag) : this(reader, writer, sizeCalculator, tag, DefaultDefault)
+        internal FieldCodec(ValueReader<T> reader, ValueWriter<T> writer, ValueSizeCalculator<T> sizeCalculator, uint tag) : this(reader, writer, sizeCalculator, tag, default(T))
         {
         }
 
@@ -98,7 +97,7 @@ namespace Google.Protobuf.Fast
         /// </summary>
         /// <param name="input">The input stream to read from.</param>
         /// <returns>The value read from the stream.</returns>
-        public void ReadValue(CodedInputStream codedInputStream, ref T dest) => ValueReader(codedInputStream, ref dest);
+        public void ReadValue(CodedInputStream codedInputStream, ref T dest, IAllocator allocator) => ValueReader(codedInputStream, ref dest, allocator);
 
         /// <summary>
         /// Write a tag and the given value, *if* the value is not the default.
@@ -112,7 +111,7 @@ namespace Google.Protobuf.Fast
             }
         }
 
-        public bool IsPackedRepeatedField(uint tag) => supportsPacking && WireFormat.GetTagWireType(tag) == WireFormat.WireType.LengthDelimited;
+        public bool IsPackedRepeatedField(uint tag) => isPrimitiveType && WireFormat.GetTagWireType(tag) == WireFormat.WireType.LengthDelimited;
 
         private bool IsDefault(ref T value) => EqualityComparer<T>.Default.Equals(value, DefaultValue);
     }

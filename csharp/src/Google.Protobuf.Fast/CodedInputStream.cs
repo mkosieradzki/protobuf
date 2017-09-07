@@ -563,7 +563,7 @@ namespace Google.Protobuf.Fast
         /// <summary>
         /// Reads an embedded message field value from the stream.
         /// </summary>   
-        public void ReadMessage(IMessage builder, IAllocator allocator)
+        public void ReadMessage<T>(ref T message, IAllocator allocator) where T : struct, IMessage<T>
         {
             int length = ReadLength();
             if (recursionDepth >= recursionLimit)
@@ -572,7 +572,7 @@ namespace Google.Protobuf.Fast
             }
             int oldLimit = PushLimit(length);
             ++recursionDepth;
-            builder.MergeFrom(this, allocator);
+            message.MergeFrom(this, allocator);
             CheckReadEndOfStreamTag();
             // Check that we've read exactly as much data as expected.
             if (!ReachedLimit)

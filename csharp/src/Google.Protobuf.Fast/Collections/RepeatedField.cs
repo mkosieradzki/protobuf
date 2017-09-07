@@ -47,7 +47,7 @@ namespace Google.Protobuf.Fast.Collections
     /// supported by Protocol Buffers but nor does it guarantee that all operations will work in such cases.
     /// </remarks>
     /// <typeparam name="T">The element type of the repeated field.</typeparam>
-    public unsafe struct RepeatedField<T> // : IList<T>, IList, IDeepCloneable<RepeatedField<T>>, IEquatable<RepeatedField<T>>
+    public unsafe struct RepeatedField<T> : IEquatable<RepeatedField<T>>//IList<T>, IList, IDeepCloneable<RepeatedField<T>>, 
         where T : struct
 #if !NET35
         //, IReadOnlyList<T>
@@ -119,7 +119,7 @@ namespace Google.Protobuf.Fast.Collections
                     while (!input.ReachedLimit)
                     {
                         ref var value = ref allocator.Alloc<T>();
-                        reader(input, ref value);
+                        reader(input, ref value, allocator);
                         if (entriesRead >= MAX_ENTRIES_IN_COLLECTION)
                             throw new Exception("Exceeded max collection size.");
                         temp[entriesRead++] = Unsafe.AsPointer(ref value);
@@ -134,7 +134,7 @@ namespace Google.Protobuf.Fast.Collections
                 do
                 {
                     ref var value = ref allocator.Alloc<T>();
-                    reader(input, ref value);
+                    reader(input, ref value, allocator);
                     if (entriesRead >= MAX_ENTRIES_IN_COLLECTION)
                         throw new Exception("Exceeded max collection size.");
                     temp[entriesRead++] = Unsafe.AsPointer(ref value);
@@ -401,17 +401,14 @@ namespace Google.Protobuf.Fast.Collections
         //    }
         //}
 
-        ///// <summary>
-        ///// Determines whether the specified <see cref="System.Object" />, is equal to this instance.
-        ///// </summary>
-        ///// <param name="obj">The <see cref="System.Object" /> to compare with this instance.</param>
-        ///// <returns>
-        /////   <c>true</c> if the specified <see cref="System.Object" /> is equal to this instance; otherwise, <c>false</c>.
-        ///// </returns>
-        //public override bool Equals(object obj)
-        //{
-        //    return Equals(obj as RepeatedField<T>);
-        //}
+        /// <summary>
+        /// Determines whether the specified <see cref="System.Object" />, is equal to this instance.
+        /// </summary>
+        /// <param name="obj">The <see cref="System.Object" /> to compare with this instance.</param>
+        /// <returns>
+        ///   <c>true</c> if the specified <see cref="System.Object" /> is equal to this instance; otherwise, <c>false</c>.
+        /// </returns>
+        public override bool Equals(object obj) => obj is RepeatedField<T> v && Equals(v);
 
         ///// <summary>
         ///// Returns an enumerator that iterates through a collection.
@@ -424,51 +421,43 @@ namespace Google.Protobuf.Fast.Collections
         //    return GetEnumerator();
         //}
 
-        ///// <summary>
-        ///// Returns a hash code for this instance.
-        ///// </summary>
-        ///// <returns>
-        ///// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
-        ///// </returns>
-        //public override int GetHashCode()
-        //{
-        //    int hash = 0;
-        //    for (int i = 0; i < count; i++)
-        //    {
-        //        hash = hash * 31 + array[i].GetHashCode();
-        //    }
-        //    return hash;
-        //}
+        /// <summary>
+        /// Returns a hash code for this instance.
+        /// </summary>
+        /// <returns>
+        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
+        /// </returns>
+        public override int GetHashCode()
+        {
+            int hash = 0;
+            for (int i = 0; i < Count; i++)
+            {
+                hash = hash * 31 + Unsafe.AsRef<T>(array[i]).GetHashCode();
+            }
+            return hash;
+        }
 
-        ///// <summary>
-        ///// Compares this repeated field with another for equality.
-        ///// </summary>
-        ///// <param name="other">The repeated field to compare this with.</param>
-        ///// <returns><c>true</c> if <paramref name="other"/> refers to an equal repeated field; <c>false</c> otherwise.</returns>
-        //public bool Equals(RepeatedField<T> other)
-        //{
-        //    if (ReferenceEquals(other, null))
-        //    {
-        //        return false;
-        //    }
-        //    if (ReferenceEquals(other, this))
-        //    {
-        //        return true;
-        //    }
-        //    if (other.Count != this.Count)
-        //    {
-        //        return false;
-        //    }
-        //    EqualityComparer<T> comparer = EqualityComparer<T>.Default;
-        //    for (int i = 0; i < count; i++)
-        //    {
-        //        if (!comparer.Equals(array[i], other.array[i]))
-        //        {
-        //            return false;
-        //        }
-        //    }
-        //    return true;
-        //}
+        /// <summary>
+        /// Compares this repeated field with another for equality.
+        /// </summary>
+        /// <param name="other">The repeated field to compare this with.</param>
+        /// <returns><c>true</c> if <paramref name="other"/> refers to an equal repeated field; <c>false</c> otherwise.</returns>
+        public bool Equals(RepeatedField<T> other)
+        {
+            if (other.Count != this.Count)
+            {
+                return false;
+            }
+            var comparer = EqualityComparer<T>.Default;
+            for (int i = 0; i < Count; i++)
+            {
+                if (!comparer.Equals(Unsafe.AsRef<T>(array[i]), Unsafe.AsRef<T>(other.array[i])))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
 
         ///// <summary>
         ///// Returns the index of the given item within the collection, or -1 if the item is not
@@ -534,34 +523,34 @@ namespace Google.Protobuf.Fast.Collections
         //    return writer.ToString();
         //}
 
-        ///// <summary>
-        ///// Gets or sets the item at the specified index.
-        ///// </summary>
-        ///// <value>
-        ///// The element at the specified index.
-        ///// </value>
-        ///// <param name="index">The zero-based index of the element to get or set.</param>
-        ///// <returns>The item at the specified index.</returns>
-        //public T this[int index]
-        //{
-        //    get
-        //    {
-        //        if (index < 0 || index >= count)
-        //        {
-        //            throw new ArgumentOutOfRangeException(nameof(index));
-        //        }
-        //        return array[index];
-        //    }
-        //    set
-        //    {
-        //        if (index < 0 || index >= count)
-        //        {
-        //            throw new ArgumentOutOfRangeException(nameof(index));
-        //        }
-        //        ProtoPreconditions.CheckNotNullUnconstrained(value, nameof(value));
-        //        array[index] = value;
-        //    }
-        //}
+        /// <summary>
+        /// Gets or sets the item at the specified index.
+        /// </summary>
+        /// <value>
+        /// The element at the specified index.
+        /// </value>
+        /// <param name="index">The zero-based index of the element to get or set.</param>
+        /// <returns>The item at the specified index.</returns>
+        public ref T this[int index]
+        {
+            get
+            {
+                if (index < 0 || index >= Count)
+                {
+                    throw new ArgumentOutOfRangeException(nameof(index));
+                }
+                return ref Unsafe.AsRef<T>(array[index]);
+            }
+            //set
+            //{
+            //    if (index < 0 || index >= Count)
+            //    {
+            //        throw new ArgumentOutOfRangeException(nameof(index));
+            //    }
+            //    ProtoPreconditions.CheckNotNullUnconstrained(value, nameof(value));
+            //    array[index] = Unsafe.AsPointer(ref value);
+            //}
+        }
 
         //#region Explicit interface implementation for IList and ICollection.
         //bool IList.IsFixedSize => false;

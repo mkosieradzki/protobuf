@@ -10,10 +10,10 @@ using pbc = global::Google.Protobuf.Fast.Collections;
 using scg = global::System.Collections.Generic;
 namespace Google.Protobuf.Examples.Fast.AddressBook
 {
-//     #region Messages
-//     /// <summary>
-//     /// [START messages]
-//     /// </summary>
+    #region Messages
+    /// <summary>
+    /// [START messages]
+    /// </summary>
     public struct Person : pb::IMessage<Person>
     {
         //         private static readonly pb::MessageParser<Person> _parser = new pb::MessageParser<Person>(() => new Person());
@@ -90,9 +90,9 @@ namespace Google.Protobuf.Examples.Fast.AddressBook
 
         /// <summary>Field number for the "phones" field.</summary>
         public const int PhonesFieldNumber = 4;
-        private static readonly pb::FieldCodec<global::Google.Protobuf.Examples.Fast.AddressBook.Person.Types.PhoneNumber> _repeated_phones_codec;
-        //    = pb::FieldCodec.ForMessage(34, global::Google.Protobuf.Examples.Fast.AddressBook.Person.Types.PhoneNumber.Parser);
-        private readonly pbc::RepeatedField<global::Google.Protobuf.Examples.Fast.AddressBook.Person.Types.PhoneNumber> phones_;
+        private static readonly pb::FieldCodec<global::Google.Protobuf.Examples.Fast.AddressBook.Person.Types.PhoneNumber> _repeated_phones_codec = pb::FieldCodec.ForMessage<global::Google.Protobuf.Examples.Fast.AddressBook.Person.Types.PhoneNumber>(34);
+        //NOTE: Extremely important to not be readonly
+        private pbc::RepeatedField<global::Google.Protobuf.Examples.Fast.AddressBook.Person.Types.PhoneNumber> phones_;
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public pbc::RepeatedField<global::Google.Protobuf.Examples.Fast.AddressBook.Person.Types.PhoneNumber> Phones
         {
@@ -192,7 +192,7 @@ namespace Google.Protobuf.Examples.Fast.AddressBook
         //             phones_.Add(other.phones_);
         //         }
 
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        //[global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public void MergeFrom(pb::CodedInputStream input, IAllocator allocator)
         {
             uint tag;
@@ -403,140 +403,139 @@ namespace Google.Protobuf.Examples.Fast.AddressBook
 
     }
 
-    //     /// <summary>
-    //     /// Our address book file is just one of these.
-    //     /// </summary>
-    //     public sealed partial class AddressBook : pb::IMessage<AddressBook>
-    //     {
-    //         private static readonly pb::MessageParser<AddressBook> _parser = new pb::MessageParser<AddressBook>(() => new AddressBook());
-    //         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    //         public static pb::MessageParser<AddressBook> Parser { get { return _parser; } }
+    /// <summary>
+    /// Our address book file is just one of these.
+    /// </summary>
+    public sealed partial class AddressBook : pb::IMessage<AddressBook>
+    {
+        //         private static readonly pb::MessageParser<AddressBook> _parser = new pb::MessageParser<AddressBook>(() => new AddressBook());
+        //         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        //         public static pb::MessageParser<AddressBook> Parser { get { return _parser; } }
 
-    //         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    //         public static pbr::MessageDescriptor Descriptor
-    //         {
-    //             get { return global::Google.Protobuf.Examples.AddressBook.AddressbookReflection.Descriptor.MessageTypes[1]; }
-    //         }
+        //         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        //         public static pbr::MessageDescriptor Descriptor
+        //         {
+        //             get { return global::Google.Protobuf.Examples.AddressBook.AddressbookReflection.Descriptor.MessageTypes[1]; }
+        //         }
 
-    //         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    //         pbr::MessageDescriptor pb::IMessage.Descriptor
-    //         {
-    //             get { return Descriptor; }
-    //         }
+        //         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        //         pbr::MessageDescriptor pb::IMessage.Descriptor
+        //         {
+        //             get { return Descriptor; }
+        //         }
 
-    //         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    //         public AddressBook()
-    //         {
-    //             OnConstruction();
-    //         }
+        //         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        //         public AddressBook()
+        //         {
+        //             OnConstruction();
+        //         }
 
-    //         partial void OnConstruction();
+        //         partial void OnConstruction();
 
-    //         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    //         public AddressBook(AddressBook other) : this()
-    //         {
-    //             people_ = other.people_.Clone();
-    //         }
+        //         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        //         public AddressBook(AddressBook other) : this()
+        //         {
+        //             people_ = other.people_.Clone();
+        //         }
 
-    //         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    //         public AddressBook Clone()
-    //         {
-    //             return new AddressBook(this);
-    //         }
+        //         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        //         public AddressBook Clone()
+        //         {
+        //             return new AddressBook(this);
+        //         }
 
-    //         /// <summary>Field number for the "people" field.</summary>
-    //         public const int PeopleFieldNumber = 1;
-    //         private static readonly pb::FieldCodec<global::Google.Protobuf.Examples.AddressBook.Person> _repeated_people_codec
-    //             = pb::FieldCodec.ForMessage(10, global::Google.Protobuf.Examples.AddressBook.Person.Parser);
-    //         private readonly pbc::RepeatedField<global::Google.Protobuf.Examples.AddressBook.Person> people_ = new pbc::RepeatedField<global::Google.Protobuf.Examples.AddressBook.Person>();
-    //         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    //         public pbc::RepeatedField<global::Google.Protobuf.Examples.AddressBook.Person> People
-    //         {
-    //             get { return people_; }
-    //         }
+        /// <summary>Field number for the "people" field.</summary>
+        public const int PeopleFieldNumber = 1;
+        private static readonly pb::FieldCodec<global::Google.Protobuf.Examples.Fast.AddressBook.Person> _repeated_people_codec = pb::FieldCodec.ForMessage<global::Google.Protobuf.Examples.Fast.AddressBook.Person>(10);
+        private pbc::RepeatedField<global::Google.Protobuf.Examples.Fast.AddressBook.Person> people_;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public pbc::RepeatedField<global::Google.Protobuf.Examples.Fast.AddressBook.Person> People
+        {
+            get { return people_; }
+        }
 
-    //         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    //         public override bool Equals(object other)
-    //         {
-    //             return Equals(other as AddressBook);
-    //         }
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public override bool Equals(object other)
+        {
+            return Equals(other as AddressBook);
+        }
 
-    //         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    //         public bool Equals(AddressBook other)
-    //         {
-    //             if (ReferenceEquals(other, null))
-    //             {
-    //                 return false;
-    //             }
-    //             if (ReferenceEquals(other, this))
-    //             {
-    //                 return true;
-    //             }
-    //             if (!people_.Equals(other.people_)) return false;
-    //             return true;
-    //         }
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public bool Equals(AddressBook other)
+        {
+            if (ReferenceEquals(other, null))
+            {
+                return false;
+            }
+            if (ReferenceEquals(other, this))
+            {
+                return true;
+            }
+            if (!people_.Equals(other.people_)) return false;
+            return true;
+        }
 
-    //         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    //         public override int GetHashCode()
-    //         {
-    //             int hash = 1;
-    //             hash ^= people_.GetHashCode();
-    //             return hash;
-    //         }
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public override int GetHashCode()
+        {
+            int hash = 1;
+            hash ^= people_.GetHashCode();
+            return hash;
+        }
 
-    //         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    //         public override string ToString()
-    //         {
-    //             return pb::JsonFormatter.ToDiagnosticString(this);
-    //         }
+        //         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        //         public override string ToString()
+        //         {
+        //             return pb::JsonFormatter.ToDiagnosticString(this);
+        //         }
 
-    //         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    //         public void WriteTo(pb::CodedOutputStream output)
-    //         {
-    //             people_.WriteTo(output, _repeated_people_codec);
-    //         }
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public void WriteTo(pb::CodedOutputStream output)
+        {
+            people_.WriteTo(output, _repeated_people_codec);
+        }
 
-    //         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    //         public int CalculateSize()
-    //         {
-    //             int size = 0;
-    //             size += people_.CalculateSize(_repeated_people_codec);
-    //             return size;
-    //         }
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public int CalculateSize()
+        {
+            int size = 0;
+            size += people_.CalculateSize(_repeated_people_codec);
+            return size;
+        }
 
-    //         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    //         public void MergeFrom(AddressBook other)
-    //         {
-    //             if (other == null)
-    //             {
-    //                 return;
-    //             }
-    //             people_.Add(other.people_);
-    //         }
+        //         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        //         public void MergeFrom(AddressBook other)
+        //         {
+        //             if (other == null)
+        //             {
+        //                 return;
+        //             }
+        //             people_.Add(other.people_);
+        //         }
 
-    //         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    //         public void MergeFrom(pb::CodedInputStream input)
-    //         {
-    //             uint tag;
-    //             while ((tag = input.ReadTag()) != 0)
-    //             {
-    //                 switch (tag)
-    //                 {
-    //                     default:
-    //                         input.SkipLastField();
-    //                         break;
-    //                     case 10:
-    //                         {
-    //                             people_.AddEntriesFrom(input, _repeated_people_codec);
-    //                             break;
-    //                         }
-    //                 }
-    //             }
-    //         }
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public void MergeFrom(pb::CodedInputStream input, IAllocator allocator)
+        {
+            uint tag;
+            while ((tag = input.ReadTag()) != 0)
+            {
+                switch (tag)
+                {
+                    default:
+                        input.SkipLastField();
+                        break;
+                    case 10:
+                        {
+                            people_.AddEntriesFrom(input, _repeated_people_codec, allocator);
+                            break;
+                        }
+                }
+            }
+        }
 
-    //     }
+    }
 
-    //     #endregion
+    #endregion
 
 }
 
