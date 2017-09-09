@@ -12,22 +12,34 @@ namespace Google.Protobuf.Fast.Benchmark
             var buff = File.ReadAllBytes(@"C:\protobench\addressbook1.bin");
             var addressBook = new AddressBook();
 
-            var allocator = new SingleThreadedTrivialArenaAllocator(new Span<byte>(new byte[250000]));
+            var arena = new SingleThreadedTrivialArena(new Memory<byte>(new byte[250000]));
             //addressBook.MergeFrom(inputStream, allocator);
 
             var sw = Stopwatch.StartNew();
             for (int i = 0; i < 10000; i++)
             {
-                using (var inputStream = new CodedInputStream(buff))
+                var inputStream = new CodedInputStream(buff);
+                try
                 {
                     addressBook = new AddressBook();
-                    addressBook.MergeFrom(inputStream, allocator);
+                    addressBook.MergeFrom(inputStream, arena);
+
+                    //var test1 = addressBook.People.GetItemAt(arena, 100);
+                    //var test2 = test1.Id;
+                    //var test3 = test1.Phones.GetItemAt(arena, 1);
+                    //var test4 = test3.Type;
+                    //var test5 = test3.Number.AsString(arena);
                 }
-                allocator.Clear();
+                finally
+                {
+                    inputStream.Dispose();
+                }
+                arena.Clear();
             }
 
             sw.Stop();
             Console.WriteLine($"Elapsed: {sw.ElapsedMilliseconds}ms GC0={GC.CollectionCount(0)} GC1={GC.CollectionCount(1)} GC2={GC.CollectionCount(2)} PeakMem={Process.GetCurrentProcess().PeakWorkingSet64}");
+            Console.ReadLine();
         }
     }
 }

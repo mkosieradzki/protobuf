@@ -2,9 +2,9 @@
 
 namespace Google.Protobuf.Fast
 {
-    public delegate void ValueWriter<T>(CodedOutputStream codedOutputStream, ref T value);
+    public delegate void ValueWriter<T>(CodedOutputStream codedOutputStream, ref T value, IArena arena);
     public delegate void ValueReader<T>(CodedInputStream codedInputStream, ref T value, IAllocator allocator);
-    public delegate int ValueSizeCalculator<T>(ref T value);
+    public delegate int ValueSizeCalculator<T>(ref T value, IArena arena);
 
     public static class FieldCodec
     {
@@ -16,8 +16,8 @@ namespace Google.Protobuf.Fast
         /// <returns>A codec for the given tag.</returns>
         public static FieldCodec<T> ForMessage<T>(uint tag) where T : struct, IMessage<T> => new FieldCodec<T>(
             (CodedInputStream input, ref T message, IAllocator allocator) => input.ReadMessage(ref message, allocator),
-            (CodedOutputStream output, ref T message) => output.WriteMessage(message),
-            (ref T message) => CodedOutputStream.ComputeMessageSize(message),
+            (CodedOutputStream output, ref T message, IArena arena) => output.WriteMessage(message, arena),
+            (ref T message, IArena arena) => CodedOutputStream.ComputeMessageSize(message, arena),
             tag);
     }
 
@@ -69,7 +69,7 @@ namespace Google.Protobuf.Fast
 
         private readonly int tagSize;
 
-        internal FieldCodec(bool isPrimitiveType, ValueReader<T> reader, ValueWriter<T> writer, int fixedSize, uint tag) : this(reader, writer, (ref T val) => fixedSize, tag)
+        internal FieldCodec(bool isPrimitiveType, ValueReader<T> reader, ValueWriter<T> writer, int fixedSize, uint tag) : this(reader, writer, (ref T val, IArena arena) => fixedSize, tag)
         {
             this.isPrimitiveType = isPrimitiveType;
             FixedSize = fixedSize;
@@ -102,12 +102,12 @@ namespace Google.Protobuf.Fast
         /// <summary>
         /// Write a tag and the given value, *if* the value is not the default.
         /// </summary>
-        public void WriteTagAndValue(CodedOutputStream output, ref T value)
+        public void WriteTagAndValue(CodedOutputStream output, ref T value, IArena arena)
         {
             if (!IsDefault(ref value))
             {
                 output.WriteTag(Tag);
-                ValueWriter(output, ref value);
+                ValueWriter(output, ref value, arena);
             }
         }
 

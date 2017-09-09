@@ -136,18 +136,18 @@ namespace Google.Protobuf.Fast
         /// Computes the number of bytes that would be needed to encode a
         /// group field, including the tag.
         /// </summary>
-        public static int ComputeGroupSize(IMessage value)
+        public static int ComputeGroupSize(IMessage value, IArena arena)
         {
-            return value.CalculateSize();
+            return value.CalculateSize(arena);
         }
 
         /// <summary>
         /// Computes the number of bytes that would be needed to encode an
         /// embedded message field, including the tag.
         /// </summary>
-        public static int ComputeMessageSize(IMessage value)
+        public static int ComputeMessageSize(IMessage value, IArena arena)
         {
-            int size = value.CalculateSize();
+            int size = value.CalculateSize(arena);
             return ComputeLengthSize(size) + size;
         }
 

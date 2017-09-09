@@ -45,15 +45,15 @@ namespace Google.Protobuf.Fast.Collections
     /// supported by Protocol Buffers but nor does it guarantee that all operations will work in such cases.
     /// </remarks>
     /// <typeparam name="T">The element type of the repeated field.</typeparam>
-    public struct RepeatedField<T> : IEquatable<RepeatedField<T>>//IList<T>, IList, IDeepCloneable<RepeatedField<T>>, 
+    public struct RepeatedField<T>// : IEquatable<RepeatedField<T>>//IList<T>, IList, IDeepCloneable<RepeatedField<T>>, 
         where T : struct
 #if !NET35
         //, IReadOnlyList<T>
 #endif
     {
         private const int MAX_ENTRIES_IN_COLLECTION = 1000;
-        public int Count => array.Length;
-        private Span<IntPtr> array;
+        public int Count { get; private set; }
+        private int arrayHandle;
 
 
         //private static readonly T[] EmptyArray = new T[0];
@@ -105,8 +105,9 @@ namespace Google.Protobuf.Fast.Collections
             var reader = codec.ValueReader;
             // Non-nullable value types can be packed or not.
 
-            var ptr = stackalloc IntPtr[MAX_ENTRIES_IN_COLLECTION];
-            var temp = new Span<IntPtr>(ptr, MAX_ENTRIES_IN_COLLECTION);
+            var ptr = stackalloc int[MAX_ENTRIES_IN_COLLECTION];
+            var temp = new Span<int>(ptr, MAX_ENTRIES_IN_COLLECTION);
+            //TODO: Replace with Span<int> temp = stackalloc int[MAX_ENTRIES_IN_COLLECTION] and remove unsafe
             int entriesRead = 0;
 
             if (codec.IsPackedRepeatedField(tag))
@@ -117,11 +118,11 @@ namespace Google.Protobuf.Fast.Collections
                     int oldLimit = input.PushLimit(length);
                     while (!input.ReachedLimit)
                     {
-                        var value = allocator.Alloc<T>(1);
-                        reader(input, ref value[0], allocator);
+                        ref var value = ref allocator.Alloc<T>(out var handle);
+                        reader(input, ref value, allocator);
                         if (entriesRead >= MAX_ENTRIES_IN_COLLECTION)
                             throw new Exception("Exceeded max collection size.");
-                        temp[entriesRead++] = (IntPtr)Unsafe.AsPointer(ref value[0]);
+                        temp[entriesRead++] = handle;
                     }
                     input.PopLimit(oldLimit);
                 }
@@ -132,11 +133,11 @@ namespace Google.Protobuf.Fast.Collections
                 // Not packed... (possibly not packable)
                 do
                 {
-                    var value = allocator.Alloc<T>(1);
-                    reader(input, ref value[0], allocator);
+                    ref var value = ref allocator.Alloc<T>(out var handle);
+                    reader(input, ref value, allocator);
                     if (entriesRead >= MAX_ENTRIES_IN_COLLECTION)
                         throw new Exception("Exceeded max collection size.");
-                    temp[entriesRead++] = (IntPtr)Unsafe.AsPointer(ref value);
+                    temp[entriesRead++] = handle;
                 } while (input.MaybeConsumeTag(tag));
             }
 
@@ -144,8 +145,9 @@ namespace Google.Protobuf.Fast.Collections
                 //TODO: No idea how to not waste already allocated memory
                 throw new NotImplementedException();
 
-            array = allocator.Alloc<IntPtr>(entriesRead);
+            var array = allocator.Alloc<int>(entriesRead, out arrayHandle);
             temp.Slice(0, entriesRead).CopyTo(array);
+            Count += entriesRead;
         }
 
         /// <summary>
@@ -154,16 +156,17 @@ namespace Google.Protobuf.Fast.Collections
         /// <param name="codec">The codec to use when encoding each field.</param>
         /// <returns>The number of bytes that would be written to a <see cref="CodedOutputStream"/> by <see cref="WriteTo"/>,
         /// using the same codec.</returns>
-        public int CalculateSize(FieldCodec<T> codec)
+        public int CalculateSize(FieldCodec<T> codec, IArena arena)
         {
-            if (Count == 0)
-            {
-                return 0;
-            }
+            if (arena == null)
+                throw new ArgumentNullException(nameof(arena));
+
+            if (Count == 0) return 0;
+
             uint tag = codec.Tag;
             if (codec.PackedRepeatedField)
             {
-                int dataSize = CalculatePackedDataSize(codec);
+                int dataSize = CalculatePackedDataSize(codec, arena);
                 return CodedOutputStream.ComputeRawVarint32Size(tag) +
                     CodedOutputStream.ComputeLengthSize(dataSize) +
                     dataSize;
@@ -172,30 +175,26 @@ namespace Google.Protobuf.Fast.Collections
             {
                 var sizeCalculator = codec.ValueSizeCalculator;
                 int size = Count * CodedOutputStream.ComputeRawVarint32Size(tag);
+                var arr = arena.Get<T>(arrayHandle, Count);
                 for (int i = 0; i < Count; i++)
                 {
-                    unsafe
-                    {
-                        size += sizeCalculator(ref Unsafe.AsRef<T>((void*)array[i]));
-                    }
+                    size += sizeCalculator(ref arr[i], arena);
                 }
                 return size;
             }
         }
 
-        private int CalculatePackedDataSize(FieldCodec<T> codec)
+        private int CalculatePackedDataSize(FieldCodec<T> codec, IArena arena)
         {
             int fixedSize = codec.FixedSize;
             if (fixedSize == 0)
             {
                 var calculator = codec.ValueSizeCalculator;
                 int tmp = 0;
+                var arr = arena.Get<T>(arrayHandle, Count);
                 for (int i = 0; i < Count; i++)
                 {
-                    unsafe
-                    {
-                        tmp += calculator(ref Unsafe.AsRef<T>((void*)array[i]));
-                    }
+                    tmp += calculator(ref arr[i], arena);
                 }
                 return tmp;
             }
@@ -211,8 +210,11 @@ namespace Google.Protobuf.Fast.Collections
         /// </summary>
         /// <param name="output">The output stream to write to.</param>
         /// <param name="codec">The codec to use when encoding each value.</param>
-        public void WriteTo(CodedOutputStream output, FieldCodec<T> codec)
+        public void WriteTo(CodedOutputStream output, FieldCodec<T> codec, IArena arena)
         {
+            if (arena == null)
+                throw new ArgumentNullException(nameof(arena));
+
             if (Count == 0)
             {
                 return;
@@ -220,18 +222,17 @@ namespace Google.Protobuf.Fast.Collections
             var valueWriter = codec.ValueWriter;
 
             var tag = codec.Tag;
+            var arr = arena.Get<T>(arrayHandle, Count);
             if (codec.PackedRepeatedField)
             {
                 // Packed primitive type
-                uint size = (uint)CalculatePackedDataSize(codec);
+                uint size = (uint)CalculatePackedDataSize(codec, arena);
                 output.WriteTag(tag);
                 output.WriteRawVarint32(size);
+
                 for (int i = 0; i < Count; i++)
                 {
-                    unsafe
-                    {
-                        valueWriter(output, ref Unsafe.AsRef<T>((void*)array[i]));
-                    }
+                    valueWriter(output, ref arr[i], arena);
                 }
             }
             else
@@ -241,10 +242,7 @@ namespace Google.Protobuf.Fast.Collections
                 for (int i = 0; i < Count; i++)
                 {
                     output.WriteTag(tag);
-                    unsafe
-                    {
-                        valueWriter(output, ref Unsafe.AsRef<T>((void*)array[i]));
-                    }
+                    valueWriter(output, ref arr[i], arena);
                 }
             }
         }
@@ -415,7 +413,7 @@ namespace Google.Protobuf.Fast.Collections
         /// <returns>
         ///   <c>true</c> if the specified <see cref="System.Object" /> is equal to this instance; otherwise, <c>false</c>.
         /// </returns>
-        public override bool Equals(object obj) => obj is RepeatedField<T> v && Equals(v);
+        //public override bool Equals(object obj) => obj is RepeatedField<T> v && Equals(v);
 
         ///// <summary>
         ///// Returns an enumerator that iterates through a collection.
@@ -428,49 +426,49 @@ namespace Google.Protobuf.Fast.Collections
         //    return GetEnumerator();
         //}
 
-        /// <summary>
-        /// Returns a hash code for this instance.
-        /// </summary>
-        /// <returns>
-        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
-        /// </returns>
-        public override int GetHashCode()
-        {
-            int hash = 0;
-            for (int i = 0; i < Count; i++)
-            {
-                unsafe
-                {
-                    hash = hash * 31 + Unsafe.AsRef<T>((void*)array[i]).GetHashCode();
-                }
-            }
-            return hash;
-        }
+        ///// <summary>
+        ///// Returns a hash code for this instance.
+        ///// </summary>
+        ///// <returns>
+        ///// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
+        ///// </returns>
+        //public override int GetHashCode()
+        //{
+        //    int hash = 0;
+        //    for (int i = 0; i < Count; i++)
+        //    {
+        //        unsafe
+        //        {
+        //            hash = hash * 31 + Unsafe.AsRef<T>((void*)array[i]).GetHashCode();
+        //        }
+        //    }
+        //    return hash;
+        //}
 
-        /// <summary>
-        /// Compares this repeated field with another for equality.
-        /// </summary>
-        /// <param name="other">The repeated field to compare this with.</param>
-        /// <returns><c>true</c> if <paramref name="other"/> refers to an equal repeated field; <c>false</c> otherwise.</returns>
-        public bool Equals(RepeatedField<T> other)
-        {
-            if (other.Count != this.Count)
-            {
-                return false;
-            }
-            var comparer = EqualityComparer<T>.Default;
-            for (int i = 0; i < Count; i++)
-            {
-                unsafe
-                {
-                    if (!comparer.Equals(Unsafe.AsRef<T>((void*)array[i]), Unsafe.AsRef<T>((void*)other.array[i])))
-                    {
-                        return false;
-                    }
-                }
-            }
-            return true;
-        }
+        ///// <summary>
+        ///// Compares this repeated field with another for equality.
+        ///// </summary>
+        ///// <param name="other">The repeated field to compare this with.</param>
+        ///// <returns><c>true</c> if <paramref name="other"/> refers to an equal repeated field; <c>false</c> otherwise.</returns>
+        //public bool Equals(RepeatedField<T> other)
+        //{
+        //    if (other.Count != this.Count)
+        //    {
+        //        return false;
+        //    }
+        //    var comparer = EqualityComparer<T>.Default;
+        //    for (int i = 0; i < Count; i++)
+        //    {
+        //        unsafe
+        //        {
+        //            if (!comparer.Equals(Unsafe.AsRef<T>((void*)array[i]), Unsafe.AsRef<T>((void*)other.array[i])))
+        //            {
+        //                return false;
+        //            }
+        //        }
+        //    }
+        //    return true;
+        //}
 
         ///// <summary>
         ///// Returns the index of the given item within the collection, or -1 if the item is not
@@ -536,29 +534,37 @@ namespace Google.Protobuf.Fast.Collections
         //    return writer.ToString();
         //}
 
-        /// <summary>
-        /// Gets or sets the item at the specified index.
-        /// </summary>
-        /// <value>
-        /// The element at the specified index.
-        /// </value>
-        /// <param name="index">The zero-based index of the element to get or set.</param>
-        /// <returns>The item at the specified index.</returns>
-        public unsafe ref T this[int index]
+        ///// <summary>
+        ///// Gets or sets the item at the specified index.
+        ///// </summary>
+        ///// <value>
+        ///// The element at the specified index.
+        ///// </value>
+        ///// <param name="index">The zero-based index of the element to get or set.</param>
+        ///// <returns>The item at the specified index.</returns>
+        //public unsafe ref T this[int index]
+        //{
+        //    get
+        //    {
+        //        return ref Unsafe.AsRef<T>((void*)array[index]);
+        //    }
+        //    //set
+        //    //{
+        //    //    if (index < 0 || index >= Count)
+        //    //    {
+        //    //        throw new ArgumentOutOfRangeException(nameof(index));
+        //    //    }
+        //    //    ProtoPreconditions.CheckNotNullUnconstrained(value, nameof(value));
+        //    //    array[index] = Unsafe.AsPointer(ref value);
+        //    //}
+        //}
+
+        public ref T GetItemAt(IArena arena, int i)
         {
-            get
-            {
-                return ref Unsafe.AsRef<T>((void*)array[index]);
-            }
-            //set
-            //{
-            //    if (index < 0 || index >= Count)
-            //    {
-            //        throw new ArgumentOutOfRangeException(nameof(index));
-            //    }
-            //    ProtoPreconditions.CheckNotNullUnconstrained(value, nameof(value));
-            //    array[index] = Unsafe.AsPointer(ref value);
-            //}
+            if (arena == null)
+                throw new ArgumentNullException(nameof(arena));
+
+            return ref arena.Get<T>(arena.Get<int>(arrayHandle, Count)[i]);
         }
 
         //#region Explicit interface implementation for IList and ICollection.

@@ -1,31 +1,51 @@
 ﻿using System;
+using System.Buffers;
 
 namespace Google.Protobuf.Fast
 {
-    public sealed class SingleThreadedTrivialArenaAllocator : IAllocator
+    public sealed class SingleThreadedTrivialArena : IAllocator, IArena, IDisposable
     {
-        private Span<byte> pinnedMemory;
-        private Span<byte> freeMemory;
+        private Memory<byte> memory;
+        private MemoryHandle pinnedMemory;
+        private int position = 0;
 
-        public SingleThreadedTrivialArenaAllocator(Span<byte> pinnedMemory)
+        public SingleThreadedTrivialArena(Memory<byte> memory)
         {
+            this.memory = memory;
+            pinnedMemory = memory.Retain(true);
             //NOTE: Replace this with System.Memory<byte> when available and use pinning!
             //IF this pointer is not pinned bad things gonna happe
-            this.pinnedMemory = pinnedMemory;
-            this.freeMemory = pinnedMemory;
         }
 
         public void Clear()
         {
-            pinnedMemory.Clear();
-            freeMemory = pinnedMemory;
+            position = 0;
+            memory.Span.Clear();
         }
 
-        public Span<T> Alloc<T>(int size) where T : struct
+        public void Dispose()
         {
-            var ret = pinnedMemory.NonPortableCast<byte, T>().Slice(0, size);
-            freeMemory = freeMemory.Slice(ret.AsBytes().Length);
-            return ret;
+            pinnedMemory.Dispose();
         }
+
+        public Span<T> Alloc<T>(int count, out int handle) where T : struct
+        {
+            var span = memory.Span.Slice(position).NonPortableCast<byte, T>().Slice(0, count);
+            handle = position;
+            position += span.AsBytes().Length;
+            return span;
+        }
+
+        public ref T Alloc<T>(out int handle) where T : struct
+        {
+            var span = memory.Span.Slice(position).NonPortableCast<byte, T>().Slice(0, 1);
+            handle = position;
+            position += span.AsBytes().Length;
+            return ref span[0];
+        }
+
+        public Span<T> Get<T>(int handle, int count) where T : struct => memory.Span.Slice(handle).NonPortableCast<byte, T>().Slice(0, count);
+
+        public ref T Get<T>(int handle) where T : struct => ref memory.Span.Slice(handle).NonPortableCast<byte, T>()[0];
     }
 }

@@ -52,7 +52,7 @@ namespace Google.Protobuf.Fast
     /// and <see cref="MapField{TKey, TValue}"/> to serialize such fields.
     /// </para>
     /// </remarks>
-    public sealed class CodedInputStream : IDisposable
+    public sealed class CodedInputStream
     {
         /// <summary>
         /// Whether to leave the underlying stream open when disposing of this stream.
@@ -63,18 +63,18 @@ namespace Google.Protobuf.Fast
         /// <summary>
         /// Buffer of data read from the stream or provided at construction time.
         /// </summary>
-        private Span<byte> buffer;
+        private Memory<byte> buffer;
 
         /// <summary>
         /// The index of the buffer at which we need to refill from the stream (if there is one).
         /// </summary>
         private int bufferSize;
 
-        private int bufferSizeAfterLimit = 0;
+        private int bufferSizeAfterLimit;
         /// <summary>
         /// The position within the current buffer (i.e. the next byte to read)
         /// </summary>
-        private int bufferPos = 0;
+        private int bufferPos;
 
         /// <summary>
         /// The stream to read further input from, or null if the byte array buffer was provided
@@ -86,13 +86,13 @@ namespace Google.Protobuf.Fast
         /// The last tag we read. 0 indicates we've read to the end of the stream
         /// (or haven't read anything yet).
         /// </summary>
-        private uint lastTag = 0;
+        private uint lastTag;
 
         /// <summary>
         /// The next tag, used to store the value read by PeekTag.
         /// </summary>
-        private uint nextTag = 0;
-        private bool hasNextTag = false;
+        private uint nextTag;
+        private bool hasNextTag;
 
         internal const int DefaultRecursionLimit = 64;
         internal const int DefaultSizeLimit = 64 << 20; // 64MB
@@ -103,14 +103,14 @@ namespace Google.Protobuf.Fast
         /// total bytes read up to the current position can be computed as
         /// totalBytesRetired + bufferPos.
         /// </summary>
-        private int totalBytesRetired = 0;
+        private int totalBytesRetired;
 
         /// <summary>
         /// The absolute position of the end of the current message.
         /// </summary> 
         private int currentLimit = int.MaxValue;
 
-        private int recursionDepth = 0;
+        private int recursionDepth;
 
         private readonly int recursionLimit;
         private readonly int sizeLimit;
@@ -147,9 +147,7 @@ namespace Google.Protobuf.Fast
         /// when the returned object is disposed.
         /// </summary>
         /// <param name="input">The stream to read from.</param>
-        public CodedInputStream(Stream input) : this(input, false)
-        {
-        }
+        public CodedInputStream(Stream input) : this(input, false) { }
 
         /// <summary>
         /// Creates a new <see cref="CodedInputStream"/> reading data from the given stream.
@@ -343,7 +341,8 @@ namespace Google.Protobuf.Fast
             // and those two bytes being enough to get the tag. This will be true for fields up to 4095.
             if (bufferPos + 2 <= bufferSize)
             {
-                int tmp = buffer[bufferPos++];
+                var ptr = buffer.Span;
+                int tmp = ptr[bufferPos++];
                 if (tmp < 128)
                 {
                     lastTag = (uint)tmp;
@@ -351,7 +350,7 @@ namespace Google.Protobuf.Fast
                 else
                 {
                     int result = tmp & 0x7f;
-                    if ((tmp = buffer[bufferPos++]) < 128)
+                    if ((tmp = ptr[bufferPos++]) < 128)
                     {
                         result |= tmp << 7;
                         lastTag = (uint) result;
@@ -543,24 +542,25 @@ namespace Google.Protobuf.Fast
         /// <summary>
         /// Reads a string field from the stream.
         /// </summary>
-        public unsafe void ReadString(ref Utf8String str, IAllocator allocator)
+        public void ReadString(ref Utf8String str, IAllocator allocator)
         {
             int length = ReadLength();
             // No need to read any data for an empty string.
             if (length == 0) return;
-            var retBuff = allocator.Alloc<byte>(length);
+            var retBuff = allocator.Alloc<byte>(length, out var retBuffHandle);
             if (length <= bufferSize - bufferPos)
             {
-                buffer.Slice(bufferPos, length).CopyTo(retBuff);
+                buffer.Span.Slice(bufferPos, length).CopyTo(retBuff);
                 bufferPos += length;
-                str.Initialize(retBuff);
-                return;
             }
-            // Slow path: Build a byte array first then copy it.
-            //TODO: Improve read raw bytes implementation
-            ReadRawBytes(length).AsSpan().CopyTo(retBuff);
-            bufferPos += length;
-            str.Initialize(retBuff);
+            else
+            {
+                // Slow path: Build a byte array first then copy it.
+                //TODO: Improve read raw bytes implementation
+                ReadRawBytes(length).AsSpan().CopyTo(retBuff);
+                bufferPos += length;
+            }
+            str.Initialize(retBuffHandle, length);
         }
 
         /// <summary>
@@ -596,7 +596,7 @@ namespace Google.Protobuf.Fast
             {
                 // Fast path:  We already have the bytes in a contiguous buffer, so
                 //   just copy directly from it.
-                ByteString result = ByteString.CopyFrom(buffer.Slice(bufferPos, length));
+                ByteString result = ByteString.CopyFrom(buffer.Span.Slice(bufferPos, length));
                 bufferPos += length;
                 return result;
             }
@@ -752,34 +752,36 @@ namespace Google.Protobuf.Fast
                 return SlowReadRawVarint32();
             }
 
-            int tmp = buffer[bufferPos++];
+            var ptr = buffer.Span;
+
+            int tmp = ptr[bufferPos++];
             if (tmp < 128)
             {
                 return (uint) tmp;
             }
             int result = tmp & 0x7f;
-            if ((tmp = buffer[bufferPos++]) < 128)
+            if ((tmp = ptr[bufferPos++]) < 128)
             {
                 result |= tmp << 7;
             }
             else
             {
                 result |= (tmp & 0x7f) << 7;
-                if ((tmp = buffer[bufferPos++]) < 128)
+                if ((tmp = ptr[bufferPos++]) < 128)
                 {
                     result |= tmp << 14;
                 }
                 else
                 {
                     result |= (tmp & 0x7f) << 14;
-                    if ((tmp = buffer[bufferPos++]) < 128)
+                    if ((tmp = ptr[bufferPos++]) < 128)
                     {
                         result |= tmp << 21;
                     }
                     else
                     {
                         result |= (tmp & 0x7f) << 21;
-                        result |= (tmp = buffer[bufferPos++]) << 28;
+                        result |= (tmp = ptr[bufferPos++]) << 28;
                         if (tmp >= 128)
                         {
                             // Discard upper 32 bits.
@@ -1073,7 +1075,7 @@ namespace Google.Protobuf.Fast
             {
                 RefillBuffer(true);
             }
-            return buffer[bufferPos++];
+            return buffer.Span[bufferPos++];
         }
 
         /// <summary>
@@ -1112,7 +1114,7 @@ namespace Google.Protobuf.Fast
                 // First copy what we have.
                 var bytes = new byte[size];
                 int pos = bufferSize - bufferPos;
-                buffer.Slice(bufferPos, pos).CopyTo(bytes);
+                buffer.Span.Slice(bufferPos, pos).CopyTo(bytes);
                 bufferPos = bufferSize;
 
                 // We want to use RefillBuffer() and then copy from the buffer into our
@@ -1122,13 +1124,13 @@ namespace Google.Protobuf.Fast
 
                 while (size - pos > bufferSize)
                 {
-                    buffer.Slice(0, bufferSize).CopyTo(bytes);
+                    buffer.Span.Slice(0, bufferSize).CopyTo(bytes);
                     pos += bufferSize;
                     bufferPos = bufferSize;
                     RefillBuffer(true);
                 }
 
-                buffer.Slice(0, size - pos).CopyTo(bytes);
+                buffer.Span.Slice(0, size - pos).CopyTo(bytes);
                 bufferPos = size - pos;
 
                 return bytes;
@@ -1176,11 +1178,11 @@ namespace Google.Protobuf.Fast
                 }
 
                 // OK, got everything.  Now concatenate it all into one buffer.
-                byte[] bytes = new byte[size];
+                var bytes = new byte[size];
 
                 // Start by copying the leftover bytes from this.buffer.
                 int newPos = originalBufferSize - originalBufferPos;
-                buffer.Slice(originalBufferPos, newPos).CopyTo(bytes);
+                buffer.Span.Slice(originalBufferPos, newPos).CopyTo(bytes);
 
                 // And now all the chunks.
                 foreach (byte[] chunk in chunks)

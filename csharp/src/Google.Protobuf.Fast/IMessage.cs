@@ -51,14 +51,14 @@ namespace Google.Protobuf.Fast
         /// Writes the data to the given coded output stream.
         /// </summary>
         /// <param name="output">Coded output stream to write the data to. Must not be null.</param>
-        void WriteTo(CodedOutputStream output);
+        void WriteTo(CodedOutputStream output, IArena arena);
 
         /// <summary>
         /// Calculates the size of this message in Protocol Buffer wire format, in bytes.
         /// </summary>
         /// <returns>The number of bytes required to write this message
         /// to a coded output stream.</returns>
-        int CalculateSize();
+        int CalculateSize(IArena arena);
 
         ///// <summary>
         ///// Descriptor for this message. All instances are expected to return the same descriptor,
@@ -74,7 +74,7 @@ namespace Google.Protobuf.Fast
     /// the implementation class.
     /// </summary>
     /// <typeparam name="T">The message type.</typeparam>
-    public interface IMessage<T> : IMessage, IEquatable<T>/*, IDeepCloneable<T>*/ where T : IMessage<T>
+    public interface IMessage<T> : IMessage/*, IEquatable<T>, IDeepCloneable<T>*/ where T : IMessage<T>
     {
         ///// <summary>
         ///// Merges the given message into this one.

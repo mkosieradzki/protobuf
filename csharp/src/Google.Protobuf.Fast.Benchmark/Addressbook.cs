@@ -99,29 +99,29 @@ namespace Google.Protobuf.Examples.Fast.AddressBook
             get { return phones_; }
         }
 
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-        public override bool Equals(object other) => other is Person v && Equals(v);
+        //[global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        //public override bool Equals(object other) => other is Person v && Equals(v);
 
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-        public bool Equals(Person other)
-        {
-            if (Name != other.Name) return false;
-            if (Id != other.Id) return false;
-            if (Email != other.Email) return false;
-            if (!phones_.Equals(other.phones_)) return false;
-            return true;
-        }
+        //[global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        //public bool Equals(Person other)
+        //{
+        //    if (Name != other.Name) return false;
+        //    if (Id != other.Id) return false;
+        //    if (Email != other.Email) return false;
+        //    if (!phones_.Equals(other.phones_)) return false;
+        //    return true;
+        //}
 
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-        public override int GetHashCode()
-        {
-            int hash = 1;
-            if (!Name.IsEmpty) hash ^= Name.GetHashCode();
-            if (Id != 0) hash ^= Id.GetHashCode();
-            if (!Email.IsEmpty) hash ^= Email.GetHashCode();
-            hash ^= phones_.GetHashCode();
-            return hash;
-        }
+        //[global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        //public override int GetHashCode()
+        //{
+        //    int hash = 1;
+        //    if (!Name.IsEmpty) hash ^= Name.GetHashCode();
+        //    if (Id != 0) hash ^= Id.GetHashCode();
+        //    if (!Email.IsEmpty) hash ^= Email.GetHashCode();
+        //    hash ^= phones_.GetHashCode();
+        //    return hash;
+        //}
 
         //         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         //         public override string ToString()
@@ -130,12 +130,12 @@ namespace Google.Protobuf.Examples.Fast.AddressBook
         //         }
 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-        public void WriteTo(pb::CodedOutputStream output)
+        public void WriteTo(pb::CodedOutputStream output, IArena arena)
         {
             if (!Name.IsEmpty)
             {
                 output.WriteRawTag(10);
-                output.WriteString(Name);
+                output.WriteString(Name, arena);
             }
             if (Id != 0)
             {
@@ -145,13 +145,13 @@ namespace Google.Protobuf.Examples.Fast.AddressBook
             if (!Email.IsEmpty)
             {
                 output.WriteRawTag(26);
-                output.WriteString(Email);
+                output.WriteString(Email, arena);
             }
-            phones_.WriteTo(output, _repeated_phones_codec);
+            phones_.WriteTo(output, _repeated_phones_codec, arena);
         }
 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-        public int CalculateSize()
+        public int CalculateSize(IArena arena)
         {
             int size = 0;
             if (!Name.IsEmpty)
@@ -166,7 +166,7 @@ namespace Google.Protobuf.Examples.Fast.AddressBook
             {
                 size += 1 + pb::CodedOutputStream.ComputeStringSize(Email);
             }
-            size += phones_.CalculateSize(_repeated_phones_codec);
+            size += phones_.CalculateSize(_repeated_phones_codec, arena);
             return size;
         }
 
@@ -265,12 +265,12 @@ namespace Google.Protobuf.Examples.Fast.AddressBook
 
                 // partial void OnConstruction();
 
-                [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-                public PhoneNumber(PhoneNumber other) : this()
-                {
-                    number_ = other.number_;
-                    type_ = other.type_;
-                }
+                //[global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+                //public PhoneNumber(PhoneNumber other) : this()
+                //{
+                //    number_ = other.number_;
+                //    type_ = other.type_;
+                //}
 
                 // [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
                 // public PhoneNumber Clone()
@@ -298,25 +298,25 @@ namespace Google.Protobuf.Examples.Fast.AddressBook
                     set { type_ = value; }
                 }
 
-                [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-                public override bool Equals(object other) => other is PhoneNumber v && Equals(v);
+                //[global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+                //public override bool Equals(object other) => other is PhoneNumber v && Equals(v);
 
-                [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-                public bool Equals(PhoneNumber other)
-                {
-                    if (Number != other.Number) return false;
-                    if (Type != other.Type) return false;
-                    return true;
-                }
+                //[global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+                //public bool Equals(PhoneNumber other)
+                //{
+                //    if (Number != other.Number) return false;
+                //    if (Type != other.Type) return false;
+                //    return true;
+                //}
 
-                [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-                public override int GetHashCode()
-                {
-                    int hash = 1;
-                    if (!Number.IsEmpty) hash ^= Number.GetHashCode();
-                    if (Type != 0) hash ^= Type.GetHashCode();
-                    return hash;
-                }
+                //[global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+                //public override int GetHashCode()
+                //{
+                //    int hash = 1;
+                //    if (!Number.IsEmpty) hash ^= Number.GetHashCode();
+                //    if (Type != 0) hash ^= Type.GetHashCode();
+                //    return hash;
+                //}
 
                 // [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
                 // public override string ToString()
@@ -325,12 +325,12 @@ namespace Google.Protobuf.Examples.Fast.AddressBook
                 // }
 
                 [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-                public void WriteTo(pb::CodedOutputStream output)
+                public void WriteTo(pb::CodedOutputStream output, IArena arena)
                 {
                     if (!Number.IsEmpty)
                     {
                         output.WriteRawTag(10);
-                        output.WriteString(Number);
+                        output.WriteString(Number, arena);
                     }
                     if (Type != 0)
                     {
@@ -340,7 +340,7 @@ namespace Google.Protobuf.Examples.Fast.AddressBook
                 }
 
                 [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-                public int CalculateSize()
+                public int CalculateSize(IArena arena)
                 {
                     int size = 0;
                     if (!Number.IsEmpty)
@@ -449,39 +449,39 @@ namespace Google.Protobuf.Examples.Fast.AddressBook
         private static readonly pb::FieldCodec<global::Google.Protobuf.Examples.Fast.AddressBook.Person> _repeated_people_codec = pb::FieldCodec.ForMessage<global::Google.Protobuf.Examples.Fast.AddressBook.Person>(10);
         private pbc::RepeatedField<global::Google.Protobuf.Examples.Fast.AddressBook.Person> people_;
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-        public pbc::RepeatedField<global::Google.Protobuf.Examples.Fast.AddressBook.Person> People
+        public ref pbc::RepeatedField<global::Google.Protobuf.Examples.Fast.AddressBook.Person> People
         {
-            get { return people_; }
+            get { return ref people_; }
         }
 
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-        public override bool Equals(object other)
-        {
-            return Equals(other as AddressBook);
-        }
+        //[global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        //public override bool Equals(object other)
+        //{
+        //    return Equals(other as AddressBook);
+        //}
 
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-        public bool Equals(AddressBook other)
-        {
-            if (ReferenceEquals(other, null))
-            {
-                return false;
-            }
-            if (ReferenceEquals(other, this))
-            {
-                return true;
-            }
-            if (!people_.Equals(other.people_)) return false;
-            return true;
-        }
+        //[global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        //public bool Equals(AddressBook other)
+        //{
+        //    if (ReferenceEquals(other, null))
+        //    {
+        //        return false;
+        //    }
+        //    if (ReferenceEquals(other, this))
+        //    {
+        //        return true;
+        //    }
+        //    if (!people_.Equals(other.people_)) return false;
+        //    return true;
+        //}
 
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-        public override int GetHashCode()
-        {
-            int hash = 1;
-            hash ^= people_.GetHashCode();
-            return hash;
-        }
+        //[global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        //public override int GetHashCode()
+        //{
+        //    int hash = 1;
+        //    hash ^= people_.GetHashCode();
+        //    return hash;
+        //}
 
         //         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         //         public override string ToString()
@@ -490,16 +490,16 @@ namespace Google.Protobuf.Examples.Fast.AddressBook
         //         }
 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-        public void WriteTo(pb::CodedOutputStream output)
+        public void WriteTo(pb::CodedOutputStream output, IArena arena)
         {
-            people_.WriteTo(output, _repeated_people_codec);
+            people_.WriteTo(output, _repeated_people_codec, arena);
         }
 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-        public int CalculateSize()
+        public int CalculateSize(IArena arena)
         {
             int size = 0;
-            size += people_.CalculateSize(_repeated_people_codec);
+            size += people_.CalculateSize(_repeated_people_codec, arena);
             return size;
         }
 

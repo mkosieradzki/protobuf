@@ -264,10 +264,10 @@ namespace Google.Protobuf.Fast
         /// The data is length-prefixed.
         /// </summary>
         /// <param name="value">The value to write</param>
-        public void WriteString(Utf8String str)
+        public void WriteString(Utf8String str, IArena arena)
         {
             //TODO: Reimplement
-            var value = str.AsString();
+            var value = str.AsString(arena);
             // Optimise the case where we have enough space to write
             // the string directly to the buffer, which should be common.
             int length = Utf8Encoding.GetByteCount(value);
@@ -299,10 +299,10 @@ namespace Google.Protobuf.Fast
         /// The data is length-prefixed.
         /// </summary>
         /// <param name="value">The value to write</param>
-        public void WriteMessage(IMessage value)
+        public void WriteMessage(IMessage value, IArena arena)
         {
-            WriteLength(value.CalculateSize());
-            value.WriteTo(this);
+            WriteLength(value.CalculateSize(arena));
+            value.WriteTo(this, arena);
         }
 
         /// <summary>
