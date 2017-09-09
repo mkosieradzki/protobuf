@@ -4,25 +4,24 @@ using System.Text;
 
 namespace Google.Protobuf.Fast
 {
-    public unsafe struct Utf8String : IEquatable<Utf8String>
+    public struct Utf8String : IEquatable<Utf8String>
     {
-        public int ByteLength { get; private set; }
-        private byte* buff;
+        public int ByteLength => buff.Length;
+        private Span<byte> buff;
 
         public bool IsEmpty => ByteLength == 0;
 
-        internal void Initialize(byte *ptr, int length)
+        internal void Initialize(Span<byte> ptr)
         {
             buff = ptr;
-            ByteLength = length;
         }
 
         public string AsString()
         {
             if (ByteLength == 0) return String.Empty;
 
-            var arr = new byte[ByteLength];
-            Unsafe.CopyBlock(ref arr[0], ref Unsafe.AsRef<byte>(buff), (uint)ByteLength);
+            var arr = buff.ToArray();
+            //TODO: Use encoding function operating on byte spans
             return Encoding.UTF8.GetString(arr, 0, arr.Length);
         }
 

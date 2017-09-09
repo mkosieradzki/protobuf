@@ -4,7 +4,6 @@ namespace Google.Protobuf.Fast
 {
     public interface IAllocator
     {
-        ref T Alloc<T>() where T : struct;
-        IntPtr AllocMem(uint size);
+        Span<T> Alloc<T>(int size) where T : struct;
     }
 }

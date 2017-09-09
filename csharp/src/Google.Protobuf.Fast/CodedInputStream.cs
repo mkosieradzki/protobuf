@@ -63,7 +63,7 @@ namespace Google.Protobuf.Fast
         /// <summary>
         /// Buffer of data read from the stream or provided at construction time.
         /// </summary>
-        private readonly byte[] buffer;
+        private Span<byte> buffer;
 
         /// <summary>
         /// The index of the buffer at which we need to refill from the stream (if there is one).
@@ -473,21 +473,23 @@ namespace Google.Protobuf.Fast
         /// </summary>
         public float ReadFloat()
         {
-            if (BitConverter.IsLittleEndian && 4 <= bufferSize - bufferPos)
-            {
-                float ret = BitConverter.ToSingle(buffer, bufferPos);
-                bufferPos += 4;
-                return ret;
-            }
-            else
-            {
-                byte[] rawBytes = ReadRawBytes(4);
-                if (!BitConverter.IsLittleEndian)
-                {
-                    ByteArray.Reverse(rawBytes);
-                }
-                return BitConverter.ToSingle(rawBytes, 0);
-            }
+            //TODO: Reimplement
+            throw new NotImplementedException();
+            //if (BitConverter.IsLittleEndian && 4 <= bufferSize - bufferPos)
+            //{
+            //    float ret = BitConverter.ToSingle(buffer, bufferPos);
+            //    bufferPos += 4;
+            //    return ret;
+            //}
+            //else
+            //{
+            //    byte[] rawBytes = ReadRawBytes(4);
+            //    if (!BitConverter.IsLittleEndian)
+            //    {
+            //        ByteArray.Reverse(rawBytes);
+            //    }
+            //    return BitConverter.ToSingle(rawBytes, 0);
+            //}
         }
 
         /// <summary>
@@ -546,22 +548,19 @@ namespace Google.Protobuf.Fast
             int length = ReadLength();
             // No need to read any data for an empty string.
             if (length == 0) return;
-            var retBuff = (void*)allocator.AllocMem((uint)length);
+            var retBuff = allocator.Alloc<byte>(length);
             if (length <= bufferSize - bufferPos)
             {
-                fixed (byte* ptr = buffer)
-                    Unsafe.CopyBlock(retBuff, ptr + bufferPos, (uint)length);
+                buffer.Slice(bufferPos, length).CopyTo(retBuff);
                 bufferPos += length;
-                str.Initialize((byte*)retBuff, length);
+                str.Initialize(retBuff);
                 return;
             }
             // Slow path: Build a byte array first then copy it.
             //TODO: Improve read raw bytes implementation
-            var strBuff = ReadRawBytes(length);
-            fixed (byte* ptr = strBuff)
-                Unsafe.CopyBlock(retBuff, ptr, (uint)length);
+            ReadRawBytes(length).AsSpan().CopyTo(retBuff);
             bufferPos += length;
-            str.Initialize((byte*)retBuff, length);
+            str.Initialize(retBuff);
         }
 
         /// <summary>
@@ -597,7 +596,7 @@ namespace Google.Protobuf.Fast
             {
                 // Fast path:  We already have the bytes in a contiguous buffer, so
                 //   just copy directly from it.
-                ByteString result = ByteString.CopyFrom(buffer, bufferPos, length);
+                ByteString result = ByteString.CopyFrom(buffer.Slice(bufferPos, length));
                 bufferPos += length;
                 return result;
             }
@@ -1033,7 +1032,7 @@ namespace Google.Protobuf.Fast
             totalBytesRetired += bufferSize;
 
             bufferPos = 0;
-            bufferSize = (input == null) ? 0 : input.Read(buffer, 0, buffer.Length);
+            bufferSize = (input == null) ? 0 : throw new NotImplementedException()/*input.Read(buffer, 0, buffer.Length)*/;
             if (bufferSize < 0)
             {
                 throw new InvalidOperationException("Stream.Read returned a negative count");
@@ -1101,8 +1100,7 @@ namespace Google.Protobuf.Fast
             if (size <= bufferSize - bufferPos)
             {
                 // We have all the bytes we need already.
-                byte[] bytes = new byte[size];
-                ByteArray.Copy(buffer, bufferPos, bytes, 0, size);
+                var bytes = buffer.Slice(bufferPos, size).ToArray();
                 bufferPos += size;
                 return bytes;
             }
@@ -1112,9 +1110,9 @@ namespace Google.Protobuf.Fast
                 // of bytes.  We can safely allocate the resulting array ahead of time.
 
                 // First copy what we have.
-                byte[] bytes = new byte[size];
+                var bytes = new byte[size];
                 int pos = bufferSize - bufferPos;
-                ByteArray.Copy(buffer, bufferPos, bytes, 0, pos);
+                buffer.Slice(bufferPos, pos).CopyTo(bytes);
                 bufferPos = bufferSize;
 
                 // We want to use RefillBuffer() and then copy from the buffer into our
@@ -1124,13 +1122,13 @@ namespace Google.Protobuf.Fast
 
                 while (size - pos > bufferSize)
                 {
-                    Buffer.BlockCopy(buffer, 0, bytes, pos, bufferSize);
+                    buffer.Slice(0, bufferSize).CopyTo(bytes);
                     pos += bufferSize;
                     bufferPos = bufferSize;
                     RefillBuffer(true);
                 }
 
-                ByteArray.Copy(buffer, 0, bytes, pos, size - pos);
+                buffer.Slice(0, size - pos).CopyTo(bytes);
                 bufferPos = size - pos;
 
                 return bytes;
@@ -1182,7 +1180,7 @@ namespace Google.Protobuf.Fast
 
                 // Start by copying the leftover bytes from this.buffer.
                 int newPos = originalBufferSize - originalBufferPos;
-                ByteArray.Copy(buffer, originalBufferPos, bytes, 0, newPos);
+                buffer.Slice(originalBufferPos, newPos).CopyTo(bytes);
 
                 // And now all the chunks.
                 foreach (byte[] chunk in chunks)

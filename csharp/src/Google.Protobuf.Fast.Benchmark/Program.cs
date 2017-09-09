@@ -12,7 +12,7 @@ namespace Google.Protobuf.Fast.Benchmark
             var buff = File.ReadAllBytes(@"C:\protobench\addressbook1.bin");
             var addressBook = new AddressBook();
 
-            var allocator = new SingleThreadedTrivialArenaAllocator(250000);
+            var allocator = new SingleThreadedTrivialArenaAllocator(new Span<byte>(new byte[250000]));
             //addressBook.MergeFrom(inputStream, allocator);
 
             var sw = Stopwatch.StartNew();

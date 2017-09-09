@@ -45,15 +45,15 @@ namespace Google.Protobuf.Fast.Collections
     /// supported by Protocol Buffers but nor does it guarantee that all operations will work in such cases.
     /// </remarks>
     /// <typeparam name="T">The element type of the repeated field.</typeparam>
-    public unsafe struct RepeatedField<T> : IEquatable<RepeatedField<T>>//IList<T>, IList, IDeepCloneable<RepeatedField<T>>, 
+    public struct RepeatedField<T> : IEquatable<RepeatedField<T>>//IList<T>, IList, IDeepCloneable<RepeatedField<T>>, 
         where T : struct
 #if !NET35
         //, IReadOnlyList<T>
 #endif
     {
         private const int MAX_ENTRIES_IN_COLLECTION = 1000;
-        public int Count { get; private set; }
-        private void** array;
+        public int Count => array.Length;
+        private Span<IntPtr> array;
 
 
         //private static readonly T[] EmptyArray = new T[0];
@@ -99,13 +99,14 @@ namespace Google.Protobuf.Fast.Collections
         /// </summary>
         /// <param name="input">The input stream to read from.</param>
         /// <param name="codec">The codec to use in order to read each entry.</param>
-        public void AddEntriesFrom(CodedInputStream input, FieldCodec<T> codec, IAllocator allocator)
+        public unsafe void AddEntriesFrom(CodedInputStream input, FieldCodec<T> codec, IAllocator allocator)
         {
             uint tag = input.LastTag;
             var reader = codec.ValueReader;
             // Non-nullable value types can be packed or not.
 
-            void** temp = stackalloc void*[MAX_ENTRIES_IN_COLLECTION];
+            var ptr = stackalloc IntPtr[MAX_ENTRIES_IN_COLLECTION];
+            var temp = new Span<IntPtr>(ptr, MAX_ENTRIES_IN_COLLECTION);
             int entriesRead = 0;
 
             if (codec.IsPackedRepeatedField(tag))
@@ -116,11 +117,11 @@ namespace Google.Protobuf.Fast.Collections
                     int oldLimit = input.PushLimit(length);
                     while (!input.ReachedLimit)
                     {
-                        ref var value = ref allocator.Alloc<T>();
-                        reader(input, ref value, allocator);
+                        var value = allocator.Alloc<T>(1);
+                        reader(input, ref value[0], allocator);
                         if (entriesRead >= MAX_ENTRIES_IN_COLLECTION)
                             throw new Exception("Exceeded max collection size.");
-                        temp[entriesRead++] = Unsafe.AsPointer(ref value);
+                        temp[entriesRead++] = (IntPtr)Unsafe.AsPointer(ref value[0]);
                     }
                     input.PopLimit(oldLimit);
                 }
@@ -131,11 +132,11 @@ namespace Google.Protobuf.Fast.Collections
                 // Not packed... (possibly not packable)
                 do
                 {
-                    ref var value = ref allocator.Alloc<T>();
-                    reader(input, ref value, allocator);
+                    var value = allocator.Alloc<T>(1);
+                    reader(input, ref value[0], allocator);
                     if (entriesRead >= MAX_ENTRIES_IN_COLLECTION)
                         throw new Exception("Exceeded max collection size.");
-                    temp[entriesRead++] = Unsafe.AsPointer(ref value);
+                    temp[entriesRead++] = (IntPtr)Unsafe.AsPointer(ref value);
                 } while (input.MaybeConsumeTag(tag));
             }
 
@@ -143,12 +144,8 @@ namespace Google.Protobuf.Fast.Collections
                 //TODO: No idea how to not waste already allocated memory
                 throw new NotImplementedException();
 
-            var originalCount = Count;
-            array = (void **)allocator.AllocMem((uint)(entriesRead * Unsafe.SizeOf<IntPtr>()));
-            Count += entriesRead;
-
-            //EnsureSize(count + entriesRead);
-            Unsafe.CopyBlock(array + originalCount, temp, (uint)(entriesRead * Unsafe.SizeOf<IntPtr>()));
+            array = allocator.Alloc<IntPtr>(entriesRead);
+            temp.Slice(0, entriesRead).CopyTo(array);
         }
 
         /// <summary>
@@ -177,7 +174,10 @@ namespace Google.Protobuf.Fast.Collections
                 int size = Count * CodedOutputStream.ComputeRawVarint32Size(tag);
                 for (int i = 0; i < Count; i++)
                 {
-                    size += sizeCalculator(ref Unsafe.AsRef<T>(array + i));
+                    unsafe
+                    {
+                        size += sizeCalculator(ref Unsafe.AsRef<T>((void*)array[i]));
+                    }
                 }
                 return size;
             }
@@ -192,7 +192,10 @@ namespace Google.Protobuf.Fast.Collections
                 int tmp = 0;
                 for (int i = 0; i < Count; i++)
                 {
-                    tmp += calculator(ref Unsafe.AsRef<T>(array + i));
+                    unsafe
+                    {
+                        tmp += calculator(ref Unsafe.AsRef<T>((void*)array[i]));
+                    }
                 }
                 return tmp;
             }
@@ -225,7 +228,10 @@ namespace Google.Protobuf.Fast.Collections
                 output.WriteRawVarint32(size);
                 for (int i = 0; i < Count; i++)
                 {
-                    valueWriter(output, ref Unsafe.AsRef<T>(array + i));
+                    unsafe
+                    {
+                        valueWriter(output, ref Unsafe.AsRef<T>((void*)array[i]));
+                    }
                 }
             }
             else
@@ -235,7 +241,10 @@ namespace Google.Protobuf.Fast.Collections
                 for (int i = 0; i < Count; i++)
                 {
                     output.WriteTag(tag);
-                    valueWriter(output, ref Unsafe.AsRef<T>(array + i));
+                    unsafe
+                    {
+                        valueWriter(output, ref Unsafe.AsRef<T>((void*)array[i]));
+                    }
                 }
             }
         }
@@ -430,7 +439,10 @@ namespace Google.Protobuf.Fast.Collections
             int hash = 0;
             for (int i = 0; i < Count; i++)
             {
-                hash = hash * 31 + Unsafe.AsRef<T>(array[i]).GetHashCode();
+                unsafe
+                {
+                    hash = hash * 31 + Unsafe.AsRef<T>((void*)array[i]).GetHashCode();
+                }
             }
             return hash;
         }
@@ -449,9 +461,12 @@ namespace Google.Protobuf.Fast.Collections
             var comparer = EqualityComparer<T>.Default;
             for (int i = 0; i < Count; i++)
             {
-                if (!comparer.Equals(Unsafe.AsRef<T>(array[i]), Unsafe.AsRef<T>(other.array[i])))
+                unsafe
                 {
-                    return false;
+                    if (!comparer.Equals(Unsafe.AsRef<T>((void*)array[i]), Unsafe.AsRef<T>((void*)other.array[i])))
+                    {
+                        return false;
+                    }
                 }
             }
             return true;
@@ -529,15 +544,11 @@ namespace Google.Protobuf.Fast.Collections
         /// </value>
         /// <param name="index">The zero-based index of the element to get or set.</param>
         /// <returns>The item at the specified index.</returns>
-        public ref T this[int index]
+        public unsafe ref T this[int index]
         {
             get
             {
-                if (index < 0 || index >= Count)
-                {
-                    throw new ArgumentOutOfRangeException(nameof(index));
-                }
-                return ref Unsafe.AsRef<T>(array[index]);
+                return ref Unsafe.AsRef<T>((void*)array[index]);
             }
             //set
             //{

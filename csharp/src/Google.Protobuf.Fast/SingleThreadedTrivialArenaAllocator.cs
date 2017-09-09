@@ -1,42 +1,31 @@
 ﻿using System;
-using System.Runtime.CompilerServices;
 
 namespace Google.Protobuf.Fast
 {
     public sealed class SingleThreadedTrivialArenaAllocator : IAllocator
     {
-        private byte[] memory;
-        private uint pos;
+        private Span<byte> pinnedMemory;
+        private Span<byte> freeMemory;
 
-        public SingleThreadedTrivialArenaAllocator(uint totalSize)
+        public SingleThreadedTrivialArenaAllocator(Span<byte> pinnedMemory)
         {
-            memory = new byte[totalSize];
+            //NOTE: Replace this with System.Memory<byte> when available and use pinning!
+            //IF this pointer is not pinned bad things gonna happe
+            this.pinnedMemory = pinnedMemory;
+            this.freeMemory = pinnedMemory;
         }
 
         public void Clear()
         {
-            Unsafe.InitBlock(ref memory[0], 0, (uint)memory.Length);
-            pos = 0;
+            pinnedMemory.Clear();
+            freeMemory = pinnedMemory;
         }
 
-        public unsafe ref T Alloc<T>() where T : struct
+        public Span<T> Alloc<T>(int size) where T : struct
         {
-            var size = (uint)Unsafe.SizeOf<T>();
-
-            if (pos + size > memory.Length)
-                throw new Exception();
-            var ptr = Unsafe.AsPointer(ref memory[pos]);
-            pos += size;
-            return ref Unsafe.AsRef<T>(ptr);
-        }
-
-        public unsafe IntPtr AllocMem(uint size)
-        {
-            if (pos + size > memory.Length)
-                throw new Exception();
-            var ptr = Unsafe.AsPointer(ref memory[pos]);
-            pos += size;
-            return (IntPtr)ptr;
+            var ret = pinnedMemory.NonPortableCast<byte, T>().Slice(0, size);
+            freeMemory = freeMemory.Slice(ret.AsBytes().Length);
+            return ret;
         }
     }
 }

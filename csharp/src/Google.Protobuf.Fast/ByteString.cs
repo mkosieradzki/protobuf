@@ -204,9 +204,9 @@ namespace Google.Protobuf.Fast
         /// This method can also be invoked in <c>ByteString.CopyFrom(0xaa, 0xbb, ...)</c> form
         /// which is primarily useful for testing.
         /// </summary>
-        public static ByteString CopyFrom(params byte[] bytes)
+        public static ByteString CopyFrom(ReadOnlySpan<byte> span)
         {
-            return new ByteString((byte[]) bytes.Clone());
+            return new ByteString(span.ToArray());
         }
 
         /// <summary>
