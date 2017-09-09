@@ -144,7 +144,7 @@ namespace Google.Protobuf.Fast.Collections
                 throw new NotImplementedException();
 
             var originalCount = Count;
-            array = (void **)allocator.AllocMem((uint)(entriesRead * Unsafe.SizeOf<IntPtr>()));
+            array = (void **)allocator.AllocMem(entriesRead * Unsafe.SizeOf<IntPtr>());
             Count += entriesRead;
 
             //EnsureSize(count + entriesRead);

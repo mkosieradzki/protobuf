@@ -5,36 +5,41 @@ namespace Google.Protobuf.Fast
 {
     public sealed class SingleThreadedTrivialArenaAllocator : IAllocator
     {
-        private byte[] memory;
-        private uint pos;
+        private unsafe void* memory;
+        private int totalSize;
+        private int pos;
 
-        public SingleThreadedTrivialArenaAllocator(uint totalSize)
+        public unsafe SingleThreadedTrivialArenaAllocator(void* memory, int totalSize)
         {
-            memory = new byte[totalSize];
+            this.memory = memory;
+            this.totalSize = totalSize;
         }
 
-        public void Clear()
+        public unsafe void Clear()
         {
-            Unsafe.InitBlock(ref memory[0], 0, (uint)memory.Length);
+            Unsafe.InitBlock(memory, 0, (uint)totalSize);
             pos = 0;
         }
 
         public unsafe ref T Alloc<T>() where T : struct
         {
-            var size = (uint)Unsafe.SizeOf<T>();
+            var size = Unsafe.SizeOf<T>();
 
-            if (pos + size > memory.Length)
+            if (pos + size > totalSize)
                 throw new Exception();
-            var ptr = Unsafe.AsPointer(ref memory[pos]);
+            var ptr = (byte*)memory + pos;
             pos += size;
             return ref Unsafe.AsRef<T>(ptr);
         }
 
-        public unsafe IntPtr AllocMem(uint size)
+        public unsafe IntPtr AllocMem(int size)
         {
-            if (pos + size > memory.Length)
+            if (size <= 0)
+                throw new ArgumentNullException(nameof(size));
+
+            if (pos + size > totalSize)
                 throw new Exception();
-            var ptr = Unsafe.AsPointer(ref memory[pos]);
+            var ptr = (byte*)memory + pos;
             pos += size;
             return (IntPtr)ptr;
         }

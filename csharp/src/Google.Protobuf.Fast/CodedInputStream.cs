@@ -546,7 +546,7 @@ namespace Google.Protobuf.Fast
             int length = ReadLength();
             // No need to read any data for an empty string.
             if (length == 0) return;
-            var retBuff = (void*)allocator.AllocMem((uint)length);
+            var retBuff = (void*)allocator.AllocMem(length);
             if (length <= bufferSize - bufferPos)
             {
                 fixed (byte* ptr = buffer)
