@@ -58,10 +58,15 @@ namespace Google.Protobuf.ProtoPiper
 
             var message = messageType.CreateMessage();
 
-            while (true)
+            uint tag;
+            while ((tag = await ReadTagAsync(cancellationToken)) != 0)
             {
+                var fieldType = messageType.GetFieldType(tag);
+
                 //await input.ReadAsync(cancellationToken);
             }
+
+            return messageType;
         }
 
         private ValueTask<bool> IsAtEndAsync(CancellationToken cancellationToken)
