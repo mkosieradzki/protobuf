@@ -1,4 +1,5 @@
-﻿using Google.Protobuf.ProtoPiper;
+﻿using BenchmarkDotNet.Running;
+using Google.Protobuf.ProtoPiper;
 using System.IO.Pipelines;
 using System.Threading.Tasks;
 
@@ -6,7 +7,10 @@ namespace TestProtoPiper
 {
     class Program
     {
-        static void Main(string[] args) => Test1().Wait();
+        static void Main(string[] args)
+        {
+            var summary = BenchmarkRunner.Run<ParseVarInt>();
+        }
 
         static async Task Test1()
         {
