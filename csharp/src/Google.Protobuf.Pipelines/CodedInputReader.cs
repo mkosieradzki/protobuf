@@ -1,11 +1,11 @@
-﻿using Google.Protobuf.Collections;
-using System;
+﻿using System;
 using System.Buffers;
+using System.Buffers.Binary;
 using System.IO.Pipelines;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Google.Protobuf.ProtoPiper
+namespace Google.Protobuf.Pipelines
 {
     /// <summary>
     /// Reads and decodes protocol message fields.
@@ -28,7 +28,8 @@ namespace Google.Protobuf.ProtoPiper
         /// </summary>
         public CodedInputReader(PipeReader input)
         {
-            ProtoPreconditions.CheckNotNull(input, nameof(input));
+            if (input == null)
+                throw new ArgumentNullException(nameof(input));
 
             this.input = input;
         }
@@ -54,14 +55,60 @@ namespace Google.Protobuf.ProtoPiper
 
         public async ValueTask<object> ReadMessageAsync(IReadableMessageType messageType, CancellationToken cancellationToken = default)
         {
-            ProtoPreconditions.CheckNotNull(messageType, nameof(messageType));
+            if (messageType == null)
+                throw new ArgumentNullException(nameof(messageType));
 
             var message = messageType.CreateMessage();
 
             uint tag;
             while ((tag = await ReadTagAsync(cancellationToken)) != 0)
             {
-                var fieldType = messageType.GetFieldType(tag);
+                var fieldInfo = messageType.GetFieldInfo(tag);
+
+                switch (fieldInfo.ValueType)
+                {
+                    //case ValueType.Unknown:
+                    //    break;
+                    //case ValueType.Double:
+                    //    break;
+                    //case ValueType.Float:
+                    //    break;
+                    case ValueType.Int32:
+                        messageType.ConsumeInt32(message, tag, (int)await ReadRawVarint32Async(cancellationToken));
+                        break;
+                    //case ValueType.Int64:
+                    //    break;
+                    case ValueType.UInt32:
+                        messageType.ConsumeUInt32(message, tag, await ReadRawVarint32Async(cancellationToken));
+                        break;
+                    //case ValueType.UInt64:
+                    //    break;
+                    //case ValueType.SInt32:
+                    //    break;
+                    //case ValueType.SInt64:
+                    //    break;
+                    case ValueType.Fixed32:
+                        messageType.ConsumeUInt32(message, tag, await ReadFixed32Async(cancellationToken));
+                        break;
+                    //case ValueType.Fixed64:
+                    //    break;
+                    //case ValueType.SFixed32:
+                    //    break;
+                    //case ValueType.SFixed64:
+                    //    break;
+                    //case ValueType.Bool:
+                    //    break;
+                    //case ValueType.String:
+                    //    break;
+                    //case ValueType.Bytes:
+                    //    break;
+                    //case ValueType.Enum:
+                    //    break;
+                    //case ValueType.Message:
+                    //    break;
+                    default:
+                        throw new NotSupportedException();
+                }
 
                 //await input.ReadAsync(cancellationToken);
             }
@@ -165,7 +212,9 @@ namespace Google.Protobuf.ProtoPiper
                 if (WireFormat.GetTagFieldNumber(lastTag) == 0)
                 {
                     // If we actually read a tag with a field of 0, that's not a valid tag.
-                    throw InvalidProtocolBufferException.InvalidTag();
+                    //TODO: Fix
+                    //throw InvalidProtocolBufferException.InvalidTag();
+                    throw new Exception();
                 }
                 return new ValueTask<uint>(lastTag);
             }
@@ -262,7 +311,9 @@ namespace Google.Protobuf.ProtoPiper
                     return result;
                 }
             }
-            throw InvalidProtocolBufferException.MalformedVarint();
+            //TODO: Fix
+            //throw InvalidProtocolBufferException.MalformedVarint();
+            throw new Exception();
         }
 
         /// <summary>
@@ -309,7 +360,9 @@ namespace Google.Protobuf.ProtoPiper
                                     return (uint)result;
                                 }
                             }
-                            throw InvalidProtocolBufferException.MalformedVarint();
+                            //TODO: Fix
+                            //throw InvalidProtocolBufferException.MalformedVarint();
+                            throw new Exception();
                         }
                     }
                 }
@@ -339,12 +392,52 @@ namespace Google.Protobuf.ProtoPiper
         {
             if (await IsAtEndAsync(cancellationToken))
             {
-                throw InvalidProtocolBufferException.TruncatedMessage();
+                //TODO: Fix
+                //throw InvalidProtocolBufferException.TruncatedMessage();
+                throw new Exception();
             }
             else
             {
                 return buffer.First.Span[0];
             }
+        }
+
+        private ValueTask<uint> ReadFixed32Async(CancellationToken cancellationToken)
+        {
+            if (buffer.First.Length >= 4)
+            {
+                return new ValueTask<uint>(BinaryPrimitives.ReadUInt32BigEndian(buffer.First.Span));
+            }
+            else if (buffer.Length >= 4)
+            {
+                Span<byte> span = stackalloc byte[4];
+                buffer.CopyTo(span);
+                return new ValueTask<uint>(BinaryPrimitives.ReadUInt32BigEndian(span));
+            }
+            else
+            {
+                return SlowReadFixed32Async(cancellationToken);
+            }
+        }
+
+        private async ValueTask SlowEnsureMinBufferSizeAsync(int bytes, CancellationToken cancellationToken)
+        {
+            while (buffer.Length < bytes)
+            {
+                if (isLastRead)
+                {
+                    //TODO: Proper exception
+                    throw new Exception();
+                }
+                await RefillBufferAsync(cancellationToken);
+            }
+        }
+
+        private async ValueTask<uint> SlowReadFixed32Async(CancellationToken cancellationToken)
+        {
+            await SlowEnsureMinBufferSizeAsync(4, cancellationToken);
+            //NOTE: this time should succeed without entering slow path
+            return await ReadFixed32Async(cancellationToken);
         }
 
         //private static uint? TryReadTagFromBuffer(ReadOnlySequence<byte> sequence, out SequencePosition consumed)

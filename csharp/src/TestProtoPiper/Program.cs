@@ -1,5 +1,6 @@
 ﻿using BenchmarkDotNet.Running;
-using Google.Protobuf.ProtoPiper;
+using Google.Protobuf.Pipelines;
+using System.Buffers.Binary;
 using System.IO.Pipelines;
 using System.Threading.Tasks;
 

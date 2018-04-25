@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard1.3</TargetFramework>
+    <AssemblyOriginatorKeyFile>../../keys/Google.Protobuf.snk</AssemblyOriginatorKeyFile>
+    <SignAssembly>true</SignAssembly>
+    <LangVersion>7.2</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.IO.Pipelines" Version="4.5.0-preview2-26406-04" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Google.Protobuf.Abstractions\Google.Protobuf.Abstractions.csproj" />
+  </ItemGroup>
+
+</Project>
