@@ -39,7 +39,6 @@ namespace Google.Protobuf.Pipelines
         private ReadOnlySequence<byte> buffer;
         private bool isLastRead;
         private bool isInitialized;
-        private SequencePosition consumed;
 
         /// <summary>
         /// The last tag we read. 0 indicates we've read to the end of the stream
@@ -161,8 +160,6 @@ namespace Google.Protobuf.Pipelines
             }
 
             var ret = buffer.Slice(0, length);
-
-            consumed = buffer.GetPosition(length);
             buffer = buffer.Slice(length);
 
             return ret;
@@ -271,13 +268,12 @@ namespace Google.Protobuf.Pipelines
         {
             if (isInitialized)
             {
-                input.AdvanceTo(consumed);
+                input.AdvanceTo(buffer.Start);
             }
 
             var result = await input.ReadAsync(cancellationToken);
             buffer = result.Buffer;
             isLastRead = result.IsCompleted;
-            consumed = result.Buffer.Start;
             isInitialized = true;
         }
 
@@ -317,7 +313,6 @@ namespace Google.Protobuf.Pipelines
                 if (tmp < 128)
                 {
                     lastTag = (uint)tmp;
-                    consumed = buffer.GetPosition(1);
                     buffer = buffer.Slice(1);
                 }
                 else
@@ -327,7 +322,6 @@ namespace Google.Protobuf.Pipelines
                     {
                         result |= tmp << 7;
                         lastTag = (uint)result;
-                        consumed = buffer.GetPosition(2);
                         buffer = buffer.Slice(2);
                     }
                     else
@@ -388,14 +382,12 @@ namespace Google.Protobuf.Pipelines
             int tmp = span[0];
             if (tmp < 128)
             {
-                consumed = buffer.GetPosition(1);
                 buffer = buffer.Slice(1);
                 return new ValueTask<uint>((uint)tmp);
             }
             int result = tmp & 0x7f;
             if ((tmp = span[1]) < 128)
             {
-                consumed = buffer.GetPosition(2);
                 buffer = buffer.Slice(2);
                 result |= tmp << 7;
             }
@@ -404,7 +396,6 @@ namespace Google.Protobuf.Pipelines
                 result |= (tmp & 0x7f) << 7;
                 if ((tmp = span[2]) < 128)
                 {
-                    consumed = buffer.GetPosition(3);
                     buffer = buffer.Slice(3);
                     result |= tmp << 14;
                 }
@@ -413,14 +404,12 @@ namespace Google.Protobuf.Pipelines
                     result |= (tmp & 0x7f) << 14;
                     if ((tmp = span[3]) < 128)
                     {
-                        consumed = buffer.GetPosition(4);
                         buffer = buffer.Slice(4);
                         result |= tmp << 21;
                     }
                     else
                     {
                         result |= (tmp & 0x7f) << 21;
-                        consumed = buffer.GetPosition(5);
                         buffer = buffer.Slice(5);
                         result |= (tmp = span[4]) << 28;
                         if (tmp >= 128)
@@ -539,7 +528,6 @@ namespace Google.Protobuf.Pipelines
                 return SlowReadRawByteAsync(cancellationToken);
             }
             var ret = buffer.First.Span[0];
-            consumed = buffer.GetPosition(1);
             buffer = buffer.Slice(1);
             return new ValueTask<byte>(ret);
         }
@@ -563,7 +551,6 @@ namespace Google.Protobuf.Pipelines
             if (buffer.First.Length >= 4)
             {
                 var span = buffer.First.Span;
-                consumed = buffer.GetPosition(4);
                 buffer = buffer.Slice(4);
                 return new ValueTask<uint>(BinaryPrimitives.ReadUInt32LittleEndian(span));
             }
@@ -571,7 +558,6 @@ namespace Google.Protobuf.Pipelines
             {
                 Span<byte> span = stackalloc byte[4];
                 buffer.CopyTo(span);
-                consumed = buffer.GetPosition(4);
                 buffer = buffer.Slice(4);
                 return new ValueTask<uint>(BinaryPrimitives.ReadUInt32LittleEndian(span));
             }
@@ -586,7 +572,6 @@ namespace Google.Protobuf.Pipelines
             if (buffer.First.Length >= 8)
             {
                 var span = buffer.First.Span;
-                consumed = buffer.GetPosition(8);
                 buffer = buffer.Slice(8);
                 return new ValueTask<ulong>(BinaryPrimitives.ReadUInt64LittleEndian(span));
             }
@@ -594,7 +579,6 @@ namespace Google.Protobuf.Pipelines
             {
                 Span<byte> span = stackalloc byte[8];
                 buffer.CopyTo(span);
-                consumed = buffer.GetPosition(8);
                 buffer = buffer.Slice(8);
                 return new ValueTask<ulong>(BinaryPrimitives.ReadUInt64LittleEndian(span));
             }
@@ -660,7 +644,6 @@ namespace Google.Protobuf.Pipelines
                 return SlowSkipRawBytesAsync(size, cancellationToken);
             }
 
-            consumed = buffer.GetPosition(size);
             buffer = buffer.Slice(size);
             return default;
         }
@@ -677,13 +660,11 @@ namespace Google.Protobuf.Pipelines
                 }
                 else if (size <= buffer.Length)
                 {
-                    consumed = buffer.GetPosition(size);
                     buffer = buffer.Slice(size);
                     break;
                 }
                 else
                 {
-                    consumed = buffer.End;
                     buffer = buffer.Slice(buffer.Length);
                     size -= (uint)buffer.Length;
                 }

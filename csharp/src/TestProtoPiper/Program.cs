@@ -20,7 +20,7 @@ namespace TestProtoPiper
 
         static async Task Test1()
         {
-            var pipe = new Pipe();
+            var pipe = new Pipe(new PipeOptions(minimumSegmentSize: 16));
             var reader = new CodedInputReader(pipe.Reader);
 
             var ab = new AddressBook
@@ -39,14 +39,15 @@ namespace TestProtoPiper
             var data = ab.ToByteArray();
 
             AddressBook.Parser.ParseFrom(data);
-
             await pipe.Writer.WriteAsync(data);
             pipe.Writer.Complete();
+
             var addressBook = await reader.ReadMessageAsync(AddressBookType.Instance);
         }
+
     }
 
-    //TODO: Move to a separate library when .NET Standard 2.1 is realeased
+    //TODO: Move to a separate library when .NET Standard 2.1 is released
     static class CompatUtils
     {
         public static string DecodeUtf8String(ReadOnlySequence<byte> sequence)
@@ -58,6 +59,12 @@ namespace TestProtoPiper
             else if (sequence.IsSingleSegment)
             {
                 return Encoding.UTF8.GetString(sequence.First.Span);
+            }
+            else if (sequence.Length < 128)
+            {
+                Span<byte> span = stackalloc byte[(int)sequence.Length];
+                sequence.CopyTo(span);
+                return Encoding.UTF8.GetString(span);
             }
             else
             {
