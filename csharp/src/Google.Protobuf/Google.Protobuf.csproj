@@ -29,8 +29,5 @@
   <PropertyGroup Condition="'$(OS)' != 'Windows_NT'">
     <TargetFrameworks>netstandard1.0</TargetFrameworks>
   </PropertyGroup>
-  <ItemGroup>
-    <Folder Include="ProtoPiper\" />
-  </ItemGroup>
 
 </Project>

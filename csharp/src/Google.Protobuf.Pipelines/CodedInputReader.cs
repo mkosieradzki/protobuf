@@ -53,11 +53,16 @@ namespace Google.Protobuf.Pipelines
         private uint nextTag = 0;
         private bool hasNextTag = false;
 
-        public async ValueTask<object> ReadMessageAsync(IReadableMessageType messageType, CancellationToken cancellationToken = default)
+        public ValueTask<object> ReadMessageAsync(IReadableMessageType messageType, CancellationToken cancellationToken = default)
         {
             if (messageType == null)
                 throw new ArgumentNullException(nameof(messageType));
 
+            return SlowReadMessageAsync(messageType, cancellationToken);
+        }
+
+        private async ValueTask<object> SlowReadMessageAsync(IReadableMessageType messageType, CancellationToken cancellationToken)
+        {
             var message = messageType.CreateMessage();
 
             uint tag;
@@ -67,19 +72,62 @@ namespace Google.Protobuf.Pipelines
 
                 switch (fieldInfo.ValueType)
                 {
-                    //case ValueType.Unknown:
-                    //    break;
+                    case ValueType.Unknown:
+                        if (messageType.IgnoreUnknown)
+                        {
+                            await SkipFieldAsync(tag, cancellationToken);
+                        }
+                        else
+                        {
+                            switch (WireFormat.GetTagWireType(tag))
+                            {
+                                case WireFormat.WireType.StartGroup:
+                                    await SkipGroupAsync(tag, cancellationToken);
+                                    break;
+                                case WireFormat.WireType.EndGroup:
+                                    //TODO: Reimplement
+                                    throw new Exception();
+                                //throw new InvalidProtocolBufferException("Merge an unknown field of end-group tag, indicating that the corresponding start-group was missing.");
+                                case WireFormat.WireType.Fixed32:
+                                    {
+                                        var val = await ReadFixed32Async(cancellationToken);
+                                        messageType.ConsumeField(message, tag, val);
+                                        break;
+                                    }
+                                case WireFormat.WireType.Fixed64:
+                                    {
+                                        var val = await ReadFixed64Async(cancellationToken);
+                                        messageType.ConsumeField(message, tag, val);
+                                        break;
+                                    }
+                                case WireFormat.WireType.LengthDelimited:
+                                    {
+                                        var val = await ReadLengthDelimitedAsync(cancellationToken);
+                                        messageType.ConsumeField(message, tag, val);
+                                        break;
+                                    }
+                                case WireFormat.WireType.Varint:
+                                    {
+                                        var val = await ReadRawVarint64Async(cancellationToken);
+                                        messageType.ConsumeField(message, tag, val);
+                                        break;
+                                    }
+                                default:
+                                    break;
+                            }
+                        }
+                        break;
                     //case ValueType.Double:
                     //    break;
                     //case ValueType.Float:
                     //    break;
                     case ValueType.Int32:
-                        messageType.ConsumeInt32(message, tag, (int)await ReadRawVarint32Async(cancellationToken));
+                        messageType.ConsumeField(message, tag, (int)await ReadRawVarint32Async(cancellationToken));
                         break;
                     //case ValueType.Int64:
                     //    break;
                     case ValueType.UInt32:
-                        messageType.ConsumeUInt32(message, tag, await ReadRawVarint32Async(cancellationToken));
+                        messageType.ConsumeField(message, tag, await ReadRawVarint32Async(cancellationToken));
                         break;
                     //case ValueType.UInt64:
                     //    break;
@@ -88,7 +136,7 @@ namespace Google.Protobuf.Pipelines
                     //case ValueType.SInt64:
                     //    break;
                     case ValueType.Fixed32:
-                        messageType.ConsumeUInt32(message, tag, await ReadFixed32Async(cancellationToken));
+                        messageType.ConsumeField(message, tag, await ReadFixed32Async(cancellationToken));
                         break;
                     //case ValueType.Fixed64:
                     //    break;
@@ -98,14 +146,38 @@ namespace Google.Protobuf.Pipelines
                     //    break;
                     //case ValueType.Bool:
                     //    break;
-                    //case ValueType.String:
-                    //    break;
-                    //case ValueType.Bytes:
-                    //    break;
+                    case ValueType.Bytes:
+                    case ValueType.String:
+                        {
+                            var val = await ReadLengthDelimitedAsync(cancellationToken);
+                            messageType.ConsumeField(message, tag, val);
+                            break;
+                        }
                     //case ValueType.Enum:
                     //    break;
-                    //case ValueType.Message:
-                    //    break;
+                    case ValueType.Message:
+                        {
+                            //TODO: If is packed?
+                            var length = await ReadLengthAsync(cancellationToken);
+                            //if (recursionDepth >= recursionLimit)
+                            //{
+                            //    throw InvalidProtocolBufferException.RecursionLimitExceeded();
+                            //}
+                            //int oldLimit = PushLimit(length);
+                            //++recursionDepth;
+                            var nestedMessage = await ReadMessageAsync(fieldInfo.MessageType, cancellationToken);
+                            messageType.ConsumeField(message, tag, nestedMessage);
+                            //builder.MergeFrom(this);
+                            //CheckReadEndOfStreamTag();
+                            //// Check that we've read exactly as much data as expected.
+                            //if (!ReachedLimit)
+                            //{
+                            //    throw InvalidProtocolBufferException.TruncatedMessage();
+                            //}
+                            //--recursionDepth;
+                            //PopLimit(oldLimit);
+                            break;
+                        }
                     default:
                         throw new NotSupportedException();
                 }
@@ -113,7 +185,97 @@ namespace Google.Protobuf.Pipelines
                 //await input.ReadAsync(cancellationToken);
             }
 
-            return messageType;
+            return messageType.CompleteMessage(message);
+        }
+
+        private async ValueTask<ReadOnlySequence<byte>> ReadLengthDelimitedAsync(CancellationToken cancellationToken)
+        {
+            var length = await ReadLengthAsync(cancellationToken);
+            if (buffer.Length < length)
+            {
+                await SlowEnsureMinBufferSizeAsync(length, cancellationToken);
+            }
+
+            var ret = buffer.Slice(0, length);
+
+            consumed = buffer.GetPosition(length);
+            buffer = buffer.Slice(length);
+
+            return ret;
+        }
+
+        private async ValueTask SkipFieldAsync(uint tag, CancellationToken cancellationToken)
+        {
+            if (tag == 0)
+            {
+                throw new InvalidOperationException("SkipLastField cannot be called at the end of a stream");
+            }
+
+            switch (WireFormat.GetTagWireType(tag))
+            {
+                case WireFormat.WireType.StartGroup:
+                    await SkipGroupAsync(tag, cancellationToken);
+                    break;
+                case WireFormat.WireType.EndGroup:
+                    //TODO: Implement properly
+                    throw new Exception();
+                //throw new InvalidProtocolBufferException("SkipLastField called on an end-group tag, indicating that the corresponding start-group was missing");
+                case WireFormat.WireType.Fixed32:
+                    await SkipRawBytesAsync(4, cancellationToken);
+                    break;
+                case WireFormat.WireType.Fixed64:
+                    await SkipRawBytesAsync(8, cancellationToken);
+                    break;
+                case WireFormat.WireType.LengthDelimited:
+                    var length = await ReadLengthAsync(cancellationToken);
+                    await SkipRawBytesAsync(length, cancellationToken);
+                    break;
+                case WireFormat.WireType.Varint:
+                    await ReadRawVarint32Async(cancellationToken);
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// Skip a group.
+        /// </summary>
+        private async ValueTask SkipGroupAsync(uint startGroupTag, CancellationToken cancellationToken)
+        {
+            // Note: Currently we expect this to be the way that groups are read. We could put the recursion
+            // depth changes into the ReadTag method instead, potentially...
+            //recursionDepth++;
+            //if (recursionDepth >= recursionLimit)
+            //{
+            //    throw InvalidProtocolBufferException.RecursionLimitExceeded();
+            //}
+            uint tag;
+            while (true)
+            {
+                tag = await ReadTagAsync();
+                if (tag == 0)
+                {
+                    throw new Exception();
+                    //TODO: Implement properly
+                    //throw InvalidProtocolBufferException.TruncatedMessage();
+                }
+                // Can't call SkipLastField for this case- that would throw.
+                if (WireFormat.GetTagWireType(tag) == WireFormat.WireType.EndGroup)
+                {
+                    break;
+                }
+                // This recursion will allow us to handle nested groups.
+                await SkipFieldAsync(tag, cancellationToken);
+            }
+            int startField = WireFormat.GetTagFieldNumber(startGroupTag);
+            int endField = WireFormat.GetTagFieldNumber(tag);
+            if (startField != endField)
+            {
+                throw new Exception();
+                //TODO: Implement properly
+                //throw new InvalidProtocolBufferException(
+                //    $"Mismatched end-group tag. Started with field {startField}; ended with field {endField}");
+            }
+            //recursionDepth--;
         }
 
         private ValueTask<bool> IsAtEndAsync(CancellationToken cancellationToken)
@@ -224,6 +386,15 @@ namespace Google.Protobuf.Pipelines
             }
         }
 
+        /// <summary>
+        /// Reads a length for length-delimited data.
+        /// </summary>
+        /// <remarks>
+        /// This is internally just reading a varint, but this method exists
+        /// to make the calling code clearer.
+        /// </remarks>
+        public ValueTask<uint> ReadLengthAsync(CancellationToken cancellationToken = default) => ReadRawVarint32Async(cancellationToken);
+
         private async ValueTask<uint> SlowReadTagAsync(CancellationToken cancellationToken)
         {
             if (await IsAtEndAsync(cancellationToken))
@@ -242,7 +413,7 @@ namespace Google.Protobuf.Pipelines
         /// That means we can check the size just once, then just read directly from the buffer
         /// without constant rechecking of the buffer length.
         /// </summary>
-        internal ValueTask<uint> ReadRawVarint32Async(CancellationToken cancellationToken)
+        private ValueTask<uint> ReadRawVarint32Async(CancellationToken cancellationToken)
         {
             var span = buffer.First.Span;
             if (span.Length < 5)
@@ -297,6 +468,27 @@ namespace Google.Protobuf.Pipelines
                 }
             }
             return new ValueTask<uint>((uint)result);
+        }
+
+        private ValueTask<ulong> ReadRawVarint64Async(CancellationToken cancellationToken) => SlowReadRawVarint64Async(cancellationToken);
+
+        private async ValueTask<ulong> SlowReadRawVarint64Async(CancellationToken cancellationToken)
+        {
+            int shift = 0;
+            ulong result = 0;
+            while (shift < 64)
+            {
+                byte b = await ReadRawByteAsync(cancellationToken);
+                result |= (ulong)(b & 0x7F) << shift;
+                if ((b & 0x80) == 0)
+                {
+                    return result;
+                }
+                shift += 7;
+            }
+            //TODO: Implement properly
+            throw new Exception();
+            //throw InvalidProtocolBufferException.MalformedVarint();
         }
 
         private async ValueTask<T> SlowDiscardUpperVarIntBitsAndReturn<T>(int count, T result, CancellationToken cancellationToken)
@@ -406,13 +598,18 @@ namespace Google.Protobuf.Pipelines
         {
             if (buffer.First.Length >= 4)
             {
-                return new ValueTask<uint>(BinaryPrimitives.ReadUInt32BigEndian(buffer.First.Span));
+                var span = buffer.First.Span;
+                consumed = buffer.GetPosition(4);
+                buffer = buffer.Slice(4);
+                return new ValueTask<uint>(BinaryPrimitives.ReadUInt32LittleEndian(span));
             }
             else if (buffer.Length >= 4)
             {
                 Span<byte> span = stackalloc byte[4];
                 buffer.CopyTo(span);
-                return new ValueTask<uint>(BinaryPrimitives.ReadUInt32BigEndian(span));
+                consumed = buffer.GetPosition(4);
+                buffer = buffer.Slice(4);
+                return new ValueTask<uint>(BinaryPrimitives.ReadUInt32LittleEndian(span));
             }
             else
             {
@@ -420,7 +617,30 @@ namespace Google.Protobuf.Pipelines
             }
         }
 
-        private async ValueTask SlowEnsureMinBufferSizeAsync(int bytes, CancellationToken cancellationToken)
+        private ValueTask<ulong> ReadFixed64Async(CancellationToken cancellationToken)
+        {
+            if (buffer.First.Length >= 8)
+            {
+                var span = buffer.First.Span;
+                consumed = buffer.GetPosition(8);
+                buffer = buffer.Slice(8);
+                return new ValueTask<ulong>(BinaryPrimitives.ReadUInt64LittleEndian(span));
+            }
+            else if (buffer.Length >= 8)
+            {
+                Span<byte> span = stackalloc byte[8];
+                buffer.CopyTo(span);
+                consumed = buffer.GetPosition(8);
+                buffer = buffer.Slice(8);
+                return new ValueTask<ulong>(BinaryPrimitives.ReadUInt64LittleEndian(span));
+            }
+            else
+            {
+                return SlowReadFixed64Async(cancellationToken);
+            }
+        }
+
+        private async ValueTask SlowEnsureMinBufferSizeAsync(uint bytes, CancellationToken cancellationToken)
         {
             while (buffer.Length < bytes)
             {
@@ -440,6 +660,13 @@ namespace Google.Protobuf.Pipelines
             return await ReadFixed32Async(cancellationToken);
         }
 
+        private async ValueTask<ulong> SlowReadFixed64Async(CancellationToken cancellationToken)
+        {
+            await SlowEnsureMinBufferSizeAsync(8, cancellationToken);
+            //NOTE: this time should succeed without entering slow path
+            return await ReadFixed64Async(cancellationToken);
+        }
+
         //private static uint? TryReadTagFromBuffer(ReadOnlySequence<byte> sequence, out SequencePosition consumed)
         //{
 
@@ -456,5 +683,47 @@ namespace Google.Protobuf.Pipelines
 
         //    message.Buffer.
         //}
+
+        /// <summary>
+        /// Reads and discards <paramref name="size"/> bytes.
+        /// </summary>
+        /// <exception cref="InvalidProtocolBufferException">the end of the stream
+        /// or the current limit was reached</exception>
+        private ValueTask SkipRawBytesAsync(uint size, CancellationToken cancellationToken)
+        {
+            if (buffer.Length < size)
+            {
+                return SlowSkipRawBytesAsync(size, cancellationToken);
+            }
+
+            consumed = buffer.GetPosition(size);
+            buffer = buffer.Slice(size);
+            return default;
+        }
+
+        private async ValueTask SlowSkipRawBytesAsync(uint size, CancellationToken cancellationToken)
+        {
+            while (size > 0)
+            {
+                if (await IsAtEndAsync(cancellationToken))
+                {
+                    //TODO: Implement properly
+                    //throw InvalidProtocolBufferException.TruncatedMessage();
+                    throw new Exception();
+                }
+                else if (size <= buffer.Length)
+                {
+                    consumed = buffer.GetPosition(size);
+                    buffer = buffer.Slice(size);
+                    break;
+                }
+                else
+                {
+                    consumed = buffer.End;
+                    buffer = buffer.Slice(buffer.Length);
+                    size -= (uint)buffer.Length;
+                }
+            }
+        }
     }
 }

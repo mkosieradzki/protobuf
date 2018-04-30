@@ -3,9 +3,9 @@
     public interface IReadableMessageType
     {
         object CreateMessage();
-        void ConsumeInt32(object message, uint tag, int value);
-        void ConsumeUInt32(object message, uint tag, uint value);
         FieldInfo GetFieldInfo(uint tag);
+        void ConsumeField(object message, uint tag, object value);
+        object CompleteMessage(object message);
         bool IgnoreUnknown { get; }
     }
 
