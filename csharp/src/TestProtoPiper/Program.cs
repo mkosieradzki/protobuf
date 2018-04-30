@@ -1,12 +1,12 @@
-﻿using Google.Protobuf;
-using Google.Protobuf.Examples.AddressBook;
-using Google.Protobuf.Pipelines;
-using Google.Protobuf.WellKnownTypes;
-using System;
+﻿using System;
 using System.Buffers;
 using System.IO.Pipelines;
 using System.Text;
 using System.Threading.Tasks;
+using Google.Protobuf;
+using Google.Protobuf.Examples.AddressBook;
+using Google.Protobuf.Pipelines;
+using Google.Protobuf.WellKnownTypes;
 
 namespace TestProtoPiper
 {

@@ -117,44 +117,52 @@ namespace Google.Protobuf.Pipelines
                             }
                         }
                         break;
-                    //case ValueType.Double:
-                    //    break;
-                    //case ValueType.Float:
-                    //    break;
+                    case ValueType.Double:
+                        messageType.ConsumeField(message, tag, BitConverter.Int64BitsToDouble((long)await ReadFixed64Async(cancellationToken)));
+                        break;
+                    case ValueType.Float:
+                        messageType.ConsumeField(message, tag, Int32BitsToSingle((int)await ReadFixed32Async(cancellationToken)));
+                        break;
                     case ValueType.Int32:
                         messageType.ConsumeField(message, tag, (int)await ReadRawVarint32Async(cancellationToken));
                         break;
-                    //case ValueType.Int64:
-                    //    break;
+                    case ValueType.Int64:
+                        messageType.ConsumeField(message, tag, (int)await ReadRawVarint64Async(cancellationToken));
+                        break;
                     case ValueType.UInt32:
                         messageType.ConsumeField(message, tag, await ReadRawVarint32Async(cancellationToken));
                         break;
-                    //case ValueType.UInt64:
-                    //    break;
-                    //case ValueType.SInt32:
-                    //    break;
-                    //case ValueType.SInt64:
-                    //    break;
+                    case ValueType.UInt64:
+                        messageType.ConsumeField(message, tag, await ReadRawVarint64Async(cancellationToken));
+                        break;
+                    case ValueType.SInt32:
+                        messageType.ConsumeField(message, tag, DecodeZigZag32(await ReadRawVarint32Async(cancellationToken)));
+                        break;
+                    case ValueType.SInt64:
+                        messageType.ConsumeField(message, tag, DecodeZigZag64(await ReadRawVarint64Async(cancellationToken)));
+                        break;
                     case ValueType.Fixed32:
                         messageType.ConsumeField(message, tag, await ReadFixed32Async(cancellationToken));
                         break;
-                    //case ValueType.Fixed64:
-                    //    break;
-                    //case ValueType.SFixed32:
-                    //    break;
-                    //case ValueType.SFixed64:
-                    //    break;
-                    //case ValueType.Bool:
-                    //    break;
+                    case ValueType.Fixed64:
+                        messageType.ConsumeField(message, tag, await ReadFixed64Async(cancellationToken));
+                        break;
+                    case ValueType.SFixed32:
+                        messageType.ConsumeField(message, tag, (int)await ReadFixed32Async(cancellationToken));
+                        break;
+                    case ValueType.SFixed64:
+                        messageType.ConsumeField(message, tag, (int)await ReadFixed64Async(cancellationToken));
+                        break;
+                    case ValueType.Bool:
+                        messageType.ConsumeField(message, tag, await ReadRawVarint32Async(cancellationToken) != 0);
+                        break;
                     case ValueType.Bytes:
                     case ValueType.String:
-                        {
-                            var val = await ReadLengthDelimitedAsync(cancellationToken);
-                            messageType.ConsumeField(message, tag, val);
-                            break;
-                        }
-                    //case ValueType.Enum:
-                    //    break;
+                        messageType.ConsumeField(message, tag, await ReadLengthDelimitedAsync(cancellationToken));
+                        break;
+                    case ValueType.Enum:
+                        messageType.ConsumeField(message, tag, (int)await ReadRawVarint32Async(cancellationToken));
+                        break;
                     case ValueType.Message:
                         {
                             //TODO: If is packed?
@@ -181,8 +189,6 @@ namespace Google.Protobuf.Pipelines
                     default:
                         throw new NotSupportedException();
                 }
-
-                //await input.ReadAsync(cancellationToken);
             }
 
             return messageType.CompleteMessage(message);
@@ -725,5 +731,34 @@ namespace Google.Protobuf.Pipelines
                 }
             }
         }
+
+        /// <summary>
+        /// Decode a 32-bit value with ZigZag encoding.
+        /// </summary>
+        /// <remarks>
+        /// ZigZag encodes signed integers into values that can be efficiently
+        /// encoded with varint.  (Otherwise, negative values must be 
+        /// sign-extended to 64 bits to be varint encoded, thus always taking
+        /// 10 bytes on the wire.)
+        /// </remarks>
+        private static int DecodeZigZag32(uint n) => (int)(n >> 1) ^ -(int)(n & 1);
+
+        /// <summary>
+        /// Decode a 64-bit value with ZigZag encoding.
+        /// </summary>
+        /// <remarks>
+        /// ZigZag encodes signed integers into values that can be efficiently
+        /// encoded with varint.  (Otherwise, negative values must be 
+        /// sign-extended to 64 bits to be varint encoded, thus always taking
+        /// 10 bytes on the wire.)
+        /// </remarks>
+        private static long DecodeZigZag64(ulong n) => (long)(n >> 1) ^ -(long)(n & 1);
+
+        //TODO: Use proper BitConverter.Int32BitsToSingle when .NET Standard is out - alternatively use unsafe implementation
+#if UNSAFE
+        private static unsafe float Int32BitsToSingle(int n) => *((float*)&n);
+#else
+        private static float Int32BitsToSingle(int n) => BitConverter.ToSingle(BitConverter.GetBytes(n), 0);
+#endif
     }
 }
