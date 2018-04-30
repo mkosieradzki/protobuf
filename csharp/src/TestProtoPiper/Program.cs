@@ -46,6 +46,7 @@ namespace TestProtoPiper
         }
     }
 
+    //TODO: Move to a separate library when .NET Standard 2.1 is realeased
     static class CompatUtils
     {
         public static string DecodeUtf8String(ReadOnlySequence<byte> sequence)
