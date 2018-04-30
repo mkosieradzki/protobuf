@@ -23,15 +23,20 @@ namespace Google.Protobuf.Pipelines
     /// </remarks>
     public sealed class CodedInputReader
     {
+        private const int DefaultRecursionLimit = 64;
+        private const int DefaultSizeLimit = Int32.MaxValue;
+
         /// <summary>
         /// Creates a new CodedInputReader reading data from the given pipe reader.
         /// </summary>
-        public CodedInputReader(PipeReader input)
+        public CodedInputReader(PipeReader input, int recursionLimit = DefaultRecursionLimit, int sizeLimit = DefaultSizeLimit)
         {
             if (input == null)
                 throw new ArgumentNullException(nameof(input));
 
             this.input = input;
+            this.recursionLimit = recursionLimit;
+            this.sizeLimit = sizeLimit;
         }
 
         private readonly PipeReader input;
@@ -40,17 +45,10 @@ namespace Google.Protobuf.Pipelines
         private bool isLastRead;
         private bool isInitialized;
 
-        /// <summary>
-        /// The last tag we read. 0 indicates we've read to the end of the stream
-        /// (or haven't read anything yet).
-        /// </summary>
-        private uint lastTag = 0;
+        private readonly int recursionLimit;
+        private readonly int sizeLimit;
 
-        /// <summary>
-        /// The next tag, used to store the value read by PeekTag.
-        /// </summary>
-        private uint nextTag = 0;
-        private bool hasNextTag = false;
+        int recursionDepth;
 
         public ValueTask<object> ReadMessageAsync(IReadableMessageType messageType, CancellationToken cancellationToken = default)
         {
@@ -64,10 +62,111 @@ namespace Google.Protobuf.Pipelines
         {
             var message = messageType.CreateMessage();
 
-            uint tag;
+            //TODO: Add support for packed encoding
+
+            uint tag, prevTag = 0;
+            FieldInfo fieldInfo = default;
+            WireFormat.WireType wireType = default;
             while ((tag = await ReadTagAsync(cancellationToken)) != 0)
             {
-                var fieldInfo = messageType.GetFieldInfo(tag);
+                // Do not ask again for field info in case of a repeated field
+                if (tag != prevTag)
+                {
+                    fieldInfo = messageType.GetFieldInfo(tag);
+                    wireType = WireFormat.GetTagWireType(tag);
+                    prevTag = tag;
+                }
+
+                switch (wireType)
+                {
+                    case WireFormat.WireType.Varint:
+                        switch (fieldInfo.ValueType)
+                        {
+                            case ValueType.Unknown:
+                                break;
+                            case ValueType.Int32:
+                                break;
+                            case ValueType.Int64:
+                                break;
+                            case ValueType.UInt32:
+                                break;
+                            case ValueType.UInt64:
+                                break;
+                            case ValueType.SInt32:
+                                break;
+                            case ValueType.SInt64:
+                                break;
+                            case ValueType.Bool:
+                                break;
+                            case ValueType.Enum:
+                                break;
+                            default:
+                                throw new Exception();
+                        }
+                        break;
+                    case WireFormat.WireType.Fixed32:
+                        switch (fieldInfo.ValueType)
+                        {
+                            case ValueType.Unknown:
+                                break;
+                            case ValueType.Float:
+                                break;
+                            case ValueType.Fixed32:
+                                break;
+                            case ValueType.SFixed32:
+                                break;
+                            default:
+                                throw new Exception();
+                        }
+                        break;
+                    case WireFormat.WireType.Fixed64:
+                        switch (fieldInfo.ValueType)
+                        {
+                            case ValueType.Unknown:
+                                break;
+                            case ValueType.Double:
+                                break;
+                            case ValueType.Fixed64:
+                                break;
+                            case ValueType.SFixed64:
+                                break;
+                            default:
+                                break;
+                        }
+                        break;
+                    case WireFormat.WireType.LengthDelimited:
+                        //TODO: Support nested messages
+                        //TODO: Support packed enoding
+                        //TODO: Support bytes and string
+                        var length = await ReadLengthAsync(cancellationToken);
+                        if (recursionDepth >= recursionLimit)
+                        {
+                            throw new Exception();
+                            //TODO: Handle recursion limit
+                            //throw InvalidProtocolBufferException.RecursionLimitExceeded();
+                        }
+                        //int oldLimit = PushLimit(length);
+                        ++recursionDepth;
+                        var nestedMessage = await ReadMessageAsync(fieldInfo.MessageType, cancellationToken);
+                        messageType.ConsumeField(message, tag, nestedMessage);
+                        //CheckReadEndOfStreamTag();
+                        //// Check that we've read exactly as much data as expected.
+                        //if (!ReachedLimit)
+                        //{
+                        //    throw InvalidProtocolBufferException.TruncatedMessage();
+                        //}
+                        --recursionDepth;
+                        //PopLimit(oldLimit);
+                        break;
+                    case WireFormat.WireType.StartGroup:
+                        await SkipGroupAsync(tag, cancellationToken);
+                        break;
+                    case WireFormat.WireType.EndGroup:
+                        throw new Exception();
+                    default:
+                        //TODO: Add proper exception
+                        throw new Exception();
+                }
 
                 switch (fieldInfo.ValueType)
                 {
@@ -124,22 +223,23 @@ namespace Google.Protobuf.Pipelines
                         {
                             //TODO: If is packed?
                             var length = await ReadLengthAsync(cancellationToken);
-                            //if (recursionDepth >= recursionLimit)
-                            //{
-                            //    throw InvalidProtocolBufferException.RecursionLimitExceeded();
-                            //}
+                            if (recursionDepth >= recursionLimit)
+                            {
+                                throw new Exception();
+                                //TODO: Handle recursion limit
+                                //throw InvalidProtocolBufferException.RecursionLimitExceeded();
+                            }
                             //int oldLimit = PushLimit(length);
-                            //++recursionDepth;
+                            ++recursionDepth;
                             var nestedMessage = await ReadMessageAsync(fieldInfo.MessageType, cancellationToken);
                             messageType.ConsumeField(message, tag, nestedMessage);
-                            //builder.MergeFrom(this);
                             //CheckReadEndOfStreamTag();
                             //// Check that we've read exactly as much data as expected.
                             //if (!ReachedLimit)
                             //{
                             //    throw InvalidProtocolBufferException.TruncatedMessage();
                             //}
-                            //--recursionDepth;
+                            --recursionDepth;
                             //PopLimit(oldLimit);
                             break;
                         }
@@ -204,11 +304,13 @@ namespace Google.Protobuf.Pipelines
         {
             // Note: Currently we expect this to be the way that groups are read. We could put the recursion
             // depth changes into the ReadTag method instead, potentially...
-            //recursionDepth++;
-            //if (recursionDepth >= recursionLimit)
-            //{
-            //    throw InvalidProtocolBufferException.RecursionLimitExceeded();
-            //}
+            recursionDepth++;
+            if (recursionDepth >= recursionLimit)
+            {
+                //TODO: add proper exception
+                throw new Exception();
+                //throw InvalidProtocolBufferException.RecursionLimitExceeded();
+            }
             uint tag;
             while (true)
             {
@@ -236,7 +338,7 @@ namespace Google.Protobuf.Pipelines
                 //throw new InvalidProtocolBufferException(
                 //    $"Mismatched end-group tag. Started with field {startField}; ended with field {endField}");
             }
-            //recursionDepth--;
+            recursionDepth--;
         }
 
         private ValueTask<bool> IsAtEndAsync(CancellationToken cancellationToken)
@@ -296,23 +398,18 @@ namespace Google.Protobuf.Pipelines
         /// <returns>The next field tag, or 0 for end of stream. (0 is never a valid tag.)</returns>
         public ValueTask<uint> ReadTagAsync(CancellationToken cancellationToken = default)
         {
-            if (hasNextTag)
-            {
-                lastTag = nextTag;
-                hasNextTag = false;
-                return new ValueTask<uint>(lastTag);
-            }
-
             var span = buffer.First.Span;
 
             // Optimize for the incredibly common case of having at least two bytes left in the buffer,
             // and those two bytes being enough to get the tag. This will be true for fields up to 4095.
             if (span.Length >= 2)// bufferPos + 2 <= bufferSize)
             {
+                uint tag;
+
                 int tmp = span[0];
                 if (tmp < 128)
                 {
-                    lastTag = (uint)tmp;
+                    tag = (uint)tmp;
                     buffer = buffer.Slice(1);
                 }
                 else
@@ -321,7 +418,7 @@ namespace Google.Protobuf.Pipelines
                     if ((tmp = span[1]) < 128)
                     {
                         result |= tmp << 7;
-                        lastTag = (uint)result;
+                        tag = (uint)result;
                         buffer = buffer.Slice(2);
                     }
                     else
@@ -329,14 +426,14 @@ namespace Google.Protobuf.Pipelines
                         return SlowReadTagAsync(cancellationToken);
                     }
                 }
-                if (WireFormat.GetTagFieldNumber(lastTag) == 0)
+                if (WireFormat.GetTagFieldNumber(tag) == 0)
                 {
                     // If we actually read a tag with a field of 0, that's not a valid tag.
                     //TODO: Fix
                     //throw InvalidProtocolBufferException.InvalidTag();
                     throw new Exception();
                 }
-                return new ValueTask<uint>(lastTag);
+                return new ValueTask<uint>(tag);
             }
             else
             {
@@ -357,12 +454,10 @@ namespace Google.Protobuf.Pipelines
         {
             if (await IsAtEndAsync(cancellationToken))
             {
-                lastTag = 0;
                 return 0; // This is the only case in which we return 0.
             }
 
-            lastTag = await ReadRawVarint32Async(cancellationToken);
-            return lastTag;
+            return await ReadRawVarint32Async(cancellationToken);
         }
 
         /// <summary>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Buffers;
+using System.Collections.Generic;
 using System.IO.Pipelines;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,6 +17,12 @@ namespace TestProtoPiper
         {
             await Test1();
             //var summary = BenchmarkRunner.Run<ParseVarInt>();
+        }
+
+        static void Test2()
+        {
+            Span<object> a = new Span<object>();
+            List<object> b = new List<object>();
         }
 
         static async Task Test1()
