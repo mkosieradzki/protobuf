@@ -73,49 +73,7 @@ namespace Google.Protobuf.Pipelines
                 switch (fieldInfo.ValueType)
                 {
                     case ValueType.Unknown:
-                        if (messageType.IgnoreUnknown)
-                        {
-                            await SkipFieldAsync(tag, cancellationToken);
-                        }
-                        else
-                        {
-                            switch (WireFormat.GetTagWireType(tag))
-                            {
-                                case WireFormat.WireType.StartGroup:
-                                    await SkipGroupAsync(tag, cancellationToken);
-                                    break;
-                                case WireFormat.WireType.EndGroup:
-                                    //TODO: Reimplement
-                                    throw new Exception();
-                                //throw new InvalidProtocolBufferException("Merge an unknown field of end-group tag, indicating that the corresponding start-group was missing.");
-                                case WireFormat.WireType.Fixed32:
-                                    {
-                                        var val = await ReadFixed32Async(cancellationToken);
-                                        messageType.ConsumeField(message, tag, val);
-                                        break;
-                                    }
-                                case WireFormat.WireType.Fixed64:
-                                    {
-                                        var val = await ReadFixed64Async(cancellationToken);
-                                        messageType.ConsumeField(message, tag, val);
-                                        break;
-                                    }
-                                case WireFormat.WireType.LengthDelimited:
-                                    {
-                                        var val = await ReadLengthDelimitedAsync(cancellationToken);
-                                        messageType.ConsumeField(message, tag, val);
-                                        break;
-                                    }
-                                case WireFormat.WireType.Varint:
-                                    {
-                                        var val = await ReadRawVarint64Async(cancellationToken);
-                                        messageType.ConsumeField(message, tag, val);
-                                        break;
-                                    }
-                                default:
-                                    break;
-                            }
-                        }
+                        await SkipFieldAsync(tag, cancellationToken);
                         break;
                     case ValueType.Double:
                         messageType.ConsumeField(message, tag, BitConverter.Int64BitsToDouble((long)await ReadFixed64Async(cancellationToken)));

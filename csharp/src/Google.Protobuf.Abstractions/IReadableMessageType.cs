@@ -6,7 +6,6 @@
         FieldInfo GetFieldInfo(uint tag);
         void ConsumeField(object message, uint tag, object value);
         object CompleteMessage(object message);
-        bool IgnoreUnknown { get; }
     }
 
     public interface IMessageType : IReadableMessageType { }

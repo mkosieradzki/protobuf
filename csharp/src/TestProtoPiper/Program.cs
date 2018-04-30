@@ -64,18 +64,31 @@ namespace TestProtoPiper
                 throw new NotImplementedException();
             }
         }
+
+        public static FieldInfo GetUnknownFieldInfo(uint tag)
+        {
+            switch (WireFormat.GetTagWireType(tag))
+            {
+                //throw new InvalidProtocolBufferException("Merge an unknown field of end-group tag, indicating that the corresponding start-group was missing.");
+                case WireFormat.WireType.Fixed32:
+                    return new FieldInfo(Google.Protobuf.ValueType.Fixed32);
+                case WireFormat.WireType.Fixed64:
+                    return new FieldInfo(Google.Protobuf.ValueType.Fixed64);
+                case WireFormat.WireType.LengthDelimited:
+                    return new FieldInfo(Google.Protobuf.ValueType.Bytes);
+                case WireFormat.WireType.Varint:
+                    return new FieldInfo(Google.Protobuf.ValueType.Int64);
+                default:
+                    return default;
+            }
+        }
     }
 
     sealed class AddressBookType : IMessageType
     {
         public static AddressBookType Instance { get; } = new AddressBookType();
 
-        public bool IgnoreUnknown => false;
-
-        public object CreateMessage()
-        {
-            return new AddressBook();
-        }
+        public object CreateMessage() => new AddressBook();
 
         public FieldInfo GetFieldInfo(uint tag)
         {
@@ -106,19 +119,16 @@ namespace TestProtoPiper
     {
         public static PersonType Instance { get; } = new PersonType();
 
-        public bool IgnoreUnknown => false;
-
-        public object CreateMessage()
-        {
-            return new Person();
-        }
+        public object CreateMessage() => new Person();
 
         public FieldInfo GetFieldInfo(uint tag)
         {
             switch (tag)
             {
                 default:
-                    return default;
+                    return CompatUtils.GetUnknownFieldInfo(tag);
+                    //NOTE: If you want to handle unknown fields return compatible info - otherwise default
+                    //return default;
                 case 10:
                     return new FieldInfo(Google.Protobuf.ValueType.String);
             }
