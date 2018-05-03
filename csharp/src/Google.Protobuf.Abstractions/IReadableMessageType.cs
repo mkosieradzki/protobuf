@@ -15,6 +15,7 @@ namespace Google.Protobuf
         object CreateMessage();
         FieldInfo GetFieldInfo(uint tag);
         void ConsumeField(object message, uint tag, object value);
+        void ConsumeSpanField(object message, uint tag, ReadOnlySpan<byte> value);
         object CompleteMessage(object message);
     }
 

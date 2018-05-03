@@ -2,6 +2,7 @@
 using System.Buffers;
 using System.Collections.Generic;
 using System.IO.Pipelines;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Google.Protobuf;
@@ -18,35 +19,50 @@ namespace TestProtoPiper
             //await Test1();
             //var summary = BenchmarkRunner.Run<ParseVarInt>();
             BenchmarkDotNet.Running.BenchmarkRunner.Run<ParseAddressBook>();
-            //ToProfile();
+            //await ToProfile();
         }
 
-        static void ToProfile()
+        static async Task ToProfile()
         {
             var ab = new AddressBook
             {
                 People =
                 {
-                    new Person
+                    Enumerable.Range(1, 100).Select(x => new Person
                     {
                         Id = 1,
                         Email = "asdadas@asdadas.com",
                         //LastUpdated = Timestamp.FromDateTime(new DateTime(2016, 1, 1, 8, 0, 3, DateTimeKind.Utc)),
                         Name = "ASdasdsad sda sdasd SSADSA",
-                    }
+                    })
                 }
             };
             var testData = ab.ToByteArray();
 
-            for (int i = 0; i < 1000000; i++)
-            {
-                var buffer = new ReadOnlySequenceState<byte>(new ReadOnlySequence<byte>(testData));
+            var pipe = new Pipe();
+            await pipe.Writer.WriteAsync(testData);
+            pipe.Writer.Complete();
 
-                var cpy = new AddressBook();
-                cpy.MergeFrom(ref buffer);
+            var reader = new CodedInputReader(pipe.Reader);
 
-                //CodedInputParser.ReadMessage(ref buffer, AddressBookType.Instance);
-            }
+            var cpy = new AddressBook();
+            await cpy.MergeFromAsync(reader);
+
+            //var buffer = new ReadOnlySequence<byte>(testData);
+
+            //var pos = buffer.Start;
+
+            //var cpy = CodedInputSeqParser.ReadMessage(buffer, ref pos, AddressBookType.Instance);
+
+            //for (int i = 0; i < 1000000; i++)
+            //{
+            //    var buffer = new ReadOnlySequenceState<byte>(new ReadOnlySequence<byte>(testData));
+
+            //    var cpy = new AddressBook();
+            //    cpy.MergeFrom(ref buffer);
+
+            //    //CodedInputParser.ReadMessage(ref buffer, AddressBookType.Instance);
+            //}
         }
 
         static void Test2()
@@ -55,32 +71,32 @@ namespace TestProtoPiper
             List<object> b = new List<object>();
         }
 
-        static async Task Test1()
-        {
-            var pipe = new Pipe(new PipeOptions(minimumSegmentSize: 16));
-            var reader = new CodedInputReader(pipe.Reader);
+        //static async Task Test1()
+        //{
+        //    var pipe = new Pipe(new PipeOptions(minimumSegmentSize: 16));
+        //    var reader = new CodedInputReader(pipe.Reader);
 
-            var ab = new AddressBook
-            {
-                People =
-                {
-                    new Person
-                    {
-                        Id = 1,
-                        Email = "asdadas@asdadas.com",
-                        //LastUpdated = Timestamp.FromDateTime(new DateTime(2016, 1, 1, 8, 0, 3, DateTimeKind.Utc)),
-                        Name = "ASdasdsad sda sdasd SSADSA",
-                    }
-                }
-            };
-            var data = ab.ToByteArray();
+        //    var ab = new AddressBook
+        //    {
+        //        People =
+        //        {
+        //            new Person
+        //            {
+        //                Id = 1,
+        //                Email = "asdadas@asdadas.com",
+        //                //LastUpdated = Timestamp.FromDateTime(new DateTime(2016, 1, 1, 8, 0, 3, DateTimeKind.Utc)),
+        //                Name = "ASdasdsad sda sdasd SSADSA",
+        //            }
+        //        }
+        //    };
+        //    var data = ab.ToByteArray();
 
-            AddressBook.Parser.ParseFrom(data);
-            await pipe.Writer.WriteAsync(data);
-            pipe.Writer.Complete();
+        //    AddressBook.Parser.ParseFrom(data);
+        //    await pipe.Writer.WriteAsync(data);
+        //    pipe.Writer.Complete();
 
-            var addressBook = await reader.ReadMessageAsync(AddressBookType.Instance);
-        }
+        //    var addressBook = await reader.ReadMessageAsync(AddressBookType.Instance);
+        //}
 
     }
 
@@ -101,28 +117,6 @@ namespace TestProtoPiper
             {
                 Span<byte> span = stackalloc byte[(int)sequence.Length];
                 sequence.CopyTo(span);
-                return Encoding.UTF8.GetString(span);
-            }
-            else
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        public static string DecodeUtf8String(ReadOnlySequenceState<byte> sequence)
-        {
-            if (sequence.First.IsEmpty)
-            {
-                return String.Empty;
-            }
-            else if (sequence.Buffer.IsSingleSegment)
-            {
-                return Encoding.UTF8.GetString(sequence.First);
-            }
-            else if (sequence.Buffer.Length < 128)
-            {
-                Span<byte> span = stackalloc byte[(int)sequence.Buffer.Length];
-                sequence.Buffer.CopyTo(span);
                 return Encoding.UTF8.GetString(span);
             }
             else
@@ -223,6 +217,9 @@ namespace TestProtoPiper
             }
         }
 
+        public void ConsumeSpanField(object message, uint tag, ReadOnlySpan<byte> value)
+        { }
+
         public object CompleteMessage(object message) => message;
     }
 
@@ -291,6 +288,20 @@ namespace TestProtoPiper
                     break;
                 case 26:
                     obj.Email = CompatUtils.DecodeUtf8String((ReadOnlySequence<byte>)value);
+                    break;
+            }
+        }
+
+        public void ConsumeSpanField(object message, uint tag, ReadOnlySpan<byte> value)
+        {
+            var obj = (Person)message;
+            switch (tag)
+            {
+                case 10:
+                    obj.Name = CompatUtils.DecodeUtf8String(value);
+                    break;
+                case 26:
+                    obj.Email = CompatUtils.DecodeUtf8String(value);
                     break;
             }
         }

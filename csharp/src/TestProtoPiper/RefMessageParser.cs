@@ -38,28 +38,28 @@ namespace Google.Protobuf
                                 CodedInputSpanParser.ReadRawVarint32(ref buffer);
                                 break;
                             case ValueType.Int32:
-                                messageType.ConsumeField(ref message, tag, (int)CodedInputSpanParser.ReadRawVarint32(ref buffer));
+                                messageType.ConsumeField(ref message, in tag, (int)CodedInputSpanParser.ReadRawVarint32(ref buffer));
                                 break;
                             case ValueType.Int64:
-                                messageType.ConsumeField(ref message, tag, (long)CodedInputSpanParser.ReadRawVarint64(ref buffer));
+                                messageType.ConsumeField(ref message, in tag, (long)CodedInputSpanParser.ReadRawVarint64(ref buffer));
                                 break;
                             case ValueType.UInt32:
-                                messageType.ConsumeField(ref message, tag, CodedInputSpanParser.ReadRawVarint32(ref buffer));
+                                messageType.ConsumeField(ref message, in tag, CodedInputSpanParser.ReadRawVarint32(ref buffer));
                                 break;
                             case ValueType.UInt64:
-                                messageType.ConsumeField(ref message, tag, CodedInputSpanParser.ReadRawVarint64(ref buffer));
+                                messageType.ConsumeField(ref message, in tag, CodedInputSpanParser.ReadRawVarint64(ref buffer));
                                 break;
                             case ValueType.SInt32:
-                                messageType.ConsumeField(ref message, tag, CodedInputSpanParser.DecodeZigZag32(CodedInputSpanParser.ReadRawVarint32(ref buffer)));
+                                messageType.ConsumeField(ref message, in tag, CodedInputSpanParser.DecodeZigZag32(CodedInputSpanParser.ReadRawVarint32(ref buffer)));
                                 break;
                             case ValueType.SInt64:
-                                messageType.ConsumeField(ref message, tag, CodedInputSpanParser.DecodeZigZag64(CodedInputSpanParser.ReadRawVarint64(ref buffer)));
+                                messageType.ConsumeField(ref message, in tag, CodedInputSpanParser.DecodeZigZag64(CodedInputSpanParser.ReadRawVarint64(ref buffer)));
                                 break;
                             case ValueType.Bool:
-                                messageType.ConsumeField(ref message, tag, CodedInputSpanParser.ReadRawVarint32(ref buffer) != 0);
+                                messageType.ConsumeField(ref message, in tag, CodedInputSpanParser.ReadRawVarint32(ref buffer) != 0);
                                 break;
                             case ValueType.Enum:
-                                messageType.ConsumeField(ref message, tag, (int)CodedInputSpanParser.ReadRawVarint32(ref buffer));
+                                messageType.ConsumeField(ref message, in tag, (int)CodedInputSpanParser.ReadRawVarint32(ref buffer));
                                 break;
                             default:
                                 //TODO: Consider skipping instead
@@ -73,13 +73,13 @@ namespace Google.Protobuf
                                 CodedInputSpanParser.SkipRawBytes(ref buffer, 4);
                                 break;
                             case ValueType.Float:
-                                messageType.ConsumeField(ref message, tag, CodedInputSpanParser.Int32BitsToSingle((int)CodedInputSpanParser.ReadFixed32(ref buffer)));
+                                messageType.ConsumeField(ref message, in tag, CodedInputSpanParser.Int32BitsToSingle((int)CodedInputSpanParser.ReadFixed32(ref buffer)));
                                 break;
                             case ValueType.Fixed32:
-                                messageType.ConsumeField(ref message, tag, CodedInputSpanParser.ReadFixed32(ref buffer));
+                                messageType.ConsumeField(ref message, in tag, CodedInputSpanParser.ReadFixed32(ref buffer));
                                 break;
                             case ValueType.SFixed32:
-                                messageType.ConsumeField(ref message, tag, (int)CodedInputSpanParser.ReadFixed32(ref buffer));
+                                messageType.ConsumeField(ref message, in tag, (int)CodedInputSpanParser.ReadFixed32(ref buffer));
                                 break;
                             default:
                                 throw new Exception();
@@ -92,13 +92,13 @@ namespace Google.Protobuf
                                 CodedInputSpanParser.SkipRawBytes(ref buffer, 8);
                                 break;
                             case ValueType.Double:
-                                messageType.ConsumeField(ref message, tag, BitConverter.Int64BitsToDouble((long)CodedInputSpanParser.ReadFixed64(ref buffer)));
+                                messageType.ConsumeField(ref message, in tag, BitConverter.Int64BitsToDouble((long)CodedInputSpanParser.ReadFixed64(ref buffer)));
                                 break;
                             case ValueType.Fixed64:
-                                messageType.ConsumeField(ref message, tag, CodedInputSpanParser.ReadFixed64(ref buffer));
+                                messageType.ConsumeField(ref message, in tag, CodedInputSpanParser.ReadFixed64(ref buffer));
                                 break;
                             case ValueType.SFixed64:
-                                messageType.ConsumeField(ref message, tag, (long)CodedInputSpanParser.ReadFixed64(ref buffer));
+                                messageType.ConsumeField(ref message, in tag, (long)CodedInputSpanParser.ReadFixed64(ref buffer));
                                 break;
                             default:
                                 throw new Exception();
@@ -161,14 +161,14 @@ namespace Google.Protobuf
                                 //messageType.ConsumeField(message, tag, nestedBuffer);
                                 break;
                             case ValueType.Message:
-                                messageType.ConsumeField(ref message, tag, fieldInfo.MessageParser.ReadMessage(ref nestedBuffer, maxRecursionLevels - 1));
+                                messageType.ConsumeField(ref message, in tag, fieldInfo.MessageParser.ReadMessage(ref nestedBuffer, maxRecursionLevels - 1));
                                 break;
                             default:
                                 throw new Exception();
                         }
                         break;
                     case WireFormat.WireType.StartGroup:
-                        CodedInputSpanParser.SkipGroup(ref buffer, tag, maxRecursionLevels);
+                        CodedInputSpanParser.SkipGroup(ref buffer, in tag, maxRecursionLevels);
                         break;
                     case WireFormat.WireType.EndGroup:
                         //TODO: Add proper exception

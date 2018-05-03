@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Buffers;
 using System.Buffers.Binary;
+using System.Runtime.CompilerServices;
 
 namespace Google.Protobuf
 {
@@ -150,10 +151,10 @@ namespace Google.Protobuf
                             case ValueType.Enum:
                                 throw new NotImplementedException();
                             case ValueType.String:
-                                //messageType.ConsumeField(message, tag, nestedBuffer);
+                                messageType.ConsumeSpanField(message, tag, nestedBuffer);
                                 break;
                             case ValueType.Bytes:
-                                //messageType.ConsumeField(message, tag, nestedBuffer);
+                                messageType.ConsumeSpanField(message, tag, nestedBuffer);
                                 break;
                             case ValueType.Message:
                                 messageType.ConsumeField(message, tag, ReadMessage(ref nestedBuffer, fieldInfo.MessageType, maxRecursionLevels - 1));
@@ -291,6 +292,7 @@ namespace Google.Protobuf
 
         public static ulong ReadRawVarint64(ref ReadOnlySpan<byte> span) => SlowReadRawVarint64(ref span);
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static ulong SlowReadRawVarint64(ref ReadOnlySpan<byte> span)
         {
             int shift = 0;
@@ -377,6 +379,7 @@ namespace Google.Protobuf
             throw new Exception();
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static byte ReadRawByte(ref ReadOnlySpan<byte> span)
         {
             if (span.IsEmpty)
@@ -390,12 +393,14 @@ namespace Google.Protobuf
             return ret;
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint ReadFixed32(ref ReadOnlySpan<byte> span)
         {
             if (span.Length >= 4)
             {
+                var ret = BinaryPrimitives.ReadUInt32LittleEndian(span);
                 span = span.Slice(4);
-                return BinaryPrimitives.ReadUInt32LittleEndian(span);
+                return ret;
             }
             else
             {
@@ -404,12 +409,14 @@ namespace Google.Protobuf
             }
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static ulong ReadFixed64(ref ReadOnlySpan<byte> span)
         {
             if (span.Length >= 8)
             {
+                var ret = BinaryPrimitives.ReadUInt64LittleEndian(span);
                 span = span.Slice(8);
-                return BinaryPrimitives.ReadUInt64LittleEndian(span);
+                return ret;
             }
             else
             {
@@ -450,6 +457,7 @@ namespace Google.Protobuf
             }
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void SkipRawBytes(ref ReadOnlySpan<byte> span, in int size)
         {
             if (span.Length < size)
@@ -510,6 +518,7 @@ namespace Google.Protobuf
         /// sign-extended to 64 bits to be varint encoded, thus always taking
         /// 10 bytes on the wire.)
         /// </remarks>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int DecodeZigZag32(uint n) => (int)(n >> 1) ^ -(int)(n & 1);
 
         /// <summary>
@@ -521,12 +530,15 @@ namespace Google.Protobuf
         /// sign-extended to 64 bits to be varint encoded, thus always taking
         /// 10 bytes on the wire.)
         /// </remarks>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static long DecodeZigZag64(ulong n) => (long)(n >> 1) ^ -(long)(n & 1);
 
         //TODO: Use proper BitConverter.Int32BitsToSingle when .NET Standard is out - alternatively use unsafe implementation
 #if UNSAFE
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static unsafe float Int32BitsToSingle(int n) => *((float*)&n);
 #else
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float Int32BitsToSingle(int n) => BitConverter.ToSingle(BitConverter.GetBytes(n), 0);
 #endif
     }

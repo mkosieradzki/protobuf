@@ -5,8 +5,11 @@
 #pragma warning disable 1591, 0612, 3021
 #region Designer generated code
 
+using Google.Protobuf.Pipelines;
 using System;
 using System.Buffers;
+using System.Threading;
+using System.Threading.Tasks;
 using TestProtoPiper;
 using pb = global::Google.Protobuf;
 using pbc = global::Google.Protobuf.Collections;
@@ -367,32 +370,32 @@ namespace Google.Protobuf.Examples.AddressBook {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(ref ReadOnlySequenceState<byte> buffer) {
+    public async ValueTask MergeFromAsync(CodedInputReader reader, CancellationToken cancellationToken = default) {
       uint tag;
-      while ((tag = CodedInputExpParser.ReadTag(ref buffer)) != 0) {
+      while ((tag = await reader.ReadTagAsync(cancellationToken)) != 0) {
         switch(tag) {
           default:
             //_unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 10: {
-            Name = CompatUtils.DecodeUtf8String(CodedInputExpParser.ReadLengthDelimited(ref buffer));
+            Name = CompatUtils.DecodeUtf8String(await reader.ReadLengthDelimited(cancellationToken));
             break;
           }
           case 16: {
-            Id = CodedInputExpParser.ReadInt32(ref buffer);
+            Id = (int)await reader.ReadRawVarint32Async(cancellationToken);
             break;
           }
           case 26: {
-            Email = CompatUtils.DecodeUtf8String(CodedInputExpParser.ReadLengthDelimited(ref buffer));
+            Email = CompatUtils.DecodeUtf8String(await reader.ReadLengthDelimited(cancellationToken));
             break;
           }
           case 34: {
-                            throw new NotImplementedException();
+            throw new NotImplementedException();
             //phones_.AddEntriesFrom(input, _repeated_phones_codec);
             //break;
           }
           case 42: {
-                            throw new NotImplementedException();
+            throw new NotImplementedException();
                             //if (lastUpdated_ == null) {
               //lastUpdated_ = new global::Google.Protobuf.WellKnownTypes.Timestamp();
             //}
@@ -702,8 +705,8 @@ namespace Google.Protobuf.Examples.AddressBook {
       while ((tag = CodedInputParser.ReadTag(ref buffer)) != 0) {
         switch(tag) {
           default:
-                        //_unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
-                        throw new NotImplementedException();
+            //_unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            throw new NotImplementedException();
             //break;
           case 10: {
             var obj = new Person();
@@ -722,8 +725,8 @@ namespace Google.Protobuf.Examples.AddressBook {
       while ((tag = CodedInputSpanParser.ReadTag(ref span)) != 0) {
         switch(tag) {
           default:
-                        //_unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
-                        throw new NotImplementedException();
+            //_unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            throw new NotImplementedException();
             //break;
           case 10: {
             var obj = new Person();
@@ -737,26 +740,27 @@ namespace Google.Protobuf.Examples.AddressBook {
       }
     }
 
-    public void MergeFrom(ref ReadOnlySequenceState<byte> span) {
+    public async ValueTask MergeFromAsync(CodedInputReader reader, CancellationToken cancellationToken = default) {
       uint tag;
-      while ((tag = CodedInputExpParser.ReadTag(ref span)) != 0) {
+      while ((tag = await reader.ReadTagAsync(cancellationToken)) != 0) {
         switch(tag) {
           default:
-                        //_unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
-                        throw new NotImplementedException();
+            //_unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            throw new NotImplementedException();
             //break;
           case 10: {
+            var toPop = await reader.ReadLengthAndPushAsLimitAsync(cancellationToken);
             var obj = new Person();
-            var nestedBuffer = CodedInputExpParser.ReadLengthDelimited(ref span);
-            obj.MergeFrom(ref nestedBuffer);
+            //var nestedBuffer = CodedInputSpanParser.ReadLengthDelimited(ref span);
+            await obj.MergeFromAsync(reader, cancellationToken);
             people_.Add(obj);
+            reader.PopLimit(toPop);
             //people_.AddEntriesFrom(input, _repeated_people_codec);
             break;
           }
         }
       }
     }
-
   }
 
   #endregion
