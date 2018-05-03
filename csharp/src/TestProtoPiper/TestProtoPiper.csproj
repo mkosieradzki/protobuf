@@ -12,7 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AddressBook\AddressBook.csproj" />
     <ProjectReference Include="..\Google.Protobuf.Pipelines\Google.Protobuf.Pipelines.csproj" />
     <ProjectReference Include="..\Google.Protobuf\Google.Protobuf.csproj" />
   </ItemGroup>

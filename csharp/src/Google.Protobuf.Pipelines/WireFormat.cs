@@ -1,4 +1,4 @@
-﻿namespace Google.Protobuf.Pipelines
+﻿namespace Google.Protobuf
 {
     static class WireFormat
     {

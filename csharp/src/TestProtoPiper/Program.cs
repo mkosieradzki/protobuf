@@ -15,8 +15,38 @@ namespace TestProtoPiper
     {
         async static Task Main(string[] args)
         {
-            await Test1();
+            //await Test1();
             //var summary = BenchmarkRunner.Run<ParseVarInt>();
+            BenchmarkDotNet.Running.BenchmarkRunner.Run<ParseAddressBook>();
+            //ToProfile();
+        }
+
+        static void ToProfile()
+        {
+            var ab = new AddressBook
+            {
+                People =
+                {
+                    new Person
+                    {
+                        Id = 1,
+                        Email = "asdadas@asdadas.com",
+                        //LastUpdated = Timestamp.FromDateTime(new DateTime(2016, 1, 1, 8, 0, 3, DateTimeKind.Utc)),
+                        Name = "ASdasdsad sda sdasd SSADSA",
+                    }
+                }
+            };
+            var testData = ab.ToByteArray();
+
+            for (int i = 0; i < 1000000; i++)
+            {
+                var buffer = new ReadOnlySequenceState<byte>(new ReadOnlySequence<byte>(testData));
+
+                var cpy = new AddressBook();
+                cpy.MergeFrom(ref buffer);
+
+                //CodedInputParser.ReadMessage(ref buffer, AddressBookType.Instance);
+            }
         }
 
         static void Test2()
@@ -38,7 +68,7 @@ namespace TestProtoPiper
                     {
                         Id = 1,
                         Email = "asdadas@asdadas.com",
-                        LastUpdated = Timestamp.FromDateTime(new DateTime(2016, 1, 1, 8, 0, 3, DateTimeKind.Utc)),
+                        //LastUpdated = Timestamp.FromDateTime(new DateTime(2016, 1, 1, 8, 0, 3, DateTimeKind.Utc)),
                         Name = "ASdasdsad sda sdasd SSADSA",
                     }
                 }
@@ -79,6 +109,40 @@ namespace TestProtoPiper
             }
         }
 
+        public static string DecodeUtf8String(ReadOnlySequenceState<byte> sequence)
+        {
+            if (sequence.First.IsEmpty)
+            {
+                return String.Empty;
+            }
+            else if (sequence.Buffer.IsSingleSegment)
+            {
+                return Encoding.UTF8.GetString(sequence.First);
+            }
+            else if (sequence.Buffer.Length < 128)
+            {
+                Span<byte> span = stackalloc byte[(int)sequence.Buffer.Length];
+                sequence.Buffer.CopyTo(span);
+                return Encoding.UTF8.GetString(span);
+            }
+            else
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public static string DecodeUtf8String(ReadOnlySpan<byte> span)
+        {
+            if (span.IsEmpty)
+            {
+                return String.Empty;
+            }
+            else
+            {
+                return Encoding.UTF8.GetString(span);
+            }
+        }
+
         public static FieldInfo GetUnknownFieldInfo(uint tag)
         {
             switch (WireFormat.GetTagWireType(tag))
@@ -95,6 +159,39 @@ namespace TestProtoPiper
                 default:
                     return default;
             }
+        }
+
+        public static RefFieldInfo GetUnknownRefFieldInfo(in uint tag)
+        {
+            switch (WireFormat.GetTagWireType(tag))
+            {
+                //throw new InvalidProtocolBufferException("Merge an unknown field of end-group tag, indicating that the corresponding start-group was missing.");
+                case WireFormat.WireType.Fixed32:
+                    return new RefFieldInfo(Google.Protobuf.ValueType.Fixed32);
+                case WireFormat.WireType.Fixed64:
+                    return new RefFieldInfo(Google.Protobuf.ValueType.Fixed64);
+                case WireFormat.WireType.LengthDelimited:
+                    return new RefFieldInfo(Google.Protobuf.ValueType.Bytes);
+                case WireFormat.WireType.Varint:
+                    return new RefFieldInfo(Google.Protobuf.ValueType.Int64);
+                default:
+                    return default;
+            }
+        }
+    }
+
+    sealed class ObjPool<T>
+    {
+        private T[] arr;
+
+        public ObjPool()
+        {
+            arr = new T[10];
+        }
+
+        public ref T Alloc()
+        {
+            return ref arr[0];
         }
     }
 
@@ -129,6 +226,36 @@ namespace TestProtoPiper
         public object CompleteMessage(object message) => message;
     }
 
+    sealed class RefAddressBookType : IRefMessageType<AddressBook>
+    {
+        public static RefMessageParser<AddressBook> Parser { get; } = new RefMessageParser<AddressBook>(new RefAddressBookType());
+
+        public ref AddressBook CreateMessage() => ref (new AddressBook[] { new AddressBook() })[0];
+
+        public RefFieldInfo GetFieldInfo(in uint tag)
+        {
+            switch (tag)
+            {
+                default:
+                    return default;
+                case 10:
+                    return new RefFieldInfo(RefPersonType.Parser);
+            }
+        }
+
+        public void ConsumeField(ref AddressBook message, in uint tag, in object value)
+        {
+            switch (tag)
+            {
+                case 10:
+                    message.People.Add((Person)value);
+                    break;
+            }
+        }
+
+        public void CompleteMessage(ref AddressBook message) { }
+    }
+
     sealed class PersonType : IMessageType
     {
         public static PersonType Instance { get; } = new PersonType();
@@ -144,7 +271,10 @@ namespace TestProtoPiper
                     //NOTE: If you want to handle unknown fields return compatible info - otherwise default
                     //return default;
                 case 10:
+                case 26:
                     return new FieldInfo(Google.Protobuf.ValueType.String);
+                case 16:
+                    return new FieldInfo(Google.Protobuf.ValueType.Int32);
             }
         }
 
@@ -156,9 +286,56 @@ namespace TestProtoPiper
                 case 10:
                     obj.Name = CompatUtils.DecodeUtf8String((ReadOnlySequence<byte>)value);
                     break;
+                case 16:
+                    obj.Id = (int)value;
+                    break;
+                case 26:
+                    obj.Email = CompatUtils.DecodeUtf8String((ReadOnlySequence<byte>)value);
+                    break;
             }
         }
 
         public object CompleteMessage(object message) => message;
+    }
+
+    sealed class RefPersonType : IRefMessageType<Person>
+    {
+        public static RefMessageParser<Person> Parser { get; } = new RefMessageParser<Person>(new RefPersonType());
+
+        public ref Person CreateMessage() => ref (new Person[] { new Person() }[0]);
+
+        public RefFieldInfo GetFieldInfo(in uint tag)
+        {
+            switch (tag)
+            {
+                default:
+                    return CompatUtils.GetUnknownRefFieldInfo(tag);
+                //NOTE: If you want to handle unknown fields return compatible info - otherwise default
+                //return default;
+                case 10:
+                case 26:
+                    return new RefFieldInfo(Google.Protobuf.ValueType.String);
+                case 16:
+                    return new RefFieldInfo(Google.Protobuf.ValueType.Int32);
+            }
+        }
+
+        public void ConsumeField(ref Person message, in uint tag, in object value)
+        {
+            switch (tag)
+            {
+                case 10:
+                    message.Name = CompatUtils.DecodeUtf8String((ReadOnlySequence<byte>)value);
+                    break;
+                case 16:
+                    message.Id = (int)value;
+                    break;
+                case 26:
+                    message.Email = CompatUtils.DecodeUtf8String((ReadOnlySequence<byte>)value);
+                    break;
+            }
+        }
+
+        public void CompleteMessage(ref Person message) { }
     }
 }
