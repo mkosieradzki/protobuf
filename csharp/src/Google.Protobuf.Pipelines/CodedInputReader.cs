@@ -2,6 +2,7 @@
 using System.Buffers;
 using System.Buffers.Binary;
 using System.IO.Pipelines;
+using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -45,23 +46,29 @@ namespace Google.Protobuf.Pipelines
         private ReadOnlySequence<byte> buffer;
         private SequencePosition position;
         private int remainingBytesToLimit;
+        private long remainingBytesInBuffer;
         private bool isLastRead;
         private bool isInitialized;
 
         private readonly int recursionLimit;
-        private readonly int sizeLimit;
 
         private int recursionDepth;
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private void Progress(int count)
         {
             if (count > remainingBytesToLimit)
             {
+                position = buffer.GetPosition(remainingBytesToLimit, position);
+                remainingBytesInBuffer -= remainingBytesToLimit;
+                remainingBytesToLimit = 0;
                 throw new Exception();
                 //TODO: proper exception
             }
-            remainingBytesToLimit -= count;
+
             position = buffer.GetPosition(count, position);
+            remainingBytesToLimit -= count;
+            remainingBytesInBuffer -= count;
         }
 
         public async ValueTask<int> ReadLengthAndPushAsLimitAsync(CancellationToken cancellationToken = default)
@@ -82,6 +89,29 @@ namespace Google.Protobuf.Pipelines
             remainingBytesToLimit = toPop;
         }
 
+        public bool TryGetContiguousBufferForCurrentMessage(out ReadOnlyMemory<byte> memory, bool advance = true)
+        {
+            if (remainingBytesInBuffer < remainingBytesToLimit)
+            {
+                memory = default;
+                return false;
+            }
+            else if (buffer.TryGet(ref position, out var temp, false) && temp.Length >= remainingBytesToLimit)
+            {
+                memory = temp.Slice(0, remainingBytesToLimit);
+                if (advance)
+                {
+                    Progress(remainingBytesToLimit);
+                }
+                return true;
+            }
+            else
+            {
+                memory = default;
+                return false;
+            }
+        }
+
         /// <summary>
         /// Reads a field tag, returning the tag of 0 for "end of stream".
         /// </summary>
@@ -95,16 +125,16 @@ namespace Google.Protobuf.Pipelines
         {
             // Optimize for the incredibly common case of having at least two bytes left in the buffer,
             // and those two bytes being enough to get the tag. This will be true for fields up to 4095.
-            if (remainingBytesToLimit >= 10 && buffer.TryGet(ref position, out var memory, false) && memory.Length >= 10)
-            {
-                int pos = 0;
-                var tag = CodedInputSpanPosParser.ReadTag(memory.Span, ref pos);
-                Progress(pos);
-                return new ValueTask<uint>(tag);
-            }
-            else if (memory.IsEmpty && isLastRead)
+            if (remainingBytesToLimit <= 0 || remainingBytesInBuffer <= 0 && isLastRead)
             {
                 return new ValueTask<uint>(0);
+            }
+            else if (remainingBytesInBuffer >= 10)
+            {
+                var origPos = position;
+                var tag = CodedInputSeqParser.ReadTag(in buffer, ref position, out var bytesConsumed, false);
+                Progress(bytesConsumed);
+                return new ValueTask<uint>(tag);
             }
             else
             {
@@ -129,7 +159,7 @@ namespace Google.Protobuf.Pipelines
                 return new ValueTask<bool>(true);
             }
 
-            if (position == buffer.End)
+            if (remainingBytesInBuffer <= 0)
             {
                 if (isLastRead)
                 {
@@ -238,6 +268,7 @@ namespace Google.Protobuf.Pipelines
             var result = await input.ReadAsync(cancellationToken);
             buffer = result.Buffer;
             position = buffer.Start;
+            remainingBytesInBuffer = buffer.Length;
             isLastRead = result.IsCompleted;
             isInitialized = true;
         }
@@ -273,11 +304,10 @@ namespace Google.Protobuf.Pipelines
         /// </summary>
         public ValueTask<uint> ReadRawVarint32Async(CancellationToken cancellationToken)
         {
-            if (buffer.TryGet(ref position, out var memory, false) && memory.Length >= 10)
+            if (remainingBytesInBuffer >= 10)
             {
-                int pos = 0;
-                var ret = CodedInputSpanPosParser.ReadRawVarint32(memory.Span, ref pos);
-                Progress(pos);
+                var ret = CodedInputSeqParser.ReadRawVarint32(in buffer, ref position, out var bytesConsumed, false);
+                Progress(bytesConsumed);
                 return new ValueTask<uint>(ret);
             }
             else
@@ -342,11 +372,10 @@ namespace Google.Protobuf.Pipelines
 
         public ValueTask<ulong> ReadRawVarint64Async(CancellationToken cancellationToken)
         {
-            if (buffer.TryGet(ref position, out var memory, false) && memory.Length >= 10)
+            if (remainingBytesInBuffer >= 10)
             {
-                int pos = 0;
-                var ret = CodedInputSpanPosParser.ReadRawVarint64(memory.Span, ref pos);
-                Progress(pos);
+                var ret = CodedInputSeqParser.ReadRawVarint64(in buffer, ref position, out var bytesConsumed, false);
+                Progress(bytesConsumed);
                 return new ValueTask<ulong>(ret);
             }
             else
@@ -411,9 +440,9 @@ namespace Google.Protobuf.Pipelines
 
         private ValueTask<uint> ReadFixed32Async(CancellationToken cancellationToken)
         {
-            if (buffer.TryGet(ref position, out var memory, false) && memory.Length >= 4)
+            if (remainingBytesInBuffer >= 4)
             {
-                var ret = BinaryPrimitives.ReadUInt32LittleEndian(memory.Span);
+                var ret = CodedInputSeqParser.ReadFixed32(in buffer, ref position, false);
                 Progress(4);
                 return new ValueTask<uint>(ret);
             }
@@ -425,9 +454,9 @@ namespace Google.Protobuf.Pipelines
 
         private ValueTask<ulong> ReadFixed64Async(CancellationToken cancellationToken)
         {
-            if (buffer.TryGet(ref position, out var memory, false) && memory.Length >= 8)
+            if (remainingBytesInBuffer >= 8)
             {
-                var ret = BinaryPrimitives.ReadUInt64LittleEndian(memory.Span);
+                var ret = CodedInputSeqParser.ReadFixed64(in buffer, ref position, false);
                 Progress(8);
                 return new ValueTask<ulong>(ret);
             }
@@ -437,10 +466,14 @@ namespace Google.Protobuf.Pipelines
             }
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private ValueTask EnsureMinBufferSizeAsync(uint bytes, CancellationToken cancellationToken)
         {
-            buffer = buffer.Slice(position);
-            if (bytes > remainingBytesToLimit || isLastRead && bytes > buffer.Length)
+            if (remainingBytesInBuffer >= bytes)
+            {
+                return default;
+            }
+            else if (bytes > remainingBytesToLimit || isLastRead)
             {
                 //TODO: Proper exception
                 throw new Exception();
@@ -453,8 +486,7 @@ namespace Google.Protobuf.Pipelines
 
         private async ValueTask SlowEnsureMinBufferSizeAsync(uint bytes, CancellationToken cancellationToken)
         {
-            //Assuming buffer has been rewinded to position && checked for remainingBytesToLimit
-            while (buffer.Length < bytes)
+            while (remainingBytesInBuffer < bytes)
             {
                 if (isLastRead)
                 {
@@ -468,31 +500,13 @@ namespace Google.Protobuf.Pipelines
         private async ValueTask<uint> SlowReadFixed32Async(CancellationToken cancellationToken)
         {
             await EnsureMinBufferSizeAsync(4, cancellationToken);
-            return ReadFixed32FromResizedBuffer();
-        }
-
-        private uint ReadFixed32FromResizedBuffer()
-        {
-            Span<byte> span = stackalloc byte[4];
-            buffer.CopyTo(span);
-            var ret = BinaryPrimitives.ReadUInt32LittleEndian(span);
-            Progress(4);
-            return ret;
-        }
-
-        private ulong ReadFixed64FromResizedBuffer()
-        {
-            Span<byte> span = stackalloc byte[8];
-            buffer.CopyTo(span);
-            var ret = BinaryPrimitives.ReadUInt64LittleEndian(span);
-            Progress(8);
-            return ret;
+            return await ReadFixed32Async(cancellationToken);
         }
 
         private async ValueTask<ulong> SlowReadFixed64Async(CancellationToken cancellationToken)
         {
             await EnsureMinBufferSizeAsync(8, cancellationToken);
-            return ReadFixed64FromResizedBuffer();
+            return await ReadFixed64Async(cancellationToken);
         }
 
         /// <summary>
@@ -502,7 +516,7 @@ namespace Google.Protobuf.Pipelines
         /// or the current limit was reached</exception>
         private ValueTask SkipRawBytesAsync(int size, CancellationToken cancellationToken)
         {
-            if (buffer.TryGet(ref position, out var memory, false) && memory.Length >= size)
+            if (remainingBytesInBuffer >= size)
             {
                 Progress(size);
                 return default;
@@ -523,15 +537,15 @@ namespace Google.Protobuf.Pipelines
                     //throw InvalidProtocolBufferException.TruncatedMessage();
                     throw new Exception();
                 }
-                else if (buffer.TryGet(ref position, out var memory, false) && memory.Length >= size)
+                else if (remainingBytesInBuffer >= size)
                 {
                     Progress(size);
                     break;
                 }
                 else
                 {
-                    Progress(memory.Length);
-                    size -= memory.Length;
+                    Progress((int)remainingBytesInBuffer);
+                    size -= (int)remainingBytesInBuffer;
                 }
             }
         }

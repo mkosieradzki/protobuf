@@ -93,15 +93,6 @@ namespace TestProtoPiper
         }
 
         [Benchmark]
-        public void ParseCodedInputSeqVirtCallParser()
-        {
-            var buffer = new ReadOnlySequence<byte>(testData);
-            var pos = buffer.Start;
-
-            var cpy = CodedInputSeqParser.ReadMessage(buffer, ref pos, AddressBookType.Instance);
-        }
-
-        [Benchmark]
         public void ParseCodedInputSmartVirtCallParser()
         {
             var buffer = new ReadOnlySequence<byte>(testData);

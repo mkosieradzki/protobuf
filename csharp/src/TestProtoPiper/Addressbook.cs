@@ -368,9 +368,17 @@ namespace Google.Protobuf.Examples.AddressBook {
         }
       }
     }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public async ValueTask MergeFromAsync(CodedInputReader reader, CancellationToken cancellationToken = default) {
+    public ValueTask MergeFromAsync(CodedInputReader reader, CancellationToken cancellationToken = default) {
+      if (reader.TryGetContiguousBufferForCurrentMessage(out var memory)) {
+        var span = memory.Span;
+        MergeFrom(ref span);
+        return default;
+      } else {
+        return MergeCoreFromAsync(reader, cancellationToken);
+      }
+    }
+    
+    public async ValueTask MergeCoreFromAsync(CodedInputReader reader, CancellationToken cancellationToken = default) {
       uint tag;
       while ((tag = await reader.ReadTagAsync(cancellationToken)) != 0) {
         switch(tag) {
@@ -739,6 +747,11 @@ namespace Google.Protobuf.Examples.AddressBook {
         }
       }
     }
+
+    //public ValueTask MergeFromAsync(CodedInputReader reader, CancellationToken cancellationToken = default)
+    //{
+    //  if (reader)
+    //}
 
     public async ValueTask MergeFromAsync(CodedInputReader reader, CancellationToken cancellationToken = default) {
       uint tag;
