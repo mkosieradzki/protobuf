@@ -368,6 +368,79 @@ namespace Google.Protobuf.Examples.AddressBook {
         }
       }
     }
+
+    public void MergeFrom(in ReadOnlyMemory<byte> mem, ref int pos) {
+      var span = mem.Span;
+      uint tag;
+      while ((tag = CodedInputSpanPosParser.ReadTag(span, ref pos)) != 0) {
+        switch(tag) {
+          default:
+            //_unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            Name = CompatUtils.DecodeUtf8String(CodedInputSpanPosParser.ReadLengthDelimited(span, ref pos));
+            break;
+          }
+          case 16: {
+            Id = CodedInputSpanPosParser.ReadInt32(span, ref pos);
+            break;
+          }
+          case 26: {
+            Email = CompatUtils.DecodeUtf8String(CodedInputSpanPosParser.ReadLengthDelimited(span, ref pos));
+            break;
+          }
+          case 34: {
+                            throw new NotImplementedException();
+            //phones_.AddEntriesFrom(input, _repeated_phones_codec);
+            //break;
+          }
+          case 42: {
+                            throw new NotImplementedException();
+                            //if (lastUpdated_ == null) {
+              //lastUpdated_ = new global::Google.Protobuf.WellKnownTypes.Timestamp();
+            //}
+            //input.ReadMessage(lastUpdated_);
+            //break;
+          }
+        }
+      }
+    }
+
+    public void MergeFrom(in ReadOnlySpan<byte> span, ref int pos) {
+      uint tag;
+      while ((tag = CodedInputSpanPosParser.ReadTag(span, ref pos)) != 0) {
+        switch(tag) {
+          default:
+            //_unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            Name = CompatUtils.DecodeUtf8String(CodedInputSpanPosParser.ReadLengthDelimited(span, ref pos));
+            break;
+          }
+          case 16: {
+            Id = CodedInputSpanPosParser.ReadInt32(span, ref pos);
+            break;
+          }
+          case 26: {
+            Email = CompatUtils.DecodeUtf8String(CodedInputSpanPosParser.ReadLengthDelimited(span, ref pos));
+            break;
+          }
+          case 34: {
+                            throw new NotImplementedException();
+            //phones_.AddEntriesFrom(input, _repeated_phones_codec);
+            //break;
+          }
+          case 42: {
+                            throw new NotImplementedException();
+                            //if (lastUpdated_ == null) {
+              //lastUpdated_ = new global::Google.Protobuf.WellKnownTypes.Timestamp();
+            //}
+            //input.ReadMessage(lastUpdated_);
+            //break;
+          }
+        }
+      }
+    }
     public ValueTask MergeFromAsync(CodedInputReader reader, CancellationToken cancellationToken = default) {
       if (reader.TryGetContiguousBufferForCurrentMessage(out var memory)) {
         var span = memory.Span;
@@ -740,6 +813,49 @@ namespace Google.Protobuf.Examples.AddressBook {
             var obj = new Person();
             var nestedBuffer = CodedInputSpanParser.ReadLengthDelimited(ref span);
             obj.MergeFrom(ref nestedBuffer);
+            people_.Add(obj);
+            //people_.AddEntriesFrom(input, _repeated_people_codec);
+            break;
+          }
+        }
+      }
+    }
+
+    public void MergeFrom(in ReadOnlyMemory<byte> mem, ref int pos) {
+      var span = mem.Span;
+      uint tag;
+      while ((tag = CodedInputSpanPosParser.ReadTag(span, ref pos)) != 0) {
+        switch(tag) {
+          default:
+            //_unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            throw new NotImplementedException();
+            //break;
+          case 10: {
+            var obj = new Person();
+            var nestedBuffer = CodedInputSpanPosParser.ReadLengthDelimited(mem, ref pos);
+            int ipos = 0;
+            obj.MergeFrom(nestedBuffer, ref ipos);
+            people_.Add(obj);
+            //people_.AddEntriesFrom(input, _repeated_people_codec);
+            break;
+          }
+        }
+      }
+    }
+
+    public void MergeFrom(in ReadOnlySpan<byte> span, ref int pos) {
+      uint tag;
+      while ((tag = CodedInputSpanPosParser.ReadTag(span, ref pos)) != 0) {
+        switch(tag) {
+          default:
+            //_unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            throw new NotImplementedException();
+            //break;
+          case 10: {
+            var obj = new Person();
+            var nestedBuffer = CodedInputSpanPosParser.ReadLengthDelimited(span, ref pos);
+            int ipos = 0;
+            obj.MergeFrom(nestedBuffer, ref ipos);
             people_.Add(obj);
             //people_.AddEntriesFrom(input, _repeated_people_codec);
             break;

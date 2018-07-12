@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Buffers;
 using System.Buffers.Binary;
 using System.Runtime.CompilerServices;
 
@@ -187,6 +186,18 @@ namespace Google.Protobuf
             if (pos + length > span.Length)
                 throw new Exception();
             var ret = span.Slice(pos, length);
+            pos += length;
+            return ret;
+        }
+
+        //Only for ReadOnlyMemory testing
+        public static ReadOnlyMemory<byte> ReadLengthDelimited(in ReadOnlyMemory<byte> mem, ref int pos)
+        {
+            var span = mem.Span;
+            var length = ReadLength(in span, ref pos);
+            if (pos + length > span.Length)
+                throw new Exception();
+            var ret = mem.Slice(pos, length);
             pos += length;
             return ret;
         }

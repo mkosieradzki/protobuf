@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 using Google.Protobuf;
 using Google.Protobuf.Examples.AddressBook;
 using Google.Protobuf.Pipelines;
-using Google.Protobuf.WellKnownTypes;
 
 namespace TestProtoPiper
 {

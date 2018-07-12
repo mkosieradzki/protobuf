@@ -50,13 +50,13 @@ namespace TestProtoPiper
             await cpy.MergeFromAsync(reader);
         }
 
-        [Benchmark]
-        public void ParseCodedInputSpanPosVirtCallParser()
-        {
-            var buffer = new ReadOnlySpan<byte>(testData);
-            var pos = 0;
-            var cpy = CodedInputSpanPosParser.ReadMessage(in buffer, ref pos, AddressBookType.Instance);
-        }
+        //[Benchmark]
+        //public void ParseCodedInputSpanPosVirtCallParser()
+        //{
+        //    var buffer = new ReadOnlySpan<byte>(testData);
+        //    var pos = 0;
+        //    var cpy = CodedInputSpanPosParser.ReadMessage(in buffer, ref pos, AddressBookType.Instance);
+        //}
 
 
         [Benchmark]
@@ -85,20 +85,40 @@ namespace TestProtoPiper
         }
 
         [Benchmark]
-        public void ParseCodedInputSpanVirtCallParser()
+        public void ParseUsingCodedInputSpanPosParser()
         {
             var buffer = new ReadOnlySpan<byte>(testData);
 
-            var cpy = CodedInputSpanParser.ReadMessage(ref buffer, AddressBookType.Instance);
+            var cpy = new AddressBook();
+            int pos = 0;
+            cpy.MergeFrom(buffer, ref pos);
         }
 
         [Benchmark]
-        public void ParseCodedInputSmartVirtCallParser()
+        public void ParseUsingCodedInputSpanPosParserReadOnlyMemory()
         {
-            var buffer = new ReadOnlySequence<byte>(testData);
+            var buffer = new ReadOnlyMemory<byte>(testData);
 
-            var cpy = CodedInputParser.ReadMessage(buffer, AddressBookType.Instance);
+            var cpy = new AddressBook();
+            int pos = 0;
+            cpy.MergeFrom(buffer, ref pos);
         }
+
+        //[Benchmark]
+        //public void ParseCodedInputSpanVirtCallParser()
+        //{
+        //    var buffer = new ReadOnlySpan<byte>(testData);
+
+        //    var cpy = CodedInputSpanParser.ReadMessage(ref buffer, AddressBookType.Instance);
+        //}
+
+        //[Benchmark]
+        //public void ParseCodedInputSmartVirtCallParser()
+        //{
+        //    var buffer = new ReadOnlySequence<byte>(testData);
+
+        //    var cpy = CodedInputParser.ReadMessage(buffer, AddressBookType.Instance);
+        //}
 
         //[Benchmark]
         //public void ParseCodedInputRefVirtCallParser()
