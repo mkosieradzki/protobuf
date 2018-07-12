@@ -31,7 +31,10 @@
 #endregion
 
 using Google.Protobuf.Collections;
+using Google.Protobuf.Compatibility;
 using System;
+using System.Buffers;
+using System.Buffers.Binary;
 using System.Collections.Generic;
 using System.IO;
 
@@ -62,7 +65,7 @@ namespace Google.Protobuf
         /// <summary>
         /// Buffer of data read from the stream or provided at construction time.
         /// </summary>
-        private readonly byte[] buffer;
+        private ReadOnlySequence<byte> buffer;
 
         /// <summary>
         /// The index of the buffer at which we need to refill from the stream (if there is one).
@@ -96,6 +99,7 @@ namespace Google.Protobuf
         internal const int DefaultRecursionLimit = 64;
         internal const int DefaultSizeLimit = Int32.MaxValue;
         internal const int BufferSize = 4096;
+        internal const int StackAllocThreshold = 1024 * 128;
 
         /// <summary>
         /// The total number of bytes read before the current buffer. The
@@ -121,7 +125,7 @@ namespace Google.Protobuf
         /// <summary>
         /// Creates a new CodedInputStream reading data from the given byte array.
         /// </summary>
-        public CodedInputStream(byte[] buffer) : this(null, ProtoPreconditions.CheckNotNull(buffer, "buffer"), 0, buffer.Length, true)
+        public CodedInputStream(byte[] buffer) : this(null, new ReadOnlySequence<byte>(ProtoPreconditions.CheckNotNull(buffer, "buffer")), 0, buffer.Length, true)
         {            
         }
 
@@ -129,7 +133,7 @@ namespace Google.Protobuf
         /// Creates a new <see cref="CodedInputStream"/> that reads from the given byte array slice.
         /// </summary>
         public CodedInputStream(byte[] buffer, int offset, int length)
-            : this(null, ProtoPreconditions.CheckNotNull(buffer, "buffer"), offset, offset + length, true)
+            : this(null, new ReadOnlySequence<byte>(ProtoPreconditions.CheckNotNull(buffer, "buffer")), offset, offset + length, true)
         {            
             if (offset < 0 || offset > buffer.Length)
             {
@@ -158,7 +162,7 @@ namespace Google.Protobuf
         /// <c cref="CodedInputStream"/> is disposed; <c>false</c> to dispose of the given stream when the
         /// returned object is disposed.</param>
         public CodedInputStream(Stream input, bool leaveOpen)
-            : this(ProtoPreconditions.CheckNotNull(input, "input"), new byte[BufferSize], 0, 0, leaveOpen)
+            : this(ProtoPreconditions.CheckNotNull(input, "input"), ReadOnlySequence<byte>.Empty, 0, 0, leaveOpen)
         {
         }
         
@@ -166,7 +170,7 @@ namespace Google.Protobuf
         /// Creates a new CodedInputStream reading data from the given
         /// stream and buffer, using the default limits.
         /// </summary>
-        internal CodedInputStream(Stream input, byte[] buffer, int bufferPos, int bufferSize, bool leaveOpen)
+        internal CodedInputStream(Stream input, ReadOnlySequence<byte> buffer, int bufferPos, int bufferSize, bool leaveOpen)
         {
             this.input = input;
             this.buffer = buffer;
@@ -185,7 +189,7 @@ namespace Google.Protobuf
         /// This chains to the version with the default limits instead of vice versa to avoid
         /// having to check that the default values are valid every time.
         /// </remarks>
-        internal CodedInputStream(Stream input, byte[] buffer, int bufferPos, int bufferSize, int sizeLimit, int recursionLimit, bool leaveOpen)
+        internal CodedInputStream(Stream input, ReadOnlySequence<byte> buffer, int bufferPos, int bufferSize, int sizeLimit, int recursionLimit, bool leaveOpen)
             : this(input, buffer, bufferPos, bufferSize, leaveOpen)
         {
             if (sizeLimit <= 0)
@@ -218,7 +222,7 @@ namespace Google.Protobuf
         public static CodedInputStream CreateWithLimits(Stream input, int sizeLimit, int recursionLimit)
         {
             // Note: we may want an overload accepting leaveOpen
-            return new CodedInputStream(input, new byte[BufferSize], 0, 0, sizeLimit, recursionLimit, false);
+            return new CodedInputStream(input, ReadOnlySequence<byte>.Empty, 0, 0, sizeLimit, recursionLimit, false);
         }
 
         /// <summary>
@@ -347,7 +351,9 @@ namespace Google.Protobuf
             // and those two bytes being enough to get the tag. This will be true for fields up to 4095.
             if (bufferPos + 2 <= bufferSize)
             {
-                int tmp = buffer[bufferPos++];
+                Span<byte> rawBytes = stackalloc byte[2];
+                buffer.CopyTo(rawBytes);
+                int tmp = rawBytes[bufferPos++];
                 if (tmp < 128)
                 {
                     lastTag = (uint)tmp;
@@ -355,7 +361,7 @@ namespace Google.Protobuf
                 else
                 {
                     int result = tmp & 0x7f;
-                    if ((tmp = buffer[bufferPos++]) < 128)
+                    if ((tmp = rawBytes[bufferPos++]) < 128)
                     {
                         result |= tmp << 7;
                         lastTag = (uint) result;
@@ -480,21 +486,7 @@ namespace Google.Protobuf
         /// </summary>
         public float ReadFloat()
         {
-            if (BitConverter.IsLittleEndian && 4 <= bufferSize - bufferPos)
-            {
-                float ret = BitConverter.ToSingle(buffer, bufferPos);
-                bufferPos += 4;
-                return ret;
-            }
-            else
-            {
-                byte[] rawBytes = ReadRawBytes(4);
-                if (!BitConverter.IsLittleEndian)
-                {
-                    ByteArray.Reverse(rawBytes);
-                }
-                return BitConverter.ToSingle(rawBytes, 0);
-            }
+            return LowLevelCompat.Int32BitsToSingle((int)ReadRawLittleEndian32());
         }
 
         /// <summary>
@@ -554,18 +546,35 @@ namespace Google.Protobuf
             // No need to read any data for an empty string.
             if (length == 0)
             {
-                return "";
+                return String.Empty;
             }
-            if (length <= bufferSize - bufferPos)
+
+            RequireBytesInBuffer(length);
+
+            string result;
+            var pos = buffer.GetPosition(bufferPos);
+            if (buffer.TryGet(ref pos, out var memory, false) && memory.Length >= length)
             {
-                // Fast path:  We already have the bytes in a contiguous buffer, so
-                //   just copy directly from it.
-                String result = CodedOutputStream.Utf8Encoding.GetString(buffer, bufferPos, length);
-                bufferPos += length;
-                return result;
+                result = LowLevelCompat.SpanToUtf8String(memory.Span);
             }
-            // Slow path: Build a byte array first then copy it.
-            return CodedOutputStream.Utf8Encoding.GetString(ReadRawBytes(length), 0, length);
+            else if (length > StackAllocThreshold)
+            {
+                using (var rent = MemoryPool<byte>.Shared.Rent(length))
+                {
+                    var rawBytes = rent.Memory.Span;
+                    buffer.Slice(bufferPos, length).CopyTo(rawBytes);
+                    result = LowLevelCompat.SpanToUtf8String(rawBytes);
+                }
+            }
+            else
+            {
+                Span<byte> rawBytes = stackalloc byte[length];
+                buffer.Slice(bufferPos, length).CopyTo(rawBytes);
+                result = LowLevelCompat.SpanToUtf8String(rawBytes);
+            }
+
+            bufferPos += length;
+            return result;
         }
 
         /// <summary>
@@ -597,69 +606,46 @@ namespace Google.Protobuf
         public ByteString ReadBytes()
         {
             int length = ReadLength();
-            if (length <= bufferSize - bufferPos && length > 0)
+            if (length == 0)
             {
-                // Fast path:  We already have the bytes in a contiguous buffer, so
-                //   just copy directly from it.
-                ByteString result = ByteString.CopyFrom(buffer, bufferPos, length);
-                bufferPos += length;
-                return result;
+                return ByteString.Empty;
             }
-            else
-            {
-                // Slow path:  Build a byte array and attach it to a new ByteString.
-                return ByteString.AttachBytes(ReadRawBytes(length));
-            }
+            RequireBytesInBuffer(length);
+
+            var result = ByteString.CopyFrom(buffer.Slice(bufferPos, length));
+            bufferPos += length;
+            return result;
         }
 
         /// <summary>
         /// Reads a uint32 field value from the stream.
         /// </summary>   
-        public uint ReadUInt32()
-        {
-            return ReadRawVarint32();
-        }
+        public uint ReadUInt32() => ReadRawVarint32();
 
         /// <summary>
         /// Reads an enum field value from the stream.
         /// </summary>   
-        public int ReadEnum()
-        {
-            // Currently just a pass-through, but it's nice to separate it logically from WriteInt32.
-            return (int) ReadRawVarint32();
-        }
+        public int ReadEnum() => (int)ReadRawVarint32();
 
         /// <summary>
         /// Reads an sfixed32 field value from the stream.
         /// </summary>   
-        public int ReadSFixed32()
-        {
-            return (int) ReadRawLittleEndian32();
-        }
+        public int ReadSFixed32() => (int)ReadRawLittleEndian32();
 
         /// <summary>
         /// Reads an sfixed64 field value from the stream.
         /// </summary>   
-        public long ReadSFixed64()
-        {
-            return (long) ReadRawLittleEndian64();
-        }
+        public long ReadSFixed64() => (long)ReadRawLittleEndian64();
 
         /// <summary>
         /// Reads an sint32 field value from the stream.
         /// </summary>   
-        public int ReadSInt32()
-        {
-            return DecodeZigZag32(ReadRawVarint32());
-        }
+        public int ReadSInt32() => DecodeZigZag32(ReadRawVarint32());
 
         /// <summary>
         /// Reads an sint64 field value from the stream.
         /// </summary>   
-        public long ReadSInt64()
-        {
-            return DecodeZigZag64(ReadRawVarint64());
-        }
+        public long ReadSInt64() => DecodeZigZag64(ReadRawVarint64());
 
         /// <summary>
         /// Reads a length for length-delimited data.
@@ -668,10 +654,7 @@ namespace Google.Protobuf
         /// This is internally just reading a varint, but this method exists
         /// to make the calling code clearer.
         /// </remarks>
-        public int ReadLength()
-        {
-            return (int) ReadRawVarint32();
-        }
+        public int ReadLength() => (int)ReadRawVarint32();
 
         /// <summary>
         /// Peeks at the next tag in the stream. If it matches <paramref name="tag"/>,
@@ -757,34 +740,37 @@ namespace Google.Protobuf
                 return SlowReadRawVarint32();
             }
 
-            int tmp = buffer[bufferPos++];
+            Span<byte> rawBytes = stackalloc byte[5];
+            buffer.Slice(bufferPos, 5).CopyTo(rawBytes);
+
+            int tmp = rawBytes[bufferPos++];
             if (tmp < 128)
             {
                 return (uint) tmp;
             }
             int result = tmp & 0x7f;
-            if ((tmp = buffer[bufferPos++]) < 128)
+            if ((tmp = rawBytes[bufferPos++]) < 128)
             {
                 result |= tmp << 7;
             }
             else
             {
                 result |= (tmp & 0x7f) << 7;
-                if ((tmp = buffer[bufferPos++]) < 128)
+                if ((tmp = rawBytes[bufferPos++]) < 128)
                 {
                     result |= tmp << 14;
                 }
                 else
                 {
                     result |= (tmp & 0x7f) << 14;
-                    if ((tmp = buffer[bufferPos++]) < 128)
+                    if ((tmp = rawBytes[bufferPos++]) < 128)
                     {
                         result |= tmp << 21;
                     }
                     else
                     {
                         result |= (tmp & 0x7f) << 21;
-                        result |= (tmp = buffer[bufferPos++]) << 28;
+                        result |= (tmp = rawBytes[bufferPos++]) << 28;
                         if (tmp >= 128)
                         {
                             // Discard upper 32 bits.
@@ -1005,6 +991,130 @@ namespace Google.Protobuf
             get { return bufferPos == bufferSize && !RefillBuffer(false); }
         }
 
+        private void RequireBytesInBuffer(int bytesRequired)
+        {
+            //TODO: Implement
+            throw new NotImplementedException();
+            ///// <summary>
+            ///// Reads a fixed size of bytes from the input.
+            ///// </summary>
+            ///// <exception cref="InvalidProtocolBufferException">
+            ///// the end of the stream or the current limit was reached
+            ///// </exception>
+            //internal byte[] ReadRawBytes(int size)
+            //{
+            //    if (size < 0)
+            //    {
+            //        throw InvalidProtocolBufferException.NegativeSize();
+            //    }
+
+            //    if (totalBytesRetired + bufferPos + size > currentLimit)
+            //    {
+            //        // Read to the end of the stream (up to the current limit) anyway.
+            //        SkipRawBytes(currentLimit - totalBytesRetired - bufferPos);
+            //        // Then fail.
+            //        throw InvalidProtocolBufferException.TruncatedMessage();
+            //    }
+
+            //    if (size <= bufferSize - bufferPos)
+            //    {
+            //        // We have all the bytes we need already.
+            //        byte[] bytes = new byte[size];
+            //        ByteArray.Copy(buffer, bufferPos, bytes, 0, size);
+            //        bufferPos += size;
+            //        return bytes;
+            //    }
+            //    else if (size < buffer.Length)
+            //    {
+            //        // Reading more bytes than are in the buffer, but not an excessive number
+            //        // of bytes.  We can safely allocate the resulting array ahead of time.
+
+            //        // First copy what we have.
+            //        byte[] bytes = new byte[size];
+            //        int pos = bufferSize - bufferPos;
+            //        ByteArray.Copy(buffer, bufferPos, bytes, 0, pos);
+            //        bufferPos = bufferSize;
+
+            //        // We want to use RefillBuffer() and then copy from the buffer into our
+            //        // byte array rather than reading directly into our byte array because
+            //        // the input may be unbuffered.
+            //        RefillBuffer(true);
+
+            //        while (size - pos > bufferSize)
+            //        {
+            //            Buffer.BlockCopy(buffer, 0, bytes, pos, bufferSize);
+            //            pos += bufferSize;
+            //            bufferPos = bufferSize;
+            //            RefillBuffer(true);
+            //        }
+
+            //        ByteArray.Copy(buffer, 0, bytes, pos, size - pos);
+            //        bufferPos = size - pos;
+
+            //        return bytes;
+            //    }
+            //    else
+            //    {
+            //        // The size is very large.  For security reasons, we can't allocate the
+            //        // entire byte array yet.  The size comes directly from the input, so a
+            //        // maliciously-crafted message could provide a bogus very large size in
+            //        // order to trick the app into allocating a lot of memory.  We avoid this
+            //        // by allocating and reading only a small chunk at a time, so that the
+            //        // malicious message must actually *be* extremely large to cause
+            //        // problems.  Meanwhile, we limit the allowed size of a message elsewhere.
+
+            //        // Remember the buffer markers since we'll have to copy the bytes out of
+            //        // it later.
+            //        int originalBufferPos = bufferPos;
+            //        int originalBufferSize = bufferSize;
+
+            //        // Mark the current buffer consumed.
+            //        totalBytesRetired += bufferSize;
+            //        bufferPos = 0;
+            //        bufferSize = 0;
+
+            //        // Read all the rest of the bytes we need.
+            //        int sizeLeft = size - (originalBufferSize - originalBufferPos);
+            //        List<byte[]> chunks = new List<byte[]>();
+
+            //        while (sizeLeft > 0)
+            //        {
+            //            byte[] chunk = new byte[Math.Min(sizeLeft, buffer.Length)];
+            //            int pos = 0;
+            //            while (pos < chunk.Length)
+            //            {
+            //                int n = (input == null) ? -1 : input.Read(chunk, pos, chunk.Length - pos);
+            //                if (n <= 0)
+            //                {
+            //                    throw InvalidProtocolBufferException.TruncatedMessage();
+            //                }
+            //                totalBytesRetired += n;
+            //                pos += n;
+            //            }
+            //            sizeLeft -= chunk.Length;
+            //            chunks.Add(chunk);
+            //        }
+
+            //        // OK, got everything.  Now concatenate it all into one buffer.
+            //        byte[] bytes = new byte[size];
+
+            //        // Start by copying the leftover bytes from this.buffer.
+            //        int newPos = originalBufferSize - originalBufferPos;
+            //        ByteArray.Copy(buffer, originalBufferPos, bytes, 0, newPos);
+
+            //        // And now all the chunks.
+            //        foreach (byte[] chunk in chunks)
+            //        {
+            //            Buffer.BlockCopy(chunk, 0, bytes, newPos, chunk.Length);
+            //            newPos += chunk.Length;
+            //        }
+
+            //        // Done.
+            //        return bytes;
+            //    }
+            //}
+        }
+
         /// <summary>
         /// Called when buffer is empty to read more bytes from the
         /// input.  If <paramref name="mustSucceed"/> is true, RefillBuffer() gurantees that
@@ -1078,126 +1188,7 @@ namespace Google.Protobuf
             {
                 RefillBuffer(true);
             }
-            return buffer[bufferPos++];
-        }
-
-        /// <summary>
-        /// Reads a fixed size of bytes from the input.
-        /// </summary>
-        /// <exception cref="InvalidProtocolBufferException">
-        /// the end of the stream or the current limit was reached
-        /// </exception>
-        internal byte[] ReadRawBytes(int size)
-        {
-            if (size < 0)
-            {
-                throw InvalidProtocolBufferException.NegativeSize();
-            }
-
-            if (totalBytesRetired + bufferPos + size > currentLimit)
-            {
-                // Read to the end of the stream (up to the current limit) anyway.
-                SkipRawBytes(currentLimit - totalBytesRetired - bufferPos);
-                // Then fail.
-                throw InvalidProtocolBufferException.TruncatedMessage();
-            }
-
-            if (size <= bufferSize - bufferPos)
-            {
-                // We have all the bytes we need already.
-                byte[] bytes = new byte[size];
-                ByteArray.Copy(buffer, bufferPos, bytes, 0, size);
-                bufferPos += size;
-                return bytes;
-            }
-            else if (size < buffer.Length)
-            {
-                // Reading more bytes than are in the buffer, but not an excessive number
-                // of bytes.  We can safely allocate the resulting array ahead of time.
-
-                // First copy what we have.
-                byte[] bytes = new byte[size];
-                int pos = bufferSize - bufferPos;
-                ByteArray.Copy(buffer, bufferPos, bytes, 0, pos);
-                bufferPos = bufferSize;
-
-                // We want to use RefillBuffer() and then copy from the buffer into our
-                // byte array rather than reading directly into our byte array because
-                // the input may be unbuffered.
-                RefillBuffer(true);
-
-                while (size - pos > bufferSize)
-                {
-                    Buffer.BlockCopy(buffer, 0, bytes, pos, bufferSize);
-                    pos += bufferSize;
-                    bufferPos = bufferSize;
-                    RefillBuffer(true);
-                }
-
-                ByteArray.Copy(buffer, 0, bytes, pos, size - pos);
-                bufferPos = size - pos;
-
-                return bytes;
-            }
-            else
-            {
-                // The size is very large.  For security reasons, we can't allocate the
-                // entire byte array yet.  The size comes directly from the input, so a
-                // maliciously-crafted message could provide a bogus very large size in
-                // order to trick the app into allocating a lot of memory.  We avoid this
-                // by allocating and reading only a small chunk at a time, so that the
-                // malicious message must actually *be* extremely large to cause
-                // problems.  Meanwhile, we limit the allowed size of a message elsewhere.
-
-                // Remember the buffer markers since we'll have to copy the bytes out of
-                // it later.
-                int originalBufferPos = bufferPos;
-                int originalBufferSize = bufferSize;
-
-                // Mark the current buffer consumed.
-                totalBytesRetired += bufferSize;
-                bufferPos = 0;
-                bufferSize = 0;
-
-                // Read all the rest of the bytes we need.
-                int sizeLeft = size - (originalBufferSize - originalBufferPos);
-                List<byte[]> chunks = new List<byte[]>();
-
-                while (sizeLeft > 0)
-                {
-                    byte[] chunk = new byte[Math.Min(sizeLeft, buffer.Length)];
-                    int pos = 0;
-                    while (pos < chunk.Length)
-                    {
-                        int n = (input == null) ? -1 : input.Read(chunk, pos, chunk.Length - pos);
-                        if (n <= 0)
-                        {
-                            throw InvalidProtocolBufferException.TruncatedMessage();
-                        }
-                        totalBytesRetired += n;
-                        pos += n;
-                    }
-                    sizeLeft -= chunk.Length;
-                    chunks.Add(chunk);
-                }
-
-                // OK, got everything.  Now concatenate it all into one buffer.
-                byte[] bytes = new byte[size];
-
-                // Start by copying the leftover bytes from this.buffer.
-                int newPos = originalBufferSize - originalBufferPos;
-                ByteArray.Copy(buffer, originalBufferPos, bytes, 0, newPos);
-
-                // And now all the chunks.
-                foreach (byte[] chunk in chunks)
-                {
-                    Buffer.BlockCopy(chunk, 0, bytes, newPos, chunk.Length);
-                    newPos += chunk.Length;
-                }
-
-                // Done.
-                return bytes;
-            }
+            return buffer.Slice(bufferPos++).First.Span[0];
         }
 
         /// <summary>

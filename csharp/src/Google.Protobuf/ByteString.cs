@@ -31,6 +31,7 @@
 #endregion
 
 using System;
+using System.Buffers;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -161,7 +162,7 @@ namespace Google.Protobuf
             int capacity = stream.CanSeek ? checked((int) (stream.Length - stream.Position)) : 0;
             var memoryStream = new MemoryStream(capacity);
             stream.CopyTo(memoryStream);
-#if NETSTANDARD1_0
+#if NETSTANDARD1_1
             byte[] bytes = memoryStream.ToArray();
 #else
             // Avoid an extra copy if we can.
@@ -187,7 +188,7 @@ namespace Google.Protobuf
             // We have to specify the buffer size here, as there's no overload accepting the cancellation token
             // alone. But it's documented to use 81920 by default if not specified.
             await stream.CopyToAsync(memoryStream, 81920, cancellationToken);
-#if NETSTANDARD1_0
+#if NETSTANDARD1_1
             byte[] bytes = memoryStream.ToArray();
 #else
             // Avoid an extra copy if we can.
@@ -207,6 +208,16 @@ namespace Google.Protobuf
         public static ByteString CopyFrom(params byte[] bytes)
         {
             return new ByteString((byte[]) bytes.Clone());
+        }
+
+        /// <summary>
+        /// Constructs a <see cref="ByteString" /> from a non-contiguous buffer.
+        /// </summary>
+        public static ByteString CopyFrom(ReadOnlySequence<byte> buffer)
+        {
+            var bytes = new byte[buffer.Length];
+            buffer.CopyTo(bytes);
+            return new ByteString(bytes);
         }
 
         /// <summary>
