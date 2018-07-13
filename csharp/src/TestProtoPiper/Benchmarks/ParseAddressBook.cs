@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace TestProtoPiper
 {
-    [CoreJob()]
+    [CoreJob,ClrJob]
     [RPlotExporter, RankColumn]
     public class ParseAddressBook
     {
@@ -39,93 +39,91 @@ namespace TestProtoPiper
         private byte[] testData;
 
         [Benchmark]
-        public async Task ParseUsingCodedInputReader()
-        {
-            var pipe = new Pipe();
-            pipe.Writer.WriteAsync(testData).GetAwaiter().GetResult();
-            pipe.Writer.Complete();
-            var reader = new CodedInputReader(pipe.Reader);
-
-            var cpy = new AddressBook();
-            await cpy.MergeFromAsync(reader);
-        }
-
-        //[Benchmark]
-        //public void ParseCodedInputSpanPosVirtCallParser()
-        //{
-        //    var buffer = new ReadOnlySpan<byte>(testData);
-        //    var pos = 0;
-        //    var cpy = CodedInputSpanPosParser.ReadMessage(in buffer, ref pos, AddressBookType.Instance);
-        //}
-
-
-        [Benchmark]
         public void ParseUsingClassic()
         {
             AddressBook.Parser.ParseFrom(testData);
         }
 
-
-        [Benchmark]
-        public void ParseUsingCodedInputParser()
-        {
-            var buffer = new ReadOnlySequence<byte>(testData);
-
-            var cpy = new AddressBook();
-            cpy.MergeFrom(ref buffer);
-        }
-
-        [Benchmark]
-        public void ParseUsingCodedInputSpanParser()
-        {
-            var buffer = new ReadOnlySpan<byte>(testData);
-
-            var cpy = new AddressBook();
-            cpy.MergeFrom(ref buffer);
-        }
-
-        [Benchmark]
-        public void ParseUsingCodedInputSpanPosParser()
-        {
-            var buffer = new ReadOnlySpan<byte>(testData);
-
-            var cpy = new AddressBook();
-            int pos = 0;
-            cpy.MergeFrom(buffer, ref pos);
-        }
-
-        [Benchmark]
-        public void ParseUsingCodedInputSpanPosParserReadOnlyMemory()
-        {
-            var buffer = new ReadOnlyMemory<byte>(testData);
-
-            var cpy = new AddressBook();
-            int pos = 0;
-            cpy.MergeFrom(buffer, ref pos);
-        }
-
         //[Benchmark]
-        //public void ParseCodedInputSpanVirtCallParser()
+        //public async Task ParseUsingCodedInputReader()
         //{
-        //    var buffer = new ReadOnlySpan<byte>(testData);
+        //    var pipe = new Pipe();
+        //    pipe.Writer.WriteAsync(testData).GetAwaiter().GetResult();
+        //    pipe.Writer.Complete();
+        //    var reader = new CodedInputReader(pipe.Reader);
 
-        //    var cpy = CodedInputSpanParser.ReadMessage(ref buffer, AddressBookType.Instance);
+        //    var cpy = new AddressBook();
+        //    await cpy.MergeFromAsync(reader);
         //}
 
+        ////[Benchmark]
+        ////public void ParseCodedInputSpanPosVirtCallParser()
+        ////{
+        ////    var buffer = new ReadOnlySpan<byte>(testData);
+        ////    var pos = 0;
+        ////    var cpy = CodedInputSpanPosParser.ReadMessage(in buffer, ref pos, AddressBookType.Instance);
+        ////}
+
         //[Benchmark]
-        //public void ParseCodedInputSmartVirtCallParser()
+        //public void ParseUsingCodedInputParser()
         //{
         //    var buffer = new ReadOnlySequence<byte>(testData);
 
-        //    var cpy = CodedInputParser.ReadMessage(buffer, AddressBookType.Instance);
+        //    var cpy = new AddressBook();
+        //    cpy.MergeFrom(ref buffer);
         //}
 
         //[Benchmark]
-        //public void ParseCodedInputRefVirtCallParser()
+        //public void ParseUsingCodedInputSpanParser()
         //{
         //    var buffer = new ReadOnlySpan<byte>(testData);
 
-        //    var cpy = RefAddressBookType.Parser.ReadMessage(ref buffer);
+        //    var cpy = new AddressBook();
+        //    cpy.MergeFrom(ref buffer);
         //}
+
+        //[Benchmark]
+        //public void ParseUsingCodedInputSpanPosParser()
+        //{
+        //    var buffer = new ReadOnlySpan<byte>(testData);
+
+        //    var cpy = new AddressBook();
+        //    int pos = 0;
+        //    cpy.MergeFrom(buffer, ref pos);
+        //}
+
+        //[Benchmark]
+        //public void ParseUsingCodedInputSpanPosParserReadOnlyMemory()
+        //{
+        //    var buffer = new ReadOnlyMemory<byte>(testData);
+
+        //    var cpy = new AddressBook();
+        //    int pos = 0;
+        //    cpy.MergeFrom(buffer, ref pos);
+        //}
+
+        ////[Benchmark]
+        ////public void ParseCodedInputSpanVirtCallParser()
+        ////{
+        ////    var buffer = new ReadOnlySpan<byte>(testData);
+
+        ////    var cpy = CodedInputSpanParser.ReadMessage(ref buffer, AddressBookType.Instance);
+        ////}
+
+        ////[Benchmark]
+        ////public void ParseCodedInputSmartVirtCallParser()
+        ////{
+        ////    var buffer = new ReadOnlySequence<byte>(testData);
+
+        ////    var cpy = CodedInputParser.ReadMessage(buffer, AddressBookType.Instance);
+        ////}
+
+        ////[Benchmark]
+        ////public void ParseCodedInputRefVirtCallParser()
+        ////{
+        ////    var buffer = new ReadOnlySpan<byte>(testData);
+
+        ////    var cpy = RefAddressBookType.Parser.ReadMessage(ref buffer);
+        ////}
     }
 }

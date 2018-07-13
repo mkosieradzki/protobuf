@@ -104,6 +104,7 @@ namespace TestProtoPiper
     {
         public static string DecodeUtf8String(ReadOnlySequence<byte> sequence)
         {
+#if NETCOREAPP2_1
             if (sequence.IsEmpty)
             {
                 return String.Empty;
@@ -122,10 +123,14 @@ namespace TestProtoPiper
             {
                 throw new NotImplementedException();
             }
+#else
+            throw new NotImplementedException();
+#endif
         }
 
         public static string DecodeUtf8String(ReadOnlySpan<byte> span)
         {
+#if NETCOREAPP2_1
             if (span.IsEmpty)
             {
                 return String.Empty;
@@ -134,6 +139,9 @@ namespace TestProtoPiper
             {
                 return Encoding.UTF8.GetString(span);
             }
+#else
+            throw new NotImplementedException();
+#endif
         }
 
         public static FieldInfo GetUnknownFieldInfo(uint tag)
