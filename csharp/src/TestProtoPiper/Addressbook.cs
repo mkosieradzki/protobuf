@@ -55,7 +55,7 @@ namespace Google.Protobuf.Examples.AddressBook {
   /// <summary>
   /// [START messages]
   /// </summary>
-  public sealed partial class Person : pb::IMessage<Person> {
+  public sealed partial class Person : pb::IMessage<Person>, IMessageSupportsSpan, pb::IEfficientMessage {
     private static readonly pb::MessageParser<Person> _parser = new pb::MessageParser<Person>(() => new Person());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -294,6 +294,44 @@ namespace Google.Protobuf.Examples.AddressBook {
         }
       }
     }
+
+#if NETCOREAPP2_1
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input, ref ReadOnlySpan<byte> buffer) {
+      uint tag;
+      while ((tag = input.ReadTag(ref buffer)) != 0) {
+        switch(tag) {
+          //default:
+          //  _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+          //  break;
+          case 10: {
+            Name = input.ReadString(ref buffer);
+            break;
+          }
+          case 16: {
+            Id = input.ReadInt32(ref buffer);
+            break;
+          }
+          case 26: {
+            Email = input.ReadString(ref buffer);
+            break;
+          }
+          //case 34: {
+          //  phones_.AddEntriesFrom(input, _repeated_phones_codec);
+          //  break;
+          //}
+          //case 42: {
+          //  if (lastUpdated_ == null) {
+          //    lastUpdated_ = new global::Google.Protobuf.WellKnownTypes.Timestamp();
+          //  }
+          //  input.ReadMessage(lastUpdated_);
+          //  break;
+          //}
+        }
+      }
+    }
+#endif
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void MergeFrom(ref ReadOnlySequence<byte> buffer) {
@@ -662,7 +700,7 @@ namespace Google.Protobuf.Examples.AddressBook {
   /// <summary>
   /// Our address book file is just one of these.
   /// </summary>
-  public sealed partial class AddressBook : pb::IMessage<AddressBook> {
+  public sealed partial class AddressBook : pb::IMessage<AddressBook>, pb::IEfficientMessage {
     private static readonly pb::MessageParser<AddressBook> _parser = new pb::MessageParser<AddressBook>(() => new AddressBook());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -781,6 +819,64 @@ namespace Google.Protobuf.Examples.AddressBook {
       }
     }
 
+#if NETCOREAPP2_1
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input, ref ReadOnlySpan<byte> buffer) {
+      uint tag;
+      while ((tag = input.ReadTag(ref buffer)) != 0) {
+        switch(tag) {
+          //default:
+          //  _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+          //  break;
+          case 10: {
+            var item = new Person();
+            input.ReadMessageInline(item, ref buffer);
+            people_.Add(item);
+            break;
+          }
+        }
+      }
+    }
+
+#endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFromInline(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            var item = new Person();
+            input.ReadMessageInline(item);
+            //break;
+            //int length = input.ReadLength();
+            ////if (recursionDepth >= recursionLimit)
+            ////{
+            ////    throw InvalidProtocolBufferException.RecursionLimitExceeded();
+            ////}
+            //int oldLimit = input.PushLimit(length);
+            ////++recursionDepth;
+            //item.MergeFrom(input);
+            ////input.CheckReadEndOfStreamTag();
+            //// Check that we've read exactly as much data as expected.
+            ////if (!input.ReachedLimit)
+            ////{
+            ////    throw InvalidProtocolBufferException.TruncatedMessage();
+            ////}
+            ////--recursionDepth;
+            //input.PopLimit(oldLimit);
+            ////people_.AddEntriesFrom(input, _repeated_people_codec);
+            people_.Add(item);
+            break;
+          }
+        }
+      }
+    }
+
     public void MergeFrom(ref ReadOnlySequence<byte> buffer) {
       uint tag;
       while ((tag = CodedInputParser.ReadTag(ref buffer)) != 0) {
@@ -821,8 +917,29 @@ namespace Google.Protobuf.Examples.AddressBook {
       }
     }
 
-    public void MergeFrom(in ReadOnlyMemory<byte> mem, ref int pos) {
-      var span = mem.Span;
+    //public void MergeFrom(in ReadOnlyMemory<byte> mem, ref int pos) {
+    //  var span = mem.Span;
+    //  uint tag;
+    //  while ((tag = CodedInputSpanPosParser.ReadTag(span, ref pos)) != 0) {
+    //    switch(tag) {
+    //      default:
+    //        //_unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+    //        throw new NotImplementedException();
+    //        //break;
+    //      case 10: {
+    //        var obj = new Person();
+    //        var nestedBuffer = CodedInputSpanPosParser.ReadLengthDelimited(mem, ref pos);
+    //        int ipos = 0;
+    //        obj.MergeFrom(nestedBuffer, ref ipos);
+    //        people_.Add(obj);
+    //        //people_.AddEntriesFrom(input, _repeated_people_codec);
+    //        break;
+    //      }
+    //    }
+    //  }
+    //}
+
+    public void MergeFrom(in ReadOnlySpan<byte> span, ref int pos) {
       uint tag;
       while ((tag = CodedInputSpanPosParser.ReadTag(span, ref pos)) != 0) {
         switch(tag) {
@@ -831,19 +948,15 @@ namespace Google.Protobuf.Examples.AddressBook {
             throw new NotImplementedException();
             //break;
           case 10: {
-            var obj = new Person();
-            var nestedBuffer = CodedInputSpanPosParser.ReadLengthDelimited(mem, ref pos);
-            int ipos = 0;
-            obj.MergeFrom(nestedBuffer, ref ipos);
-            people_.Add(obj);
-            //people_.AddEntriesFrom(input, _repeated_people_codec);
+            //people_.Add(CodedInputSpanPosParser.ReadMessage(in span, ref pos, () => new Person()));
+            people_.Add(CodedInputSpanPosParser.ReadMessage(in span, ref pos, new Person()));
             break;
           }
         }
       }
     }
 
-    public void MergeFrom(in ReadOnlySpan<byte> span, ref int pos) {
+    public void MergeFromInline(in ReadOnlySpan<byte> span, ref int pos) {
       uint tag;
       while ((tag = CodedInputSpanPosParser.ReadTag(span, ref pos)) != 0) {
         switch(tag) {

@@ -34,6 +34,7 @@ using Google.Protobuf.Collections;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Runtime.CompilerServices;
 
 namespace Google.Protobuf
 {
@@ -63,6 +64,10 @@ namespace Google.Protobuf
         /// Buffer of data read from the stream or provided at construction time.
         /// </summary>
         private readonly byte[] buffer;
+
+#if NETCOREAPP2_1
+        public ReadOnlySpan<byte> Span => new ReadOnlySpan<byte>(buffer);
+#endif
 
         /// <summary>
         /// The index of the buffer at which we need to refill from the stream (if there is one).
@@ -114,7 +119,7 @@ namespace Google.Protobuf
         private readonly int recursionLimit;
         private readonly int sizeLimit;
 
-        #region Construction
+#region Construction
         // Note that the checks are performed such that we don't end up checking obviously-valid things
         // like non-null references for arrays we've just created.
 
@@ -199,7 +204,7 @@ namespace Google.Protobuf
             this.sizeLimit = sizeLimit;
             this.recursionLimit = recursionLimit;
         }
-        #endregion
+#endregion
 
         /// <summary>
         /// Creates a <see cref="CodedInputStream"/> with the specified size and recursion limits, reading
@@ -288,13 +293,14 @@ namespace Google.Protobuf
             }
         }
 
-        #region Validation
+#region Validation
         /// <summary>
         /// Verifies that the last call to ReadTag() returned tag 0 - in other words,
         /// we've reached the end of the stream when we expected to.
         /// </summary>
         /// <exception cref="InvalidProtocolBufferException">The 
         /// tag read was not the one specified</exception>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal void CheckReadEndOfStreamTag()
         {
             if (lastTag != 0)
@@ -302,15 +308,16 @@ namespace Google.Protobuf
                 throw InvalidProtocolBufferException.MoreDataAvailable();
             }
         }
-        #endregion
+#endregion
 
-        #region Reading of tags etc
+#region Reading of tags etc
 
         /// <summary>
         /// Peeks at the next field tag. This is like calling <see cref="ReadTag"/>, but the
         /// tag is not consumed. (So a subsequent call to <see cref="ReadTag"/> will return the
         /// same value.)
         /// </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public uint PeekTag()
         {
             if (hasNextTag)
@@ -334,6 +341,7 @@ namespace Google.Protobuf
         /// for an embedded message, for example.
         /// </remarks>
         /// <returns>The next field tag, or 0 for end of stream. (0 is never a valid tag.)</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public uint ReadTag()
         {
             if (hasNextTag)
@@ -385,6 +393,61 @@ namespace Google.Protobuf
             }
             return lastTag;
         }
+
+#if NETCOREAPP2_1
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public uint ReadTag(ref ReadOnlySpan<byte> buffer)
+        {
+            if (hasNextTag)
+            {
+                lastTag = nextTag;
+                hasNextTag = false;
+                return lastTag;
+            }
+
+            // Optimize for the incredibly common case of having at least two bytes left in the buffer,
+            // and those two bytes being enough to get the tag. This will be true for fields up to 4095.
+            if (bufferPos + 2 <= bufferSize)
+            {
+                int tmp = buffer[bufferPos++];
+                if (tmp < 128)
+                {
+                    lastTag = (uint)tmp;
+                }
+                else
+                {
+                    int result = tmp & 0x7f;
+                    if ((tmp = buffer[bufferPos++]) < 128)
+                    {
+                        result |= tmp << 7;
+                        lastTag = (uint)result;
+                    }
+                    else
+                    {
+                        // Nope, rewind and go the potentially slow route.
+                        bufferPos -= 2;
+                        lastTag = ReadRawVarint32(ref buffer);
+                    }
+                }
+            }
+            else
+            {
+                if (IsAtEnd)
+                {
+                    lastTag = 0;
+                    return 0; // This is the only case in which we return 0.
+                }
+
+                lastTag = ReadRawVarint32(ref buffer);
+            }
+            if (WireFormat.GetTagFieldNumber(lastTag) == 0)
+            {
+                // If we actually read a tag with a field of 0, that's not a valid tag.
+                throw InvalidProtocolBufferException.InvalidTag();
+            }
+            return lastTag;
+        }
+#endif
 
         /// <summary>
         /// Skips the data for the field with the tag we've just read.
@@ -470,6 +533,7 @@ namespace Google.Protobuf
         /// <summary>
         /// Reads a double field from the stream.
         /// </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public double ReadDouble()
         {
             return BitConverter.Int64BitsToDouble((long) ReadRawLittleEndian64());
@@ -478,6 +542,7 @@ namespace Google.Protobuf
         /// <summary>
         /// Reads a float field from the stream.
         /// </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public float ReadFloat()
         {
             if (BitConverter.IsLittleEndian && 4 <= bufferSize - bufferPos)
@@ -500,6 +565,7 @@ namespace Google.Protobuf
         /// <summary>
         /// Reads a uint64 field from the stream.
         /// </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public ulong ReadUInt64()
         {
             return ReadRawVarint64();
@@ -508,6 +574,7 @@ namespace Google.Protobuf
         /// <summary>
         /// Reads an int64 field from the stream.
         /// </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public long ReadInt64()
         {
             return (long) ReadRawVarint64();
@@ -516,14 +583,24 @@ namespace Google.Protobuf
         /// <summary>
         /// Reads an int32 field from the stream.
         /// </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public int ReadInt32()
         {
             return (int) ReadRawVarint32();
         }
 
+#if NETCOREAPP2_1
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public int ReadInt32(ref ReadOnlySpan<byte> buffer)
+        {
+            return (int)ReadRawVarint32(ref buffer);
+        }
+#endif
+
         /// <summary>
         /// Reads a fixed64 field from the stream.
         /// </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public ulong ReadFixed64()
         {
             return ReadRawLittleEndian64();
@@ -532,6 +609,7 @@ namespace Google.Protobuf
         /// <summary>
         /// Reads a fixed32 field from the stream.
         /// </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public uint ReadFixed32()
         {
             return ReadRawLittleEndian32();
@@ -540,6 +618,7 @@ namespace Google.Protobuf
         /// <summary>
         /// Reads a bool field from the stream.
         /// </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool ReadBool()
         {
             return ReadRawVarint32() != 0;
@@ -548,6 +627,7 @@ namespace Google.Protobuf
         /// <summary>
         /// Reads a string field from the stream.
         /// </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public string ReadString()
         {
             int length = ReadLength();
@@ -568,9 +648,36 @@ namespace Google.Protobuf
             return CodedOutputStream.Utf8Encoding.GetString(ReadRawBytes(length), 0, length);
         }
 
+#if NETCOREAPP2_1
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public string ReadString(ref ReadOnlySpan<byte> buffer)
+        {
+            int length = ReadLength(ref buffer);
+            // No need to read any data for an empty string.
+            if (length == 0)
+            {
+                return "";
+            }
+            if (length <= bufferSize - bufferPos)
+            {
+                // Fast path:  We already have the bytes in a contiguous buffer, so
+                //   just copy directly from it.
+                //TODO: Check performance of span based
+                //String result = CodedOutputStream.Utf8Encoding.GetString(this.buffer, bufferPos, length);
+                String result = CodedOutputStream.Utf8Encoding.GetString(buffer.Slice(bufferPos, length));
+                bufferPos += length;
+                return result;
+            }
+            // Slow path: Build a byte array first then copy it.
+            return CodedOutputStream.Utf8Encoding.GetString(ReadRawBytes(length, ref buffer), 0, length);
+        }
+#endif
+
         /// <summary>
         /// Reads an embedded message field value from the stream.
-        /// </summary>   
+        /// </summary>
+        //[MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void ReadMessage(IMessage builder)
         {
             int length = ReadLength();
@@ -591,9 +698,55 @@ namespace Google.Protobuf
             PopLimit(oldLimit);
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void ReadMessageInline<T>(T builder) where T : IMessage
+        {
+            int length = ReadLength();
+            if (recursionDepth >= recursionLimit)
+            {
+                throw InvalidProtocolBufferException.RecursionLimitExceeded();
+            }
+            int oldLimit = PushLimit(length);
+            ++recursionDepth;
+            builder.MergeFrom(this);
+            CheckReadEndOfStreamTag();
+            // Check that we've read exactly as much data as expected.
+            if (!ReachedLimit)
+            {
+                throw InvalidProtocolBufferException.TruncatedMessage();
+            }
+            --recursionDepth;
+            PopLimit(oldLimit);
+        }
+
+#if NETCOREAPP2_1
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void ReadMessageInline<T>(T builder, ref ReadOnlySpan<byte> buffer) where T : IEfficientMessage
+        {
+            int length = ReadLength(ref buffer);
+
+            if (recursionDepth >= recursionLimit)
+            {
+                throw InvalidProtocolBufferException.RecursionLimitExceeded();
+            }
+            int oldLimit = PushLimit(length);
+            ++recursionDepth;
+            builder.MergeFrom(this, ref buffer);
+            CheckReadEndOfStreamTag();
+            // Check that we've read exactly as much data as expected.
+            if (!ReachedLimit)
+            {
+                throw InvalidProtocolBufferException.TruncatedMessage();
+            }
+            --recursionDepth;
+            PopLimit(oldLimit);
+        }
+#endif
+
         /// <summary>
         /// Reads a bytes field value from the stream.
         /// </summary>   
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public ByteString ReadBytes()
         {
             int length = ReadLength();
@@ -615,6 +768,7 @@ namespace Google.Protobuf
         /// <summary>
         /// Reads a uint32 field value from the stream.
         /// </summary>   
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public uint ReadUInt32()
         {
             return ReadRawVarint32();
@@ -623,6 +777,7 @@ namespace Google.Protobuf
         /// <summary>
         /// Reads an enum field value from the stream.
         /// </summary>   
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public int ReadEnum()
         {
             // Currently just a pass-through, but it's nice to separate it logically from WriteInt32.
@@ -632,6 +787,7 @@ namespace Google.Protobuf
         /// <summary>
         /// Reads an sfixed32 field value from the stream.
         /// </summary>   
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public int ReadSFixed32()
         {
             return (int) ReadRawLittleEndian32();
@@ -640,6 +796,7 @@ namespace Google.Protobuf
         /// <summary>
         /// Reads an sfixed64 field value from the stream.
         /// </summary>   
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public long ReadSFixed64()
         {
             return (long) ReadRawLittleEndian64();
@@ -648,6 +805,7 @@ namespace Google.Protobuf
         /// <summary>
         /// Reads an sint32 field value from the stream.
         /// </summary>   
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public int ReadSInt32()
         {
             return DecodeZigZag32(ReadRawVarint32());
@@ -656,6 +814,7 @@ namespace Google.Protobuf
         /// <summary>
         /// Reads an sint64 field value from the stream.
         /// </summary>   
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public long ReadSInt64()
         {
             return DecodeZigZag64(ReadRawVarint64());
@@ -668,10 +827,19 @@ namespace Google.Protobuf
         /// This is internally just reading a varint, but this method exists
         /// to make the calling code clearer.
         /// </remarks>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public int ReadLength()
         {
             return (int) ReadRawVarint32();
         }
+
+#if NETCOREAPP2_1
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public int ReadLength(ref ReadOnlySpan<byte> buffer)
+        {
+            return (int)ReadRawVarint32(ref buffer);
+        }
+#endif
 
         /// <summary>
         /// Peeks at the next tag in the stream. If it matches <paramref name="tag"/>,
@@ -688,9 +856,9 @@ namespace Google.Protobuf
             return false;
         }
 
-        #endregion
+#endregion
 
-        #region Underlying reading primitives
+#region Underlying reading primitives
 
         /// <summary>
         /// Same code as ReadRawVarint32, but read each byte individually, checking for
@@ -744,12 +912,63 @@ namespace Google.Protobuf
             return (uint) result;
         }
 
+#if NETCOREAPP2_1
+        private uint SlowReadRawVarint32(ref ReadOnlySpan<byte> buffer)
+        {
+            int tmp = ReadRawByte(ref buffer);
+            if (tmp < 128)
+            {
+                return (uint)tmp;
+            }
+            int result = tmp & 0x7f;
+            if ((tmp = ReadRawByte(ref buffer)) < 128)
+            {
+                result |= tmp << 7;
+            }
+            else
+            {
+                result |= (tmp & 0x7f) << 7;
+                if ((tmp = ReadRawByte(ref buffer)) < 128)
+                {
+                    result |= tmp << 14;
+                }
+                else
+                {
+                    result |= (tmp & 0x7f) << 14;
+                    if ((tmp = ReadRawByte(ref buffer)) < 128)
+                    {
+                        result |= tmp << 21;
+                    }
+                    else
+                    {
+                        result |= (tmp & 0x7f) << 21;
+                        result |= (tmp = ReadRawByte(ref buffer)) << 28;
+                        if (tmp >= 128)
+                        {
+                            // Discard upper 32 bits.
+                            for (int i = 0; i < 5; i++)
+                            {
+                                if (ReadRawByte(ref buffer) < 128)
+                                {
+                                    return (uint)result;
+                                }
+                            }
+                            throw InvalidProtocolBufferException.MalformedVarint();
+                        }
+                    }
+                }
+            }
+            return (uint)result;
+        }
+#endif
+
         /// <summary>
         /// Reads a raw Varint from the stream.  If larger than 32 bits, discard the upper bits.
         /// This method is optimised for the case where we've got lots of data in the buffer.
         /// That means we can check the size just once, then just read directly from the buffer
         /// without constant rechecking of the buffer length.
         /// </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal uint ReadRawVarint32()
         {
             if (bufferPos + 5 > bufferSize)
@@ -806,6 +1025,65 @@ namespace Google.Protobuf
             return (uint) result;
         }
 
+#if NETCOREAPP2_1
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        internal uint ReadRawVarint32(ref ReadOnlySpan<byte> buffer)
+        {
+            if (bufferPos + 5 > bufferSize)
+            {
+                return SlowReadRawVarint32(ref buffer);
+            }
+
+            int tmp = buffer[bufferPos++];
+            if (tmp < 128)
+            {
+                return (uint)tmp;
+            }
+            int result = tmp & 0x7f;
+            if ((tmp = buffer[bufferPos++]) < 128)
+            {
+                result |= tmp << 7;
+            }
+            else
+            {
+                result |= (tmp & 0x7f) << 7;
+                if ((tmp = buffer[bufferPos++]) < 128)
+                {
+                    result |= tmp << 14;
+                }
+                else
+                {
+                    result |= (tmp & 0x7f) << 14;
+                    if ((tmp = buffer[bufferPos++]) < 128)
+                    {
+                        result |= tmp << 21;
+                    }
+                    else
+                    {
+                        result |= (tmp & 0x7f) << 21;
+                        result |= (tmp = buffer[bufferPos++]) << 28;
+                        if (tmp >= 128)
+                        {
+                            // Discard upper 32 bits.
+                            // Note that this has to use ReadRawByte() as we only ensure we've
+                            // got at least 5 bytes at the start of the method. This lets us
+                            // use the fast path in more cases, and we rarely hit this section of code.
+                            for (int i = 0; i < 5; i++)
+                            {
+                                if (ReadRawByte(ref buffer) < 128)
+                                {
+                                    return (uint)result;
+                                }
+                            }
+                            throw InvalidProtocolBufferException.MalformedVarint();
+                        }
+                    }
+                }
+            }
+            return (uint)result;
+        }
+#endif
+
         /// <summary>
         /// Reads a varint from the input one byte at a time, so that it does not
         /// read any bytes after the end of the varint. If you simply wrapped the
@@ -851,6 +1129,7 @@ namespace Google.Protobuf
         /// <summary>
         /// Reads a raw varint from the stream.
         /// </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal ulong ReadRawVarint64()
         {
             int shift = 0;
@@ -934,7 +1213,8 @@ namespace Google.Protobuf
         /// limit is returned.
         /// </summary>
         /// <returns>The old limit.</returns>
-        internal int PushLimit(int byteLimit)
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public int PushLimit(int byteLimit)
         {
             if (byteLimit < 0)
             {
@@ -953,6 +1233,7 @@ namespace Google.Protobuf
             return oldLimit;
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private void RecomputeBufferSizeAfterLimit()
         {
             bufferSize += bufferSizeAfterLimit;
@@ -972,7 +1253,8 @@ namespace Google.Protobuf
         /// <summary>
         /// Discards the current limit, returning the previous limit.
         /// </summary>
-        internal void PopLimit(int oldLimit)
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void PopLimit(int oldLimit)
         {
             currentLimit = oldLimit;
             RecomputeBufferSizeAfterLimit();
@@ -1072,6 +1354,7 @@ namespace Google.Protobuf
         /// <exception cref="InvalidProtocolBufferException">
         /// the end of the stream or the current limit was reached
         /// </exception>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal byte ReadRawByte()
         {
             if (bufferPos == bufferSize)
@@ -1080,6 +1363,18 @@ namespace Google.Protobuf
             }
             return buffer[bufferPos++];
         }
+
+#if NETCOREAPP2_1
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        internal byte ReadRawByte(ref ReadOnlySpan<byte> buffer)
+        {
+            if (bufferPos == bufferSize)
+            {
+                RefillBuffer(true);
+            }
+            return buffer[bufferPos++];
+        }
+#endif
 
         /// <summary>
         /// Reads a fixed size of bytes from the input.
@@ -1200,6 +1495,126 @@ namespace Google.Protobuf
             }
         }
 
+#if NETCOREAPP2_1
+        internal byte[] ReadRawBytes(int size, ref ReadOnlySpan<byte> buffer)
+        {
+            if (size < 0)
+            {
+                throw InvalidProtocolBufferException.NegativeSize();
+            }
+
+            if (totalBytesRetired + bufferPos + size > currentLimit)
+            {
+                // Read to the end of the stream (up to the current limit) anyway.
+                SkipRawBytes(currentLimit - totalBytesRetired - bufferPos);
+                // Then fail.
+                throw InvalidProtocolBufferException.TruncatedMessage();
+            }
+
+            if (size <= bufferSize - bufferPos)
+            {
+                // We have all the bytes we need already.
+                byte[] bytes = new byte[size];
+                buffer.Slice(bufferPos, size).CopyTo(bytes);
+                //ByteArray.Copy(buffer, bufferPos, bytes, 0, size);
+                bufferPos += size;
+                return bytes;
+            }
+            else if (size < buffer.Length)
+            {
+                // Reading more bytes than are in the buffer, but not an excessive number
+                // of bytes.  We can safely allocate the resulting array ahead of time.
+
+                // First copy what we have.
+                byte[] bytes = new byte[size];
+                int pos = bufferSize - bufferPos;
+                //ByteArray.Copy(buffer, bufferPos, bytes, 0, pos);
+                buffer.Slice(bufferPos, pos).CopyTo(bytes);
+                bufferPos = bufferSize;
+
+                // We want to use RefillBuffer() and then copy from the buffer into our
+                // byte array rather than reading directly into our byte array because
+                // the input may be unbuffered.
+                RefillBuffer(true);
+
+                while (size - pos > bufferSize)
+                {
+                    //Buffer.BlockCopy(buffer, 0, bytes, pos, bufferSize);
+                    buffer.Slice(0, bufferSize).CopyTo(bytes.AsSpan().Slice(pos, bufferSize));
+                    pos += bufferSize;
+                    bufferPos = bufferSize;
+                    RefillBuffer(true);
+                }
+
+                //ByteArray.Copy(buffer, 0, bytes, pos, size - pos);
+                buffer.Slice(0, size - pos).CopyTo(bytes.AsSpan().Slice(pos, size - pos));
+                bufferPos = size - pos;
+
+                return bytes;
+            }
+            else
+            {
+                // The size is very large.  For security reasons, we can't allocate the
+                // entire byte array yet.  The size comes directly from the input, so a
+                // maliciously-crafted message could provide a bogus very large size in
+                // order to trick the app into allocating a lot of memory.  We avoid this
+                // by allocating and reading only a small chunk at a time, so that the
+                // malicious message must actually *be* extremely large to cause
+                // problems.  Meanwhile, we limit the allowed size of a message elsewhere.
+
+                // Remember the buffer markers since we'll have to copy the bytes out of
+                // it later.
+                int originalBufferPos = bufferPos;
+                int originalBufferSize = bufferSize;
+
+                // Mark the current buffer consumed.
+                totalBytesRetired += bufferSize;
+                bufferPos = 0;
+                bufferSize = 0;
+
+                // Read all the rest of the bytes we need.
+                int sizeLeft = size - (originalBufferSize - originalBufferPos);
+                List<byte[]> chunks = new List<byte[]>();
+
+                while (sizeLeft > 0)
+                {
+                    byte[] chunk = new byte[Math.Min(sizeLeft, buffer.Length)];
+                    int pos = 0;
+                    while (pos < chunk.Length)
+                    {
+                        int n = (input == null) ? -1 : input.Read(chunk, pos, chunk.Length - pos);
+                        if (n <= 0)
+                        {
+                            throw InvalidProtocolBufferException.TruncatedMessage();
+                        }
+                        totalBytesRetired += n;
+                        pos += n;
+                    }
+                    sizeLeft -= chunk.Length;
+                    chunks.Add(chunk);
+                }
+
+                // OK, got everything.  Now concatenate it all into one buffer.
+                byte[] bytes = new byte[size];
+
+                // Start by copying the leftover bytes from this.buffer.
+                int newPos = originalBufferSize - originalBufferPos;
+                //ByteArray.Copy(buffer, originalBufferPos, bytes, 0, newPos);
+                buffer.Slice(originalBufferPos, newPos).CopyTo(bytes.AsSpan().Slice(0, newPos));
+
+                // And now all the chunks.
+                foreach (byte[] chunk in chunks)
+                {
+                    Buffer.BlockCopy(chunk, 0, bytes, newPos, chunk.Length);
+                    newPos += chunk.Length;
+                }
+
+                // Done.
+                return bytes;
+            }
+        }
+#endif
+
         /// <summary>
         /// Reads and discards <paramref name="size"/> bytes.
         /// </summary>
@@ -1278,6 +1693,6 @@ namespace Google.Protobuf
                 }
             }
         }
-        #endregion
+#endregion
     }
 }

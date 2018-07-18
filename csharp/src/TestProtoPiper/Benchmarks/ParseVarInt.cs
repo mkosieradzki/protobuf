@@ -151,5 +151,45 @@ namespace TestProtoPiper
             }
             return result;
         }
+
+        static uint ParseAsArrayCore2(ReadOnlySpan<byte> span)
+        {
+            uint tmp = span[0];
+            if (tmp < 128)
+                return tmp;
+            uint result = tmp & 0x7f;
+            if ((tmp = span[1]) < 128)
+            {
+                return result | tmp << 7;
+            }
+            else
+            {
+                result |= (tmp & 0x7f) << 7;
+                if ((tmp = span[2]) < 128)
+                {
+                    result |= tmp << 14;
+                }
+                else
+                {
+                    result |= (tmp & 0x7f) << 14;
+                    if ((tmp = span[3]) < 128)
+                    {
+                        result |= tmp << 21;
+                    }
+                    else
+                    {
+                        throw new Exception();
+                        //result |= (tmp & 0x7f) << 21;
+                        //result |= (tmp = span[4]) << 28;
+                        //if (tmp >= 128)
+                        //{
+                        //    // Discard upper 32 bits.
+                        //    return SlowDiscardUpperVarIntBitsAndReturn(5, (uint)result, cancellationToken);
+                        //}
+                    }
+                }
+            }
+            return result;
+        }
     }
 }

@@ -84,4 +84,11 @@ namespace Google.Protobuf
         /// <param name="message">The message to merge with this one. Must not be null.</param>
         void MergeFrom(T message);
     }
+
+    public interface IEfficientMessage : IMessage
+    {
+#if NETCOREAPP2_1
+        void MergeFrom(CodedInputStream input, ref ReadOnlySpan<byte> buffer);
+#endif
+    }
 }

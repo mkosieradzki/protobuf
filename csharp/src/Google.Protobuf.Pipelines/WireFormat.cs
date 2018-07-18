@@ -1,4 +1,6 @@
-﻿namespace Google.Protobuf
+﻿using System.Runtime.CompilerServices;
+
+namespace Google.Protobuf
 {
     static class WireFormat
     {
@@ -39,6 +41,7 @@
         /// <summary>
         /// Given a tag value, determines the wire type (lower 3 bits).
         /// </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static WireType GetTagWireType(uint tag)
         {
             return (WireType)(tag & TagTypeMask);
@@ -47,6 +50,7 @@
         /// <summary>
         /// Given a tag value, determines the field number (the upper 29 bits).
         /// </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int GetTagFieldNumber(uint tag)
         {
             return (int)tag >> TagTypeBits;

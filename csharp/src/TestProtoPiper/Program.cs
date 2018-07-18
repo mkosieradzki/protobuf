@@ -3,6 +3,7 @@ using System.Buffers;
 using System.Collections.Generic;
 using System.IO.Pipelines;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using Google.Protobuf;
@@ -16,7 +17,7 @@ namespace TestProtoPiper
         async static Task Main(string[] args)
         {
             //await Test1();
-            //var summary = BenchmarkRunner.Run<ParseVarInt>();
+            //BenchmarkDotNet.Running.BenchmarkRunner.Run<ParseVarInt>();
             BenchmarkDotNet.Running.BenchmarkRunner.Run<ParseAddressBook>();
             //await ToProfile();
         }
@@ -29,10 +30,10 @@ namespace TestProtoPiper
                 {
                     Enumerable.Range(1, 100).Select(x => new Person
                     {
-                        Id = 1,
+                        Id = x,
                         Email = "asdadas@asdadas.com",
                         //LastUpdated = Timestamp.FromDateTime(new DateTime(2016, 1, 1, 8, 0, 3, DateTimeKind.Utc)),
-                        Name = "ASdasdsad sda sdasd SSADSA",
+                        Name = $"ASdasdsad sda sdasd SSADSA {x}",
                     })
                 }
             };
@@ -124,6 +125,7 @@ namespace TestProtoPiper
             }
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string DecodeUtf8String(ReadOnlySpan<byte> span)
         {
             if (span.IsEmpty)
