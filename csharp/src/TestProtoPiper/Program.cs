@@ -19,6 +19,9 @@ namespace TestProtoPiper
             //await Test1();
             //BenchmarkDotNet.Running.BenchmarkRunner.Run<ParseVarInt>();
             BenchmarkDotNet.Running.BenchmarkRunner.Run<ParseAddressBook>();
+            //var test = new ParseAddressBook();
+            //test.Setup();
+            //test.ParseUsingNew();
             //await ToProfile();
         }
 

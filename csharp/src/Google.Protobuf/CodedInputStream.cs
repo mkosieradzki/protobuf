@@ -398,12 +398,12 @@ namespace Google.Protobuf
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public uint ReadTag(ref ReadOnlySpan<byte> buffer)
         {
-            if (hasNextTag)
-            {
-                lastTag = nextTag;
-                hasNextTag = false;
-                return lastTag;
-            }
+            //if (hasNextTag)
+            //{
+            //    lastTag = nextTag;
+            //    hasNextTag = false;
+            //    return lastTag;
+            //}
 
             // Optimize for the incredibly common case of having at least two bytes left in the buffer,
             // and those two bytes being enough to get the tag. This will be true for fields up to 4095.
@@ -729,6 +729,7 @@ namespace Google.Protobuf
             {
                 throw InvalidProtocolBufferException.RecursionLimitExceeded();
             }
+
             int oldLimit = PushLimit(length);
             ++recursionDepth;
             builder.MergeFrom(this, ref buffer);
@@ -1284,7 +1285,8 @@ namespace Google.Protobuf
         /// </summary>
         public bool IsAtEnd
         {
-            get { return bufferPos == bufferSize && !RefillBuffer(false); }
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get { return bufferPos == bufferSize && (input == null || !RefillBuffer(false)); }
         }
 
         /// <summary>
@@ -1296,6 +1298,7 @@ namespace Google.Protobuf
         /// </summary>
         /// <param name="mustSucceed"></param>
         /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private bool RefillBuffer(bool mustSucceed)
         {
             if (bufferPos < bufferSize)
