@@ -857,14 +857,15 @@ namespace Google.Protobuf
             return false;
         }
 
-#endregion
+        #endregion
 
-#region Underlying reading primitives
+        #region Underlying reading primitives
 
         /// <summary>
         /// Same code as ReadRawVarint32, but read each byte individually, checking for
         /// buffer overflow.
         /// </summary>
+        [MethodImpl(MethodImplOptions.NoInlining)]
         private uint SlowReadRawVarint32()
         {
             int tmp = ReadRawByte();
@@ -914,6 +915,7 @@ namespace Google.Protobuf
         }
 
 #if NETCOREAPP2_1
+        [MethodImpl(MethodImplOptions.NoInlining)]
         private uint SlowReadRawVarint32(ref ReadOnlySpan<byte> buffer)
         {
             int tmp = ReadRawByte(ref buffer);
@@ -1267,6 +1269,7 @@ namespace Google.Protobuf
         /// <returns></returns>
         internal bool ReachedLimit
         {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get
             {
                 if (currentLimit == int.MaxValue)
@@ -1298,6 +1301,7 @@ namespace Google.Protobuf
         /// </summary>
         /// <param name="mustSucceed"></param>
         /// <returns></returns>
+        [MethodImpl(MethodImplOptions.NoInlining)]
         private bool RefillBuffer(bool mustSucceed)
         {
             if (bufferPos < bufferSize)
