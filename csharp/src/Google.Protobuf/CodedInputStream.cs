@@ -1298,7 +1298,6 @@ namespace Google.Protobuf
         /// </summary>
         /// <param name="mustSucceed"></param>
         /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private bool RefillBuffer(bool mustSucceed)
         {
             if (bufferPos < bufferSize)
