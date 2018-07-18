@@ -398,6 +398,7 @@ namespace Google.Protobuf
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public uint ReadTag(ref ReadOnlySpan<byte> buffer)
         {
+            //NOTE: We are not using PeekTag!
             //if (hasNextTag)
             //{
             //    lastTag = nextTag;
@@ -733,6 +734,34 @@ namespace Google.Protobuf
             int oldLimit = PushLimit(length);
             ++recursionDepth;
             builder.MergeFrom(this, ref buffer);
+            CheckReadEndOfStreamTag();
+            // Check that we've read exactly as much data as expected.
+            if (!ReachedLimit)
+            {
+                throw InvalidProtocolBufferException.TruncatedMessage();
+            }
+            --recursionDepth;
+            PopLimit(oldLimit);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public int BeginRecursiveParse(ref ReadOnlySpan<byte> buffer)
+        {
+            if (recursionDepth >= recursionLimit)
+            {
+                throw InvalidProtocolBufferException.RecursionLimitExceeded();
+            }
+
+            int length = ReadLength(ref buffer);
+
+            int oldLimit = PushLimit(length);
+            ++recursionDepth;
+            return oldLimit;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void EndRecursiveParse(int oldLimit)
+        {
             CheckReadEndOfStreamTag();
             // Check that we've read exactly as much data as expected.
             if (!ReachedLimit)

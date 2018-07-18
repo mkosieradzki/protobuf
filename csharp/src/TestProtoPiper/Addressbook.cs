@@ -8,6 +8,7 @@
 using Google.Protobuf.Pipelines;
 using System;
 using System.Buffers;
+using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 using TestProtoPiper;
@@ -830,9 +831,15 @@ namespace Google.Protobuf.Examples.AddressBook {
           //  _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
           //  break;
           case 10: {
+            //var item = new Person();
+            //input.ReadMessageInline(item, ref buffer);
+            //people_.Add(item);
+            //break;
+            var oldLimit = input.BeginRecursiveParse(ref buffer);
             var item = new Person();
-            input.ReadMessageInline(item, ref buffer);
+            item.MergeFrom(input, ref buffer);
             people_.Add(item);
+            input.EndRecursiveParse(oldLimit);
             break;
           }
         }

@@ -30,6 +30,8 @@
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #endregion
 
+using System.Runtime.CompilerServices;
+
 namespace Google.Protobuf
 {
     /// <summary>
@@ -96,6 +98,7 @@ namespace Google.Protobuf
         /// <summary>
         /// Makes a tag value given a field number and wire type.
         /// </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint MakeTag(int fieldNumber, WireType wireType)
         {
             return (uint) (fieldNumber << TagTypeBits) | (uint) wireType;
