@@ -1181,7 +1181,8 @@ namespace Google.Protobuf
         /// limit is returned.
         /// </summary>
         /// <returns>The old limit.</returns>
-        internal int PushLimit(int byteLimit)
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public int PushLimit(int byteLimit)
         {
             if (byteLimit < 0)
             {
@@ -1200,6 +1201,7 @@ namespace Google.Protobuf
             return oldLimit;
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private void RecomputeBufferSizeAfterLimit()
         {
             bufferSize += bufferSizeAfterLimit;
@@ -1219,7 +1221,8 @@ namespace Google.Protobuf
         /// <summary>
         /// Discards the current limit, returning the previous limit.
         /// </summary>
-        internal void PopLimit(int oldLimit)
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void PopLimit(int oldLimit)
         {
             currentLimit = oldLimit;
             RecomputeBufferSizeAfterLimit();
