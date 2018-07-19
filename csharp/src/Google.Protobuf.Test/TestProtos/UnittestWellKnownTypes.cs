@@ -846,63 +846,63 @@ namespace Google.Protobuf.TestProtos {
             break;
           }
           case 82: {
-            double? value = _single_doubleField_codec.Read(input, ref immediateBuffer);
+            double? value = input.ReadWrappedDouble(ref immediateBuffer);
             if (doubleField_ == null || value != 0D) {
               DoubleField = value;
             }
             break;
           }
           case 90: {
-            float? value = _single_floatField_codec.Read(input, ref immediateBuffer);
+            float? value = input.ReadWrappedFloat(ref immediateBuffer);
             if (floatField_ == null || value != 0F) {
               FloatField = value;
             }
             break;
           }
           case 98: {
-            long? value = _single_int64Field_codec.Read(input, ref immediateBuffer);
+            long? value = input.ReadWrappedInt64(ref immediateBuffer);
             if (int64Field_ == null || value != 0L) {
               Int64Field = value;
             }
             break;
           }
           case 106: {
-            ulong? value = _single_uint64Field_codec.Read(input, ref immediateBuffer);
+            ulong? value = input.ReadWrappedUInt64(ref immediateBuffer);
             if (uint64Field_ == null || value != 0UL) {
               Uint64Field = value;
             }
             break;
           }
           case 114: {
-            int? value = _single_int32Field_codec.Read(input, ref immediateBuffer);
+            int? value = input.ReadWrappedInt32(ref immediateBuffer);
             if (int32Field_ == null || value != 0) {
               Int32Field = value;
             }
             break;
           }
           case 122: {
-            uint? value = _single_uint32Field_codec.Read(input, ref immediateBuffer);
+            uint? value = input.ReadWrappedUInt32(ref immediateBuffer);
             if (uint32Field_ == null || value != 0) {
               Uint32Field = value;
             }
             break;
           }
           case 130: {
-            bool? value = _single_boolField_codec.Read(input, ref immediateBuffer);
+            bool? value = input.ReadWrappedBool(ref immediateBuffer);
             if (boolField_ == null || value != false) {
               BoolField = value;
             }
             break;
           }
           case 138: {
-            string value = _single_stringField_codec.Read(input, ref immediateBuffer);
+            string value = input.ReadWrappedString(ref immediateBuffer);
             if (stringField_ == null || value != "") {
               StringField = value;
             }
             break;
           }
           case 146: {
-            pb::ByteString value = _single_bytesField_codec.Read(input, ref immediateBuffer);
+            pb::ByteString value = input.ReadWrappedBytes(ref immediateBuffer);
             if (bytesField_ == null || value != pb::ByteString.Empty) {
               BytesField = value;
             }

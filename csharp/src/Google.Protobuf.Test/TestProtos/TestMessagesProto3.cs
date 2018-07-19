@@ -3176,63 +3176,63 @@ namespace ProtobufTestMessages.Proto3 {
             break;
           }
           case 1610: {
-            bool? value = _single_optionalBoolWrapper_codec.Read(input, ref immediateBuffer);
+            bool? value = input.ReadWrappedBool(ref immediateBuffer);
             if (optionalBoolWrapper_ == null || value != false) {
               OptionalBoolWrapper = value;
             }
             break;
           }
           case 1618: {
-            int? value = _single_optionalInt32Wrapper_codec.Read(input, ref immediateBuffer);
+            int? value = input.ReadWrappedInt32(ref immediateBuffer);
             if (optionalInt32Wrapper_ == null || value != 0) {
               OptionalInt32Wrapper = value;
             }
             break;
           }
           case 1626: {
-            long? value = _single_optionalInt64Wrapper_codec.Read(input, ref immediateBuffer);
+            long? value = input.ReadWrappedInt64(ref immediateBuffer);
             if (optionalInt64Wrapper_ == null || value != 0L) {
               OptionalInt64Wrapper = value;
             }
             break;
           }
           case 1634: {
-            uint? value = _single_optionalUint32Wrapper_codec.Read(input, ref immediateBuffer);
+            uint? value = input.ReadWrappedUInt32(ref immediateBuffer);
             if (optionalUint32Wrapper_ == null || value != 0) {
               OptionalUint32Wrapper = value;
             }
             break;
           }
           case 1642: {
-            ulong? value = _single_optionalUint64Wrapper_codec.Read(input, ref immediateBuffer);
+            ulong? value = input.ReadWrappedUInt64(ref immediateBuffer);
             if (optionalUint64Wrapper_ == null || value != 0UL) {
               OptionalUint64Wrapper = value;
             }
             break;
           }
           case 1650: {
-            float? value = _single_optionalFloatWrapper_codec.Read(input, ref immediateBuffer);
+            float? value = input.ReadWrappedFloat(ref immediateBuffer);
             if (optionalFloatWrapper_ == null || value != 0F) {
               OptionalFloatWrapper = value;
             }
             break;
           }
           case 1658: {
-            double? value = _single_optionalDoubleWrapper_codec.Read(input, ref immediateBuffer);
+            double? value = input.ReadWrappedDouble(ref immediateBuffer);
             if (optionalDoubleWrapper_ == null || value != 0D) {
               OptionalDoubleWrapper = value;
             }
             break;
           }
           case 1666: {
-            string value = _single_optionalStringWrapper_codec.Read(input, ref immediateBuffer);
+            string value = input.ReadWrappedString(ref immediateBuffer);
             if (optionalStringWrapper_ == null || value != "") {
               OptionalStringWrapper = value;
             }
             break;
           }
           case 1674: {
-            pb::ByteString value = _single_optionalBytesWrapper_codec.Read(input, ref immediateBuffer);
+            pb::ByteString value = input.ReadWrappedBytes(ref immediateBuffer);
             if (optionalBytesWrapper_ == null || value != pb::ByteString.Empty) {
               OptionalBytesWrapper = value;
             }
