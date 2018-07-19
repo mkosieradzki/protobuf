@@ -694,7 +694,7 @@ namespace Google.Protobuf
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [SecurityCritical]
-        private int BeginReadNested(ref ReadOnlySpan<byte> immediateBuffer)
+        public int BeginReadNested(ref ReadOnlySpan<byte> immediateBuffer)
         {
             int length = ReadLength(ref immediateBuffer);
             if (recursionDepth >= recursionLimit)
@@ -707,7 +707,7 @@ namespace Google.Protobuf
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private void EndReadNested(int oldLimit)
+        public void EndReadNested(int oldLimit)
         {
             CheckReadEndOfStreamTag();
             // Check that we've read exactly as much data as expected.
