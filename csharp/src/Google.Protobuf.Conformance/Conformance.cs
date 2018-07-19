@@ -310,31 +310,32 @@ namespace Conformance {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
+    [global::System.Security.SecurityCritical]
+    public void MergeFrom(pb::CodedInputStream input, ref global::System.ReadOnlySpan<byte> immediateBuffer) {
       uint tag;
-      while ((tag = input.ReadTag()) != 0) {
+      while ((tag = input.ReadTag(ref immediateBuffer)) != 0) {
         switch(tag) {
           default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input, ref immediateBuffer);
             break;
           case 10: {
-            ProtobufPayload = input.ReadBytes();
+            ProtobufPayload = input.ReadBytes(ref immediateBuffer);
             break;
           }
           case 18: {
-            JsonPayload = input.ReadString();
+            JsonPayload = input.ReadString(ref immediateBuffer);
             break;
           }
           case 24: {
-            requestedOutputFormat_ = (global::Conformance.WireFormat) input.ReadEnum();
+            requestedOutputFormat_ = (global::Conformance.WireFormat) input.ReadEnum(ref immediateBuffer);
             break;
           }
           case 34: {
-            MessageType = input.ReadString();
+            MessageType = input.ReadString(ref immediateBuffer);
             break;
           }
           case 40: {
-            IgnoreUnknownJson = input.ReadBool();
+            IgnoreUnknownJson = input.ReadBool(ref immediateBuffer);
             break;
           }
         }
@@ -650,35 +651,36 @@ namespace Conformance {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
+    [global::System.Security.SecurityCritical]
+    public void MergeFrom(pb::CodedInputStream input, ref global::System.ReadOnlySpan<byte> immediateBuffer) {
       uint tag;
-      while ((tag = input.ReadTag()) != 0) {
+      while ((tag = input.ReadTag(ref immediateBuffer)) != 0) {
         switch(tag) {
           default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input, ref immediateBuffer);
             break;
           case 10: {
-            ParseError = input.ReadString();
+            ParseError = input.ReadString(ref immediateBuffer);
             break;
           }
           case 18: {
-            RuntimeError = input.ReadString();
+            RuntimeError = input.ReadString(ref immediateBuffer);
             break;
           }
           case 26: {
-            ProtobufPayload = input.ReadBytes();
+            ProtobufPayload = input.ReadBytes(ref immediateBuffer);
             break;
           }
           case 34: {
-            JsonPayload = input.ReadString();
+            JsonPayload = input.ReadString(ref immediateBuffer);
             break;
           }
           case 42: {
-            Skipped = input.ReadString();
+            Skipped = input.ReadString(ref immediateBuffer);
             break;
           }
           case 50: {
-            SerializeError = input.ReadString();
+            SerializeError = input.ReadString(ref immediateBuffer);
             break;
           }
         }

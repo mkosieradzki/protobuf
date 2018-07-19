@@ -255,34 +255,35 @@ namespace Google.Protobuf.Examples.AddressBook {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
+    [global::System.Security.SecurityCritical]
+    public void MergeFrom(pb::CodedInputStream input, ref global::System.ReadOnlySpan<byte> immediateBuffer) {
       uint tag;
-      while ((tag = input.ReadTag()) != 0) {
+      while ((tag = input.ReadTag(ref immediateBuffer)) != 0) {
         switch(tag) {
           default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input, ref immediateBuffer);
             break;
           case 10: {
-            Name = input.ReadString();
+            Name = input.ReadString(ref immediateBuffer);
             break;
           }
           case 16: {
-            Id = input.ReadInt32();
+            Id = input.ReadInt32(ref immediateBuffer);
             break;
           }
           case 26: {
-            Email = input.ReadString();
+            Email = input.ReadString(ref immediateBuffer);
             break;
           }
           case 34: {
-            phones_.AddEntriesFrom(input, _repeated_phones_codec);
+            phones_.AddEntriesFrom(input, _repeated_phones_codec, ref immediateBuffer);
             break;
           }
           case 42: {
             if (lastUpdated_ == null) {
               lastUpdated_ = new global::Google.Protobuf.WellKnownTypes.Timestamp();
             }
-            input.ReadMessage(lastUpdated_);
+            input.ReadMessage(lastUpdated_, ref immediateBuffer);
             break;
           }
         }
@@ -435,19 +436,20 @@ namespace Google.Protobuf.Examples.AddressBook {
         }
 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-        public void MergeFrom(pb::CodedInputStream input) {
+        [global::System.Security.SecurityCritical]
+        public void MergeFrom(pb::CodedInputStream input, ref global::System.ReadOnlySpan<byte> immediateBuffer) {
           uint tag;
-          while ((tag = input.ReadTag()) != 0) {
+          while ((tag = input.ReadTag(ref immediateBuffer)) != 0) {
             switch(tag) {
               default:
-                _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+                _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input, ref immediateBuffer);
                 break;
               case 10: {
-                Number = input.ReadString();
+                Number = input.ReadString(ref immediateBuffer);
                 break;
               }
               case 16: {
-                type_ = (global::Google.Protobuf.Examples.AddressBook.Person.Types.PhoneType) input.ReadEnum();
+                type_ = (global::Google.Protobuf.Examples.AddressBook.Person.Types.PhoneType) input.ReadEnum(ref immediateBuffer);
                 break;
               }
             }
@@ -568,15 +570,16 @@ namespace Google.Protobuf.Examples.AddressBook {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
+    [global::System.Security.SecurityCritical]
+    public void MergeFrom(pb::CodedInputStream input, ref global::System.ReadOnlySpan<byte> immediateBuffer) {
       uint tag;
-      while ((tag = input.ReadTag()) != 0) {
+      while ((tag = input.ReadTag(ref immediateBuffer)) != 0) {
         switch(tag) {
           default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input, ref immediateBuffer);
             break;
           case 10: {
-            people_.AddEntriesFrom(input, _repeated_people_codec);
+            people_.AddEntriesFrom(input, _repeated_people_codec, ref immediateBuffer);
             break;
           }
         }

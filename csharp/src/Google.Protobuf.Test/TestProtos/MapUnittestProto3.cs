@@ -536,79 +536,80 @@ namespace Google.Protobuf.TestProtos {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
+    [global::System.Security.SecurityCritical]
+    public void MergeFrom(pb::CodedInputStream input, ref global::System.ReadOnlySpan<byte> immediateBuffer) {
       uint tag;
-      while ((tag = input.ReadTag()) != 0) {
+      while ((tag = input.ReadTag(ref immediateBuffer)) != 0) {
         switch(tag) {
           default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input, ref immediateBuffer);
             break;
           case 10: {
-            mapInt32Int32_.AddEntriesFrom(input, _map_mapInt32Int32_codec);
+            mapInt32Int32_.AddEntriesFrom(input, _map_mapInt32Int32_codec, ref immediateBuffer);
             break;
           }
           case 18: {
-            mapInt64Int64_.AddEntriesFrom(input, _map_mapInt64Int64_codec);
+            mapInt64Int64_.AddEntriesFrom(input, _map_mapInt64Int64_codec, ref immediateBuffer);
             break;
           }
           case 26: {
-            mapUint32Uint32_.AddEntriesFrom(input, _map_mapUint32Uint32_codec);
+            mapUint32Uint32_.AddEntriesFrom(input, _map_mapUint32Uint32_codec, ref immediateBuffer);
             break;
           }
           case 34: {
-            mapUint64Uint64_.AddEntriesFrom(input, _map_mapUint64Uint64_codec);
+            mapUint64Uint64_.AddEntriesFrom(input, _map_mapUint64Uint64_codec, ref immediateBuffer);
             break;
           }
           case 42: {
-            mapSint32Sint32_.AddEntriesFrom(input, _map_mapSint32Sint32_codec);
+            mapSint32Sint32_.AddEntriesFrom(input, _map_mapSint32Sint32_codec, ref immediateBuffer);
             break;
           }
           case 50: {
-            mapSint64Sint64_.AddEntriesFrom(input, _map_mapSint64Sint64_codec);
+            mapSint64Sint64_.AddEntriesFrom(input, _map_mapSint64Sint64_codec, ref immediateBuffer);
             break;
           }
           case 58: {
-            mapFixed32Fixed32_.AddEntriesFrom(input, _map_mapFixed32Fixed32_codec);
+            mapFixed32Fixed32_.AddEntriesFrom(input, _map_mapFixed32Fixed32_codec, ref immediateBuffer);
             break;
           }
           case 66: {
-            mapFixed64Fixed64_.AddEntriesFrom(input, _map_mapFixed64Fixed64_codec);
+            mapFixed64Fixed64_.AddEntriesFrom(input, _map_mapFixed64Fixed64_codec, ref immediateBuffer);
             break;
           }
           case 74: {
-            mapSfixed32Sfixed32_.AddEntriesFrom(input, _map_mapSfixed32Sfixed32_codec);
+            mapSfixed32Sfixed32_.AddEntriesFrom(input, _map_mapSfixed32Sfixed32_codec, ref immediateBuffer);
             break;
           }
           case 82: {
-            mapSfixed64Sfixed64_.AddEntriesFrom(input, _map_mapSfixed64Sfixed64_codec);
+            mapSfixed64Sfixed64_.AddEntriesFrom(input, _map_mapSfixed64Sfixed64_codec, ref immediateBuffer);
             break;
           }
           case 90: {
-            mapInt32Float_.AddEntriesFrom(input, _map_mapInt32Float_codec);
+            mapInt32Float_.AddEntriesFrom(input, _map_mapInt32Float_codec, ref immediateBuffer);
             break;
           }
           case 98: {
-            mapInt32Double_.AddEntriesFrom(input, _map_mapInt32Double_codec);
+            mapInt32Double_.AddEntriesFrom(input, _map_mapInt32Double_codec, ref immediateBuffer);
             break;
           }
           case 106: {
-            mapBoolBool_.AddEntriesFrom(input, _map_mapBoolBool_codec);
+            mapBoolBool_.AddEntriesFrom(input, _map_mapBoolBool_codec, ref immediateBuffer);
             break;
           }
           case 114: {
-            mapStringString_.AddEntriesFrom(input, _map_mapStringString_codec);
+            mapStringString_.AddEntriesFrom(input, _map_mapStringString_codec, ref immediateBuffer);
             break;
           }
           case 122: {
-            mapInt32Bytes_.AddEntriesFrom(input, _map_mapInt32Bytes_codec);
+            mapInt32Bytes_.AddEntriesFrom(input, _map_mapInt32Bytes_codec, ref immediateBuffer);
             break;
           }
           case 130: {
-            mapInt32Enum_.AddEntriesFrom(input, _map_mapInt32Enum_codec);
+            mapInt32Enum_.AddEntriesFrom(input, _map_mapInt32Enum_codec, ref immediateBuffer);
             break;
           }
           case 138: {
-            mapInt32ForeignMessage_.AddEntriesFrom(input, _map_mapInt32ForeignMessage_codec);
+            mapInt32ForeignMessage_.AddEntriesFrom(input, _map_mapInt32ForeignMessage_codec, ref immediateBuffer);
             break;
           }
         }
@@ -732,18 +733,19 @@ namespace Google.Protobuf.TestProtos {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
+    [global::System.Security.SecurityCritical]
+    public void MergeFrom(pb::CodedInputStream input, ref global::System.ReadOnlySpan<byte> immediateBuffer) {
       uint tag;
-      while ((tag = input.ReadTag()) != 0) {
+      while ((tag = input.ReadTag(ref immediateBuffer)) != 0) {
         switch(tag) {
           default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input, ref immediateBuffer);
             break;
           case 10: {
             if (testMap_ == null) {
               testMap_ = new global::Google.Protobuf.TestProtos.TestMap();
             }
-            input.ReadMessage(testMap_);
+            input.ReadMessage(testMap_, ref immediateBuffer);
             break;
           }
         }
@@ -856,15 +858,16 @@ namespace Google.Protobuf.TestProtos {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
+    [global::System.Security.SecurityCritical]
+    public void MergeFrom(pb::CodedInputStream input, ref global::System.ReadOnlySpan<byte> immediateBuffer) {
       uint tag;
-      while ((tag = input.ReadTag()) != 0) {
+      while ((tag = input.ReadTag(ref immediateBuffer)) != 0) {
         switch(tag) {
           default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input, ref immediateBuffer);
             break;
           case 10: {
-            mapInt32Message_.AddEntriesFrom(input, _map_mapInt32Message_codec);
+            mapInt32Message_.AddEntriesFrom(input, _map_mapInt32Message_codec, ref immediateBuffer);
             break;
           }
         }
@@ -996,19 +999,20 @@ namespace Google.Protobuf.TestProtos {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
+    [global::System.Security.SecurityCritical]
+    public void MergeFrom(pb::CodedInputStream input, ref global::System.ReadOnlySpan<byte> immediateBuffer) {
       uint tag;
-      while ((tag = input.ReadTag()) != 0) {
+      while ((tag = input.ReadTag(ref immediateBuffer)) != 0) {
         switch(tag) {
           default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input, ref immediateBuffer);
             break;
           case 10: {
-            map1_.AddEntriesFrom(input, _map_map1_codec);
+            map1_.AddEntriesFrom(input, _map_map1_codec, ref immediateBuffer);
             break;
           }
           case 18: {
-            map2_.AddEntriesFrom(input, _map_map2_codec);
+            map2_.AddEntriesFrom(input, _map_map2_codec, ref immediateBuffer);
             break;
           }
         }
@@ -1345,71 +1349,72 @@ namespace Google.Protobuf.TestProtos {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
+    [global::System.Security.SecurityCritical]
+    public void MergeFrom(pb::CodedInputStream input, ref global::System.ReadOnlySpan<byte> immediateBuffer) {
       uint tag;
-      while ((tag = input.ReadTag()) != 0) {
+      while ((tag = input.ReadTag(ref immediateBuffer)) != 0) {
         switch(tag) {
           default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input, ref immediateBuffer);
             break;
           case 10: {
-            mapInt32Int32_.AddEntriesFrom(input, _map_mapInt32Int32_codec);
+            mapInt32Int32_.AddEntriesFrom(input, _map_mapInt32Int32_codec, ref immediateBuffer);
             break;
           }
           case 18: {
-            mapInt64Int64_.AddEntriesFrom(input, _map_mapInt64Int64_codec);
+            mapInt64Int64_.AddEntriesFrom(input, _map_mapInt64Int64_codec, ref immediateBuffer);
             break;
           }
           case 26: {
-            mapUint32Uint32_.AddEntriesFrom(input, _map_mapUint32Uint32_codec);
+            mapUint32Uint32_.AddEntriesFrom(input, _map_mapUint32Uint32_codec, ref immediateBuffer);
             break;
           }
           case 34: {
-            mapUint64Uint64_.AddEntriesFrom(input, _map_mapUint64Uint64_codec);
+            mapUint64Uint64_.AddEntriesFrom(input, _map_mapUint64Uint64_codec, ref immediateBuffer);
             break;
           }
           case 42: {
-            mapSint32Sint32_.AddEntriesFrom(input, _map_mapSint32Sint32_codec);
+            mapSint32Sint32_.AddEntriesFrom(input, _map_mapSint32Sint32_codec, ref immediateBuffer);
             break;
           }
           case 50: {
-            mapSint64Sint64_.AddEntriesFrom(input, _map_mapSint64Sint64_codec);
+            mapSint64Sint64_.AddEntriesFrom(input, _map_mapSint64Sint64_codec, ref immediateBuffer);
             break;
           }
           case 58: {
-            mapFixed32Fixed32_.AddEntriesFrom(input, _map_mapFixed32Fixed32_codec);
+            mapFixed32Fixed32_.AddEntriesFrom(input, _map_mapFixed32Fixed32_codec, ref immediateBuffer);
             break;
           }
           case 66: {
-            mapFixed64Fixed64_.AddEntriesFrom(input, _map_mapFixed64Fixed64_codec);
+            mapFixed64Fixed64_.AddEntriesFrom(input, _map_mapFixed64Fixed64_codec, ref immediateBuffer);
             break;
           }
           case 74: {
-            mapSfixed32Sfixed32_.AddEntriesFrom(input, _map_mapSfixed32Sfixed32_codec);
+            mapSfixed32Sfixed32_.AddEntriesFrom(input, _map_mapSfixed32Sfixed32_codec, ref immediateBuffer);
             break;
           }
           case 82: {
-            mapSfixed64Sfixed64_.AddEntriesFrom(input, _map_mapSfixed64Sfixed64_codec);
+            mapSfixed64Sfixed64_.AddEntriesFrom(input, _map_mapSfixed64Sfixed64_codec, ref immediateBuffer);
             break;
           }
           case 90: {
-            mapInt32Float_.AddEntriesFrom(input, _map_mapInt32Float_codec);
+            mapInt32Float_.AddEntriesFrom(input, _map_mapInt32Float_codec, ref immediateBuffer);
             break;
           }
           case 98: {
-            mapInt32Double_.AddEntriesFrom(input, _map_mapInt32Double_codec);
+            mapInt32Double_.AddEntriesFrom(input, _map_mapInt32Double_codec, ref immediateBuffer);
             break;
           }
           case 106: {
-            mapBoolBool_.AddEntriesFrom(input, _map_mapBoolBool_codec);
+            mapBoolBool_.AddEntriesFrom(input, _map_mapBoolBool_codec, ref immediateBuffer);
             break;
           }
           case 114: {
-            mapInt32Enum_.AddEntriesFrom(input, _map_mapInt32Enum_codec);
+            mapInt32Enum_.AddEntriesFrom(input, _map_mapInt32Enum_codec, ref immediateBuffer);
             break;
           }
           case 122: {
-            mapInt32ForeignMessage_.AddEntriesFrom(input, _map_mapInt32ForeignMessage_codec);
+            mapInt32ForeignMessage_.AddEntriesFrom(input, _map_mapInt32ForeignMessage_codec, ref immediateBuffer);
             break;
           }
         }
@@ -1526,15 +1531,16 @@ namespace Google.Protobuf.TestProtos {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
+    [global::System.Security.SecurityCritical]
+    public void MergeFrom(pb::CodedInputStream input, ref global::System.ReadOnlySpan<byte> immediateBuffer) {
       uint tag;
-      while ((tag = input.ReadTag()) != 0) {
+      while ((tag = input.ReadTag(ref immediateBuffer)) != 0) {
         switch(tag) {
           default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input, ref immediateBuffer);
             break;
           case 10: {
-            type_.AddEntriesFrom(input, _map_type_codec);
+            type_.AddEntriesFrom(input, _map_type_codec, ref immediateBuffer);
             break;
           }
         }
@@ -1661,15 +1667,16 @@ namespace Google.Protobuf.TestProtos {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
+    [global::System.Security.SecurityCritical]
+    public void MergeFrom(pb::CodedInputStream input, ref global::System.ReadOnlySpan<byte> immediateBuffer) {
       uint tag;
-      while ((tag = input.ReadTag()) != 0) {
+      while ((tag = input.ReadTag(ref immediateBuffer)) != 0) {
         switch(tag) {
           default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input, ref immediateBuffer);
             break;
           case 10: {
-            entry_.AddEntriesFrom(input, _map_entry_codec);
+            entry_.AddEntriesFrom(input, _map_entry_codec, ref immediateBuffer);
             break;
           }
         }

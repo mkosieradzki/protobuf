@@ -1368,219 +1368,220 @@ namespace Google.Protobuf.TestProtos {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
+    [global::System.Security.SecurityCritical]
+    public void MergeFrom(pb::CodedInputStream input, ref global::System.ReadOnlySpan<byte> immediateBuffer) {
       uint tag;
-      while ((tag = input.ReadTag()) != 0) {
+      while ((tag = input.ReadTag(ref immediateBuffer)) != 0) {
         switch(tag) {
           default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input, ref immediateBuffer);
             break;
           case 8: {
-            SingleInt32 = input.ReadInt32();
+            SingleInt32 = input.ReadInt32(ref immediateBuffer);
             break;
           }
           case 16: {
-            SingleInt64 = input.ReadInt64();
+            SingleInt64 = input.ReadInt64(ref immediateBuffer);
             break;
           }
           case 24: {
-            SingleUint32 = input.ReadUInt32();
+            SingleUint32 = input.ReadUInt32(ref immediateBuffer);
             break;
           }
           case 32: {
-            SingleUint64 = input.ReadUInt64();
+            SingleUint64 = input.ReadUInt64(ref immediateBuffer);
             break;
           }
           case 40: {
-            SingleSint32 = input.ReadSInt32();
+            SingleSint32 = input.ReadSInt32(ref immediateBuffer);
             break;
           }
           case 48: {
-            SingleSint64 = input.ReadSInt64();
+            SingleSint64 = input.ReadSInt64(ref immediateBuffer);
             break;
           }
           case 61: {
-            SingleFixed32 = input.ReadFixed32();
+            SingleFixed32 = input.ReadFixed32(ref immediateBuffer);
             break;
           }
           case 65: {
-            SingleFixed64 = input.ReadFixed64();
+            SingleFixed64 = input.ReadFixed64(ref immediateBuffer);
             break;
           }
           case 77: {
-            SingleSfixed32 = input.ReadSFixed32();
+            SingleSfixed32 = input.ReadSFixed32(ref immediateBuffer);
             break;
           }
           case 81: {
-            SingleSfixed64 = input.ReadSFixed64();
+            SingleSfixed64 = input.ReadSFixed64(ref immediateBuffer);
             break;
           }
           case 93: {
-            SingleFloat = input.ReadFloat();
+            SingleFloat = input.ReadFloat(ref immediateBuffer);
             break;
           }
           case 97: {
-            SingleDouble = input.ReadDouble();
+            SingleDouble = input.ReadDouble(ref immediateBuffer);
             break;
           }
           case 104: {
-            SingleBool = input.ReadBool();
+            SingleBool = input.ReadBool(ref immediateBuffer);
             break;
           }
           case 114: {
-            SingleString = input.ReadString();
+            SingleString = input.ReadString(ref immediateBuffer);
             break;
           }
           case 122: {
-            SingleBytes = input.ReadBytes();
+            SingleBytes = input.ReadBytes(ref immediateBuffer);
             break;
           }
           case 146: {
             if (singleNestedMessage_ == null) {
               singleNestedMessage_ = new global::Google.Protobuf.TestProtos.TestAllTypes.Types.NestedMessage();
             }
-            input.ReadMessage(singleNestedMessage_);
+            input.ReadMessage(singleNestedMessage_, ref immediateBuffer);
             break;
           }
           case 154: {
             if (singleForeignMessage_ == null) {
               singleForeignMessage_ = new global::Google.Protobuf.TestProtos.ForeignMessage();
             }
-            input.ReadMessage(singleForeignMessage_);
+            input.ReadMessage(singleForeignMessage_, ref immediateBuffer);
             break;
           }
           case 162: {
             if (singleImportMessage_ == null) {
               singleImportMessage_ = new global::Google.Protobuf.TestProtos.ImportMessage();
             }
-            input.ReadMessage(singleImportMessage_);
+            input.ReadMessage(singleImportMessage_, ref immediateBuffer);
             break;
           }
           case 168: {
-            singleNestedEnum_ = (global::Google.Protobuf.TestProtos.TestAllTypes.Types.NestedEnum) input.ReadEnum();
+            singleNestedEnum_ = (global::Google.Protobuf.TestProtos.TestAllTypes.Types.NestedEnum) input.ReadEnum(ref immediateBuffer);
             break;
           }
           case 176: {
-            singleForeignEnum_ = (global::Google.Protobuf.TestProtos.ForeignEnum) input.ReadEnum();
+            singleForeignEnum_ = (global::Google.Protobuf.TestProtos.ForeignEnum) input.ReadEnum(ref immediateBuffer);
             break;
           }
           case 184: {
-            singleImportEnum_ = (global::Google.Protobuf.TestProtos.ImportEnum) input.ReadEnum();
+            singleImportEnum_ = (global::Google.Protobuf.TestProtos.ImportEnum) input.ReadEnum(ref immediateBuffer);
             break;
           }
           case 210: {
             if (singlePublicImportMessage_ == null) {
               singlePublicImportMessage_ = new global::Google.Protobuf.TestProtos.PublicImportMessage();
             }
-            input.ReadMessage(singlePublicImportMessage_);
+            input.ReadMessage(singlePublicImportMessage_, ref immediateBuffer);
             break;
           }
           case 250:
           case 248: {
-            repeatedInt32_.AddEntriesFrom(input, _repeated_repeatedInt32_codec);
+            repeatedInt32_.AddEntriesFrom(input, _repeated_repeatedInt32_codec, ref immediateBuffer);
             break;
           }
           case 258:
           case 256: {
-            repeatedInt64_.AddEntriesFrom(input, _repeated_repeatedInt64_codec);
+            repeatedInt64_.AddEntriesFrom(input, _repeated_repeatedInt64_codec, ref immediateBuffer);
             break;
           }
           case 266:
           case 264: {
-            repeatedUint32_.AddEntriesFrom(input, _repeated_repeatedUint32_codec);
+            repeatedUint32_.AddEntriesFrom(input, _repeated_repeatedUint32_codec, ref immediateBuffer);
             break;
           }
           case 274:
           case 272: {
-            repeatedUint64_.AddEntriesFrom(input, _repeated_repeatedUint64_codec);
+            repeatedUint64_.AddEntriesFrom(input, _repeated_repeatedUint64_codec, ref immediateBuffer);
             break;
           }
           case 282:
           case 280: {
-            repeatedSint32_.AddEntriesFrom(input, _repeated_repeatedSint32_codec);
+            repeatedSint32_.AddEntriesFrom(input, _repeated_repeatedSint32_codec, ref immediateBuffer);
             break;
           }
           case 290:
           case 288: {
-            repeatedSint64_.AddEntriesFrom(input, _repeated_repeatedSint64_codec);
+            repeatedSint64_.AddEntriesFrom(input, _repeated_repeatedSint64_codec, ref immediateBuffer);
             break;
           }
           case 298:
           case 301: {
-            repeatedFixed32_.AddEntriesFrom(input, _repeated_repeatedFixed32_codec);
+            repeatedFixed32_.AddEntriesFrom(input, _repeated_repeatedFixed32_codec, ref immediateBuffer);
             break;
           }
           case 306:
           case 305: {
-            repeatedFixed64_.AddEntriesFrom(input, _repeated_repeatedFixed64_codec);
+            repeatedFixed64_.AddEntriesFrom(input, _repeated_repeatedFixed64_codec, ref immediateBuffer);
             break;
           }
           case 314:
           case 317: {
-            repeatedSfixed32_.AddEntriesFrom(input, _repeated_repeatedSfixed32_codec);
+            repeatedSfixed32_.AddEntriesFrom(input, _repeated_repeatedSfixed32_codec, ref immediateBuffer);
             break;
           }
           case 322:
           case 321: {
-            repeatedSfixed64_.AddEntriesFrom(input, _repeated_repeatedSfixed64_codec);
+            repeatedSfixed64_.AddEntriesFrom(input, _repeated_repeatedSfixed64_codec, ref immediateBuffer);
             break;
           }
           case 330:
           case 333: {
-            repeatedFloat_.AddEntriesFrom(input, _repeated_repeatedFloat_codec);
+            repeatedFloat_.AddEntriesFrom(input, _repeated_repeatedFloat_codec, ref immediateBuffer);
             break;
           }
           case 338:
           case 337: {
-            repeatedDouble_.AddEntriesFrom(input, _repeated_repeatedDouble_codec);
+            repeatedDouble_.AddEntriesFrom(input, _repeated_repeatedDouble_codec, ref immediateBuffer);
             break;
           }
           case 346:
           case 344: {
-            repeatedBool_.AddEntriesFrom(input, _repeated_repeatedBool_codec);
+            repeatedBool_.AddEntriesFrom(input, _repeated_repeatedBool_codec, ref immediateBuffer);
             break;
           }
           case 354: {
-            repeatedString_.AddEntriesFrom(input, _repeated_repeatedString_codec);
+            repeatedString_.AddEntriesFrom(input, _repeated_repeatedString_codec, ref immediateBuffer);
             break;
           }
           case 362: {
-            repeatedBytes_.AddEntriesFrom(input, _repeated_repeatedBytes_codec);
+            repeatedBytes_.AddEntriesFrom(input, _repeated_repeatedBytes_codec, ref immediateBuffer);
             break;
           }
           case 386: {
-            repeatedNestedMessage_.AddEntriesFrom(input, _repeated_repeatedNestedMessage_codec);
+            repeatedNestedMessage_.AddEntriesFrom(input, _repeated_repeatedNestedMessage_codec, ref immediateBuffer);
             break;
           }
           case 394: {
-            repeatedForeignMessage_.AddEntriesFrom(input, _repeated_repeatedForeignMessage_codec);
+            repeatedForeignMessage_.AddEntriesFrom(input, _repeated_repeatedForeignMessage_codec, ref immediateBuffer);
             break;
           }
           case 402: {
-            repeatedImportMessage_.AddEntriesFrom(input, _repeated_repeatedImportMessage_codec);
+            repeatedImportMessage_.AddEntriesFrom(input, _repeated_repeatedImportMessage_codec, ref immediateBuffer);
             break;
           }
           case 410:
           case 408: {
-            repeatedNestedEnum_.AddEntriesFrom(input, _repeated_repeatedNestedEnum_codec);
+            repeatedNestedEnum_.AddEntriesFrom(input, _repeated_repeatedNestedEnum_codec, ref immediateBuffer);
             break;
           }
           case 418:
           case 416: {
-            repeatedForeignEnum_.AddEntriesFrom(input, _repeated_repeatedForeignEnum_codec);
+            repeatedForeignEnum_.AddEntriesFrom(input, _repeated_repeatedForeignEnum_codec, ref immediateBuffer);
             break;
           }
           case 426:
           case 424: {
-            repeatedImportEnum_.AddEntriesFrom(input, _repeated_repeatedImportEnum_codec);
+            repeatedImportEnum_.AddEntriesFrom(input, _repeated_repeatedImportEnum_codec, ref immediateBuffer);
             break;
           }
           case 434: {
-            repeatedPublicImportMessage_.AddEntriesFrom(input, _repeated_repeatedPublicImportMessage_codec);
+            repeatedPublicImportMessage_.AddEntriesFrom(input, _repeated_repeatedPublicImportMessage_codec, ref immediateBuffer);
             break;
           }
           case 888: {
-            OneofUint32 = input.ReadUInt32();
+            OneofUint32 = input.ReadUInt32(ref immediateBuffer);
             break;
           }
           case 898: {
@@ -1588,16 +1589,16 @@ namespace Google.Protobuf.TestProtos {
             if (oneofFieldCase_ == OneofFieldOneofCase.OneofNestedMessage) {
               subBuilder.MergeFrom(OneofNestedMessage);
             }
-            input.ReadMessage(subBuilder);
+            input.ReadMessage(subBuilder, ref immediateBuffer);
             OneofNestedMessage = subBuilder;
             break;
           }
           case 906: {
-            OneofString = input.ReadString();
+            OneofString = input.ReadString(ref immediateBuffer);
             break;
           }
           case 914: {
-            OneofBytes = input.ReadBytes();
+            OneofBytes = input.ReadBytes(ref immediateBuffer);
             break;
           }
         }
@@ -1736,15 +1737,16 @@ namespace Google.Protobuf.TestProtos {
         }
 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-        public void MergeFrom(pb::CodedInputStream input) {
+        [global::System.Security.SecurityCritical]
+        public void MergeFrom(pb::CodedInputStream input, ref global::System.ReadOnlySpan<byte> immediateBuffer) {
           uint tag;
-          while ((tag = input.ReadTag()) != 0) {
+          while ((tag = input.ReadTag(ref immediateBuffer)) != 0) {
             switch(tag) {
               default:
-                _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+                _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input, ref immediateBuffer);
                 break;
               case 8: {
-                Bb = input.ReadInt32();
+                Bb = input.ReadInt32(ref immediateBuffer);
                 break;
               }
             }
@@ -1919,29 +1921,30 @@ namespace Google.Protobuf.TestProtos {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
+    [global::System.Security.SecurityCritical]
+    public void MergeFrom(pb::CodedInputStream input, ref global::System.ReadOnlySpan<byte> immediateBuffer) {
       uint tag;
-      while ((tag = input.ReadTag()) != 0) {
+      while ((tag = input.ReadTag(ref immediateBuffer)) != 0) {
         switch(tag) {
           default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input, ref immediateBuffer);
             break;
           case 10: {
             if (child_ == null) {
               child_ = new global::Google.Protobuf.TestProtos.NestedTestAllTypes();
             }
-            input.ReadMessage(child_);
+            input.ReadMessage(child_, ref immediateBuffer);
             break;
           }
           case 18: {
             if (payload_ == null) {
               payload_ = new global::Google.Protobuf.TestProtos.TestAllTypes();
             }
-            input.ReadMessage(payload_);
+            input.ReadMessage(payload_, ref immediateBuffer);
             break;
           }
           case 26: {
-            repeatedChild_.AddEntriesFrom(input, _repeated_repeatedChild_codec);
+            repeatedChild_.AddEntriesFrom(input, _repeated_repeatedChild_codec, ref immediateBuffer);
             break;
           }
         }
@@ -2063,15 +2066,16 @@ namespace Google.Protobuf.TestProtos {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
+    [global::System.Security.SecurityCritical]
+    public void MergeFrom(pb::CodedInputStream input, ref global::System.ReadOnlySpan<byte> immediateBuffer) {
       uint tag;
-      while ((tag = input.ReadTag()) != 0) {
+      while ((tag = input.ReadTag(ref immediateBuffer)) != 0) {
         switch(tag) {
           default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input, ref immediateBuffer);
             break;
           case 8: {
-            DeprecatedInt32 = input.ReadInt32();
+            DeprecatedInt32 = input.ReadInt32(ref immediateBuffer);
             break;
           }
         }
@@ -2196,15 +2200,16 @@ namespace Google.Protobuf.TestProtos {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
+    [global::System.Security.SecurityCritical]
+    public void MergeFrom(pb::CodedInputStream input, ref global::System.ReadOnlySpan<byte> immediateBuffer) {
       uint tag;
-      while ((tag = input.ReadTag()) != 0) {
+      while ((tag = input.ReadTag(ref immediateBuffer)) != 0) {
         switch(tag) {
           default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input, ref immediateBuffer);
             break;
           case 8: {
-            C = input.ReadInt32();
+            C = input.ReadInt32(ref immediateBuffer);
             break;
           }
         }
@@ -2301,12 +2306,13 @@ namespace Google.Protobuf.TestProtos {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
+    [global::System.Security.SecurityCritical]
+    public void MergeFrom(pb::CodedInputStream input, ref global::System.ReadOnlySpan<byte> immediateBuffer) {
       uint tag;
-      while ((tag = input.ReadTag()) != 0) {
+      while ((tag = input.ReadTag(ref immediateBuffer)) != 0) {
         switch(tag) {
           default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input, ref immediateBuffer);
             break;
         }
       }
@@ -2432,18 +2438,19 @@ namespace Google.Protobuf.TestProtos {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
+    [global::System.Security.SecurityCritical]
+    public void MergeFrom(pb::CodedInputStream input, ref global::System.ReadOnlySpan<byte> immediateBuffer) {
       uint tag;
-      while ((tag = input.ReadTag()) != 0) {
+      while ((tag = input.ReadTag(ref immediateBuffer)) != 0) {
         switch(tag) {
           default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input, ref immediateBuffer);
             break;
           case 10: {
             if (foreignNested_ == null) {
               foreignNested_ = new global::Google.Protobuf.TestProtos.TestAllTypes.Types.NestedMessage();
             }
-            input.ReadMessage(foreignNested_);
+            input.ReadMessage(foreignNested_, ref immediateBuffer);
             break;
           }
         }
@@ -2595,19 +2602,20 @@ namespace Google.Protobuf.TestProtos {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
+    [global::System.Security.SecurityCritical]
+    public void MergeFrom(pb::CodedInputStream input, ref global::System.ReadOnlySpan<byte> immediateBuffer) {
       uint tag;
-      while ((tag = input.ReadTag()) != 0) {
+      while ((tag = input.ReadTag(ref immediateBuffer)) != 0) {
         switch(tag) {
           default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input, ref immediateBuffer);
             break;
           case 8: {
-            A = input.ReadInt32();
+            A = input.ReadInt32(ref immediateBuffer);
             break;
           }
           case 2147483640: {
-            Bb = input.ReadInt32();
+            Bb = input.ReadInt32(ref immediateBuffer);
             break;
           }
         }
@@ -2755,22 +2763,23 @@ namespace Google.Protobuf.TestProtos {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
+    [global::System.Security.SecurityCritical]
+    public void MergeFrom(pb::CodedInputStream input, ref global::System.ReadOnlySpan<byte> immediateBuffer) {
       uint tag;
-      while ((tag = input.ReadTag()) != 0) {
+      while ((tag = input.ReadTag(ref immediateBuffer)) != 0) {
         switch(tag) {
           default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input, ref immediateBuffer);
             break;
           case 10: {
             if (a_ == null) {
               a_ = new global::Google.Protobuf.TestProtos.TestRecursiveMessage();
             }
-            input.ReadMessage(a_);
+            input.ReadMessage(a_, ref immediateBuffer);
             break;
           }
           case 16: {
-            I = input.ReadInt32();
+            I = input.ReadInt32(ref immediateBuffer);
             break;
           }
         }
@@ -2897,18 +2906,19 @@ namespace Google.Protobuf.TestProtos {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
+    [global::System.Security.SecurityCritical]
+    public void MergeFrom(pb::CodedInputStream input, ref global::System.ReadOnlySpan<byte> immediateBuffer) {
       uint tag;
-      while ((tag = input.ReadTag()) != 0) {
+      while ((tag = input.ReadTag(ref immediateBuffer)) != 0) {
         switch(tag) {
           default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input, ref immediateBuffer);
             break;
           case 10: {
             if (bb_ == null) {
               bb_ = new global::Google.Protobuf.TestProtos.TestMutualRecursionB();
             }
-            input.ReadMessage(bb_);
+            input.ReadMessage(bb_, ref immediateBuffer);
             break;
           }
         }
@@ -3056,22 +3066,23 @@ namespace Google.Protobuf.TestProtos {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
+    [global::System.Security.SecurityCritical]
+    public void MergeFrom(pb::CodedInputStream input, ref global::System.ReadOnlySpan<byte> immediateBuffer) {
       uint tag;
-      while ((tag = input.ReadTag()) != 0) {
+      while ((tag = input.ReadTag(ref immediateBuffer)) != 0) {
         switch(tag) {
           default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input, ref immediateBuffer);
             break;
           case 10: {
             if (a_ == null) {
               a_ = new global::Google.Protobuf.TestProtos.TestMutualRecursionA();
             }
-            input.ReadMessage(a_);
+            input.ReadMessage(a_, ref immediateBuffer);
             break;
           }
           case 16: {
-            OptionalInt32 = input.ReadInt32();
+            OptionalInt32 = input.ReadInt32(ref immediateBuffer);
             break;
           }
         }
@@ -3192,15 +3203,16 @@ namespace Google.Protobuf.TestProtos {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
+    [global::System.Security.SecurityCritical]
+    public void MergeFrom(pb::CodedInputStream input, ref global::System.ReadOnlySpan<byte> immediateBuffer) {
       uint tag;
-      while ((tag = input.ReadTag()) != 0) {
+      while ((tag = input.ReadTag(ref immediateBuffer)) != 0) {
         switch(tag) {
           default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input, ref immediateBuffer);
             break;
           case 8: {
-            value_ = (global::Google.Protobuf.TestProtos.TestEnumWithDupValue) input.ReadEnum();
+            value_ = (global::Google.Protobuf.TestProtos.TestEnumWithDupValue) input.ReadEnum(ref immediateBuffer);
             break;
           }
         }
@@ -3464,48 +3476,49 @@ namespace Google.Protobuf.TestProtos {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
+    [global::System.Security.SecurityCritical]
+    public void MergeFrom(pb::CodedInputStream input, ref global::System.ReadOnlySpan<byte> immediateBuffer) {
       uint tag;
-      while ((tag = input.ReadTag()) != 0) {
+      while ((tag = input.ReadTag(ref immediateBuffer)) != 0) {
         switch(tag) {
           default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input, ref immediateBuffer);
             break;
           case 8: {
-            PrimitiveField = input.ReadInt32();
+            PrimitiveField = input.ReadInt32(ref immediateBuffer);
             break;
           }
           case 18: {
-            StringField = input.ReadString();
+            StringField = input.ReadString(ref immediateBuffer);
             break;
           }
           case 24: {
-            enumField_ = (global::Google.Protobuf.TestProtos.ForeignEnum) input.ReadEnum();
+            enumField_ = (global::Google.Protobuf.TestProtos.ForeignEnum) input.ReadEnum(ref immediateBuffer);
             break;
           }
           case 34: {
             if (messageField_ == null) {
               messageField_ = new global::Google.Protobuf.TestProtos.ForeignMessage();
             }
-            input.ReadMessage(messageField_);
+            input.ReadMessage(messageField_, ref immediateBuffer);
             break;
           }
           case 58:
           case 56: {
-            repeatedPrimitiveField_.AddEntriesFrom(input, _repeated_repeatedPrimitiveField_codec);
+            repeatedPrimitiveField_.AddEntriesFrom(input, _repeated_repeatedPrimitiveField_codec, ref immediateBuffer);
             break;
           }
           case 66: {
-            repeatedStringField_.AddEntriesFrom(input, _repeated_repeatedStringField_codec);
+            repeatedStringField_.AddEntriesFrom(input, _repeated_repeatedStringField_codec, ref immediateBuffer);
             break;
           }
           case 74:
           case 72: {
-            repeatedEnumField_.AddEntriesFrom(input, _repeated_repeatedEnumField_codec);
+            repeatedEnumField_.AddEntriesFrom(input, _repeated_repeatedEnumField_codec, ref immediateBuffer);
             break;
           }
           case 82: {
-            repeatedMessageField_.AddEntriesFrom(input, _repeated_repeatedMessageField_codec);
+            repeatedMessageField_.AddEntriesFrom(input, _repeated_repeatedMessageField_codec, ref immediateBuffer);
             break;
           }
         }
@@ -3705,30 +3718,31 @@ namespace Google.Protobuf.TestProtos {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
+    [global::System.Security.SecurityCritical]
+    public void MergeFrom(pb::CodedInputStream input, ref global::System.ReadOnlySpan<byte> immediateBuffer) {
       uint tag;
-      while ((tag = input.ReadTag()) != 0) {
+      while ((tag = input.ReadTag(ref immediateBuffer)) != 0) {
         switch(tag) {
           default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input, ref immediateBuffer);
             break;
           case 8: {
-            MyInt = input.ReadInt64();
+            MyInt = input.ReadInt64(ref immediateBuffer);
             break;
           }
           case 90: {
-            MyString = input.ReadString();
+            MyString = input.ReadString(ref immediateBuffer);
             break;
           }
           case 813: {
-            MyFloat = input.ReadFloat();
+            MyFloat = input.ReadFloat(ref immediateBuffer);
             break;
           }
           case 1602: {
             if (singleNestedMessage_ == null) {
               singleNestedMessage_ = new global::Google.Protobuf.TestProtos.TestFieldOrderings.Types.NestedMessage();
             }
-            input.ReadMessage(singleNestedMessage_);
+            input.ReadMessage(singleNestedMessage_, ref immediateBuffer);
             break;
           }
         }
@@ -3880,19 +3894,20 @@ namespace Google.Protobuf.TestProtos {
         }
 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-        public void MergeFrom(pb::CodedInputStream input) {
+        [global::System.Security.SecurityCritical]
+        public void MergeFrom(pb::CodedInputStream input, ref global::System.ReadOnlySpan<byte> immediateBuffer) {
           uint tag;
-          while ((tag = input.ReadTag()) != 0) {
+          while ((tag = input.ReadTag(ref immediateBuffer)) != 0) {
             switch(tag) {
               default:
-                _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+                _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input, ref immediateBuffer);
                 break;
               case 8: {
-                Bb = input.ReadInt32();
+                Bb = input.ReadInt32(ref immediateBuffer);
                 break;
               }
               case 16: {
-                Oo = input.ReadInt64();
+                Oo = input.ReadInt64(ref immediateBuffer);
                 break;
               }
             }
@@ -4018,15 +4033,16 @@ namespace Google.Protobuf.TestProtos {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
+    [global::System.Security.SecurityCritical]
+    public void MergeFrom(pb::CodedInputStream input, ref global::System.ReadOnlySpan<byte> immediateBuffer) {
       uint tag;
-      while ((tag = input.ReadTag()) != 0) {
+      while ((tag = input.ReadTag(ref immediateBuffer)) != 0) {
         switch(tag) {
           default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input, ref immediateBuffer);
             break;
           case 8: {
-            sparseEnum_ = (global::Google.Protobuf.TestProtos.TestSparseEnum) input.ReadEnum();
+            sparseEnum_ = (global::Google.Protobuf.TestProtos.TestSparseEnum) input.ReadEnum(ref immediateBuffer);
             break;
           }
         }
@@ -4150,15 +4166,16 @@ namespace Google.Protobuf.TestProtos {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
+    [global::System.Security.SecurityCritical]
+    public void MergeFrom(pb::CodedInputStream input, ref global::System.ReadOnlySpan<byte> immediateBuffer) {
       uint tag;
-      while ((tag = input.ReadTag()) != 0) {
+      while ((tag = input.ReadTag(ref immediateBuffer)) != 0) {
         switch(tag) {
           default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input, ref immediateBuffer);
             break;
           case 10: {
-            Data = input.ReadString();
+            Data = input.ReadString(ref immediateBuffer);
             break;
           }
         }
@@ -4271,15 +4288,16 @@ namespace Google.Protobuf.TestProtos {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
+    [global::System.Security.SecurityCritical]
+    public void MergeFrom(pb::CodedInputStream input, ref global::System.ReadOnlySpan<byte> immediateBuffer) {
       uint tag;
-      while ((tag = input.ReadTag()) != 0) {
+      while ((tag = input.ReadTag(ref immediateBuffer)) != 0) {
         switch(tag) {
           default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input, ref immediateBuffer);
             break;
           case 10: {
-            data_.AddEntriesFrom(input, _repeated_data_codec);
+            data_.AddEntriesFrom(input, _repeated_data_codec, ref immediateBuffer);
             break;
           }
         }
@@ -4400,15 +4418,16 @@ namespace Google.Protobuf.TestProtos {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
+    [global::System.Security.SecurityCritical]
+    public void MergeFrom(pb::CodedInputStream input, ref global::System.ReadOnlySpan<byte> immediateBuffer) {
       uint tag;
-      while ((tag = input.ReadTag()) != 0) {
+      while ((tag = input.ReadTag(ref immediateBuffer)) != 0) {
         switch(tag) {
           default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input, ref immediateBuffer);
             break;
           case 10: {
-            Data = input.ReadBytes();
+            Data = input.ReadBytes(ref immediateBuffer);
             break;
           }
         }
@@ -4529,15 +4548,16 @@ namespace Google.Protobuf.TestProtos {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
+    [global::System.Security.SecurityCritical]
+    public void MergeFrom(pb::CodedInputStream input, ref global::System.ReadOnlySpan<byte> immediateBuffer) {
       uint tag;
-      while ((tag = input.ReadTag()) != 0) {
+      while ((tag = input.ReadTag(ref immediateBuffer)) != 0) {
         switch(tag) {
           default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input, ref immediateBuffer);
             break;
           case 10: {
-            Data = input.ReadBytes();
+            Data = input.ReadBytes(ref immediateBuffer);
             break;
           }
         }
@@ -4661,15 +4681,16 @@ namespace Google.Protobuf.TestProtos {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
+    [global::System.Security.SecurityCritical]
+    public void MergeFrom(pb::CodedInputStream input, ref global::System.ReadOnlySpan<byte> immediateBuffer) {
       uint tag;
-      while ((tag = input.ReadTag()) != 0) {
+      while ((tag = input.ReadTag(ref immediateBuffer)) != 0) {
         switch(tag) {
           default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input, ref immediateBuffer);
             break;
           case 8: {
-            Data = input.ReadInt32();
+            Data = input.ReadInt32(ref immediateBuffer);
             break;
           }
         }
@@ -4790,15 +4811,16 @@ namespace Google.Protobuf.TestProtos {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
+    [global::System.Security.SecurityCritical]
+    public void MergeFrom(pb::CodedInputStream input, ref global::System.ReadOnlySpan<byte> immediateBuffer) {
       uint tag;
-      while ((tag = input.ReadTag()) != 0) {
+      while ((tag = input.ReadTag(ref immediateBuffer)) != 0) {
         switch(tag) {
           default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input, ref immediateBuffer);
             break;
           case 8: {
-            Data = input.ReadUInt32();
+            Data = input.ReadUInt32(ref immediateBuffer);
             break;
           }
         }
@@ -4919,15 +4941,16 @@ namespace Google.Protobuf.TestProtos {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
+    [global::System.Security.SecurityCritical]
+    public void MergeFrom(pb::CodedInputStream input, ref global::System.ReadOnlySpan<byte> immediateBuffer) {
       uint tag;
-      while ((tag = input.ReadTag()) != 0) {
+      while ((tag = input.ReadTag(ref immediateBuffer)) != 0) {
         switch(tag) {
           default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input, ref immediateBuffer);
             break;
           case 8: {
-            Data = input.ReadInt64();
+            Data = input.ReadInt64(ref immediateBuffer);
             break;
           }
         }
@@ -5048,15 +5071,16 @@ namespace Google.Protobuf.TestProtos {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
+    [global::System.Security.SecurityCritical]
+    public void MergeFrom(pb::CodedInputStream input, ref global::System.ReadOnlySpan<byte> immediateBuffer) {
       uint tag;
-      while ((tag = input.ReadTag()) != 0) {
+      while ((tag = input.ReadTag(ref immediateBuffer)) != 0) {
         switch(tag) {
           default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input, ref immediateBuffer);
             break;
           case 8: {
-            Data = input.ReadUInt64();
+            Data = input.ReadUInt64(ref immediateBuffer);
             break;
           }
         }
@@ -5177,15 +5201,16 @@ namespace Google.Protobuf.TestProtos {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
+    [global::System.Security.SecurityCritical]
+    public void MergeFrom(pb::CodedInputStream input, ref global::System.ReadOnlySpan<byte> immediateBuffer) {
       uint tag;
-      while ((tag = input.ReadTag()) != 0) {
+      while ((tag = input.ReadTag(ref immediateBuffer)) != 0) {
         switch(tag) {
           default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input, ref immediateBuffer);
             break;
           case 8: {
-            Data = input.ReadBool();
+            Data = input.ReadBool(ref immediateBuffer);
             break;
           }
         }
@@ -5394,19 +5419,20 @@ namespace Google.Protobuf.TestProtos {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
+    [global::System.Security.SecurityCritical]
+    public void MergeFrom(pb::CodedInputStream input, ref global::System.ReadOnlySpan<byte> immediateBuffer) {
       uint tag;
-      while ((tag = input.ReadTag()) != 0) {
+      while ((tag = input.ReadTag(ref immediateBuffer)) != 0) {
         switch(tag) {
           default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input, ref immediateBuffer);
             break;
           case 8: {
-            FooInt = input.ReadInt32();
+            FooInt = input.ReadInt32(ref immediateBuffer);
             break;
           }
           case 18: {
-            FooString = input.ReadString();
+            FooString = input.ReadString(ref immediateBuffer);
             break;
           }
           case 26: {
@@ -5414,7 +5440,7 @@ namespace Google.Protobuf.TestProtos {
             if (fooCase_ == FooOneofCase.FooMessage) {
               subBuilder.MergeFrom(FooMessage);
             }
-            input.ReadMessage(subBuilder);
+            input.ReadMessage(subBuilder, ref immediateBuffer);
             FooMessage = subBuilder;
             break;
           }
@@ -5736,81 +5762,82 @@ namespace Google.Protobuf.TestProtos {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
+    [global::System.Security.SecurityCritical]
+    public void MergeFrom(pb::CodedInputStream input, ref global::System.ReadOnlySpan<byte> immediateBuffer) {
       uint tag;
-      while ((tag = input.ReadTag()) != 0) {
+      while ((tag = input.ReadTag(ref immediateBuffer)) != 0) {
         switch(tag) {
           default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input, ref immediateBuffer);
             break;
           case 722:
           case 720: {
-            packedInt32_.AddEntriesFrom(input, _repeated_packedInt32_codec);
+            packedInt32_.AddEntriesFrom(input, _repeated_packedInt32_codec, ref immediateBuffer);
             break;
           }
           case 730:
           case 728: {
-            packedInt64_.AddEntriesFrom(input, _repeated_packedInt64_codec);
+            packedInt64_.AddEntriesFrom(input, _repeated_packedInt64_codec, ref immediateBuffer);
             break;
           }
           case 738:
           case 736: {
-            packedUint32_.AddEntriesFrom(input, _repeated_packedUint32_codec);
+            packedUint32_.AddEntriesFrom(input, _repeated_packedUint32_codec, ref immediateBuffer);
             break;
           }
           case 746:
           case 744: {
-            packedUint64_.AddEntriesFrom(input, _repeated_packedUint64_codec);
+            packedUint64_.AddEntriesFrom(input, _repeated_packedUint64_codec, ref immediateBuffer);
             break;
           }
           case 754:
           case 752: {
-            packedSint32_.AddEntriesFrom(input, _repeated_packedSint32_codec);
+            packedSint32_.AddEntriesFrom(input, _repeated_packedSint32_codec, ref immediateBuffer);
             break;
           }
           case 762:
           case 760: {
-            packedSint64_.AddEntriesFrom(input, _repeated_packedSint64_codec);
+            packedSint64_.AddEntriesFrom(input, _repeated_packedSint64_codec, ref immediateBuffer);
             break;
           }
           case 770:
           case 773: {
-            packedFixed32_.AddEntriesFrom(input, _repeated_packedFixed32_codec);
+            packedFixed32_.AddEntriesFrom(input, _repeated_packedFixed32_codec, ref immediateBuffer);
             break;
           }
           case 778:
           case 777: {
-            packedFixed64_.AddEntriesFrom(input, _repeated_packedFixed64_codec);
+            packedFixed64_.AddEntriesFrom(input, _repeated_packedFixed64_codec, ref immediateBuffer);
             break;
           }
           case 786:
           case 789: {
-            packedSfixed32_.AddEntriesFrom(input, _repeated_packedSfixed32_codec);
+            packedSfixed32_.AddEntriesFrom(input, _repeated_packedSfixed32_codec, ref immediateBuffer);
             break;
           }
           case 794:
           case 793: {
-            packedSfixed64_.AddEntriesFrom(input, _repeated_packedSfixed64_codec);
+            packedSfixed64_.AddEntriesFrom(input, _repeated_packedSfixed64_codec, ref immediateBuffer);
             break;
           }
           case 802:
           case 805: {
-            packedFloat_.AddEntriesFrom(input, _repeated_packedFloat_codec);
+            packedFloat_.AddEntriesFrom(input, _repeated_packedFloat_codec, ref immediateBuffer);
             break;
           }
           case 810:
           case 809: {
-            packedDouble_.AddEntriesFrom(input, _repeated_packedDouble_codec);
+            packedDouble_.AddEntriesFrom(input, _repeated_packedDouble_codec, ref immediateBuffer);
             break;
           }
           case 818:
           case 816: {
-            packedBool_.AddEntriesFrom(input, _repeated_packedBool_codec);
+            packedBool_.AddEntriesFrom(input, _repeated_packedBool_codec, ref immediateBuffer);
             break;
           }
           case 826:
           case 824: {
-            packedEnum_.AddEntriesFrom(input, _repeated_packedEnum_codec);
+            packedEnum_.AddEntriesFrom(input, _repeated_packedEnum_codec, ref immediateBuffer);
             break;
           }
         }
@@ -6135,81 +6162,82 @@ namespace Google.Protobuf.TestProtos {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
+    [global::System.Security.SecurityCritical]
+    public void MergeFrom(pb::CodedInputStream input, ref global::System.ReadOnlySpan<byte> immediateBuffer) {
       uint tag;
-      while ((tag = input.ReadTag()) != 0) {
+      while ((tag = input.ReadTag(ref immediateBuffer)) != 0) {
         switch(tag) {
           default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input, ref immediateBuffer);
             break;
           case 722:
           case 720: {
-            unpackedInt32_.AddEntriesFrom(input, _repeated_unpackedInt32_codec);
+            unpackedInt32_.AddEntriesFrom(input, _repeated_unpackedInt32_codec, ref immediateBuffer);
             break;
           }
           case 730:
           case 728: {
-            unpackedInt64_.AddEntriesFrom(input, _repeated_unpackedInt64_codec);
+            unpackedInt64_.AddEntriesFrom(input, _repeated_unpackedInt64_codec, ref immediateBuffer);
             break;
           }
           case 738:
           case 736: {
-            unpackedUint32_.AddEntriesFrom(input, _repeated_unpackedUint32_codec);
+            unpackedUint32_.AddEntriesFrom(input, _repeated_unpackedUint32_codec, ref immediateBuffer);
             break;
           }
           case 746:
           case 744: {
-            unpackedUint64_.AddEntriesFrom(input, _repeated_unpackedUint64_codec);
+            unpackedUint64_.AddEntriesFrom(input, _repeated_unpackedUint64_codec, ref immediateBuffer);
             break;
           }
           case 754:
           case 752: {
-            unpackedSint32_.AddEntriesFrom(input, _repeated_unpackedSint32_codec);
+            unpackedSint32_.AddEntriesFrom(input, _repeated_unpackedSint32_codec, ref immediateBuffer);
             break;
           }
           case 762:
           case 760: {
-            unpackedSint64_.AddEntriesFrom(input, _repeated_unpackedSint64_codec);
+            unpackedSint64_.AddEntriesFrom(input, _repeated_unpackedSint64_codec, ref immediateBuffer);
             break;
           }
           case 770:
           case 773: {
-            unpackedFixed32_.AddEntriesFrom(input, _repeated_unpackedFixed32_codec);
+            unpackedFixed32_.AddEntriesFrom(input, _repeated_unpackedFixed32_codec, ref immediateBuffer);
             break;
           }
           case 778:
           case 777: {
-            unpackedFixed64_.AddEntriesFrom(input, _repeated_unpackedFixed64_codec);
+            unpackedFixed64_.AddEntriesFrom(input, _repeated_unpackedFixed64_codec, ref immediateBuffer);
             break;
           }
           case 786:
           case 789: {
-            unpackedSfixed32_.AddEntriesFrom(input, _repeated_unpackedSfixed32_codec);
+            unpackedSfixed32_.AddEntriesFrom(input, _repeated_unpackedSfixed32_codec, ref immediateBuffer);
             break;
           }
           case 794:
           case 793: {
-            unpackedSfixed64_.AddEntriesFrom(input, _repeated_unpackedSfixed64_codec);
+            unpackedSfixed64_.AddEntriesFrom(input, _repeated_unpackedSfixed64_codec, ref immediateBuffer);
             break;
           }
           case 802:
           case 805: {
-            unpackedFloat_.AddEntriesFrom(input, _repeated_unpackedFloat_codec);
+            unpackedFloat_.AddEntriesFrom(input, _repeated_unpackedFloat_codec, ref immediateBuffer);
             break;
           }
           case 810:
           case 809: {
-            unpackedDouble_.AddEntriesFrom(input, _repeated_unpackedDouble_codec);
+            unpackedDouble_.AddEntriesFrom(input, _repeated_unpackedDouble_codec, ref immediateBuffer);
             break;
           }
           case 818:
           case 816: {
-            unpackedBool_.AddEntriesFrom(input, _repeated_unpackedBool_codec);
+            unpackedBool_.AddEntriesFrom(input, _repeated_unpackedBool_codec, ref immediateBuffer);
             break;
           }
           case 826:
           case 824: {
-            unpackedEnum_.AddEntriesFrom(input, _repeated_unpackedEnum_codec);
+            unpackedEnum_.AddEntriesFrom(input, _repeated_unpackedEnum_codec, ref immediateBuffer);
             break;
           }
         }
@@ -6416,41 +6444,42 @@ namespace Google.Protobuf.TestProtos {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
+    [global::System.Security.SecurityCritical]
+    public void MergeFrom(pb::CodedInputStream input, ref global::System.ReadOnlySpan<byte> immediateBuffer) {
       uint tag;
-      while ((tag = input.ReadTag()) != 0) {
+      while ((tag = input.ReadTag(ref immediateBuffer)) != 0) {
         switch(tag) {
           default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input, ref immediateBuffer);
             break;
           case 98:
           case 101: {
-            repeatedFixed32_.AddEntriesFrom(input, _repeated_repeatedFixed32_codec);
+            repeatedFixed32_.AddEntriesFrom(input, _repeated_repeatedFixed32_codec, ref immediateBuffer);
             break;
           }
           case 106:
           case 104: {
-            repeatedInt32_.AddEntriesFrom(input, _repeated_repeatedInt32_codec);
+            repeatedInt32_.AddEntriesFrom(input, _repeated_repeatedInt32_codec, ref immediateBuffer);
             break;
           }
           case 16370:
           case 16369: {
-            repeatedFixed64_.AddEntriesFrom(input, _repeated_repeatedFixed64_codec);
+            repeatedFixed64_.AddEntriesFrom(input, _repeated_repeatedFixed64_codec, ref immediateBuffer);
             break;
           }
           case 16378:
           case 16376: {
-            repeatedInt64_.AddEntriesFrom(input, _repeated_repeatedInt64_codec);
+            repeatedInt64_.AddEntriesFrom(input, _repeated_repeatedInt64_codec, ref immediateBuffer);
             break;
           }
           case 2097138:
           case 2097141: {
-            repeatedFloat_.AddEntriesFrom(input, _repeated_repeatedFloat_codec);
+            repeatedFloat_.AddEntriesFrom(input, _repeated_repeatedFloat_codec, ref immediateBuffer);
             break;
           }
           case 2097146:
           case 2097144: {
-            repeatedUint64_.AddEntriesFrom(input, _repeated_repeatedUint64_codec);
+            repeatedUint64_.AddEntriesFrom(input, _repeated_repeatedUint64_codec, ref immediateBuffer);
             break;
           }
         }
@@ -6574,15 +6603,16 @@ namespace Google.Protobuf.TestProtos {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
+    [global::System.Security.SecurityCritical]
+    public void MergeFrom(pb::CodedInputStream input, ref global::System.ReadOnlySpan<byte> immediateBuffer) {
       uint tag;
-      while ((tag = input.ReadTag()) != 0) {
+      while ((tag = input.ReadTag(ref immediateBuffer)) != 0) {
         switch(tag) {
           default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input, ref immediateBuffer);
             break;
           case 10: {
-            A = input.ReadString();
+            A = input.ReadString(ref immediateBuffer);
             break;
           }
         }
@@ -6682,12 +6712,13 @@ namespace Google.Protobuf.TestProtos {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
+    [global::System.Security.SecurityCritical]
+    public void MergeFrom(pb::CodedInputStream input, ref global::System.ReadOnlySpan<byte> immediateBuffer) {
       uint tag;
-      while ((tag = input.ReadTag()) != 0) {
+      while ((tag = input.ReadTag(ref immediateBuffer)) != 0) {
         switch(tag) {
           default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input, ref immediateBuffer);
             break;
         }
       }
@@ -6783,12 +6814,13 @@ namespace Google.Protobuf.TestProtos {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
+    [global::System.Security.SecurityCritical]
+    public void MergeFrom(pb::CodedInputStream input, ref global::System.ReadOnlySpan<byte> immediateBuffer) {
       uint tag;
-      while ((tag = input.ReadTag()) != 0) {
+      while ((tag = input.ReadTag(ref immediateBuffer)) != 0) {
         switch(tag) {
           default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input, ref immediateBuffer);
             break;
         }
       }
@@ -6884,12 +6916,13 @@ namespace Google.Protobuf.TestProtos {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
+    [global::System.Security.SecurityCritical]
+    public void MergeFrom(pb::CodedInputStream input, ref global::System.ReadOnlySpan<byte> immediateBuffer) {
       uint tag;
-      while ((tag = input.ReadTag()) != 0) {
+      while ((tag = input.ReadTag(ref immediateBuffer)) != 0) {
         switch(tag) {
           default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input, ref immediateBuffer);
             break;
         }
       }
@@ -6985,12 +7018,13 @@ namespace Google.Protobuf.TestProtos {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
+    [global::System.Security.SecurityCritical]
+    public void MergeFrom(pb::CodedInputStream input, ref global::System.ReadOnlySpan<byte> immediateBuffer) {
       uint tag;
-      while ((tag = input.ReadTag()) != 0) {
+      while ((tag = input.ReadTag(ref immediateBuffer)) != 0) {
         switch(tag) {
           default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input, ref immediateBuffer);
             break;
         }
       }
@@ -7086,12 +7120,13 @@ namespace Google.Protobuf.TestProtos {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
+    [global::System.Security.SecurityCritical]
+    public void MergeFrom(pb::CodedInputStream input, ref global::System.ReadOnlySpan<byte> immediateBuffer) {
       uint tag;
-      while ((tag = input.ReadTag()) != 0) {
+      while ((tag = input.ReadTag(ref immediateBuffer)) != 0) {
         switch(tag) {
           default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input, ref immediateBuffer);
             break;
         }
       }
@@ -7187,12 +7222,13 @@ namespace Google.Protobuf.TestProtos {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
+    [global::System.Security.SecurityCritical]
+    public void MergeFrom(pb::CodedInputStream input, ref global::System.ReadOnlySpan<byte> immediateBuffer) {
       uint tag;
-      while ((tag = input.ReadTag()) != 0) {
+      while ((tag = input.ReadTag(ref immediateBuffer)) != 0) {
         switch(tag) {
           default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input, ref immediateBuffer);
             break;
         }
       }
@@ -7288,12 +7324,13 @@ namespace Google.Protobuf.TestProtos {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
+    [global::System.Security.SecurityCritical]
+    public void MergeFrom(pb::CodedInputStream input, ref global::System.ReadOnlySpan<byte> immediateBuffer) {
       uint tag;
-      while ((tag = input.ReadTag()) != 0) {
+      while ((tag = input.ReadTag(ref immediateBuffer)) != 0) {
         switch(tag) {
           default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input, ref immediateBuffer);
             break;
         }
       }

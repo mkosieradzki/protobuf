@@ -184,15 +184,16 @@ namespace Google.Protobuf.WellKnownTypes {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
+    [global::System.Security.SecurityCritical]
+    public void MergeFrom(pb::CodedInputStream input, ref global::System.ReadOnlySpan<byte> immediateBuffer) {
       uint tag;
-      while ((tag = input.ReadTag()) != 0) {
+      while ((tag = input.ReadTag(ref immediateBuffer)) != 0) {
         switch(tag) {
           default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input, ref immediateBuffer);
             break;
           case 10: {
-            fields_.AddEntriesFrom(input, _map_fields_codec);
+            fields_.AddEntriesFrom(input, _map_fields_codec, ref immediateBuffer);
             break;
           }
         }
@@ -508,28 +509,29 @@ namespace Google.Protobuf.WellKnownTypes {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
+    [global::System.Security.SecurityCritical]
+    public void MergeFrom(pb::CodedInputStream input, ref global::System.ReadOnlySpan<byte> immediateBuffer) {
       uint tag;
-      while ((tag = input.ReadTag()) != 0) {
+      while ((tag = input.ReadTag(ref immediateBuffer)) != 0) {
         switch(tag) {
           default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input, ref immediateBuffer);
             break;
           case 8: {
-            kind_ = input.ReadEnum();
+            kind_ = input.ReadEnum(ref immediateBuffer);
             kindCase_ = KindOneofCase.NullValue;
             break;
           }
           case 17: {
-            NumberValue = input.ReadDouble();
+            NumberValue = input.ReadDouble(ref immediateBuffer);
             break;
           }
           case 26: {
-            StringValue = input.ReadString();
+            StringValue = input.ReadString(ref immediateBuffer);
             break;
           }
           case 32: {
-            BoolValue = input.ReadBool();
+            BoolValue = input.ReadBool(ref immediateBuffer);
             break;
           }
           case 42: {
@@ -537,7 +539,7 @@ namespace Google.Protobuf.WellKnownTypes {
             if (kindCase_ == KindOneofCase.StructValue) {
               subBuilder.MergeFrom(StructValue);
             }
-            input.ReadMessage(subBuilder);
+            input.ReadMessage(subBuilder, ref immediateBuffer);
             StructValue = subBuilder;
             break;
           }
@@ -546,7 +548,7 @@ namespace Google.Protobuf.WellKnownTypes {
             if (kindCase_ == KindOneofCase.ListValue) {
               subBuilder.MergeFrom(ListValue);
             }
-            input.ReadMessage(subBuilder);
+            input.ReadMessage(subBuilder, ref immediateBuffer);
             ListValue = subBuilder;
             break;
           }
@@ -668,15 +670,16 @@ namespace Google.Protobuf.WellKnownTypes {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
+    [global::System.Security.SecurityCritical]
+    public void MergeFrom(pb::CodedInputStream input, ref global::System.ReadOnlySpan<byte> immediateBuffer) {
       uint tag;
-      while ((tag = input.ReadTag()) != 0) {
+      while ((tag = input.ReadTag(ref immediateBuffer)) != 0) {
         switch(tag) {
           default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input, ref immediateBuffer);
             break;
           case 10: {
-            values_.AddEntriesFrom(input, _repeated_values_codec);
+            values_.AddEntriesFrom(input, _repeated_values_codec, ref immediateBuffer);
             break;
           }
         }
