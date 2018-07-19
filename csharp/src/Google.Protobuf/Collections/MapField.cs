@@ -37,6 +37,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security;
 
 namespace Google.Protobuf.Collections
 {
@@ -420,15 +421,16 @@ namespace Google.Protobuf.Collections
         /// </remarks>
         /// <param name="input">Stream to read from</param>
         /// <param name="codec">Codec describing how the key/value pairs are encoded</param>
-        public void AddEntriesFrom(CodedInputStream input, Codec codec)
+        [SecurityCritical]
+        public void AddEntriesFrom(CodedInputStream input, Codec codec, ref ReadOnlySpan<byte> immediateBuffer)
         {
             var adapter = new Codec.MessageAdapter(codec);
             do
             {
                 adapter.Reset();
-                input.ReadMessage(adapter);
+                input.ReadMessage(adapter, ref immediateBuffer);
                 this[adapter.Key] = adapter.Value;
-            } while (input.MaybeConsumeTag(codec.MapTag));
+            } while (input.MaybeConsumeTag(codec.MapTag, ref immediateBuffer));
         }
 
         /// <summary>
@@ -639,22 +641,23 @@ namespace Google.Protobuf.Collections
                     Value = codec.valueCodec.DefaultValue;
                 }
 
-                public void MergeFrom(CodedInputStream input)
+                [SecurityCritical]
+                public void MergeFrom(CodedInputStream input, ref ReadOnlySpan<byte> immediateBuffer)
                 {
                     uint tag;
-                    while ((tag = input.ReadTag()) != 0)
+                    while ((tag = input.ReadTag(ref immediateBuffer)) != 0)
                     {
                         if (tag == codec.keyCodec.Tag)
                         {
-                            Key = codec.keyCodec.Read(input);
+                            Key = codec.keyCodec.Read(input, ref immediateBuffer);
                         }
                         else if (tag == codec.valueCodec.Tag)
                         {
-                            Value = codec.valueCodec.Read(input);
+                            Value = codec.valueCodec.Read(input, ref immediateBuffer);
                         }
                         else 
                         {
-                            input.SkipLastField();
+                            input.SkipLastField(ref immediateBuffer);
                         }
                     }
 
@@ -662,7 +665,9 @@ namespace Google.Protobuf.Collections
                     // Read it as if we'd seen an input stream with no data (i.e. create a "default" message).
                     if (Value == null)
                     {
-                        Value = codec.valueCodec.Read(new CodedInputStream(ZeroLengthMessageStreamData));
+                        var zeroInput = new CodedInputStream(ZeroLengthMessageStreamData);
+                        var zeroInputImmediateBuffer = zeroInput.ImmediateBuffer;
+                        Value = codec.valueCodec.Read(zeroInput, ref zeroInputImmediateBuffer);
                     }
                 }
 

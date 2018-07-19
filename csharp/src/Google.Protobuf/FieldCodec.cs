@@ -35,6 +35,7 @@ using Google.Protobuf.Compatibility;
 using Google.Protobuf.WellKnownTypes;
 using System;
 using System.Collections.Generic;
+using System.Security;
 
 namespace Google.Protobuf
 {
@@ -50,150 +51,165 @@ namespace Google.Protobuf
         /// </summary>
         /// <param name="tag">The tag.</param>
         /// <returns>A codec for the given tag.</returns>
-        public static FieldCodec<string> ForString(uint tag)
-        {
-            return new FieldCodec<string>(input => input.ReadString(), (output, value) => output.WriteString(value), CodedOutputStream.ComputeStringSize, tag);
-        }
+        [SecuritySafeCritical]
+        public static FieldCodec<string> ForString(uint tag) => new FieldCodec<string>(ParseString, (output, value) => output.WriteString(value), CodedOutputStream.ComputeStringSize, tag);
+
+        [SecurityCritical]
+        private static string ParseString(CodedInputStream input, ref ReadOnlySpan<byte> immediateBuffer) => input.ReadString(ref immediateBuffer);
 
         /// <summary>
         /// Retrieves a codec suitable for a bytes field with the given tag.
         /// </summary>
         /// <param name="tag">The tag.</param>
         /// <returns>A codec for the given tag.</returns>
-        public static FieldCodec<ByteString> ForBytes(uint tag)
-        {
-            return new FieldCodec<ByteString>(input => input.ReadBytes(), (output, value) => output.WriteBytes(value), CodedOutputStream.ComputeBytesSize, tag);
-        }
+        [SecuritySafeCritical]
+        public static FieldCodec<ByteString> ForBytes(uint tag) => new FieldCodec<ByteString>(ParseBytes, (output, value) => output.WriteBytes(value), CodedOutputStream.ComputeBytesSize, tag);
+
+        [SecurityCritical]
+        private static ByteString ParseBytes(CodedInputStream input, ref ReadOnlySpan<byte> immediateBuffer) => input.ReadBytes(ref immediateBuffer);
 
         /// <summary>
         /// Retrieves a codec suitable for a bool field with the given tag.
         /// </summary>
         /// <param name="tag">The tag.</param>
         /// <returns>A codec for the given tag.</returns>
-        public static FieldCodec<bool> ForBool(uint tag)
-        {
-            return new FieldCodec<bool>(input => input.ReadBool(), (output, value) => output.WriteBool(value), CodedOutputStream.ComputeBoolSize, tag);
-        }
+        [SecuritySafeCritical]
+        public static FieldCodec<bool> ForBool(uint tag) => new FieldCodec<bool>(ParseBool, (output, value) => output.WriteBool(value), CodedOutputStream.ComputeBoolSize, tag);
+
+        [SecurityCritical]
+        private static bool ParseBool(CodedInputStream input, ref ReadOnlySpan<byte> immediateBuffer) => input.ReadBool(ref immediateBuffer);
 
         /// <summary>
         /// Retrieves a codec suitable for an int32 field with the given tag.
         /// </summary>
         /// <param name="tag">The tag.</param>
         /// <returns>A codec for the given tag.</returns>
-        public static FieldCodec<int> ForInt32(uint tag)
-        {
-            return new FieldCodec<int>(input => input.ReadInt32(), (output, value) => output.WriteInt32(value), CodedOutputStream.ComputeInt32Size, tag);
-        }
+        [SecuritySafeCritical]
+        public static FieldCodec<int> ForInt32(uint tag) => new FieldCodec<int>(ParseInt32, (output, value) => output.WriteInt32(value), CodedOutputStream.ComputeInt32Size, tag);
+
+        [SecurityCritical]
+        private static int ParseInt32(CodedInputStream input, ref ReadOnlySpan<byte> immediateBuffer) => input.ReadInt32(ref immediateBuffer);
 
         /// <summary>
         /// Retrieves a codec suitable for an sint32 field with the given tag.
         /// </summary>
         /// <param name="tag">The tag.</param>
         /// <returns>A codec for the given tag.</returns>
-        public static FieldCodec<int> ForSInt32(uint tag)
-        {
-            return new FieldCodec<int>(input => input.ReadSInt32(), (output, value) => output.WriteSInt32(value), CodedOutputStream.ComputeSInt32Size, tag);
-        }
+        [SecuritySafeCritical]
+        public static FieldCodec<int> ForSInt32(uint tag) => new FieldCodec<int>(ParseSInt32, (output, value) => output.WriteSInt32(value), CodedOutputStream.ComputeSInt32Size, tag);
+
+        [SecurityCritical]
+        private static int ParseSInt32(CodedInputStream input, ref ReadOnlySpan<byte> immediateBuffer) => input.ReadSInt32(ref immediateBuffer);
 
         /// <summary>
         /// Retrieves a codec suitable for a fixed32 field with the given tag.
         /// </summary>
         /// <param name="tag">The tag.</param>
         /// <returns>A codec for the given tag.</returns>
-        public static FieldCodec<uint> ForFixed32(uint tag)
-        {
-            return new FieldCodec<uint>(input => input.ReadFixed32(), (output, value) => output.WriteFixed32(value), 4, tag);
-        }
+        [SecuritySafeCritical]
+        public static FieldCodec<uint> ForFixed32(uint tag) => new FieldCodec<uint>(ParseFixed32, (output, value) => output.WriteFixed32(value), 4, tag);
+
+        [SecurityCritical]
+        private static uint ParseFixed32(CodedInputStream input, ref ReadOnlySpan<byte> immediateBuffer) => input.ReadFixed32(ref immediateBuffer);
 
         /// <summary>
         /// Retrieves a codec suitable for an sfixed32 field with the given tag.
         /// </summary>
         /// <param name="tag">The tag.</param>
         /// <returns>A codec for the given tag.</returns>
-        public static FieldCodec<int> ForSFixed32(uint tag)
-        {
-            return new FieldCodec<int>(input => input.ReadSFixed32(), (output, value) => output.WriteSFixed32(value), 4, tag);
-        }
+        [SecuritySafeCritical]
+        public static FieldCodec<int> ForSFixed32(uint tag) => new FieldCodec<int>(ParseSFixed32, (output, value) => output.WriteSFixed32(value), 4, tag);
+
+        [SecurityCritical]
+        private static int ParseSFixed32(CodedInputStream input, ref ReadOnlySpan<byte> immediateBuffer) => input.ReadSFixed32(ref immediateBuffer);
 
         /// <summary>
         /// Retrieves a codec suitable for a uint32 field with the given tag.
         /// </summary>
         /// <param name="tag">The tag.</param>
         /// <returns>A codec for the given tag.</returns>
-        public static FieldCodec<uint> ForUInt32(uint tag)
-        {
-            return new FieldCodec<uint>(input => input.ReadUInt32(), (output, value) => output.WriteUInt32(value), CodedOutputStream.ComputeUInt32Size, tag);
-        }
+        [SecuritySafeCritical]
+        public static FieldCodec<uint> ForUInt32(uint tag) => new FieldCodec<uint>(ParseUInt32, (output, value) => output.WriteUInt32(value), CodedOutputStream.ComputeUInt32Size, tag);
+
+        [SecurityCritical]
+        private static uint ParseUInt32(CodedInputStream input, ref ReadOnlySpan<byte> immediateBuffer) => input.ReadUInt32(ref immediateBuffer);
 
         /// <summary>
         /// Retrieves a codec suitable for an int64 field with the given tag.
         /// </summary>
         /// <param name="tag">The tag.</param>
         /// <returns>A codec for the given tag.</returns>
-        public static FieldCodec<long> ForInt64(uint tag)
-        {
-            return new FieldCodec<long>(input => input.ReadInt64(), (output, value) => output.WriteInt64(value), CodedOutputStream.ComputeInt64Size, tag);
-        }
+        [SecuritySafeCritical]
+        public static FieldCodec<long> ForInt64(uint tag) => new FieldCodec<long>(ParseInt64, (output, value) => output.WriteInt64(value), CodedOutputStream.ComputeInt64Size, tag);
+
+        [SecurityCritical]
+        private static long ParseInt64(CodedInputStream input, ref ReadOnlySpan<byte> immediateBuffer) => input.ReadInt64(ref immediateBuffer);
 
         /// <summary>
         /// Retrieves a codec suitable for an sint64 field with the given tag.
         /// </summary>
         /// <param name="tag">The tag.</param>
         /// <returns>A codec for the given tag.</returns>
-        public static FieldCodec<long> ForSInt64(uint tag)
-        {
-            return new FieldCodec<long>(input => input.ReadSInt64(), (output, value) => output.WriteSInt64(value), CodedOutputStream.ComputeSInt64Size, tag);
-        }
+        [SecuritySafeCritical]
+        public static FieldCodec<long> ForSInt64(uint tag) => new FieldCodec<long>(ParseSInt64, (output, value) => output.WriteSInt64(value), CodedOutputStream.ComputeSInt64Size, tag);
+
+        [SecurityCritical]
+        private static long ParseSInt64(CodedInputStream input, ref ReadOnlySpan<byte> immediateBuffer) => input.ReadSInt64(ref immediateBuffer);
 
         /// <summary>
         /// Retrieves a codec suitable for a fixed64 field with the given tag.
         /// </summary>
         /// <param name="tag">The tag.</param>
         /// <returns>A codec for the given tag.</returns>
-        public static FieldCodec<ulong> ForFixed64(uint tag)
-        {
-            return new FieldCodec<ulong>(input => input.ReadFixed64(), (output, value) => output.WriteFixed64(value), 8, tag);
-        }
+        [SecuritySafeCritical]
+        public static FieldCodec<ulong> ForFixed64(uint tag) => new FieldCodec<ulong>(ParseFixed64, (output, value) => output.WriteFixed64(value), 8, tag);
+
+        [SecurityCritical]
+        private static ulong ParseFixed64(CodedInputStream input, ref ReadOnlySpan<byte> immediateBuffer) => input.ReadFixed64(ref immediateBuffer);
 
         /// <summary>
         /// Retrieves a codec suitable for an sfixed64 field with the given tag.
         /// </summary>
         /// <param name="tag">The tag.</param>
         /// <returns>A codec for the given tag.</returns>
-        public static FieldCodec<long> ForSFixed64(uint tag)
-        {
-            return new FieldCodec<long>(input => input.ReadSFixed64(), (output, value) => output.WriteSFixed64(value), 8, tag);
-        }
+        [SecuritySafeCritical]
+        public static FieldCodec<long> ForSFixed64(uint tag) => new FieldCodec<long>(ParseSFixed64, (output, value) => output.WriteSFixed64(value), 8, tag);
+
+        [SecurityCritical]
+        private static long ParseSFixed64(CodedInputStream input, ref ReadOnlySpan<byte> immediateBuffer) => input.ReadSFixed64(ref immediateBuffer);
 
         /// <summary>
         /// Retrieves a codec suitable for a uint64 field with the given tag.
         /// </summary>
         /// <param name="tag">The tag.</param>
         /// <returns>A codec for the given tag.</returns>
-        public static FieldCodec<ulong> ForUInt64(uint tag)
-        {
-            return new FieldCodec<ulong>(input => input.ReadUInt64(), (output, value) => output.WriteUInt64(value), CodedOutputStream.ComputeUInt64Size, tag);
-        }
+        [SecuritySafeCritical]
+        public static FieldCodec<ulong> ForUInt64(uint tag) => new FieldCodec<ulong>(ParseUInt64, (output, value) => output.WriteUInt64(value), CodedOutputStream.ComputeUInt64Size, tag);
+
+        [SecurityCritical]
+        private static ulong ParseUInt64(CodedInputStream input, ref ReadOnlySpan<byte> immediateBuffer) => input.ReadUInt64(ref immediateBuffer);
 
         /// <summary>
         /// Retrieves a codec suitable for a float field with the given tag.
         /// </summary>
         /// <param name="tag">The tag.</param>
         /// <returns>A codec for the given tag.</returns>
-        public static FieldCodec<float> ForFloat(uint tag)
-        {
-            return new FieldCodec<float>(input => input.ReadFloat(), (output, value) => output.WriteFloat(value), CodedOutputStream.ComputeFloatSize, tag);
-        }
+        [SecuritySafeCritical]
+        public static FieldCodec<float> ForFloat(uint tag) => new FieldCodec<float>(ParseFloat, (output, value) => output.WriteFloat(value), CodedOutputStream.ComputeFloatSize, tag);
+
+        [SecurityCritical]
+        private static float ParseFloat(CodedInputStream input, ref ReadOnlySpan<byte> immediateBuffer) => input.ReadFloat(ref immediateBuffer);
 
         /// <summary>
         /// Retrieves a codec suitable for a double field with the given tag.
         /// </summary>
         /// <param name="tag">The tag.</param>
         /// <returns>A codec for the given tag.</returns>
-        public static FieldCodec<double> ForDouble(uint tag)
-        {
-            return new FieldCodec<double>(input => input.ReadDouble(), (output, value) => output.WriteDouble(value), CodedOutputStream.ComputeDoubleSize, tag);
-        }
+        [SecuritySafeCritical]
+        public static FieldCodec<double> ForDouble(uint tag) => new FieldCodec<double>(ParseDouble, (output, value) => output.WriteDouble(value), CodedOutputStream.ComputeDoubleSize, tag);
+
+        [SecurityCritical]
+        private static double ParseDouble(CodedInputStream input, ref ReadOnlySpan<byte> immediateBuffer) => input.ReadDouble(ref immediateBuffer);
 
         // Enums are tricky. We can probably use expression trees to build these delegates automatically,
         // but it's easy to generate the code for it.
@@ -205,12 +221,27 @@ namespace Google.Protobuf
         /// <param name="toInt32">A conversion function from <see cref="Int32"/> to the enum type.</param>
         /// <param name="fromInt32">A conversion function from the enum type to <see cref="Int32"/>.</param>
         /// <returns>A codec for the given tag.</returns>
+        [SecuritySafeCritical]
         public static FieldCodec<T> ForEnum<T>(uint tag, Func<T, int> toInt32, Func<int, T> fromInt32)
         {
-            return new FieldCodec<T>(input => fromInt32(
-                input.ReadEnum()),
-                (output, value) => output.WriteEnum(toInt32(value)),
-                value => CodedOutputStream.ComputeEnumSize(toInt32(value)), tag);
+            var enumCodec = new EnumCodec<T>(toInt32, fromInt32);
+            return new FieldCodec<T>(enumCodec.ParseEnum, enumCodec.WriteEnum, value => CodedOutputStream.ComputeEnumSize(toInt32(value)), tag);
+        }
+
+        private sealed class EnumCodec<T>
+        {
+            private Func<T, int> toInt32;
+            private Func<int, T> fromInt32;
+
+            public EnumCodec(Func<T, int> toInt32, Func<int, T> fromInt32)
+            {
+                this.fromInt32 = fromInt32;
+                this.toInt32 = toInt32;
+            }
+
+            [SecurityCritical]
+            public T ParseEnum(CodedInputStream input, ref ReadOnlySpan<byte> immediateBuffer) => fromInt32(input.ReadEnum(ref immediateBuffer));
+            public void WriteEnum(CodedOutputStream output, T value) => output.WriteEnum(toInt32(value));
         }
 
         /// <summary>
@@ -219,39 +250,91 @@ namespace Google.Protobuf
         /// <param name="tag">The tag.</param>
         /// <param name="parser">A parser to use for the message type.</param>
         /// <returns>A codec for the given tag.</returns>
+        [SecuritySafeCritical]
         public static FieldCodec<T> ForMessage<T>(uint tag, MessageParser<T> parser) where T : IMessage<T>
         {
-            return new FieldCodec<T>(input => { T message = parser.CreateTemplate(); input.ReadMessage(message); return message; },
-                (output, value) => output.WriteMessage(value), message => CodedOutputStream.ComputeMessageSize(message), tag);
+            var codec = new MessageCodec<T>(parser);
+            return new FieldCodec<T>(codec.ParseMessage, codec.WriteMessage, message => CodedOutputStream.ComputeMessageSize(message), tag);
+        }
+
+        private sealed class MessageCodec<T> where T : IMessage<T>
+        {
+            private MessageParser<T> parser;
+
+            public MessageCodec(MessageParser<T> parser)
+            {
+                this.parser = parser;
+            }
+
+            [SecurityCritical]
+            public T ParseMessage(CodedInputStream input, ref ReadOnlySpan<byte> immediateBuffer)
+            {
+                T message = parser.CreateTemplate();
+                input.ReadMessage(message, ref immediateBuffer);
+                return message;
+            }
+
+            public void WriteMessage(CodedOutputStream output, T value) => output.WriteMessage(value);
         }
 
         /// <summary>
         /// Creates a codec for a wrapper type of a class - which must be string or ByteString.
         /// </summary>
+        [SecuritySafeCritical]
         public static FieldCodec<T> ForClassWrapper<T>(uint tag) where T : class
         {
             var nestedCodec = WrapperCodecs.GetCodec<T>();
-            return new FieldCodec<T>(
-                input => WrapperCodecs.Read<T>(input, nestedCodec),
-                (output, value) => WrapperCodecs.Write<T>(output, value, nestedCodec),
+            var wrapperCodec = new ClassWrapperCodec<T>(nestedCodec);
+            return new FieldCodec<T>(wrapperCodec.ParseMessage, wrapperCodec.WriteMessage,
                 value => WrapperCodecs.CalculateSize<T>(value, nestedCodec),
                 tag,
                 null); // Default value for the wrapper
         }
 
+        private sealed class ClassWrapperCodec<T> where T : class
+        {
+            private FieldCodec<T> nestedCodec;
+
+            public ClassWrapperCodec(FieldCodec<T> nestedCodec)
+            {
+                this.nestedCodec = nestedCodec;
+            }
+
+            [SecurityCritical]
+            public T ParseMessage(CodedInputStream input, ref ReadOnlySpan<byte> immediateBuffer) => WrapperCodecs.Read(input, nestedCodec, ref immediateBuffer);
+
+            public void WriteMessage(CodedOutputStream output, T value) => WrapperCodecs.Write(output, value, nestedCodec);
+        }
+
+
         /// <summary>
         /// Creates a codec for a wrapper type of a struct - which must be Int32, Int64, UInt32, UInt64,
         /// Bool, Single or Double.
         /// </summary>
+        [SecuritySafeCritical]
         public static FieldCodec<T?> ForStructWrapper<T>(uint tag) where T : struct
         {
             var nestedCodec = WrapperCodecs.GetCodec<T>();
-            return new FieldCodec<T?>(
-                input => WrapperCodecs.Read<T>(input, nestedCodec),
-                (output, value) => WrapperCodecs.Write<T>(output, value.Value, nestedCodec),
+            var wrapperCodec = new StructWrapperCodec<T>(nestedCodec);
+            return new FieldCodec<T?>(wrapperCodec.ParseMessage, wrapperCodec.WriteMessage,
                 value => value == null ? 0 : WrapperCodecs.CalculateSize<T>(value.Value, nestedCodec),
                 tag,
                 null); // Default value for the wrapper
+        }
+
+        private sealed class StructWrapperCodec<T> where T : struct
+        {
+            private FieldCodec<T> nestedCodec;
+
+            public StructWrapperCodec(FieldCodec<T> nestedCodec)
+            {
+                this.nestedCodec = nestedCodec;
+            }
+
+            [SecurityCritical]
+            public T? ParseMessage(CodedInputStream input, ref ReadOnlySpan<byte> immediateBuffer) => WrapperCodecs.Read(input, nestedCodec, ref immediateBuffer);
+
+            public void WriteMessage(CodedOutputStream output, T? value) => WrapperCodecs.Write(output, value.Value, nestedCodec);
         }
 
         /// <summary>
@@ -291,22 +374,23 @@ namespace Google.Protobuf
                 return (FieldCodec<T>) value;
             }
 
-            internal static T Read<T>(CodedInputStream input, FieldCodec<T> codec)
+            [SecurityCritical]
+            internal static T Read<T>(CodedInputStream input, FieldCodec<T> codec, ref ReadOnlySpan<byte> immediateBuffer)
             {
-                int length = input.ReadLength();
+                int length = input.ReadLength(ref immediateBuffer);
                 int oldLimit = input.PushLimit(length);
 
                 uint tag;
                 T value = codec.DefaultValue;
-                while ((tag = input.ReadTag()) != 0)
+                while ((tag = input.ReadTag(ref immediateBuffer)) != 0)
                 {
                     if (tag == codec.Tag)
                     {
-                        value = codec.Read(input);
+                        value = codec.Read(input, ref immediateBuffer);
                     }
                     else
                     {
-                        input.SkipLastField();
+                        input.SkipLastField(ref immediateBuffer);
                     }
 
                 }
@@ -329,6 +413,8 @@ namespace Google.Protobuf
             }
         }
     }
+
+    internal delegate T ValueReaderDelegate<T>(CodedInputStream input, ref ReadOnlySpan<byte> buffer);
 
     /// <summary>
     /// <para>
@@ -384,7 +470,7 @@ namespace Google.Protobuf
         /// Returns a delegate to read a value from a coded input stream. It is assumed that
         /// the stream is already positioned on the appropriate tag.
         /// </summary>
-        internal Func<CodedInputStream, T> ValueReader { get; }
+        internal ValueReaderDelegate<T> ValueReader { get; }
 
         /// <summary>
         /// Returns the fixed size for an entry, or 0 if sizes vary.
@@ -412,7 +498,7 @@ namespace Google.Protobuf
         private readonly int tagSize;
         
         internal FieldCodec(
-                Func<CodedInputStream, T> reader,
+                ValueReaderDelegate<T> reader,
                 Action<CodedOutputStream, T> writer,
                 int fixedSize,
                 uint tag) : this(reader, writer, _ => fixedSize, tag)
@@ -421,7 +507,7 @@ namespace Google.Protobuf
         }
 
         internal FieldCodec(
-            Func<CodedInputStream, T> reader,
+            ValueReaderDelegate<T> reader,
             Action<CodedOutputStream, T> writer,
             Func<T, int> sizeCalculator,
             uint tag) : this(reader, writer, sizeCalculator, tag, DefaultDefault)
@@ -429,7 +515,7 @@ namespace Google.Protobuf
         }
 
         internal FieldCodec(
-            Func<CodedInputStream, T> reader,
+            ValueReaderDelegate<T> reader,
             Action<CodedOutputStream, T> writer,
             Func<T, int> sizeCalculator,
             uint tag,
@@ -463,7 +549,8 @@ namespace Google.Protobuf
         /// </summary>
         /// <param name="input">The input stream to read from.</param>
         /// <returns>The value read from the stream.</returns>
-        public T Read(CodedInputStream input) => ValueReader(input);
+        [SecurityCritical]
+        public T Read(CodedInputStream input, ref ReadOnlySpan<byte> immediateBuffer) => ValueReader(input, ref immediateBuffer);
 
         /// <summary>
         /// Calculates the size required to write the given value, with a tag,

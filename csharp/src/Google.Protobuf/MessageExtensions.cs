@@ -31,6 +31,7 @@
 #endregion
 
 using System.IO;
+using System.Security;
 
 namespace Google.Protobuf
 {
@@ -138,6 +139,21 @@ namespace Google.Protobuf
         {
             ProtoPreconditions.CheckNotNull(message, "message");
             return ByteString.AttachBytes(message.ToByteArray());
+        }
+
+        /// <summary>
+        /// Merges the data from the specified coded input stream with the current message.
+        /// </summary>
+        /// <remarks>See the user guide for precise merge semantics.</remarks>
+        /// <param name="message"></param>
+        /// <param name="input"></param>
+        [SecuritySafeCritical]
+        public static void MergeFrom(this IMessage message, CodedInputStream input)
+        {
+            ProtoPreconditions.CheckNotNull(message, nameof(message));
+            ProtoPreconditions.CheckNotNull(input, nameof(input));
+            var immediateBuffer = input.ImmediateBuffer;
+            message.MergeFrom(input, ref immediateBuffer);
         }
 
         // Implementations allowing unknown fields to be discarded.

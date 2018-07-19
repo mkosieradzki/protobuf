@@ -31,6 +31,7 @@
 #endregion
 
 using System;
+using System.Security;
 using Google.Protobuf.Reflection;
 
 namespace Google.Protobuf
@@ -46,7 +47,9 @@ namespace Google.Protobuf
         /// </summary>
         /// <remarks>See the user guide for precise merge semantics.</remarks>
         /// <param name="input"></param>
-        void MergeFrom(CodedInputStream input);
+        /// <param name="immediateBuffer"></param>
+        [SecurityCritical]
+        void MergeFrom(CodedInputStream input, ref ReadOnlySpan<byte> immediateBuffer);
 
         /// <summary>
         /// Writes the data to the given coded output stream.
