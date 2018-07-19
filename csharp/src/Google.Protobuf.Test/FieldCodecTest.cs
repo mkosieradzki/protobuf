@@ -66,27 +66,9 @@ namespace Google.Protobuf
 #pragma warning restore 0414
 
         [Test, TestCaseSource("Codecs")]
-        public void RoundTripWithTag(ICodecTestData codec)
-        {
-            codec.TestRoundTripWithTag();
-        }
-
-        [Test, TestCaseSource("Codecs")]
-        public void RoundTripRaw(ICodecTestData codec)
-        {
-            codec.TestRoundTripRaw();
-        }
-
-        [Test, TestCaseSource("Codecs")]
         public void CalculateSize(ICodecTestData codec)
         {
             codec.TestCalculateSizeWithTag();
-        }
-
-        [Test, TestCaseSource("Codecs")]
-        public void DefaultValue(ICodecTestData codec)
-        {
-            codec.TestDefaultValue();
         }
 
         [Test, TestCaseSource("Codecs")]
@@ -100,10 +82,7 @@ namespace Google.Protobuf
         // of any better ways right now.
         public interface ICodecTestData
         {
-            void TestRoundTripRaw();
-            void TestRoundTripWithTag();
             void TestCalculateSizeWithTag();
-            void TestDefaultValue();
             void TestFixedSize();
         }
 
@@ -120,33 +99,6 @@ namespace Google.Protobuf
                 this.name = name;
             }
 
-            public void TestRoundTripRaw()
-            {
-                var stream = new MemoryStream();
-                var codedOutput = new CodedOutputStream(stream);
-                codec.ValueWriter(codedOutput, sampleValue);
-                codedOutput.Flush();
-                stream.Position = 0;
-                var codedInput = new CodedInputStream(stream);
-                var immediateBuffer = codedInput.ImmediateBuffer;
-                Assert.AreEqual(sampleValue, codec.ValueReader(codedInput, ref immediateBuffer));
-                Assert.IsTrue(codedInput.IsAtEnd());
-            }
-
-            public void TestRoundTripWithTag()
-            {
-                var stream = new MemoryStream();
-                var codedOutput = new CodedOutputStream(stream);
-                codec.WriteTagAndValue(codedOutput, sampleValue);
-                codedOutput.Flush();
-                stream.Position = 0;
-                var codedInput = new CodedInputStream(stream);
-                var immediateBuffer = codedInput.ImmediateBuffer;
-                codedInput.AssertNextTag(codec.Tag);
-                Assert.AreEqual(sampleValue, codec.Read(codedInput, ref immediateBuffer));
-                Assert.IsTrue(codedInput.IsAtEnd());
-            }
-
             public void TestCalculateSizeWithTag()
             {
                 var stream = new MemoryStream();
@@ -154,38 +106,6 @@ namespace Google.Protobuf
                 codec.WriteTagAndValue(codedOutput, sampleValue);
                 codedOutput.Flush();
                 Assert.AreEqual(stream.Position, codec.CalculateSizeWithTag(sampleValue));
-            }
-
-            public void TestDefaultValue()
-            {
-                // WriteTagAndValue ignores default values
-                var stream = new MemoryStream();
-                CodedOutputStream codedOutput;
-#if !NET35
-                codedOutput = new CodedOutputStream(stream);
-                codec.WriteTagAndValue(codedOutput, codec.DefaultValue);
-                codedOutput.Flush();
-                Assert.AreEqual(0, stream.Position);
-                Assert.AreEqual(0, codec.CalculateSizeWithTag(codec.DefaultValue));
-                if (typeof(T).GetTypeInfo().IsValueType)
-                {
-                    Assert.AreEqual(default(T), codec.DefaultValue);
-                }
-#endif
-
-                // The plain ValueWriter/ValueReader delegates don't.
-                if (codec.DefaultValue != null) // This part isn't appropriate for message types.
-                {
-                    codedOutput = new CodedOutputStream(stream);
-                    codec.ValueWriter(codedOutput, codec.DefaultValue);
-                    codedOutput.Flush();
-                    Assert.AreNotEqual(0, stream.Position);
-                    Assert.AreEqual(stream.Position, codec.ValueSizeCalculator(codec.DefaultValue));
-                    stream.Position = 0;
-                    var codedInput = new CodedInputStream(stream);
-                    var immediateBuffer = codedInput.ImmediateBuffer;
-                    Assert.AreEqual(codec.DefaultValue, codec.ValueReader(codedInput, ref immediateBuffer));
-                }
             }
 
             public void TestFixedSize()

@@ -412,28 +412,6 @@ namespace Google.Protobuf.Collections
         }
 
         /// <summary>
-        /// Adds entries to the map from the given stream.
-        /// </summary>
-        /// <remarks>
-        /// It is assumed that the stream is initially positioned after the tag specified by the codec.
-        /// This method will continue reading entries from the stream until the end is reached, or
-        /// a different tag is encountered.
-        /// </remarks>
-        /// <param name="input">Stream to read from</param>
-        /// <param name="codec">Codec describing how the key/value pairs are encoded</param>
-        [SecurityCritical]
-        public void AddEntriesFrom(CodedInputStream input, Codec codec, ref ReadOnlySpan<byte> immediateBuffer)
-        {
-            var adapter = new Codec.MessageAdapter(codec);
-            do
-            {
-                adapter.Reset();
-                input.ReadMessage(adapter, ref immediateBuffer);
-                this[adapter.Key] = adapter.Value;
-            } while (input.MaybeConsumeTag(codec.MapTag, ref immediateBuffer));
-        }
-
-        /// <summary>
         /// Writes the contents of this map to the given coded output stream, using the specified codec
         /// to encode each entry.
         /// </summary>
@@ -642,34 +620,7 @@ namespace Google.Protobuf.Collections
                 }
 
                 [SecurityCritical]
-                public void MergeFrom(CodedInputStream input, ref ReadOnlySpan<byte> immediateBuffer)
-                {
-                    uint tag;
-                    while ((tag = input.ReadTag(ref immediateBuffer)) != 0)
-                    {
-                        if (tag == codec.keyCodec.Tag)
-                        {
-                            Key = codec.keyCodec.Read(input, ref immediateBuffer);
-                        }
-                        else if (tag == codec.valueCodec.Tag)
-                        {
-                            Value = codec.valueCodec.Read(input, ref immediateBuffer);
-                        }
-                        else 
-                        {
-                            input.SkipLastField(ref immediateBuffer);
-                        }
-                    }
-
-                    // Corner case: a map entry with a key but no value, where the value type is a message.
-                    // Read it as if we'd seen an input stream with no data (i.e. create a "default" message).
-                    if (Value == null)
-                    {
-                        var zeroInput = new CodedInputStream(ZeroLengthMessageStreamData);
-                        var zeroInputImmediateBuffer = zeroInput.ImmediateBuffer;
-                        Value = codec.valueCodec.Read(zeroInput, ref zeroInputImmediateBuffer);
-                    }
-                }
+                public void MergeFrom(CodedInputStream input, ref ReadOnlySpan<byte> immediateBuffer) => throw new NotImplementedException();
 
                 public void WriteTo(CodedOutputStream output)
                 {

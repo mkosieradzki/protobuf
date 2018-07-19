@@ -90,43 +90,6 @@ namespace Google.Protobuf.Collections
         }
 
         /// <summary>
-        /// Adds the entries from the given input stream, decoding them with the specified codec.
-        /// </summary>
-        /// <param name="input">The input stream to read from.</param>
-        /// <param name="codec">The codec to use in order to read each entry.</param>
-        [SecurityCritical]
-        public void AddEntriesFrom(CodedInputStream input, FieldCodec<T> codec, ref ReadOnlySpan<byte> immediateBuffer)
-        {
-            // TODO: Inline some of the Add code, so we can avoid checking the size on every
-            // iteration.
-            uint tag = input.LastTag;
-            var reader = codec.ValueReader;
-            // Non-nullable value types can be packed or not.
-            if (FieldCodec<T>.IsPackedRepeatedField(tag))
-            {
-                int length = input.ReadLength(ref immediateBuffer);
-                if (length > 0)
-                {
-                    int oldLimit = input.PushLimit(length);
-                    while (!input.ReachedLimit)
-                    {
-                        Add(reader(input, ref immediateBuffer));
-                    }
-                    input.PopLimit(oldLimit);
-                }
-                // Empty packed field. Odd, but valid - just ignore.
-            }
-            else
-            {
-                // Not packed... (possibly not packable)
-                do
-                {
-                    Add(reader(input, ref immediateBuffer));
-                } while (input.MaybeConsumeTag(tag, ref immediateBuffer));
-            }
-        }
-
-        /// <summary>
         /// Calculates the size of this collection based on the given codec.
         /// </summary>
         /// <param name="codec">The codec to use when encoding each field.</param>

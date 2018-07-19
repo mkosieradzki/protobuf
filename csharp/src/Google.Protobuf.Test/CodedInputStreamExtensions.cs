@@ -133,12 +133,6 @@ namespace Google.Protobuf
             return stream.IsAtEnd(ref immediateBuffer);
         }
 
-        public static void AddEntriesFrom<T>(this RepeatedField<T> field, CodedInputStream input, FieldCodec<T> codec)
-        {
-            var immediateBuffer = input.ImmediateBuffer;
-            field.AddEntriesFrom(input, codec, ref immediateBuffer);
-        }
-
         public static CustomOptions ReadOrSkipUnknownField(this CustomOptions customOptions, CodedInputStream input)
         {
             var immediateBuffer = input.ImmediateBuffer;
