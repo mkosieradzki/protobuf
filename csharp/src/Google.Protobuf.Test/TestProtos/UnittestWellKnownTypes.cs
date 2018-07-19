@@ -847,63 +847,63 @@ namespace Google.Protobuf.TestProtos {
           }
           case 82: {
             double? value = input.ReadWrappedDouble(ref immediateBuffer);
-            if (doubleField_ == null || value != 0D) {
+            if (DoubleField == null || value != 0D) {
               DoubleField = value;
             }
             break;
           }
           case 90: {
             float? value = input.ReadWrappedFloat(ref immediateBuffer);
-            if (floatField_ == null || value != 0F) {
+            if (FloatField == null || value != 0F) {
               FloatField = value;
             }
             break;
           }
           case 98: {
             long? value = input.ReadWrappedInt64(ref immediateBuffer);
-            if (int64Field_ == null || value != 0L) {
+            if (Int64Field == null || value != 0L) {
               Int64Field = value;
             }
             break;
           }
           case 106: {
             ulong? value = input.ReadWrappedUInt64(ref immediateBuffer);
-            if (uint64Field_ == null || value != 0UL) {
+            if (Uint64Field == null || value != 0UL) {
               Uint64Field = value;
             }
             break;
           }
           case 114: {
             int? value = input.ReadWrappedInt32(ref immediateBuffer);
-            if (int32Field_ == null || value != 0) {
+            if (Int32Field == null || value != 0) {
               Int32Field = value;
             }
             break;
           }
           case 122: {
             uint? value = input.ReadWrappedUInt32(ref immediateBuffer);
-            if (uint32Field_ == null || value != 0) {
+            if (Uint32Field == null || value != 0) {
               Uint32Field = value;
             }
             break;
           }
           case 130: {
             bool? value = input.ReadWrappedBool(ref immediateBuffer);
-            if (boolField_ == null || value != false) {
+            if (BoolField == null || value != false) {
               BoolField = value;
             }
             break;
           }
           case 138: {
             string value = input.ReadWrappedString(ref immediateBuffer);
-            if (stringField_ == null || value != "") {
+            if (StringField == null || value != "") {
               StringField = value;
             }
             break;
           }
           case 146: {
             pb::ByteString value = input.ReadWrappedBytes(ref immediateBuffer);
-            if (bytesField_ == null || value != pb::ByteString.Empty) {
+            if (BytesField == null || value != pb::ByteString.Empty) {
               BytesField = value;
             }
             break;
@@ -2536,75 +2536,408 @@ namespace Google.Protobuf.TestProtos {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input, ref immediateBuffer);
             break;
           case 10: {
-            anyField_.AddEntriesFrom(input, _map_anyField_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            int entryKey = 0;
+            global::Google.Protobuf.WellKnownTypes.Any entryValue = null;
+            uint ntag;
+            while ((ntag = input.ReadTag(ref immediateBuffer)) != 0) {
+              if (ntag == 8) {
+                entryKey = input.ReadInt32(ref immediateBuffer);
+              } else if (ntag == 18) {
+                if (entryValue == null) {
+                  entryValue = new global::Google.Protobuf.WellKnownTypes.Any();
+                }
+                input.ReadMessage(entryValue, ref immediateBuffer);
+              } else {
+                input.SkipLastField(ref immediateBuffer);
+              }
+            }
+            if (entryValue == null) {
+              entryValue = new global::Google.Protobuf.WellKnownTypes.Any();
+            }
+            anyField_[entryKey] = entryValue;
+            input.EndReadNested(oldLimit);
             break;
           }
           case 18: {
-            apiField_.AddEntriesFrom(input, _map_apiField_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            int entryKey = 0;
+            global::Google.Protobuf.WellKnownTypes.Api entryValue = null;
+            uint ntag;
+            while ((ntag = input.ReadTag(ref immediateBuffer)) != 0) {
+              if (ntag == 8) {
+                entryKey = input.ReadInt32(ref immediateBuffer);
+              } else if (ntag == 18) {
+                if (entryValue == null) {
+                  entryValue = new global::Google.Protobuf.WellKnownTypes.Api();
+                }
+                input.ReadMessage(entryValue, ref immediateBuffer);
+              } else {
+                input.SkipLastField(ref immediateBuffer);
+              }
+            }
+            if (entryValue == null) {
+              entryValue = new global::Google.Protobuf.WellKnownTypes.Api();
+            }
+            apiField_[entryKey] = entryValue;
+            input.EndReadNested(oldLimit);
             break;
           }
           case 26: {
-            durationField_.AddEntriesFrom(input, _map_durationField_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            int entryKey = 0;
+            global::Google.Protobuf.WellKnownTypes.Duration entryValue = null;
+            uint ntag;
+            while ((ntag = input.ReadTag(ref immediateBuffer)) != 0) {
+              if (ntag == 8) {
+                entryKey = input.ReadInt32(ref immediateBuffer);
+              } else if (ntag == 18) {
+                if (entryValue == null) {
+                  entryValue = new global::Google.Protobuf.WellKnownTypes.Duration();
+                }
+                input.ReadMessage(entryValue, ref immediateBuffer);
+              } else {
+                input.SkipLastField(ref immediateBuffer);
+              }
+            }
+            if (entryValue == null) {
+              entryValue = new global::Google.Protobuf.WellKnownTypes.Duration();
+            }
+            durationField_[entryKey] = entryValue;
+            input.EndReadNested(oldLimit);
             break;
           }
           case 34: {
-            emptyField_.AddEntriesFrom(input, _map_emptyField_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            int entryKey = 0;
+            global::Google.Protobuf.WellKnownTypes.Empty entryValue = null;
+            uint ntag;
+            while ((ntag = input.ReadTag(ref immediateBuffer)) != 0) {
+              if (ntag == 8) {
+                entryKey = input.ReadInt32(ref immediateBuffer);
+              } else if (ntag == 18) {
+                if (entryValue == null) {
+                  entryValue = new global::Google.Protobuf.WellKnownTypes.Empty();
+                }
+                input.ReadMessage(entryValue, ref immediateBuffer);
+              } else {
+                input.SkipLastField(ref immediateBuffer);
+              }
+            }
+            if (entryValue == null) {
+              entryValue = new global::Google.Protobuf.WellKnownTypes.Empty();
+            }
+            emptyField_[entryKey] = entryValue;
+            input.EndReadNested(oldLimit);
             break;
           }
           case 42: {
-            fieldMaskField_.AddEntriesFrom(input, _map_fieldMaskField_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            int entryKey = 0;
+            global::Google.Protobuf.WellKnownTypes.FieldMask entryValue = null;
+            uint ntag;
+            while ((ntag = input.ReadTag(ref immediateBuffer)) != 0) {
+              if (ntag == 8) {
+                entryKey = input.ReadInt32(ref immediateBuffer);
+              } else if (ntag == 18) {
+                if (entryValue == null) {
+                  entryValue = new global::Google.Protobuf.WellKnownTypes.FieldMask();
+                }
+                input.ReadMessage(entryValue, ref immediateBuffer);
+              } else {
+                input.SkipLastField(ref immediateBuffer);
+              }
+            }
+            if (entryValue == null) {
+              entryValue = new global::Google.Protobuf.WellKnownTypes.FieldMask();
+            }
+            fieldMaskField_[entryKey] = entryValue;
+            input.EndReadNested(oldLimit);
             break;
           }
           case 50: {
-            sourceContextField_.AddEntriesFrom(input, _map_sourceContextField_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            int entryKey = 0;
+            global::Google.Protobuf.WellKnownTypes.SourceContext entryValue = null;
+            uint ntag;
+            while ((ntag = input.ReadTag(ref immediateBuffer)) != 0) {
+              if (ntag == 8) {
+                entryKey = input.ReadInt32(ref immediateBuffer);
+              } else if (ntag == 18) {
+                if (entryValue == null) {
+                  entryValue = new global::Google.Protobuf.WellKnownTypes.SourceContext();
+                }
+                input.ReadMessage(entryValue, ref immediateBuffer);
+              } else {
+                input.SkipLastField(ref immediateBuffer);
+              }
+            }
+            if (entryValue == null) {
+              entryValue = new global::Google.Protobuf.WellKnownTypes.SourceContext();
+            }
+            sourceContextField_[entryKey] = entryValue;
+            input.EndReadNested(oldLimit);
             break;
           }
           case 58: {
-            structField_.AddEntriesFrom(input, _map_structField_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            int entryKey = 0;
+            global::Google.Protobuf.WellKnownTypes.Struct entryValue = null;
+            uint ntag;
+            while ((ntag = input.ReadTag(ref immediateBuffer)) != 0) {
+              if (ntag == 8) {
+                entryKey = input.ReadInt32(ref immediateBuffer);
+              } else if (ntag == 18) {
+                if (entryValue == null) {
+                  entryValue = new global::Google.Protobuf.WellKnownTypes.Struct();
+                }
+                input.ReadMessage(entryValue, ref immediateBuffer);
+              } else {
+                input.SkipLastField(ref immediateBuffer);
+              }
+            }
+            if (entryValue == null) {
+              entryValue = new global::Google.Protobuf.WellKnownTypes.Struct();
+            }
+            structField_[entryKey] = entryValue;
+            input.EndReadNested(oldLimit);
             break;
           }
           case 66: {
-            timestampField_.AddEntriesFrom(input, _map_timestampField_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            int entryKey = 0;
+            global::Google.Protobuf.WellKnownTypes.Timestamp entryValue = null;
+            uint ntag;
+            while ((ntag = input.ReadTag(ref immediateBuffer)) != 0) {
+              if (ntag == 8) {
+                entryKey = input.ReadInt32(ref immediateBuffer);
+              } else if (ntag == 18) {
+                if (entryValue == null) {
+                  entryValue = new global::Google.Protobuf.WellKnownTypes.Timestamp();
+                }
+                input.ReadMessage(entryValue, ref immediateBuffer);
+              } else {
+                input.SkipLastField(ref immediateBuffer);
+              }
+            }
+            if (entryValue == null) {
+              entryValue = new global::Google.Protobuf.WellKnownTypes.Timestamp();
+            }
+            timestampField_[entryKey] = entryValue;
+            input.EndReadNested(oldLimit);
             break;
           }
           case 74: {
-            typeField_.AddEntriesFrom(input, _map_typeField_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            int entryKey = 0;
+            global::Google.Protobuf.WellKnownTypes.Type entryValue = null;
+            uint ntag;
+            while ((ntag = input.ReadTag(ref immediateBuffer)) != 0) {
+              if (ntag == 8) {
+                entryKey = input.ReadInt32(ref immediateBuffer);
+              } else if (ntag == 18) {
+                if (entryValue == null) {
+                  entryValue = new global::Google.Protobuf.WellKnownTypes.Type();
+                }
+                input.ReadMessage(entryValue, ref immediateBuffer);
+              } else {
+                input.SkipLastField(ref immediateBuffer);
+              }
+            }
+            if (entryValue == null) {
+              entryValue = new global::Google.Protobuf.WellKnownTypes.Type();
+            }
+            typeField_[entryKey] = entryValue;
+            input.EndReadNested(oldLimit);
             break;
           }
           case 82: {
-            doubleField_.AddEntriesFrom(input, _map_doubleField_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            int entryKey = 0;
+            double? entryValue = 0D;
+            uint ntag;
+            while ((ntag = input.ReadTag(ref immediateBuffer)) != 0) {
+              if (ntag == 8) {
+                entryKey = input.ReadInt32(ref immediateBuffer);
+              } else if (ntag == 18) {
+                double? value = input.ReadWrappedDouble(ref immediateBuffer);
+                if (entryValue == null || value != 0D) {
+                  entryValue = value;
+                }
+              } else {
+                input.SkipLastField(ref immediateBuffer);
+              }
+            }
+            doubleField_[entryKey] = entryValue;
+            input.EndReadNested(oldLimit);
             break;
           }
           case 90: {
-            floatField_.AddEntriesFrom(input, _map_floatField_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            int entryKey = 0;
+            float? entryValue = 0F;
+            uint ntag;
+            while ((ntag = input.ReadTag(ref immediateBuffer)) != 0) {
+              if (ntag == 8) {
+                entryKey = input.ReadInt32(ref immediateBuffer);
+              } else if (ntag == 18) {
+                float? value = input.ReadWrappedFloat(ref immediateBuffer);
+                if (entryValue == null || value != 0F) {
+                  entryValue = value;
+                }
+              } else {
+                input.SkipLastField(ref immediateBuffer);
+              }
+            }
+            floatField_[entryKey] = entryValue;
+            input.EndReadNested(oldLimit);
             break;
           }
           case 98: {
-            int64Field_.AddEntriesFrom(input, _map_int64Field_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            int entryKey = 0;
+            long? entryValue = 0L;
+            uint ntag;
+            while ((ntag = input.ReadTag(ref immediateBuffer)) != 0) {
+              if (ntag == 8) {
+                entryKey = input.ReadInt32(ref immediateBuffer);
+              } else if (ntag == 18) {
+                long? value = input.ReadWrappedInt64(ref immediateBuffer);
+                if (entryValue == null || value != 0L) {
+                  entryValue = value;
+                }
+              } else {
+                input.SkipLastField(ref immediateBuffer);
+              }
+            }
+            int64Field_[entryKey] = entryValue;
+            input.EndReadNested(oldLimit);
             break;
           }
           case 106: {
-            uint64Field_.AddEntriesFrom(input, _map_uint64Field_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            int entryKey = 0;
+            ulong? entryValue = 0UL;
+            uint ntag;
+            while ((ntag = input.ReadTag(ref immediateBuffer)) != 0) {
+              if (ntag == 8) {
+                entryKey = input.ReadInt32(ref immediateBuffer);
+              } else if (ntag == 18) {
+                ulong? value = input.ReadWrappedUInt64(ref immediateBuffer);
+                if (entryValue == null || value != 0UL) {
+                  entryValue = value;
+                }
+              } else {
+                input.SkipLastField(ref immediateBuffer);
+              }
+            }
+            uint64Field_[entryKey] = entryValue;
+            input.EndReadNested(oldLimit);
             break;
           }
           case 114: {
-            int32Field_.AddEntriesFrom(input, _map_int32Field_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            int entryKey = 0;
+            int? entryValue = 0;
+            uint ntag;
+            while ((ntag = input.ReadTag(ref immediateBuffer)) != 0) {
+              if (ntag == 8) {
+                entryKey = input.ReadInt32(ref immediateBuffer);
+              } else if (ntag == 18) {
+                int? value = input.ReadWrappedInt32(ref immediateBuffer);
+                if (entryValue == null || value != 0) {
+                  entryValue = value;
+                }
+              } else {
+                input.SkipLastField(ref immediateBuffer);
+              }
+            }
+            int32Field_[entryKey] = entryValue;
+            input.EndReadNested(oldLimit);
             break;
           }
           case 122: {
-            uint32Field_.AddEntriesFrom(input, _map_uint32Field_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            int entryKey = 0;
+            uint? entryValue = 0;
+            uint ntag;
+            while ((ntag = input.ReadTag(ref immediateBuffer)) != 0) {
+              if (ntag == 8) {
+                entryKey = input.ReadInt32(ref immediateBuffer);
+              } else if (ntag == 18) {
+                uint? value = input.ReadWrappedUInt32(ref immediateBuffer);
+                if (entryValue == null || value != 0) {
+                  entryValue = value;
+                }
+              } else {
+                input.SkipLastField(ref immediateBuffer);
+              }
+            }
+            uint32Field_[entryKey] = entryValue;
+            input.EndReadNested(oldLimit);
             break;
           }
           case 130: {
-            boolField_.AddEntriesFrom(input, _map_boolField_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            int entryKey = 0;
+            bool? entryValue = false;
+            uint ntag;
+            while ((ntag = input.ReadTag(ref immediateBuffer)) != 0) {
+              if (ntag == 8) {
+                entryKey = input.ReadInt32(ref immediateBuffer);
+              } else if (ntag == 18) {
+                bool? value = input.ReadWrappedBool(ref immediateBuffer);
+                if (entryValue == null || value != false) {
+                  entryValue = value;
+                }
+              } else {
+                input.SkipLastField(ref immediateBuffer);
+              }
+            }
+            boolField_[entryKey] = entryValue;
+            input.EndReadNested(oldLimit);
             break;
           }
           case 138: {
-            stringField_.AddEntriesFrom(input, _map_stringField_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            int entryKey = 0;
+            string entryValue = "";
+            uint ntag;
+            while ((ntag = input.ReadTag(ref immediateBuffer)) != 0) {
+              if (ntag == 8) {
+                entryKey = input.ReadInt32(ref immediateBuffer);
+              } else if (ntag == 18) {
+                string value = input.ReadWrappedString(ref immediateBuffer);
+                if (entryValue == null || value != "") {
+                  entryValue = value;
+                }
+              } else {
+                input.SkipLastField(ref immediateBuffer);
+              }
+            }
+            stringField_[entryKey] = entryValue;
+            input.EndReadNested(oldLimit);
             break;
           }
           case 146: {
-            bytesField_.AddEntriesFrom(input, _map_bytesField_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            int entryKey = 0;
+            pb::ByteString entryValue = pb::ByteString.Empty;
+            uint ntag;
+            while ((ntag = input.ReadTag(ref immediateBuffer)) != 0) {
+              if (ntag == 8) {
+                entryKey = input.ReadInt32(ref immediateBuffer);
+              } else if (ntag == 18) {
+                pb::ByteString value = input.ReadWrappedBytes(ref immediateBuffer);
+                if (entryValue == null || value != pb::ByteString.Empty) {
+                  entryValue = value;
+                }
+              } else {
+                input.SkipLastField(ref immediateBuffer);
+              }
+            }
+            bytesField_[entryKey] = entryValue;
+            input.EndReadNested(oldLimit);
             break;
           }
         }

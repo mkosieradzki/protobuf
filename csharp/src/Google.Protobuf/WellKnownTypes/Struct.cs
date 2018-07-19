@@ -193,7 +193,27 @@ namespace Google.Protobuf.WellKnownTypes {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input, ref immediateBuffer);
             break;
           case 10: {
-            fields_.AddEntriesFrom(input, _map_fields_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            string entryKey = "";
+            global::Google.Protobuf.WellKnownTypes.Value entryValue = null;
+            uint ntag;
+            while ((ntag = input.ReadTag(ref immediateBuffer)) != 0) {
+              if (ntag == 10) {
+                entryKey = input.ReadString(ref immediateBuffer);
+              } else if (ntag == 18) {
+                if (entryValue == null) {
+                  entryValue = new global::Google.Protobuf.WellKnownTypes.Value();
+                }
+                input.ReadMessage(entryValue, ref immediateBuffer);
+              } else {
+                input.SkipLastField(ref immediateBuffer);
+              }
+            }
+            if (entryValue == null) {
+              entryValue = new global::Google.Protobuf.WellKnownTypes.Value();
+            }
+            fields_[entryKey] = entryValue;
+            input.EndReadNested(oldLimit);
             break;
           }
         }

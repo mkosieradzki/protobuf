@@ -3058,79 +3058,357 @@ namespace ProtobufTestMessages.Proto3 {
             break;
           }
           case 450: {
-            mapInt32Int32_.AddEntriesFrom(input, _map_mapInt32Int32_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            int entryKey = 0;
+            int entryValue = 0;
+            uint ntag;
+            while ((ntag = input.ReadTag(ref immediateBuffer)) != 0) {
+              if (ntag == 8) {
+                entryKey = input.ReadInt32(ref immediateBuffer);
+              } else if (ntag == 16) {
+                entryValue = input.ReadInt32(ref immediateBuffer);
+              } else {
+                input.SkipLastField(ref immediateBuffer);
+              }
+            }
+            mapInt32Int32_[entryKey] = entryValue;
+            input.EndReadNested(oldLimit);
             break;
           }
           case 458: {
-            mapInt64Int64_.AddEntriesFrom(input, _map_mapInt64Int64_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            long entryKey = 0L;
+            long entryValue = 0L;
+            uint ntag;
+            while ((ntag = input.ReadTag(ref immediateBuffer)) != 0) {
+              if (ntag == 8) {
+                entryKey = input.ReadInt64(ref immediateBuffer);
+              } else if (ntag == 16) {
+                entryValue = input.ReadInt64(ref immediateBuffer);
+              } else {
+                input.SkipLastField(ref immediateBuffer);
+              }
+            }
+            mapInt64Int64_[entryKey] = entryValue;
+            input.EndReadNested(oldLimit);
             break;
           }
           case 466: {
-            mapUint32Uint32_.AddEntriesFrom(input, _map_mapUint32Uint32_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            uint entryKey = 0;
+            uint entryValue = 0;
+            uint ntag;
+            while ((ntag = input.ReadTag(ref immediateBuffer)) != 0) {
+              if (ntag == 8) {
+                entryKey = input.ReadUInt32(ref immediateBuffer);
+              } else if (ntag == 16) {
+                entryValue = input.ReadUInt32(ref immediateBuffer);
+              } else {
+                input.SkipLastField(ref immediateBuffer);
+              }
+            }
+            mapUint32Uint32_[entryKey] = entryValue;
+            input.EndReadNested(oldLimit);
             break;
           }
           case 474: {
-            mapUint64Uint64_.AddEntriesFrom(input, _map_mapUint64Uint64_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            ulong entryKey = 0UL;
+            ulong entryValue = 0UL;
+            uint ntag;
+            while ((ntag = input.ReadTag(ref immediateBuffer)) != 0) {
+              if (ntag == 8) {
+                entryKey = input.ReadUInt64(ref immediateBuffer);
+              } else if (ntag == 16) {
+                entryValue = input.ReadUInt64(ref immediateBuffer);
+              } else {
+                input.SkipLastField(ref immediateBuffer);
+              }
+            }
+            mapUint64Uint64_[entryKey] = entryValue;
+            input.EndReadNested(oldLimit);
             break;
           }
           case 482: {
-            mapSint32Sint32_.AddEntriesFrom(input, _map_mapSint32Sint32_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            int entryKey = 0;
+            int entryValue = 0;
+            uint ntag;
+            while ((ntag = input.ReadTag(ref immediateBuffer)) != 0) {
+              if (ntag == 8) {
+                entryKey = input.ReadSInt32(ref immediateBuffer);
+              } else if (ntag == 16) {
+                entryValue = input.ReadSInt32(ref immediateBuffer);
+              } else {
+                input.SkipLastField(ref immediateBuffer);
+              }
+            }
+            mapSint32Sint32_[entryKey] = entryValue;
+            input.EndReadNested(oldLimit);
             break;
           }
           case 490: {
-            mapSint64Sint64_.AddEntriesFrom(input, _map_mapSint64Sint64_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            long entryKey = 0L;
+            long entryValue = 0L;
+            uint ntag;
+            while ((ntag = input.ReadTag(ref immediateBuffer)) != 0) {
+              if (ntag == 8) {
+                entryKey = input.ReadSInt64(ref immediateBuffer);
+              } else if (ntag == 16) {
+                entryValue = input.ReadSInt64(ref immediateBuffer);
+              } else {
+                input.SkipLastField(ref immediateBuffer);
+              }
+            }
+            mapSint64Sint64_[entryKey] = entryValue;
+            input.EndReadNested(oldLimit);
             break;
           }
           case 498: {
-            mapFixed32Fixed32_.AddEntriesFrom(input, _map_mapFixed32Fixed32_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            uint entryKey = 0;
+            uint entryValue = 0;
+            uint ntag;
+            while ((ntag = input.ReadTag(ref immediateBuffer)) != 0) {
+              if (ntag == 13) {
+                entryKey = input.ReadFixed32(ref immediateBuffer);
+              } else if (ntag == 21) {
+                entryValue = input.ReadFixed32(ref immediateBuffer);
+              } else {
+                input.SkipLastField(ref immediateBuffer);
+              }
+            }
+            mapFixed32Fixed32_[entryKey] = entryValue;
+            input.EndReadNested(oldLimit);
             break;
           }
           case 506: {
-            mapFixed64Fixed64_.AddEntriesFrom(input, _map_mapFixed64Fixed64_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            ulong entryKey = 0UL;
+            ulong entryValue = 0UL;
+            uint ntag;
+            while ((ntag = input.ReadTag(ref immediateBuffer)) != 0) {
+              if (ntag == 9) {
+                entryKey = input.ReadFixed64(ref immediateBuffer);
+              } else if (ntag == 17) {
+                entryValue = input.ReadFixed64(ref immediateBuffer);
+              } else {
+                input.SkipLastField(ref immediateBuffer);
+              }
+            }
+            mapFixed64Fixed64_[entryKey] = entryValue;
+            input.EndReadNested(oldLimit);
             break;
           }
           case 514: {
-            mapSfixed32Sfixed32_.AddEntriesFrom(input, _map_mapSfixed32Sfixed32_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            int entryKey = 0;
+            int entryValue = 0;
+            uint ntag;
+            while ((ntag = input.ReadTag(ref immediateBuffer)) != 0) {
+              if (ntag == 13) {
+                entryKey = input.ReadSFixed32(ref immediateBuffer);
+              } else if (ntag == 21) {
+                entryValue = input.ReadSFixed32(ref immediateBuffer);
+              } else {
+                input.SkipLastField(ref immediateBuffer);
+              }
+            }
+            mapSfixed32Sfixed32_[entryKey] = entryValue;
+            input.EndReadNested(oldLimit);
             break;
           }
           case 522: {
-            mapSfixed64Sfixed64_.AddEntriesFrom(input, _map_mapSfixed64Sfixed64_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            long entryKey = 0L;
+            long entryValue = 0L;
+            uint ntag;
+            while ((ntag = input.ReadTag(ref immediateBuffer)) != 0) {
+              if (ntag == 9) {
+                entryKey = input.ReadSFixed64(ref immediateBuffer);
+              } else if (ntag == 17) {
+                entryValue = input.ReadSFixed64(ref immediateBuffer);
+              } else {
+                input.SkipLastField(ref immediateBuffer);
+              }
+            }
+            mapSfixed64Sfixed64_[entryKey] = entryValue;
+            input.EndReadNested(oldLimit);
             break;
           }
           case 530: {
-            mapInt32Float_.AddEntriesFrom(input, _map_mapInt32Float_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            int entryKey = 0;
+            float entryValue = 0F;
+            uint ntag;
+            while ((ntag = input.ReadTag(ref immediateBuffer)) != 0) {
+              if (ntag == 8) {
+                entryKey = input.ReadInt32(ref immediateBuffer);
+              } else if (ntag == 21) {
+                entryValue = input.ReadFloat(ref immediateBuffer);
+              } else {
+                input.SkipLastField(ref immediateBuffer);
+              }
+            }
+            mapInt32Float_[entryKey] = entryValue;
+            input.EndReadNested(oldLimit);
             break;
           }
           case 538: {
-            mapInt32Double_.AddEntriesFrom(input, _map_mapInt32Double_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            int entryKey = 0;
+            double entryValue = 0D;
+            uint ntag;
+            while ((ntag = input.ReadTag(ref immediateBuffer)) != 0) {
+              if (ntag == 8) {
+                entryKey = input.ReadInt32(ref immediateBuffer);
+              } else if (ntag == 17) {
+                entryValue = input.ReadDouble(ref immediateBuffer);
+              } else {
+                input.SkipLastField(ref immediateBuffer);
+              }
+            }
+            mapInt32Double_[entryKey] = entryValue;
+            input.EndReadNested(oldLimit);
             break;
           }
           case 546: {
-            mapBoolBool_.AddEntriesFrom(input, _map_mapBoolBool_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            bool entryKey = false;
+            bool entryValue = false;
+            uint ntag;
+            while ((ntag = input.ReadTag(ref immediateBuffer)) != 0) {
+              if (ntag == 8) {
+                entryKey = input.ReadBool(ref immediateBuffer);
+              } else if (ntag == 16) {
+                entryValue = input.ReadBool(ref immediateBuffer);
+              } else {
+                input.SkipLastField(ref immediateBuffer);
+              }
+            }
+            mapBoolBool_[entryKey] = entryValue;
+            input.EndReadNested(oldLimit);
             break;
           }
           case 554: {
-            mapStringString_.AddEntriesFrom(input, _map_mapStringString_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            string entryKey = "";
+            string entryValue = "";
+            uint ntag;
+            while ((ntag = input.ReadTag(ref immediateBuffer)) != 0) {
+              if (ntag == 10) {
+                entryKey = input.ReadString(ref immediateBuffer);
+              } else if (ntag == 18) {
+                entryValue = input.ReadString(ref immediateBuffer);
+              } else {
+                input.SkipLastField(ref immediateBuffer);
+              }
+            }
+            mapStringString_[entryKey] = entryValue;
+            input.EndReadNested(oldLimit);
             break;
           }
           case 562: {
-            mapStringBytes_.AddEntriesFrom(input, _map_mapStringBytes_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            string entryKey = "";
+            pb::ByteString entryValue = pb::ByteString.Empty;
+            uint ntag;
+            while ((ntag = input.ReadTag(ref immediateBuffer)) != 0) {
+              if (ntag == 10) {
+                entryKey = input.ReadString(ref immediateBuffer);
+              } else if (ntag == 18) {
+                entryValue = input.ReadBytes(ref immediateBuffer);
+              } else {
+                input.SkipLastField(ref immediateBuffer);
+              }
+            }
+            mapStringBytes_[entryKey] = entryValue;
+            input.EndReadNested(oldLimit);
             break;
           }
           case 570: {
-            mapStringNestedMessage_.AddEntriesFrom(input, _map_mapStringNestedMessage_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            string entryKey = "";
+            global::ProtobufTestMessages.Proto3.TestAllTypesProto3.Types.NestedMessage entryValue = null;
+            uint ntag;
+            while ((ntag = input.ReadTag(ref immediateBuffer)) != 0) {
+              if (ntag == 10) {
+                entryKey = input.ReadString(ref immediateBuffer);
+              } else if (ntag == 18) {
+                if (entryValue == null) {
+                  entryValue = new global::ProtobufTestMessages.Proto3.TestAllTypesProto3.Types.NestedMessage();
+                }
+                input.ReadMessage(entryValue, ref immediateBuffer);
+              } else {
+                input.SkipLastField(ref immediateBuffer);
+              }
+            }
+            if (entryValue == null) {
+              entryValue = new global::ProtobufTestMessages.Proto3.TestAllTypesProto3.Types.NestedMessage();
+            }
+            mapStringNestedMessage_[entryKey] = entryValue;
+            input.EndReadNested(oldLimit);
             break;
           }
           case 578: {
-            mapStringForeignMessage_.AddEntriesFrom(input, _map_mapStringForeignMessage_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            string entryKey = "";
+            global::ProtobufTestMessages.Proto3.ForeignMessage entryValue = null;
+            uint ntag;
+            while ((ntag = input.ReadTag(ref immediateBuffer)) != 0) {
+              if (ntag == 10) {
+                entryKey = input.ReadString(ref immediateBuffer);
+              } else if (ntag == 18) {
+                if (entryValue == null) {
+                  entryValue = new global::ProtobufTestMessages.Proto3.ForeignMessage();
+                }
+                input.ReadMessage(entryValue, ref immediateBuffer);
+              } else {
+                input.SkipLastField(ref immediateBuffer);
+              }
+            }
+            if (entryValue == null) {
+              entryValue = new global::ProtobufTestMessages.Proto3.ForeignMessage();
+            }
+            mapStringForeignMessage_[entryKey] = entryValue;
+            input.EndReadNested(oldLimit);
             break;
           }
           case 586: {
-            mapStringNestedEnum_.AddEntriesFrom(input, _map_mapStringNestedEnum_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            string entryKey = "";
+            global::ProtobufTestMessages.Proto3.TestAllTypesProto3.Types.NestedEnum entryValue = 0;
+            uint ntag;
+            while ((ntag = input.ReadTag(ref immediateBuffer)) != 0) {
+              if (ntag == 10) {
+                entryKey = input.ReadString(ref immediateBuffer);
+              } else if (ntag == 16) {
+                entryValue = (global::ProtobufTestMessages.Proto3.TestAllTypesProto3.Types.NestedEnum) input.ReadEnum(ref immediateBuffer);
+              } else {
+                input.SkipLastField(ref immediateBuffer);
+              }
+            }
+            mapStringNestedEnum_[entryKey] = entryValue;
+            input.EndReadNested(oldLimit);
             break;
           }
           case 594: {
-            mapStringForeignEnum_.AddEntriesFrom(input, _map_mapStringForeignEnum_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            string entryKey = "";
+            global::ProtobufTestMessages.Proto3.ForeignEnum entryValue = 0;
+            uint ntag;
+            while ((ntag = input.ReadTag(ref immediateBuffer)) != 0) {
+              if (ntag == 10) {
+                entryKey = input.ReadString(ref immediateBuffer);
+              } else if (ntag == 16) {
+                entryValue = (global::ProtobufTestMessages.Proto3.ForeignEnum) input.ReadEnum(ref immediateBuffer);
+              } else {
+                input.SkipLastField(ref immediateBuffer);
+              }
+            }
+            mapStringForeignEnum_[entryKey] = entryValue;
+            input.EndReadNested(oldLimit);
             break;
           }
           case 888: {
@@ -3177,63 +3455,63 @@ namespace ProtobufTestMessages.Proto3 {
           }
           case 1610: {
             bool? value = input.ReadWrappedBool(ref immediateBuffer);
-            if (optionalBoolWrapper_ == null || value != false) {
+            if (OptionalBoolWrapper == null || value != false) {
               OptionalBoolWrapper = value;
             }
             break;
           }
           case 1618: {
             int? value = input.ReadWrappedInt32(ref immediateBuffer);
-            if (optionalInt32Wrapper_ == null || value != 0) {
+            if (OptionalInt32Wrapper == null || value != 0) {
               OptionalInt32Wrapper = value;
             }
             break;
           }
           case 1626: {
             long? value = input.ReadWrappedInt64(ref immediateBuffer);
-            if (optionalInt64Wrapper_ == null || value != 0L) {
+            if (OptionalInt64Wrapper == null || value != 0L) {
               OptionalInt64Wrapper = value;
             }
             break;
           }
           case 1634: {
             uint? value = input.ReadWrappedUInt32(ref immediateBuffer);
-            if (optionalUint32Wrapper_ == null || value != 0) {
+            if (OptionalUint32Wrapper == null || value != 0) {
               OptionalUint32Wrapper = value;
             }
             break;
           }
           case 1642: {
             ulong? value = input.ReadWrappedUInt64(ref immediateBuffer);
-            if (optionalUint64Wrapper_ == null || value != 0UL) {
+            if (OptionalUint64Wrapper == null || value != 0UL) {
               OptionalUint64Wrapper = value;
             }
             break;
           }
           case 1650: {
             float? value = input.ReadWrappedFloat(ref immediateBuffer);
-            if (optionalFloatWrapper_ == null || value != 0F) {
+            if (OptionalFloatWrapper == null || value != 0F) {
               OptionalFloatWrapper = value;
             }
             break;
           }
           case 1658: {
             double? value = input.ReadWrappedDouble(ref immediateBuffer);
-            if (optionalDoubleWrapper_ == null || value != 0D) {
+            if (OptionalDoubleWrapper == null || value != 0D) {
               OptionalDoubleWrapper = value;
             }
             break;
           }
           case 1666: {
             string value = input.ReadWrappedString(ref immediateBuffer);
-            if (optionalStringWrapper_ == null || value != "") {
+            if (OptionalStringWrapper == null || value != "") {
               OptionalStringWrapper = value;
             }
             break;
           }
           case 1674: {
             pb::ByteString value = input.ReadWrappedBytes(ref immediateBuffer);
-            if (optionalBytesWrapper_ == null || value != pb::ByteString.Empty) {
+            if (OptionalBytesWrapper == null || value != pb::ByteString.Empty) {
               OptionalBytesWrapper = value;
             }
             break;
