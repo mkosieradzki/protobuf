@@ -491,6 +491,32 @@ namespace Google.Protobuf
         public double ReadDouble(ref ReadOnlySpan<byte> immediateBuffer) => BitConverter.Int64BitsToDouble((long)ReadRawLittleEndian64(ref immediateBuffer));
 
         /// <summary>
+        /// Reads a wrapped double field from the stream.
+        /// </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [SecurityCritical]
+        public double ReadWrappedDouble(ref ReadOnlySpan<byte> immediateBuffer)
+        {
+            int oldLimit = BeginReadNested(ref immediateBuffer);
+            uint tag;
+            double value = default(double);
+            while ((tag = ReadTag(ref immediateBuffer)) != 0)
+            {
+                if (tag == WellKnownTypes.WrappersReflection.WrapperValueFixed64Tag)
+                {
+                    value = ReadDouble(ref immediateBuffer);
+                }
+                else
+                {
+                    SkipLastField(ref immediateBuffer);
+                }
+            }
+            EndReadNested(oldLimit);
+
+            return value;
+        }
+
+        /// <summary>
         /// Reads a float field from the stream.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -505,11 +531,44 @@ namespace Google.Protobuf
 #endif
 
         /// <summary>
+        /// Reads a wrapped float field from the stream.
+        /// </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [SecurityCritical]
+        public float ReadWrappedFloat(ref ReadOnlySpan<byte> immediateBuffer)
+        {
+            int oldLimit = BeginReadNested(ref immediateBuffer);
+            uint tag;
+            float value = default(float);
+            while ((tag = ReadTag(ref immediateBuffer)) != 0)
+            {
+                if (tag == WellKnownTypes.WrappersReflection.WrapperValueFixed32Tag)
+                {
+                    value = ReadFloat(ref immediateBuffer);
+                }
+                else
+                {
+                    SkipLastField(ref immediateBuffer);
+                }
+            }
+            EndReadNested(oldLimit);
+
+            return value;
+        }
+
+        /// <summary>
         /// Reads a uint64 field from the stream.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [SecurityCritical]
         public ulong ReadUInt64(ref ReadOnlySpan<byte> immediateBuffer) => ReadRawVarint64(ref immediateBuffer);
+
+        /// <summary>
+        /// Reads a wrapped uint64 field from the stream.
+        /// </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [SecurityCritical]
+        public ulong ReadWrappedUInt64(ref ReadOnlySpan<byte> immediateBuffer) => ReadRawWrappedVarint64(ref immediateBuffer);
 
         /// <summary>
         /// Reads an int64 field from the stream.
@@ -519,11 +578,25 @@ namespace Google.Protobuf
         public long ReadInt64(ref ReadOnlySpan<byte> immediateBuffer) => (long)ReadRawVarint64(ref immediateBuffer);
 
         /// <summary>
+        /// Reads a wrapped int64 field from the stream.
+        /// </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [SecurityCritical]
+        public long ReadWrappedInt64(ref ReadOnlySpan<byte> immediateBuffer) => (long)ReadRawWrappedVarint64(ref immediateBuffer);
+
+        /// <summary>
         /// Reads an int32 field from the stream.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [SecurityCritical]
         public int ReadInt32(ref ReadOnlySpan<byte> immediateBuffer) => (int)ReadRawVarint32(ref immediateBuffer);
+
+        /// <summary>
+        /// Reads a wrapped bool field from the stream.
+        /// </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [SecurityCritical]
+        public int ReadWrappedInt32(ref ReadOnlySpan<byte> immediateBuffer) => (int)ReadRawWrappedVarint32(ref immediateBuffer);
 
         /// <summary>
         /// Reads a fixed64 field from the stream.
@@ -545,6 +618,13 @@ namespace Google.Protobuf
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [SecurityCritical]
         public bool ReadBool(ref ReadOnlySpan<byte> immediateBuffer) => ReadRawVarint32(ref immediateBuffer) != 0;
+
+        /// <summary>
+        /// Reads a wrapped bool field from the stream.
+        /// </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [SecurityCritical]
+        public bool ReadWrappedBool(ref ReadOnlySpan<byte> immediateBuffer) => ReadRawWrappedVarint32(ref immediateBuffer) != 0;
 
         /// <summary>
         /// Reads a string field from the stream.
@@ -576,10 +656,45 @@ namespace Google.Protobuf
         }
 
         /// <summary>
+        /// Reads a wrapped bool field from the stream.
+        /// </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [SecurityCritical]
+        public string ReadWrappedString(ref ReadOnlySpan<byte> immediateBuffer)
+        {
+            int oldLimit = BeginReadNested(ref immediateBuffer);
+            uint tag;
+            string value = string.Empty;
+            while ((tag = ReadTag(ref immediateBuffer)) != 0)
+            {
+                if (tag == WellKnownTypes.WrappersReflection.WrapperValueLengthDelimitedTag)
+                {
+                    value = ReadString(ref immediateBuffer);
+                }
+                else
+                {
+                    SkipLastField(ref immediateBuffer);
+                }
+            }
+            EndReadNested(oldLimit);
+
+            return value;
+        }
+
+        /// <summary>
         /// Reads an embedded message field value from the stream.
         /// </summary>
         [SecurityCritical]
         public void ReadMessage(IMessage builder, ref ReadOnlySpan<byte> immediateBuffer)
+        {
+            var oldLimit = BeginReadNested(ref immediateBuffer);
+            builder.MergeFrom(this, ref immediateBuffer);
+            EndReadNested(oldLimit);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [SecurityCritical]
+        private int BeginReadNested(ref ReadOnlySpan<byte> immediateBuffer)
         {
             int length = ReadLength(ref immediateBuffer);
             if (recursionDepth >= recursionLimit)
@@ -588,7 +703,12 @@ namespace Google.Protobuf
             }
             int oldLimit = PushLimit(length);
             ++recursionDepth;
-            builder.MergeFrom(this, ref immediateBuffer);
+            return oldLimit;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private void EndReadNested(int oldLimit)
+        {
             CheckReadEndOfStreamTag();
             // Check that we've read exactly as much data as expected.
             if (!ReachedLimit)
@@ -623,11 +743,44 @@ namespace Google.Protobuf
         }
 
         /// <summary>
+        /// Reads a wrapped bytes field from the stream.
+        /// </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [SecurityCritical]
+        public ByteString ReadWrappedBytes(ref ReadOnlySpan<byte> immediateBuffer)
+        {
+            int oldLimit = BeginReadNested(ref immediateBuffer);
+            uint tag;
+            ByteString value = ByteString.Empty;
+            while ((tag = ReadTag(ref immediateBuffer)) != 0)
+            {
+                if (tag == WellKnownTypes.WrappersReflection.WrapperValueLengthDelimitedTag)
+                {
+                    value = ReadBytes(ref immediateBuffer);
+                }
+                else
+                {
+                    SkipLastField(ref immediateBuffer);
+                }
+            }
+            EndReadNested(oldLimit);
+
+            return value;
+        }
+
+        /// <summary>
         /// Reads a uint32 field value from the stream.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [SecurityCritical]
         public uint ReadUInt32(ref ReadOnlySpan<byte> immediateBuffer) => ReadRawVarint32(ref immediateBuffer);
+
+        /// <summary>
+        /// Reads a wrapped uint32 field from the stream.
+        /// </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [SecurityCritical]
+        public uint ReadWrappedUInt32(ref ReadOnlySpan<byte> immediateBuffer) => ReadRawWrappedVarint32(ref immediateBuffer);
 
         /// <summary>
         /// Reads an enum field value from the stream.
@@ -748,6 +901,29 @@ namespace Google.Protobuf
                 }
             }
             return (uint)result;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [SecurityCritical]
+        private uint ReadRawWrappedVarint32(ref ReadOnlySpan<byte> immediateBuffer)
+        {
+            int oldLimit = BeginReadNested(ref immediateBuffer);
+            uint tag;
+            uint value = default(uint);
+            while ((tag = ReadTag(ref immediateBuffer)) != 0)
+            {
+                if (tag == WellKnownTypes.WrappersReflection.WrapperValueVarintTag)
+                {
+                    value = ReadRawVarint32(ref immediateBuffer);
+                }
+                else
+                {
+                    SkipLastField(ref immediateBuffer);
+                }
+            }
+            EndReadNested(oldLimit);
+
+            return value;
         }
 
         /// <summary>
@@ -876,6 +1052,29 @@ namespace Google.Protobuf
                 shift += 7;
             }
             throw InvalidProtocolBufferException.MalformedVarint();
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [SecurityCritical]
+        private ulong ReadRawWrappedVarint64(ref ReadOnlySpan<byte> immediateBuffer)
+        {
+            int oldLimit = BeginReadNested(ref immediateBuffer);
+            uint tag;
+            ulong value = default(ulong);
+            while ((tag = ReadTag(ref immediateBuffer)) != 0)
+            {
+                if (tag == WellKnownTypes.WrappersReflection.WrapperValueVarintTag)
+                {
+                    value = ReadRawVarint64(ref immediateBuffer);
+                }
+                else
+                {
+                    SkipLastField(ref immediateBuffer);
+                }
+            }
+            EndReadNested(oldLimit);
+
+            return value;
         }
 
         /// <summary>
