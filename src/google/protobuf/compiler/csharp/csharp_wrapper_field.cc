@@ -201,7 +201,7 @@ void WrapperOneofFieldGenerator::GenerateParsingCode(io::Printer* printer, const
   variables_["lvalue_name"] = lvalueName.empty() ? variables_["property_name"] : lvalueName;
   printer->Print(
     variables_,
-    "$lvalue_name$ = _oneof_$name$_codec.Read(input, ref immediateBuffer);\n");
+    "$lvalue_name$ = input.ReadWrapped$wrapped_type_capitalized_name$(ref immediateBuffer);\n");
 }
 
 void WrapperOneofFieldGenerator::GenerateSerializationCode(io::Printer* printer) {
