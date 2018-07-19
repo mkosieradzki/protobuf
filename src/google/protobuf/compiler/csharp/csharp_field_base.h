@@ -87,6 +87,7 @@ class FieldGeneratorBase : public SourceGeneratorBase {
   std::string default_value(const FieldDescriptor* descriptor);
   std::string number();
   std::string capitalized_type_name();
+  std::string capitalized_type_name(const FieldDescriptor* descriptor);
 
  private:
   void SetCommonFieldVariables(std::map<string, string>* variables);

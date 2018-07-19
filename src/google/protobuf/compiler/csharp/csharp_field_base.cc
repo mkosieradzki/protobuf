@@ -381,7 +381,11 @@ std::string FieldGeneratorBase::number() {
 }
 
 std::string FieldGeneratorBase::capitalized_type_name() {
-  switch (descriptor_->type()) {
+  return capitalized_type_name(descriptor_);
+}
+
+std::string FieldGeneratorBase::capitalized_type_name(const FieldDescriptor* descriptor) {
+  switch (descriptor->type()) {
     case FieldDescriptor::TYPE_ENUM:
       return "Enum";
     case FieldDescriptor::TYPE_MESSAGE:

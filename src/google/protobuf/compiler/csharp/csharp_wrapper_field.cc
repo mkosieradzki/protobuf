@@ -58,6 +58,7 @@ WrapperFieldGenerator::WrapperFieldGenerator(const FieldDescriptor* descriptor,
   if (is_value_type) {
     variables_["nonnullable_type_name"] = type_name(wrapped_field);
   }
+  variables_["wrapped_type_capitalized_name"] = capitalized_type_name(wrapped_field);
 }
 
 WrapperFieldGenerator::~WrapperFieldGenerator() {
@@ -97,7 +98,7 @@ void WrapperFieldGenerator::GenerateMergingCode(io::Printer* printer) {
 void WrapperFieldGenerator::GenerateParsingCode(io::Printer* printer) {
   printer->Print(
     variables_,
-    "$type_name$ value = _single_$name$_codec.Read(input, ref immediateBuffer);\n"
+    "$type_name$ value = input.ReadWrapped$wrapped_type_capitalized_name$(ref immediateBuffer);\n"
     "if ($has_not_property_check$ || value != $default_value$) {\n"
     "  $property_name$ = value;\n"
     "}\n");
