@@ -95,7 +95,7 @@ void MapFieldGenerator::GenerateMergingCode(io::Printer* printer) {
       "$name$_.Add(other.$name$_);\n");
 }
 
-void MapFieldGenerator::GenerateParsingCode(io::Printer* printer, const std::string& lvalueName) {
+void MapFieldGenerator::GenerateParsingCode(io::Printer* printer, const std::string& lvalueName, bool forceNonPacked) {
   const FieldDescriptor* key_descriptor =
     descriptor_->message_type()->FindFieldByName("key");
   const FieldDescriptor* value_descriptor =
@@ -123,13 +123,13 @@ void MapFieldGenerator::GenerateParsingCode(io::Printer* printer, const std::str
     variables_,
     "if (ntag == $key_tag$) {\n");
   printer->Indent();
-  key_generator->GenerateParsingCode(printer, "entryKey");
+  key_generator->GenerateParsingCode(printer, "entryKey", false);
   printer->Outdent();
   printer->Print(
     variables_,
     "} else if (ntag == $value_tag$) {\n");
   printer->Indent();
-  value_generator->GenerateParsingCode(printer, "entryValue");
+  value_generator->GenerateParsingCode(printer, "entryValue", false);
   printer->Outdent();
   printer->Print(
     "} else {\n"

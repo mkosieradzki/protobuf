@@ -78,11 +78,25 @@ void RepeatedPrimitiveFieldGenerator::GenerateMergingCode(io::Printer* printer) 
     "$name$_.Add(other.$name$_);\n");
 }
 
-void RepeatedPrimitiveFieldGenerator::GenerateParsingCode(io::Printer* printer, const std::string& lvalueName) {
+void RepeatedPrimitiveFieldGenerator::GenerateParsingCode(io::Printer* printer, const std::string& lvalueName, bool forceNonPacked) {
   variables_["lvalue_name"] = lvalueName.empty() ? variables_["name"] + "_" : lvalueName;
-  printer->Print(
-    variables_,
-    "$lvalue_name$.AddEntriesFrom(input, _repeated_$name$_codec, ref immediateBuffer);\n");
+  if (descriptor_->is_packable() && !forceNonPacked) {
+    printer->Print(
+      variables_,
+      "int length = input.ReadLength(ref immediateBuffer);\n"
+      "if (length > 0) {\n"
+      "  var oldLimit = input.PushLimit(length);\n"
+      "  while (!input.ReachedLimit) {\n"
+      "    $lvalue_name$.Add(input.Read$capitalized_type_name$(ref immediateBuffer)); \n"
+      "  }\n"
+      "  input.PopLimit(oldLimit);\n"
+      "}\n");
+  }
+  else {
+    printer->Print(
+      variables_,
+      "$lvalue_name$.Add(input.Read$capitalized_type_name$(ref immediateBuffer));\n");
+  }
 }
 
 void RepeatedPrimitiveFieldGenerator::GenerateSerializationCode(io::Printer* printer) {

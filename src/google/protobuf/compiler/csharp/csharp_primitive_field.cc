@@ -99,7 +99,7 @@ void PrimitiveFieldGenerator::GenerateMergingCode(io::Printer* printer) {
     "}\n");
 }
 
-void PrimitiveFieldGenerator::GenerateParsingCode(io::Printer* printer, const std::string& lvalueName) {
+void PrimitiveFieldGenerator::GenerateParsingCode(io::Printer* printer, const std::string& lvalueName, bool forceNonPacked) {
   // Note: invoke the property setter rather than writing straight to the field,
   // so that we can normalize "null to empty" for strings and bytes.
   variables_["lvalue_name"] = lvalueName.empty() ? variables_["property_name"] : lvalueName;
@@ -214,7 +214,7 @@ void PrimitiveOneofFieldGenerator::WriteToString(io::Printer* printer) {
     "PrintField(\"$descriptor_name$\", $has_property_check$, $oneof_name$_, writer);\n");
 }
 
-void PrimitiveOneofFieldGenerator::GenerateParsingCode(io::Printer* printer, const std::string& lvalueName) {
+void PrimitiveOneofFieldGenerator::GenerateParsingCode(io::Printer* printer, const std::string& lvalueName, bool forceNonPacked) {
   variables_["lvalue_name"] = lvalueName.empty() ? variables_["property_name"] : lvalueName;
   printer->Print(
    variables_,

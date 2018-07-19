@@ -95,7 +95,7 @@ void WrapperFieldGenerator::GenerateMergingCode(io::Printer* printer) {
     "}\n");
 }
 
-void WrapperFieldGenerator::GenerateParsingCode(io::Printer* printer, const std::string& lvalueName) {
+void WrapperFieldGenerator::GenerateParsingCode(io::Printer* printer, const std::string& lvalueName, bool forceNonPacked) {
   variables_["lvalue_name"] = lvalueName.empty() ? variables_["property_name"] : lvalueName;
   printer->Print(
     variables_,
@@ -197,7 +197,7 @@ void WrapperOneofFieldGenerator::GenerateMergingCode(io::Printer* printer) {
   printer->Print(variables_, "$property_name$ = other.$property_name$;\n");
 }
 
-void WrapperOneofFieldGenerator::GenerateParsingCode(io::Printer* printer, const std::string& lvalueName) {
+void WrapperOneofFieldGenerator::GenerateParsingCode(io::Printer* printer, const std::string& lvalueName, bool forceNonPacked) {
   variables_["lvalue_name"] = lvalueName.empty() ? variables_["property_name"] : lvalueName;
   printer->Print(
     variables_,

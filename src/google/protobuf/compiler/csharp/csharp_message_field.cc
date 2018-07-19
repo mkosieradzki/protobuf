@@ -87,7 +87,7 @@ void MessageFieldGenerator::GenerateMergingCode(io::Printer* printer) {
     "}\n");
 }
 
-void MessageFieldGenerator::GenerateParsingCode(io::Printer* printer, const std::string& lvalueName) {
+void MessageFieldGenerator::GenerateParsingCode(io::Printer* printer, const std::string& lvalueName, bool forceNonPacked) {
   variables_["lvalue_name"] = lvalueName.empty() ? variables_["name"] + "_" : lvalueName;
   printer->Print(
     variables_,
@@ -180,7 +180,7 @@ void MessageOneofFieldGenerator::GenerateMergingCode(io::Printer* printer) {
     "$property_name$.MergeFrom(other.$property_name$);\n");
 }
 
-void MessageOneofFieldGenerator::GenerateParsingCode(io::Printer* printer, const std::string& lvalueName) {
+void MessageOneofFieldGenerator::GenerateParsingCode(io::Printer* printer, const std::string& lvalueName, bool forceNonPacked) {
   variables_["lvalue_name"] = lvalueName.empty() ? variables_["property_name"] : lvalueName;
   // TODO(jonskeet): We may be able to do better than this
   printer->Print(

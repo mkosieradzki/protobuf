@@ -54,7 +54,7 @@ EnumFieldGenerator::EnumFieldGenerator(const FieldDescriptor* descriptor,
 EnumFieldGenerator::~EnumFieldGenerator() {
 }
 
-void EnumFieldGenerator::GenerateParsingCode(io::Printer* printer, const std::string& lvalueName) {
+void EnumFieldGenerator::GenerateParsingCode(io::Printer* printer, const std::string& lvalueName, bool forceNonPacked) {
   variables_["lvalue_name"] = lvalueName.empty() ? variables_["name"] + "_" : lvalueName;
   printer->Print(variables_,
     "$lvalue_name$ = ($type_name$) input.ReadEnum(ref immediateBuffer);\n");
@@ -94,7 +94,7 @@ void EnumOneofFieldGenerator::GenerateMergingCode(io::Printer* printer) {
   printer->Print(variables_, "$property_name$ = other.$property_name$;\n");
 }
 
-void EnumOneofFieldGenerator::GenerateParsingCode(io::Printer* printer, const std::string& lvalueName) {
+void EnumOneofFieldGenerator::GenerateParsingCode(io::Printer* printer, const std::string& lvalueName, bool forceNonPacked) {
   variables_["lvalue_name"] = lvalueName.empty() ? variables_["oneof_name"] + "_" : lvalueName;
   variables_["case_lvalue_name"] = lvalueName.empty() ? variables_["oneof_name"] + "Case_" : lvalueName;
   // TODO(jonskeet): What about if we read the default value?

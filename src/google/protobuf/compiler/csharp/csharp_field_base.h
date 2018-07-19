@@ -54,7 +54,7 @@ class FieldGeneratorBase : public SourceGeneratorBase {
   virtual void GenerateCodecCode(io::Printer* printer);
   virtual void GenerateMembers(io::Printer* printer) = 0;
   virtual void GenerateMergingCode(io::Printer* printer) = 0;
-  virtual void GenerateParsingCode(io::Printer* printer, const std::string& lvalueName) = 0;
+  virtual void GenerateParsingCode(io::Printer* printer, const std::string& lvalueName, bool forceNonPacked) = 0;
   virtual void GenerateSerializationCode(io::Printer* printer) = 0;
   virtual void GenerateSerializedSizeCode(io::Printer* printer) = 0;
 

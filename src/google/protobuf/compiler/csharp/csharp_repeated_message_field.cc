@@ -93,11 +93,23 @@ void RepeatedMessageFieldGenerator::GenerateMergingCode(io::Printer* printer) {
     "$name$_.Add(other.$name$_);\n");
 }
 
-void RepeatedMessageFieldGenerator::GenerateParsingCode(io::Printer* printer, const std::string& lvalueName) {
+void RepeatedMessageFieldGenerator::GenerateParsingCode(io::Printer* printer, const std::string& lvalueName, bool forceNonPacked) {
   variables_["lvalue_name"] = lvalueName.empty() ? variables_["name"] + "_" : lvalueName;
-  printer->Print(
-    variables_,
-    "$lvalue_name$.AddEntriesFrom(input, _repeated_$name$_codec, ref immediateBuffer);\n");
+  if (IsWrapperType(descriptor_)) {
+    variables_["capitalized_wrapped_type_name"] = capitalized_type_name(descriptor_->message_type()->field(0));
+    printer->Print(
+      variables_,
+      "$lvalue_name$.Add(input.ReadWrapped$capitalized_wrapped_type_name$(ref immediateBuffer));\n");
+  }
+  else {
+    printer->Print(
+      variables_,
+      "var oldLimit = input.BeginReadNested(ref immediateBuffer);"
+      "var item = new $type_name$();\n"
+      "item.MergeFrom(input, ref immediateBuffer);\n"
+      "$lvalue_name$.Add(item);\n"
+      "input.EndReadNested(oldLimit);\n");
+  }
 }
 
 void RepeatedMessageFieldGenerator::GenerateSerializationCode(io::Printer* printer) {

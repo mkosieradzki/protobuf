@@ -533,21 +533,26 @@ void MessageGenerator::GenerateMergingMethods(io::Printer* printer) {
     // TODO(jonskeet): Check that is_packable is equivalent to
     // is_repeated && wt in { VARINT, FIXED32, FIXED64 }.
     // It looks like it is...
+    std::unique_ptr<FieldGeneratorBase> generator(
+      CreateFieldGeneratorInternal(field));
     if (field->is_packable()) {
       printer->Print(
-        "case $packed_tag$:\n",
+        "case $packed_tag$: {\n",
         "packed_tag",
         SimpleItoa(
             internal::WireFormatLite::MakeTag(
                 field->number(),
                 internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED)));
+      printer->Indent();
+      generator->GenerateParsingCode(printer, std::string(), false);
+      printer->Print("break;\n");
+      printer->Outdent();
+      printer->Print("}\n");
     }
 
     printer->Print("case $tag$: {\n", "tag", SimpleItoa(tag));
     printer->Indent();
-    std::unique_ptr<FieldGeneratorBase> generator(
-        CreateFieldGeneratorInternal(field));
-    generator->GenerateParsingCode(printer, std::string());
+    generator->GenerateParsingCode(printer, std::string(), true);
     printer->Print("break;\n");
     printer->Outdent();
     printer->Print("}\n");
