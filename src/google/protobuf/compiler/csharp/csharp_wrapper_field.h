@@ -54,7 +54,7 @@ class WrapperFieldGenerator : public FieldGeneratorBase {
   virtual void GenerateCloningCode(io::Printer* printer);
   virtual void GenerateMembers(io::Printer* printer);
   virtual void GenerateMergingCode(io::Printer* printer);
-  virtual void GenerateParsingCode(io::Printer* printer);
+  virtual void GenerateParsingCode(io::Printer* printer, const std::string& lvalueName);
   virtual void GenerateSerializationCode(io::Printer* printer);
   virtual void GenerateSerializedSizeCode(io::Printer* printer);
 
@@ -76,7 +76,7 @@ class WrapperOneofFieldGenerator : public WrapperFieldGenerator {
 
   virtual void GenerateMembers(io::Printer* printer);
   virtual void GenerateMergingCode(io::Printer* printer);
-  virtual void GenerateParsingCode(io::Printer* printer);
+  virtual void GenerateParsingCode(io::Printer* printer, const std::string& lvalueName);
   virtual void GenerateSerializationCode(io::Printer* printer);
   virtual void GenerateSerializedSizeCode(io::Printer* printer);
 

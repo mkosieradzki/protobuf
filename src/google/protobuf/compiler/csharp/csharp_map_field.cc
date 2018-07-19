@@ -37,6 +37,7 @@
 #include <google/protobuf/io/printer.h>
 #include <google/protobuf/io/zero_copy_stream.h>
 #include <google/protobuf/stubs/strutil.h>
+#include <google/protobuf/wire_format.h>
 
 #include <google/protobuf/compiler/csharp/csharp_doc_comment.h>
 #include <google/protobuf/compiler/csharp/csharp_helpers.h>
@@ -94,10 +95,60 @@ void MapFieldGenerator::GenerateMergingCode(io::Printer* printer) {
       "$name$_.Add(other.$name$_);\n");
 }
 
-void MapFieldGenerator::GenerateParsingCode(io::Printer* printer) {
+void MapFieldGenerator::GenerateParsingCode(io::Printer* printer, const std::string& lvalueName) {
+  const FieldDescriptor* key_descriptor =
+    descriptor_->message_type()->FindFieldByName("key");
+  const FieldDescriptor* value_descriptor =
+    descriptor_->message_type()->FindFieldByName("value");
+  variables_["lvalue_name"] = lvalueName.empty() ? variables_["name"] + "_" : lvalueName;
+  variables_["key_default_value"] = default_value(key_descriptor);
+  variables_["value_default_value"] = default_value(value_descriptor);
+  variables_["key_type_name"] = type_name(key_descriptor);
+  variables_["value_type_name"] = type_name(value_descriptor);
+  variables_["key_tag"] = SimpleItoa(internal::WireFormat::MakeTag(key_descriptor));
+  variables_["value_tag"] = SimpleItoa(internal::WireFormat::MakeTag(value_descriptor));
+  std::unique_ptr<FieldGeneratorBase> key_generator(
+    CreateFieldGenerator(key_descriptor, 1, this->options()));
+  std::unique_ptr<FieldGeneratorBase> value_generator(
+    CreateFieldGenerator(value_descriptor, 2, this->options()));
   printer->Print(
     variables_,
-    "$name$_.AddEntriesFrom(input, _map_$name$_codec, ref immediateBuffer);\n");
+    "var oldLimit = input.BeginReadNested(ref immediateBuffer);\n"
+    "$key_type_name$ entryKey = $key_default_value$;\n"
+    "$value_type_name$ entryValue = $value_default_value$;\n"
+    "uint ntag;\n"
+    "while ((ntag = input.ReadTag(ref immediateBuffer)) != 0) {\n");
+  printer->Indent();
+  printer->Print(
+    variables_,
+    "if (ntag == $key_tag$) {\n");
+  printer->Indent();
+  key_generator->GenerateParsingCode(printer, "entryKey");
+  printer->Outdent();
+  printer->Print(
+    variables_,
+    "} else if (ntag == $value_tag$) {\n");
+  printer->Indent();
+  value_generator->GenerateParsingCode(printer, "entryValue");
+  printer->Outdent();
+  printer->Print(
+    "} else {\n"
+    "  input.SkipLastField(ref immediateBuffer);\n"
+    "}\n");
+  printer->Outdent();
+  printer->Print(
+    "}\n");
+  if (value_descriptor->type() == FieldDescriptor::Type::TYPE_MESSAGE && default_value(value_descriptor) == "null") {
+    printer->Print(
+      variables_,
+      "if (entryValue == null) {\n"
+      "  entryValue = new $value_type_name$();\n"
+      "}\n");
+  }
+  printer->Print(
+    variables_,
+    "$lvalue_name$[entryKey] = entryValue;\n"
+    "input.EndReadNested(oldLimit);\n");
 }
 
 void MapFieldGenerator::GenerateSerializationCode(io::Printer* printer) {

@@ -78,10 +78,11 @@ void RepeatedEnumFieldGenerator::GenerateMergingCode(io::Printer* printer) {
     "$name$_.Add(other.$name$_);\n");
 }
 
-void RepeatedEnumFieldGenerator::GenerateParsingCode(io::Printer* printer) {
+void RepeatedEnumFieldGenerator::GenerateParsingCode(io::Printer* printer, const std::string& lvalueName) {
+  variables_["lvalue_name"] = lvalueName.empty() ? variables_["name"] + "_" : lvalueName;
   printer->Print(
     variables_,
-    "$name$_.AddEntriesFrom(input, _repeated_$name$_codec, ref immediateBuffer);\n");
+    "$lvalue_name$.AddEntriesFrom(input, _repeated_$name$_codec, ref immediateBuffer);\n");
 }
 
 void RepeatedEnumFieldGenerator::GenerateSerializationCode(io::Printer* printer) {

@@ -95,12 +95,13 @@ void WrapperFieldGenerator::GenerateMergingCode(io::Printer* printer) {
     "}\n");
 }
 
-void WrapperFieldGenerator::GenerateParsingCode(io::Printer* printer) {
+void WrapperFieldGenerator::GenerateParsingCode(io::Printer* printer, const std::string& lvalueName) {
+  variables_["lvalue_name"] = lvalueName.empty() ? variables_["property_name"] : lvalueName;
   printer->Print(
     variables_,
     "$type_name$ value = input.ReadWrapped$wrapped_type_capitalized_name$(ref immediateBuffer);\n"
-    "if ($has_not_property_check$ || value != $default_value$) {\n"
-    "  $property_name$ = value;\n"
+    "if ($lvalue_name$ == null || value != $default_value$) {\n"
+    "  $lvalue_name$ = value;\n"
     "}\n");
 }
 
@@ -196,10 +197,11 @@ void WrapperOneofFieldGenerator::GenerateMergingCode(io::Printer* printer) {
   printer->Print(variables_, "$property_name$ = other.$property_name$;\n");
 }
 
-void WrapperOneofFieldGenerator::GenerateParsingCode(io::Printer* printer) {
+void WrapperOneofFieldGenerator::GenerateParsingCode(io::Printer* printer, const std::string& lvalueName) {
+  variables_["lvalue_name"] = lvalueName.empty() ? variables_["property_name"] : lvalueName;
   printer->Print(
     variables_,
-    "$property_name$ = _oneof_$name$_codec.Read(input, ref immediateBuffer);\n");
+    "$lvalue_name$ = _oneof_$name$_codec.Read(input, ref immediateBuffer);\n");
 }
 
 void WrapperOneofFieldGenerator::GenerateSerializationCode(io::Printer* printer) {

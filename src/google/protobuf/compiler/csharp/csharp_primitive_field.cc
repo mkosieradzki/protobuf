@@ -99,12 +99,13 @@ void PrimitiveFieldGenerator::GenerateMergingCode(io::Printer* printer) {
     "}\n");
 }
 
-void PrimitiveFieldGenerator::GenerateParsingCode(io::Printer* printer) {
+void PrimitiveFieldGenerator::GenerateParsingCode(io::Printer* printer, const std::string& lvalueName) {
   // Note: invoke the property setter rather than writing straight to the field,
   // so that we can normalize "null to empty" for strings and bytes.
+  variables_["lvalue_name"] = lvalueName.empty() ? variables_["property_name"] : lvalueName;
   printer->Print(
     variables_,
-    "$property_name$ = input.Read$capitalized_type_name$(ref immediateBuffer);\n");
+    "$lvalue_name$ = input.Read$capitalized_type_name$(ref immediateBuffer);\n");
 }
 
 void PrimitiveFieldGenerator::GenerateSerializationCode(io::Printer* printer) {
@@ -213,10 +214,11 @@ void PrimitiveOneofFieldGenerator::WriteToString(io::Printer* printer) {
     "PrintField(\"$descriptor_name$\", $has_property_check$, $oneof_name$_, writer);\n");
 }
 
-void PrimitiveOneofFieldGenerator::GenerateParsingCode(io::Printer* printer) {
-    printer->Print(
-      variables_,
-      "$property_name$ = input.Read$capitalized_type_name$(ref immediateBuffer);\n");
+void PrimitiveOneofFieldGenerator::GenerateParsingCode(io::Printer* printer, const std::string& lvalueName) {
+  variables_["lvalue_name"] = lvalueName.empty() ? variables_["property_name"] : lvalueName;
+  printer->Print(
+   variables_,
+  "$lvalue_name$ = input.Read$capitalized_type_name$(ref immediateBuffer);\n");
 }
 
 void PrimitiveOneofFieldGenerator::GenerateCloningCode(io::Printer* printer) {

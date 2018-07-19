@@ -87,14 +87,15 @@ void MessageFieldGenerator::GenerateMergingCode(io::Printer* printer) {
     "}\n");
 }
 
-void MessageFieldGenerator::GenerateParsingCode(io::Printer* printer) {
+void MessageFieldGenerator::GenerateParsingCode(io::Printer* printer, const std::string& lvalueName) {
+  variables_["lvalue_name"] = lvalueName.empty() ? variables_["name"] + "_" : lvalueName;
   printer->Print(
     variables_,
-    "if ($has_not_property_check$) {\n"
-    "  $name$_ = new $type_name$();\n"
+    "if ($lvalue_name$ == null) {\n"
+    "  $lvalue_name$ = new $type_name$();\n"
     "}\n"
     // TODO(jonskeet): Do we really need merging behaviour like this?
-    "input.ReadMessage($name$_, ref immediateBuffer);\n"); // No need to support TYPE_GROUP...
+    "input.ReadMessage($lvalue_name$, ref immediateBuffer);\n"); // No need to support TYPE_GROUP...
 }
 
 void MessageFieldGenerator::GenerateSerializationCode(io::Printer* printer) {
@@ -179,7 +180,8 @@ void MessageOneofFieldGenerator::GenerateMergingCode(io::Printer* printer) {
     "$property_name$.MergeFrom(other.$property_name$);\n");
 }
 
-void MessageOneofFieldGenerator::GenerateParsingCode(io::Printer* printer) {
+void MessageOneofFieldGenerator::GenerateParsingCode(io::Printer* printer, const std::string& lvalueName) {
+  variables_["lvalue_name"] = lvalueName.empty() ? variables_["property_name"] : lvalueName;
   // TODO(jonskeet): We may be able to do better than this
   printer->Print(
     variables_,
@@ -188,7 +190,7 @@ void MessageOneofFieldGenerator::GenerateParsingCode(io::Printer* printer) {
     "  subBuilder.MergeFrom($property_name$);\n"
     "}\n"
     "input.ReadMessage(subBuilder, ref immediateBuffer);\n" // No support of TYPE_GROUP
-    "$property_name$ = subBuilder;\n");
+    "$lvalue_name$ = subBuilder;\n");
 }
 
 void MessageOneofFieldGenerator::WriteToString(io::Printer* printer) {

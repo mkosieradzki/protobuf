@@ -547,7 +547,7 @@ void MessageGenerator::GenerateMergingMethods(io::Printer* printer) {
     printer->Indent();
     std::unique_ptr<FieldGeneratorBase> generator(
         CreateFieldGeneratorInternal(field));
-    generator->GenerateParsingCode(printer);
+    generator->GenerateParsingCode(printer, std::string());
     printer->Print("break;\n");
     printer->Outdent();
     printer->Print("}\n");
