@@ -2105,39 +2105,39 @@ namespace Google.Protobuf.TestProtos {
             break;
           }
           case 82: {
-            DoubleField = _oneof_doubleField_codec.Read(input, ref immediateBuffer);
+            DoubleField = input.ReadWrappedDouble(ref immediateBuffer);
             break;
           }
           case 90: {
-            FloatField = _oneof_floatField_codec.Read(input, ref immediateBuffer);
+            FloatField = input.ReadWrappedFloat(ref immediateBuffer);
             break;
           }
           case 98: {
-            Int64Field = _oneof_int64Field_codec.Read(input, ref immediateBuffer);
+            Int64Field = input.ReadWrappedInt64(ref immediateBuffer);
             break;
           }
           case 106: {
-            Uint64Field = _oneof_uint64Field_codec.Read(input, ref immediateBuffer);
+            Uint64Field = input.ReadWrappedUInt64(ref immediateBuffer);
             break;
           }
           case 114: {
-            Int32Field = _oneof_int32Field_codec.Read(input, ref immediateBuffer);
+            Int32Field = input.ReadWrappedInt32(ref immediateBuffer);
             break;
           }
           case 122: {
-            Uint32Field = _oneof_uint32Field_codec.Read(input, ref immediateBuffer);
+            Uint32Field = input.ReadWrappedUInt32(ref immediateBuffer);
             break;
           }
           case 130: {
-            BoolField = _oneof_boolField_codec.Read(input, ref immediateBuffer);
+            BoolField = input.ReadWrappedBool(ref immediateBuffer);
             break;
           }
           case 138: {
-            StringField = _oneof_stringField_codec.Read(input, ref immediateBuffer);
+            StringField = input.ReadWrappedString(ref immediateBuffer);
             break;
           }
           case 146: {
-            BytesField = _oneof_bytesField_codec.Read(input, ref immediateBuffer);
+            BytesField = input.ReadWrappedBytes(ref immediateBuffer);
             break;
           }
         }
