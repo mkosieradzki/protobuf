@@ -374,7 +374,7 @@ namespace Google.Protobuf
                     Assert.AreEqual(121, cin.Position);
                     Assert.AreEqual(501, cin.ReadSFixed32());
                     Assert.AreEqual(125, cin.Position);
-                    Assert.IsTrue(cin.IsAtEnd);
+                    Assert.IsTrue(cin.IsAtEnd());
                 }
                 cin.PopLimit(oldlimit);
                 Assert.AreEqual(125, cin.Position);
@@ -384,7 +384,7 @@ namespace Google.Protobuf
                 Assert.AreEqual(126, cin.Position);
                 Assert.AreEqual(501, cin.ReadSFixed32());
                 Assert.AreEqual(130, cin.Position);
-                Assert.IsTrue(cin.IsAtEnd);
+                Assert.IsTrue(cin.IsAtEnd());
             }
         }
 

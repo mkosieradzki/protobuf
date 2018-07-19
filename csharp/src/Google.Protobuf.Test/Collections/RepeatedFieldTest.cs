@@ -328,7 +328,7 @@ namespace Google.Protobuf.Collections
             input.AssertNextTag(packedTag);
             field.AddEntriesFrom(input, FieldCodec.ForInt32(nonPackedTag));
             CollectionAssert.AreEqual(new[] { 10, 999, -1000 }, field);
-            Assert.IsTrue(input.IsAtEnd);
+            Assert.IsTrue(input.IsAtEnd());
         }
 
         [Test]
@@ -354,7 +354,7 @@ namespace Google.Protobuf.Collections
             input.AssertNextTag(nonPackedTag);
             field.AddEntriesFrom(input, FieldCodec.ForInt32(packedTag));
             CollectionAssert.AreEqual(new[] { 10, 999, -1000 }, field);
-            Assert.IsTrue(input.IsAtEnd);
+            Assert.IsTrue(input.IsAtEnd());
         }
 
         [Test]
@@ -377,7 +377,7 @@ namespace Google.Protobuf.Collections
             input.AssertNextTag(tag);
             field.AddEntriesFrom(input, FieldCodec.ForString(tag));
             CollectionAssert.AreEqual(new[] { "Foo", "", "Bar" }, field);
-            Assert.IsTrue(input.IsAtEnd);
+            Assert.IsTrue(input.IsAtEnd());
         }
 
         [Test]
@@ -401,7 +401,7 @@ namespace Google.Protobuf.Collections
             input.AssertNextTag(tag);
             field.AddEntriesFrom(input, FieldCodec.ForMessage(tag, ForeignMessage.Parser));
             CollectionAssert.AreEqual(new[] { message1, message2}, field);
-            Assert.IsTrue(input.IsAtEnd);
+            Assert.IsTrue(input.IsAtEnd());
         }
 
         [Test]
@@ -421,7 +421,7 @@ namespace Google.Protobuf.Collections
             Assert.AreEqual(10, input.ReadInt32());
             Assert.AreEqual(1000, input.ReadInt32());
             Assert.AreEqual(1000000, input.ReadInt32());
-            Assert.IsTrue(input.IsAtEnd);
+            Assert.IsTrue(input.IsAtEnd());
             Assert.AreEqual(1 + CodedOutputStream.ComputeLengthSize(length) + length, stream.Length);
         }
 
@@ -443,7 +443,7 @@ namespace Google.Protobuf.Collections
             Assert.AreEqual(1000, input.ReadInt32());
             input.AssertNextTag(tag);
             Assert.AreEqual(1000000, input.ReadInt32());
-            Assert.IsTrue(input.IsAtEnd);
+            Assert.IsTrue(input.IsAtEnd());
         }
 
         [Test]
@@ -464,7 +464,7 @@ namespace Google.Protobuf.Collections
             Assert.AreEqual("", input.ReadString());
             input.AssertNextTag(tag);
             Assert.AreEqual("Bar", input.ReadString());
-            Assert.IsTrue(input.IsAtEnd);
+            Assert.IsTrue(input.IsAtEnd());
         }
 
         [Test]
@@ -485,7 +485,7 @@ namespace Google.Protobuf.Collections
             Assert.AreEqual(message1, input.ReadMessage(ForeignMessage.Parser));
             input.AssertNextTag(tag);
             Assert.AreEqual(message2, input.ReadMessage(ForeignMessage.Parser));
-            Assert.IsTrue(input.IsAtEnd);
+            Assert.IsTrue(input.IsAtEnd());
         }
 
         [Test]
@@ -750,7 +750,9 @@ namespace Google.Protobuf.Collections
             var list2 = new RepeatedField<double> { SampleNaNs.Regular, SampleNaNs.PayloadFlipped };
             var list3 = new RepeatedField<double> { SampleNaNs.Regular, SampleNaNs.SignallingFlipped };
 
+#if !NETCOREAPP2_1
             EqualityTester.AssertInequality(list1, list2);
+#endif
             EqualityTester.AssertEquality(list1, list3);
             Assert.True(list1.Contains(SampleNaNs.SignallingFlipped));
             Assert.False(list2.Contains(SampleNaNs.SignallingFlipped));

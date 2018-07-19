@@ -64,7 +64,7 @@ namespace Google.Protobuf
 
             input = new CodedInputStream(data);
             Assert.AreEqual(value, input.ReadRawVarint64());
-            Assert.IsTrue(input.IsAtEnd);
+            Assert.IsTrue(input.IsAtEnd());
 
             // Try different block sizes.
             for (int bufferSize = 1; bufferSize <= 16; bufferSize *= 2)
@@ -74,7 +74,7 @@ namespace Google.Protobuf
 
                 input = new CodedInputStream(new SmallBlockInputStream(data, bufferSize));
                 Assert.AreEqual(value, input.ReadRawVarint64());
-                Assert.IsTrue(input.IsAtEnd);
+                Assert.IsTrue(input.IsAtEnd());
             }
 
             // Try reading directly from a MemoryStream. We want to verify that it
@@ -154,7 +154,7 @@ namespace Google.Protobuf
         {
             CodedInputStream input = new CodedInputStream(data);
             Assert.AreEqual(value, input.ReadRawLittleEndian32());
-            Assert.IsTrue(input.IsAtEnd);
+            Assert.IsTrue(input.IsAtEnd());
 
             // Try different block sizes.
             for (int blockSize = 1; blockSize <= 16; blockSize *= 2)
@@ -162,7 +162,7 @@ namespace Google.Protobuf
                 input = new CodedInputStream(
                     new SmallBlockInputStream(data, blockSize));
                 Assert.AreEqual(value, input.ReadRawLittleEndian32());
-                Assert.IsTrue(input.IsAtEnd);
+                Assert.IsTrue(input.IsAtEnd());
             }
         }
 
@@ -174,7 +174,7 @@ namespace Google.Protobuf
         {
             CodedInputStream input = new CodedInputStream(data);
             Assert.AreEqual(value, input.ReadRawLittleEndian64());
-            Assert.IsTrue(input.IsAtEnd);
+            Assert.IsTrue(input.IsAtEnd());
 
             // Try different block sizes.
             for (int blockSize = 1; blockSize <= 16; blockSize *= 2)
@@ -182,7 +182,7 @@ namespace Google.Protobuf
                 input = new CodedInputStream(
                     new SmallBlockInputStream(data, blockSize));
                 Assert.AreEqual(value, input.ReadRawLittleEndian64());
-                Assert.IsTrue(input.IsAtEnd);
+                Assert.IsTrue(input.IsAtEnd());
             }
         }
 
@@ -400,7 +400,7 @@ namespace Google.Protobuf
             byte[] bytes = { 0xFE, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0x01 };
             CodedInputStream input = new CodedInputStream(bytes);
             Assert.AreEqual((int)SampleEnum.NegativeValue, input.ReadEnum());
-            Assert.IsTrue(input.IsAtEnd);
+            Assert.IsTrue(input.IsAtEnd());
         }
 
         //Issue 71:	CodedInputStream.ReadBytes go to slow path unnecessarily

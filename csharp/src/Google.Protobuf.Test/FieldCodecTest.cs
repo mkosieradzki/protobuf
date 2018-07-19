@@ -128,8 +128,9 @@ namespace Google.Protobuf
                 codedOutput.Flush();
                 stream.Position = 0;
                 var codedInput = new CodedInputStream(stream);
-                Assert.AreEqual(sampleValue, codec.ValueReader(codedInput));
-                Assert.IsTrue(codedInput.IsAtEnd);
+                var immediateBuffer = codedInput.ImmediateBuffer;
+                Assert.AreEqual(sampleValue, codec.ValueReader(codedInput, ref immediateBuffer));
+                Assert.IsTrue(codedInput.IsAtEnd());
             }
 
             public void TestRoundTripWithTag()
@@ -140,9 +141,10 @@ namespace Google.Protobuf
                 codedOutput.Flush();
                 stream.Position = 0;
                 var codedInput = new CodedInputStream(stream);
+                var immediateBuffer = codedInput.ImmediateBuffer;
                 codedInput.AssertNextTag(codec.Tag);
-                Assert.AreEqual(sampleValue, codec.Read(codedInput));
-                Assert.IsTrue(codedInput.IsAtEnd);
+                Assert.AreEqual(sampleValue, codec.Read(codedInput, ref immediateBuffer));
+                Assert.IsTrue(codedInput.IsAtEnd());
             }
 
             public void TestCalculateSizeWithTag()
@@ -181,7 +183,8 @@ namespace Google.Protobuf
                     Assert.AreEqual(stream.Position, codec.ValueSizeCalculator(codec.DefaultValue));
                     stream.Position = 0;
                     var codedInput = new CodedInputStream(stream);
-                    Assert.AreEqual(codec.DefaultValue, codec.ValueReader(codedInput));
+                    var immediateBuffer = codedInput.ImmediateBuffer;
+                    Assert.AreEqual(codec.DefaultValue, codec.ValueReader(codedInput, ref immediateBuffer));
                 }
             }
 
