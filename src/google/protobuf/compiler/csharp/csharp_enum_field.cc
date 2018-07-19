@@ -56,7 +56,7 @@ EnumFieldGenerator::~EnumFieldGenerator() {
 
 void EnumFieldGenerator::GenerateParsingCode(io::Printer* printer) {
   printer->Print(variables_,
-    "$name$_ = ($type_name$) input.ReadEnum();\n");
+    "$name$_ = ($type_name$) input.ReadEnum(ref immediateBuffer);\n");
 }
 
 void EnumFieldGenerator::GenerateSerializationCode(io::Printer* printer) {
@@ -97,7 +97,7 @@ void EnumOneofFieldGenerator::GenerateParsingCode(io::Printer* printer) {
   // TODO(jonskeet): What about if we read the default value?
   printer->Print(
     variables_,
-    "$oneof_name$_ = input.ReadEnum();\n"
+    "$oneof_name$_ = input.ReadEnum(ref immediateBuffer);\n"
     "$oneof_name$Case_ = $oneof_property_name$OneofCase.$property_name$;\n");
 }
 

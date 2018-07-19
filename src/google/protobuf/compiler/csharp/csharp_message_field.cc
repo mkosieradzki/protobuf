@@ -94,7 +94,7 @@ void MessageFieldGenerator::GenerateParsingCode(io::Printer* printer) {
     "  $name$_ = new $type_name$();\n"
     "}\n"
     // TODO(jonskeet): Do we really need merging behaviour like this?
-    "input.ReadMessage($name$_);\n"); // No need to support TYPE_GROUP...
+    "input.ReadMessage($name$_, ref immediateBuffer);\n"); // No need to support TYPE_GROUP...
 }
 
 void MessageFieldGenerator::GenerateSerializationCode(io::Printer* printer) {
@@ -187,7 +187,7 @@ void MessageOneofFieldGenerator::GenerateParsingCode(io::Printer* printer) {
     "if ($has_property_check$) {\n"
     "  subBuilder.MergeFrom($property_name$);\n"
     "}\n"
-    "input.ReadMessage(subBuilder);\n" // No support of TYPE_GROUP
+    "input.ReadMessage(subBuilder, ref immediateBuffer);\n" // No support of TYPE_GROUP
     "$property_name$ = subBuilder;\n");
 }
 

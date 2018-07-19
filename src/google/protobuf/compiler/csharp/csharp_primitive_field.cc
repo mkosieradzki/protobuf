@@ -104,7 +104,7 @@ void PrimitiveFieldGenerator::GenerateParsingCode(io::Printer* printer) {
   // so that we can normalize "null to empty" for strings and bytes.
   printer->Print(
     variables_,
-    "$property_name$ = input.Read$capitalized_type_name$();\n");
+    "$property_name$ = input.Read$capitalized_type_name$(ref immediateBuffer);\n");
 }
 
 void PrimitiveFieldGenerator::GenerateSerializationCode(io::Printer* printer) {
@@ -216,7 +216,7 @@ void PrimitiveOneofFieldGenerator::WriteToString(io::Printer* printer) {
 void PrimitiveOneofFieldGenerator::GenerateParsingCode(io::Printer* printer) {
     printer->Print(
       variables_,
-      "$property_name$ = input.Read$capitalized_type_name$();\n");
+      "$property_name$ = input.Read$capitalized_type_name$(ref immediateBuffer);\n");
 }
 
 void PrimitiveOneofFieldGenerator::GenerateCloningCode(io::Printer* printer) {

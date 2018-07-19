@@ -502,11 +502,12 @@ void MessageGenerator::GenerateMergingMethods(io::Printer* printer) {
 
 
   WriteGeneratedCodeAttributes(printer);
-  printer->Print("public void MergeFrom(pb::CodedInputStream input) {\n");
+  printer->Print("[global::System.Security.SecurityCritical]\n");
+  printer->Print("public void MergeFrom(pb::CodedInputStream input, ref global::System.ReadOnlySpan<byte> immediateBuffer) {\n");
   printer->Indent();
   printer->Print(
     "uint tag;\n"
-    "while ((tag = input.ReadTag()) != 0) {\n"
+    "while ((tag = input.ReadTag(ref immediateBuffer)) != 0) {\n"
     "  switch(tag) {\n");
   printer->Indent();
   printer->Indent();
@@ -514,12 +515,12 @@ void MessageGenerator::GenerateMergingMethods(io::Printer* printer) {
   if (IsDescriptorOptionMessage(descriptor_)) {
     printer->Print(
       "default:\n"
-      "  CustomOptions = CustomOptions.ReadOrSkipUnknownField(input);\n"
+      "  CustomOptions = CustomOptions.ReadOrSkipUnknownField(input, ref immediateBuffer);\n"
       "  break;\n");
   } else {
     printer->Print(
       "default:\n"
-      "  _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);\n"
+      "  _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input, ref immediateBuffer);\n"
       "  break;\n");
   }
   for (int i = 0; i < fields_by_number().size(); i++) {

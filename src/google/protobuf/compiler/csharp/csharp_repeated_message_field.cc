@@ -96,7 +96,7 @@ void RepeatedMessageFieldGenerator::GenerateMergingCode(io::Printer* printer) {
 void RepeatedMessageFieldGenerator::GenerateParsingCode(io::Printer* printer) {
   printer->Print(
     variables_,
-    "$name$_.AddEntriesFrom(input, _repeated_$name$_codec);\n");
+    "$name$_.AddEntriesFrom(input, _repeated_$name$_codec, ref immediateBuffer);\n");
 }
 
 void RepeatedMessageFieldGenerator::GenerateSerializationCode(io::Printer* printer) {
