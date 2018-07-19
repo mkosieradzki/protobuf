@@ -336,15 +336,21 @@ namespace Google.Protobuf.WellKnownTypes {
             break;
           }
           case 18: {
-            fields_.AddEntriesFrom(input, _repeated_fields_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.WellKnownTypes.Field();
+            item.MergeFrom(input, ref immediateBuffer);
+            fields_.Add(item);
+            input.EndReadNested(oldLimit);
             break;
           }
           case 26: {
-            oneofs_.AddEntriesFrom(input, _repeated_oneofs_codec, ref immediateBuffer);
+            oneofs_.Add(input.ReadString(ref immediateBuffer));
             break;
           }
           case 34: {
-            options_.AddEntriesFrom(input, _repeated_options_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.WellKnownTypes.Option();
+            item.MergeFrom(input, ref immediateBuffer);
+            options_.Add(item);
+            input.EndReadNested(oldLimit);
             break;
           }
           case 42: {
@@ -756,7 +762,10 @@ namespace Google.Protobuf.WellKnownTypes {
             break;
           }
           case 74: {
-            options_.AddEntriesFrom(input, _repeated_options_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.WellKnownTypes.Option();
+            item.MergeFrom(input, ref immediateBuffer);
+            options_.Add(item);
+            input.EndReadNested(oldLimit);
             break;
           }
           case 82: {
@@ -1110,11 +1119,17 @@ namespace Google.Protobuf.WellKnownTypes {
             break;
           }
           case 18: {
-            enumvalue_.AddEntriesFrom(input, _repeated_enumvalue_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.WellKnownTypes.EnumValue();
+            item.MergeFrom(input, ref immediateBuffer);
+            enumvalue_.Add(item);
+            input.EndReadNested(oldLimit);
             break;
           }
           case 26: {
-            options_.AddEntriesFrom(input, _repeated_options_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.WellKnownTypes.Option();
+            item.MergeFrom(input, ref immediateBuffer);
+            options_.Add(item);
+            input.EndReadNested(oldLimit);
             break;
           }
           case 34: {
@@ -1315,7 +1330,10 @@ namespace Google.Protobuf.WellKnownTypes {
             break;
           }
           case 26: {
-            options_.AddEntriesFrom(input, _repeated_options_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.WellKnownTypes.Option();
+            item.MergeFrom(input, ref immediateBuffer);
+            options_.Add(item);
+            input.EndReadNested(oldLimit);
             break;
           }
         }

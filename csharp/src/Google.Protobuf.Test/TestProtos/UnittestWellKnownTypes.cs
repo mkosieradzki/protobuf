@@ -1312,75 +1312,102 @@ namespace Google.Protobuf.TestProtos {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input, ref immediateBuffer);
             break;
           case 10: {
-            anyField_.AddEntriesFrom(input, _repeated_anyField_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.WellKnownTypes.Any();
+            item.MergeFrom(input, ref immediateBuffer);
+            anyField_.Add(item);
+            input.EndReadNested(oldLimit);
             break;
           }
           case 18: {
-            apiField_.AddEntriesFrom(input, _repeated_apiField_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.WellKnownTypes.Api();
+            item.MergeFrom(input, ref immediateBuffer);
+            apiField_.Add(item);
+            input.EndReadNested(oldLimit);
             break;
           }
           case 26: {
-            durationField_.AddEntriesFrom(input, _repeated_durationField_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.WellKnownTypes.Duration();
+            item.MergeFrom(input, ref immediateBuffer);
+            durationField_.Add(item);
+            input.EndReadNested(oldLimit);
             break;
           }
           case 34: {
-            emptyField_.AddEntriesFrom(input, _repeated_emptyField_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.WellKnownTypes.Empty();
+            item.MergeFrom(input, ref immediateBuffer);
+            emptyField_.Add(item);
+            input.EndReadNested(oldLimit);
             break;
           }
           case 42: {
-            fieldMaskField_.AddEntriesFrom(input, _repeated_fieldMaskField_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.WellKnownTypes.FieldMask();
+            item.MergeFrom(input, ref immediateBuffer);
+            fieldMaskField_.Add(item);
+            input.EndReadNested(oldLimit);
             break;
           }
           case 50: {
-            sourceContextField_.AddEntriesFrom(input, _repeated_sourceContextField_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.WellKnownTypes.SourceContext();
+            item.MergeFrom(input, ref immediateBuffer);
+            sourceContextField_.Add(item);
+            input.EndReadNested(oldLimit);
             break;
           }
           case 58: {
-            structField_.AddEntriesFrom(input, _repeated_structField_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.WellKnownTypes.Struct();
+            item.MergeFrom(input, ref immediateBuffer);
+            structField_.Add(item);
+            input.EndReadNested(oldLimit);
             break;
           }
           case 66: {
-            timestampField_.AddEntriesFrom(input, _repeated_timestampField_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.WellKnownTypes.Timestamp();
+            item.MergeFrom(input, ref immediateBuffer);
+            timestampField_.Add(item);
+            input.EndReadNested(oldLimit);
             break;
           }
           case 74: {
-            typeField_.AddEntriesFrom(input, _repeated_typeField_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.WellKnownTypes.Type();
+            item.MergeFrom(input, ref immediateBuffer);
+            typeField_.Add(item);
+            input.EndReadNested(oldLimit);
             break;
           }
           case 82: {
-            doubleField_.AddEntriesFrom(input, _repeated_doubleField_codec, ref immediateBuffer);
+            doubleField_.Add(input.ReadWrappedDouble(ref immediateBuffer));
             break;
           }
           case 90: {
-            floatField_.AddEntriesFrom(input, _repeated_floatField_codec, ref immediateBuffer);
+            floatField_.Add(input.ReadWrappedFloat(ref immediateBuffer));
             break;
           }
           case 98: {
-            int64Field_.AddEntriesFrom(input, _repeated_int64Field_codec, ref immediateBuffer);
+            int64Field_.Add(input.ReadWrappedInt64(ref immediateBuffer));
             break;
           }
           case 106: {
-            uint64Field_.AddEntriesFrom(input, _repeated_uint64Field_codec, ref immediateBuffer);
+            uint64Field_.Add(input.ReadWrappedUInt64(ref immediateBuffer));
             break;
           }
           case 114: {
-            int32Field_.AddEntriesFrom(input, _repeated_int32Field_codec, ref immediateBuffer);
+            int32Field_.Add(input.ReadWrappedInt32(ref immediateBuffer));
             break;
           }
           case 122: {
-            uint32Field_.AddEntriesFrom(input, _repeated_uint32Field_codec, ref immediateBuffer);
+            uint32Field_.Add(input.ReadWrappedUInt32(ref immediateBuffer));
             break;
           }
           case 130: {
-            boolField_.AddEntriesFrom(input, _repeated_boolField_codec, ref immediateBuffer);
+            boolField_.Add(input.ReadWrappedBool(ref immediateBuffer));
             break;
           }
           case 138: {
-            stringField_.AddEntriesFrom(input, _repeated_stringField_codec, ref immediateBuffer);
+            stringField_.Add(input.ReadWrappedString(ref immediateBuffer));
             break;
           }
           case 146: {
-            bytesField_.AddEntriesFrom(input, _repeated_bytesField_codec, ref immediateBuffer);
+            bytesField_.Add(input.ReadWrappedBytes(ref immediateBuffer));
             break;
           }
         }

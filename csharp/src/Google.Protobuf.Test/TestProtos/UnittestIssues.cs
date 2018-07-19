@@ -564,14 +564,34 @@ namespace UnitTest.Issues.TestProtos {
             value_ = (global::UnitTest.Issues.TestProtos.NegativeEnum) input.ReadEnum(ref immediateBuffer);
             break;
           }
-          case 18:
-          case 16: {
-            values_.AddEntriesFrom(input, _repeated_values_codec, ref immediateBuffer);
+          case 18: {
+            int length = input.ReadLength(ref immediateBuffer);
+            if (length > 0) {
+              var oldLimit = input.PushLimit(length);
+              while (!input.ReachedLimit) {
+                values_.Add((global::UnitTest.Issues.TestProtos.NegativeEnum)input.ReadEnum(ref immediateBuffer)); 
+              }
+              input.PopLimit(oldLimit);
+            }
             break;
           }
-          case 26:
+          case 16: {
+            values_.Add((global::UnitTest.Issues.TestProtos.NegativeEnum)input.ReadEnum(ref immediateBuffer));
+            break;
+          }
+          case 26: {
+            int length = input.ReadLength(ref immediateBuffer);
+            if (length > 0) {
+              var oldLimit = input.PushLimit(length);
+              while (!input.ReachedLimit) {
+                packedValues_.Add((global::UnitTest.Issues.TestProtos.NegativeEnum)input.ReadEnum(ref immediateBuffer)); 
+              }
+              input.PopLimit(oldLimit);
+            }
+            break;
+          }
           case 24: {
-            packedValues_.AddEntriesFrom(input, _repeated_packedValues_codec, ref immediateBuffer);
+            packedValues_.Add((global::UnitTest.Issues.TestProtos.NegativeEnum)input.ReadEnum(ref immediateBuffer));
             break;
           }
         }
@@ -911,9 +931,19 @@ namespace UnitTest.Issues.TestProtos {
             PrimitiveValue = input.ReadInt32(ref immediateBuffer);
             break;
           }
-          case 18:
+          case 18: {
+            int length = input.ReadLength(ref immediateBuffer);
+            if (length > 0) {
+              var oldLimit = input.PushLimit(length);
+              while (!input.ReachedLimit) {
+                primitiveArray_.Add(input.ReadInt32(ref immediateBuffer)); 
+              }
+              input.PopLimit(oldLimit);
+            }
+            break;
+          }
           case 16: {
-            primitiveArray_.AddEntriesFrom(input, _repeated_primitiveArray_codec, ref immediateBuffer);
+            primitiveArray_.Add(input.ReadInt32(ref immediateBuffer));
             break;
           }
           case 26: {
@@ -924,16 +954,29 @@ namespace UnitTest.Issues.TestProtos {
             break;
           }
           case 34: {
-            messageArray_.AddEntriesFrom(input, _repeated_messageArray_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::UnitTest.Issues.TestProtos.DeprecatedChild();
+            item.MergeFrom(input, ref immediateBuffer);
+            messageArray_.Add(item);
+            input.EndReadNested(oldLimit);
             break;
           }
           case 40: {
             enumValue_ = (global::UnitTest.Issues.TestProtos.DeprecatedEnum) input.ReadEnum(ref immediateBuffer);
             break;
           }
-          case 50:
+          case 50: {
+            int length = input.ReadLength(ref immediateBuffer);
+            if (length > 0) {
+              var oldLimit = input.PushLimit(length);
+              while (!input.ReachedLimit) {
+                enumArray_.Add((global::UnitTest.Issues.TestProtos.DeprecatedEnum)input.ReadEnum(ref immediateBuffer)); 
+              }
+              input.PopLimit(oldLimit);
+            }
+            break;
+          }
           case 48: {
-            enumArray_.AddEntriesFrom(input, _repeated_enumArray_codec, ref immediateBuffer);
+            enumArray_.Add((global::UnitTest.Issues.TestProtos.DeprecatedEnum)input.ReadEnum(ref immediateBuffer));
             break;
           }
         }

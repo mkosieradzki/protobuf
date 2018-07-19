@@ -353,11 +353,17 @@ namespace Google.Protobuf.WellKnownTypes {
             break;
           }
           case 18: {
-            methods_.AddEntriesFrom(input, _repeated_methods_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.WellKnownTypes.Method();
+            item.MergeFrom(input, ref immediateBuffer);
+            methods_.Add(item);
+            input.EndReadNested(oldLimit);
             break;
           }
           case 26: {
-            options_.AddEntriesFrom(input, _repeated_options_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.WellKnownTypes.Option();
+            item.MergeFrom(input, ref immediateBuffer);
+            options_.Add(item);
+            input.EndReadNested(oldLimit);
             break;
           }
           case 34: {
@@ -372,7 +378,10 @@ namespace Google.Protobuf.WellKnownTypes {
             break;
           }
           case 50: {
-            mixins_.AddEntriesFrom(input, _repeated_mixins_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.WellKnownTypes.Mixin();
+            item.MergeFrom(input, ref immediateBuffer);
+            mixins_.Add(item);
+            input.EndReadNested(oldLimit);
             break;
           }
           case 56: {
@@ -686,7 +695,10 @@ namespace Google.Protobuf.WellKnownTypes {
             break;
           }
           case 50: {
-            options_.AddEntriesFrom(input, _repeated_options_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.WellKnownTypes.Option();
+            item.MergeFrom(input, ref immediateBuffer);
+            options_.Add(item);
+            input.EndReadNested(oldLimit);
             break;
           }
           case 56: {

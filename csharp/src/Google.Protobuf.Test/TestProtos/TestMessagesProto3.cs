@@ -2958,103 +2958,259 @@ namespace ProtobufTestMessages.Proto3 {
             input.ReadMessage(recursiveMessage_, ref immediateBuffer);
             break;
           }
-          case 250:
+          case 250: {
+            int length = input.ReadLength(ref immediateBuffer);
+            if (length > 0) {
+              var oldLimit = input.PushLimit(length);
+              while (!input.ReachedLimit) {
+                repeatedInt32_.Add(input.ReadInt32(ref immediateBuffer)); 
+              }
+              input.PopLimit(oldLimit);
+            }
+            break;
+          }
           case 248: {
-            repeatedInt32_.AddEntriesFrom(input, _repeated_repeatedInt32_codec, ref immediateBuffer);
+            repeatedInt32_.Add(input.ReadInt32(ref immediateBuffer));
             break;
           }
-          case 258:
+          case 258: {
+            int length = input.ReadLength(ref immediateBuffer);
+            if (length > 0) {
+              var oldLimit = input.PushLimit(length);
+              while (!input.ReachedLimit) {
+                repeatedInt64_.Add(input.ReadInt64(ref immediateBuffer)); 
+              }
+              input.PopLimit(oldLimit);
+            }
+            break;
+          }
           case 256: {
-            repeatedInt64_.AddEntriesFrom(input, _repeated_repeatedInt64_codec, ref immediateBuffer);
+            repeatedInt64_.Add(input.ReadInt64(ref immediateBuffer));
             break;
           }
-          case 266:
+          case 266: {
+            int length = input.ReadLength(ref immediateBuffer);
+            if (length > 0) {
+              var oldLimit = input.PushLimit(length);
+              while (!input.ReachedLimit) {
+                repeatedUint32_.Add(input.ReadUInt32(ref immediateBuffer)); 
+              }
+              input.PopLimit(oldLimit);
+            }
+            break;
+          }
           case 264: {
-            repeatedUint32_.AddEntriesFrom(input, _repeated_repeatedUint32_codec, ref immediateBuffer);
+            repeatedUint32_.Add(input.ReadUInt32(ref immediateBuffer));
             break;
           }
-          case 274:
+          case 274: {
+            int length = input.ReadLength(ref immediateBuffer);
+            if (length > 0) {
+              var oldLimit = input.PushLimit(length);
+              while (!input.ReachedLimit) {
+                repeatedUint64_.Add(input.ReadUInt64(ref immediateBuffer)); 
+              }
+              input.PopLimit(oldLimit);
+            }
+            break;
+          }
           case 272: {
-            repeatedUint64_.AddEntriesFrom(input, _repeated_repeatedUint64_codec, ref immediateBuffer);
+            repeatedUint64_.Add(input.ReadUInt64(ref immediateBuffer));
             break;
           }
-          case 282:
+          case 282: {
+            int length = input.ReadLength(ref immediateBuffer);
+            if (length > 0) {
+              var oldLimit = input.PushLimit(length);
+              while (!input.ReachedLimit) {
+                repeatedSint32_.Add(input.ReadSInt32(ref immediateBuffer)); 
+              }
+              input.PopLimit(oldLimit);
+            }
+            break;
+          }
           case 280: {
-            repeatedSint32_.AddEntriesFrom(input, _repeated_repeatedSint32_codec, ref immediateBuffer);
+            repeatedSint32_.Add(input.ReadSInt32(ref immediateBuffer));
             break;
           }
-          case 290:
+          case 290: {
+            int length = input.ReadLength(ref immediateBuffer);
+            if (length > 0) {
+              var oldLimit = input.PushLimit(length);
+              while (!input.ReachedLimit) {
+                repeatedSint64_.Add(input.ReadSInt64(ref immediateBuffer)); 
+              }
+              input.PopLimit(oldLimit);
+            }
+            break;
+          }
           case 288: {
-            repeatedSint64_.AddEntriesFrom(input, _repeated_repeatedSint64_codec, ref immediateBuffer);
+            repeatedSint64_.Add(input.ReadSInt64(ref immediateBuffer));
             break;
           }
-          case 298:
+          case 298: {
+            int length = input.ReadLength(ref immediateBuffer);
+            if (length > 0) {
+              var oldLimit = input.PushLimit(length);
+              while (!input.ReachedLimit) {
+                repeatedFixed32_.Add(input.ReadFixed32(ref immediateBuffer)); 
+              }
+              input.PopLimit(oldLimit);
+            }
+            break;
+          }
           case 301: {
-            repeatedFixed32_.AddEntriesFrom(input, _repeated_repeatedFixed32_codec, ref immediateBuffer);
+            repeatedFixed32_.Add(input.ReadFixed32(ref immediateBuffer));
             break;
           }
-          case 306:
+          case 306: {
+            int length = input.ReadLength(ref immediateBuffer);
+            if (length > 0) {
+              var oldLimit = input.PushLimit(length);
+              while (!input.ReachedLimit) {
+                repeatedFixed64_.Add(input.ReadFixed64(ref immediateBuffer)); 
+              }
+              input.PopLimit(oldLimit);
+            }
+            break;
+          }
           case 305: {
-            repeatedFixed64_.AddEntriesFrom(input, _repeated_repeatedFixed64_codec, ref immediateBuffer);
+            repeatedFixed64_.Add(input.ReadFixed64(ref immediateBuffer));
             break;
           }
-          case 314:
+          case 314: {
+            int length = input.ReadLength(ref immediateBuffer);
+            if (length > 0) {
+              var oldLimit = input.PushLimit(length);
+              while (!input.ReachedLimit) {
+                repeatedSfixed32_.Add(input.ReadSFixed32(ref immediateBuffer)); 
+              }
+              input.PopLimit(oldLimit);
+            }
+            break;
+          }
           case 317: {
-            repeatedSfixed32_.AddEntriesFrom(input, _repeated_repeatedSfixed32_codec, ref immediateBuffer);
+            repeatedSfixed32_.Add(input.ReadSFixed32(ref immediateBuffer));
             break;
           }
-          case 322:
+          case 322: {
+            int length = input.ReadLength(ref immediateBuffer);
+            if (length > 0) {
+              var oldLimit = input.PushLimit(length);
+              while (!input.ReachedLimit) {
+                repeatedSfixed64_.Add(input.ReadSFixed64(ref immediateBuffer)); 
+              }
+              input.PopLimit(oldLimit);
+            }
+            break;
+          }
           case 321: {
-            repeatedSfixed64_.AddEntriesFrom(input, _repeated_repeatedSfixed64_codec, ref immediateBuffer);
+            repeatedSfixed64_.Add(input.ReadSFixed64(ref immediateBuffer));
             break;
           }
-          case 330:
+          case 330: {
+            int length = input.ReadLength(ref immediateBuffer);
+            if (length > 0) {
+              var oldLimit = input.PushLimit(length);
+              while (!input.ReachedLimit) {
+                repeatedFloat_.Add(input.ReadFloat(ref immediateBuffer)); 
+              }
+              input.PopLimit(oldLimit);
+            }
+            break;
+          }
           case 333: {
-            repeatedFloat_.AddEntriesFrom(input, _repeated_repeatedFloat_codec, ref immediateBuffer);
+            repeatedFloat_.Add(input.ReadFloat(ref immediateBuffer));
             break;
           }
-          case 338:
+          case 338: {
+            int length = input.ReadLength(ref immediateBuffer);
+            if (length > 0) {
+              var oldLimit = input.PushLimit(length);
+              while (!input.ReachedLimit) {
+                repeatedDouble_.Add(input.ReadDouble(ref immediateBuffer)); 
+              }
+              input.PopLimit(oldLimit);
+            }
+            break;
+          }
           case 337: {
-            repeatedDouble_.AddEntriesFrom(input, _repeated_repeatedDouble_codec, ref immediateBuffer);
+            repeatedDouble_.Add(input.ReadDouble(ref immediateBuffer));
             break;
           }
-          case 346:
+          case 346: {
+            int length = input.ReadLength(ref immediateBuffer);
+            if (length > 0) {
+              var oldLimit = input.PushLimit(length);
+              while (!input.ReachedLimit) {
+                repeatedBool_.Add(input.ReadBool(ref immediateBuffer)); 
+              }
+              input.PopLimit(oldLimit);
+            }
+            break;
+          }
           case 344: {
-            repeatedBool_.AddEntriesFrom(input, _repeated_repeatedBool_codec, ref immediateBuffer);
+            repeatedBool_.Add(input.ReadBool(ref immediateBuffer));
             break;
           }
           case 354: {
-            repeatedString_.AddEntriesFrom(input, _repeated_repeatedString_codec, ref immediateBuffer);
+            repeatedString_.Add(input.ReadString(ref immediateBuffer));
             break;
           }
           case 362: {
-            repeatedBytes_.AddEntriesFrom(input, _repeated_repeatedBytes_codec, ref immediateBuffer);
+            repeatedBytes_.Add(input.ReadBytes(ref immediateBuffer));
             break;
           }
           case 386: {
-            repeatedNestedMessage_.AddEntriesFrom(input, _repeated_repeatedNestedMessage_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::ProtobufTestMessages.Proto3.TestAllTypesProto3.Types.NestedMessage();
+            item.MergeFrom(input, ref immediateBuffer);
+            repeatedNestedMessage_.Add(item);
+            input.EndReadNested(oldLimit);
             break;
           }
           case 394: {
-            repeatedForeignMessage_.AddEntriesFrom(input, _repeated_repeatedForeignMessage_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::ProtobufTestMessages.Proto3.ForeignMessage();
+            item.MergeFrom(input, ref immediateBuffer);
+            repeatedForeignMessage_.Add(item);
+            input.EndReadNested(oldLimit);
             break;
           }
-          case 410:
+          case 410: {
+            int length = input.ReadLength(ref immediateBuffer);
+            if (length > 0) {
+              var oldLimit = input.PushLimit(length);
+              while (!input.ReachedLimit) {
+                repeatedNestedEnum_.Add((global::ProtobufTestMessages.Proto3.TestAllTypesProto3.Types.NestedEnum)input.ReadEnum(ref immediateBuffer)); 
+              }
+              input.PopLimit(oldLimit);
+            }
+            break;
+          }
           case 408: {
-            repeatedNestedEnum_.AddEntriesFrom(input, _repeated_repeatedNestedEnum_codec, ref immediateBuffer);
+            repeatedNestedEnum_.Add((global::ProtobufTestMessages.Proto3.TestAllTypesProto3.Types.NestedEnum)input.ReadEnum(ref immediateBuffer));
             break;
           }
-          case 418:
+          case 418: {
+            int length = input.ReadLength(ref immediateBuffer);
+            if (length > 0) {
+              var oldLimit = input.PushLimit(length);
+              while (!input.ReachedLimit) {
+                repeatedForeignEnum_.Add((global::ProtobufTestMessages.Proto3.ForeignEnum)input.ReadEnum(ref immediateBuffer)); 
+              }
+              input.PopLimit(oldLimit);
+            }
+            break;
+          }
           case 416: {
-            repeatedForeignEnum_.AddEntriesFrom(input, _repeated_repeatedForeignEnum_codec, ref immediateBuffer);
+            repeatedForeignEnum_.Add((global::ProtobufTestMessages.Proto3.ForeignEnum)input.ReadEnum(ref immediateBuffer));
             break;
           }
           case 434: {
-            repeatedStringPiece_.AddEntriesFrom(input, _repeated_repeatedStringPiece_codec, ref immediateBuffer);
+            repeatedStringPiece_.Add(input.ReadString(ref immediateBuffer));
             break;
           }
           case 442: {
-            repeatedCord_.AddEntriesFrom(input, _repeated_repeatedCord_codec, ref immediateBuffer);
+            repeatedCord_.Add(input.ReadString(ref immediateBuffer));
             break;
           }
           case 450: {
@@ -3517,39 +3673,39 @@ namespace ProtobufTestMessages.Proto3 {
             break;
           }
           case 1690: {
-            repeatedBoolWrapper_.AddEntriesFrom(input, _repeated_repeatedBoolWrapper_codec, ref immediateBuffer);
+            repeatedBoolWrapper_.Add(input.ReadWrappedBool(ref immediateBuffer));
             break;
           }
           case 1698: {
-            repeatedInt32Wrapper_.AddEntriesFrom(input, _repeated_repeatedInt32Wrapper_codec, ref immediateBuffer);
+            repeatedInt32Wrapper_.Add(input.ReadWrappedInt32(ref immediateBuffer));
             break;
           }
           case 1706: {
-            repeatedInt64Wrapper_.AddEntriesFrom(input, _repeated_repeatedInt64Wrapper_codec, ref immediateBuffer);
+            repeatedInt64Wrapper_.Add(input.ReadWrappedInt64(ref immediateBuffer));
             break;
           }
           case 1714: {
-            repeatedUint32Wrapper_.AddEntriesFrom(input, _repeated_repeatedUint32Wrapper_codec, ref immediateBuffer);
+            repeatedUint32Wrapper_.Add(input.ReadWrappedUInt32(ref immediateBuffer));
             break;
           }
           case 1722: {
-            repeatedUint64Wrapper_.AddEntriesFrom(input, _repeated_repeatedUint64Wrapper_codec, ref immediateBuffer);
+            repeatedUint64Wrapper_.Add(input.ReadWrappedUInt64(ref immediateBuffer));
             break;
           }
           case 1730: {
-            repeatedFloatWrapper_.AddEntriesFrom(input, _repeated_repeatedFloatWrapper_codec, ref immediateBuffer);
+            repeatedFloatWrapper_.Add(input.ReadWrappedFloat(ref immediateBuffer));
             break;
           }
           case 1738: {
-            repeatedDoubleWrapper_.AddEntriesFrom(input, _repeated_repeatedDoubleWrapper_codec, ref immediateBuffer);
+            repeatedDoubleWrapper_.Add(input.ReadWrappedDouble(ref immediateBuffer));
             break;
           }
           case 1746: {
-            repeatedStringWrapper_.AddEntriesFrom(input, _repeated_repeatedStringWrapper_codec, ref immediateBuffer);
+            repeatedStringWrapper_.Add(input.ReadWrappedString(ref immediateBuffer));
             break;
           }
           case 1754: {
-            repeatedBytesWrapper_.AddEntriesFrom(input, _repeated_repeatedBytesWrapper_codec, ref immediateBuffer);
+            repeatedBytesWrapper_.Add(input.ReadWrappedBytes(ref immediateBuffer));
             break;
           }
           case 2410: {
@@ -3595,27 +3751,45 @@ namespace ProtobufTestMessages.Proto3 {
             break;
           }
           case 2490: {
-            repeatedDuration_.AddEntriesFrom(input, _repeated_repeatedDuration_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.WellKnownTypes.Duration();
+            item.MergeFrom(input, ref immediateBuffer);
+            repeatedDuration_.Add(item);
+            input.EndReadNested(oldLimit);
             break;
           }
           case 2498: {
-            repeatedTimestamp_.AddEntriesFrom(input, _repeated_repeatedTimestamp_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.WellKnownTypes.Timestamp();
+            item.MergeFrom(input, ref immediateBuffer);
+            repeatedTimestamp_.Add(item);
+            input.EndReadNested(oldLimit);
             break;
           }
           case 2506: {
-            repeatedFieldmask_.AddEntriesFrom(input, _repeated_repeatedFieldmask_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.WellKnownTypes.FieldMask();
+            item.MergeFrom(input, ref immediateBuffer);
+            repeatedFieldmask_.Add(item);
+            input.EndReadNested(oldLimit);
             break;
           }
           case 2522: {
-            repeatedAny_.AddEntriesFrom(input, _repeated_repeatedAny_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.WellKnownTypes.Any();
+            item.MergeFrom(input, ref immediateBuffer);
+            repeatedAny_.Add(item);
+            input.EndReadNested(oldLimit);
             break;
           }
           case 2530: {
-            repeatedValue_.AddEntriesFrom(input, _repeated_repeatedValue_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.WellKnownTypes.Value();
+            item.MergeFrom(input, ref immediateBuffer);
+            repeatedValue_.Add(item);
+            input.EndReadNested(oldLimit);
             break;
           }
           case 2594: {
-            repeatedStruct_.AddEntriesFrom(input, _repeated_repeatedStruct_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.WellKnownTypes.Struct();
+            item.MergeFrom(input, ref immediateBuffer);
+            repeatedStruct_.Add(item);
+            input.EndReadNested(oldLimit);
             break;
           }
           case 3208: {

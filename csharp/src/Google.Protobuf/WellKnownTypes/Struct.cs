@@ -699,7 +699,10 @@ namespace Google.Protobuf.WellKnownTypes {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input, ref immediateBuffer);
             break;
           case 10: {
-            values_.AddEntriesFrom(input, _repeated_values_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.WellKnownTypes.Value();
+            item.MergeFrom(input, ref immediateBuffer);
+            values_.Add(item);
+            input.EndReadNested(oldLimit);
             break;
           }
         }

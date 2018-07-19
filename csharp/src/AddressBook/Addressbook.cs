@@ -276,7 +276,10 @@ namespace Google.Protobuf.Examples.AddressBook {
             break;
           }
           case 34: {
-            phones_.AddEntriesFrom(input, _repeated_phones_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.Examples.AddressBook.Person.Types.PhoneNumber();
+            item.MergeFrom(input, ref immediateBuffer);
+            phones_.Add(item);
+            input.EndReadNested(oldLimit);
             break;
           }
           case 42: {
@@ -579,7 +582,10 @@ namespace Google.Protobuf.Examples.AddressBook {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input, ref immediateBuffer);
             break;
           case 10: {
-            people_.AddEntriesFrom(input, _repeated_people_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.Examples.AddressBook.Person();
+            item.MergeFrom(input, ref immediateBuffer);
+            people_.Add(item);
+            input.EndReadNested(oldLimit);
             break;
           }
         }

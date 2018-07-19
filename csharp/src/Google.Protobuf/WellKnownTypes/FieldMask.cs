@@ -364,7 +364,7 @@ namespace Google.Protobuf.WellKnownTypes {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input, ref immediateBuffer);
             break;
           case 10: {
-            paths_.AddEntriesFrom(input, _repeated_paths_codec, ref immediateBuffer);
+            paths_.Add(input.ReadString(ref immediateBuffer));
             break;
           }
         }

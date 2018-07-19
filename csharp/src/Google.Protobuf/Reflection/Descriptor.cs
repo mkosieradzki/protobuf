@@ -306,7 +306,10 @@ namespace Google.Protobuf.Reflection {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input, ref immediateBuffer);
             break;
           case 10: {
-            file_.AddEntriesFrom(input, _repeated_file_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.Reflection.FileDescriptorProto();
+            item.MergeFrom(input, ref immediateBuffer);
+            file_.Add(item);
+            input.EndReadNested(oldLimit);
             break;
           }
         }
@@ -690,23 +693,35 @@ namespace Google.Protobuf.Reflection {
             break;
           }
           case 26: {
-            dependency_.AddEntriesFrom(input, _repeated_dependency_codec, ref immediateBuffer);
+            dependency_.Add(input.ReadString(ref immediateBuffer));
             break;
           }
           case 34: {
-            messageType_.AddEntriesFrom(input, _repeated_messageType_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.Reflection.DescriptorProto();
+            item.MergeFrom(input, ref immediateBuffer);
+            messageType_.Add(item);
+            input.EndReadNested(oldLimit);
             break;
           }
           case 42: {
-            enumType_.AddEntriesFrom(input, _repeated_enumType_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.Reflection.EnumDescriptorProto();
+            item.MergeFrom(input, ref immediateBuffer);
+            enumType_.Add(item);
+            input.EndReadNested(oldLimit);
             break;
           }
           case 50: {
-            service_.AddEntriesFrom(input, _repeated_service_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.Reflection.ServiceDescriptorProto();
+            item.MergeFrom(input, ref immediateBuffer);
+            service_.Add(item);
+            input.EndReadNested(oldLimit);
             break;
           }
           case 58: {
-            extension_.AddEntriesFrom(input, _repeated_extension_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.Reflection.FieldDescriptorProto();
+            item.MergeFrom(input, ref immediateBuffer);
+            extension_.Add(item);
+            input.EndReadNested(oldLimit);
             break;
           }
           case 66: {
@@ -723,14 +738,34 @@ namespace Google.Protobuf.Reflection {
             input.ReadMessage(sourceCodeInfo_, ref immediateBuffer);
             break;
           }
-          case 82:
-          case 80: {
-            publicDependency_.AddEntriesFrom(input, _repeated_publicDependency_codec, ref immediateBuffer);
+          case 82: {
+            int length = input.ReadLength(ref immediateBuffer);
+            if (length > 0) {
+              var oldLimit = input.PushLimit(length);
+              while (!input.ReachedLimit) {
+                publicDependency_.Add(input.ReadInt32(ref immediateBuffer)); 
+              }
+              input.PopLimit(oldLimit);
+            }
             break;
           }
-          case 90:
+          case 80: {
+            publicDependency_.Add(input.ReadInt32(ref immediateBuffer));
+            break;
+          }
+          case 90: {
+            int length = input.ReadLength(ref immediateBuffer);
+            if (length > 0) {
+              var oldLimit = input.PushLimit(length);
+              while (!input.ReachedLimit) {
+                weakDependency_.Add(input.ReadInt32(ref immediateBuffer)); 
+              }
+              input.PopLimit(oldLimit);
+            }
+            break;
+          }
           case 88: {
-            weakDependency_.AddEntriesFrom(input, _repeated_weakDependency_codec, ref immediateBuffer);
+            weakDependency_.Add(input.ReadInt32(ref immediateBuffer));
             break;
           }
           case 98: {
@@ -1030,23 +1065,38 @@ namespace Google.Protobuf.Reflection {
             break;
           }
           case 18: {
-            field_.AddEntriesFrom(input, _repeated_field_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.Reflection.FieldDescriptorProto();
+            item.MergeFrom(input, ref immediateBuffer);
+            field_.Add(item);
+            input.EndReadNested(oldLimit);
             break;
           }
           case 26: {
-            nestedType_.AddEntriesFrom(input, _repeated_nestedType_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.Reflection.DescriptorProto();
+            item.MergeFrom(input, ref immediateBuffer);
+            nestedType_.Add(item);
+            input.EndReadNested(oldLimit);
             break;
           }
           case 34: {
-            enumType_.AddEntriesFrom(input, _repeated_enumType_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.Reflection.EnumDescriptorProto();
+            item.MergeFrom(input, ref immediateBuffer);
+            enumType_.Add(item);
+            input.EndReadNested(oldLimit);
             break;
           }
           case 42: {
-            extensionRange_.AddEntriesFrom(input, _repeated_extensionRange_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.Reflection.DescriptorProto.Types.ExtensionRange();
+            item.MergeFrom(input, ref immediateBuffer);
+            extensionRange_.Add(item);
+            input.EndReadNested(oldLimit);
             break;
           }
           case 50: {
-            extension_.AddEntriesFrom(input, _repeated_extension_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.Reflection.FieldDescriptorProto();
+            item.MergeFrom(input, ref immediateBuffer);
+            extension_.Add(item);
+            input.EndReadNested(oldLimit);
             break;
           }
           case 58: {
@@ -1057,15 +1107,21 @@ namespace Google.Protobuf.Reflection {
             break;
           }
           case 66: {
-            oneofDecl_.AddEntriesFrom(input, _repeated_oneofDecl_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.Reflection.OneofDescriptorProto();
+            item.MergeFrom(input, ref immediateBuffer);
+            oneofDecl_.Add(item);
+            input.EndReadNested(oldLimit);
             break;
           }
           case 74: {
-            reservedRange_.AddEntriesFrom(input, _repeated_reservedRange_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.Reflection.DescriptorProto.Types.ReservedRange();
+            item.MergeFrom(input, ref immediateBuffer);
+            reservedRange_.Add(item);
+            input.EndReadNested(oldLimit);
             break;
           }
           case 82: {
-            reservedName_.AddEntriesFrom(input, _repeated_reservedName_codec, ref immediateBuffer);
+            reservedName_.Add(input.ReadString(ref immediateBuffer));
             break;
           }
         }
@@ -1558,7 +1614,10 @@ namespace Google.Protobuf.Reflection {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input, ref immediateBuffer);
             break;
           case 7994: {
-            uninterpretedOption_.AddEntriesFrom(input, _repeated_uninterpretedOption_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.Reflection.UninterpretedOption();
+            item.MergeFrom(input, ref immediateBuffer);
+            uninterpretedOption_.Add(item);
+            input.EndReadNested(oldLimit);
             break;
           }
         }
@@ -2436,7 +2495,10 @@ namespace Google.Protobuf.Reflection {
             break;
           }
           case 18: {
-            value_.AddEntriesFrom(input, _repeated_value_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.Reflection.EnumValueDescriptorProto();
+            item.MergeFrom(input, ref immediateBuffer);
+            value_.Add(item);
+            input.EndReadNested(oldLimit);
             break;
           }
           case 26: {
@@ -2447,11 +2509,14 @@ namespace Google.Protobuf.Reflection {
             break;
           }
           case 34: {
-            reservedRange_.AddEntriesFrom(input, _repeated_reservedRange_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.Reflection.EnumDescriptorProto.Types.EnumReservedRange();
+            item.MergeFrom(input, ref immediateBuffer);
+            reservedRange_.Add(item);
+            input.EndReadNested(oldLimit);
             break;
           }
           case 42: {
-            reservedName_.AddEntriesFrom(input, _repeated_reservedName_codec, ref immediateBuffer);
+            reservedName_.Add(input.ReadString(ref immediateBuffer));
             break;
           }
         }
@@ -3005,7 +3070,10 @@ namespace Google.Protobuf.Reflection {
             break;
           }
           case 18: {
-            method_.AddEntriesFrom(input, _repeated_method_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.Reflection.MethodDescriptorProto();
+            item.MergeFrom(input, ref immediateBuffer);
+            method_.Add(item);
+            input.EndReadNested(oldLimit);
             break;
           }
           case 26: {
@@ -4083,7 +4151,10 @@ namespace Google.Protobuf.Reflection {
             break;
           }
           case 7994: {
-            uninterpretedOption_.AddEntriesFrom(input, _repeated_uninterpretedOption_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.Reflection.UninterpretedOption();
+            item.MergeFrom(input, ref immediateBuffer);
+            uninterpretedOption_.Add(item);
+            input.EndReadNested(oldLimit);
             break;
           }
         }
@@ -4401,7 +4472,10 @@ namespace Google.Protobuf.Reflection {
             break;
           }
           case 7994: {
-            uninterpretedOption_.AddEntriesFrom(input, _repeated_uninterpretedOption_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.Reflection.UninterpretedOption();
+            item.MergeFrom(input, ref immediateBuffer);
+            uninterpretedOption_.Add(item);
+            input.EndReadNested(oldLimit);
             break;
           }
         }
@@ -4760,7 +4834,10 @@ namespace Google.Protobuf.Reflection {
             break;
           }
           case 7994: {
-            uninterpretedOption_.AddEntriesFrom(input, _repeated_uninterpretedOption_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.Reflection.UninterpretedOption();
+            item.MergeFrom(input, ref immediateBuffer);
+            uninterpretedOption_.Add(item);
+            input.EndReadNested(oldLimit);
             break;
           }
         }
@@ -4918,7 +4995,10 @@ namespace Google.Protobuf.Reflection {
             CustomOptions = CustomOptions.ReadOrSkipUnknownField(input, ref immediateBuffer);
             break;
           case 7994: {
-            uninterpretedOption_.AddEntriesFrom(input, _repeated_uninterpretedOption_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.Reflection.UninterpretedOption();
+            item.MergeFrom(input, ref immediateBuffer);
+            uninterpretedOption_.Add(item);
+            input.EndReadNested(oldLimit);
             break;
           }
         }
@@ -5111,7 +5191,10 @@ namespace Google.Protobuf.Reflection {
             break;
           }
           case 7994: {
-            uninterpretedOption_.AddEntriesFrom(input, _repeated_uninterpretedOption_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.Reflection.UninterpretedOption();
+            item.MergeFrom(input, ref immediateBuffer);
+            uninterpretedOption_.Add(item);
+            input.EndReadNested(oldLimit);
             break;
           }
         }
@@ -5272,7 +5355,10 @@ namespace Google.Protobuf.Reflection {
             break;
           }
           case 7994: {
-            uninterpretedOption_.AddEntriesFrom(input, _repeated_uninterpretedOption_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.Reflection.UninterpretedOption();
+            item.MergeFrom(input, ref immediateBuffer);
+            uninterpretedOption_.Add(item);
+            input.EndReadNested(oldLimit);
             break;
           }
         }
@@ -5433,7 +5519,10 @@ namespace Google.Protobuf.Reflection {
             break;
           }
           case 7994: {
-            uninterpretedOption_.AddEntriesFrom(input, _repeated_uninterpretedOption_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.Reflection.UninterpretedOption();
+            item.MergeFrom(input, ref immediateBuffer);
+            uninterpretedOption_.Add(item);
+            input.EndReadNested(oldLimit);
             break;
           }
         }
@@ -5622,7 +5711,10 @@ namespace Google.Protobuf.Reflection {
             break;
           }
           case 7994: {
-            uninterpretedOption_.AddEntriesFrom(input, _repeated_uninterpretedOption_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.Reflection.UninterpretedOption();
+            item.MergeFrom(input, ref immediateBuffer);
+            uninterpretedOption_.Add(item);
+            input.EndReadNested(oldLimit);
             break;
           }
         }
@@ -5924,7 +6016,10 @@ namespace Google.Protobuf.Reflection {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input, ref immediateBuffer);
             break;
           case 18: {
-            name_.AddEntriesFrom(input, _repeated_name_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.Reflection.UninterpretedOption.Types.NamePart();
+            item.MergeFrom(input, ref immediateBuffer);
+            name_.Add(item);
+            input.EndReadNested(oldLimit);
             break;
           }
           case 26: {
@@ -6291,7 +6386,10 @@ namespace Google.Protobuf.Reflection {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input, ref immediateBuffer);
             break;
           case 10: {
-            location_.AddEntriesFrom(input, _repeated_location_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.Reflection.SourceCodeInfo.Types.Location();
+            item.MergeFrom(input, ref immediateBuffer);
+            location_.Add(item);
+            input.EndReadNested(oldLimit);
             break;
           }
         }
@@ -6575,14 +6673,34 @@ namespace Google.Protobuf.Reflection {
               default:
                 _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input, ref immediateBuffer);
                 break;
-              case 10:
-              case 8: {
-                path_.AddEntriesFrom(input, _repeated_path_codec, ref immediateBuffer);
+              case 10: {
+                int length = input.ReadLength(ref immediateBuffer);
+                if (length > 0) {
+                  var oldLimit = input.PushLimit(length);
+                  while (!input.ReachedLimit) {
+                    path_.Add(input.ReadInt32(ref immediateBuffer)); 
+                  }
+                  input.PopLimit(oldLimit);
+                }
                 break;
               }
-              case 18:
+              case 8: {
+                path_.Add(input.ReadInt32(ref immediateBuffer));
+                break;
+              }
+              case 18: {
+                int length = input.ReadLength(ref immediateBuffer);
+                if (length > 0) {
+                  var oldLimit = input.PushLimit(length);
+                  while (!input.ReachedLimit) {
+                    span_.Add(input.ReadInt32(ref immediateBuffer)); 
+                  }
+                  input.PopLimit(oldLimit);
+                }
+                break;
+              }
               case 16: {
-                span_.AddEntriesFrom(input, _repeated_span_codec, ref immediateBuffer);
+                span_.Add(input.ReadInt32(ref immediateBuffer));
                 break;
               }
               case 26: {
@@ -6594,7 +6712,7 @@ namespace Google.Protobuf.Reflection {
                 break;
               }
               case 50: {
-                leadingDetachedComments_.AddEntriesFrom(input, _repeated_leadingDetachedComments_codec, ref immediateBuffer);
+                leadingDetachedComments_.Add(input.ReadString(ref immediateBuffer));
                 break;
               }
             }
@@ -6730,7 +6848,10 @@ namespace Google.Protobuf.Reflection {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input, ref immediateBuffer);
             break;
           case 10: {
-            annotation_.AddEntriesFrom(input, _repeated_annotation_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.Reflection.GeneratedCodeInfo.Types.Annotation();
+            item.MergeFrom(input, ref immediateBuffer);
+            annotation_.Add(item);
+            input.EndReadNested(oldLimit);
             break;
           }
         }
@@ -6941,9 +7062,19 @@ namespace Google.Protobuf.Reflection {
               default:
                 _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input, ref immediateBuffer);
                 break;
-              case 10:
+              case 10: {
+                int length = input.ReadLength(ref immediateBuffer);
+                if (length > 0) {
+                  var oldLimit = input.PushLimit(length);
+                  while (!input.ReachedLimit) {
+                    path_.Add(input.ReadInt32(ref immediateBuffer)); 
+                  }
+                  input.PopLimit(oldLimit);
+                }
+                break;
+              }
               case 8: {
-                path_.AddEntriesFrom(input, _repeated_path_codec, ref immediateBuffer);
+                path_.Add(input.ReadInt32(ref immediateBuffer));
                 break;
               }
               case 18: {

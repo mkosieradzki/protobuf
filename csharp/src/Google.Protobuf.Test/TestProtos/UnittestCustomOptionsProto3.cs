@@ -1717,9 +1717,19 @@ namespace UnitTest.Issues.TestProtos {
             Foo3 = input.ReadInt32(ref immediateBuffer);
             break;
           }
-          case 34:
+          case 34: {
+            int length = input.ReadLength(ref immediateBuffer);
+            if (length > 0) {
+              var oldLimit = input.PushLimit(length);
+              while (!input.ReachedLimit) {
+                foo4_.Add(input.ReadInt32(ref immediateBuffer)); 
+              }
+              input.PopLimit(oldLimit);
+            }
+            break;
+          }
           case 32: {
-            foo4_.AddEntriesFrom(input, _repeated_foo4_codec, ref immediateBuffer);
+            foo4_.Add(input.ReadInt32(ref immediateBuffer));
             break;
           }
         }
@@ -1937,7 +1947,10 @@ namespace UnitTest.Issues.TestProtos {
             break;
           }
           case 34: {
-            barney_.AddEntriesFrom(input, _repeated_barney_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::UnitTest.Issues.TestProtos.ComplexOptionType2.Types.ComplexOptionType4();
+            item.MergeFrom(input, ref immediateBuffer);
+            barney_.Add(item);
+            input.EndReadNested(oldLimit);
             break;
           }
         }
