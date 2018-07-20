@@ -33,6 +33,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Security;
 using Google.Protobuf.Collections;
 
 namespace Google.Protobuf
@@ -99,38 +100,39 @@ namespace Google.Protobuf
         /// </summary>
         /// <param name="fieldNumber">The unknown field number.</param>
         /// <param name="output">The CodedOutputStream to write to.</param>
-        internal void WriteTo(int fieldNumber, CodedOutputStream output)
+        [SecurityCritical]
+        internal void WriteTo(int fieldNumber, CodedOutputStream output, ref Span<byte> immediateBuffer)
         {
             if (varintList != null)
             {
                 foreach (ulong value in varintList)
                 {
-                    output.WriteTag(fieldNumber, WireFormat.WireType.Varint);
-                    output.WriteUInt64(value);
+                    output.WriteTag(fieldNumber, WireFormat.WireType.Varint, ref immediateBuffer);
+                    output.WriteUInt64(value, ref immediateBuffer);
                 }
             }
             if (fixed32List != null)
             {
                 foreach (uint value in fixed32List)
                 {
-                    output.WriteTag(fieldNumber, WireFormat.WireType.Fixed32);
-                    output.WriteFixed32(value);
+                    output.WriteTag(fieldNumber, WireFormat.WireType.Fixed32, ref immediateBuffer);
+                    output.WriteFixed32(value, ref immediateBuffer);
                 }
             }
             if (fixed64List != null)
             {
                 foreach (ulong value in fixed64List)
                 {
-                    output.WriteTag(fieldNumber, WireFormat.WireType.Fixed64);
-                    output.WriteFixed64(value);
+                    output.WriteTag(fieldNumber, WireFormat.WireType.Fixed64, ref immediateBuffer);
+                    output.WriteFixed64(value, ref immediateBuffer);
                 }
             }
             if (lengthDelimitedList != null)
             {
                 foreach (ByteString value in lengthDelimitedList)
                 {
-                    output.WriteTag(fieldNumber, WireFormat.WireType.LengthDelimited);
-                    output.WriteBytes(value);
+                    output.WriteTag(fieldNumber, WireFormat.WireType.LengthDelimited, ref immediateBuffer);
+                    output.WriteBytes(value, ref immediateBuffer);
                 }
             }
         }

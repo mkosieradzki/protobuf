@@ -412,31 +412,6 @@ namespace Google.Protobuf.Collections
         }
 
         /// <summary>
-        /// Writes the contents of this map to the given coded output stream, using the specified codec
-        /// to encode each entry.
-        /// </summary>
-        /// <param name="output">The output stream to write to.</param>
-        /// <param name="codec">The codec to use for each entry.</param>
-        public void WriteTo(CodedOutputStream output, Codec codec)
-        {
-            var message = new Codec.MessageAdapter(codec);
-            foreach (var entry in list)
-            {
-                message.Key = entry.Key;
-                message.Value = entry.Value;
-                output.WriteTag(codec.MapTag);
-                output.WriteMessage(message);
-            }
-        }
-
-        /// <summary>
-        /// Calculates the size of this map based on the given entry codec.
-        /// </summary>
-        /// <param name="codec">The codec to use to encode each entry.</param>
-        /// <returns></returns>
-        public int CalculateSize(Codec codec) => throw new NotImplementedException();
-
-        /// <summary>
         /// Returns a string representation of this repeated field, in the same
         /// way as it would be represented by the default JSON formatter.
         /// </summary>
@@ -546,79 +521,6 @@ namespace Google.Protobuf.Collections
             public DictionaryEntry Entry { get { return new DictionaryEntry(Key, Value); } }
             public object Key { get { return enumerator.Current.Key; } }
             public object Value { get { return enumerator.Current.Value; } }
-        }
-
-        /// <summary>
-        /// A codec for a specific map field. This contains all the information required to encode and
-        /// decode the nested messages.
-        /// </summary>
-        public sealed class Codec
-        {
-            private readonly FieldCodec<TKey> keyCodec;
-            private readonly FieldCodec<TValue> valueCodec;
-            private readonly uint mapTag;
-
-            /// <summary>
-            /// Creates a new entry codec based on a separate key codec and value codec,
-            /// and the tag to use for each map entry.
-            /// </summary>
-            /// <param name="keyCodec">The key codec.</param>
-            /// <param name="valueCodec">The value codec.</param>
-            /// <param name="mapTag">The map tag to use to introduce each map entry.</param>
-            public Codec(FieldCodec<TKey> keyCodec, FieldCodec<TValue> valueCodec, uint mapTag)
-            {
-                this.keyCodec = keyCodec;
-                this.valueCodec = valueCodec;
-                this.mapTag = mapTag;
-            }
-
-            /// <summary>
-            /// The tag used in the enclosing message to indicate map entries.
-            /// </summary>
-            internal uint MapTag { get { return mapTag; } }
-
-            /// <summary>
-            /// A mutable message class, used for parsing and serializing. This
-            /// delegates the work to a codec, but implements the <see cref="IMessage"/> interface
-            /// for interop with <see cref="CodedInputStream"/> and <see cref="CodedOutputStream"/>.
-            /// This is nested inside Codec as it's tightly coupled to the associated codec,
-            /// and it's simpler if it has direct access to all its fields.
-            /// </summary>
-            internal class MessageAdapter : IMessage
-            {
-                private static readonly byte[] ZeroLengthMessageStreamData = new byte[] { 0 };
-
-                private readonly Codec codec;
-                internal TKey Key { get; set; }
-                internal TValue Value { get; set; }
-
-                internal MessageAdapter(Codec codec)
-                {
-                    this.codec = codec;
-                }
-
-                internal void Reset()
-                {
-                    Key = codec.keyCodec.DefaultValue;
-                    Value = codec.valueCodec.DefaultValue;
-                }
-
-                [SecurityCritical]
-                public void MergeFrom(CodedInputStream input, ref ReadOnlySpan<byte> immediateBuffer) => throw new NotImplementedException();
-
-                public void WriteTo(CodedOutputStream output)
-                {
-                    codec.keyCodec.WriteTagAndValue(output, Key);
-                    codec.valueCodec.WriteTagAndValue(output, Value);
-                }
-
-                public int CalculateSize()
-                {
-                    return codec.keyCodec.CalculateSizeWithTag(Key) + codec.valueCodec.CalculateSizeWithTag(Value);
-                }
-
-                MessageDescriptor IMessage.Descriptor { get { return null; } }
-            }
         }
 
         private class MapView<T> : ICollection<T>, ICollection

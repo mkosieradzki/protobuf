@@ -55,7 +55,8 @@ namespace Google.Protobuf
         /// Writes the data to the given coded output stream.
         /// </summary>
         /// <param name="output">Coded output stream to write the data to. Must not be null.</param>
-        void WriteTo(CodedOutputStream output);
+        [SecurityCritical]
+        void WriteTo(CodedOutputStream output, ref Span<byte> immediateBuffer);
 
         /// <summary>
         /// Calculates the size of this message in Protocol Buffer wire format, in bytes.

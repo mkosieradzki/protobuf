@@ -70,11 +70,12 @@ namespace Google.Protobuf
         /// <summary>
         /// Serializes the set and writes it to <paramref name="output"/>.
         /// </summary>
-        public void WriteTo(CodedOutputStream output)
+        [SecurityCritical]
+        public void WriteTo(CodedOutputStream output, ref Span<byte> immediateBuffer)
         {
             foreach (KeyValuePair<int, UnknownField> entry in fields)
             {
-                entry.Value.WriteTo(entry.Key, output);
+                entry.Value.WriteTo(entry.Key, output, ref immediateBuffer);
             }
         }
 
