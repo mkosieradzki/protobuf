@@ -57,10 +57,6 @@ RepeatedEnumFieldGenerator::~RepeatedEnumFieldGenerator() {
 }
 
 void RepeatedEnumFieldGenerator::GenerateMembers(io::Printer* printer) {
-  printer->Print(
-    variables_,
-    "private static readonly pb::FieldCodec<$type_name$> _repeated_$name$_codec\n"
-    "    = pb::FieldCodec.ForEnum($tag$, x => (int) x, x => ($type_name$) x);\n");
   printer->Print(variables_,
     "private readonly pbc::RepeatedField<$type_name$> $name$_ = new pbc::RepeatedField<$type_name$>();\n");
   WritePropertyDocComment(printer, descriptor_);
@@ -80,10 +76,7 @@ void RepeatedEnumFieldGenerator::GenerateMergingCode(io::Printer* printer) {
 
 void RepeatedEnumFieldGenerator::GenerateParsingCode(io::Printer* printer, const std::string& lvalueName, bool forceNonPacked) {
   variables_["lvalue_name"] = lvalueName.empty() ? variables_["name"] + "_" : lvalueName;
-  /*printer->Print(
-    variables_,
-    "$lvalue_name$.AddEntriesFrom(input, _repeated_$name$_codec, ref immediateBuffer);\n");*/
-  if (descriptor_->is_packable() && !forceNonPacked) {
+  if (descriptor_->is_packed() && !forceNonPacked) {
     printer->Print(
       variables_,
       "int length = input.ReadLength(ref immediateBuffer);\n"
@@ -102,18 +95,58 @@ void RepeatedEnumFieldGenerator::GenerateParsingCode(io::Printer* printer, const
   }
 }
 
-void RepeatedEnumFieldGenerator::GenerateSerializationCode(io::Printer* printer) {
-  printer->Print(
-    variables_,
-    "$name$_.WriteTo(output, _repeated_$name$_codec);\n");
+void RepeatedEnumFieldGenerator::GenerateSerializationCode(io::Printer* printer, const std::string& rvalueName) {
+  variables_["rvalue_name"] = rvalueName;
+  if (descriptor_->is_packed()) {
+    printer->Print(
+      variables_,
+      "{\n"
+      "  var packedSize = 0;\n"
+      "  for (var i = 0; i < $rvalue_name$.Count; i++) {\n"
+      "    packedSize += pb::CodedOutputStream.ComputeEnumSize((int)$rvalue_name$[i]);\n"
+      "  }\n"
+      "  if (packedSize > 0) {\n"
+      "    output.WriteRawTag($tag_bytes$, ref immediateBuffer);\n"
+      "    output.WriteLength(packedSize, ref immediateBuffer);\n"
+      "    for (var i = 0; i < $rvalue_name$.Count; i++) {\n"
+      "      output.WriteEnum((int)$rvalue_name$[i], ref immediateBuffer);\n"
+      "    }\n"
+      "  }\n"
+      "}\n");
+  }
+  else {
+    printer->Print(
+      variables_,
+      "for (var i = 0; i < $rvalue_name$.Count; i++) {\n"
+      "  output.WriteRawTag($tag_bytes$, ref immediateBuffer);\n"
+      "  output.WriteEnum((int)$rvalue_name$[i], ref immediateBuffer);\n"
+      "}\n");
+  }
 }
 
 void RepeatedEnumFieldGenerator::GenerateSerializedSizeCode(io::Printer* printer, const std::string& lvalueName, const std::string& rvalueName) {
   variables_["lvalue_name"] = lvalueName;
   variables_["rvalue_name"] = rvalueName;
-  printer->Print(
-    variables_,
-    "$lvalue_name$ += $rvalue_name$.CalculateSize(_repeated_$name$_codec);\n");
+  if (descriptor_->is_packed()) {
+    printer->Print(
+      variables_,
+      "{\n"
+      "  var packedSize = 0;\n"
+      "  for (var i = 0; i < $rvalue_name$.Count; i++) {\n"
+      "    packedSize += pb::CodedOutputStream.ComputeEnumSize((int)$rvalue_name$[i]);\n"
+      "  }\n"
+      "  if (packedSize > 0) {\n"
+      "    $lvalue_name$ += $tag_size$ + packedSize + pb::CodedOutputStream.ComputeLengthSize(packedSize);\n"
+      "  }\n"
+      "}\n");
+  }
+  else {
+    printer->Print(
+      variables_,
+      "for (var i = 0; i < $rvalue_name$.Count; i++) {\n"
+      "  $lvalue_name$ += $tag_size$ + pb::CodedOutputStream.ComputeEnumSize((int)$rvalue_name$[i]);\n"
+      "}\n");
+  }
 }
 
 void RepeatedEnumFieldGenerator::WriteHash(io::Printer* printer) {

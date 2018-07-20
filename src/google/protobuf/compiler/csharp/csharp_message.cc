@@ -406,20 +406,22 @@ void MessageGenerator::GenerateFrameworkMethods(io::Printer* printer) {
 void MessageGenerator::GenerateMessageSerializationMethods(io::Printer* printer) {
   WriteGeneratedCodeAttributes(printer);
   printer->Print(
-      "public void WriteTo(pb::CodedOutputStream output) {\n");
+    "[global::System.Security.SecurityCritical]\n"
+    "public void WriteTo(pb::CodedOutputStream output, ref global::System.Span<byte> immediateBuffer) {\n");
   printer->Indent();
 
   // Serialize all the fields
-  for (int i = 0; i < fields_by_number().size(); i++) {
+  for (int i = 0; i < descriptor_->field_count(); i++) {
+    auto field = descriptor_->field(i);
     std::unique_ptr<FieldGeneratorBase> generator(
-      CreateFieldGeneratorInternal(fields_by_number()[i]));
-    generator->GenerateSerializationCode(printer);
+      CreateFieldGeneratorInternal(field));
+    generator->GenerateSerializationCode(printer, GetPropertyName(field));
   }
 
   // Serialize unknown fields
   printer->Print(
     "if (_unknownFields != null) {\n"
-    "  _unknownFields.WriteTo(output);\n"
+    "  _unknownFields.WriteTo(output, ref immediateBuffer);\n"
     "}\n");
 
   // TODO(jonskeet): Memoize size of frozen messages?
@@ -503,8 +505,9 @@ void MessageGenerator::GenerateMergingMethods(io::Printer* printer) {
 
 
   WriteGeneratedCodeAttributes(printer);
-  printer->Print("[global::System.Security.SecurityCritical]\n");
-  printer->Print("public void MergeFrom(pb::CodedInputStream input, ref global::System.ReadOnlySpan<byte> immediateBuffer) {\n");
+  printer->Print(
+    "[global::System.Security.SecurityCritical]\n"
+    "public void MergeFrom(pb::CodedInputStream input, ref global::System.ReadOnlySpan<byte> immediateBuffer) {\n");
   printer->Indent();
   printer->Print(
     "uint tag;\n"

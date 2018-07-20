@@ -50,12 +50,11 @@ class PrimitiveFieldGenerator : public FieldGeneratorBase {
                           const Options *options);
   ~PrimitiveFieldGenerator();
 
-  virtual void GenerateCodecCode(io::Printer* printer);
   virtual void GenerateCloningCode(io::Printer* printer);
   virtual void GenerateMembers(io::Printer* printer);
   virtual void GenerateMergingCode(io::Printer* printer);
   virtual void GenerateParsingCode(io::Printer* printer, const std::string& lvalueName, bool forceNonPacked);
-  virtual void GenerateSerializationCode(io::Printer* printer);
+  virtual void GenerateSerializationCode(io::Printer* printer, const std::string& rvalueName);
   virtual void GenerateSerializedSizeCode(io::Printer* printer, const std::string& lvalueName, const std::string& rvalueName);
 
   virtual void WriteHash(io::Printer* printer);

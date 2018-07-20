@@ -60,11 +60,12 @@ void EnumFieldGenerator::GenerateParsingCode(io::Printer* printer, const std::st
     "$lvalue_name$ = ($type_name$) input.ReadEnum(ref immediateBuffer);\n");
 }
 
-void EnumFieldGenerator::GenerateSerializationCode(io::Printer* printer) {
+void EnumFieldGenerator::GenerateSerializationCode(io::Printer* printer, const std::string& rvalueName) {
+  variables_["rvalue_name"] = rvalueName;
   printer->Print(variables_,
-    "if ($has_property_check$) {\n"
-    "  output.WriteRawTag($tag_bytes$);\n"
-    "  output.WriteEnum((int) $property_name$);\n"
+    "if ($rvalue_name$$has_property_check_sufix$) {\n"
+    "  output.WriteRawTag($tag_bytes$, ref immediateBuffer);\n"
+    "  output.WriteEnum((int)$rvalue_name$, ref immediateBuffer);\n"
     "}\n");
 }
 
@@ -76,12 +77,6 @@ void EnumFieldGenerator::GenerateSerializedSizeCode(io::Printer* printer, const 
     "if ($rvalue_name$$has_property_check_sufix$) {\n"
     "  $lvalue_name$ += $tag_size$ + pb::CodedOutputStream.ComputeEnumSize((int) $rvalue_name$);\n"
     "}\n");
-}
-
-void EnumFieldGenerator::GenerateCodecCode(io::Printer* printer) {
-    printer->Print(
-        variables_,
-        "pb::FieldCodec.ForEnum($tag$, x => (int) x, x => ($type_name$) x)");
 }
 
 EnumOneofFieldGenerator::EnumOneofFieldGenerator(
@@ -106,12 +101,13 @@ void EnumOneofFieldGenerator::GenerateParsingCode(io::Printer* printer, const st
     "$case_lvalue_name$ = $oneof_property_name$OneofCase.$property_name$;\n");
 }
 
-void EnumOneofFieldGenerator::GenerateSerializationCode(io::Printer* printer) {
+void EnumOneofFieldGenerator::GenerateSerializationCode(io::Printer* printer, const std::string& rvalueName) {
+  // NOTE: This one works only for property_name (ignoring rvalue)
   printer->Print(
     variables_,
     "if ($has_property_check$) {\n"
-    "  output.WriteRawTag($tag_bytes$);\n"
-    "  output.WriteEnum((int) $property_name$);\n"
+    "  output.WriteRawTag($tag_bytes$, ref immediateBuffer);\n"
+    "  output.WriteEnum((int) $property_name$, ref immediateBuffer);\n"
     "}\n");
 }
 

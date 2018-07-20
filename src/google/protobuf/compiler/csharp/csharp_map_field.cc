@@ -70,25 +70,8 @@ MapFieldGenerator::~MapFieldGenerator() {
 }
 
 void MapFieldGenerator::GenerateMembers(io::Printer* printer) {   
-  const FieldDescriptor* key_descriptor =
-      descriptor_->message_type()->FindFieldByName("key");
-  const FieldDescriptor* value_descriptor =
-      descriptor_->message_type()->FindFieldByName("value");
-  std::unique_ptr<FieldGeneratorBase> key_generator(
-      CreateFieldGenerator(key_descriptor, 1, this->options()));
-  std::unique_ptr<FieldGeneratorBase> value_generator(
-      CreateFieldGenerator(value_descriptor, 2, this->options()));
-
   printer->Print(
     variables_,
-    "private static readonly pbc::MapField<$key_type_name$, $value_type_name$>.Codec _map_$name$_codec\n"
-    "    = new pbc::MapField<$key_type_name$, $value_type_name$>.Codec(");
-  key_generator->GenerateCodecCode(printer);
-  printer->Print(", ");
-  value_generator->GenerateCodecCode(printer);
-  printer->Print(
-    variables_,
-    ", $tag$);\n"
     "private readonly pbc::MapField<$key_type_name$, $value_type_name$> $name$_ = new pbc::MapField<$key_type_name$, $value_type_name$>();\n");
   WritePropertyDocComment(printer, descriptor_);
   AddPublicMemberAttributes(printer);
@@ -115,6 +98,7 @@ void MapFieldGenerator::GenerateParsingCode(io::Printer* printer, const std::str
     CreateFieldGenerator(key_descriptor, 1, this->options()));
   std::unique_ptr<FieldGeneratorBase> value_generator(
     CreateFieldGenerator(value_descriptor, 2, this->options()));
+
   printer->Print(
     variables_,
     "var oldLimit = input.BeginReadNested(ref immediateBuffer);\n"
@@ -155,10 +139,32 @@ void MapFieldGenerator::GenerateParsingCode(io::Printer* printer, const std::str
     "input.EndReadNested(oldLimit);\n");
 }
 
-void MapFieldGenerator::GenerateSerializationCode(io::Printer* printer) {
+void MapFieldGenerator::GenerateSerializationCode(io::Printer* printer, const std::string& rvalueName) {
+  const FieldDescriptor* key_descriptor =
+    descriptor_->message_type()->FindFieldByName("key");
+  const FieldDescriptor* value_descriptor =
+    descriptor_->message_type()->FindFieldByName("value");
+  variables_["rvalue_name"] = rvalueName;
+  std::unique_ptr<FieldGeneratorBase> key_generator(
+    CreateFieldGenerator(key_descriptor, 1, this->options()));
+  std::unique_ptr<FieldGeneratorBase> value_generator(
+    CreateFieldGenerator(value_descriptor, 2, this->options()));
+
   printer->Print(
     variables_,
-    "$name$_.WriteTo(output, _map_$name$_codec);\n");
+    "foreach (var entry in $rvalue_name$) {\n");
+  printer->Indent();
+  printer->Print("var messageSize = 0;\n");
+  key_generator->GenerateSerializedSizeCode(printer, "messageSize", "entry.Key");
+  value_generator->GenerateSerializedSizeCode(printer, "messageSize", "entry.Value");
+  printer->Print(
+    variables_,
+    "output.WriteRawTag($tag_bytes$, ref immediateBuffer);\n"
+    "output.WriteLength(messageSize, ref immediateBuffer);\n");
+  key_generator->GenerateSerializationCode(printer, "entry.Key");
+  value_generator->GenerateSerializationCode(printer, "entry.Value");
+  printer->Outdent();
+  printer->Print("}\n");
 }
 
 void MapFieldGenerator::GenerateSerializedSizeCode(io::Printer* printer, const std::string& lvalueName, const std::string& rvalueName) {

@@ -99,12 +99,14 @@ void MessageFieldGenerator::GenerateParsingCode(io::Printer* printer, const std:
     "input.ReadMessage($lvalue_name$, ref immediateBuffer);\n"); // No need to support TYPE_GROUP...
 }
 
-void MessageFieldGenerator::GenerateSerializationCode(io::Printer* printer) {
+void MessageFieldGenerator::GenerateSerializationCode(io::Printer* printer, const std::string& rvalueName) {
+  variables_["rvalue_name"] = rvalueName;
   printer->Print(
     variables_,
-    "if ($has_property_check$) {\n"
-    "  output.WriteRawTag($tag_bytes$);\n"
-    "  output.WriteMessage($property_name$);\n"
+    "if ($rvalue_name$$has_property_check_sufix$) {\n"
+    "  output.WriteRawTag($tag_bytes$, ref immediateBuffer);\n"
+    //TODO: Inline write message
+    "  output.WriteMessage($rvalue_name$, ref immediateBuffer);\n"
     "}\n");
 }
 
@@ -141,12 +143,6 @@ void MessageFieldGenerator::GenerateCloningCode(io::Printer* printer) {
 }
 
 void MessageFieldGenerator::GenerateFreezingCode(io::Printer* printer) {
-}
-
-void MessageFieldGenerator::GenerateCodecCode(io::Printer* printer) {
-  printer->Print(
-    variables_,
-    "pb::FieldCodec.ForMessage($tag$, $type_name$.Parser)");
 }
 
 MessageOneofFieldGenerator::MessageOneofFieldGenerator(

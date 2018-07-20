@@ -116,11 +116,6 @@ void FieldGeneratorBase::GenerateFreezingCode(io::Printer* printer) {
   // special handling for freezing, so default to not generating any code.
 }
 
-void FieldGeneratorBase::GenerateCodecCode(io::Printer* printer) {
-    // No-op: expect this to be overridden by appropriate types.
-    // Could fail if we get called here though...
-}
-
 void FieldGeneratorBase::AddDeprecatedFlag(io::Printer* printer) {
   if (descriptor_->options().deprecated()) {
     printer->Print("[global::System.ObsoleteAttribute]\n");

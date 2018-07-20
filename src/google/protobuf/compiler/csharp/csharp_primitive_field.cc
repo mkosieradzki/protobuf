@@ -114,19 +114,31 @@ void PrimitiveFieldGenerator::GenerateParsingCode(io::Printer* printer, const st
     "$lvalue_name$ = input.Read$capitalized_type_name$(ref immediateBuffer);\n");
 }
 
-void PrimitiveFieldGenerator::GenerateSerializationCode(io::Printer* printer) {
+void PrimitiveFieldGenerator::GenerateSerializationCode(io::Printer* printer, const std::string& rvalueName) {
+  variables_["rvalue_name"] = rvalueName;
+
+  if (descriptor_->containing_oneof()) {
+    printer->Print(
+      variables_,
+      "if ($has_property_check$) {\n");
+  }
+  else {
+    printer->Print(
+      variables_,
+      "if ($rvalue_name$$has_property_check_sufix$) {\n");
+  }
+
   printer->Print(
     variables_,
-    "if ($has_property_check$) {\n"
-    "  output.WriteRawTag($tag_bytes$);\n"
-    "  output.Write$capitalized_type_name$($property_name$);\n"
+    "  output.WriteRawTag($tag_bytes$, ref immediateBuffer);\n"
+    "  output.Write$capitalized_type_name$($rvalue_name$, ref immediateBuffer);\n"
     "}\n");
 }
 
-//TODO: Move to inherited - because proper has_property_check for oneof is required
 void PrimitiveFieldGenerator::GenerateSerializedSizeCode(io::Printer* printer, const std::string& lvalueName, const std::string& rvalueName) {
   variables_["lvalue_name"] = lvalueName;
   variables_["rvalue_name"] = rvalueName;
+  //Oneof variant igonores rvalue
   if (descriptor_->containing_oneof()) {
     printer->Print(
       variables_,
@@ -181,12 +193,6 @@ void PrimitiveFieldGenerator::WriteToString(io::Printer* printer) {
 void PrimitiveFieldGenerator::GenerateCloningCode(io::Printer* printer) {
   printer->Print(variables_,
     "$name$_ = other.$name$_;\n");
-}
-
-void PrimitiveFieldGenerator::GenerateCodecCode(io::Printer* printer) {
-  printer->Print(
-    variables_,
-    "pb::FieldCodec.For$capitalized_type_name$($tag$)");
 }
 
 PrimitiveOneofFieldGenerator::PrimitiveOneofFieldGenerator(
