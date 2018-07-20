@@ -34,6 +34,7 @@ using Google.Protobuf.Collections;
 using System;
 using System.Buffers.Binary;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Runtime.CompilerServices;
 using System.Security;
@@ -89,12 +90,6 @@ namespace Google.Protobuf
         /// (or haven't read anything yet).
         /// </summary>
         private uint lastTag = 0;
-
-        /// <summary>
-        /// The next tag, used to store the value read by PeekTag.
-        /// </summary>
-        private uint nextTag = 0;
-        private bool hasNextTag = false;
 
         internal const int DefaultRecursionLimit = 64;
         internal const int DefaultSizeLimit = Int32.MaxValue;
@@ -316,26 +311,6 @@ namespace Google.Protobuf
         #region Reading of tags etc
 
         /// <summary>
-        /// Peeks at the next field tag. This is like calling <see cref="ReadTag"/>, but the
-        /// tag is not consumed. (So a subsequent call to <see cref="ReadTag"/> will return the
-        /// same value.)
-        /// </summary>
-        [SecurityCritical]
-        public uint PeekTag(ref ReadOnlySpan<byte> immediateBuffer)
-        {
-            if (hasNextTag)
-            {
-                return nextTag;
-            }
-
-            uint savedLast = lastTag;
-            nextTag = ReadTag(ref immediateBuffer);
-            hasNextTag = true;
-            lastTag = savedLast; // Undo the side effect of ReadTag
-            return nextTag;
-        }
-
-        /// <summary>
         /// Reads a field tag, returning the tag of 0 for "end of stream".
         /// </summary>
         /// <remarks>
@@ -348,13 +323,6 @@ namespace Google.Protobuf
         [SecurityCritical]
         public uint ReadTag(ref ReadOnlySpan<byte> immediateBuffer)
         {
-            if (hasNextTag)
-            {
-                lastTag = nextTag;
-                hasNextTag = false;
-                return lastTag;
-            }
-
             // Optimize for the incredibly common case of having at least two bytes left in the buffer,
             // and those two bytes being enough to get the tag. This will be true for fields up to 4095.
             if (bufferPos + 2 <= bufferSize)
@@ -828,22 +796,6 @@ namespace Google.Protobuf
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [SecurityCritical]
         public int ReadLength(ref ReadOnlySpan<byte> immediateBuffer) => (int)ReadRawVarint32(ref immediateBuffer);
-
-        /// <summary>
-        /// Peeks at the next tag in the stream. If it matches <paramref name="tag"/>,
-        /// the tag is consumed and the method returns <c>true</c>; otherwise, the
-        /// stream is left in the original position and the method returns <c>false</c>.
-        /// </summary>
-        [SecurityCritical]
-        public bool MaybeConsumeTag(uint tag, ref ReadOnlySpan<byte> immediateBuffer)
-        {
-            if (PeekTag(ref immediateBuffer) == tag)
-            {
-                hasNextTag = false;
-                return true;
-            }
-            return false;
-        }
 
         #endregion
 
