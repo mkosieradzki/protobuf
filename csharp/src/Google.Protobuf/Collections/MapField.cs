@@ -434,23 +434,7 @@ namespace Google.Protobuf.Collections
         /// </summary>
         /// <param name="codec">The codec to use to encode each entry.</param>
         /// <returns></returns>
-        public int CalculateSize(Codec codec)
-        {
-            if (Count == 0)
-            {
-                return 0;
-            }
-            var message = new Codec.MessageAdapter(codec);
-            int size = 0;
-            foreach (var entry in list)
-            {
-                message.Key = entry.Key;
-                message.Value = entry.Value;
-                size += CodedOutputStream.ComputeRawVarint32Size(codec.MapTag);
-                size += CodedOutputStream.ComputeMessageSize(message);
-            }
-            return size;
-        }
+        public int CalculateSize(Codec codec) => throw new NotImplementedException();
 
         /// <summary>
         /// Returns a string representation of this repeated field, in the same

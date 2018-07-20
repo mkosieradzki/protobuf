@@ -66,12 +66,6 @@ namespace Google.Protobuf
 #pragma warning restore 0414
 
         [Test, TestCaseSource("Codecs")]
-        public void CalculateSize(ICodecTestData codec)
-        {
-            codec.TestCalculateSizeWithTag();
-        }
-
-        [Test, TestCaseSource("Codecs")]
         public void FixedSize(ICodecTestData codec)
         {
             codec.TestFixedSize();
@@ -82,7 +76,6 @@ namespace Google.Protobuf
         // of any better ways right now.
         public interface ICodecTestData
         {
-            void TestCalculateSizeWithTag();
             void TestFixedSize();
         }
 
@@ -97,15 +90,6 @@ namespace Google.Protobuf
                 this.codec = codec;
                 this.sampleValue = sampleValue;
                 this.name = name;
-            }
-
-            public void TestCalculateSizeWithTag()
-            {
-                var stream = new MemoryStream();
-                var codedOutput = new CodedOutputStream(stream);
-                codec.WriteTagAndValue(codedOutput, sampleValue);
-                codedOutput.Flush();
-                Assert.AreEqual(stream.Position, codec.CalculateSizeWithTag(sampleValue));
             }
 
             public void TestFixedSize()
