@@ -242,17 +242,18 @@ namespace Google.Protobuf.WellKnownTypes {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
+    [global::System.Security.SecurityCritical]
+    public void WriteTo(pb::CodedOutputStream output, ref global::System.Span<byte> immediateBuffer) {
       if (TypeUrl.Length != 0) {
-        output.WriteRawTag(10);
-        output.WriteString(TypeUrl);
+        output.WriteRawTag(10, ref immediateBuffer);
+        output.WriteString(TypeUrl, ref immediateBuffer);
       }
       if (Value.Length != 0) {
-        output.WriteRawTag(18);
-        output.WriteBytes(Value);
+        output.WriteRawTag(18, ref immediateBuffer);
+        output.WriteBytes(Value, ref immediateBuffer);
       }
       if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
+        _unknownFields.WriteTo(output, ref immediateBuffer);
       }
     }
 

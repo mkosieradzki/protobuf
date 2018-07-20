@@ -121,8 +121,6 @@ namespace Google.Protobuf.WellKnownTypes {
 
     /// <summary>Field number for the "methods" field.</summary>
     public const int MethodsFieldNumber = 2;
-    private static readonly pb::FieldCodec<global::Google.Protobuf.WellKnownTypes.Method> _repeated_methods_codec
-        = pb::FieldCodec.ForMessage(18, global::Google.Protobuf.WellKnownTypes.Method.Parser);
     private readonly pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.Method> methods_ = new pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.Method>();
     /// <summary>
     /// The methods of this interface, in unspecified order.
@@ -134,8 +132,6 @@ namespace Google.Protobuf.WellKnownTypes {
 
     /// <summary>Field number for the "options" field.</summary>
     public const int OptionsFieldNumber = 3;
-    private static readonly pb::FieldCodec<global::Google.Protobuf.WellKnownTypes.Option> _repeated_options_codec
-        = pb::FieldCodec.ForMessage(26, global::Google.Protobuf.WellKnownTypes.Option.Parser);
     private readonly pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.Option> options_ = new pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.Option>();
     /// <summary>
     /// Any metadata attached to the interface.
@@ -194,8 +190,6 @@ namespace Google.Protobuf.WellKnownTypes {
 
     /// <summary>Field number for the "mixins" field.</summary>
     public const int MixinsFieldNumber = 6;
-    private static readonly pb::FieldCodec<global::Google.Protobuf.WellKnownTypes.Mixin> _repeated_mixins_codec
-        = pb::FieldCodec.ForMessage(50, global::Google.Protobuf.WellKnownTypes.Mixin.Parser);
     private readonly pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.Mixin> mixins_ = new pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.Mixin>();
     /// <summary>
     /// Included interfaces. See [Mixin][].
@@ -264,28 +258,38 @@ namespace Google.Protobuf.WellKnownTypes {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
+    [global::System.Security.SecurityCritical]
+    public void WriteTo(pb::CodedOutputStream output, ref global::System.Span<byte> immediateBuffer) {
       if (Name.Length != 0) {
-        output.WriteRawTag(10);
-        output.WriteString(Name);
+        output.WriteRawTag(10, ref immediateBuffer);
+        output.WriteString(Name, ref immediateBuffer);
       }
-      methods_.WriteTo(output, _repeated_methods_codec);
-      options_.WriteTo(output, _repeated_options_codec);
+      for (var i = 0; i < Methods.Count; i++) {
+        output.WriteRawTag(18, ref immediateBuffer);
+        output.WriteMessage(Methods[i], ref immediateBuffer);
+      }
+      for (var i = 0; i < Options.Count; i++) {
+        output.WriteRawTag(26, ref immediateBuffer);
+        output.WriteMessage(Options[i], ref immediateBuffer);
+      }
       if (Version.Length != 0) {
-        output.WriteRawTag(34);
-        output.WriteString(Version);
+        output.WriteRawTag(34, ref immediateBuffer);
+        output.WriteString(Version, ref immediateBuffer);
       }
-      if (sourceContext_ != null) {
-        output.WriteRawTag(42);
-        output.WriteMessage(SourceContext);
+      if (SourceContext != null) {
+        output.WriteRawTag(42, ref immediateBuffer);
+        output.WriteMessage(SourceContext, ref immediateBuffer);
       }
-      mixins_.WriteTo(output, _repeated_mixins_codec);
+      for (var i = 0; i < Mixins.Count; i++) {
+        output.WriteRawTag(50, ref immediateBuffer);
+        output.WriteMessage(Mixins[i], ref immediateBuffer);
+      }
       if (Syntax != 0) {
-        output.WriteRawTag(56);
-        output.WriteEnum((int) Syntax);
+        output.WriteRawTag(56, ref immediateBuffer);
+        output.WriteEnum((int)Syntax, ref immediateBuffer);
       }
       if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
+        _unknownFields.WriteTo(output, ref immediateBuffer);
       }
     }
 
@@ -295,15 +299,21 @@ namespace Google.Protobuf.WellKnownTypes {
       if (Name.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Name);
       }
-      size += Methods.CalculateSize(_repeated_methods_codec);
-      size += Options.CalculateSize(_repeated_options_codec);
+      for (var i = 0; i < Methods.Count; i++) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Methods[i]);
+      }
+      for (var i = 0; i < Options.Count; i++) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Options[i]);
+      }
       if (Version.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Version);
       }
       if (SourceContext != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(SourceContext);
       }
-      size += Mixins.CalculateSize(_repeated_mixins_codec);
+      for (var i = 0; i < Mixins.Count; i++) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Mixins[i]);
+      }
       if (Syntax != 0) {
         size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) Syntax);
       }
@@ -509,8 +519,6 @@ namespace Google.Protobuf.WellKnownTypes {
 
     /// <summary>Field number for the "options" field.</summary>
     public const int OptionsFieldNumber = 6;
-    private static readonly pb::FieldCodec<global::Google.Protobuf.WellKnownTypes.Option> _repeated_options_codec
-        = pb::FieldCodec.ForMessage(50, global::Google.Protobuf.WellKnownTypes.Option.Parser);
     private readonly pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.Option> options_ = new pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.Option>();
     /// <summary>
     /// Any metadata attached to the method.
@@ -579,34 +587,38 @@ namespace Google.Protobuf.WellKnownTypes {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
+    [global::System.Security.SecurityCritical]
+    public void WriteTo(pb::CodedOutputStream output, ref global::System.Span<byte> immediateBuffer) {
       if (Name.Length != 0) {
-        output.WriteRawTag(10);
-        output.WriteString(Name);
+        output.WriteRawTag(10, ref immediateBuffer);
+        output.WriteString(Name, ref immediateBuffer);
       }
       if (RequestTypeUrl.Length != 0) {
-        output.WriteRawTag(18);
-        output.WriteString(RequestTypeUrl);
+        output.WriteRawTag(18, ref immediateBuffer);
+        output.WriteString(RequestTypeUrl, ref immediateBuffer);
       }
       if (RequestStreaming != false) {
-        output.WriteRawTag(24);
-        output.WriteBool(RequestStreaming);
+        output.WriteRawTag(24, ref immediateBuffer);
+        output.WriteBool(RequestStreaming, ref immediateBuffer);
       }
       if (ResponseTypeUrl.Length != 0) {
-        output.WriteRawTag(34);
-        output.WriteString(ResponseTypeUrl);
+        output.WriteRawTag(34, ref immediateBuffer);
+        output.WriteString(ResponseTypeUrl, ref immediateBuffer);
       }
       if (ResponseStreaming != false) {
-        output.WriteRawTag(40);
-        output.WriteBool(ResponseStreaming);
+        output.WriteRawTag(40, ref immediateBuffer);
+        output.WriteBool(ResponseStreaming, ref immediateBuffer);
       }
-      options_.WriteTo(output, _repeated_options_codec);
+      for (var i = 0; i < Options.Count; i++) {
+        output.WriteRawTag(50, ref immediateBuffer);
+        output.WriteMessage(Options[i], ref immediateBuffer);
+      }
       if (Syntax != 0) {
-        output.WriteRawTag(56);
-        output.WriteEnum((int) Syntax);
+        output.WriteRawTag(56, ref immediateBuffer);
+        output.WriteEnum((int)Syntax, ref immediateBuffer);
       }
       if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
+        _unknownFields.WriteTo(output, ref immediateBuffer);
       }
     }
 
@@ -628,7 +640,9 @@ namespace Google.Protobuf.WellKnownTypes {
       if (ResponseStreaming != false) {
         size += 1 + 1;
       }
-      size += Options.CalculateSize(_repeated_options_codec);
+      for (var i = 0; i < Options.Count; i++) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Options[i]);
+      }
       if (Syntax != 0) {
         size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) Syntax);
       }
@@ -890,17 +904,18 @@ namespace Google.Protobuf.WellKnownTypes {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
+    [global::System.Security.SecurityCritical]
+    public void WriteTo(pb::CodedOutputStream output, ref global::System.Span<byte> immediateBuffer) {
       if (Name.Length != 0) {
-        output.WriteRawTag(10);
-        output.WriteString(Name);
+        output.WriteRawTag(10, ref immediateBuffer);
+        output.WriteString(Name, ref immediateBuffer);
       }
       if (Root.Length != 0) {
-        output.WriteRawTag(18);
-        output.WriteString(Root);
+        output.WriteRawTag(18, ref immediateBuffer);
+        output.WriteString(Root, ref immediateBuffer);
       }
       if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
+        _unknownFields.WriteTo(output, ref immediateBuffer);
       }
     }
 

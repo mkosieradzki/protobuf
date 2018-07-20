@@ -125,8 +125,6 @@ namespace Google.Protobuf.Examples.AddressBook {
 
     /// <summary>Field number for the "phones" field.</summary>
     public const int PhonesFieldNumber = 4;
-    private static readonly pb::FieldCodec<global::Google.Protobuf.Examples.AddressBook.Person.Types.PhoneNumber> _repeated_phones_codec
-        = pb::FieldCodec.ForMessage(34, global::Google.Protobuf.Examples.AddressBook.Person.Types.PhoneNumber.Parser);
     private readonly pbc::RepeatedField<global::Google.Protobuf.Examples.AddressBook.Person.Types.PhoneNumber> phones_ = new pbc::RepeatedField<global::Google.Protobuf.Examples.AddressBook.Person.Types.PhoneNumber>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<global::Google.Protobuf.Examples.AddressBook.Person.Types.PhoneNumber> Phones {
@@ -185,26 +183,30 @@ namespace Google.Protobuf.Examples.AddressBook {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
+    [global::System.Security.SecurityCritical]
+    public void WriteTo(pb::CodedOutputStream output, ref global::System.Span<byte> immediateBuffer) {
       if (Name.Length != 0) {
-        output.WriteRawTag(10);
-        output.WriteString(Name);
+        output.WriteRawTag(10, ref immediateBuffer);
+        output.WriteString(Name, ref immediateBuffer);
       }
       if (Id != 0) {
-        output.WriteRawTag(16);
-        output.WriteInt32(Id);
+        output.WriteRawTag(16, ref immediateBuffer);
+        output.WriteInt32(Id, ref immediateBuffer);
       }
       if (Email.Length != 0) {
-        output.WriteRawTag(26);
-        output.WriteString(Email);
+        output.WriteRawTag(26, ref immediateBuffer);
+        output.WriteString(Email, ref immediateBuffer);
       }
-      phones_.WriteTo(output, _repeated_phones_codec);
-      if (lastUpdated_ != null) {
-        output.WriteRawTag(42);
-        output.WriteMessage(LastUpdated);
+      for (var i = 0; i < Phones.Count; i++) {
+        output.WriteRawTag(34, ref immediateBuffer);
+        output.WriteMessage(Phones[i], ref immediateBuffer);
+      }
+      if (LastUpdated != null) {
+        output.WriteRawTag(42, ref immediateBuffer);
+        output.WriteMessage(LastUpdated, ref immediateBuffer);
       }
       if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
+        _unknownFields.WriteTo(output, ref immediateBuffer);
       }
     }
 
@@ -220,7 +222,9 @@ namespace Google.Protobuf.Examples.AddressBook {
       if (Email.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Email);
       }
-      size += Phones.CalculateSize(_repeated_phones_codec);
+      for (var i = 0; i < Phones.Count; i++) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Phones[i]);
+      }
       if (LastUpdated != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(LastUpdated);
       }
@@ -395,17 +399,18 @@ namespace Google.Protobuf.Examples.AddressBook {
         }
 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-        public void WriteTo(pb::CodedOutputStream output) {
+        [global::System.Security.SecurityCritical]
+        public void WriteTo(pb::CodedOutputStream output, ref global::System.Span<byte> immediateBuffer) {
           if (Number.Length != 0) {
-            output.WriteRawTag(10);
-            output.WriteString(Number);
+            output.WriteRawTag(10, ref immediateBuffer);
+            output.WriteString(Number, ref immediateBuffer);
           }
           if (Type != 0) {
-            output.WriteRawTag(16);
-            output.WriteEnum((int) Type);
+            output.WriteRawTag(16, ref immediateBuffer);
+            output.WriteEnum((int)Type, ref immediateBuffer);
           }
           if (_unknownFields != null) {
-            _unknownFields.WriteTo(output);
+            _unknownFields.WriteTo(output, ref immediateBuffer);
           }
         }
 
@@ -505,8 +510,6 @@ namespace Google.Protobuf.Examples.AddressBook {
 
     /// <summary>Field number for the "people" field.</summary>
     public const int PeopleFieldNumber = 1;
-    private static readonly pb::FieldCodec<global::Google.Protobuf.Examples.AddressBook.Person> _repeated_people_codec
-        = pb::FieldCodec.ForMessage(10, global::Google.Protobuf.Examples.AddressBook.Person.Parser);
     private readonly pbc::RepeatedField<global::Google.Protobuf.Examples.AddressBook.Person> people_ = new pbc::RepeatedField<global::Google.Protobuf.Examples.AddressBook.Person>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<global::Google.Protobuf.Examples.AddressBook.Person> People {
@@ -546,17 +549,23 @@ namespace Google.Protobuf.Examples.AddressBook {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
-      people_.WriteTo(output, _repeated_people_codec);
+    [global::System.Security.SecurityCritical]
+    public void WriteTo(pb::CodedOutputStream output, ref global::System.Span<byte> immediateBuffer) {
+      for (var i = 0; i < People.Count; i++) {
+        output.WriteRawTag(10, ref immediateBuffer);
+        output.WriteMessage(People[i], ref immediateBuffer);
+      }
       if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
+        _unknownFields.WriteTo(output, ref immediateBuffer);
       }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      size += People.CalculateSize(_repeated_people_codec);
+      for (var i = 0; i < People.Count; i++) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(People[i]);
+      }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }

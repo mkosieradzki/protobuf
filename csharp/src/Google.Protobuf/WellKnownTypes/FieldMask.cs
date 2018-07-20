@@ -284,8 +284,6 @@ namespace Google.Protobuf.WellKnownTypes {
 
     /// <summary>Field number for the "paths" field.</summary>
     public const int PathsFieldNumber = 1;
-    private static readonly pb::FieldCodec<string> _repeated_paths_codec
-        = pb::FieldCodec.ForString(10);
     private readonly pbc::RepeatedField<string> paths_ = new pbc::RepeatedField<string>();
     /// <summary>
     /// The set of field mask paths.
@@ -328,17 +326,23 @@ namespace Google.Protobuf.WellKnownTypes {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
-      paths_.WriteTo(output, _repeated_paths_codec);
+    [global::System.Security.SecurityCritical]
+    public void WriteTo(pb::CodedOutputStream output, ref global::System.Span<byte> immediateBuffer) {
+      for (var i = 0; i < Paths.Count; i++) {
+        output.WriteRawTag(10, ref immediateBuffer);
+        output.WriteString(Paths[i], ref immediateBuffer);
+      }
       if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
+        _unknownFields.WriteTo(output, ref immediateBuffer);
       }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      size += Paths.CalculateSize(_repeated_paths_codec);
+      for (var i = 0; i < Paths.Count; i++) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Paths[i]);
+      }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }

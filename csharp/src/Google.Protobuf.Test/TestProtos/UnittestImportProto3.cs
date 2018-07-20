@@ -128,13 +128,14 @@ namespace Google.Protobuf.TestProtos {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
+    [global::System.Security.SecurityCritical]
+    public void WriteTo(pb::CodedOutputStream output, ref global::System.Span<byte> immediateBuffer) {
       if (D != 0) {
-        output.WriteRawTag(8);
-        output.WriteInt32(D);
+        output.WriteRawTag(8, ref immediateBuffer);
+        output.WriteInt32(D, ref immediateBuffer);
       }
       if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
+        _unknownFields.WriteTo(output, ref immediateBuffer);
       }
     }
 

@@ -582,8 +582,6 @@ namespace Google.Protobuf.TestProtos {
 
     /// <summary>Field number for the "repeated_int32" field.</summary>
     public const int RepeatedInt32FieldNumber = 31;
-    private static readonly pb::FieldCodec<int> _repeated_repeatedInt32_codec
-        = pb::FieldCodec.ForInt32(250);
     private readonly pbc::RepeatedField<int> repeatedInt32_ = new pbc::RepeatedField<int>();
     /// <summary>
     /// Repeated
@@ -595,8 +593,6 @@ namespace Google.Protobuf.TestProtos {
 
     /// <summary>Field number for the "repeated_int64" field.</summary>
     public const int RepeatedInt64FieldNumber = 32;
-    private static readonly pb::FieldCodec<long> _repeated_repeatedInt64_codec
-        = pb::FieldCodec.ForInt64(258);
     private readonly pbc::RepeatedField<long> repeatedInt64_ = new pbc::RepeatedField<long>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<long> RepeatedInt64 {
@@ -605,8 +601,6 @@ namespace Google.Protobuf.TestProtos {
 
     /// <summary>Field number for the "repeated_uint32" field.</summary>
     public const int RepeatedUint32FieldNumber = 33;
-    private static readonly pb::FieldCodec<uint> _repeated_repeatedUint32_codec
-        = pb::FieldCodec.ForUInt32(266);
     private readonly pbc::RepeatedField<uint> repeatedUint32_ = new pbc::RepeatedField<uint>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<uint> RepeatedUint32 {
@@ -615,8 +609,6 @@ namespace Google.Protobuf.TestProtos {
 
     /// <summary>Field number for the "repeated_uint64" field.</summary>
     public const int RepeatedUint64FieldNumber = 34;
-    private static readonly pb::FieldCodec<ulong> _repeated_repeatedUint64_codec
-        = pb::FieldCodec.ForUInt64(274);
     private readonly pbc::RepeatedField<ulong> repeatedUint64_ = new pbc::RepeatedField<ulong>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<ulong> RepeatedUint64 {
@@ -625,8 +617,6 @@ namespace Google.Protobuf.TestProtos {
 
     /// <summary>Field number for the "repeated_sint32" field.</summary>
     public const int RepeatedSint32FieldNumber = 35;
-    private static readonly pb::FieldCodec<int> _repeated_repeatedSint32_codec
-        = pb::FieldCodec.ForSInt32(282);
     private readonly pbc::RepeatedField<int> repeatedSint32_ = new pbc::RepeatedField<int>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<int> RepeatedSint32 {
@@ -635,8 +625,6 @@ namespace Google.Protobuf.TestProtos {
 
     /// <summary>Field number for the "repeated_sint64" field.</summary>
     public const int RepeatedSint64FieldNumber = 36;
-    private static readonly pb::FieldCodec<long> _repeated_repeatedSint64_codec
-        = pb::FieldCodec.ForSInt64(290);
     private readonly pbc::RepeatedField<long> repeatedSint64_ = new pbc::RepeatedField<long>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<long> RepeatedSint64 {
@@ -645,8 +633,6 @@ namespace Google.Protobuf.TestProtos {
 
     /// <summary>Field number for the "repeated_fixed32" field.</summary>
     public const int RepeatedFixed32FieldNumber = 37;
-    private static readonly pb::FieldCodec<uint> _repeated_repeatedFixed32_codec
-        = pb::FieldCodec.ForFixed32(298);
     private readonly pbc::RepeatedField<uint> repeatedFixed32_ = new pbc::RepeatedField<uint>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<uint> RepeatedFixed32 {
@@ -655,8 +641,6 @@ namespace Google.Protobuf.TestProtos {
 
     /// <summary>Field number for the "repeated_fixed64" field.</summary>
     public const int RepeatedFixed64FieldNumber = 38;
-    private static readonly pb::FieldCodec<ulong> _repeated_repeatedFixed64_codec
-        = pb::FieldCodec.ForFixed64(306);
     private readonly pbc::RepeatedField<ulong> repeatedFixed64_ = new pbc::RepeatedField<ulong>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<ulong> RepeatedFixed64 {
@@ -665,8 +649,6 @@ namespace Google.Protobuf.TestProtos {
 
     /// <summary>Field number for the "repeated_sfixed32" field.</summary>
     public const int RepeatedSfixed32FieldNumber = 39;
-    private static readonly pb::FieldCodec<int> _repeated_repeatedSfixed32_codec
-        = pb::FieldCodec.ForSFixed32(314);
     private readonly pbc::RepeatedField<int> repeatedSfixed32_ = new pbc::RepeatedField<int>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<int> RepeatedSfixed32 {
@@ -675,8 +657,6 @@ namespace Google.Protobuf.TestProtos {
 
     /// <summary>Field number for the "repeated_sfixed64" field.</summary>
     public const int RepeatedSfixed64FieldNumber = 40;
-    private static readonly pb::FieldCodec<long> _repeated_repeatedSfixed64_codec
-        = pb::FieldCodec.ForSFixed64(322);
     private readonly pbc::RepeatedField<long> repeatedSfixed64_ = new pbc::RepeatedField<long>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<long> RepeatedSfixed64 {
@@ -685,8 +665,6 @@ namespace Google.Protobuf.TestProtos {
 
     /// <summary>Field number for the "repeated_float" field.</summary>
     public const int RepeatedFloatFieldNumber = 41;
-    private static readonly pb::FieldCodec<float> _repeated_repeatedFloat_codec
-        = pb::FieldCodec.ForFloat(330);
     private readonly pbc::RepeatedField<float> repeatedFloat_ = new pbc::RepeatedField<float>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<float> RepeatedFloat {
@@ -695,8 +673,6 @@ namespace Google.Protobuf.TestProtos {
 
     /// <summary>Field number for the "repeated_double" field.</summary>
     public const int RepeatedDoubleFieldNumber = 42;
-    private static readonly pb::FieldCodec<double> _repeated_repeatedDouble_codec
-        = pb::FieldCodec.ForDouble(338);
     private readonly pbc::RepeatedField<double> repeatedDouble_ = new pbc::RepeatedField<double>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<double> RepeatedDouble {
@@ -705,8 +681,6 @@ namespace Google.Protobuf.TestProtos {
 
     /// <summary>Field number for the "repeated_bool" field.</summary>
     public const int RepeatedBoolFieldNumber = 43;
-    private static readonly pb::FieldCodec<bool> _repeated_repeatedBool_codec
-        = pb::FieldCodec.ForBool(346);
     private readonly pbc::RepeatedField<bool> repeatedBool_ = new pbc::RepeatedField<bool>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<bool> RepeatedBool {
@@ -715,8 +689,6 @@ namespace Google.Protobuf.TestProtos {
 
     /// <summary>Field number for the "repeated_string" field.</summary>
     public const int RepeatedStringFieldNumber = 44;
-    private static readonly pb::FieldCodec<string> _repeated_repeatedString_codec
-        = pb::FieldCodec.ForString(354);
     private readonly pbc::RepeatedField<string> repeatedString_ = new pbc::RepeatedField<string>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<string> RepeatedString {
@@ -725,8 +697,6 @@ namespace Google.Protobuf.TestProtos {
 
     /// <summary>Field number for the "repeated_bytes" field.</summary>
     public const int RepeatedBytesFieldNumber = 45;
-    private static readonly pb::FieldCodec<pb::ByteString> _repeated_repeatedBytes_codec
-        = pb::FieldCodec.ForBytes(362);
     private readonly pbc::RepeatedField<pb::ByteString> repeatedBytes_ = new pbc::RepeatedField<pb::ByteString>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<pb::ByteString> RepeatedBytes {
@@ -735,8 +705,6 @@ namespace Google.Protobuf.TestProtos {
 
     /// <summary>Field number for the "repeated_nested_message" field.</summary>
     public const int RepeatedNestedMessageFieldNumber = 48;
-    private static readonly pb::FieldCodec<global::Google.Protobuf.TestProtos.TestAllTypes.Types.NestedMessage> _repeated_repeatedNestedMessage_codec
-        = pb::FieldCodec.ForMessage(386, global::Google.Protobuf.TestProtos.TestAllTypes.Types.NestedMessage.Parser);
     private readonly pbc::RepeatedField<global::Google.Protobuf.TestProtos.TestAllTypes.Types.NestedMessage> repeatedNestedMessage_ = new pbc::RepeatedField<global::Google.Protobuf.TestProtos.TestAllTypes.Types.NestedMessage>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<global::Google.Protobuf.TestProtos.TestAllTypes.Types.NestedMessage> RepeatedNestedMessage {
@@ -745,8 +713,6 @@ namespace Google.Protobuf.TestProtos {
 
     /// <summary>Field number for the "repeated_foreign_message" field.</summary>
     public const int RepeatedForeignMessageFieldNumber = 49;
-    private static readonly pb::FieldCodec<global::Google.Protobuf.TestProtos.ForeignMessage> _repeated_repeatedForeignMessage_codec
-        = pb::FieldCodec.ForMessage(394, global::Google.Protobuf.TestProtos.ForeignMessage.Parser);
     private readonly pbc::RepeatedField<global::Google.Protobuf.TestProtos.ForeignMessage> repeatedForeignMessage_ = new pbc::RepeatedField<global::Google.Protobuf.TestProtos.ForeignMessage>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<global::Google.Protobuf.TestProtos.ForeignMessage> RepeatedForeignMessage {
@@ -755,8 +721,6 @@ namespace Google.Protobuf.TestProtos {
 
     /// <summary>Field number for the "repeated_import_message" field.</summary>
     public const int RepeatedImportMessageFieldNumber = 50;
-    private static readonly pb::FieldCodec<global::Google.Protobuf.TestProtos.ImportMessage> _repeated_repeatedImportMessage_codec
-        = pb::FieldCodec.ForMessage(402, global::Google.Protobuf.TestProtos.ImportMessage.Parser);
     private readonly pbc::RepeatedField<global::Google.Protobuf.TestProtos.ImportMessage> repeatedImportMessage_ = new pbc::RepeatedField<global::Google.Protobuf.TestProtos.ImportMessage>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<global::Google.Protobuf.TestProtos.ImportMessage> RepeatedImportMessage {
@@ -765,8 +729,6 @@ namespace Google.Protobuf.TestProtos {
 
     /// <summary>Field number for the "repeated_nested_enum" field.</summary>
     public const int RepeatedNestedEnumFieldNumber = 51;
-    private static readonly pb::FieldCodec<global::Google.Protobuf.TestProtos.TestAllTypes.Types.NestedEnum> _repeated_repeatedNestedEnum_codec
-        = pb::FieldCodec.ForEnum(410, x => (int) x, x => (global::Google.Protobuf.TestProtos.TestAllTypes.Types.NestedEnum) x);
     private readonly pbc::RepeatedField<global::Google.Protobuf.TestProtos.TestAllTypes.Types.NestedEnum> repeatedNestedEnum_ = new pbc::RepeatedField<global::Google.Protobuf.TestProtos.TestAllTypes.Types.NestedEnum>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<global::Google.Protobuf.TestProtos.TestAllTypes.Types.NestedEnum> RepeatedNestedEnum {
@@ -775,8 +737,6 @@ namespace Google.Protobuf.TestProtos {
 
     /// <summary>Field number for the "repeated_foreign_enum" field.</summary>
     public const int RepeatedForeignEnumFieldNumber = 52;
-    private static readonly pb::FieldCodec<global::Google.Protobuf.TestProtos.ForeignEnum> _repeated_repeatedForeignEnum_codec
-        = pb::FieldCodec.ForEnum(418, x => (int) x, x => (global::Google.Protobuf.TestProtos.ForeignEnum) x);
     private readonly pbc::RepeatedField<global::Google.Protobuf.TestProtos.ForeignEnum> repeatedForeignEnum_ = new pbc::RepeatedField<global::Google.Protobuf.TestProtos.ForeignEnum>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<global::Google.Protobuf.TestProtos.ForeignEnum> RepeatedForeignEnum {
@@ -785,8 +745,6 @@ namespace Google.Protobuf.TestProtos {
 
     /// <summary>Field number for the "repeated_import_enum" field.</summary>
     public const int RepeatedImportEnumFieldNumber = 53;
-    private static readonly pb::FieldCodec<global::Google.Protobuf.TestProtos.ImportEnum> _repeated_repeatedImportEnum_codec
-        = pb::FieldCodec.ForEnum(426, x => (int) x, x => (global::Google.Protobuf.TestProtos.ImportEnum) x);
     private readonly pbc::RepeatedField<global::Google.Protobuf.TestProtos.ImportEnum> repeatedImportEnum_ = new pbc::RepeatedField<global::Google.Protobuf.TestProtos.ImportEnum>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<global::Google.Protobuf.TestProtos.ImportEnum> RepeatedImportEnum {
@@ -795,8 +753,6 @@ namespace Google.Protobuf.TestProtos {
 
     /// <summary>Field number for the "repeated_public_import_message" field.</summary>
     public const int RepeatedPublicImportMessageFieldNumber = 54;
-    private static readonly pb::FieldCodec<global::Google.Protobuf.TestProtos.PublicImportMessage> _repeated_repeatedPublicImportMessage_codec
-        = pb::FieldCodec.ForMessage(434, global::Google.Protobuf.TestProtos.PublicImportMessage.Parser);
     private readonly pbc::RepeatedField<global::Google.Protobuf.TestProtos.PublicImportMessage> repeatedPublicImportMessage_ = new pbc::RepeatedField<global::Google.Protobuf.TestProtos.PublicImportMessage>();
     /// <summary>
     /// Defined in unittest_import_public.proto
@@ -1000,135 +956,325 @@ namespace Google.Protobuf.TestProtos {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
+    [global::System.Security.SecurityCritical]
+    public void WriteTo(pb::CodedOutputStream output, ref global::System.Span<byte> immediateBuffer) {
       if (SingleInt32 != 0) {
-        output.WriteRawTag(8);
-        output.WriteInt32(SingleInt32);
+        output.WriteRawTag(8, ref immediateBuffer);
+        output.WriteInt32(SingleInt32, ref immediateBuffer);
       }
       if (SingleInt64 != 0L) {
-        output.WriteRawTag(16);
-        output.WriteInt64(SingleInt64);
+        output.WriteRawTag(16, ref immediateBuffer);
+        output.WriteInt64(SingleInt64, ref immediateBuffer);
       }
       if (SingleUint32 != 0) {
-        output.WriteRawTag(24);
-        output.WriteUInt32(SingleUint32);
+        output.WriteRawTag(24, ref immediateBuffer);
+        output.WriteUInt32(SingleUint32, ref immediateBuffer);
       }
       if (SingleUint64 != 0UL) {
-        output.WriteRawTag(32);
-        output.WriteUInt64(SingleUint64);
+        output.WriteRawTag(32, ref immediateBuffer);
+        output.WriteUInt64(SingleUint64, ref immediateBuffer);
       }
       if (SingleSint32 != 0) {
-        output.WriteRawTag(40);
-        output.WriteSInt32(SingleSint32);
+        output.WriteRawTag(40, ref immediateBuffer);
+        output.WriteSInt32(SingleSint32, ref immediateBuffer);
       }
       if (SingleSint64 != 0L) {
-        output.WriteRawTag(48);
-        output.WriteSInt64(SingleSint64);
+        output.WriteRawTag(48, ref immediateBuffer);
+        output.WriteSInt64(SingleSint64, ref immediateBuffer);
       }
       if (SingleFixed32 != 0) {
-        output.WriteRawTag(61);
-        output.WriteFixed32(SingleFixed32);
+        output.WriteRawTag(61, ref immediateBuffer);
+        output.WriteFixed32(SingleFixed32, ref immediateBuffer);
       }
       if (SingleFixed64 != 0UL) {
-        output.WriteRawTag(65);
-        output.WriteFixed64(SingleFixed64);
+        output.WriteRawTag(65, ref immediateBuffer);
+        output.WriteFixed64(SingleFixed64, ref immediateBuffer);
       }
       if (SingleSfixed32 != 0) {
-        output.WriteRawTag(77);
-        output.WriteSFixed32(SingleSfixed32);
+        output.WriteRawTag(77, ref immediateBuffer);
+        output.WriteSFixed32(SingleSfixed32, ref immediateBuffer);
       }
       if (SingleSfixed64 != 0L) {
-        output.WriteRawTag(81);
-        output.WriteSFixed64(SingleSfixed64);
+        output.WriteRawTag(81, ref immediateBuffer);
+        output.WriteSFixed64(SingleSfixed64, ref immediateBuffer);
       }
       if (SingleFloat != 0F) {
-        output.WriteRawTag(93);
-        output.WriteFloat(SingleFloat);
+        output.WriteRawTag(93, ref immediateBuffer);
+        output.WriteFloat(SingleFloat, ref immediateBuffer);
       }
       if (SingleDouble != 0D) {
-        output.WriteRawTag(97);
-        output.WriteDouble(SingleDouble);
+        output.WriteRawTag(97, ref immediateBuffer);
+        output.WriteDouble(SingleDouble, ref immediateBuffer);
       }
       if (SingleBool != false) {
-        output.WriteRawTag(104);
-        output.WriteBool(SingleBool);
+        output.WriteRawTag(104, ref immediateBuffer);
+        output.WriteBool(SingleBool, ref immediateBuffer);
       }
       if (SingleString.Length != 0) {
-        output.WriteRawTag(114);
-        output.WriteString(SingleString);
+        output.WriteRawTag(114, ref immediateBuffer);
+        output.WriteString(SingleString, ref immediateBuffer);
       }
       if (SingleBytes.Length != 0) {
-        output.WriteRawTag(122);
-        output.WriteBytes(SingleBytes);
+        output.WriteRawTag(122, ref immediateBuffer);
+        output.WriteBytes(SingleBytes, ref immediateBuffer);
       }
-      if (singleNestedMessage_ != null) {
-        output.WriteRawTag(146, 1);
-        output.WriteMessage(SingleNestedMessage);
+      if (SingleNestedMessage != null) {
+        output.WriteRawTag(146, 1, ref immediateBuffer);
+        output.WriteMessage(SingleNestedMessage, ref immediateBuffer);
       }
-      if (singleForeignMessage_ != null) {
-        output.WriteRawTag(154, 1);
-        output.WriteMessage(SingleForeignMessage);
+      if (SingleForeignMessage != null) {
+        output.WriteRawTag(154, 1, ref immediateBuffer);
+        output.WriteMessage(SingleForeignMessage, ref immediateBuffer);
       }
-      if (singleImportMessage_ != null) {
-        output.WriteRawTag(162, 1);
-        output.WriteMessage(SingleImportMessage);
+      if (SingleImportMessage != null) {
+        output.WriteRawTag(162, 1, ref immediateBuffer);
+        output.WriteMessage(SingleImportMessage, ref immediateBuffer);
       }
       if (SingleNestedEnum != 0) {
-        output.WriteRawTag(168, 1);
-        output.WriteEnum((int) SingleNestedEnum);
+        output.WriteRawTag(168, 1, ref immediateBuffer);
+        output.WriteEnum((int)SingleNestedEnum, ref immediateBuffer);
       }
       if (SingleForeignEnum != 0) {
-        output.WriteRawTag(176, 1);
-        output.WriteEnum((int) SingleForeignEnum);
+        output.WriteRawTag(176, 1, ref immediateBuffer);
+        output.WriteEnum((int)SingleForeignEnum, ref immediateBuffer);
       }
       if (SingleImportEnum != 0) {
-        output.WriteRawTag(184, 1);
-        output.WriteEnum((int) SingleImportEnum);
+        output.WriteRawTag(184, 1, ref immediateBuffer);
+        output.WriteEnum((int)SingleImportEnum, ref immediateBuffer);
       }
-      if (singlePublicImportMessage_ != null) {
-        output.WriteRawTag(210, 1);
-        output.WriteMessage(SinglePublicImportMessage);
+      if (SinglePublicImportMessage != null) {
+        output.WriteRawTag(210, 1, ref immediateBuffer);
+        output.WriteMessage(SinglePublicImportMessage, ref immediateBuffer);
       }
-      repeatedInt32_.WriteTo(output, _repeated_repeatedInt32_codec);
-      repeatedInt64_.WriteTo(output, _repeated_repeatedInt64_codec);
-      repeatedUint32_.WriteTo(output, _repeated_repeatedUint32_codec);
-      repeatedUint64_.WriteTo(output, _repeated_repeatedUint64_codec);
-      repeatedSint32_.WriteTo(output, _repeated_repeatedSint32_codec);
-      repeatedSint64_.WriteTo(output, _repeated_repeatedSint64_codec);
-      repeatedFixed32_.WriteTo(output, _repeated_repeatedFixed32_codec);
-      repeatedFixed64_.WriteTo(output, _repeated_repeatedFixed64_codec);
-      repeatedSfixed32_.WriteTo(output, _repeated_repeatedSfixed32_codec);
-      repeatedSfixed64_.WriteTo(output, _repeated_repeatedSfixed64_codec);
-      repeatedFloat_.WriteTo(output, _repeated_repeatedFloat_codec);
-      repeatedDouble_.WriteTo(output, _repeated_repeatedDouble_codec);
-      repeatedBool_.WriteTo(output, _repeated_repeatedBool_codec);
-      repeatedString_.WriteTo(output, _repeated_repeatedString_codec);
-      repeatedBytes_.WriteTo(output, _repeated_repeatedBytes_codec);
-      repeatedNestedMessage_.WriteTo(output, _repeated_repeatedNestedMessage_codec);
-      repeatedForeignMessage_.WriteTo(output, _repeated_repeatedForeignMessage_codec);
-      repeatedImportMessage_.WriteTo(output, _repeated_repeatedImportMessage_codec);
-      repeatedNestedEnum_.WriteTo(output, _repeated_repeatedNestedEnum_codec);
-      repeatedForeignEnum_.WriteTo(output, _repeated_repeatedForeignEnum_codec);
-      repeatedImportEnum_.WriteTo(output, _repeated_repeatedImportEnum_codec);
-      repeatedPublicImportMessage_.WriteTo(output, _repeated_repeatedPublicImportMessage_codec);
+      {
+        var packedSize = 0;
+        for (var i = 0; i < RepeatedInt32.Count; i++) {
+          packedSize += pb::CodedOutputStream.ComputeInt32Size(RepeatedInt32[i]);
+        }
+        if (packedSize > 0) {
+          output.WriteRawTag(250, 1, ref immediateBuffer);
+          output.WriteLength(packedSize, ref immediateBuffer);
+          for (var i = 0; i < RepeatedInt32.Count; i++) {
+            output.WriteInt32(RepeatedInt32[i], ref immediateBuffer);
+          }
+        }
+      }
+      {
+        var packedSize = 0;
+        for (var i = 0; i < RepeatedInt64.Count; i++) {
+          packedSize += pb::CodedOutputStream.ComputeInt64Size(RepeatedInt64[i]);
+        }
+        if (packedSize > 0) {
+          output.WriteRawTag(130, 2, ref immediateBuffer);
+          output.WriteLength(packedSize, ref immediateBuffer);
+          for (var i = 0; i < RepeatedInt64.Count; i++) {
+            output.WriteInt64(RepeatedInt64[i], ref immediateBuffer);
+          }
+        }
+      }
+      {
+        var packedSize = 0;
+        for (var i = 0; i < RepeatedUint32.Count; i++) {
+          packedSize += pb::CodedOutputStream.ComputeUInt32Size(RepeatedUint32[i]);
+        }
+        if (packedSize > 0) {
+          output.WriteRawTag(138, 2, ref immediateBuffer);
+          output.WriteLength(packedSize, ref immediateBuffer);
+          for (var i = 0; i < RepeatedUint32.Count; i++) {
+            output.WriteUInt32(RepeatedUint32[i], ref immediateBuffer);
+          }
+        }
+      }
+      {
+        var packedSize = 0;
+        for (var i = 0; i < RepeatedUint64.Count; i++) {
+          packedSize += pb::CodedOutputStream.ComputeUInt64Size(RepeatedUint64[i]);
+        }
+        if (packedSize > 0) {
+          output.WriteRawTag(146, 2, ref immediateBuffer);
+          output.WriteLength(packedSize, ref immediateBuffer);
+          for (var i = 0; i < RepeatedUint64.Count; i++) {
+            output.WriteUInt64(RepeatedUint64[i], ref immediateBuffer);
+          }
+        }
+      }
+      {
+        var packedSize = 0;
+        for (var i = 0; i < RepeatedSint32.Count; i++) {
+          packedSize += pb::CodedOutputStream.ComputeSInt32Size(RepeatedSint32[i]);
+        }
+        if (packedSize > 0) {
+          output.WriteRawTag(154, 2, ref immediateBuffer);
+          output.WriteLength(packedSize, ref immediateBuffer);
+          for (var i = 0; i < RepeatedSint32.Count; i++) {
+            output.WriteSInt32(RepeatedSint32[i], ref immediateBuffer);
+          }
+        }
+      }
+      {
+        var packedSize = 0;
+        for (var i = 0; i < RepeatedSint64.Count; i++) {
+          packedSize += pb::CodedOutputStream.ComputeSInt64Size(RepeatedSint64[i]);
+        }
+        if (packedSize > 0) {
+          output.WriteRawTag(162, 2, ref immediateBuffer);
+          output.WriteLength(packedSize, ref immediateBuffer);
+          for (var i = 0; i < RepeatedSint64.Count; i++) {
+            output.WriteSInt64(RepeatedSint64[i], ref immediateBuffer);
+          }
+        }
+      }
+      {
+        var packedSize = 4 * RepeatedFixed32.Count;
+        if (packedSize > 0) {
+          output.WriteRawTag(170, 2, ref immediateBuffer);
+          output.WriteLength(packedSize, ref immediateBuffer);
+          for (var i = 0; i < RepeatedFixed32.Count; i++) {
+            output.WriteFixed32(RepeatedFixed32[i], ref immediateBuffer);
+          }
+        }
+      }
+      {
+        var packedSize = 8 * RepeatedFixed64.Count;
+        if (packedSize > 0) {
+          output.WriteRawTag(178, 2, ref immediateBuffer);
+          output.WriteLength(packedSize, ref immediateBuffer);
+          for (var i = 0; i < RepeatedFixed64.Count; i++) {
+            output.WriteFixed64(RepeatedFixed64[i], ref immediateBuffer);
+          }
+        }
+      }
+      {
+        var packedSize = 4 * RepeatedSfixed32.Count;
+        if (packedSize > 0) {
+          output.WriteRawTag(186, 2, ref immediateBuffer);
+          output.WriteLength(packedSize, ref immediateBuffer);
+          for (var i = 0; i < RepeatedSfixed32.Count; i++) {
+            output.WriteSFixed32(RepeatedSfixed32[i], ref immediateBuffer);
+          }
+        }
+      }
+      {
+        var packedSize = 8 * RepeatedSfixed64.Count;
+        if (packedSize > 0) {
+          output.WriteRawTag(194, 2, ref immediateBuffer);
+          output.WriteLength(packedSize, ref immediateBuffer);
+          for (var i = 0; i < RepeatedSfixed64.Count; i++) {
+            output.WriteSFixed64(RepeatedSfixed64[i], ref immediateBuffer);
+          }
+        }
+      }
+      {
+        var packedSize = 4 * RepeatedFloat.Count;
+        if (packedSize > 0) {
+          output.WriteRawTag(202, 2, ref immediateBuffer);
+          output.WriteLength(packedSize, ref immediateBuffer);
+          for (var i = 0; i < RepeatedFloat.Count; i++) {
+            output.WriteFloat(RepeatedFloat[i], ref immediateBuffer);
+          }
+        }
+      }
+      {
+        var packedSize = 8 * RepeatedDouble.Count;
+        if (packedSize > 0) {
+          output.WriteRawTag(210, 2, ref immediateBuffer);
+          output.WriteLength(packedSize, ref immediateBuffer);
+          for (var i = 0; i < RepeatedDouble.Count; i++) {
+            output.WriteDouble(RepeatedDouble[i], ref immediateBuffer);
+          }
+        }
+      }
+      {
+        var packedSize = 1 * RepeatedBool.Count;
+        if (packedSize > 0) {
+          output.WriteRawTag(218, 2, ref immediateBuffer);
+          output.WriteLength(packedSize, ref immediateBuffer);
+          for (var i = 0; i < RepeatedBool.Count; i++) {
+            output.WriteBool(RepeatedBool[i], ref immediateBuffer);
+          }
+        }
+      }
+      for (var i = 0; i < RepeatedString.Count; i++) {
+        output.WriteRawTag(226, 2, ref immediateBuffer);
+        output.WriteString(RepeatedString[i], ref immediateBuffer);
+      }
+      for (var i = 0; i < RepeatedBytes.Count; i++) {
+        output.WriteRawTag(234, 2, ref immediateBuffer);
+        output.WriteBytes(RepeatedBytes[i], ref immediateBuffer);
+      }
+      for (var i = 0; i < RepeatedNestedMessage.Count; i++) {
+        output.WriteRawTag(130, 3, ref immediateBuffer);
+        output.WriteMessage(RepeatedNestedMessage[i], ref immediateBuffer);
+      }
+      for (var i = 0; i < RepeatedForeignMessage.Count; i++) {
+        output.WriteRawTag(138, 3, ref immediateBuffer);
+        output.WriteMessage(RepeatedForeignMessage[i], ref immediateBuffer);
+      }
+      for (var i = 0; i < RepeatedImportMessage.Count; i++) {
+        output.WriteRawTag(146, 3, ref immediateBuffer);
+        output.WriteMessage(RepeatedImportMessage[i], ref immediateBuffer);
+      }
+      {
+        var packedSize = 0;
+        for (var i = 0; i < RepeatedNestedEnum.Count; i++) {
+          packedSize += pb::CodedOutputStream.ComputeEnumSize((int)RepeatedNestedEnum[i]);
+        }
+        if (packedSize > 0) {
+          output.WriteRawTag(154, 3, ref immediateBuffer);
+          output.WriteLength(packedSize, ref immediateBuffer);
+          for (var i = 0; i < RepeatedNestedEnum.Count; i++) {
+            output.WriteEnum((int)RepeatedNestedEnum[i], ref immediateBuffer);
+          }
+        }
+      }
+      {
+        var packedSize = 0;
+        for (var i = 0; i < RepeatedForeignEnum.Count; i++) {
+          packedSize += pb::CodedOutputStream.ComputeEnumSize((int)RepeatedForeignEnum[i]);
+        }
+        if (packedSize > 0) {
+          output.WriteRawTag(162, 3, ref immediateBuffer);
+          output.WriteLength(packedSize, ref immediateBuffer);
+          for (var i = 0; i < RepeatedForeignEnum.Count; i++) {
+            output.WriteEnum((int)RepeatedForeignEnum[i], ref immediateBuffer);
+          }
+        }
+      }
+      {
+        var packedSize = 0;
+        for (var i = 0; i < RepeatedImportEnum.Count; i++) {
+          packedSize += pb::CodedOutputStream.ComputeEnumSize((int)RepeatedImportEnum[i]);
+        }
+        if (packedSize > 0) {
+          output.WriteRawTag(170, 3, ref immediateBuffer);
+          output.WriteLength(packedSize, ref immediateBuffer);
+          for (var i = 0; i < RepeatedImportEnum.Count; i++) {
+            output.WriteEnum((int)RepeatedImportEnum[i], ref immediateBuffer);
+          }
+        }
+      }
+      for (var i = 0; i < RepeatedPublicImportMessage.Count; i++) {
+        output.WriteRawTag(178, 3, ref immediateBuffer);
+        output.WriteMessage(RepeatedPublicImportMessage[i], ref immediateBuffer);
+      }
       if (oneofFieldCase_ == OneofFieldOneofCase.OneofUint32) {
-        output.WriteRawTag(248, 6);
-        output.WriteUInt32(OneofUint32);
+        output.WriteRawTag(248, 6, ref immediateBuffer);
+        output.WriteUInt32(OneofUint32, ref immediateBuffer);
       }
-      if (oneofFieldCase_ == OneofFieldOneofCase.OneofNestedMessage) {
-        output.WriteRawTag(130, 7);
-        output.WriteMessage(OneofNestedMessage);
+      if (OneofNestedMessage != null) {
+        output.WriteRawTag(130, 7, ref immediateBuffer);
+        output.WriteMessage(OneofNestedMessage, ref immediateBuffer);
       }
       if (oneofFieldCase_ == OneofFieldOneofCase.OneofString) {
-        output.WriteRawTag(138, 7);
-        output.WriteString(OneofString);
+        output.WriteRawTag(138, 7, ref immediateBuffer);
+        output.WriteString(OneofString, ref immediateBuffer);
       }
       if (oneofFieldCase_ == OneofFieldOneofCase.OneofBytes) {
-        output.WriteRawTag(146, 7);
-        output.WriteBytes(OneofBytes);
+        output.WriteRawTag(146, 7, ref immediateBuffer);
+        output.WriteBytes(OneofBytes, ref immediateBuffer);
       }
       if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
+        _unknownFields.WriteTo(output, ref immediateBuffer);
       }
     }
 
@@ -1201,28 +1347,147 @@ namespace Google.Protobuf.TestProtos {
       if (SinglePublicImportMessage != null) {
         size += 2 + pb::CodedOutputStream.ComputeMessageSize(SinglePublicImportMessage);
       }
-      size += RepeatedInt32.CalculateSize(_repeated_repeatedInt32_codec);
-      size += RepeatedInt64.CalculateSize(_repeated_repeatedInt64_codec);
-      size += RepeatedUint32.CalculateSize(_repeated_repeatedUint32_codec);
-      size += RepeatedUint64.CalculateSize(_repeated_repeatedUint64_codec);
-      size += RepeatedSint32.CalculateSize(_repeated_repeatedSint32_codec);
-      size += RepeatedSint64.CalculateSize(_repeated_repeatedSint64_codec);
-      size += RepeatedFixed32.CalculateSize(_repeated_repeatedFixed32_codec);
-      size += RepeatedFixed64.CalculateSize(_repeated_repeatedFixed64_codec);
-      size += RepeatedSfixed32.CalculateSize(_repeated_repeatedSfixed32_codec);
-      size += RepeatedSfixed64.CalculateSize(_repeated_repeatedSfixed64_codec);
-      size += RepeatedFloat.CalculateSize(_repeated_repeatedFloat_codec);
-      size += RepeatedDouble.CalculateSize(_repeated_repeatedDouble_codec);
-      size += RepeatedBool.CalculateSize(_repeated_repeatedBool_codec);
-      size += RepeatedString.CalculateSize(_repeated_repeatedString_codec);
-      size += RepeatedBytes.CalculateSize(_repeated_repeatedBytes_codec);
-      size += RepeatedNestedMessage.CalculateSize(_repeated_repeatedNestedMessage_codec);
-      size += RepeatedForeignMessage.CalculateSize(_repeated_repeatedForeignMessage_codec);
-      size += RepeatedImportMessage.CalculateSize(_repeated_repeatedImportMessage_codec);
-      size += RepeatedNestedEnum.CalculateSize(_repeated_repeatedNestedEnum_codec);
-      size += RepeatedForeignEnum.CalculateSize(_repeated_repeatedForeignEnum_codec);
-      size += RepeatedImportEnum.CalculateSize(_repeated_repeatedImportEnum_codec);
-      size += RepeatedPublicImportMessage.CalculateSize(_repeated_repeatedPublicImportMessage_codec);
+      {
+        var packedSize = 0;
+        for (var i = 0; i < RepeatedInt32.Count; i++) {
+          packedSize += pb::CodedOutputStream.ComputeInt32Size(RepeatedInt32[i]);
+        }
+        if (packedSize > 0) {
+          size += 2 + packedSize + pb::CodedOutputStream.ComputeLengthSize(packedSize);
+        }
+      }
+      {
+        var packedSize = 0;
+        for (var i = 0; i < RepeatedInt64.Count; i++) {
+          packedSize += pb::CodedOutputStream.ComputeInt64Size(RepeatedInt64[i]);
+        }
+        if (packedSize > 0) {
+          size += 2 + packedSize + pb::CodedOutputStream.ComputeLengthSize(packedSize);
+        }
+      }
+      {
+        var packedSize = 0;
+        for (var i = 0; i < RepeatedUint32.Count; i++) {
+          packedSize += pb::CodedOutputStream.ComputeUInt32Size(RepeatedUint32[i]);
+        }
+        if (packedSize > 0) {
+          size += 2 + packedSize + pb::CodedOutputStream.ComputeLengthSize(packedSize);
+        }
+      }
+      {
+        var packedSize = 0;
+        for (var i = 0; i < RepeatedUint64.Count; i++) {
+          packedSize += pb::CodedOutputStream.ComputeUInt64Size(RepeatedUint64[i]);
+        }
+        if (packedSize > 0) {
+          size += 2 + packedSize + pb::CodedOutputStream.ComputeLengthSize(packedSize);
+        }
+      }
+      {
+        var packedSize = 0;
+        for (var i = 0; i < RepeatedSint32.Count; i++) {
+          packedSize += pb::CodedOutputStream.ComputeSInt32Size(RepeatedSint32[i]);
+        }
+        if (packedSize > 0) {
+          size += 2 + packedSize + pb::CodedOutputStream.ComputeLengthSize(packedSize);
+        }
+      }
+      {
+        var packedSize = 0;
+        for (var i = 0; i < RepeatedSint64.Count; i++) {
+          packedSize += pb::CodedOutputStream.ComputeSInt64Size(RepeatedSint64[i]);
+        }
+        if (packedSize > 0) {
+          size += 2 + packedSize + pb::CodedOutputStream.ComputeLengthSize(packedSize);
+        }
+      }
+      {
+        var packedSize = 4 * RepeatedFixed32.Count;
+        if (packedSize > 0) {
+          size += 2 + packedSize + pb::CodedOutputStream.ComputeLengthSize(packedSize);
+        }
+      }
+      {
+        var packedSize = 8 * RepeatedFixed64.Count;
+        if (packedSize > 0) {
+          size += 2 + packedSize + pb::CodedOutputStream.ComputeLengthSize(packedSize);
+        }
+      }
+      {
+        var packedSize = 4 * RepeatedSfixed32.Count;
+        if (packedSize > 0) {
+          size += 2 + packedSize + pb::CodedOutputStream.ComputeLengthSize(packedSize);
+        }
+      }
+      {
+        var packedSize = 8 * RepeatedSfixed64.Count;
+        if (packedSize > 0) {
+          size += 2 + packedSize + pb::CodedOutputStream.ComputeLengthSize(packedSize);
+        }
+      }
+      {
+        var packedSize = 4 * RepeatedFloat.Count;
+        if (packedSize > 0) {
+          size += 2 + packedSize + pb::CodedOutputStream.ComputeLengthSize(packedSize);
+        }
+      }
+      {
+        var packedSize = 8 * RepeatedDouble.Count;
+        if (packedSize > 0) {
+          size += 2 + packedSize + pb::CodedOutputStream.ComputeLengthSize(packedSize);
+        }
+      }
+      {
+        var packedSize = 1 * RepeatedBool.Count;
+        if (packedSize > 0) {
+          size += 2 + packedSize + pb::CodedOutputStream.ComputeLengthSize(packedSize);
+        }
+      }
+      for (var i = 0; i < RepeatedString.Count; i++) {
+        size += 2 + pb::CodedOutputStream.ComputeStringSize(RepeatedString[i]);
+      }
+      for (var i = 0; i < RepeatedBytes.Count; i++) {
+        size += 2 + pb::CodedOutputStream.ComputeBytesSize(RepeatedBytes[i]);
+      }
+      for (var i = 0; i < RepeatedNestedMessage.Count; i++) {
+        size += 2 + pb::CodedOutputStream.ComputeMessageSize(RepeatedNestedMessage[i]);
+      }
+      for (var i = 0; i < RepeatedForeignMessage.Count; i++) {
+        size += 2 + pb::CodedOutputStream.ComputeMessageSize(RepeatedForeignMessage[i]);
+      }
+      for (var i = 0; i < RepeatedImportMessage.Count; i++) {
+        size += 2 + pb::CodedOutputStream.ComputeMessageSize(RepeatedImportMessage[i]);
+      }
+      {
+        var packedSize = 0;
+        for (var i = 0; i < RepeatedNestedEnum.Count; i++) {
+          packedSize += pb::CodedOutputStream.ComputeEnumSize((int)RepeatedNestedEnum[i]);
+        }
+        if (packedSize > 0) {
+          size += 2 + packedSize + pb::CodedOutputStream.ComputeLengthSize(packedSize);
+        }
+      }
+      {
+        var packedSize = 0;
+        for (var i = 0; i < RepeatedForeignEnum.Count; i++) {
+          packedSize += pb::CodedOutputStream.ComputeEnumSize((int)RepeatedForeignEnum[i]);
+        }
+        if (packedSize > 0) {
+          size += 2 + packedSize + pb::CodedOutputStream.ComputeLengthSize(packedSize);
+        }
+      }
+      {
+        var packedSize = 0;
+        for (var i = 0; i < RepeatedImportEnum.Count; i++) {
+          packedSize += pb::CodedOutputStream.ComputeEnumSize((int)RepeatedImportEnum[i]);
+        }
+        if (packedSize > 0) {
+          size += 2 + packedSize + pb::CodedOutputStream.ComputeLengthSize(packedSize);
+        }
+      }
+      for (var i = 0; i < RepeatedPublicImportMessage.Count; i++) {
+        size += 2 + pb::CodedOutputStream.ComputeMessageSize(RepeatedPublicImportMessage[i]);
+      }
       if (oneofFieldCase_ == OneofFieldOneofCase.OneofUint32) {
         size += 2 + pb::CodedOutputStream.ComputeUInt32Size(OneofUint32);
       }
@@ -1875,13 +2140,14 @@ namespace Google.Protobuf.TestProtos {
         }
 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-        public void WriteTo(pb::CodedOutputStream output) {
+        [global::System.Security.SecurityCritical]
+        public void WriteTo(pb::CodedOutputStream output, ref global::System.Span<byte> immediateBuffer) {
           if (Bb != 0) {
-            output.WriteRawTag(8);
-            output.WriteInt32(Bb);
+            output.WriteRawTag(8, ref immediateBuffer);
+            output.WriteInt32(Bb, ref immediateBuffer);
           }
           if (_unknownFields != null) {
-            _unknownFields.WriteTo(output);
+            _unknownFields.WriteTo(output, ref immediateBuffer);
           }
         }
 
@@ -1995,8 +2261,6 @@ namespace Google.Protobuf.TestProtos {
 
     /// <summary>Field number for the "repeated_child" field.</summary>
     public const int RepeatedChildFieldNumber = 3;
-    private static readonly pb::FieldCodec<global::Google.Protobuf.TestProtos.NestedTestAllTypes> _repeated_repeatedChild_codec
-        = pb::FieldCodec.ForMessage(26, global::Google.Protobuf.TestProtos.NestedTestAllTypes.Parser);
     private readonly pbc::RepeatedField<global::Google.Protobuf.TestProtos.NestedTestAllTypes> repeatedChild_ = new pbc::RepeatedField<global::Google.Protobuf.TestProtos.NestedTestAllTypes>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<global::Google.Protobuf.TestProtos.NestedTestAllTypes> RepeatedChild {
@@ -2040,18 +2304,22 @@ namespace Google.Protobuf.TestProtos {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
-      if (child_ != null) {
-        output.WriteRawTag(10);
-        output.WriteMessage(Child);
+    [global::System.Security.SecurityCritical]
+    public void WriteTo(pb::CodedOutputStream output, ref global::System.Span<byte> immediateBuffer) {
+      if (Child != null) {
+        output.WriteRawTag(10, ref immediateBuffer);
+        output.WriteMessage(Child, ref immediateBuffer);
       }
-      if (payload_ != null) {
-        output.WriteRawTag(18);
-        output.WriteMessage(Payload);
+      if (Payload != null) {
+        output.WriteRawTag(18, ref immediateBuffer);
+        output.WriteMessage(Payload, ref immediateBuffer);
       }
-      repeatedChild_.WriteTo(output, _repeated_repeatedChild_codec);
+      for (var i = 0; i < RepeatedChild.Count; i++) {
+        output.WriteRawTag(26, ref immediateBuffer);
+        output.WriteMessage(RepeatedChild[i], ref immediateBuffer);
+      }
       if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
+        _unknownFields.WriteTo(output, ref immediateBuffer);
       }
     }
 
@@ -2064,7 +2332,9 @@ namespace Google.Protobuf.TestProtos {
       if (Payload != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(Payload);
       }
-      size += RepeatedChild.CalculateSize(_repeated_repeatedChild_codec);
+      for (var i = 0; i < RepeatedChild.Count; i++) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(RepeatedChild[i]);
+      }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -2207,13 +2477,14 @@ namespace Google.Protobuf.TestProtos {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
+    [global::System.Security.SecurityCritical]
+    public void WriteTo(pb::CodedOutputStream output, ref global::System.Span<byte> immediateBuffer) {
       if (DeprecatedInt32 != 0) {
-        output.WriteRawTag(8);
-        output.WriteInt32(DeprecatedInt32);
+        output.WriteRawTag(8, ref immediateBuffer);
+        output.WriteInt32(DeprecatedInt32, ref immediateBuffer);
       }
       if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
+        _unknownFields.WriteTo(output, ref immediateBuffer);
       }
     }
 
@@ -2341,13 +2612,14 @@ namespace Google.Protobuf.TestProtos {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
+    [global::System.Security.SecurityCritical]
+    public void WriteTo(pb::CodedOutputStream output, ref global::System.Span<byte> immediateBuffer) {
       if (C != 0) {
-        output.WriteRawTag(8);
-        output.WriteInt32(C);
+        output.WriteRawTag(8, ref immediateBuffer);
+        output.WriteInt32(C, ref immediateBuffer);
       }
       if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
+        _unknownFields.WriteTo(output, ref immediateBuffer);
       }
     }
 
@@ -2457,9 +2729,10 @@ namespace Google.Protobuf.TestProtos {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
+    [global::System.Security.SecurityCritical]
+    public void WriteTo(pb::CodedOutputStream output, ref global::System.Span<byte> immediateBuffer) {
       if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
+        _unknownFields.WriteTo(output, ref immediateBuffer);
       }
     }
 
@@ -2576,13 +2849,14 @@ namespace Google.Protobuf.TestProtos {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
-      if (foreignNested_ != null) {
-        output.WriteRawTag(10);
-        output.WriteMessage(ForeignNested);
+    [global::System.Security.SecurityCritical]
+    public void WriteTo(pb::CodedOutputStream output, ref global::System.Span<byte> immediateBuffer) {
+      if (ForeignNested != null) {
+        output.WriteRawTag(10, ref immediateBuffer);
+        output.WriteMessage(ForeignNested, ref immediateBuffer);
       }
       if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
+        _unknownFields.WriteTo(output, ref immediateBuffer);
       }
     }
 
@@ -2733,17 +3007,18 @@ namespace Google.Protobuf.TestProtos {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
+    [global::System.Security.SecurityCritical]
+    public void WriteTo(pb::CodedOutputStream output, ref global::System.Span<byte> immediateBuffer) {
       if (A != 0) {
-        output.WriteRawTag(8);
-        output.WriteInt32(A);
+        output.WriteRawTag(8, ref immediateBuffer);
+        output.WriteInt32(A, ref immediateBuffer);
       }
       if (Bb != 0) {
-        output.WriteRawTag(248, 255, 255, 255, 7);
-        output.WriteInt32(Bb);
+        output.WriteRawTag(248, 255, 255, 255, 7, ref immediateBuffer);
+        output.WriteInt32(Bb, ref immediateBuffer);
       }
       if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
+        _unknownFields.WriteTo(output, ref immediateBuffer);
       }
     }
 
@@ -2891,17 +3166,18 @@ namespace Google.Protobuf.TestProtos {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
-      if (a_ != null) {
-        output.WriteRawTag(10);
-        output.WriteMessage(A);
+    [global::System.Security.SecurityCritical]
+    public void WriteTo(pb::CodedOutputStream output, ref global::System.Span<byte> immediateBuffer) {
+      if (A != null) {
+        output.WriteRawTag(10, ref immediateBuffer);
+        output.WriteMessage(A, ref immediateBuffer);
       }
       if (I != 0) {
-        output.WriteRawTag(16);
-        output.WriteInt32(I);
+        output.WriteRawTag(16, ref immediateBuffer);
+        output.WriteInt32(I, ref immediateBuffer);
       }
       if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
+        _unknownFields.WriteTo(output, ref immediateBuffer);
       }
     }
 
@@ -3044,13 +3320,14 @@ namespace Google.Protobuf.TestProtos {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
-      if (bb_ != null) {
-        output.WriteRawTag(10);
-        output.WriteMessage(Bb);
+    [global::System.Security.SecurityCritical]
+    public void WriteTo(pb::CodedOutputStream output, ref global::System.Span<byte> immediateBuffer) {
+      if (Bb != null) {
+        output.WriteRawTag(10, ref immediateBuffer);
+        output.WriteMessage(Bb, ref immediateBuffer);
       }
       if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
+        _unknownFields.WriteTo(output, ref immediateBuffer);
       }
     }
 
@@ -3194,17 +3471,18 @@ namespace Google.Protobuf.TestProtos {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
-      if (a_ != null) {
-        output.WriteRawTag(10);
-        output.WriteMessage(A);
+    [global::System.Security.SecurityCritical]
+    public void WriteTo(pb::CodedOutputStream output, ref global::System.Span<byte> immediateBuffer) {
+      if (A != null) {
+        output.WriteRawTag(10, ref immediateBuffer);
+        output.WriteMessage(A, ref immediateBuffer);
       }
       if (OptionalInt32 != 0) {
-        output.WriteRawTag(16);
-        output.WriteInt32(OptionalInt32);
+        output.WriteRawTag(16, ref immediateBuffer);
+        output.WriteInt32(OptionalInt32, ref immediateBuffer);
       }
       if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
+        _unknownFields.WriteTo(output, ref immediateBuffer);
       }
     }
 
@@ -3344,13 +3622,14 @@ namespace Google.Protobuf.TestProtos {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
+    [global::System.Security.SecurityCritical]
+    public void WriteTo(pb::CodedOutputStream output, ref global::System.Span<byte> immediateBuffer) {
       if (Value != 0) {
-        output.WriteRawTag(8);
-        output.WriteEnum((int) Value);
+        output.WriteRawTag(8, ref immediateBuffer);
+        output.WriteEnum((int)Value, ref immediateBuffer);
       }
       if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
+        _unknownFields.WriteTo(output, ref immediateBuffer);
       }
     }
 
@@ -3487,8 +3766,6 @@ namespace Google.Protobuf.TestProtos {
 
     /// <summary>Field number for the "RepeatedPrimitiveField" field.</summary>
     public const int RepeatedPrimitiveFieldFieldNumber = 7;
-    private static readonly pb::FieldCodec<int> _repeated_repeatedPrimitiveField_codec
-        = pb::FieldCodec.ForInt32(58);
     private readonly pbc::RepeatedField<int> repeatedPrimitiveField_ = new pbc::RepeatedField<int>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<int> RepeatedPrimitiveField {
@@ -3497,8 +3774,6 @@ namespace Google.Protobuf.TestProtos {
 
     /// <summary>Field number for the "RepeatedStringField" field.</summary>
     public const int RepeatedStringFieldFieldNumber = 8;
-    private static readonly pb::FieldCodec<string> _repeated_repeatedStringField_codec
-        = pb::FieldCodec.ForString(66);
     private readonly pbc::RepeatedField<string> repeatedStringField_ = new pbc::RepeatedField<string>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<string> RepeatedStringField {
@@ -3507,8 +3782,6 @@ namespace Google.Protobuf.TestProtos {
 
     /// <summary>Field number for the "RepeatedEnumField" field.</summary>
     public const int RepeatedEnumFieldFieldNumber = 9;
-    private static readonly pb::FieldCodec<global::Google.Protobuf.TestProtos.ForeignEnum> _repeated_repeatedEnumField_codec
-        = pb::FieldCodec.ForEnum(74, x => (int) x, x => (global::Google.Protobuf.TestProtos.ForeignEnum) x);
     private readonly pbc::RepeatedField<global::Google.Protobuf.TestProtos.ForeignEnum> repeatedEnumField_ = new pbc::RepeatedField<global::Google.Protobuf.TestProtos.ForeignEnum>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<global::Google.Protobuf.TestProtos.ForeignEnum> RepeatedEnumField {
@@ -3517,8 +3790,6 @@ namespace Google.Protobuf.TestProtos {
 
     /// <summary>Field number for the "RepeatedMessageField" field.</summary>
     public const int RepeatedMessageFieldFieldNumber = 10;
-    private static readonly pb::FieldCodec<global::Google.Protobuf.TestProtos.ForeignMessage> _repeated_repeatedMessageField_codec
-        = pb::FieldCodec.ForMessage(82, global::Google.Protobuf.TestProtos.ForeignMessage.Parser);
     private readonly pbc::RepeatedField<global::Google.Protobuf.TestProtos.ForeignMessage> repeatedMessageField_ = new pbc::RepeatedField<global::Google.Protobuf.TestProtos.ForeignMessage>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<global::Google.Protobuf.TestProtos.ForeignMessage> RepeatedMessageField {
@@ -3572,29 +3843,60 @@ namespace Google.Protobuf.TestProtos {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
+    [global::System.Security.SecurityCritical]
+    public void WriteTo(pb::CodedOutputStream output, ref global::System.Span<byte> immediateBuffer) {
       if (PrimitiveField != 0) {
-        output.WriteRawTag(8);
-        output.WriteInt32(PrimitiveField);
+        output.WriteRawTag(8, ref immediateBuffer);
+        output.WriteInt32(PrimitiveField, ref immediateBuffer);
       }
       if (StringField.Length != 0) {
-        output.WriteRawTag(18);
-        output.WriteString(StringField);
+        output.WriteRawTag(18, ref immediateBuffer);
+        output.WriteString(StringField, ref immediateBuffer);
       }
       if (EnumField != 0) {
-        output.WriteRawTag(24);
-        output.WriteEnum((int) EnumField);
+        output.WriteRawTag(24, ref immediateBuffer);
+        output.WriteEnum((int)EnumField, ref immediateBuffer);
       }
-      if (messageField_ != null) {
-        output.WriteRawTag(34);
-        output.WriteMessage(MessageField);
+      if (MessageField != null) {
+        output.WriteRawTag(34, ref immediateBuffer);
+        output.WriteMessage(MessageField, ref immediateBuffer);
       }
-      repeatedPrimitiveField_.WriteTo(output, _repeated_repeatedPrimitiveField_codec);
-      repeatedStringField_.WriteTo(output, _repeated_repeatedStringField_codec);
-      repeatedEnumField_.WriteTo(output, _repeated_repeatedEnumField_codec);
-      repeatedMessageField_.WriteTo(output, _repeated_repeatedMessageField_codec);
+      {
+        var packedSize = 0;
+        for (var i = 0; i < RepeatedPrimitiveField.Count; i++) {
+          packedSize += pb::CodedOutputStream.ComputeInt32Size(RepeatedPrimitiveField[i]);
+        }
+        if (packedSize > 0) {
+          output.WriteRawTag(58, ref immediateBuffer);
+          output.WriteLength(packedSize, ref immediateBuffer);
+          for (var i = 0; i < RepeatedPrimitiveField.Count; i++) {
+            output.WriteInt32(RepeatedPrimitiveField[i], ref immediateBuffer);
+          }
+        }
+      }
+      for (var i = 0; i < RepeatedStringField.Count; i++) {
+        output.WriteRawTag(66, ref immediateBuffer);
+        output.WriteString(RepeatedStringField[i], ref immediateBuffer);
+      }
+      {
+        var packedSize = 0;
+        for (var i = 0; i < RepeatedEnumField.Count; i++) {
+          packedSize += pb::CodedOutputStream.ComputeEnumSize((int)RepeatedEnumField[i]);
+        }
+        if (packedSize > 0) {
+          output.WriteRawTag(74, ref immediateBuffer);
+          output.WriteLength(packedSize, ref immediateBuffer);
+          for (var i = 0; i < RepeatedEnumField.Count; i++) {
+            output.WriteEnum((int)RepeatedEnumField[i], ref immediateBuffer);
+          }
+        }
+      }
+      for (var i = 0; i < RepeatedMessageField.Count; i++) {
+        output.WriteRawTag(82, ref immediateBuffer);
+        output.WriteMessage(RepeatedMessageField[i], ref immediateBuffer);
+      }
       if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
+        _unknownFields.WriteTo(output, ref immediateBuffer);
       }
     }
 
@@ -3613,10 +3915,30 @@ namespace Google.Protobuf.TestProtos {
       if (MessageField != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(MessageField);
       }
-      size += RepeatedPrimitiveField.CalculateSize(_repeated_repeatedPrimitiveField_codec);
-      size += RepeatedStringField.CalculateSize(_repeated_repeatedStringField_codec);
-      size += RepeatedEnumField.CalculateSize(_repeated_repeatedEnumField_codec);
-      size += RepeatedMessageField.CalculateSize(_repeated_repeatedMessageField_codec);
+      {
+        var packedSize = 0;
+        for (var i = 0; i < RepeatedPrimitiveField.Count; i++) {
+          packedSize += pb::CodedOutputStream.ComputeInt32Size(RepeatedPrimitiveField[i]);
+        }
+        if (packedSize > 0) {
+          size += 1 + packedSize + pb::CodedOutputStream.ComputeLengthSize(packedSize);
+        }
+      }
+      for (var i = 0; i < RepeatedStringField.Count; i++) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(RepeatedStringField[i]);
+      }
+      {
+        var packedSize = 0;
+        for (var i = 0; i < RepeatedEnumField.Count; i++) {
+          packedSize += pb::CodedOutputStream.ComputeEnumSize((int)RepeatedEnumField[i]);
+        }
+        if (packedSize > 0) {
+          size += 1 + packedSize + pb::CodedOutputStream.ComputeLengthSize(packedSize);
+        }
+      }
+      for (var i = 0; i < RepeatedMessageField.Count; i++) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(RepeatedMessageField[i]);
+      }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -3849,25 +4171,26 @@ namespace Google.Protobuf.TestProtos {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
-      if (MyInt != 0L) {
-        output.WriteRawTag(8);
-        output.WriteInt64(MyInt);
-      }
+    [global::System.Security.SecurityCritical]
+    public void WriteTo(pb::CodedOutputStream output, ref global::System.Span<byte> immediateBuffer) {
       if (MyString.Length != 0) {
-        output.WriteRawTag(90);
-        output.WriteString(MyString);
+        output.WriteRawTag(90, ref immediateBuffer);
+        output.WriteString(MyString, ref immediateBuffer);
+      }
+      if (MyInt != 0L) {
+        output.WriteRawTag(8, ref immediateBuffer);
+        output.WriteInt64(MyInt, ref immediateBuffer);
       }
       if (MyFloat != 0F) {
-        output.WriteRawTag(173, 6);
-        output.WriteFloat(MyFloat);
+        output.WriteRawTag(173, 6, ref immediateBuffer);
+        output.WriteFloat(MyFloat, ref immediateBuffer);
       }
-      if (singleNestedMessage_ != null) {
-        output.WriteRawTag(194, 12);
-        output.WriteMessage(SingleNestedMessage);
+      if (SingleNestedMessage != null) {
+        output.WriteRawTag(194, 12, ref immediateBuffer);
+        output.WriteMessage(SingleNestedMessage, ref immediateBuffer);
       }
       if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
+        _unknownFields.WriteTo(output, ref immediateBuffer);
       }
     }
 
@@ -4048,17 +4371,18 @@ namespace Google.Protobuf.TestProtos {
         }
 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-        public void WriteTo(pb::CodedOutputStream output) {
-          if (Bb != 0) {
-            output.WriteRawTag(8);
-            output.WriteInt32(Bb);
-          }
+        [global::System.Security.SecurityCritical]
+        public void WriteTo(pb::CodedOutputStream output, ref global::System.Span<byte> immediateBuffer) {
           if (Oo != 0L) {
-            output.WriteRawTag(16);
-            output.WriteInt64(Oo);
+            output.WriteRawTag(16, ref immediateBuffer);
+            output.WriteInt64(Oo, ref immediateBuffer);
+          }
+          if (Bb != 0) {
+            output.WriteRawTag(8, ref immediateBuffer);
+            output.WriteInt32(Bb, ref immediateBuffer);
           }
           if (_unknownFields != null) {
-            _unknownFields.WriteTo(output);
+            _unknownFields.WriteTo(output, ref immediateBuffer);
           }
         }
 
@@ -4197,13 +4521,14 @@ namespace Google.Protobuf.TestProtos {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
+    [global::System.Security.SecurityCritical]
+    public void WriteTo(pb::CodedOutputStream output, ref global::System.Span<byte> immediateBuffer) {
       if (SparseEnum != 0) {
-        output.WriteRawTag(8);
-        output.WriteEnum((int) SparseEnum);
+        output.WriteRawTag(8, ref immediateBuffer);
+        output.WriteEnum((int)SparseEnum, ref immediateBuffer);
       }
       if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
+        _unknownFields.WriteTo(output, ref immediateBuffer);
       }
     }
 
@@ -4330,13 +4655,14 @@ namespace Google.Protobuf.TestProtos {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
+    [global::System.Security.SecurityCritical]
+    public void WriteTo(pb::CodedOutputStream output, ref global::System.Span<byte> immediateBuffer) {
       if (Data.Length != 0) {
-        output.WriteRawTag(10);
-        output.WriteString(Data);
+        output.WriteRawTag(10, ref immediateBuffer);
+        output.WriteString(Data, ref immediateBuffer);
       }
       if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
+        _unknownFields.WriteTo(output, ref immediateBuffer);
       }
     }
 
@@ -4418,8 +4744,6 @@ namespace Google.Protobuf.TestProtos {
 
     /// <summary>Field number for the "data" field.</summary>
     public const int DataFieldNumber = 1;
-    private static readonly pb::FieldCodec<string> _repeated_data_codec
-        = pb::FieldCodec.ForString(10);
     private readonly pbc::RepeatedField<string> data_ = new pbc::RepeatedField<string>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<string> Data {
@@ -4459,17 +4783,23 @@ namespace Google.Protobuf.TestProtos {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
-      data_.WriteTo(output, _repeated_data_codec);
+    [global::System.Security.SecurityCritical]
+    public void WriteTo(pb::CodedOutputStream output, ref global::System.Span<byte> immediateBuffer) {
+      for (var i = 0; i < Data.Count; i++) {
+        output.WriteRawTag(10, ref immediateBuffer);
+        output.WriteString(Data[i], ref immediateBuffer);
+      }
       if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
+        _unknownFields.WriteTo(output, ref immediateBuffer);
       }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      size += Data.CalculateSize(_repeated_data_codec);
+      for (var i = 0; i < Data.Count; i++) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Data[i]);
+      }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -4582,13 +4912,14 @@ namespace Google.Protobuf.TestProtos {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
+    [global::System.Security.SecurityCritical]
+    public void WriteTo(pb::CodedOutputStream output, ref global::System.Span<byte> immediateBuffer) {
       if (Data.Length != 0) {
-        output.WriteRawTag(10);
-        output.WriteBytes(Data);
+        output.WriteRawTag(10, ref immediateBuffer);
+        output.WriteBytes(Data, ref immediateBuffer);
       }
       if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
+        _unknownFields.WriteTo(output, ref immediateBuffer);
       }
     }
 
@@ -4712,13 +5043,14 @@ namespace Google.Protobuf.TestProtos {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
+    [global::System.Security.SecurityCritical]
+    public void WriteTo(pb::CodedOutputStream output, ref global::System.Span<byte> immediateBuffer) {
       if (Data.Length != 0) {
-        output.WriteRawTag(10);
-        output.WriteBytes(Data);
+        output.WriteRawTag(10, ref immediateBuffer);
+        output.WriteBytes(Data, ref immediateBuffer);
       }
       if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
+        _unknownFields.WriteTo(output, ref immediateBuffer);
       }
     }
 
@@ -4845,13 +5177,14 @@ namespace Google.Protobuf.TestProtos {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
+    [global::System.Security.SecurityCritical]
+    public void WriteTo(pb::CodedOutputStream output, ref global::System.Span<byte> immediateBuffer) {
       if (Data != 0) {
-        output.WriteRawTag(8);
-        output.WriteInt32(Data);
+        output.WriteRawTag(8, ref immediateBuffer);
+        output.WriteInt32(Data, ref immediateBuffer);
       }
       if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
+        _unknownFields.WriteTo(output, ref immediateBuffer);
       }
     }
 
@@ -4975,13 +5308,14 @@ namespace Google.Protobuf.TestProtos {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
+    [global::System.Security.SecurityCritical]
+    public void WriteTo(pb::CodedOutputStream output, ref global::System.Span<byte> immediateBuffer) {
       if (Data != 0) {
-        output.WriteRawTag(8);
-        output.WriteUInt32(Data);
+        output.WriteRawTag(8, ref immediateBuffer);
+        output.WriteUInt32(Data, ref immediateBuffer);
       }
       if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
+        _unknownFields.WriteTo(output, ref immediateBuffer);
       }
     }
 
@@ -5105,13 +5439,14 @@ namespace Google.Protobuf.TestProtos {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
+    [global::System.Security.SecurityCritical]
+    public void WriteTo(pb::CodedOutputStream output, ref global::System.Span<byte> immediateBuffer) {
       if (Data != 0L) {
-        output.WriteRawTag(8);
-        output.WriteInt64(Data);
+        output.WriteRawTag(8, ref immediateBuffer);
+        output.WriteInt64(Data, ref immediateBuffer);
       }
       if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
+        _unknownFields.WriteTo(output, ref immediateBuffer);
       }
     }
 
@@ -5235,13 +5570,14 @@ namespace Google.Protobuf.TestProtos {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
+    [global::System.Security.SecurityCritical]
+    public void WriteTo(pb::CodedOutputStream output, ref global::System.Span<byte> immediateBuffer) {
       if (Data != 0UL) {
-        output.WriteRawTag(8);
-        output.WriteUInt64(Data);
+        output.WriteRawTag(8, ref immediateBuffer);
+        output.WriteUInt64(Data, ref immediateBuffer);
       }
       if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
+        _unknownFields.WriteTo(output, ref immediateBuffer);
       }
     }
 
@@ -5365,13 +5701,14 @@ namespace Google.Protobuf.TestProtos {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
+    [global::System.Security.SecurityCritical]
+    public void WriteTo(pb::CodedOutputStream output, ref global::System.Span<byte> immediateBuffer) {
       if (Data != false) {
-        output.WriteRawTag(8);
-        output.WriteBool(Data);
+        output.WriteRawTag(8, ref immediateBuffer);
+        output.WriteBool(Data, ref immediateBuffer);
       }
       if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
+        _unknownFields.WriteTo(output, ref immediateBuffer);
       }
     }
 
@@ -5557,21 +5894,22 @@ namespace Google.Protobuf.TestProtos {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
+    [global::System.Security.SecurityCritical]
+    public void WriteTo(pb::CodedOutputStream output, ref global::System.Span<byte> immediateBuffer) {
       if (fooCase_ == FooOneofCase.FooInt) {
-        output.WriteRawTag(8);
-        output.WriteInt32(FooInt);
+        output.WriteRawTag(8, ref immediateBuffer);
+        output.WriteInt32(FooInt, ref immediateBuffer);
       }
       if (fooCase_ == FooOneofCase.FooString) {
-        output.WriteRawTag(18);
-        output.WriteString(FooString);
+        output.WriteRawTag(18, ref immediateBuffer);
+        output.WriteString(FooString, ref immediateBuffer);
       }
-      if (fooCase_ == FooOneofCase.FooMessage) {
-        output.WriteRawTag(26);
-        output.WriteMessage(FooMessage);
+      if (FooMessage != null) {
+        output.WriteRawTag(26, ref immediateBuffer);
+        output.WriteMessage(FooMessage, ref immediateBuffer);
       }
       if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
+        _unknownFields.WriteTo(output, ref immediateBuffer);
       }
     }
 
@@ -5697,8 +6035,6 @@ namespace Google.Protobuf.TestProtos {
 
     /// <summary>Field number for the "packed_int32" field.</summary>
     public const int PackedInt32FieldNumber = 90;
-    private static readonly pb::FieldCodec<int> _repeated_packedInt32_codec
-        = pb::FieldCodec.ForInt32(722);
     private readonly pbc::RepeatedField<int> packedInt32_ = new pbc::RepeatedField<int>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<int> PackedInt32 {
@@ -5707,8 +6043,6 @@ namespace Google.Protobuf.TestProtos {
 
     /// <summary>Field number for the "packed_int64" field.</summary>
     public const int PackedInt64FieldNumber = 91;
-    private static readonly pb::FieldCodec<long> _repeated_packedInt64_codec
-        = pb::FieldCodec.ForInt64(730);
     private readonly pbc::RepeatedField<long> packedInt64_ = new pbc::RepeatedField<long>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<long> PackedInt64 {
@@ -5717,8 +6051,6 @@ namespace Google.Protobuf.TestProtos {
 
     /// <summary>Field number for the "packed_uint32" field.</summary>
     public const int PackedUint32FieldNumber = 92;
-    private static readonly pb::FieldCodec<uint> _repeated_packedUint32_codec
-        = pb::FieldCodec.ForUInt32(738);
     private readonly pbc::RepeatedField<uint> packedUint32_ = new pbc::RepeatedField<uint>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<uint> PackedUint32 {
@@ -5727,8 +6059,6 @@ namespace Google.Protobuf.TestProtos {
 
     /// <summary>Field number for the "packed_uint64" field.</summary>
     public const int PackedUint64FieldNumber = 93;
-    private static readonly pb::FieldCodec<ulong> _repeated_packedUint64_codec
-        = pb::FieldCodec.ForUInt64(746);
     private readonly pbc::RepeatedField<ulong> packedUint64_ = new pbc::RepeatedField<ulong>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<ulong> PackedUint64 {
@@ -5737,8 +6067,6 @@ namespace Google.Protobuf.TestProtos {
 
     /// <summary>Field number for the "packed_sint32" field.</summary>
     public const int PackedSint32FieldNumber = 94;
-    private static readonly pb::FieldCodec<int> _repeated_packedSint32_codec
-        = pb::FieldCodec.ForSInt32(754);
     private readonly pbc::RepeatedField<int> packedSint32_ = new pbc::RepeatedField<int>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<int> PackedSint32 {
@@ -5747,8 +6075,6 @@ namespace Google.Protobuf.TestProtos {
 
     /// <summary>Field number for the "packed_sint64" field.</summary>
     public const int PackedSint64FieldNumber = 95;
-    private static readonly pb::FieldCodec<long> _repeated_packedSint64_codec
-        = pb::FieldCodec.ForSInt64(762);
     private readonly pbc::RepeatedField<long> packedSint64_ = new pbc::RepeatedField<long>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<long> PackedSint64 {
@@ -5757,8 +6083,6 @@ namespace Google.Protobuf.TestProtos {
 
     /// <summary>Field number for the "packed_fixed32" field.</summary>
     public const int PackedFixed32FieldNumber = 96;
-    private static readonly pb::FieldCodec<uint> _repeated_packedFixed32_codec
-        = pb::FieldCodec.ForFixed32(770);
     private readonly pbc::RepeatedField<uint> packedFixed32_ = new pbc::RepeatedField<uint>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<uint> PackedFixed32 {
@@ -5767,8 +6091,6 @@ namespace Google.Protobuf.TestProtos {
 
     /// <summary>Field number for the "packed_fixed64" field.</summary>
     public const int PackedFixed64FieldNumber = 97;
-    private static readonly pb::FieldCodec<ulong> _repeated_packedFixed64_codec
-        = pb::FieldCodec.ForFixed64(778);
     private readonly pbc::RepeatedField<ulong> packedFixed64_ = new pbc::RepeatedField<ulong>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<ulong> PackedFixed64 {
@@ -5777,8 +6099,6 @@ namespace Google.Protobuf.TestProtos {
 
     /// <summary>Field number for the "packed_sfixed32" field.</summary>
     public const int PackedSfixed32FieldNumber = 98;
-    private static readonly pb::FieldCodec<int> _repeated_packedSfixed32_codec
-        = pb::FieldCodec.ForSFixed32(786);
     private readonly pbc::RepeatedField<int> packedSfixed32_ = new pbc::RepeatedField<int>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<int> PackedSfixed32 {
@@ -5787,8 +6107,6 @@ namespace Google.Protobuf.TestProtos {
 
     /// <summary>Field number for the "packed_sfixed64" field.</summary>
     public const int PackedSfixed64FieldNumber = 99;
-    private static readonly pb::FieldCodec<long> _repeated_packedSfixed64_codec
-        = pb::FieldCodec.ForSFixed64(794);
     private readonly pbc::RepeatedField<long> packedSfixed64_ = new pbc::RepeatedField<long>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<long> PackedSfixed64 {
@@ -5797,8 +6115,6 @@ namespace Google.Protobuf.TestProtos {
 
     /// <summary>Field number for the "packed_float" field.</summary>
     public const int PackedFloatFieldNumber = 100;
-    private static readonly pb::FieldCodec<float> _repeated_packedFloat_codec
-        = pb::FieldCodec.ForFloat(802);
     private readonly pbc::RepeatedField<float> packedFloat_ = new pbc::RepeatedField<float>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<float> PackedFloat {
@@ -5807,8 +6123,6 @@ namespace Google.Protobuf.TestProtos {
 
     /// <summary>Field number for the "packed_double" field.</summary>
     public const int PackedDoubleFieldNumber = 101;
-    private static readonly pb::FieldCodec<double> _repeated_packedDouble_codec
-        = pb::FieldCodec.ForDouble(810);
     private readonly pbc::RepeatedField<double> packedDouble_ = new pbc::RepeatedField<double>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<double> PackedDouble {
@@ -5817,8 +6131,6 @@ namespace Google.Protobuf.TestProtos {
 
     /// <summary>Field number for the "packed_bool" field.</summary>
     public const int PackedBoolFieldNumber = 102;
-    private static readonly pb::FieldCodec<bool> _repeated_packedBool_codec
-        = pb::FieldCodec.ForBool(818);
     private readonly pbc::RepeatedField<bool> packedBool_ = new pbc::RepeatedField<bool>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<bool> PackedBool {
@@ -5827,8 +6139,6 @@ namespace Google.Protobuf.TestProtos {
 
     /// <summary>Field number for the "packed_enum" field.</summary>
     public const int PackedEnumFieldNumber = 103;
-    private static readonly pb::FieldCodec<global::Google.Protobuf.TestProtos.ForeignEnum> _repeated_packedEnum_codec
-        = pb::FieldCodec.ForEnum(826, x => (int) x, x => (global::Google.Protobuf.TestProtos.ForeignEnum) x);
     private readonly pbc::RepeatedField<global::Google.Protobuf.TestProtos.ForeignEnum> packedEnum_ = new pbc::RepeatedField<global::Google.Protobuf.TestProtos.ForeignEnum>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<global::Google.Protobuf.TestProtos.ForeignEnum> PackedEnum {
@@ -5894,43 +6204,282 @@ namespace Google.Protobuf.TestProtos {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
-      packedInt32_.WriteTo(output, _repeated_packedInt32_codec);
-      packedInt64_.WriteTo(output, _repeated_packedInt64_codec);
-      packedUint32_.WriteTo(output, _repeated_packedUint32_codec);
-      packedUint64_.WriteTo(output, _repeated_packedUint64_codec);
-      packedSint32_.WriteTo(output, _repeated_packedSint32_codec);
-      packedSint64_.WriteTo(output, _repeated_packedSint64_codec);
-      packedFixed32_.WriteTo(output, _repeated_packedFixed32_codec);
-      packedFixed64_.WriteTo(output, _repeated_packedFixed64_codec);
-      packedSfixed32_.WriteTo(output, _repeated_packedSfixed32_codec);
-      packedSfixed64_.WriteTo(output, _repeated_packedSfixed64_codec);
-      packedFloat_.WriteTo(output, _repeated_packedFloat_codec);
-      packedDouble_.WriteTo(output, _repeated_packedDouble_codec);
-      packedBool_.WriteTo(output, _repeated_packedBool_codec);
-      packedEnum_.WriteTo(output, _repeated_packedEnum_codec);
+    [global::System.Security.SecurityCritical]
+    public void WriteTo(pb::CodedOutputStream output, ref global::System.Span<byte> immediateBuffer) {
+      {
+        var packedSize = 0;
+        for (var i = 0; i < PackedInt32.Count; i++) {
+          packedSize += pb::CodedOutputStream.ComputeInt32Size(PackedInt32[i]);
+        }
+        if (packedSize > 0) {
+          output.WriteRawTag(210, 5, ref immediateBuffer);
+          output.WriteLength(packedSize, ref immediateBuffer);
+          for (var i = 0; i < PackedInt32.Count; i++) {
+            output.WriteInt32(PackedInt32[i], ref immediateBuffer);
+          }
+        }
+      }
+      {
+        var packedSize = 0;
+        for (var i = 0; i < PackedInt64.Count; i++) {
+          packedSize += pb::CodedOutputStream.ComputeInt64Size(PackedInt64[i]);
+        }
+        if (packedSize > 0) {
+          output.WriteRawTag(218, 5, ref immediateBuffer);
+          output.WriteLength(packedSize, ref immediateBuffer);
+          for (var i = 0; i < PackedInt64.Count; i++) {
+            output.WriteInt64(PackedInt64[i], ref immediateBuffer);
+          }
+        }
+      }
+      {
+        var packedSize = 0;
+        for (var i = 0; i < PackedUint32.Count; i++) {
+          packedSize += pb::CodedOutputStream.ComputeUInt32Size(PackedUint32[i]);
+        }
+        if (packedSize > 0) {
+          output.WriteRawTag(226, 5, ref immediateBuffer);
+          output.WriteLength(packedSize, ref immediateBuffer);
+          for (var i = 0; i < PackedUint32.Count; i++) {
+            output.WriteUInt32(PackedUint32[i], ref immediateBuffer);
+          }
+        }
+      }
+      {
+        var packedSize = 0;
+        for (var i = 0; i < PackedUint64.Count; i++) {
+          packedSize += pb::CodedOutputStream.ComputeUInt64Size(PackedUint64[i]);
+        }
+        if (packedSize > 0) {
+          output.WriteRawTag(234, 5, ref immediateBuffer);
+          output.WriteLength(packedSize, ref immediateBuffer);
+          for (var i = 0; i < PackedUint64.Count; i++) {
+            output.WriteUInt64(PackedUint64[i], ref immediateBuffer);
+          }
+        }
+      }
+      {
+        var packedSize = 0;
+        for (var i = 0; i < PackedSint32.Count; i++) {
+          packedSize += pb::CodedOutputStream.ComputeSInt32Size(PackedSint32[i]);
+        }
+        if (packedSize > 0) {
+          output.WriteRawTag(242, 5, ref immediateBuffer);
+          output.WriteLength(packedSize, ref immediateBuffer);
+          for (var i = 0; i < PackedSint32.Count; i++) {
+            output.WriteSInt32(PackedSint32[i], ref immediateBuffer);
+          }
+        }
+      }
+      {
+        var packedSize = 0;
+        for (var i = 0; i < PackedSint64.Count; i++) {
+          packedSize += pb::CodedOutputStream.ComputeSInt64Size(PackedSint64[i]);
+        }
+        if (packedSize > 0) {
+          output.WriteRawTag(250, 5, ref immediateBuffer);
+          output.WriteLength(packedSize, ref immediateBuffer);
+          for (var i = 0; i < PackedSint64.Count; i++) {
+            output.WriteSInt64(PackedSint64[i], ref immediateBuffer);
+          }
+        }
+      }
+      {
+        var packedSize = 4 * PackedFixed32.Count;
+        if (packedSize > 0) {
+          output.WriteRawTag(130, 6, ref immediateBuffer);
+          output.WriteLength(packedSize, ref immediateBuffer);
+          for (var i = 0; i < PackedFixed32.Count; i++) {
+            output.WriteFixed32(PackedFixed32[i], ref immediateBuffer);
+          }
+        }
+      }
+      {
+        var packedSize = 8 * PackedFixed64.Count;
+        if (packedSize > 0) {
+          output.WriteRawTag(138, 6, ref immediateBuffer);
+          output.WriteLength(packedSize, ref immediateBuffer);
+          for (var i = 0; i < PackedFixed64.Count; i++) {
+            output.WriteFixed64(PackedFixed64[i], ref immediateBuffer);
+          }
+        }
+      }
+      {
+        var packedSize = 4 * PackedSfixed32.Count;
+        if (packedSize > 0) {
+          output.WriteRawTag(146, 6, ref immediateBuffer);
+          output.WriteLength(packedSize, ref immediateBuffer);
+          for (var i = 0; i < PackedSfixed32.Count; i++) {
+            output.WriteSFixed32(PackedSfixed32[i], ref immediateBuffer);
+          }
+        }
+      }
+      {
+        var packedSize = 8 * PackedSfixed64.Count;
+        if (packedSize > 0) {
+          output.WriteRawTag(154, 6, ref immediateBuffer);
+          output.WriteLength(packedSize, ref immediateBuffer);
+          for (var i = 0; i < PackedSfixed64.Count; i++) {
+            output.WriteSFixed64(PackedSfixed64[i], ref immediateBuffer);
+          }
+        }
+      }
+      {
+        var packedSize = 4 * PackedFloat.Count;
+        if (packedSize > 0) {
+          output.WriteRawTag(162, 6, ref immediateBuffer);
+          output.WriteLength(packedSize, ref immediateBuffer);
+          for (var i = 0; i < PackedFloat.Count; i++) {
+            output.WriteFloat(PackedFloat[i], ref immediateBuffer);
+          }
+        }
+      }
+      {
+        var packedSize = 8 * PackedDouble.Count;
+        if (packedSize > 0) {
+          output.WriteRawTag(170, 6, ref immediateBuffer);
+          output.WriteLength(packedSize, ref immediateBuffer);
+          for (var i = 0; i < PackedDouble.Count; i++) {
+            output.WriteDouble(PackedDouble[i], ref immediateBuffer);
+          }
+        }
+      }
+      {
+        var packedSize = 1 * PackedBool.Count;
+        if (packedSize > 0) {
+          output.WriteRawTag(178, 6, ref immediateBuffer);
+          output.WriteLength(packedSize, ref immediateBuffer);
+          for (var i = 0; i < PackedBool.Count; i++) {
+            output.WriteBool(PackedBool[i], ref immediateBuffer);
+          }
+        }
+      }
+      {
+        var packedSize = 0;
+        for (var i = 0; i < PackedEnum.Count; i++) {
+          packedSize += pb::CodedOutputStream.ComputeEnumSize((int)PackedEnum[i]);
+        }
+        if (packedSize > 0) {
+          output.WriteRawTag(186, 6, ref immediateBuffer);
+          output.WriteLength(packedSize, ref immediateBuffer);
+          for (var i = 0; i < PackedEnum.Count; i++) {
+            output.WriteEnum((int)PackedEnum[i], ref immediateBuffer);
+          }
+        }
+      }
       if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
+        _unknownFields.WriteTo(output, ref immediateBuffer);
       }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      size += PackedInt32.CalculateSize(_repeated_packedInt32_codec);
-      size += PackedInt64.CalculateSize(_repeated_packedInt64_codec);
-      size += PackedUint32.CalculateSize(_repeated_packedUint32_codec);
-      size += PackedUint64.CalculateSize(_repeated_packedUint64_codec);
-      size += PackedSint32.CalculateSize(_repeated_packedSint32_codec);
-      size += PackedSint64.CalculateSize(_repeated_packedSint64_codec);
-      size += PackedFixed32.CalculateSize(_repeated_packedFixed32_codec);
-      size += PackedFixed64.CalculateSize(_repeated_packedFixed64_codec);
-      size += PackedSfixed32.CalculateSize(_repeated_packedSfixed32_codec);
-      size += PackedSfixed64.CalculateSize(_repeated_packedSfixed64_codec);
-      size += PackedFloat.CalculateSize(_repeated_packedFloat_codec);
-      size += PackedDouble.CalculateSize(_repeated_packedDouble_codec);
-      size += PackedBool.CalculateSize(_repeated_packedBool_codec);
-      size += PackedEnum.CalculateSize(_repeated_packedEnum_codec);
+      {
+        var packedSize = 0;
+        for (var i = 0; i < PackedInt32.Count; i++) {
+          packedSize += pb::CodedOutputStream.ComputeInt32Size(PackedInt32[i]);
+        }
+        if (packedSize > 0) {
+          size += 2 + packedSize + pb::CodedOutputStream.ComputeLengthSize(packedSize);
+        }
+      }
+      {
+        var packedSize = 0;
+        for (var i = 0; i < PackedInt64.Count; i++) {
+          packedSize += pb::CodedOutputStream.ComputeInt64Size(PackedInt64[i]);
+        }
+        if (packedSize > 0) {
+          size += 2 + packedSize + pb::CodedOutputStream.ComputeLengthSize(packedSize);
+        }
+      }
+      {
+        var packedSize = 0;
+        for (var i = 0; i < PackedUint32.Count; i++) {
+          packedSize += pb::CodedOutputStream.ComputeUInt32Size(PackedUint32[i]);
+        }
+        if (packedSize > 0) {
+          size += 2 + packedSize + pb::CodedOutputStream.ComputeLengthSize(packedSize);
+        }
+      }
+      {
+        var packedSize = 0;
+        for (var i = 0; i < PackedUint64.Count; i++) {
+          packedSize += pb::CodedOutputStream.ComputeUInt64Size(PackedUint64[i]);
+        }
+        if (packedSize > 0) {
+          size += 2 + packedSize + pb::CodedOutputStream.ComputeLengthSize(packedSize);
+        }
+      }
+      {
+        var packedSize = 0;
+        for (var i = 0; i < PackedSint32.Count; i++) {
+          packedSize += pb::CodedOutputStream.ComputeSInt32Size(PackedSint32[i]);
+        }
+        if (packedSize > 0) {
+          size += 2 + packedSize + pb::CodedOutputStream.ComputeLengthSize(packedSize);
+        }
+      }
+      {
+        var packedSize = 0;
+        for (var i = 0; i < PackedSint64.Count; i++) {
+          packedSize += pb::CodedOutputStream.ComputeSInt64Size(PackedSint64[i]);
+        }
+        if (packedSize > 0) {
+          size += 2 + packedSize + pb::CodedOutputStream.ComputeLengthSize(packedSize);
+        }
+      }
+      {
+        var packedSize = 4 * PackedFixed32.Count;
+        if (packedSize > 0) {
+          size += 2 + packedSize + pb::CodedOutputStream.ComputeLengthSize(packedSize);
+        }
+      }
+      {
+        var packedSize = 8 * PackedFixed64.Count;
+        if (packedSize > 0) {
+          size += 2 + packedSize + pb::CodedOutputStream.ComputeLengthSize(packedSize);
+        }
+      }
+      {
+        var packedSize = 4 * PackedSfixed32.Count;
+        if (packedSize > 0) {
+          size += 2 + packedSize + pb::CodedOutputStream.ComputeLengthSize(packedSize);
+        }
+      }
+      {
+        var packedSize = 8 * PackedSfixed64.Count;
+        if (packedSize > 0) {
+          size += 2 + packedSize + pb::CodedOutputStream.ComputeLengthSize(packedSize);
+        }
+      }
+      {
+        var packedSize = 4 * PackedFloat.Count;
+        if (packedSize > 0) {
+          size += 2 + packedSize + pb::CodedOutputStream.ComputeLengthSize(packedSize);
+        }
+      }
+      {
+        var packedSize = 8 * PackedDouble.Count;
+        if (packedSize > 0) {
+          size += 2 + packedSize + pb::CodedOutputStream.ComputeLengthSize(packedSize);
+        }
+      }
+      {
+        var packedSize = 1 * PackedBool.Count;
+        if (packedSize > 0) {
+          size += 2 + packedSize + pb::CodedOutputStream.ComputeLengthSize(packedSize);
+        }
+      }
+      {
+        var packedSize = 0;
+        for (var i = 0; i < PackedEnum.Count; i++) {
+          packedSize += pb::CodedOutputStream.ComputeEnumSize((int)PackedEnum[i]);
+        }
+        if (packedSize > 0) {
+          size += 2 + packedSize + pb::CodedOutputStream.ComputeLengthSize(packedSize);
+        }
+      }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -6237,8 +6786,6 @@ namespace Google.Protobuf.TestProtos {
 
     /// <summary>Field number for the "unpacked_int32" field.</summary>
     public const int UnpackedInt32FieldNumber = 90;
-    private static readonly pb::FieldCodec<int> _repeated_unpackedInt32_codec
-        = pb::FieldCodec.ForInt32(720);
     private readonly pbc::RepeatedField<int> unpackedInt32_ = new pbc::RepeatedField<int>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<int> UnpackedInt32 {
@@ -6247,8 +6794,6 @@ namespace Google.Protobuf.TestProtos {
 
     /// <summary>Field number for the "unpacked_int64" field.</summary>
     public const int UnpackedInt64FieldNumber = 91;
-    private static readonly pb::FieldCodec<long> _repeated_unpackedInt64_codec
-        = pb::FieldCodec.ForInt64(728);
     private readonly pbc::RepeatedField<long> unpackedInt64_ = new pbc::RepeatedField<long>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<long> UnpackedInt64 {
@@ -6257,8 +6802,6 @@ namespace Google.Protobuf.TestProtos {
 
     /// <summary>Field number for the "unpacked_uint32" field.</summary>
     public const int UnpackedUint32FieldNumber = 92;
-    private static readonly pb::FieldCodec<uint> _repeated_unpackedUint32_codec
-        = pb::FieldCodec.ForUInt32(736);
     private readonly pbc::RepeatedField<uint> unpackedUint32_ = new pbc::RepeatedField<uint>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<uint> UnpackedUint32 {
@@ -6267,8 +6810,6 @@ namespace Google.Protobuf.TestProtos {
 
     /// <summary>Field number for the "unpacked_uint64" field.</summary>
     public const int UnpackedUint64FieldNumber = 93;
-    private static readonly pb::FieldCodec<ulong> _repeated_unpackedUint64_codec
-        = pb::FieldCodec.ForUInt64(744);
     private readonly pbc::RepeatedField<ulong> unpackedUint64_ = new pbc::RepeatedField<ulong>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<ulong> UnpackedUint64 {
@@ -6277,8 +6818,6 @@ namespace Google.Protobuf.TestProtos {
 
     /// <summary>Field number for the "unpacked_sint32" field.</summary>
     public const int UnpackedSint32FieldNumber = 94;
-    private static readonly pb::FieldCodec<int> _repeated_unpackedSint32_codec
-        = pb::FieldCodec.ForSInt32(752);
     private readonly pbc::RepeatedField<int> unpackedSint32_ = new pbc::RepeatedField<int>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<int> UnpackedSint32 {
@@ -6287,8 +6826,6 @@ namespace Google.Protobuf.TestProtos {
 
     /// <summary>Field number for the "unpacked_sint64" field.</summary>
     public const int UnpackedSint64FieldNumber = 95;
-    private static readonly pb::FieldCodec<long> _repeated_unpackedSint64_codec
-        = pb::FieldCodec.ForSInt64(760);
     private readonly pbc::RepeatedField<long> unpackedSint64_ = new pbc::RepeatedField<long>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<long> UnpackedSint64 {
@@ -6297,8 +6834,6 @@ namespace Google.Protobuf.TestProtos {
 
     /// <summary>Field number for the "unpacked_fixed32" field.</summary>
     public const int UnpackedFixed32FieldNumber = 96;
-    private static readonly pb::FieldCodec<uint> _repeated_unpackedFixed32_codec
-        = pb::FieldCodec.ForFixed32(773);
     private readonly pbc::RepeatedField<uint> unpackedFixed32_ = new pbc::RepeatedField<uint>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<uint> UnpackedFixed32 {
@@ -6307,8 +6842,6 @@ namespace Google.Protobuf.TestProtos {
 
     /// <summary>Field number for the "unpacked_fixed64" field.</summary>
     public const int UnpackedFixed64FieldNumber = 97;
-    private static readonly pb::FieldCodec<ulong> _repeated_unpackedFixed64_codec
-        = pb::FieldCodec.ForFixed64(777);
     private readonly pbc::RepeatedField<ulong> unpackedFixed64_ = new pbc::RepeatedField<ulong>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<ulong> UnpackedFixed64 {
@@ -6317,8 +6850,6 @@ namespace Google.Protobuf.TestProtos {
 
     /// <summary>Field number for the "unpacked_sfixed32" field.</summary>
     public const int UnpackedSfixed32FieldNumber = 98;
-    private static readonly pb::FieldCodec<int> _repeated_unpackedSfixed32_codec
-        = pb::FieldCodec.ForSFixed32(789);
     private readonly pbc::RepeatedField<int> unpackedSfixed32_ = new pbc::RepeatedField<int>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<int> UnpackedSfixed32 {
@@ -6327,8 +6858,6 @@ namespace Google.Protobuf.TestProtos {
 
     /// <summary>Field number for the "unpacked_sfixed64" field.</summary>
     public const int UnpackedSfixed64FieldNumber = 99;
-    private static readonly pb::FieldCodec<long> _repeated_unpackedSfixed64_codec
-        = pb::FieldCodec.ForSFixed64(793);
     private readonly pbc::RepeatedField<long> unpackedSfixed64_ = new pbc::RepeatedField<long>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<long> UnpackedSfixed64 {
@@ -6337,8 +6866,6 @@ namespace Google.Protobuf.TestProtos {
 
     /// <summary>Field number for the "unpacked_float" field.</summary>
     public const int UnpackedFloatFieldNumber = 100;
-    private static readonly pb::FieldCodec<float> _repeated_unpackedFloat_codec
-        = pb::FieldCodec.ForFloat(805);
     private readonly pbc::RepeatedField<float> unpackedFloat_ = new pbc::RepeatedField<float>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<float> UnpackedFloat {
@@ -6347,8 +6874,6 @@ namespace Google.Protobuf.TestProtos {
 
     /// <summary>Field number for the "unpacked_double" field.</summary>
     public const int UnpackedDoubleFieldNumber = 101;
-    private static readonly pb::FieldCodec<double> _repeated_unpackedDouble_codec
-        = pb::FieldCodec.ForDouble(809);
     private readonly pbc::RepeatedField<double> unpackedDouble_ = new pbc::RepeatedField<double>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<double> UnpackedDouble {
@@ -6357,8 +6882,6 @@ namespace Google.Protobuf.TestProtos {
 
     /// <summary>Field number for the "unpacked_bool" field.</summary>
     public const int UnpackedBoolFieldNumber = 102;
-    private static readonly pb::FieldCodec<bool> _repeated_unpackedBool_codec
-        = pb::FieldCodec.ForBool(816);
     private readonly pbc::RepeatedField<bool> unpackedBool_ = new pbc::RepeatedField<bool>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<bool> UnpackedBool {
@@ -6367,8 +6890,6 @@ namespace Google.Protobuf.TestProtos {
 
     /// <summary>Field number for the "unpacked_enum" field.</summary>
     public const int UnpackedEnumFieldNumber = 103;
-    private static readonly pb::FieldCodec<global::Google.Protobuf.TestProtos.ForeignEnum> _repeated_unpackedEnum_codec
-        = pb::FieldCodec.ForEnum(824, x => (int) x, x => (global::Google.Protobuf.TestProtos.ForeignEnum) x);
     private readonly pbc::RepeatedField<global::Google.Protobuf.TestProtos.ForeignEnum> unpackedEnum_ = new pbc::RepeatedField<global::Google.Protobuf.TestProtos.ForeignEnum>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<global::Google.Protobuf.TestProtos.ForeignEnum> UnpackedEnum {
@@ -6434,43 +6955,210 @@ namespace Google.Protobuf.TestProtos {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
-      unpackedInt32_.WriteTo(output, _repeated_unpackedInt32_codec);
-      unpackedInt64_.WriteTo(output, _repeated_unpackedInt64_codec);
-      unpackedUint32_.WriteTo(output, _repeated_unpackedUint32_codec);
-      unpackedUint64_.WriteTo(output, _repeated_unpackedUint64_codec);
-      unpackedSint32_.WriteTo(output, _repeated_unpackedSint32_codec);
-      unpackedSint64_.WriteTo(output, _repeated_unpackedSint64_codec);
-      unpackedFixed32_.WriteTo(output, _repeated_unpackedFixed32_codec);
-      unpackedFixed64_.WriteTo(output, _repeated_unpackedFixed64_codec);
-      unpackedSfixed32_.WriteTo(output, _repeated_unpackedSfixed32_codec);
-      unpackedSfixed64_.WriteTo(output, _repeated_unpackedSfixed64_codec);
-      unpackedFloat_.WriteTo(output, _repeated_unpackedFloat_codec);
-      unpackedDouble_.WriteTo(output, _repeated_unpackedDouble_codec);
-      unpackedBool_.WriteTo(output, _repeated_unpackedBool_codec);
-      unpackedEnum_.WriteTo(output, _repeated_unpackedEnum_codec);
+    [global::System.Security.SecurityCritical]
+    public void WriteTo(pb::CodedOutputStream output, ref global::System.Span<byte> immediateBuffer) {
+      {
+        var packedSize = 0;
+        for (var i = 0; i < UnpackedInt32.Count; i++) {
+          packedSize += pb::CodedOutputStream.ComputeInt32Size(UnpackedInt32[i]);
+        }
+        if (packedSize > 0) {
+          output.WriteRawTag(208, 5, ref immediateBuffer);
+          output.WriteLength(packedSize, ref immediateBuffer);
+          for (var i = 0; i < UnpackedInt32.Count; i++) {
+            output.WriteInt32(UnpackedInt32[i], ref immediateBuffer);
+          }
+        }
+      }
+      {
+        var packedSize = 0;
+        for (var i = 0; i < UnpackedInt64.Count; i++) {
+          packedSize += pb::CodedOutputStream.ComputeInt64Size(UnpackedInt64[i]);
+        }
+        if (packedSize > 0) {
+          output.WriteRawTag(216, 5, ref immediateBuffer);
+          output.WriteLength(packedSize, ref immediateBuffer);
+          for (var i = 0; i < UnpackedInt64.Count; i++) {
+            output.WriteInt64(UnpackedInt64[i], ref immediateBuffer);
+          }
+        }
+      }
+      {
+        var packedSize = 0;
+        for (var i = 0; i < UnpackedUint32.Count; i++) {
+          packedSize += pb::CodedOutputStream.ComputeUInt32Size(UnpackedUint32[i]);
+        }
+        if (packedSize > 0) {
+          output.WriteRawTag(224, 5, ref immediateBuffer);
+          output.WriteLength(packedSize, ref immediateBuffer);
+          for (var i = 0; i < UnpackedUint32.Count; i++) {
+            output.WriteUInt32(UnpackedUint32[i], ref immediateBuffer);
+          }
+        }
+      }
+      {
+        var packedSize = 0;
+        for (var i = 0; i < UnpackedUint64.Count; i++) {
+          packedSize += pb::CodedOutputStream.ComputeUInt64Size(UnpackedUint64[i]);
+        }
+        if (packedSize > 0) {
+          output.WriteRawTag(232, 5, ref immediateBuffer);
+          output.WriteLength(packedSize, ref immediateBuffer);
+          for (var i = 0; i < UnpackedUint64.Count; i++) {
+            output.WriteUInt64(UnpackedUint64[i], ref immediateBuffer);
+          }
+        }
+      }
+      {
+        var packedSize = 0;
+        for (var i = 0; i < UnpackedSint32.Count; i++) {
+          packedSize += pb::CodedOutputStream.ComputeSInt32Size(UnpackedSint32[i]);
+        }
+        if (packedSize > 0) {
+          output.WriteRawTag(240, 5, ref immediateBuffer);
+          output.WriteLength(packedSize, ref immediateBuffer);
+          for (var i = 0; i < UnpackedSint32.Count; i++) {
+            output.WriteSInt32(UnpackedSint32[i], ref immediateBuffer);
+          }
+        }
+      }
+      {
+        var packedSize = 0;
+        for (var i = 0; i < UnpackedSint64.Count; i++) {
+          packedSize += pb::CodedOutputStream.ComputeSInt64Size(UnpackedSint64[i]);
+        }
+        if (packedSize > 0) {
+          output.WriteRawTag(248, 5, ref immediateBuffer);
+          output.WriteLength(packedSize, ref immediateBuffer);
+          for (var i = 0; i < UnpackedSint64.Count; i++) {
+            output.WriteSInt64(UnpackedSint64[i], ref immediateBuffer);
+          }
+        }
+      }
+      {
+        var packedSize = 4 * UnpackedFixed32.Count;
+        if (packedSize > 0) {
+          output.WriteRawTag(133, 6, ref immediateBuffer);
+          output.WriteLength(packedSize, ref immediateBuffer);
+          for (var i = 0; i < UnpackedFixed32.Count; i++) {
+            output.WriteFixed32(UnpackedFixed32[i], ref immediateBuffer);
+          }
+        }
+      }
+      {
+        var packedSize = 8 * UnpackedFixed64.Count;
+        if (packedSize > 0) {
+          output.WriteRawTag(137, 6, ref immediateBuffer);
+          output.WriteLength(packedSize, ref immediateBuffer);
+          for (var i = 0; i < UnpackedFixed64.Count; i++) {
+            output.WriteFixed64(UnpackedFixed64[i], ref immediateBuffer);
+          }
+        }
+      }
+      {
+        var packedSize = 4 * UnpackedSfixed32.Count;
+        if (packedSize > 0) {
+          output.WriteRawTag(149, 6, ref immediateBuffer);
+          output.WriteLength(packedSize, ref immediateBuffer);
+          for (var i = 0; i < UnpackedSfixed32.Count; i++) {
+            output.WriteSFixed32(UnpackedSfixed32[i], ref immediateBuffer);
+          }
+        }
+      }
+      {
+        var packedSize = 8 * UnpackedSfixed64.Count;
+        if (packedSize > 0) {
+          output.WriteRawTag(153, 6, ref immediateBuffer);
+          output.WriteLength(packedSize, ref immediateBuffer);
+          for (var i = 0; i < UnpackedSfixed64.Count; i++) {
+            output.WriteSFixed64(UnpackedSfixed64[i], ref immediateBuffer);
+          }
+        }
+      }
+      {
+        var packedSize = 4 * UnpackedFloat.Count;
+        if (packedSize > 0) {
+          output.WriteRawTag(165, 6, ref immediateBuffer);
+          output.WriteLength(packedSize, ref immediateBuffer);
+          for (var i = 0; i < UnpackedFloat.Count; i++) {
+            output.WriteFloat(UnpackedFloat[i], ref immediateBuffer);
+          }
+        }
+      }
+      {
+        var packedSize = 8 * UnpackedDouble.Count;
+        if (packedSize > 0) {
+          output.WriteRawTag(169, 6, ref immediateBuffer);
+          output.WriteLength(packedSize, ref immediateBuffer);
+          for (var i = 0; i < UnpackedDouble.Count; i++) {
+            output.WriteDouble(UnpackedDouble[i], ref immediateBuffer);
+          }
+        }
+      }
+      {
+        var packedSize = 1 * UnpackedBool.Count;
+        if (packedSize > 0) {
+          output.WriteRawTag(176, 6, ref immediateBuffer);
+          output.WriteLength(packedSize, ref immediateBuffer);
+          for (var i = 0; i < UnpackedBool.Count; i++) {
+            output.WriteBool(UnpackedBool[i], ref immediateBuffer);
+          }
+        }
+      }
+      for (var i = 0; i < UnpackedEnum.Count; i++) {
+        output.WriteRawTag(184, 6, ref immediateBuffer);
+        output.WriteEnum((int)UnpackedEnum[i], ref immediateBuffer);
+      }
       if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
+        _unknownFields.WriteTo(output, ref immediateBuffer);
       }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      size += UnpackedInt32.CalculateSize(_repeated_unpackedInt32_codec);
-      size += UnpackedInt64.CalculateSize(_repeated_unpackedInt64_codec);
-      size += UnpackedUint32.CalculateSize(_repeated_unpackedUint32_codec);
-      size += UnpackedUint64.CalculateSize(_repeated_unpackedUint64_codec);
-      size += UnpackedSint32.CalculateSize(_repeated_unpackedSint32_codec);
-      size += UnpackedSint64.CalculateSize(_repeated_unpackedSint64_codec);
-      size += UnpackedFixed32.CalculateSize(_repeated_unpackedFixed32_codec);
-      size += UnpackedFixed64.CalculateSize(_repeated_unpackedFixed64_codec);
-      size += UnpackedSfixed32.CalculateSize(_repeated_unpackedSfixed32_codec);
-      size += UnpackedSfixed64.CalculateSize(_repeated_unpackedSfixed64_codec);
-      size += UnpackedFloat.CalculateSize(_repeated_unpackedFloat_codec);
-      size += UnpackedDouble.CalculateSize(_repeated_unpackedDouble_codec);
-      size += UnpackedBool.CalculateSize(_repeated_unpackedBool_codec);
-      size += UnpackedEnum.CalculateSize(_repeated_unpackedEnum_codec);
+      for (var i = 0; i < UnpackedInt32.Count; i++) {
+        size += 2 + pb::CodedOutputStream.ComputeInt32Size(UnpackedInt32[i]);
+      }
+      for (var i = 0; i < UnpackedInt64.Count; i++) {
+        size += 2 + pb::CodedOutputStream.ComputeInt64Size(UnpackedInt64[i]);
+      }
+      for (var i = 0; i < UnpackedUint32.Count; i++) {
+        size += 2 + pb::CodedOutputStream.ComputeUInt32Size(UnpackedUint32[i]);
+      }
+      for (var i = 0; i < UnpackedUint64.Count; i++) {
+        size += 2 + pb::CodedOutputStream.ComputeUInt64Size(UnpackedUint64[i]);
+      }
+      for (var i = 0; i < UnpackedSint32.Count; i++) {
+        size += 2 + pb::CodedOutputStream.ComputeSInt32Size(UnpackedSint32[i]);
+      }
+      for (var i = 0; i < UnpackedSint64.Count; i++) {
+        size += 2 + pb::CodedOutputStream.ComputeSInt64Size(UnpackedSint64[i]);
+      }
+      for (var i = 0; i < UnpackedFixed32.Count; i++) {
+        size += 2 + pb::CodedOutputStream.ComputeFixed32Size(UnpackedFixed32[i]);
+      }
+      for (var i = 0; i < UnpackedFixed64.Count; i++) {
+        size += 2 + pb::CodedOutputStream.ComputeFixed64Size(UnpackedFixed64[i]);
+      }
+      for (var i = 0; i < UnpackedSfixed32.Count; i++) {
+        size += 2 + pb::CodedOutputStream.ComputeSFixed32Size(UnpackedSfixed32[i]);
+      }
+      for (var i = 0; i < UnpackedSfixed64.Count; i++) {
+        size += 2 + pb::CodedOutputStream.ComputeSFixed64Size(UnpackedSfixed64[i]);
+      }
+      for (var i = 0; i < UnpackedFloat.Count; i++) {
+        size += 2 + pb::CodedOutputStream.ComputeFloatSize(UnpackedFloat[i]);
+      }
+      for (var i = 0; i < UnpackedDouble.Count; i++) {
+        size += 2 + pb::CodedOutputStream.ComputeDoubleSize(UnpackedDouble[i]);
+      }
+      for (var i = 0; i < UnpackedBool.Count; i++) {
+        size += 2 + pb::CodedOutputStream.ComputeBoolSize(UnpackedBool[i]);
+      }
+      for (var i = 0; i < UnpackedEnum.Count; i++) {
+        size += 2 + pb::CodedOutputStream.ComputeEnumSize((int)UnpackedEnum[i]);
+      }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -6704,14 +7392,7 @@ namespace Google.Protobuf.TestProtos {
             break;
           }
           case 826: {
-            int length = input.ReadLength(ref immediateBuffer);
-            if (length > 0) {
-              var oldLimit = input.PushLimit(length);
-              while (!input.ReachedLimit) {
-                unpackedEnum_.Add((global::Google.Protobuf.TestProtos.ForeignEnum)input.ReadEnum(ref immediateBuffer)); 
-              }
-              input.PopLimit(oldLimit);
-            }
+            unpackedEnum_.Add((global::Google.Protobuf.TestProtos.ForeignEnum)input.ReadEnum(ref immediateBuffer));
             break;
           }
           case 824: {
@@ -6765,8 +7446,6 @@ namespace Google.Protobuf.TestProtos {
 
     /// <summary>Field number for the "repeated_fixed32" field.</summary>
     public const int RepeatedFixed32FieldNumber = 12;
-    private static readonly pb::FieldCodec<uint> _repeated_repeatedFixed32_codec
-        = pb::FieldCodec.ForFixed32(98);
     private readonly pbc::RepeatedField<uint> repeatedFixed32_ = new pbc::RepeatedField<uint>();
     /// <summary>
     /// Parsing repeated fixed size values used to fail. This message needs to be
@@ -6780,8 +7459,6 @@ namespace Google.Protobuf.TestProtos {
 
     /// <summary>Field number for the "repeated_int32" field.</summary>
     public const int RepeatedInt32FieldNumber = 13;
-    private static readonly pb::FieldCodec<int> _repeated_repeatedInt32_codec
-        = pb::FieldCodec.ForInt32(106);
     private readonly pbc::RepeatedField<int> repeatedInt32_ = new pbc::RepeatedField<int>();
     /// <summary>
     /// Check for a varint type, just for good measure.
@@ -6793,8 +7470,6 @@ namespace Google.Protobuf.TestProtos {
 
     /// <summary>Field number for the "repeated_fixed64" field.</summary>
     public const int RepeatedFixed64FieldNumber = 2046;
-    private static readonly pb::FieldCodec<ulong> _repeated_repeatedFixed64_codec
-        = pb::FieldCodec.ForFixed64(16370);
     private readonly pbc::RepeatedField<ulong> repeatedFixed64_ = new pbc::RepeatedField<ulong>();
     /// <summary>
     /// These have two-byte tags.
@@ -6806,8 +7481,6 @@ namespace Google.Protobuf.TestProtos {
 
     /// <summary>Field number for the "repeated_int64" field.</summary>
     public const int RepeatedInt64FieldNumber = 2047;
-    private static readonly pb::FieldCodec<long> _repeated_repeatedInt64_codec
-        = pb::FieldCodec.ForInt64(16378);
     private readonly pbc::RepeatedField<long> repeatedInt64_ = new pbc::RepeatedField<long>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<long> RepeatedInt64 {
@@ -6816,8 +7489,6 @@ namespace Google.Protobuf.TestProtos {
 
     /// <summary>Field number for the "repeated_float" field.</summary>
     public const int RepeatedFloatFieldNumber = 262142;
-    private static readonly pb::FieldCodec<float> _repeated_repeatedFloat_codec
-        = pb::FieldCodec.ForFloat(2097138);
     private readonly pbc::RepeatedField<float> repeatedFloat_ = new pbc::RepeatedField<float>();
     /// <summary>
     /// Three byte tags.
@@ -6829,8 +7500,6 @@ namespace Google.Protobuf.TestProtos {
 
     /// <summary>Field number for the "repeated_uint64" field.</summary>
     public const int RepeatedUint64FieldNumber = 262143;
-    private static readonly pb::FieldCodec<ulong> _repeated_repeatedUint64_codec
-        = pb::FieldCodec.ForUInt64(2097146);
     private readonly pbc::RepeatedField<ulong> repeatedUint64_ = new pbc::RepeatedField<ulong>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<ulong> RepeatedUint64 {
@@ -6880,27 +7549,130 @@ namespace Google.Protobuf.TestProtos {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
-      repeatedFixed32_.WriteTo(output, _repeated_repeatedFixed32_codec);
-      repeatedInt32_.WriteTo(output, _repeated_repeatedInt32_codec);
-      repeatedFixed64_.WriteTo(output, _repeated_repeatedFixed64_codec);
-      repeatedInt64_.WriteTo(output, _repeated_repeatedInt64_codec);
-      repeatedFloat_.WriteTo(output, _repeated_repeatedFloat_codec);
-      repeatedUint64_.WriteTo(output, _repeated_repeatedUint64_codec);
+    [global::System.Security.SecurityCritical]
+    public void WriteTo(pb::CodedOutputStream output, ref global::System.Span<byte> immediateBuffer) {
+      {
+        var packedSize = 4 * RepeatedFixed32.Count;
+        if (packedSize > 0) {
+          output.WriteRawTag(98, ref immediateBuffer);
+          output.WriteLength(packedSize, ref immediateBuffer);
+          for (var i = 0; i < RepeatedFixed32.Count; i++) {
+            output.WriteFixed32(RepeatedFixed32[i], ref immediateBuffer);
+          }
+        }
+      }
+      {
+        var packedSize = 0;
+        for (var i = 0; i < RepeatedInt32.Count; i++) {
+          packedSize += pb::CodedOutputStream.ComputeInt32Size(RepeatedInt32[i]);
+        }
+        if (packedSize > 0) {
+          output.WriteRawTag(106, ref immediateBuffer);
+          output.WriteLength(packedSize, ref immediateBuffer);
+          for (var i = 0; i < RepeatedInt32.Count; i++) {
+            output.WriteInt32(RepeatedInt32[i], ref immediateBuffer);
+          }
+        }
+      }
+      {
+        var packedSize = 8 * RepeatedFixed64.Count;
+        if (packedSize > 0) {
+          output.WriteRawTag(242, 127, ref immediateBuffer);
+          output.WriteLength(packedSize, ref immediateBuffer);
+          for (var i = 0; i < RepeatedFixed64.Count; i++) {
+            output.WriteFixed64(RepeatedFixed64[i], ref immediateBuffer);
+          }
+        }
+      }
+      {
+        var packedSize = 0;
+        for (var i = 0; i < RepeatedInt64.Count; i++) {
+          packedSize += pb::CodedOutputStream.ComputeInt64Size(RepeatedInt64[i]);
+        }
+        if (packedSize > 0) {
+          output.WriteRawTag(250, 127, ref immediateBuffer);
+          output.WriteLength(packedSize, ref immediateBuffer);
+          for (var i = 0; i < RepeatedInt64.Count; i++) {
+            output.WriteInt64(RepeatedInt64[i], ref immediateBuffer);
+          }
+        }
+      }
+      {
+        var packedSize = 4 * RepeatedFloat.Count;
+        if (packedSize > 0) {
+          output.WriteRawTag(242, 255, 127, ref immediateBuffer);
+          output.WriteLength(packedSize, ref immediateBuffer);
+          for (var i = 0; i < RepeatedFloat.Count; i++) {
+            output.WriteFloat(RepeatedFloat[i], ref immediateBuffer);
+          }
+        }
+      }
+      {
+        var packedSize = 0;
+        for (var i = 0; i < RepeatedUint64.Count; i++) {
+          packedSize += pb::CodedOutputStream.ComputeUInt64Size(RepeatedUint64[i]);
+        }
+        if (packedSize > 0) {
+          output.WriteRawTag(250, 255, 127, ref immediateBuffer);
+          output.WriteLength(packedSize, ref immediateBuffer);
+          for (var i = 0; i < RepeatedUint64.Count; i++) {
+            output.WriteUInt64(RepeatedUint64[i], ref immediateBuffer);
+          }
+        }
+      }
       if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
+        _unknownFields.WriteTo(output, ref immediateBuffer);
       }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      size += RepeatedFixed32.CalculateSize(_repeated_repeatedFixed32_codec);
-      size += RepeatedInt32.CalculateSize(_repeated_repeatedInt32_codec);
-      size += RepeatedFixed64.CalculateSize(_repeated_repeatedFixed64_codec);
-      size += RepeatedInt64.CalculateSize(_repeated_repeatedInt64_codec);
-      size += RepeatedFloat.CalculateSize(_repeated_repeatedFloat_codec);
-      size += RepeatedUint64.CalculateSize(_repeated_repeatedUint64_codec);
+      {
+        var packedSize = 4 * RepeatedFixed32.Count;
+        if (packedSize > 0) {
+          size += 1 + packedSize + pb::CodedOutputStream.ComputeLengthSize(packedSize);
+        }
+      }
+      {
+        var packedSize = 0;
+        for (var i = 0; i < RepeatedInt32.Count; i++) {
+          packedSize += pb::CodedOutputStream.ComputeInt32Size(RepeatedInt32[i]);
+        }
+        if (packedSize > 0) {
+          size += 1 + packedSize + pb::CodedOutputStream.ComputeLengthSize(packedSize);
+        }
+      }
+      {
+        var packedSize = 8 * RepeatedFixed64.Count;
+        if (packedSize > 0) {
+          size += 2 + packedSize + pb::CodedOutputStream.ComputeLengthSize(packedSize);
+        }
+      }
+      {
+        var packedSize = 0;
+        for (var i = 0; i < RepeatedInt64.Count; i++) {
+          packedSize += pb::CodedOutputStream.ComputeInt64Size(RepeatedInt64[i]);
+        }
+        if (packedSize > 0) {
+          size += 2 + packedSize + pb::CodedOutputStream.ComputeLengthSize(packedSize);
+        }
+      }
+      {
+        var packedSize = 4 * RepeatedFloat.Count;
+        if (packedSize > 0) {
+          size += 3 + packedSize + pb::CodedOutputStream.ComputeLengthSize(packedSize);
+        }
+      }
+      {
+        var packedSize = 0;
+        for (var i = 0; i < RepeatedUint64.Count; i++) {
+          packedSize += pb::CodedOutputStream.ComputeUInt64Size(RepeatedUint64[i]);
+        }
+        if (packedSize > 0) {
+          size += 3 + packedSize + pb::CodedOutputStream.ComputeLengthSize(packedSize);
+        }
+      }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -7107,13 +7879,14 @@ namespace Google.Protobuf.TestProtos {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
+    [global::System.Security.SecurityCritical]
+    public void WriteTo(pb::CodedOutputStream output, ref global::System.Span<byte> immediateBuffer) {
       if (A.Length != 0) {
-        output.WriteRawTag(10);
-        output.WriteString(A);
+        output.WriteRawTag(10, ref immediateBuffer);
+        output.WriteString(A, ref immediateBuffer);
       }
       if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
+        _unknownFields.WriteTo(output, ref immediateBuffer);
       }
     }
 
@@ -7226,9 +7999,10 @@ namespace Google.Protobuf.TestProtos {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
+    [global::System.Security.SecurityCritical]
+    public void WriteTo(pb::CodedOutputStream output, ref global::System.Span<byte> immediateBuffer) {
       if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
+        _unknownFields.WriteTo(output, ref immediateBuffer);
       }
     }
 
@@ -7328,9 +8102,10 @@ namespace Google.Protobuf.TestProtos {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
+    [global::System.Security.SecurityCritical]
+    public void WriteTo(pb::CodedOutputStream output, ref global::System.Span<byte> immediateBuffer) {
       if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
+        _unknownFields.WriteTo(output, ref immediateBuffer);
       }
     }
 
@@ -7430,9 +8205,10 @@ namespace Google.Protobuf.TestProtos {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
+    [global::System.Security.SecurityCritical]
+    public void WriteTo(pb::CodedOutputStream output, ref global::System.Span<byte> immediateBuffer) {
       if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
+        _unknownFields.WriteTo(output, ref immediateBuffer);
       }
     }
 
@@ -7532,9 +8308,10 @@ namespace Google.Protobuf.TestProtos {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
+    [global::System.Security.SecurityCritical]
+    public void WriteTo(pb::CodedOutputStream output, ref global::System.Span<byte> immediateBuffer) {
       if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
+        _unknownFields.WriteTo(output, ref immediateBuffer);
       }
     }
 
@@ -7634,9 +8411,10 @@ namespace Google.Protobuf.TestProtos {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
+    [global::System.Security.SecurityCritical]
+    public void WriteTo(pb::CodedOutputStream output, ref global::System.Span<byte> immediateBuffer) {
       if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
+        _unknownFields.WriteTo(output, ref immediateBuffer);
       }
     }
 
@@ -7736,9 +8514,10 @@ namespace Google.Protobuf.TestProtos {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
+    [global::System.Security.SecurityCritical]
+    public void WriteTo(pb::CodedOutputStream output, ref global::System.Span<byte> immediateBuffer) {
       if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
+        _unknownFields.WriteTo(output, ref immediateBuffer);
       }
     }
 
@@ -7838,9 +8617,10 @@ namespace Google.Protobuf.TestProtos {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
+    [global::System.Security.SecurityCritical]
+    public void WriteTo(pb::CodedOutputStream output, ref global::System.Span<byte> immediateBuffer) {
       if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
+        _unknownFields.WriteTo(output, ref immediateBuffer);
       }
     }
 
