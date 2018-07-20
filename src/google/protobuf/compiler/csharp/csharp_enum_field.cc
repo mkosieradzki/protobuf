@@ -68,11 +68,13 @@ void EnumFieldGenerator::GenerateSerializationCode(io::Printer* printer) {
     "}\n");
 }
 
-void EnumFieldGenerator::GenerateSerializedSizeCode(io::Printer* printer) {
+void EnumFieldGenerator::GenerateSerializedSizeCode(io::Printer* printer, const std::string& lvalueName, const std::string& rvalueName) {
+  variables_["lvalue_name"] = lvalueName;
+  variables_["rvalue_name"] = rvalueName;
   printer->Print(
     variables_,
-    "if ($has_property_check$) {\n"
-      "  size += $tag_size$ + pb::CodedOutputStream.ComputeEnumSize((int) $property_name$);\n"
+    "if ($rvalue_name$$has_property_check_sufix$) {\n"
+    "  $lvalue_name$ += $tag_size$ + pb::CodedOutputStream.ComputeEnumSize((int) $rvalue_name$);\n"
     "}\n");
 }
 
@@ -113,11 +115,13 @@ void EnumOneofFieldGenerator::GenerateSerializationCode(io::Printer* printer) {
     "}\n");
 }
 
-void EnumOneofFieldGenerator::GenerateSerializedSizeCode(io::Printer* printer) {
+void EnumOneofFieldGenerator::GenerateSerializedSizeCode(io::Printer* printer, const std::string& lvalueName, const std::string& rvalueName) {
+  variables_["lvalue_name"] = lvalueName;
+  // NOTE: This one works only for property_name (ignoring rvalue)
   printer->Print(
     variables_,
     "if ($has_property_check$) {\n"
-    "  size += $tag_size$ + pb::CodedOutputStream.ComputeEnumSize((int) $property_name$);\n"
+    "  $lvalue_name$ += $tag_size$ + pb::CodedOutputStream.ComputeEnumSize((int) $property_name$);\n"
     "}\n");
 }
 

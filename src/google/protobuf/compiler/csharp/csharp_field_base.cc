@@ -85,6 +85,8 @@ void FieldGeneratorBase::SetCommonFieldVariables(
   (*variables)["number"] = number();
   (*variables)["has_property_check"] =
     (*variables)["property_name"] + " != " + (*variables)["default_value"];
+  (*variables)["has_property_check_sufix"] =
+    " != " + (*variables)["default_value"];
   (*variables)["other_has_property_check"] = "other." +
     (*variables)["property_name"] + " != " + (*variables)["default_value"];
 }

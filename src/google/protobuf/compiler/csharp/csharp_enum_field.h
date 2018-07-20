@@ -51,7 +51,7 @@ class EnumFieldGenerator : public PrimitiveFieldGenerator {
   virtual void GenerateCodecCode(io::Printer* printer);
   virtual void GenerateParsingCode(io::Printer* printer, const std::string& lvalueName, bool packed);
   virtual void GenerateSerializationCode(io::Printer* printer);
-  virtual void GenerateSerializedSizeCode(io::Printer* printer);
+  virtual void GenerateSerializedSizeCode(io::Printer* printer, const std::string& lvalueName, const std::string& rvalueName);
 
  private:
   GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(EnumFieldGenerator);
@@ -67,7 +67,7 @@ class EnumOneofFieldGenerator : public PrimitiveOneofFieldGenerator {
   virtual void GenerateMergingCode(io::Printer* printer);
   virtual void GenerateParsingCode(io::Printer* printer, const std::string& lvalueName, bool forceNonPacked);
   virtual void GenerateSerializationCode(io::Printer* printer);
-  virtual void GenerateSerializedSizeCode(io::Printer* printer);
+  virtual void GenerateSerializedSizeCode(io::Printer* printer, const std::string& lvalueName, const std::string& rvalueName);
 
  private:
   GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(EnumOneofFieldGenerator);

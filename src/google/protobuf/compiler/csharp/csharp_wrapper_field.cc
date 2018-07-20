@@ -51,6 +51,7 @@ WrapperFieldGenerator::WrapperFieldGenerator(const FieldDescriptor* descriptor,
                                        int fieldOrdinal, const Options *options)
     : FieldGeneratorBase(descriptor, fieldOrdinal, options) {
   variables_["has_property_check"] = name() + "_ != null";
+  variables_["has_property_check_sufix"] = " != null";
   variables_["has_not_property_check"] = name() + "_ == null";
   const FieldDescriptor* wrapped_field = descriptor->message_type()->field(0);
   is_value_type = wrapped_field->type() != FieldDescriptor::TYPE_STRING &&
@@ -113,11 +114,13 @@ void WrapperFieldGenerator::GenerateSerializationCode(io::Printer* printer) {
     "}\n");
 }
 
-void WrapperFieldGenerator::GenerateSerializedSizeCode(io::Printer* printer) {
+void WrapperFieldGenerator::GenerateSerializedSizeCode(io::Printer* printer, const std::string& lvalueName, const std::string& rvalueName) {
+  variables_["lvalue_name"] = lvalueName;
+  variables_["rvalue_name"] = rvalueName;
   printer->Print(
     variables_,
-    "if ($has_property_check$) {\n"
-    "  size += _single_$name$_codec.CalculateSizeWithTag($property_name$);\n"
+    "if ($rvalue_name$$has_property_check_sufix$) {\n"
+    "  $lvalue_name$ += $tag_size$ + pb::CodedOutputStream.ComputeWrapped$wrapped_type_capitalized_name$Size($rvalue_name$);\n"
     "}\n");
 }
 
@@ -167,7 +170,9 @@ void WrapperFieldGenerator::GenerateCodecCode(io::Printer* printer) {
 WrapperOneofFieldGenerator::WrapperOneofFieldGenerator(
     const FieldDescriptor* descriptor, int fieldOrdinal, const Options *options)
     : WrapperFieldGenerator(descriptor, fieldOrdinal, options) {
-    SetCommonOneofFieldVariables(&variables_);
+  SetCommonOneofFieldVariables(&variables_);
+  const FieldDescriptor* wrapped_field = descriptor->message_type()->field(0);
+  variables_["wrapped_type_capitalized_name"] = capitalized_type_name(wrapped_field);
 }
 
 WrapperOneofFieldGenerator::~WrapperOneofFieldGenerator() {
@@ -213,12 +218,14 @@ void WrapperOneofFieldGenerator::GenerateSerializationCode(io::Printer* printer)
     "}\n");
 }
 
-void WrapperOneofFieldGenerator::GenerateSerializedSizeCode(io::Printer* printer) {
+void WrapperOneofFieldGenerator::GenerateSerializedSizeCode(io::Printer* printer, const std::string& lvalueName, const std::string& rvalueName) {
   // TODO: I suspect this is wrong...
+  variables_["lvalue_name"] = lvalueName;
+  // NOTE: This one works only for property_name (ignoring rvalue)
   printer->Print(
     variables_,
     "if ($has_property_check$) {\n"
-    "  size += _oneof_$name$_codec.CalculateSizeWithTag($property_name$);\n"
+    "  $lvalue_name$ += $tag_size$ + pb::CodedOutputStream.ComputeWrapped$wrapped_type_capitalized_name$Size($property_name$);\n"
     "}\n");
 }
 

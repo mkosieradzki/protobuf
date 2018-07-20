@@ -53,6 +53,7 @@ MessageFieldGenerator::MessageFieldGenerator(const FieldDescriptor* descriptor,
                                              const Options *options)
     : FieldGeneratorBase(descriptor, fieldOrdinal, options) {
   variables_["has_property_check"] = name() + "_ != null";
+  variables_["has_property_check_sufix"] = " != null";
   variables_["has_not_property_check"] = name() + "_ == null";
 }
 
@@ -107,11 +108,13 @@ void MessageFieldGenerator::GenerateSerializationCode(io::Printer* printer) {
     "}\n");
 }
 
-void MessageFieldGenerator::GenerateSerializedSizeCode(io::Printer* printer) {
+void MessageFieldGenerator::GenerateSerializedSizeCode(io::Printer* printer, const std::string& lvalueName, const std::string& rvalueName) {
+  variables_["lvalue_name"] = lvalueName;
+  variables_["rvalue_name"] = rvalueName;
   printer->Print(
     variables_,
-    "if ($has_property_check$) {\n"
-    "  size += $tag_size$ + pb::CodedOutputStream.ComputeMessageSize($property_name$);\n"
+    "if ($rvalue_name$$has_property_check_sufix$) {\n"
+    "  $lvalue_name$ += $tag_size$ + pb::CodedOutputStream.ComputeMessageSize($rvalue_name$);\n"
     "}\n");
 }
 

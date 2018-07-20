@@ -52,6 +52,18 @@ MapFieldGenerator::MapFieldGenerator(const FieldDescriptor* descriptor,
                                      int fieldOrdinal,
                                      const Options* options)
     : FieldGeneratorBase(descriptor, fieldOrdinal, options) {
+  const FieldDescriptor* key_descriptor =
+    descriptor_->message_type()->FindFieldByName("key");
+  const FieldDescriptor* value_descriptor =
+    descriptor_->message_type()->FindFieldByName("value");
+  variables_["key_default_value"] = default_value(key_descriptor);
+  variables_["value_default_value"] = default_value(value_descriptor);
+  variables_["key_type_name"] = type_name(key_descriptor);
+  variables_["value_type_name"] = type_name(value_descriptor);
+  variables_["key_tag"] = SimpleItoa(internal::WireFormat::MakeTag(key_descriptor));
+  variables_["value_tag"] = SimpleItoa(internal::WireFormat::MakeTag(value_descriptor));
+  variables_["key_type_capitalized_name"] = capitalized_type_name(key_descriptor);
+  variables_["value_type_capitalized_name"] = capitalized_type_name(value_descriptor);
 }
 
 MapFieldGenerator::~MapFieldGenerator() {
@@ -62,8 +74,6 @@ void MapFieldGenerator::GenerateMembers(io::Printer* printer) {
       descriptor_->message_type()->FindFieldByName("key");
   const FieldDescriptor* value_descriptor =
       descriptor_->message_type()->FindFieldByName("value");
-  variables_["key_type_name"] = type_name(key_descriptor);
-  variables_["value_type_name"] = type_name(value_descriptor);
   std::unique_ptr<FieldGeneratorBase> key_generator(
       CreateFieldGenerator(key_descriptor, 1, this->options()));
   std::unique_ptr<FieldGeneratorBase> value_generator(
@@ -101,12 +111,6 @@ void MapFieldGenerator::GenerateParsingCode(io::Printer* printer, const std::str
   const FieldDescriptor* value_descriptor =
     descriptor_->message_type()->FindFieldByName("value");
   variables_["lvalue_name"] = lvalueName.empty() ? variables_["name"] + "_" : lvalueName;
-  variables_["key_default_value"] = default_value(key_descriptor);
-  variables_["value_default_value"] = default_value(value_descriptor);
-  variables_["key_type_name"] = type_name(key_descriptor);
-  variables_["value_type_name"] = type_name(value_descriptor);
-  variables_["key_tag"] = SimpleItoa(internal::WireFormat::MakeTag(key_descriptor));
-  variables_["value_tag"] = SimpleItoa(internal::WireFormat::MakeTag(value_descriptor));
   std::unique_ptr<FieldGeneratorBase> key_generator(
     CreateFieldGenerator(key_descriptor, 1, this->options()));
   std::unique_ptr<FieldGeneratorBase> value_generator(
@@ -157,10 +161,30 @@ void MapFieldGenerator::GenerateSerializationCode(io::Printer* printer) {
     "$name$_.WriteTo(output, _map_$name$_codec);\n");
 }
 
-void MapFieldGenerator::GenerateSerializedSizeCode(io::Printer* printer) {
+void MapFieldGenerator::GenerateSerializedSizeCode(io::Printer* printer, const std::string& lvalueName, const std::string& rvalueName) {
+  const FieldDescriptor* key_descriptor =
+    descriptor_->message_type()->FindFieldByName("key");
+  const FieldDescriptor* value_descriptor =
+    descriptor_->message_type()->FindFieldByName("value");
+  variables_["lvalue_name"] = lvalueName;
+  variables_["rvalue_name"] = rvalueName;
+  std::unique_ptr<FieldGeneratorBase> key_generator(
+    CreateFieldGenerator(key_descriptor, 1, this->options()));
+  std::unique_ptr<FieldGeneratorBase> value_generator(
+    CreateFieldGenerator(value_descriptor, 2, this->options()));
+
   printer->Print(
     variables_,
-    "size += $name$_.CalculateSize(_map_$name$_codec);\n");
+    "foreach (var entry in $rvalue_name$) {\n");
+  printer->Indent();
+  printer->Print("var messageSize = 0;\n");
+  key_generator->GenerateSerializedSizeCode(printer, "messageSize", "entry.Key");
+  value_generator->GenerateSerializedSizeCode(printer, "messageSize", "entry.Value");
+  printer->Print(
+    variables_,
+    "$lvalue_name$ += $tag_size$ + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;\n");
+  printer->Outdent();
+  printer->Print("}\n");
 }
 
 void MapFieldGenerator::WriteHash(io::Printer* printer) {

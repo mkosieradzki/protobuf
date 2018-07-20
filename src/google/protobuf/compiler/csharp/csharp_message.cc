@@ -433,9 +433,10 @@ void MessageGenerator::GenerateMessageSerializationMethods(io::Printer* printer)
   printer->Indent();
   printer->Print("int size = 0;\n");
   for (int i = 0; i < descriptor_->field_count(); i++) {
+    auto field = descriptor_->field(i);
     std::unique_ptr<FieldGeneratorBase> generator(
-        CreateFieldGeneratorInternal(descriptor_->field(i)));
-    generator->GenerateSerializedSizeCode(printer);
+        CreateFieldGeneratorInternal(field));
+    generator->GenerateSerializedSizeCode(printer, "size", GetPropertyName(field));
   }
 
   printer->Print(

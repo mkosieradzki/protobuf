@@ -118,10 +118,12 @@ void RepeatedMessageFieldGenerator::GenerateSerializationCode(io::Printer* print
     "$name$_.WriteTo(output, _repeated_$name$_codec);\n");
 }
 
-void RepeatedMessageFieldGenerator::GenerateSerializedSizeCode(io::Printer* printer) {
+void RepeatedMessageFieldGenerator::GenerateSerializedSizeCode(io::Printer* printer, const std::string& lvalueName, const std::string& rvalueName) {
+  variables_["lvalue_name"] = lvalueName;
+  variables_["rvalue_name"] = rvalueName;
   printer->Print(
     variables_,
-    "size += $name$_.CalculateSize(_repeated_$name$_codec);\n");
+    "$lvalue_name$ += $rvalue_name$.CalculateSize(_repeated_$name$_codec);\n");
 }
 
 void RepeatedMessageFieldGenerator::WriteHash(io::Printer* printer) {

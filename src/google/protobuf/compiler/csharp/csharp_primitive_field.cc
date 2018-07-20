@@ -55,6 +55,7 @@ PrimitiveFieldGenerator::PrimitiveFieldGenerator(
   is_value_type = descriptor->type() != FieldDescriptor::TYPE_STRING
       && descriptor->type() != FieldDescriptor::TYPE_BYTES;
   if (!is_value_type) {
+    variables_["has_property_check_sufix"] = ".Length != 0";
     variables_["has_property_check"] = variables_["property_name"] + ".Length != 0";
     variables_["other_has_property_check"] = "other." + variables_["property_name"] + ".Length != 0";
   }
@@ -67,6 +68,11 @@ void PrimitiveFieldGenerator::GenerateMembers(io::Printer* printer) {
   // TODO(jonskeet): Work out whether we want to prevent the fields from ever being
   // null, or whether we just handle it, in the cases of bytes and string.
   // (Basically, should null-handling code be in the getter or the setter?)
+  // mkosieradzki: Current solution is OK:
+  // - oneof with handling in getter
+  // - standard in setter
+  // This determines how recursive code-gen works (we can use safely getters
+  // anytime we are not in oneof field - and oneofs are not used in recursive fields)
   printer->Print(
     variables_,
     "private $type_name$ $name_def_message$;\n");
@@ -117,19 +123,30 @@ void PrimitiveFieldGenerator::GenerateSerializationCode(io::Printer* printer) {
     "}\n");
 }
 
-void PrimitiveFieldGenerator::GenerateSerializedSizeCode(io::Printer* printer) {
-  printer->Print(
-    variables_,
-    "if ($has_property_check$) {\n");
+//TODO: Move to inherited - because proper has_property_check for oneof is required
+void PrimitiveFieldGenerator::GenerateSerializedSizeCode(io::Printer* printer, const std::string& lvalueName, const std::string& rvalueName) {
+  variables_["lvalue_name"] = lvalueName;
+  variables_["rvalue_name"] = rvalueName;
+  if (descriptor_->containing_oneof()) {
+    printer->Print(
+      variables_,
+      "if ($has_property_check$) {\n");
+  }
+  else {
+    printer->Print(
+      variables_,
+      "if ($rvalue_name$$has_property_check_sufix$) {\n");
+  }
   printer->Indent();
   int fixedSize = GetFixedSize(descriptor_->type());
   if (fixedSize == -1) {
     printer->Print(
       variables_,
-      "size += $tag_size$ + pb::CodedOutputStream.Compute$capitalized_type_name$Size($property_name$);\n");
+      "$lvalue_name$ += $tag_size$ + pb::CodedOutputStream.Compute$capitalized_type_name$Size($rvalue_name$);\n");
   } else {
     printer->Print(
-      "size += $tag_size$ + $fixed_size$;\n",
+      "$lvalue_name$ += $tag_size$ + $fixed_size$;\n",
+      "lvalue_name", lvalueName,
       "fixed_size", SimpleItoa(fixedSize),
       "tag_size", variables_["tag_size"]);
   }
