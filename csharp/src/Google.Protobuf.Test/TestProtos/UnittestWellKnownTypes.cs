@@ -597,61 +597,61 @@ namespace Google.Protobuf.TestProtos {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      if (anyField_ != null) {
+      if (AnyField != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(AnyField);
       }
-      if (apiField_ != null) {
+      if (ApiField != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(ApiField);
       }
-      if (durationField_ != null) {
+      if (DurationField != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(DurationField);
       }
-      if (emptyField_ != null) {
+      if (EmptyField != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(EmptyField);
       }
-      if (fieldMaskField_ != null) {
+      if (FieldMaskField != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(FieldMaskField);
       }
-      if (sourceContextField_ != null) {
+      if (SourceContextField != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(SourceContextField);
       }
-      if (structField_ != null) {
+      if (StructField != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(StructField);
       }
-      if (timestampField_ != null) {
+      if (TimestampField != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(TimestampField);
       }
-      if (typeField_ != null) {
+      if (TypeField != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(TypeField);
       }
-      if (doubleField_ != null) {
-        size += _single_doubleField_codec.CalculateSizeWithTag(DoubleField);
+      if (DoubleField != null) {
+        size += 1 + pb::CodedOutputStream.ComputeWrappedDoubleSize(DoubleField);
       }
-      if (floatField_ != null) {
-        size += _single_floatField_codec.CalculateSizeWithTag(FloatField);
+      if (FloatField != null) {
+        size += 1 + pb::CodedOutputStream.ComputeWrappedFloatSize(FloatField);
       }
-      if (int64Field_ != null) {
-        size += _single_int64Field_codec.CalculateSizeWithTag(Int64Field);
+      if (Int64Field != null) {
+        size += 1 + pb::CodedOutputStream.ComputeWrappedInt64Size(Int64Field);
       }
-      if (uint64Field_ != null) {
-        size += _single_uint64Field_codec.CalculateSizeWithTag(Uint64Field);
+      if (Uint64Field != null) {
+        size += 1 + pb::CodedOutputStream.ComputeWrappedUInt64Size(Uint64Field);
       }
-      if (int32Field_ != null) {
-        size += _single_int32Field_codec.CalculateSizeWithTag(Int32Field);
+      if (Int32Field != null) {
+        size += 1 + pb::CodedOutputStream.ComputeWrappedInt32Size(Int32Field);
       }
-      if (uint32Field_ != null) {
-        size += _single_uint32Field_codec.CalculateSizeWithTag(Uint32Field);
+      if (Uint32Field != null) {
+        size += 1 + pb::CodedOutputStream.ComputeWrappedUInt32Size(Uint32Field);
       }
-      if (boolField_ != null) {
-        size += _single_boolField_codec.CalculateSizeWithTag(BoolField);
+      if (BoolField != null) {
+        size += 2 + pb::CodedOutputStream.ComputeWrappedBoolSize(BoolField);
       }
-      if (stringField_ != null) {
-        size += _single_stringField_codec.CalculateSizeWithTag(StringField);
+      if (StringField != null) {
+        size += 2 + pb::CodedOutputStream.ComputeWrappedStringSize(StringField);
       }
-      if (bytesField_ != null) {
-        size += _single_bytesField_codec.CalculateSizeWithTag(BytesField);
+      if (BytesField != null) {
+        size += 2 + pb::CodedOutputStream.ComputeWrappedBytesSize(BytesField);
       }
-      if (valueField_ != null) {
+      if (ValueField != null) {
         size += 2 + pb::CodedOutputStream.ComputeMessageSize(ValueField);
       }
       if (_unknownFields != null) {
@@ -1252,24 +1252,24 @@ namespace Google.Protobuf.TestProtos {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      size += anyField_.CalculateSize(_repeated_anyField_codec);
-      size += apiField_.CalculateSize(_repeated_apiField_codec);
-      size += durationField_.CalculateSize(_repeated_durationField_codec);
-      size += emptyField_.CalculateSize(_repeated_emptyField_codec);
-      size += fieldMaskField_.CalculateSize(_repeated_fieldMaskField_codec);
-      size += sourceContextField_.CalculateSize(_repeated_sourceContextField_codec);
-      size += structField_.CalculateSize(_repeated_structField_codec);
-      size += timestampField_.CalculateSize(_repeated_timestampField_codec);
-      size += typeField_.CalculateSize(_repeated_typeField_codec);
-      size += doubleField_.CalculateSize(_repeated_doubleField_codec);
-      size += floatField_.CalculateSize(_repeated_floatField_codec);
-      size += int64Field_.CalculateSize(_repeated_int64Field_codec);
-      size += uint64Field_.CalculateSize(_repeated_uint64Field_codec);
-      size += int32Field_.CalculateSize(_repeated_int32Field_codec);
-      size += uint32Field_.CalculateSize(_repeated_uint32Field_codec);
-      size += boolField_.CalculateSize(_repeated_boolField_codec);
-      size += stringField_.CalculateSize(_repeated_stringField_codec);
-      size += bytesField_.CalculateSize(_repeated_bytesField_codec);
+      size += AnyField.CalculateSize(_repeated_anyField_codec);
+      size += ApiField.CalculateSize(_repeated_apiField_codec);
+      size += DurationField.CalculateSize(_repeated_durationField_codec);
+      size += EmptyField.CalculateSize(_repeated_emptyField_codec);
+      size += FieldMaskField.CalculateSize(_repeated_fieldMaskField_codec);
+      size += SourceContextField.CalculateSize(_repeated_sourceContextField_codec);
+      size += StructField.CalculateSize(_repeated_structField_codec);
+      size += TimestampField.CalculateSize(_repeated_timestampField_codec);
+      size += TypeField.CalculateSize(_repeated_typeField_codec);
+      size += DoubleField.CalculateSize(_repeated_doubleField_codec);
+      size += FloatField.CalculateSize(_repeated_floatField_codec);
+      size += Int64Field.CalculateSize(_repeated_int64Field_codec);
+      size += Uint64Field.CalculateSize(_repeated_uint64Field_codec);
+      size += Int32Field.CalculateSize(_repeated_int32Field_codec);
+      size += Uint32Field.CalculateSize(_repeated_uint32Field_codec);
+      size += BoolField.CalculateSize(_repeated_boolField_codec);
+      size += StringField.CalculateSize(_repeated_stringField_codec);
+      size += BytesField.CalculateSize(_repeated_bytesField_codec);
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -1889,59 +1889,59 @@ namespace Google.Protobuf.TestProtos {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      if (oneofFieldCase_ == OneofFieldOneofCase.AnyField) {
+      if (AnyField != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(AnyField);
       }
-      if (oneofFieldCase_ == OneofFieldOneofCase.ApiField) {
+      if (ApiField != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(ApiField);
       }
-      if (oneofFieldCase_ == OneofFieldOneofCase.DurationField) {
+      if (DurationField != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(DurationField);
       }
-      if (oneofFieldCase_ == OneofFieldOneofCase.EmptyField) {
+      if (EmptyField != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(EmptyField);
       }
-      if (oneofFieldCase_ == OneofFieldOneofCase.FieldMaskField) {
+      if (FieldMaskField != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(FieldMaskField);
       }
-      if (oneofFieldCase_ == OneofFieldOneofCase.SourceContextField) {
+      if (SourceContextField != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(SourceContextField);
       }
-      if (oneofFieldCase_ == OneofFieldOneofCase.StructField) {
+      if (StructField != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(StructField);
       }
-      if (oneofFieldCase_ == OneofFieldOneofCase.TimestampField) {
+      if (TimestampField != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(TimestampField);
       }
-      if (oneofFieldCase_ == OneofFieldOneofCase.TypeField) {
+      if (TypeField != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(TypeField);
       }
       if (oneofFieldCase_ == OneofFieldOneofCase.DoubleField) {
-        size += _oneof_doubleField_codec.CalculateSizeWithTag(DoubleField);
+        size += 1 + pb::CodedOutputStream.ComputeWrappedDoubleSize(DoubleField);
       }
       if (oneofFieldCase_ == OneofFieldOneofCase.FloatField) {
-        size += _oneof_floatField_codec.CalculateSizeWithTag(FloatField);
+        size += 1 + pb::CodedOutputStream.ComputeWrappedFloatSize(FloatField);
       }
       if (oneofFieldCase_ == OneofFieldOneofCase.Int64Field) {
-        size += _oneof_int64Field_codec.CalculateSizeWithTag(Int64Field);
+        size += 1 + pb::CodedOutputStream.ComputeWrappedInt64Size(Int64Field);
       }
       if (oneofFieldCase_ == OneofFieldOneofCase.Uint64Field) {
-        size += _oneof_uint64Field_codec.CalculateSizeWithTag(Uint64Field);
+        size += 1 + pb::CodedOutputStream.ComputeWrappedUInt64Size(Uint64Field);
       }
       if (oneofFieldCase_ == OneofFieldOneofCase.Int32Field) {
-        size += _oneof_int32Field_codec.CalculateSizeWithTag(Int32Field);
+        size += 1 + pb::CodedOutputStream.ComputeWrappedInt32Size(Int32Field);
       }
       if (oneofFieldCase_ == OneofFieldOneofCase.Uint32Field) {
-        size += _oneof_uint32Field_codec.CalculateSizeWithTag(Uint32Field);
+        size += 1 + pb::CodedOutputStream.ComputeWrappedUInt32Size(Uint32Field);
       }
       if (oneofFieldCase_ == OneofFieldOneofCase.BoolField) {
-        size += _oneof_boolField_codec.CalculateSizeWithTag(BoolField);
+        size += 2 + pb::CodedOutputStream.ComputeWrappedBoolSize(BoolField);
       }
       if (oneofFieldCase_ == OneofFieldOneofCase.StringField) {
-        size += _oneof_stringField_codec.CalculateSizeWithTag(StringField);
+        size += 2 + pb::CodedOutputStream.ComputeWrappedStringSize(StringField);
       }
       if (oneofFieldCase_ == OneofFieldOneofCase.BytesField) {
-        size += _oneof_bytesField_codec.CalculateSizeWithTag(BytesField);
+        size += 2 + pb::CodedOutputStream.ComputeWrappedBytesSize(BytesField);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -2503,24 +2503,186 @@ namespace Google.Protobuf.TestProtos {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      size += anyField_.CalculateSize(_map_anyField_codec);
-      size += apiField_.CalculateSize(_map_apiField_codec);
-      size += durationField_.CalculateSize(_map_durationField_codec);
-      size += emptyField_.CalculateSize(_map_emptyField_codec);
-      size += fieldMaskField_.CalculateSize(_map_fieldMaskField_codec);
-      size += sourceContextField_.CalculateSize(_map_sourceContextField_codec);
-      size += structField_.CalculateSize(_map_structField_codec);
-      size += timestampField_.CalculateSize(_map_timestampField_codec);
-      size += typeField_.CalculateSize(_map_typeField_codec);
-      size += doubleField_.CalculateSize(_map_doubleField_codec);
-      size += floatField_.CalculateSize(_map_floatField_codec);
-      size += int64Field_.CalculateSize(_map_int64Field_codec);
-      size += uint64Field_.CalculateSize(_map_uint64Field_codec);
-      size += int32Field_.CalculateSize(_map_int32Field_codec);
-      size += uint32Field_.CalculateSize(_map_uint32Field_codec);
-      size += boolField_.CalculateSize(_map_boolField_codec);
-      size += stringField_.CalculateSize(_map_stringField_codec);
-      size += bytesField_.CalculateSize(_map_bytesField_codec);
+      foreach (var entry in AnyField) {
+        var messageSize = 0;
+        if (entry.Key != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeInt32Size(entry.Key);
+        }
+        if (entry.Value != null) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeMessageSize(entry.Value);
+        }
+        size += 1 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
+      foreach (var entry in ApiField) {
+        var messageSize = 0;
+        if (entry.Key != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeInt32Size(entry.Key);
+        }
+        if (entry.Value != null) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeMessageSize(entry.Value);
+        }
+        size += 1 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
+      foreach (var entry in DurationField) {
+        var messageSize = 0;
+        if (entry.Key != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeInt32Size(entry.Key);
+        }
+        if (entry.Value != null) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeMessageSize(entry.Value);
+        }
+        size += 1 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
+      foreach (var entry in EmptyField) {
+        var messageSize = 0;
+        if (entry.Key != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeInt32Size(entry.Key);
+        }
+        if (entry.Value != null) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeMessageSize(entry.Value);
+        }
+        size += 1 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
+      foreach (var entry in FieldMaskField) {
+        var messageSize = 0;
+        if (entry.Key != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeInt32Size(entry.Key);
+        }
+        if (entry.Value != null) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeMessageSize(entry.Value);
+        }
+        size += 1 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
+      foreach (var entry in SourceContextField) {
+        var messageSize = 0;
+        if (entry.Key != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeInt32Size(entry.Key);
+        }
+        if (entry.Value != null) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeMessageSize(entry.Value);
+        }
+        size += 1 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
+      foreach (var entry in StructField) {
+        var messageSize = 0;
+        if (entry.Key != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeInt32Size(entry.Key);
+        }
+        if (entry.Value != null) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeMessageSize(entry.Value);
+        }
+        size += 1 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
+      foreach (var entry in TimestampField) {
+        var messageSize = 0;
+        if (entry.Key != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeInt32Size(entry.Key);
+        }
+        if (entry.Value != null) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeMessageSize(entry.Value);
+        }
+        size += 1 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
+      foreach (var entry in TypeField) {
+        var messageSize = 0;
+        if (entry.Key != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeInt32Size(entry.Key);
+        }
+        if (entry.Value != null) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeMessageSize(entry.Value);
+        }
+        size += 1 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
+      foreach (var entry in DoubleField) {
+        var messageSize = 0;
+        if (entry.Key != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeInt32Size(entry.Key);
+        }
+        if (entry.Value != null) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeWrappedDoubleSize(entry.Value);
+        }
+        size += 1 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
+      foreach (var entry in FloatField) {
+        var messageSize = 0;
+        if (entry.Key != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeInt32Size(entry.Key);
+        }
+        if (entry.Value != null) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeWrappedFloatSize(entry.Value);
+        }
+        size += 1 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
+      foreach (var entry in Int64Field) {
+        var messageSize = 0;
+        if (entry.Key != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeInt32Size(entry.Key);
+        }
+        if (entry.Value != null) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeWrappedInt64Size(entry.Value);
+        }
+        size += 1 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
+      foreach (var entry in Uint64Field) {
+        var messageSize = 0;
+        if (entry.Key != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeInt32Size(entry.Key);
+        }
+        if (entry.Value != null) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeWrappedUInt64Size(entry.Value);
+        }
+        size += 1 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
+      foreach (var entry in Int32Field) {
+        var messageSize = 0;
+        if (entry.Key != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeInt32Size(entry.Key);
+        }
+        if (entry.Value != null) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeWrappedInt32Size(entry.Value);
+        }
+        size += 1 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
+      foreach (var entry in Uint32Field) {
+        var messageSize = 0;
+        if (entry.Key != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeInt32Size(entry.Key);
+        }
+        if (entry.Value != null) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeWrappedUInt32Size(entry.Value);
+        }
+        size += 1 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
+      foreach (var entry in BoolField) {
+        var messageSize = 0;
+        if (entry.Key != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeInt32Size(entry.Key);
+        }
+        if (entry.Value != null) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeWrappedBoolSize(entry.Value);
+        }
+        size += 2 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
+      foreach (var entry in StringField) {
+        var messageSize = 0;
+        if (entry.Key != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeInt32Size(entry.Key);
+        }
+        if (entry.Value != null) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeWrappedStringSize(entry.Value);
+        }
+        size += 2 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
+      foreach (var entry in BytesField) {
+        var messageSize = 0;
+        if (entry.Key != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeInt32Size(entry.Key);
+        }
+        if (entry.Value != null) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeWrappedBytesSize(entry.Value);
+        }
+        size += 2 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }

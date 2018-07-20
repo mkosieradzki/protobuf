@@ -338,7 +338,7 @@ namespace Google.Protobuf.WellKnownTypes {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      size += paths_.CalculateSize(_repeated_paths_codec);
+      size += Paths.CalculateSize(_repeated_paths_codec);
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }

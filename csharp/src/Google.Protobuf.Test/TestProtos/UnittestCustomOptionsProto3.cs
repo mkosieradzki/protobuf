@@ -1671,7 +1671,7 @@ namespace UnitTest.Issues.TestProtos {
       if (Foo3 != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(Foo3);
       }
-      size += foo4_.CalculateSize(_repeated_foo4_codec);
+      size += Foo4.CalculateSize(_repeated_foo4_codec);
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -1879,16 +1879,16 @@ namespace UnitTest.Issues.TestProtos {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      if (bar_ != null) {
+      if (Bar != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(Bar);
       }
       if (Baz != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(Baz);
       }
-      if (fred_ != null) {
+      if (Fred != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(Fred);
       }
-      size += barney_.CalculateSize(_repeated_barney_codec);
+      size += Barney.CalculateSize(_repeated_barney_codec);
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -2470,7 +2470,7 @@ namespace UnitTest.Issues.TestProtos {
       if (S.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(S);
       }
-      if (sub_ != null) {
+      if (Sub != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(Sub);
       }
       if (_unknownFields != null) {

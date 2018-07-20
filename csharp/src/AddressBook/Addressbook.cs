@@ -220,8 +220,8 @@ namespace Google.Protobuf.Examples.AddressBook {
       if (Email.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Email);
       }
-      size += phones_.CalculateSize(_repeated_phones_codec);
-      if (lastUpdated_ != null) {
+      size += Phones.CalculateSize(_repeated_phones_codec);
+      if (LastUpdated != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(LastUpdated);
       }
       if (_unknownFields != null) {
@@ -556,7 +556,7 @@ namespace Google.Protobuf.Examples.AddressBook {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      size += people_.CalculateSize(_repeated_people_codec);
+      size += People.CalculateSize(_repeated_people_codec);
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }

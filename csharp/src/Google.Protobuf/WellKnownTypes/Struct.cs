@@ -167,7 +167,16 @@ namespace Google.Protobuf.WellKnownTypes {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      size += fields_.CalculateSize(_map_fields_codec);
+      foreach (var entry in Fields) {
+        var messageSize = 0;
+        if (entry.Key.Length != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeStringSize(entry.Key);
+        }
+        if (entry.Value != null) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeMessageSize(entry.Value);
+        }
+        size += 1 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -481,10 +490,10 @@ namespace Google.Protobuf.WellKnownTypes {
       if (kindCase_ == KindOneofCase.BoolValue) {
         size += 1 + 1;
       }
-      if (kindCase_ == KindOneofCase.StructValue) {
+      if (StructValue != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(StructValue);
       }
-      if (kindCase_ == KindOneofCase.ListValue) {
+      if (ListValue != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(ListValue);
       }
       if (_unknownFields != null) {
@@ -673,7 +682,7 @@ namespace Google.Protobuf.WellKnownTypes {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      size += values_.CalculateSize(_repeated_values_codec);
+      size += Values.CalculateSize(_repeated_values_codec);
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }

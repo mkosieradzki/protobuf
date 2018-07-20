@@ -487,23 +487,176 @@ namespace Google.Protobuf.TestProtos {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      size += mapInt32Int32_.CalculateSize(_map_mapInt32Int32_codec);
-      size += mapInt64Int64_.CalculateSize(_map_mapInt64Int64_codec);
-      size += mapUint32Uint32_.CalculateSize(_map_mapUint32Uint32_codec);
-      size += mapUint64Uint64_.CalculateSize(_map_mapUint64Uint64_codec);
-      size += mapSint32Sint32_.CalculateSize(_map_mapSint32Sint32_codec);
-      size += mapSint64Sint64_.CalculateSize(_map_mapSint64Sint64_codec);
-      size += mapFixed32Fixed32_.CalculateSize(_map_mapFixed32Fixed32_codec);
-      size += mapFixed64Fixed64_.CalculateSize(_map_mapFixed64Fixed64_codec);
-      size += mapSfixed32Sfixed32_.CalculateSize(_map_mapSfixed32Sfixed32_codec);
-      size += mapSfixed64Sfixed64_.CalculateSize(_map_mapSfixed64Sfixed64_codec);
-      size += mapInt32Float_.CalculateSize(_map_mapInt32Float_codec);
-      size += mapInt32Double_.CalculateSize(_map_mapInt32Double_codec);
-      size += mapBoolBool_.CalculateSize(_map_mapBoolBool_codec);
-      size += mapStringString_.CalculateSize(_map_mapStringString_codec);
-      size += mapInt32Bytes_.CalculateSize(_map_mapInt32Bytes_codec);
-      size += mapInt32Enum_.CalculateSize(_map_mapInt32Enum_codec);
-      size += mapInt32ForeignMessage_.CalculateSize(_map_mapInt32ForeignMessage_codec);
+      foreach (var entry in MapInt32Int32) {
+        var messageSize = 0;
+        if (entry.Key != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeInt32Size(entry.Key);
+        }
+        if (entry.Value != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeInt32Size(entry.Value);
+        }
+        size += 1 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
+      foreach (var entry in MapInt64Int64) {
+        var messageSize = 0;
+        if (entry.Key != 0L) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeInt64Size(entry.Key);
+        }
+        if (entry.Value != 0L) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeInt64Size(entry.Value);
+        }
+        size += 1 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
+      foreach (var entry in MapUint32Uint32) {
+        var messageSize = 0;
+        if (entry.Key != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeUInt32Size(entry.Key);
+        }
+        if (entry.Value != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeUInt32Size(entry.Value);
+        }
+        size += 1 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
+      foreach (var entry in MapUint64Uint64) {
+        var messageSize = 0;
+        if (entry.Key != 0UL) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeUInt64Size(entry.Key);
+        }
+        if (entry.Value != 0UL) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeUInt64Size(entry.Value);
+        }
+        size += 1 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
+      foreach (var entry in MapSint32Sint32) {
+        var messageSize = 0;
+        if (entry.Key != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeSInt32Size(entry.Key);
+        }
+        if (entry.Value != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeSInt32Size(entry.Value);
+        }
+        size += 1 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
+      foreach (var entry in MapSint64Sint64) {
+        var messageSize = 0;
+        if (entry.Key != 0L) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeSInt64Size(entry.Key);
+        }
+        if (entry.Value != 0L) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeSInt64Size(entry.Value);
+        }
+        size += 1 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
+      foreach (var entry in MapFixed32Fixed32) {
+        var messageSize = 0;
+        if (entry.Key != 0) {
+          messageSize += 1 + 4;
+        }
+        if (entry.Value != 0) {
+          messageSize += 1 + 4;
+        }
+        size += 1 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
+      foreach (var entry in MapFixed64Fixed64) {
+        var messageSize = 0;
+        if (entry.Key != 0UL) {
+          messageSize += 1 + 8;
+        }
+        if (entry.Value != 0UL) {
+          messageSize += 1 + 8;
+        }
+        size += 1 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
+      foreach (var entry in MapSfixed32Sfixed32) {
+        var messageSize = 0;
+        if (entry.Key != 0) {
+          messageSize += 1 + 4;
+        }
+        if (entry.Value != 0) {
+          messageSize += 1 + 4;
+        }
+        size += 1 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
+      foreach (var entry in MapSfixed64Sfixed64) {
+        var messageSize = 0;
+        if (entry.Key != 0L) {
+          messageSize += 1 + 8;
+        }
+        if (entry.Value != 0L) {
+          messageSize += 1 + 8;
+        }
+        size += 1 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
+      foreach (var entry in MapInt32Float) {
+        var messageSize = 0;
+        if (entry.Key != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeInt32Size(entry.Key);
+        }
+        if (entry.Value != 0F) {
+          messageSize += 1 + 4;
+        }
+        size += 1 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
+      foreach (var entry in MapInt32Double) {
+        var messageSize = 0;
+        if (entry.Key != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeInt32Size(entry.Key);
+        }
+        if (entry.Value != 0D) {
+          messageSize += 1 + 8;
+        }
+        size += 1 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
+      foreach (var entry in MapBoolBool) {
+        var messageSize = 0;
+        if (entry.Key != false) {
+          messageSize += 1 + 1;
+        }
+        if (entry.Value != false) {
+          messageSize += 1 + 1;
+        }
+        size += 1 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
+      foreach (var entry in MapStringString) {
+        var messageSize = 0;
+        if (entry.Key.Length != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeStringSize(entry.Key);
+        }
+        if (entry.Value.Length != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeStringSize(entry.Value);
+        }
+        size += 1 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
+      foreach (var entry in MapInt32Bytes) {
+        var messageSize = 0;
+        if (entry.Key != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeInt32Size(entry.Key);
+        }
+        if (entry.Value.Length != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeBytesSize(entry.Value);
+        }
+        size += 1 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
+      foreach (var entry in MapInt32Enum) {
+        var messageSize = 0;
+        if (entry.Key != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeInt32Size(entry.Key);
+        }
+        if (entry.Value != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeEnumSize((int) entry.Value);
+        }
+        size += 2 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
+      foreach (var entry in MapInt32ForeignMessage) {
+        var messageSize = 0;
+        if (entry.Key != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeInt32Size(entry.Key);
+        }
+        if (entry.Value != null) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeMessageSize(entry.Value);
+        }
+        size += 2 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -953,7 +1106,7 @@ namespace Google.Protobuf.TestProtos {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      if (testMap_ != null) {
+      if (TestMap != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(TestMap);
       }
       if (_unknownFields != null) {
@@ -1085,7 +1238,16 @@ namespace Google.Protobuf.TestProtos {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      size += mapInt32Message_.CalculateSize(_map_mapInt32Message_codec);
+      foreach (var entry in MapInt32Message) {
+        var messageSize = 0;
+        if (entry.Key != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeInt32Size(entry.Key);
+        }
+        if (entry.Value != null) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeMessageSize(entry.Value);
+        }
+        size += 1 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -1244,8 +1406,26 @@ namespace Google.Protobuf.TestProtos {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      size += map1_.CalculateSize(_map_map1_codec);
-      size += map2_.CalculateSize(_map_map2_codec);
+      foreach (var entry in Map1) {
+        var messageSize = 0;
+        if (entry.Key != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeInt32Size(entry.Key);
+        }
+        if (entry.Value != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeInt32Size(entry.Value);
+        }
+        size += 1 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
+      foreach (var entry in Map2) {
+        var messageSize = 0;
+        if (entry.Key != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeInt32Size(entry.Key);
+        }
+        if (entry.Value != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeInt32Size(entry.Value);
+        }
+        size += 1 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -1596,21 +1776,156 @@ namespace Google.Protobuf.TestProtos {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      size += mapInt32Int32_.CalculateSize(_map_mapInt32Int32_codec);
-      size += mapInt64Int64_.CalculateSize(_map_mapInt64Int64_codec);
-      size += mapUint32Uint32_.CalculateSize(_map_mapUint32Uint32_codec);
-      size += mapUint64Uint64_.CalculateSize(_map_mapUint64Uint64_codec);
-      size += mapSint32Sint32_.CalculateSize(_map_mapSint32Sint32_codec);
-      size += mapSint64Sint64_.CalculateSize(_map_mapSint64Sint64_codec);
-      size += mapFixed32Fixed32_.CalculateSize(_map_mapFixed32Fixed32_codec);
-      size += mapFixed64Fixed64_.CalculateSize(_map_mapFixed64Fixed64_codec);
-      size += mapSfixed32Sfixed32_.CalculateSize(_map_mapSfixed32Sfixed32_codec);
-      size += mapSfixed64Sfixed64_.CalculateSize(_map_mapSfixed64Sfixed64_codec);
-      size += mapInt32Float_.CalculateSize(_map_mapInt32Float_codec);
-      size += mapInt32Double_.CalculateSize(_map_mapInt32Double_codec);
-      size += mapBoolBool_.CalculateSize(_map_mapBoolBool_codec);
-      size += mapInt32Enum_.CalculateSize(_map_mapInt32Enum_codec);
-      size += mapInt32ForeignMessage_.CalculateSize(_map_mapInt32ForeignMessage_codec);
+      foreach (var entry in MapInt32Int32) {
+        var messageSize = 0;
+        if (entry.Key != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeInt32Size(entry.Key);
+        }
+        if (entry.Value != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeInt32Size(entry.Value);
+        }
+        size += 1 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
+      foreach (var entry in MapInt64Int64) {
+        var messageSize = 0;
+        if (entry.Key != 0L) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeInt64Size(entry.Key);
+        }
+        if (entry.Value != 0L) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeInt64Size(entry.Value);
+        }
+        size += 1 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
+      foreach (var entry in MapUint32Uint32) {
+        var messageSize = 0;
+        if (entry.Key != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeUInt32Size(entry.Key);
+        }
+        if (entry.Value != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeUInt32Size(entry.Value);
+        }
+        size += 1 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
+      foreach (var entry in MapUint64Uint64) {
+        var messageSize = 0;
+        if (entry.Key != 0UL) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeUInt64Size(entry.Key);
+        }
+        if (entry.Value != 0UL) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeUInt64Size(entry.Value);
+        }
+        size += 1 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
+      foreach (var entry in MapSint32Sint32) {
+        var messageSize = 0;
+        if (entry.Key != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeSInt32Size(entry.Key);
+        }
+        if (entry.Value != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeSInt32Size(entry.Value);
+        }
+        size += 1 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
+      foreach (var entry in MapSint64Sint64) {
+        var messageSize = 0;
+        if (entry.Key != 0L) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeSInt64Size(entry.Key);
+        }
+        if (entry.Value != 0L) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeSInt64Size(entry.Value);
+        }
+        size += 1 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
+      foreach (var entry in MapFixed32Fixed32) {
+        var messageSize = 0;
+        if (entry.Key != 0) {
+          messageSize += 1 + 4;
+        }
+        if (entry.Value != 0) {
+          messageSize += 1 + 4;
+        }
+        size += 1 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
+      foreach (var entry in MapFixed64Fixed64) {
+        var messageSize = 0;
+        if (entry.Key != 0UL) {
+          messageSize += 1 + 8;
+        }
+        if (entry.Value != 0UL) {
+          messageSize += 1 + 8;
+        }
+        size += 1 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
+      foreach (var entry in MapSfixed32Sfixed32) {
+        var messageSize = 0;
+        if (entry.Key != 0) {
+          messageSize += 1 + 4;
+        }
+        if (entry.Value != 0) {
+          messageSize += 1 + 4;
+        }
+        size += 1 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
+      foreach (var entry in MapSfixed64Sfixed64) {
+        var messageSize = 0;
+        if (entry.Key != 0L) {
+          messageSize += 1 + 8;
+        }
+        if (entry.Value != 0L) {
+          messageSize += 1 + 8;
+        }
+        size += 1 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
+      foreach (var entry in MapInt32Float) {
+        var messageSize = 0;
+        if (entry.Key != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeInt32Size(entry.Key);
+        }
+        if (entry.Value != 0F) {
+          messageSize += 1 + 4;
+        }
+        size += 1 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
+      foreach (var entry in MapInt32Double) {
+        var messageSize = 0;
+        if (entry.Key != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeInt32Size(entry.Key);
+        }
+        if (entry.Value != 0D) {
+          messageSize += 1 + 8;
+        }
+        size += 1 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
+      foreach (var entry in MapBoolBool) {
+        var messageSize = 0;
+        if (entry.Key != false) {
+          messageSize += 1 + 1;
+        }
+        if (entry.Value != false) {
+          messageSize += 1 + 1;
+        }
+        size += 1 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
+      foreach (var entry in MapInt32Enum) {
+        var messageSize = 0;
+        if (entry.Key != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeInt32Size(entry.Key);
+        }
+        if (entry.Value != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeEnumSize((int) entry.Value);
+        }
+        size += 1 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
+      foreach (var entry in MapInt32ForeignMessage) {
+        var messageSize = 0;
+        if (entry.Key != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeInt32Size(entry.Key);
+        }
+        if (entry.Value != null) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeMessageSize(entry.Value);
+        }
+        size += 1 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -2022,7 +2337,16 @@ namespace Google.Protobuf.TestProtos {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      size += type_.CalculateSize(_map_type_codec);
+      foreach (var entry in Type) {
+        var messageSize = 0;
+        if (entry.Key != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeInt32Size(entry.Key);
+        }
+        if (entry.Value != null) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeMessageSize(entry.Value);
+        }
+        size += 1 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -2178,7 +2502,16 @@ namespace Google.Protobuf.TestProtos {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      size += entry_.CalculateSize(_map_entry_codec);
+      foreach (var entry in Entry) {
+        var messageSize = 0;
+        if (entry.Key != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeInt32Size(entry.Key);
+        }
+        if (entry.Value != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeInt32Size(entry.Value);
+        }
+        size += 1 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }

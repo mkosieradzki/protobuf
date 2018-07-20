@@ -280,7 +280,7 @@ namespace Google.Protobuf.Reflection {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      size += file_.CalculateSize(_repeated_file_codec);
+      size += File.CalculateSize(_repeated_file_codec);
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -617,17 +617,17 @@ namespace Google.Protobuf.Reflection {
       if (Package.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Package);
       }
-      size += dependency_.CalculateSize(_repeated_dependency_codec);
-      size += publicDependency_.CalculateSize(_repeated_publicDependency_codec);
-      size += weakDependency_.CalculateSize(_repeated_weakDependency_codec);
-      size += messageType_.CalculateSize(_repeated_messageType_codec);
-      size += enumType_.CalculateSize(_repeated_enumType_codec);
-      size += service_.CalculateSize(_repeated_service_codec);
-      size += extension_.CalculateSize(_repeated_extension_codec);
-      if (options_ != null) {
+      size += Dependency.CalculateSize(_repeated_dependency_codec);
+      size += PublicDependency.CalculateSize(_repeated_publicDependency_codec);
+      size += WeakDependency.CalculateSize(_repeated_weakDependency_codec);
+      size += MessageType.CalculateSize(_repeated_messageType_codec);
+      size += EnumType.CalculateSize(_repeated_enumType_codec);
+      size += Service.CalculateSize(_repeated_service_codec);
+      size += Extension.CalculateSize(_repeated_extension_codec);
+      if (Options != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(Options);
       }
-      if (sourceCodeInfo_ != null) {
+      if (SourceCodeInfo != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(SourceCodeInfo);
       }
       if (Syntax.Length != 0) {
@@ -1009,17 +1009,17 @@ namespace Google.Protobuf.Reflection {
       if (Name.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Name);
       }
-      size += field_.CalculateSize(_repeated_field_codec);
-      size += extension_.CalculateSize(_repeated_extension_codec);
-      size += nestedType_.CalculateSize(_repeated_nestedType_codec);
-      size += enumType_.CalculateSize(_repeated_enumType_codec);
-      size += extensionRange_.CalculateSize(_repeated_extensionRange_codec);
-      size += oneofDecl_.CalculateSize(_repeated_oneofDecl_codec);
-      if (options_ != null) {
+      size += Field.CalculateSize(_repeated_field_codec);
+      size += Extension.CalculateSize(_repeated_extension_codec);
+      size += NestedType.CalculateSize(_repeated_nestedType_codec);
+      size += EnumType.CalculateSize(_repeated_enumType_codec);
+      size += ExtensionRange.CalculateSize(_repeated_extensionRange_codec);
+      size += OneofDecl.CalculateSize(_repeated_oneofDecl_codec);
+      if (Options != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(Options);
       }
-      size += reservedRange_.CalculateSize(_repeated_reservedRange_codec);
-      size += reservedName_.CalculateSize(_repeated_reservedName_codec);
+      size += ReservedRange.CalculateSize(_repeated_reservedRange_codec);
+      size += ReservedName.CalculateSize(_repeated_reservedName_codec);
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -1265,7 +1265,7 @@ namespace Google.Protobuf.Reflection {
           if (End != 0) {
             size += 1 + pb::CodedOutputStream.ComputeInt32Size(End);
           }
-          if (options_ != null) {
+          if (Options != null) {
             size += 1 + pb::CodedOutputStream.ComputeMessageSize(Options);
           }
           if (_unknownFields != null) {
@@ -1588,7 +1588,7 @@ namespace Google.Protobuf.Reflection {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      size += uninterpretedOption_.CalculateSize(_repeated_uninterpretedOption_codec);
+      size += UninterpretedOption.CalculateSize(_repeated_uninterpretedOption_codec);
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -1941,7 +1941,7 @@ namespace Google.Protobuf.Reflection {
       if (JsonName.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(JsonName);
       }
-      if (options_ != null) {
+      if (Options != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(Options);
       }
       if (_unknownFields != null) {
@@ -2231,7 +2231,7 @@ namespace Google.Protobuf.Reflection {
       if (Name.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Name);
       }
-      if (options_ != null) {
+      if (Options != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(Options);
       }
       if (_unknownFields != null) {
@@ -2449,12 +2449,12 @@ namespace Google.Protobuf.Reflection {
       if (Name.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Name);
       }
-      size += value_.CalculateSize(_repeated_value_codec);
-      if (options_ != null) {
+      size += Value.CalculateSize(_repeated_value_codec);
+      if (Options != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(Options);
       }
-      size += reservedRange_.CalculateSize(_repeated_reservedRange_codec);
-      size += reservedName_.CalculateSize(_repeated_reservedName_codec);
+      size += ReservedRange.CalculateSize(_repeated_reservedRange_codec);
+      size += ReservedName.CalculateSize(_repeated_reservedName_codec);
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -2840,7 +2840,7 @@ namespace Google.Protobuf.Reflection {
       if (Number != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(Number);
       }
-      if (options_ != null) {
+      if (Options != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(Options);
       }
       if (_unknownFields != null) {
@@ -3028,8 +3028,8 @@ namespace Google.Protobuf.Reflection {
       if (Name.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Name);
       }
-      size += method_.CalculateSize(_repeated_method_codec);
-      if (options_ != null) {
+      size += Method.CalculateSize(_repeated_method_codec);
+      if (Options != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(Options);
       }
       if (_unknownFields != null) {
@@ -3292,7 +3292,7 @@ namespace Google.Protobuf.Reflection {
       if (OutputType.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(OutputType);
       }
-      if (options_ != null) {
+      if (Options != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(Options);
       }
       if (ClientStreaming != false) {
@@ -3985,7 +3985,7 @@ namespace Google.Protobuf.Reflection {
       if (RubyPackage.Length != 0) {
         size += 2 + pb::CodedOutputStream.ComputeStringSize(RubyPackage);
       }
-      size += uninterpretedOption_.CalculateSize(_repeated_uninterpretedOption_codec);
+      size += UninterpretedOption.CalculateSize(_repeated_uninterpretedOption_codec);
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -4418,7 +4418,7 @@ namespace Google.Protobuf.Reflection {
       if (MapEntry != false) {
         size += 1 + 1;
       }
-      size += uninterpretedOption_.CalculateSize(_repeated_uninterpretedOption_codec);
+      size += UninterpretedOption.CalculateSize(_repeated_uninterpretedOption_codec);
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -4766,7 +4766,7 @@ namespace Google.Protobuf.Reflection {
       if (Weak != false) {
         size += 1 + 1;
       }
-      size += uninterpretedOption_.CalculateSize(_repeated_uninterpretedOption_codec);
+      size += UninterpretedOption.CalculateSize(_repeated_uninterpretedOption_codec);
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -4969,7 +4969,7 @@ namespace Google.Protobuf.Reflection {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      size += uninterpretedOption_.CalculateSize(_repeated_uninterpretedOption_codec);
+      size += UninterpretedOption.CalculateSize(_repeated_uninterpretedOption_codec);
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -5151,7 +5151,7 @@ namespace Google.Protobuf.Reflection {
       if (Deprecated != false) {
         size += 1 + 1;
       }
-      size += uninterpretedOption_.CalculateSize(_repeated_uninterpretedOption_codec);
+      size += UninterpretedOption.CalculateSize(_repeated_uninterpretedOption_codec);
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -5322,7 +5322,7 @@ namespace Google.Protobuf.Reflection {
       if (Deprecated != false) {
         size += 1 + 1;
       }
-      size += uninterpretedOption_.CalculateSize(_repeated_uninterpretedOption_codec);
+      size += UninterpretedOption.CalculateSize(_repeated_uninterpretedOption_codec);
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -5486,7 +5486,7 @@ namespace Google.Protobuf.Reflection {
       if (Deprecated != false) {
         size += 2 + 1;
       }
-      size += uninterpretedOption_.CalculateSize(_repeated_uninterpretedOption_codec);
+      size += UninterpretedOption.CalculateSize(_repeated_uninterpretedOption_codec);
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -5671,7 +5671,7 @@ namespace Google.Protobuf.Reflection {
       if (IdempotencyLevel != 0) {
         size += 2 + pb::CodedOutputStream.ComputeEnumSize((int) IdempotencyLevel);
       }
-      size += uninterpretedOption_.CalculateSize(_repeated_uninterpretedOption_codec);
+      size += UninterpretedOption.CalculateSize(_repeated_uninterpretedOption_codec);
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -5954,7 +5954,7 @@ namespace Google.Protobuf.Reflection {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      size += name_.CalculateSize(_repeated_name_codec);
+      size += Name.CalculateSize(_repeated_name_codec);
       if (IdentifierValue.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(IdentifierValue);
       }
@@ -6360,7 +6360,7 @@ namespace Google.Protobuf.Reflection {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      size += location_.CalculateSize(_repeated_location_codec);
+      size += Location.CalculateSize(_repeated_location_codec);
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -6632,15 +6632,15 @@ namespace Google.Protobuf.Reflection {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public int CalculateSize() {
           int size = 0;
-          size += path_.CalculateSize(_repeated_path_codec);
-          size += span_.CalculateSize(_repeated_span_codec);
+          size += Path.CalculateSize(_repeated_path_codec);
+          size += Span.CalculateSize(_repeated_span_codec);
           if (LeadingComments.Length != 0) {
             size += 1 + pb::CodedOutputStream.ComputeStringSize(LeadingComments);
           }
           if (TrailingComments.Length != 0) {
             size += 1 + pb::CodedOutputStream.ComputeStringSize(TrailingComments);
           }
-          size += leadingDetachedComments_.CalculateSize(_repeated_leadingDetachedComments_codec);
+          size += LeadingDetachedComments.CalculateSize(_repeated_leadingDetachedComments_codec);
           if (_unknownFields != null) {
             size += _unknownFields.CalculateSize();
           }
@@ -6822,7 +6822,7 @@ namespace Google.Protobuf.Reflection {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      size += annotation_.CalculateSize(_repeated_annotation_codec);
+      size += Annotation.CalculateSize(_repeated_annotation_codec);
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -7019,7 +7019,7 @@ namespace Google.Protobuf.Reflection {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public int CalculateSize() {
           int size = 0;
-          size += path_.CalculateSize(_repeated_path_codec);
+          size += Path.CalculateSize(_repeated_path_codec);
           if (SourceFile.Length != 0) {
             size += 1 + pb::CodedOutputStream.ComputeStringSize(SourceFile);
           }

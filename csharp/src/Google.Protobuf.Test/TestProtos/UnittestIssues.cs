@@ -530,8 +530,8 @@ namespace UnitTest.Issues.TestProtos {
       if (Value != 0) {
         size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) Value);
       }
-      size += values_.CalculateSize(_repeated_values_codec);
-      size += packedValues_.CalculateSize(_repeated_packedValues_codec);
+      size += Values.CalculateSize(_repeated_values_codec);
+      size += PackedValues.CalculateSize(_repeated_packedValues_codec);
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -880,15 +880,15 @@ namespace UnitTest.Issues.TestProtos {
       if (PrimitiveValue != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(PrimitiveValue);
       }
-      size += primitiveArray_.CalculateSize(_repeated_primitiveArray_codec);
-      if (messageValue_ != null) {
+      size += PrimitiveArray.CalculateSize(_repeated_primitiveArray_codec);
+      if (MessageValue != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(MessageValue);
       }
-      size += messageArray_.CalculateSize(_repeated_messageArray_codec);
+      size += MessageArray.CalculateSize(_repeated_messageArray_codec);
       if (EnumValue != 0) {
         size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) EnumValue);
       }
-      size += enumArray_.CalculateSize(_repeated_enumArray_codec);
+      size += EnumArray.CalculateSize(_repeated_enumArray_codec);
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -2066,7 +2066,7 @@ namespace UnitTest.Issues.TestProtos {
       if (valueCase_ == ValueOneofCase.Text) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Text);
       }
-      if (valueCase_ == ValueOneofCase.Nested) {
+      if (Nested != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(Nested);
       }
       if (_unknownFields != null) {

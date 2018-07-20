@@ -284,10 +284,10 @@ namespace Google.Protobuf.WellKnownTypes {
       if (Name.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Name);
       }
-      size += fields_.CalculateSize(_repeated_fields_codec);
-      size += oneofs_.CalculateSize(_repeated_oneofs_codec);
-      size += options_.CalculateSize(_repeated_options_codec);
-      if (sourceContext_ != null) {
+      size += Fields.CalculateSize(_repeated_fields_codec);
+      size += Oneofs.CalculateSize(_repeated_oneofs_codec);
+      size += Options.CalculateSize(_repeated_options_codec);
+      if (SourceContext != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(SourceContext);
       }
       if (Syntax != 0) {
@@ -675,7 +675,7 @@ namespace Google.Protobuf.WellKnownTypes {
       if (Packed != false) {
         size += 1 + 1;
       }
-      size += options_.CalculateSize(_repeated_options_codec);
+      size += Options.CalculateSize(_repeated_options_codec);
       if (JsonName.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(JsonName);
       }
@@ -1069,9 +1069,9 @@ namespace Google.Protobuf.WellKnownTypes {
       if (Name.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Name);
       }
-      size += enumvalue_.CalculateSize(_repeated_enumvalue_codec);
-      size += options_.CalculateSize(_repeated_options_codec);
-      if (sourceContext_ != null) {
+      size += Enumvalue.CalculateSize(_repeated_enumvalue_codec);
+      size += Options.CalculateSize(_repeated_options_codec);
+      if (SourceContext != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(SourceContext);
       }
       if (Syntax != 0) {
@@ -1290,7 +1290,7 @@ namespace Google.Protobuf.WellKnownTypes {
       if (Number != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(Number);
       }
-      size += options_.CalculateSize(_repeated_options_codec);
+      size += Options.CalculateSize(_repeated_options_codec);
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -1470,7 +1470,7 @@ namespace Google.Protobuf.WellKnownTypes {
       if (Name.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Name);
       }
-      if (value_ != null) {
+      if (Value != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(Value);
       }
       if (_unknownFields != null) {

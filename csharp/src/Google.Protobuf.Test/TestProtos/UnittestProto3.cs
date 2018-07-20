@@ -1180,13 +1180,13 @@ namespace Google.Protobuf.TestProtos {
       if (SingleBytes.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeBytesSize(SingleBytes);
       }
-      if (singleNestedMessage_ != null) {
+      if (SingleNestedMessage != null) {
         size += 2 + pb::CodedOutputStream.ComputeMessageSize(SingleNestedMessage);
       }
-      if (singleForeignMessage_ != null) {
+      if (SingleForeignMessage != null) {
         size += 2 + pb::CodedOutputStream.ComputeMessageSize(SingleForeignMessage);
       }
-      if (singleImportMessage_ != null) {
+      if (SingleImportMessage != null) {
         size += 2 + pb::CodedOutputStream.ComputeMessageSize(SingleImportMessage);
       }
       if (SingleNestedEnum != 0) {
@@ -1198,35 +1198,35 @@ namespace Google.Protobuf.TestProtos {
       if (SingleImportEnum != 0) {
         size += 2 + pb::CodedOutputStream.ComputeEnumSize((int) SingleImportEnum);
       }
-      if (singlePublicImportMessage_ != null) {
+      if (SinglePublicImportMessage != null) {
         size += 2 + pb::CodedOutputStream.ComputeMessageSize(SinglePublicImportMessage);
       }
-      size += repeatedInt32_.CalculateSize(_repeated_repeatedInt32_codec);
-      size += repeatedInt64_.CalculateSize(_repeated_repeatedInt64_codec);
-      size += repeatedUint32_.CalculateSize(_repeated_repeatedUint32_codec);
-      size += repeatedUint64_.CalculateSize(_repeated_repeatedUint64_codec);
-      size += repeatedSint32_.CalculateSize(_repeated_repeatedSint32_codec);
-      size += repeatedSint64_.CalculateSize(_repeated_repeatedSint64_codec);
-      size += repeatedFixed32_.CalculateSize(_repeated_repeatedFixed32_codec);
-      size += repeatedFixed64_.CalculateSize(_repeated_repeatedFixed64_codec);
-      size += repeatedSfixed32_.CalculateSize(_repeated_repeatedSfixed32_codec);
-      size += repeatedSfixed64_.CalculateSize(_repeated_repeatedSfixed64_codec);
-      size += repeatedFloat_.CalculateSize(_repeated_repeatedFloat_codec);
-      size += repeatedDouble_.CalculateSize(_repeated_repeatedDouble_codec);
-      size += repeatedBool_.CalculateSize(_repeated_repeatedBool_codec);
-      size += repeatedString_.CalculateSize(_repeated_repeatedString_codec);
-      size += repeatedBytes_.CalculateSize(_repeated_repeatedBytes_codec);
-      size += repeatedNestedMessage_.CalculateSize(_repeated_repeatedNestedMessage_codec);
-      size += repeatedForeignMessage_.CalculateSize(_repeated_repeatedForeignMessage_codec);
-      size += repeatedImportMessage_.CalculateSize(_repeated_repeatedImportMessage_codec);
-      size += repeatedNestedEnum_.CalculateSize(_repeated_repeatedNestedEnum_codec);
-      size += repeatedForeignEnum_.CalculateSize(_repeated_repeatedForeignEnum_codec);
-      size += repeatedImportEnum_.CalculateSize(_repeated_repeatedImportEnum_codec);
-      size += repeatedPublicImportMessage_.CalculateSize(_repeated_repeatedPublicImportMessage_codec);
+      size += RepeatedInt32.CalculateSize(_repeated_repeatedInt32_codec);
+      size += RepeatedInt64.CalculateSize(_repeated_repeatedInt64_codec);
+      size += RepeatedUint32.CalculateSize(_repeated_repeatedUint32_codec);
+      size += RepeatedUint64.CalculateSize(_repeated_repeatedUint64_codec);
+      size += RepeatedSint32.CalculateSize(_repeated_repeatedSint32_codec);
+      size += RepeatedSint64.CalculateSize(_repeated_repeatedSint64_codec);
+      size += RepeatedFixed32.CalculateSize(_repeated_repeatedFixed32_codec);
+      size += RepeatedFixed64.CalculateSize(_repeated_repeatedFixed64_codec);
+      size += RepeatedSfixed32.CalculateSize(_repeated_repeatedSfixed32_codec);
+      size += RepeatedSfixed64.CalculateSize(_repeated_repeatedSfixed64_codec);
+      size += RepeatedFloat.CalculateSize(_repeated_repeatedFloat_codec);
+      size += RepeatedDouble.CalculateSize(_repeated_repeatedDouble_codec);
+      size += RepeatedBool.CalculateSize(_repeated_repeatedBool_codec);
+      size += RepeatedString.CalculateSize(_repeated_repeatedString_codec);
+      size += RepeatedBytes.CalculateSize(_repeated_repeatedBytes_codec);
+      size += RepeatedNestedMessage.CalculateSize(_repeated_repeatedNestedMessage_codec);
+      size += RepeatedForeignMessage.CalculateSize(_repeated_repeatedForeignMessage_codec);
+      size += RepeatedImportMessage.CalculateSize(_repeated_repeatedImportMessage_codec);
+      size += RepeatedNestedEnum.CalculateSize(_repeated_repeatedNestedEnum_codec);
+      size += RepeatedForeignEnum.CalculateSize(_repeated_repeatedForeignEnum_codec);
+      size += RepeatedImportEnum.CalculateSize(_repeated_repeatedImportEnum_codec);
+      size += RepeatedPublicImportMessage.CalculateSize(_repeated_repeatedPublicImportMessage_codec);
       if (oneofFieldCase_ == OneofFieldOneofCase.OneofUint32) {
         size += 2 + pb::CodedOutputStream.ComputeUInt32Size(OneofUint32);
       }
-      if (oneofFieldCase_ == OneofFieldOneofCase.OneofNestedMessage) {
+      if (OneofNestedMessage != null) {
         size += 2 + pb::CodedOutputStream.ComputeMessageSize(OneofNestedMessage);
       }
       if (oneofFieldCase_ == OneofFieldOneofCase.OneofString) {
@@ -2058,13 +2058,13 @@ namespace Google.Protobuf.TestProtos {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      if (child_ != null) {
+      if (Child != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(Child);
       }
-      if (payload_ != null) {
+      if (Payload != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(Payload);
       }
-      size += repeatedChild_.CalculateSize(_repeated_repeatedChild_codec);
+      size += RepeatedChild.CalculateSize(_repeated_repeatedChild_codec);
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -2589,7 +2589,7 @@ namespace Google.Protobuf.TestProtos {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      if (foreignNested_ != null) {
+      if (ForeignNested != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(ForeignNested);
       }
       if (_unknownFields != null) {
@@ -2908,7 +2908,7 @@ namespace Google.Protobuf.TestProtos {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      if (a_ != null) {
+      if (A != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(A);
       }
       if (I != 0) {
@@ -3057,7 +3057,7 @@ namespace Google.Protobuf.TestProtos {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      if (bb_ != null) {
+      if (Bb != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(Bb);
       }
       if (_unknownFields != null) {
@@ -3211,7 +3211,7 @@ namespace Google.Protobuf.TestProtos {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      if (a_ != null) {
+      if (A != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(A);
       }
       if (OptionalInt32 != 0) {
@@ -3610,13 +3610,13 @@ namespace Google.Protobuf.TestProtos {
       if (EnumField != 0) {
         size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) EnumField);
       }
-      if (messageField_ != null) {
+      if (MessageField != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(MessageField);
       }
-      size += repeatedPrimitiveField_.CalculateSize(_repeated_repeatedPrimitiveField_codec);
-      size += repeatedStringField_.CalculateSize(_repeated_repeatedStringField_codec);
-      size += repeatedEnumField_.CalculateSize(_repeated_repeatedEnumField_codec);
-      size += repeatedMessageField_.CalculateSize(_repeated_repeatedMessageField_codec);
+      size += RepeatedPrimitiveField.CalculateSize(_repeated_repeatedPrimitiveField_codec);
+      size += RepeatedStringField.CalculateSize(_repeated_repeatedStringField_codec);
+      size += RepeatedEnumField.CalculateSize(_repeated_repeatedEnumField_codec);
+      size += RepeatedMessageField.CalculateSize(_repeated_repeatedMessageField_codec);
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -3883,7 +3883,7 @@ namespace Google.Protobuf.TestProtos {
       if (MyFloat != 0F) {
         size += 2 + 4;
       }
-      if (singleNestedMessage_ != null) {
+      if (SingleNestedMessage != null) {
         size += 2 + pb::CodedOutputStream.ComputeMessageSize(SingleNestedMessage);
       }
       if (_unknownFields != null) {
@@ -4469,7 +4469,7 @@ namespace Google.Protobuf.TestProtos {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      size += data_.CalculateSize(_repeated_data_codec);
+      size += Data.CalculateSize(_repeated_data_codec);
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -5584,7 +5584,7 @@ namespace Google.Protobuf.TestProtos {
       if (fooCase_ == FooOneofCase.FooString) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(FooString);
       }
-      if (fooCase_ == FooOneofCase.FooMessage) {
+      if (FooMessage != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(FooMessage);
       }
       if (_unknownFields != null) {
@@ -5917,20 +5917,20 @@ namespace Google.Protobuf.TestProtos {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      size += packedInt32_.CalculateSize(_repeated_packedInt32_codec);
-      size += packedInt64_.CalculateSize(_repeated_packedInt64_codec);
-      size += packedUint32_.CalculateSize(_repeated_packedUint32_codec);
-      size += packedUint64_.CalculateSize(_repeated_packedUint64_codec);
-      size += packedSint32_.CalculateSize(_repeated_packedSint32_codec);
-      size += packedSint64_.CalculateSize(_repeated_packedSint64_codec);
-      size += packedFixed32_.CalculateSize(_repeated_packedFixed32_codec);
-      size += packedFixed64_.CalculateSize(_repeated_packedFixed64_codec);
-      size += packedSfixed32_.CalculateSize(_repeated_packedSfixed32_codec);
-      size += packedSfixed64_.CalculateSize(_repeated_packedSfixed64_codec);
-      size += packedFloat_.CalculateSize(_repeated_packedFloat_codec);
-      size += packedDouble_.CalculateSize(_repeated_packedDouble_codec);
-      size += packedBool_.CalculateSize(_repeated_packedBool_codec);
-      size += packedEnum_.CalculateSize(_repeated_packedEnum_codec);
+      size += PackedInt32.CalculateSize(_repeated_packedInt32_codec);
+      size += PackedInt64.CalculateSize(_repeated_packedInt64_codec);
+      size += PackedUint32.CalculateSize(_repeated_packedUint32_codec);
+      size += PackedUint64.CalculateSize(_repeated_packedUint64_codec);
+      size += PackedSint32.CalculateSize(_repeated_packedSint32_codec);
+      size += PackedSint64.CalculateSize(_repeated_packedSint64_codec);
+      size += PackedFixed32.CalculateSize(_repeated_packedFixed32_codec);
+      size += PackedFixed64.CalculateSize(_repeated_packedFixed64_codec);
+      size += PackedSfixed32.CalculateSize(_repeated_packedSfixed32_codec);
+      size += PackedSfixed64.CalculateSize(_repeated_packedSfixed64_codec);
+      size += PackedFloat.CalculateSize(_repeated_packedFloat_codec);
+      size += PackedDouble.CalculateSize(_repeated_packedDouble_codec);
+      size += PackedBool.CalculateSize(_repeated_packedBool_codec);
+      size += PackedEnum.CalculateSize(_repeated_packedEnum_codec);
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -6457,20 +6457,20 @@ namespace Google.Protobuf.TestProtos {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      size += unpackedInt32_.CalculateSize(_repeated_unpackedInt32_codec);
-      size += unpackedInt64_.CalculateSize(_repeated_unpackedInt64_codec);
-      size += unpackedUint32_.CalculateSize(_repeated_unpackedUint32_codec);
-      size += unpackedUint64_.CalculateSize(_repeated_unpackedUint64_codec);
-      size += unpackedSint32_.CalculateSize(_repeated_unpackedSint32_codec);
-      size += unpackedSint64_.CalculateSize(_repeated_unpackedSint64_codec);
-      size += unpackedFixed32_.CalculateSize(_repeated_unpackedFixed32_codec);
-      size += unpackedFixed64_.CalculateSize(_repeated_unpackedFixed64_codec);
-      size += unpackedSfixed32_.CalculateSize(_repeated_unpackedSfixed32_codec);
-      size += unpackedSfixed64_.CalculateSize(_repeated_unpackedSfixed64_codec);
-      size += unpackedFloat_.CalculateSize(_repeated_unpackedFloat_codec);
-      size += unpackedDouble_.CalculateSize(_repeated_unpackedDouble_codec);
-      size += unpackedBool_.CalculateSize(_repeated_unpackedBool_codec);
-      size += unpackedEnum_.CalculateSize(_repeated_unpackedEnum_codec);
+      size += UnpackedInt32.CalculateSize(_repeated_unpackedInt32_codec);
+      size += UnpackedInt64.CalculateSize(_repeated_unpackedInt64_codec);
+      size += UnpackedUint32.CalculateSize(_repeated_unpackedUint32_codec);
+      size += UnpackedUint64.CalculateSize(_repeated_unpackedUint64_codec);
+      size += UnpackedSint32.CalculateSize(_repeated_unpackedSint32_codec);
+      size += UnpackedSint64.CalculateSize(_repeated_unpackedSint64_codec);
+      size += UnpackedFixed32.CalculateSize(_repeated_unpackedFixed32_codec);
+      size += UnpackedFixed64.CalculateSize(_repeated_unpackedFixed64_codec);
+      size += UnpackedSfixed32.CalculateSize(_repeated_unpackedSfixed32_codec);
+      size += UnpackedSfixed64.CalculateSize(_repeated_unpackedSfixed64_codec);
+      size += UnpackedFloat.CalculateSize(_repeated_unpackedFloat_codec);
+      size += UnpackedDouble.CalculateSize(_repeated_unpackedDouble_codec);
+      size += UnpackedBool.CalculateSize(_repeated_unpackedBool_codec);
+      size += UnpackedEnum.CalculateSize(_repeated_unpackedEnum_codec);
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -6895,12 +6895,12 @@ namespace Google.Protobuf.TestProtos {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      size += repeatedFixed32_.CalculateSize(_repeated_repeatedFixed32_codec);
-      size += repeatedInt32_.CalculateSize(_repeated_repeatedInt32_codec);
-      size += repeatedFixed64_.CalculateSize(_repeated_repeatedFixed64_codec);
-      size += repeatedInt64_.CalculateSize(_repeated_repeatedInt64_codec);
-      size += repeatedFloat_.CalculateSize(_repeated_repeatedFloat_codec);
-      size += repeatedUint64_.CalculateSize(_repeated_repeatedUint64_codec);
+      size += RepeatedFixed32.CalculateSize(_repeated_repeatedFixed32_codec);
+      size += RepeatedInt32.CalculateSize(_repeated_repeatedInt32_codec);
+      size += RepeatedFixed64.CalculateSize(_repeated_repeatedFixed64_codec);
+      size += RepeatedInt64.CalculateSize(_repeated_repeatedInt64_codec);
+      size += RepeatedFloat.CalculateSize(_repeated_repeatedFloat_codec);
+      size += RepeatedUint64.CalculateSize(_repeated_repeatedUint64_codec);
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }

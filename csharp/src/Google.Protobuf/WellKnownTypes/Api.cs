@@ -295,15 +295,15 @@ namespace Google.Protobuf.WellKnownTypes {
       if (Name.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Name);
       }
-      size += methods_.CalculateSize(_repeated_methods_codec);
-      size += options_.CalculateSize(_repeated_options_codec);
+      size += Methods.CalculateSize(_repeated_methods_codec);
+      size += Options.CalculateSize(_repeated_options_codec);
       if (Version.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Version);
       }
-      if (sourceContext_ != null) {
+      if (SourceContext != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(SourceContext);
       }
-      size += mixins_.CalculateSize(_repeated_mixins_codec);
+      size += Mixins.CalculateSize(_repeated_mixins_codec);
       if (Syntax != 0) {
         size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) Syntax);
       }
@@ -628,7 +628,7 @@ namespace Google.Protobuf.WellKnownTypes {
       if (ResponseStreaming != false) {
         size += 1 + 1;
       }
-      size += options_.CalculateSize(_repeated_options_codec);
+      size += Options.CalculateSize(_repeated_options_codec);
       if (Syntax != 0) {
         size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) Syntax);
       }
