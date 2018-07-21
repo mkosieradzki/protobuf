@@ -1184,7 +1184,7 @@ namespace Google.Protobuf
                 try
                 {
                     value.Slice(offset, length).CopyTo(temp);
-                    output.Write(temp, offset, length);
+                    output.Write(temp, 0, length);
                 }
                 finally
                 {
