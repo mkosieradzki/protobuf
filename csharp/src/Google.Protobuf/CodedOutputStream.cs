@@ -72,9 +72,13 @@ namespace Google.Protobuf
 
         private readonly bool leaveOpen;
         private readonly byte[] buffer;
-        private readonly int limit;
+        private int limit;
         private int position;
         private readonly Stream output;
+
+        private Memory<byte> nativeBuffer;
+        private readonly IBufferWriter<byte> nativeOutput;
+        private long nativeOutputPosition;
 
         #region Construction
         /// <summary>
@@ -87,13 +91,41 @@ namespace Google.Protobuf
         }
 
         /// <summary>
+        /// Creates a new CodedOutputStream that writes directly to the contiguous
+        /// memory. If more bytes are written than fit in the memory,
+        /// OutOfSpaceException will be thrown.
+        /// </summary>
+        [SecurityCritical]
+        public CodedOutputStream(Memory<byte> nativeBuffer)
+        {
+            this.nativeBuffer = nativeBuffer;
+            this.position = 0;
+            this.limit = nativeBuffer.Length;
+            leaveOpen = true; // Simple way of avoiding trying to dispose of a null reference
+        }
+
+        /// <summary>
+        /// Creates a new CodedOutputStream that writes directly to the contiguous
+        /// memory. If more bytes are written than fit in the memory,
+        /// OutOfSpaceException will be thrown.
+        /// </summary>
+        [SecurityCritical]
+        public CodedOutputStream(IBufferWriter<byte> nativeOutput)
+        {
+            this.nativeOutput = ProtoPreconditions.CheckNotNull(nativeOutput, nameof(nativeOutput));
+            this.nativeBuffer = nativeOutput.GetMemory();
+            this.position = 0;
+            this.limit = nativeBuffer.Length;
+            leaveOpen = true; // Simple way of avoiding trying to dispose of a null reference
+        }
+
+        /// <summary>
         /// Creates a new CodedOutputStream that writes directly to the given
         /// byte array slice. If more bytes are written than fit in the array,
         /// OutOfSpaceException will be thrown.
         /// </summary>
         private CodedOutputStream(byte[] buffer, int offset, int length)
         {
-            this.output = null;
             this.buffer = buffer;
             this.position = offset;
             this.limit = offset + length;
@@ -162,14 +194,14 @@ namespace Google.Protobuf
                 {
                     return output.Position + position;
                 }
-                return position;
+                return nativeOutputPosition + position;
             }
         }
 
         internal Span<byte> ImmediateBuffer
         {
             [SecurityCritical]
-            get => buffer;
+            get => buffer != null ? buffer : nativeBuffer.Span;
         }
 
         #region Writing of values (not including tags)
@@ -1124,7 +1156,7 @@ namespace Google.Protobuf
         /// Writes out part of an array of bytes.
         /// </summary>
         [SecurityCritical]
-        internal void WriteRawBytes(Span<byte> value)
+        internal void WriteRawBytes(ReadOnlySpan<byte> value)
         {
             var immediateBuffer = ImmediateBuffer;
             WriteRawBytes(value, ref immediateBuffer);
@@ -1133,7 +1165,7 @@ namespace Google.Protobuf
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [SecurityCritical]
-        internal void WriteRawBytes(Span<byte> value, ref Span<byte> immediateBuffer)
+        internal void WriteRawBytes(ReadOnlySpan<byte> value, ref Span<byte> immediateBuffer)
         {
             if (limit - position >= value.Length)
             {
@@ -1149,14 +1181,13 @@ namespace Google.Protobuf
 
         [MethodImpl(MethodImplOptions.NoInlining)]
         [SecurityCritical]
-        private void SlowWriteRawBytes(Span<byte> value, ref Span<byte> immediateBuffer)
+        private void SlowWriteRawBytes(ReadOnlySpan<byte> value, ref Span<byte> immediateBuffer)
         {
             int offset = 0;
             int length = value.Length;
             // Write extends past current buffer.  Fill the rest of this buffer and
             // flush.
             int bytesWritten = limit - position;
-            //ByteArray.Copy(value, offset, buffer, position, bytesWritten);
             value.Slice(0, bytesWritten).CopyTo(immediateBuffer.Slice(position));
             offset += bytesWritten;
             length -= bytesWritten;
@@ -1169,14 +1200,12 @@ namespace Google.Protobuf
             if (length <= limit)
             {
                 // Fits in new buffer.
-                //ByteArray.Copy(value, offset, buffer, 0, length);
                 value.Slice(offset, length).CopyTo(immediateBuffer);
                 position = length;
             }
-            else
+            else if (output != null)
             {
                 // Write is very big.  Let's do it all at once.
-                //output.Write(value, offset, length);
 #if NETCOREAPP2_1
                 output.Write(value.Slice(offset, length));
 #else
@@ -1191,6 +1220,14 @@ namespace Google.Protobuf
                     ArrayPool<byte>.Shared.Return(temp);
                 }
 #endif
+            }
+            else
+            {
+                nativeOutput.Write(value.Slice(offset, length));
+                nativeOutputPosition += length;
+                nativeBuffer = nativeOutput.GetMemory();
+                immediateBuffer = nativeBuffer.Span;
+                limit = nativeBuffer.Length;
             }
         }
 
@@ -1222,45 +1259,38 @@ namespace Google.Protobuf
         /// 10 bytes on the wire.)
         /// </remarks>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static ulong EncodeZigZag64(long n)
-        {
-            return (ulong) ((n << 1) ^ (n >> 63));
-        }
+        internal static ulong EncodeZigZag64(long n) => (ulong) ((n << 1) ^ (n >> 63));
 
         [MethodImpl(MethodImplOptions.NoInlining)]
         [SecurityCritical]
         private void RefreshBuffer(ref Span<byte> immediateBuffer)
         {
-            if (output == null)
+            if (output != null)
+            {
+                // Since we have an output stream, this is our buffer
+                // and buffer offset == 0
+#if NETCOREAPP2_1
+                output.Write(immediateBuffer.Slice(0, position));
+#else
+                //We always have buffer when using output
+                output.Write(buffer, 0, position);
+#endif
+                position = 0;
+            }
+            else if (nativeOutput != null)
+            {
+                nativeOutput.Advance(position);
+                nativeOutputPosition += position;
+                nativeBuffer = nativeOutput.GetMemory();
+                immediateBuffer = nativeBuffer.Span;
+                position = 0;
+                limit = nativeBuffer.Length;
+            }
+            else
             {
                 // We're writing to a single buffer.
                 throw new OutOfSpaceException();
             }
-
-            // Since we have an output stream, this is our buffer
-            // and buffer offset == 0
-#if NETCOREAPP2_1
-            output.Write(immediateBuffer.Slice(0, position));
-#else
-            if (buffer != null)
-            {
-                output.Write(buffer, 0, position);
-            }
-            else
-            {
-                var temp = ArrayPool<byte>.Shared.Rent(position);
-                try
-                {
-                    immediateBuffer.Slice(0, position).CopyTo(temp);
-                    output.Write(temp, 0, position);
-                }
-                finally
-                {
-                    ArrayPool<byte>.Shared.Return(temp);
-                }
-            }
-#endif
-            position = 0;
         }
 
         /// <summary>
@@ -1344,9 +1374,10 @@ namespace Google.Protobuf
         /// </summary>
         public int SpaceLeft
         {
+            [SecuritySafeCritical]
             get
             {
-                if (output == null)
+                if (output == null && nativeOutput == null)
                 {
                     return limit - position;
                 }
