@@ -106,6 +106,7 @@ namespace Google.Protobuf
         /// </summary>
         /// <param name="message">The message to write to the stream.</param>
         /// <param name="output">Coded output stream to write the data to. Must not be null.</param>
+        [SecuritySafeCritical]
         public static void WriteTo(this IMessage message, CodedOutputStream output)
         {
             ProtoPreconditions.CheckNotNull(message, "message");
@@ -133,6 +134,7 @@ namespace Google.Protobuf
         /// </summary>
         /// <param name="message">The message to write.</param>
         /// <param name="output">The output stream to write to.</param>
+        [SecuritySafeCritical]
         public static void WriteDelimitedTo(this IMessage message, Stream output)
         {
             ProtoPreconditions.CheckNotNull(message, "message");

@@ -319,6 +319,17 @@ namespace Google.Protobuf
         /// for an embedded message, for example.
         /// </remarks>
         /// <returns>The next field tag, or 0 for end of stream. (0 is never a valid tag.)</returns>
+        [SecuritySafeCritical]
+        public uint ReadTag()
+        {
+            var immediateBudder = ImmediateBuffer;
+            return ReadTag(ref immediateBudder);
+        }
+
+        /// <summary>
+        /// This supports the Protocol Buffers infrastructure and is not meant to be used directly from your code.
+        /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [SecurityCritical]
         public uint ReadTag(ref ReadOnlySpan<byte> immediateBuffer)
@@ -350,7 +361,7 @@ namespace Google.Protobuf
             }
             else
             {
-                if (IsAtEnd(ref immediateBuffer))
+                if (IsAtEndCore(ref immediateBuffer))
                 {
                     lastTag = 0;
                     return 0; // This is the only case in which we return 0.
@@ -368,7 +379,7 @@ namespace Google.Protobuf
 
         /// <summary>
         /// Skips the data for the field with the tag we've just read.
-        /// This should be called directly after <see cref="ReadTag"/>, when
+        /// This should be called directly after <see cref="ReadTag()"/>, when
         /// the caller wishes to skip an unknown field.
         /// </summary>
         /// <remarks>
@@ -379,6 +390,17 @@ namespace Google.Protobuf
         /// </remarks>
         /// <exception cref="InvalidProtocolBufferException">The last tag was an end-group tag</exception>
         /// <exception cref="InvalidOperationException">The last read operation read to the end of the logical stream</exception>
+        [SecuritySafeCritical]
+        public void SkipLastField()
+        {
+            var immediateBudder = ImmediateBuffer;
+            SkipLastField(ref immediateBudder);
+        }
+
+        /// <summary>
+        /// This supports the Protocol Buffers infrastructure and is not meant to be used directly from your code.
+        /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [SecurityCritical]
         public void SkipLastField(ref ReadOnlySpan<byte> immediateBuffer)
@@ -411,9 +433,7 @@ namespace Google.Protobuf
             }
         }
 
-        /// <summary>
-        /// Skip a group.
-        /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
         [MethodImpl(MethodImplOptions.NoInlining)]
         [SecurityCritical]
         internal void SkipGroup(uint startGroupTag, ref ReadOnlySpan<byte> immediateBuffer)
@@ -454,13 +474,25 @@ namespace Google.Protobuf
         /// <summary>
         /// Reads a double field from the stream.
         /// </summary>
+        [SecuritySafeCritical]
+        public double ReadDouble()
+        {
+            var immediateBudder = ImmediateBuffer;
+            return ReadDouble(ref immediateBudder);
+        }
+
+        /// <summary>
+        /// This supports the Protocol Buffers infrastructure and is not meant to be used directly from your code.
+        /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [SecurityCritical]
         public double ReadDouble(ref ReadOnlySpan<byte> immediateBuffer) => BitConverter.Int64BitsToDouble((long)ReadRawLittleEndian64(ref immediateBuffer));
 
         /// <summary>
-        /// Reads a wrapped double field from the stream.
+        /// This supports the Protocol Buffers infrastructure and is not meant to be used directly from your code.
         /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [SecurityCritical]
         public double ReadWrappedDouble(ref ReadOnlySpan<byte> immediateBuffer)
@@ -487,6 +519,17 @@ namespace Google.Protobuf
         /// <summary>
         /// Reads a float field from the stream.
         /// </summary>
+        [SecuritySafeCritical]
+        public float ReadFloat()
+        {
+            var immediateBudder = ImmediateBuffer;
+            return ReadFloat(ref immediateBudder);
+        }
+
+        /// <summary>
+        /// This supports the Protocol Buffers infrastructure and is not meant to be used directly from your code.
+        /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [SecurityCritical]
 #if NETCOREAPP2_1
@@ -499,8 +542,9 @@ namespace Google.Protobuf
 #endif
 
         /// <summary>
-        /// Reads a wrapped float field from the stream.
+        /// This supports the Protocol Buffers infrastructure and is not meant to be used directly from your code.
         /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [SecurityCritical]
         public float ReadWrappedFloat(ref ReadOnlySpan<byte> immediateBuffer)
@@ -527,13 +571,25 @@ namespace Google.Protobuf
         /// <summary>
         /// Reads a uint64 field from the stream.
         /// </summary>
+        [SecuritySafeCritical]
+        public ulong ReadUInt64()
+        {
+            var immediateBudder = ImmediateBuffer;
+            return ReadUInt64(ref immediateBudder);
+        }
+
+        /// <summary>
+        /// This supports the Protocol Buffers infrastructure and is not meant to be used directly from your code.
+        /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [SecurityCritical]
         public ulong ReadUInt64(ref ReadOnlySpan<byte> immediateBuffer) => ReadRawVarint64(ref immediateBuffer);
 
         /// <summary>
-        /// Reads a wrapped uint64 field from the stream.
+        /// This supports the Protocol Buffers infrastructure and is not meant to be used directly from your code.
         /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [SecurityCritical]
         public ulong ReadWrappedUInt64(ref ReadOnlySpan<byte> immediateBuffer) => ReadRawWrappedVarint64(ref immediateBuffer);
@@ -541,13 +597,25 @@ namespace Google.Protobuf
         /// <summary>
         /// Reads an int64 field from the stream.
         /// </summary>
+        [SecuritySafeCritical]
+        public long ReadInt64()
+        {
+            var immediateBudder = ImmediateBuffer;
+            return ReadInt64(ref immediateBudder);
+        }
+
+        /// <summary>
+        /// This supports the Protocol Buffers infrastructure and is not meant to be used directly from your code.
+        /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [SecurityCritical]
         public long ReadInt64(ref ReadOnlySpan<byte> immediateBuffer) => (long)ReadRawVarint64(ref immediateBuffer);
 
         /// <summary>
-        /// Reads a wrapped int64 field from the stream.
+        /// This supports the Protocol Buffers infrastructure and is not meant to be used directly from your code.
         /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [SecurityCritical]
         public long ReadWrappedInt64(ref ReadOnlySpan<byte> immediateBuffer) => (long)ReadRawWrappedVarint64(ref immediateBuffer);
@@ -555,13 +623,25 @@ namespace Google.Protobuf
         /// <summary>
         /// Reads an int32 field from the stream.
         /// </summary>
+        [SecuritySafeCritical]
+        public int ReadInt32()
+        {
+            var immediateBudder = ImmediateBuffer;
+            return ReadInt32(ref immediateBudder);
+        }
+
+        /// <summary>
+        /// This supports the Protocol Buffers infrastructure and is not meant to be used directly from your code.
+        /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [SecurityCritical]
         public int ReadInt32(ref ReadOnlySpan<byte> immediateBuffer) => (int)ReadRawVarint32(ref immediateBuffer);
 
         /// <summary>
-        /// Reads a wrapped bool field from the stream.
+        /// This supports the Protocol Buffers infrastructure and is not meant to be used directly from your code.
         /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [SecurityCritical]
         public int ReadWrappedInt32(ref ReadOnlySpan<byte> immediateBuffer) => (int)ReadRawWrappedVarint32(ref immediateBuffer);
@@ -569,6 +649,17 @@ namespace Google.Protobuf
         /// <summary>
         /// Reads a fixed64 field from the stream.
         /// </summary>
+        [SecuritySafeCritical]
+        public ulong ReadFixed64()
+        {
+            var immediateBudder = ImmediateBuffer;
+            return ReadFixed64(ref immediateBudder);
+        }
+
+        /// <summary>
+        /// This supports the Protocol Buffers infrastructure and is not meant to be used directly from your code.
+        /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [SecurityCritical]
         public ulong ReadFixed64(ref ReadOnlySpan<byte> immediateBuffer) => ReadRawLittleEndian64(ref immediateBuffer);
@@ -576,6 +667,17 @@ namespace Google.Protobuf
         /// <summary>
         /// Reads a fixed32 field from the stream.
         /// </summary>
+        [SecuritySafeCritical]
+        public double ReadFixed32()
+        {
+            var immediateBudder = ImmediateBuffer;
+            return ReadFixed32(ref immediateBudder);
+        }
+
+        /// <summary>
+        /// This supports the Protocol Buffers infrastructure and is not meant to be used directly from your code.
+        /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [SecurityCritical]
         public uint ReadFixed32(ref ReadOnlySpan<byte> immediateBuffer) => ReadRawLittleEndian32(ref immediateBuffer);
@@ -583,13 +685,25 @@ namespace Google.Protobuf
         /// <summary>
         /// Reads a bool field from the stream.
         /// </summary>
+        [SecuritySafeCritical]
+        public bool ReadBool()
+        {
+            var immediateBudder = ImmediateBuffer;
+            return ReadBool(ref immediateBudder);
+        }
+
+        /// <summary>
+        /// This supports the Protocol Buffers infrastructure and is not meant to be used directly from your code.
+        /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [SecurityCritical]
         public bool ReadBool(ref ReadOnlySpan<byte> immediateBuffer) => ReadRawVarint32(ref immediateBuffer) != 0;
 
         /// <summary>
-        /// Reads a wrapped bool field from the stream.
+        /// This supports the Protocol Buffers infrastructure and is not meant to be used directly from your code.
         /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [SecurityCritical]
         public bool ReadWrappedBool(ref ReadOnlySpan<byte> immediateBuffer) => ReadRawWrappedVarint32(ref immediateBuffer) != 0;
@@ -597,6 +711,17 @@ namespace Google.Protobuf
         /// <summary>
         /// Reads a string field from the stream.
         /// </summary>
+        [SecuritySafeCritical]
+        public string ReadString()
+        {
+            var immediateBudder = ImmediateBuffer;
+            return ReadString(ref immediateBudder);
+        }
+
+        /// <summary>
+        /// This supports the Protocol Buffers infrastructure and is not meant to be used directly from your code.
+        /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [SecurityCritical]
         public string ReadString(ref ReadOnlySpan<byte> immediateBuffer)
@@ -624,8 +749,9 @@ namespace Google.Protobuf
         }
 
         /// <summary>
-        /// Reads a wrapped bool field from the stream.
+        /// This supports the Protocol Buffers infrastructure and is not meant to be used directly from your code.
         /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [SecurityCritical]
         public string ReadWrappedString(ref ReadOnlySpan<byte> immediateBuffer)
@@ -652,6 +778,18 @@ namespace Google.Protobuf
         /// <summary>
         /// Reads an embedded message field value from the stream.
         /// </summary>
+        [SecuritySafeCritical]
+        public void ReadMessage(IMessage builder)
+        {
+            var immediateBudder = ImmediateBuffer;
+            ReadMessage(builder, ref immediateBudder);
+        }
+
+        /// <summary>
+        /// This supports the Protocol Buffers infrastructure and is not meant to be used directly from your code.
+        /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [SecurityCritical]
         public void ReadMessage(IMessage builder, ref ReadOnlySpan<byte> immediateBuffer)
         {
@@ -660,6 +798,10 @@ namespace Google.Protobuf
             EndReadNested(oldLimit);
         }
 
+        /// <summary>
+        /// This supports the Protocol Buffers infrastructure and is not meant to be used directly from your code.
+        /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [SecurityCritical]
         public int BeginReadNested(ref ReadOnlySpan<byte> immediateBuffer)
@@ -674,6 +816,10 @@ namespace Google.Protobuf
             return oldLimit;
         }
 
+        /// <summary>
+        /// This supports the Protocol Buffers infrastructure and is not meant to be used directly from your code.
+        /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void EndReadNested(int oldLimit)
         {
@@ -690,6 +836,17 @@ namespace Google.Protobuf
         /// <summary>
         /// Reads a bytes field value from the stream.
         /// </summary>   
+        [SecuritySafeCritical]
+        public ByteString ReadBytes()
+        {
+            var immediateBudder = ImmediateBuffer;
+            return ReadBytes(ref immediateBudder);
+        }
+
+        /// <summary>
+        /// This supports the Protocol Buffers infrastructure and is not meant to be used directly from your code.
+        /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [SecurityCritical]
         public ByteString ReadBytes(ref ReadOnlySpan<byte> immediateBuffer)
@@ -711,8 +868,9 @@ namespace Google.Protobuf
         }
 
         /// <summary>
-        /// Reads a wrapped bytes field from the stream.
+        /// This supports the Protocol Buffers infrastructure and is not meant to be used directly from your code.
         /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [SecurityCritical]
         public ByteString ReadWrappedBytes(ref ReadOnlySpan<byte> immediateBuffer)
@@ -739,13 +897,25 @@ namespace Google.Protobuf
         /// <summary>
         /// Reads a uint32 field value from the stream.
         /// </summary>
+        [SecuritySafeCritical]
+        public uint ReadUInt32()
+        {
+            var immediateBudder = ImmediateBuffer;
+            return ReadUInt32(ref immediateBudder);
+        }
+
+        /// <summary>
+        /// This supports the Protocol Buffers infrastructure and is not meant to be used directly from your code.
+        /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [SecurityCritical]
         public uint ReadUInt32(ref ReadOnlySpan<byte> immediateBuffer) => ReadRawVarint32(ref immediateBuffer);
 
         /// <summary>
-        /// Reads a wrapped uint32 field from the stream.
+        /// This supports the Protocol Buffers infrastructure and is not meant to be used directly from your code.
         /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [SecurityCritical]
         public uint ReadWrappedUInt32(ref ReadOnlySpan<byte> immediateBuffer) => ReadRawWrappedVarint32(ref immediateBuffer);
@@ -753,7 +923,17 @@ namespace Google.Protobuf
         /// <summary>
         /// Reads an enum field value from the stream.
         /// </summary>
-        // Currently just a pass-through, but it's nice to separate it logically from WriteInt32.
+        [SecuritySafeCritical]
+        public int ReadEnum()
+        {
+            var immediateBudder = ImmediateBuffer;
+            return ReadEnum(ref immediateBudder);
+        }
+
+        /// <summary>
+        /// This supports the Protocol Buffers infrastructure and is not meant to be used directly from your code.
+        /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [SecurityCritical]
         public int ReadEnum(ref ReadOnlySpan<byte> immediateBuffer) => (int)ReadRawVarint32(ref immediateBuffer);
@@ -761,6 +941,17 @@ namespace Google.Protobuf
         /// <summary>
         /// Reads an sfixed32 field value from the stream.
         /// </summary>
+        [SecuritySafeCritical]
+        public int ReadSFixed32()
+        {
+            var immediateBudder = ImmediateBuffer;
+            return ReadSFixed32(ref immediateBudder);
+        }
+
+        /// <summary>
+        /// This supports the Protocol Buffers infrastructure and is not meant to be used directly from your code.
+        /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [SecurityCritical]
         public int ReadSFixed32(ref ReadOnlySpan<byte> immediateBuffer) => (int)ReadRawLittleEndian32(ref immediateBuffer);
@@ -768,6 +959,17 @@ namespace Google.Protobuf
         /// <summary>
         /// Reads an sfixed64 field value from the stream.
         /// </summary>
+        [SecuritySafeCritical]
+        public long ReadSFixed64()
+        {
+            var immediateBudder = ImmediateBuffer;
+            return ReadSFixed64(ref immediateBudder);
+        }
+
+        /// <summary>
+        /// This supports the Protocol Buffers infrastructure and is not meant to be used directly from your code.
+        /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [SecurityCritical]
         public long ReadSFixed64(ref ReadOnlySpan<byte> immediateBuffer) => (long)ReadRawLittleEndian64(ref immediateBuffer);
@@ -775,6 +977,17 @@ namespace Google.Protobuf
         /// <summary>
         /// Reads an sint32 field value from the stream.
         /// </summary>
+        [SecuritySafeCritical]
+        public int ReadSInt32()
+        {
+            var immediateBudder = ImmediateBuffer;
+            return ReadSInt32(ref immediateBudder);
+        }
+
+        /// <summary>
+        /// This supports the Protocol Buffers infrastructure and is not meant to be used directly from your code.
+        /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [SecurityCritical]
         public int ReadSInt32(ref ReadOnlySpan<byte> immediateBuffer) => DecodeZigZag32(ReadRawVarint32(ref immediateBuffer));
@@ -782,6 +995,17 @@ namespace Google.Protobuf
         /// <summary>
         /// Reads an sint64 field value from the stream.
         /// </summary>   
+        [SecuritySafeCritical]
+        public long ReadSInt64()
+        {
+            var immediateBudder = ImmediateBuffer;
+            return ReadSInt64(ref immediateBudder);
+        }
+
+        /// <summary>
+        /// This supports the Protocol Buffers infrastructure and is not meant to be used directly from your code.
+        /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [SecurityCritical]
         public long ReadSInt64(ref ReadOnlySpan<byte> immediateBuffer) => DecodeZigZag64(ReadRawVarint64(ref immediateBuffer));
@@ -789,10 +1013,17 @@ namespace Google.Protobuf
         /// <summary>
         /// Reads a length for length-delimited data.
         /// </summary>
-        /// <remarks>
-        /// This is internally just reading a varint, but this method exists
-        /// to make the calling code clearer.
-        /// </remarks>
+        [SecuritySafeCritical]
+        public int ReadLength()
+        {
+            var immediateBudder = ImmediateBuffer;
+            return ReadLength(ref immediateBudder);
+        }
+
+        /// <summary>
+        /// This supports the Protocol Buffers infrastructure and is not meant to be used directly from your code.
+        /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [SecurityCritical]
         public int ReadLength(ref ReadOnlySpan<byte> immediateBuffer) => (int)ReadRawVarint32(ref immediateBuffer);
@@ -884,9 +1115,20 @@ namespace Google.Protobuf
         /// That means we can check the size just once, then just read directly from the buffer
         /// without constant rechecking of the buffer length.
         /// </summary>
+        [SecuritySafeCritical]
+        internal uint ReadRawVarint32()
+        {
+            var immediateBudder = ImmediateBuffer;
+            return ReadRawVarint32(ref immediateBudder);
+        }
+
+        /// <summary>
+        /// This supports the Protocol Buffers infrastructure and is not meant to be used directly from your code.
+        /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [SecurityCritical]
-        internal uint ReadRawVarint32(ref ReadOnlySpan<byte> immediateBuffer)
+        private uint ReadRawVarint32(ref ReadOnlySpan<byte> immediateBuffer)
         {
             if (bufferPos + 5 > bufferSize)
             {
@@ -987,6 +1229,18 @@ namespace Google.Protobuf
         /// <summary>
         /// Reads a raw varint from the stream.
         /// </summary>
+        [SecuritySafeCritical]
+        internal ulong ReadRawVarint64()
+        {
+            var immediateBudder = ImmediateBuffer;
+            return ReadRawVarint64(ref immediateBudder);
+        }
+
+        /// <summary>
+        /// This supports the Protocol Buffers infrastructure and is not meant to be used directly from your code.
+        /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [SecurityCritical]
         internal ulong ReadRawVarint64(ref ReadOnlySpan<byte> immediateBuffer)
         {
@@ -1032,9 +1286,20 @@ namespace Google.Protobuf
         /// <summary>
         /// Reads a 32-bit little-endian integer from the stream.
         /// </summary>
+        [SecuritySafeCritical]
+        internal uint ReadRawLittleEndian32()
+        {
+            var immediateBudder = ImmediateBuffer;
+            return ReadRawLittleEndian32(ref immediateBudder);
+        }
+
+        /// <summary>
+        /// This supports the Protocol Buffers infrastructure and is not meant to be used directly from your code.
+        /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [SecurityCritical]
-        internal uint ReadRawLittleEndian32(ref ReadOnlySpan<byte> immediateBuffer)
+        private uint ReadRawLittleEndian32(ref ReadOnlySpan<byte> immediateBuffer)
         {
             if (bufferPos + 4 > bufferSize)
             {
@@ -1062,6 +1327,17 @@ namespace Google.Protobuf
         /// <summary>
         /// Reads a 64-bit little-endian integer from the stream.
         /// </summary>
+        [SecuritySafeCritical]
+        public ulong ReadRawLittleEndian64()
+        {
+            var immediateBudder = ImmediateBuffer;
+            return ReadRawLittleEndian64(ref immediateBudder);
+        }
+
+        /// <summary>
+        /// This supports the Protocol Buffers infrastructure and is not meant to be used directly from your code.
+        /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [SecurityCritical]
         internal ulong ReadRawLittleEndian64(ref ReadOnlySpan<byte> immediateBuffer)
@@ -1104,10 +1380,7 @@ namespace Google.Protobuf
         /// 10 bytes on the wire.)
         /// </remarks>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static int DecodeZigZag32(uint n)
-        {
-            return (int)(n >> 1) ^ -(int)(n & 1);
-        }
+        internal static int DecodeZigZag32(uint n) => (int)(n >> 1) ^ -(int)(n & 1);
 
         /// <summary>
         /// Decode a 32-bit value with ZigZag encoding.
@@ -1119,10 +1392,7 @@ namespace Google.Protobuf
         /// 10 bytes on the wire.)
         /// </remarks>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static long DecodeZigZag64(ulong n)
-        {
-            return (long)(n >> 1) ^ -(long)(n & 1);
-        }
+        internal static long DecodeZigZag64(ulong n) => (long)(n >> 1) ^ -(long)(n & 1);
         #endregion
 
         #region Internal reading and buffer management
@@ -1133,6 +1403,8 @@ namespace Google.Protobuf
         /// limit is returned.
         /// </summary>
         /// <returns>The old limit.</returns>
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        [SecurityCritical]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public int PushLimit(int byteLimit)
         {
@@ -1173,6 +1445,8 @@ namespace Google.Protobuf
         /// <summary>
         /// Discards the current limit, returning the previous limit.
         /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        [SecurityCritical]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void PopLimit(int oldLimit)
         {
@@ -1202,22 +1476,30 @@ namespace Google.Protobuf
         /// case if either the end of the underlying input source has been reached or
         /// the stream has reached a limit created using PushLimit.
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        [SecurityCritical]
-        public bool IsAtEnd(ref ReadOnlySpan<byte> immediateBuffer)
+        public bool IsAtEnd
         {
-            return bufferPos == bufferSize && (input == null || !RefillBuffer(false, ref immediateBuffer));
+            [SecuritySafeCritical]
+            get
+            {
+                var immediateBudder = ImmediateBuffer;
+                return IsAtEndCore(ref immediateBudder);
+            }
         }
 
         /// <summary>
+        /// This supports the Protocol Buffers infrastructure and is not meant to be used directly from your code.
+        /// </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [SecurityCritical]
+        internal bool IsAtEndCore(ref ReadOnlySpan<byte> immediateBuffer) => bufferPos == bufferSize && (input == null || !RefillBuffer(false, ref immediateBuffer));
+
+        /// <summary>
         /// Called when buffer is empty to read more bytes from the
-        /// input.  If <paramref name="mustSucceed"/> is true, RefillBuffer() gurantees that
+        /// input.  If mustSucceed is true, RefillBuffer() gurantees that
         /// either there will be at least one byte in the buffer when it returns
-        /// or it will throw an exception.  If <paramref name="mustSucceed"/> is false,
+        /// or it will throw an exception.  If mustSucceed is false,
         /// RefillBuffer() returns false if no more bytes were available.
         /// </summary>
-        /// <param name="mustSucceed"></param>
-        /// <returns></returns>
         [MethodImpl(MethodImplOptions.NoInlining)]
         [SecurityCritical]
         private bool RefillBuffer(bool mustSucceed, ref ReadOnlySpan<byte> immediateBuffer)
@@ -1278,9 +1560,20 @@ namespace Google.Protobuf
         /// <exception cref="InvalidProtocolBufferException">
         /// the end of the stream or the current limit was reached
         /// </exception>
+        [SecuritySafeCritical]
+        internal byte ReadRawByte()
+        {
+            var immediateBudder = ImmediateBuffer;
+            return ReadRawByte(ref immediateBudder);
+        }
+
+        /// <summary>
+        /// This supports the Protocol Buffers infrastructure and is not meant to be used directly from your code.
+        /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [SecurityCritical]
-        internal byte ReadRawByte(ref ReadOnlySpan<byte> immediateBuffer)
+        private byte ReadRawByte(ref ReadOnlySpan<byte> immediateBuffer)
         {
             if (bufferPos == bufferSize)
             {
@@ -1295,8 +1588,20 @@ namespace Google.Protobuf
         /// <exception cref="InvalidProtocolBufferException">
         /// the end of the stream or the current limit was reached
         /// </exception>
+        [SecuritySafeCritical]
+        internal byte[] ReadRawBytes(int size)
+        {
+            var immediateBudder = ImmediateBuffer;
+            return ReadRawBytes(size, ref immediateBudder);
+        }
+
+        /// <summary>
+        /// This supports the Protocol Buffers infrastructure and is not meant to be used directly from your code.
+        /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
         [SecurityCritical]
-        internal byte[] ReadRawBytes(int size, ref ReadOnlySpan<byte> immediateBuffer)
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        private byte[] ReadRawBytes(int size, ref ReadOnlySpan<byte> immediateBuffer)
         {
             if (size < 0)
             {
@@ -1416,6 +1721,7 @@ namespace Google.Protobuf
         /// <exception cref="InvalidProtocolBufferException">the end of the stream
         /// or the current limit was reached</exception>
         [SecurityCritical]
+        [MethodImpl(MethodImplOptions.NoInlining)]
         private void SkipRawBytes(int size)
         {
             if (size < 0)

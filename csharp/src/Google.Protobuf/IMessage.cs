@@ -31,6 +31,7 @@
 #endregion
 
 using System;
+using System.ComponentModel;
 using System.Security;
 using Google.Protobuf.Reflection;
 
@@ -43,18 +44,16 @@ namespace Google.Protobuf
     public interface IMessage
     {
         /// <summary>
-        /// Merges the data from the specified coded input stream with the current message.
+        /// This supports the Protocol Buffers infrastructure and is not meant to be used directly from your code.
         /// </summary>
-        /// <remarks>See the user guide for precise merge semantics.</remarks>
-        /// <param name="input"></param>
-        /// <param name="immediateBuffer"></param>
+        [EditorBrowsable(EditorBrowsableState.Never)]
         [SecurityCritical]
         void MergeFrom(CodedInputStream input, ref ReadOnlySpan<byte> immediateBuffer);
 
         /// <summary>
-        /// Writes the data to the given coded output stream.
+        /// This supports the Protocol Buffers infrastructure and is not meant to be used directly from your code.
         /// </summary>
-        /// <param name="output">Coded output stream to write the data to. Must not be null.</param>
+        [EditorBrowsable(EditorBrowsableState.Never)]
         [SecurityCritical]
         void WriteTo(CodedOutputStream output, ref Span<byte> immediateBuffer);
 

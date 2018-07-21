@@ -98,8 +98,6 @@ namespace Google.Protobuf
         /// Serializes the field, including the field number, and writes it to
         /// <paramref name="output"/>
         /// </summary>
-        /// <param name="fieldNumber">The unknown field number.</param>
-        /// <param name="output">The CodedOutputStream to write to.</param>
         [SecurityCritical]
         internal void WriteTo(int fieldNumber, CodedOutputStream output, ref Span<byte> immediateBuffer)
         {
