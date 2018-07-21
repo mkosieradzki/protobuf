@@ -54,31 +54,29 @@ EnumFieldGenerator::EnumFieldGenerator(const FieldDescriptor* descriptor,
 EnumFieldGenerator::~EnumFieldGenerator() {
 }
 
-void EnumFieldGenerator::GenerateParsingCode(io::Printer* printer) {
+void EnumFieldGenerator::GenerateParsingCode(io::Printer* printer, const std::string& lvalueName, bool forceNonPacked) {
+  variables_["lvalue_name"] = lvalueName.empty() ? variables_["name"] + "_" : lvalueName;
   printer->Print(variables_,
-    "$name$_ = ($type_name$) input.ReadEnum(ref immediateBuffer);\n");
+    "$lvalue_name$ = ($type_name$) input.ReadEnum(ref immediateBuffer);\n");
 }
 
-void EnumFieldGenerator::GenerateSerializationCode(io::Printer* printer) {
+void EnumFieldGenerator::GenerateSerializationCode(io::Printer* printer, const std::string& rvalueName) {
+  variables_["rvalue_name"] = rvalueName;
   printer->Print(variables_,
-    "if ($has_property_check$) {\n"
-    "  output.WriteRawTag($tag_bytes$);\n"
-    "  output.WriteEnum((int) $property_name$);\n"
+    "if ($rvalue_name$$has_property_check_sufix$) {\n"
+    "  output.WriteRawTag($tag_bytes$, ref immediateBuffer);\n"
+    "  output.WriteEnum((int)$rvalue_name$, ref immediateBuffer);\n"
     "}\n");
 }
 
-void EnumFieldGenerator::GenerateSerializedSizeCode(io::Printer* printer) {
+void EnumFieldGenerator::GenerateSerializedSizeCode(io::Printer* printer, const std::string& lvalueName, const std::string& rvalueName) {
+  variables_["lvalue_name"] = lvalueName;
+  variables_["rvalue_name"] = rvalueName;
   printer->Print(
     variables_,
-    "if ($has_property_check$) {\n"
-      "  size += $tag_size$ + pb::CodedOutputStream.ComputeEnumSize((int) $property_name$);\n"
+    "if ($rvalue_name$$has_property_check_sufix$) {\n"
+    "  $lvalue_name$ += $tag_size$ + pb::CodedOutputStream.ComputeEnumSize((int) $rvalue_name$);\n"
     "}\n");
-}
-
-void EnumFieldGenerator::GenerateCodecCode(io::Printer* printer) {
-    printer->Print(
-        variables_,
-        "pb::FieldCodec.ForEnum($tag$, x => (int) x, x => ($type_name$) x)");
 }
 
 EnumOneofFieldGenerator::EnumOneofFieldGenerator(
@@ -93,28 +91,33 @@ void EnumOneofFieldGenerator::GenerateMergingCode(io::Printer* printer) {
   printer->Print(variables_, "$property_name$ = other.$property_name$;\n");
 }
 
-void EnumOneofFieldGenerator::GenerateParsingCode(io::Printer* printer) {
+void EnumOneofFieldGenerator::GenerateParsingCode(io::Printer* printer, const std::string& lvalueName, bool forceNonPacked) {
+  variables_["lvalue_name"] = lvalueName.empty() ? variables_["oneof_name"] + "_" : lvalueName;
+  variables_["case_lvalue_name"] = lvalueName.empty() ? variables_["oneof_name"] + "Case_" : lvalueName;
   // TODO(jonskeet): What about if we read the default value?
   printer->Print(
     variables_,
-    "$oneof_name$_ = input.ReadEnum(ref immediateBuffer);\n"
-    "$oneof_name$Case_ = $oneof_property_name$OneofCase.$property_name$;\n");
+    "$lvalue_name$ = input.ReadEnum(ref immediateBuffer);\n"
+    "$case_lvalue_name$ = $oneof_property_name$OneofCase.$property_name$;\n");
 }
 
-void EnumOneofFieldGenerator::GenerateSerializationCode(io::Printer* printer) {
+void EnumOneofFieldGenerator::GenerateSerializationCode(io::Printer* printer, const std::string& rvalueName) {
+  // NOTE: This one works only for property_name (ignoring rvalue)
   printer->Print(
     variables_,
     "if ($has_property_check$) {\n"
-    "  output.WriteRawTag($tag_bytes$);\n"
-    "  output.WriteEnum((int) $property_name$);\n"
+    "  output.WriteRawTag($tag_bytes$, ref immediateBuffer);\n"
+    "  output.WriteEnum((int) $property_name$, ref immediateBuffer);\n"
     "}\n");
 }
 
-void EnumOneofFieldGenerator::GenerateSerializedSizeCode(io::Printer* printer) {
+void EnumOneofFieldGenerator::GenerateSerializedSizeCode(io::Printer* printer, const std::string& lvalueName, const std::string& rvalueName) {
+  variables_["lvalue_name"] = lvalueName;
+  // NOTE: This one works only for property_name (ignoring rvalue)
   printer->Print(
     variables_,
     "if ($has_property_check$) {\n"
-    "  size += $tag_size$ + pb::CodedOutputStream.ComputeEnumSize((int) $property_name$);\n"
+    "  $lvalue_name$ += $tag_size$ + pb::CodedOutputStream.ComputeEnumSize((int) $property_name$);\n"
     "}\n");
 }
 

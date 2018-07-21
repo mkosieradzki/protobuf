@@ -57,10 +57,6 @@ RepeatedPrimitiveFieldGenerator::~RepeatedPrimitiveFieldGenerator() {
 }
 
 void RepeatedPrimitiveFieldGenerator::GenerateMembers(io::Printer* printer) {
-  printer->Print(
-    variables_,
-    "private static readonly pb::FieldCodec<$type_name$> _repeated_$name$_codec\n"
-    "    = pb::FieldCodec.For$capitalized_type_name$($tag$);\n");
   printer->Print(variables_,
     "private readonly pbc::RepeatedField<$type_name$> $name$_ = new pbc::RepeatedField<$type_name$>();\n");
   WritePropertyDocComment(printer, descriptor_);
@@ -78,22 +74,103 @@ void RepeatedPrimitiveFieldGenerator::GenerateMergingCode(io::Printer* printer) 
     "$name$_.Add(other.$name$_);\n");
 }
 
-void RepeatedPrimitiveFieldGenerator::GenerateParsingCode(io::Printer* printer) {
-  printer->Print(
-    variables_,
-    "$name$_.AddEntriesFrom(input, _repeated_$name$_codec, ref immediateBuffer);\n");
+void RepeatedPrimitiveFieldGenerator::GenerateParsingCode(io::Printer* printer, const std::string& lvalueName, bool forceNonPacked) {
+  variables_["lvalue_name"] = lvalueName.empty() ? variables_["name"] + "_" : lvalueName;
+  if (descriptor_->is_packable() && !forceNonPacked) {
+    printer->Print(
+      variables_,
+      "int length = input.ReadLength(ref immediateBuffer);\n"
+      "if (length > 0) {\n"
+      "  var oldLimit = input.PushLimit(length);\n"
+      "  while (!input.ReachedLimit) {\n"
+      "    $lvalue_name$.Add(input.Read$capitalized_type_name$(ref immediateBuffer)); \n"
+      "  }\n"
+      "  input.PopLimit(oldLimit);\n"
+      "}\n");
+  }
+  else {
+    printer->Print(
+      variables_,
+      "$lvalue_name$.Add(input.Read$capitalized_type_name$(ref immediateBuffer));\n");
+  }
 }
 
-void RepeatedPrimitiveFieldGenerator::GenerateSerializationCode(io::Printer* printer) {
-  printer->Print(
-    variables_,
-    "$name$_.WriteTo(output, _repeated_$name$_codec);\n");
+void RepeatedPrimitiveFieldGenerator::GenerateSerializationCode(io::Printer* printer, const std::string& rvalueName) {
+  variables_["rvalue_name"] = rvalueName;
+  if (descriptor_->is_packable()) {
+    int fixedSize = GetFixedSize(descriptor_->type());
+    if (fixedSize == -1) {
+      printer->Print(
+        variables_,
+        "{\n"
+        "  var packedSize = 0;\n"
+        "  for (var i = 0; i < $rvalue_name$.Count; i++) {\n"
+        "    packedSize += pb::CodedOutputStream.Compute$capitalized_type_name$Size($rvalue_name$[i]);\n"
+        "  }\n");
+    }
+    else {
+      printer->Print(
+        "{\n"
+        "  var packedSize = $fixed_size$ * $rvalue_name$.Count;\n",
+        "rvalue_name", rvalueName,
+        "fixed_size", SimpleItoa(fixedSize));
+    }
+    printer->Print(
+      variables_,
+      "  if (packedSize > 0) {\n"
+      "    output.WriteRawTag($tag_bytes$, ref immediateBuffer);\n"
+      "    output.WriteLength(packedSize, ref immediateBuffer);\n"
+      "    for (var i = 0; i < $rvalue_name$.Count; i++) {\n"
+      "      output.Write$capitalized_type_name$($rvalue_name$[i], ref immediateBuffer);\n"
+      "    }\n"
+      "  }\n"
+      "}\n");
+  }
+  else {
+    printer->Print(
+      variables_,
+      "for (var i = 0; i < $rvalue_name$.Count; i++) {\n"
+      "  output.WriteRawTag($tag_bytes$, ref immediateBuffer);\n"
+      "  output.Write$capitalized_type_name$($rvalue_name$[i], ref immediateBuffer);\n"
+      "}\n");
+  }
 }
 
-void RepeatedPrimitiveFieldGenerator::GenerateSerializedSizeCode(io::Printer* printer) {
-  printer->Print(
-    variables_,
-    "size += $name$_.CalculateSize(_repeated_$name$_codec);\n");
+void RepeatedPrimitiveFieldGenerator::GenerateSerializedSizeCode(io::Printer* printer, const std::string& lvalueName, const std::string& rvalueName) {
+  variables_["lvalue_name"] = lvalueName;
+  variables_["rvalue_name"] = rvalueName;
+  if (descriptor_->is_packed()) {
+    int fixedSize = GetFixedSize(descriptor_->type());
+    if (fixedSize == -1) {
+      printer->Print(
+        variables_,
+        "{\n"
+        "  var packedSize = 0;\n"
+        "  for (var i = 0; i < $rvalue_name$.Count; i++) {\n"
+        "    packedSize += pb::CodedOutputStream.Compute$capitalized_type_name$Size($rvalue_name$[i]);\n"
+        "  }\n");
+    }
+    else {
+      printer->Print(
+        "{\n"
+        "  var packedSize = $fixed_size$ * $rvalue_name$.Count;\n",
+        "rvalue_name", rvalueName,
+        "fixed_size", SimpleItoa(fixedSize));
+    }
+    printer->Print(
+      variables_,
+      "  if (packedSize > 0) {\n"
+      "    $lvalue_name$ += $tag_size$ + packedSize + pb::CodedOutputStream.ComputeLengthSize(packedSize);\n"
+      "  }\n"
+      "}\n");
+  }
+  else {
+    printer->Print(
+      variables_,
+      "for (var i = 0; i < $rvalue_name$.Count; i++) {\n"
+      "  $lvalue_name$ += $tag_size$ + pb::CodedOutputStream.Compute$capitalized_type_name$Size($rvalue_name$[i]);\n"
+      "}\n");
+  }
 }
 
 void RepeatedPrimitiveFieldGenerator::WriteHash(io::Printer* printer) {

@@ -32,6 +32,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Security;
 
 namespace Google.Protobuf.Reflection
@@ -328,8 +329,17 @@ namespace Google.Protobuf.Reflection
         /// will be created and returned. Otherwise, the return value is <c>this</c>. This allows
         /// us to start with a singleton empty set of options and just create new ones where necessary.
         /// </remarks>
-        /// <param name="input">Input stream to read from. </param>
-        /// <returns>The resulting set of custom options, either <c>this</c> or a new set.</returns>
+        [SecuritySafeCritical]
+        internal CustomOptions ReadOrSkipUnknownField(CodedInputStream input)
+        {
+            var immediateBudder = input.ImmediateBuffer;
+            return ReadOrSkipUnknownField(input, ref immediateBudder);
+        }
+
+        /// <summary>
+        /// This supports the Protocol Buffers infrastructure and is not meant to be used directly from your code.
+        /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
         [SecurityCritical]
         internal CustomOptions ReadOrSkipUnknownField(CodedInputStream input, ref ReadOnlySpan<byte> immediateBuffer)
         {

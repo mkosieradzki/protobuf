@@ -233,29 +233,31 @@ namespace Conformance {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
+    [global::System.Security.SecurityCritical]
+    [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+    public void WriteTo(pb::CodedOutputStream output, ref global::System.Span<byte> immediateBuffer) {
       if (payloadCase_ == PayloadOneofCase.ProtobufPayload) {
-        output.WriteRawTag(10);
-        output.WriteBytes(ProtobufPayload);
+        output.WriteRawTag(10, ref immediateBuffer);
+        output.WriteBytes(ProtobufPayload, ref immediateBuffer);
       }
       if (payloadCase_ == PayloadOneofCase.JsonPayload) {
-        output.WriteRawTag(18);
-        output.WriteString(JsonPayload);
+        output.WriteRawTag(18, ref immediateBuffer);
+        output.WriteString(JsonPayload, ref immediateBuffer);
       }
       if (RequestedOutputFormat != 0) {
-        output.WriteRawTag(24);
-        output.WriteEnum((int) RequestedOutputFormat);
+        output.WriteRawTag(24, ref immediateBuffer);
+        output.WriteEnum((int)RequestedOutputFormat, ref immediateBuffer);
       }
       if (MessageType.Length != 0) {
-        output.WriteRawTag(34);
-        output.WriteString(MessageType);
+        output.WriteRawTag(34, ref immediateBuffer);
+        output.WriteString(MessageType, ref immediateBuffer);
       }
       if (IgnoreUnknownJson != false) {
-        output.WriteRawTag(40);
-        output.WriteBool(IgnoreUnknownJson);
+        output.WriteRawTag(40, ref immediateBuffer);
+        output.WriteBool(IgnoreUnknownJson, ref immediateBuffer);
       }
       if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
+        _unknownFields.WriteTo(output, ref immediateBuffer);
       }
     }
 
@@ -311,6 +313,7 @@ namespace Conformance {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.Security.SecurityCritical]
+    [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
     public void MergeFrom(pb::CodedInputStream input, ref global::System.ReadOnlySpan<byte> immediateBuffer) {
       uint tag;
       while ((tag = input.ReadTag(ref immediateBuffer)) != 0) {
@@ -564,33 +567,35 @@ namespace Conformance {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
+    [global::System.Security.SecurityCritical]
+    [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+    public void WriteTo(pb::CodedOutputStream output, ref global::System.Span<byte> immediateBuffer) {
       if (resultCase_ == ResultOneofCase.ParseError) {
-        output.WriteRawTag(10);
-        output.WriteString(ParseError);
-      }
-      if (resultCase_ == ResultOneofCase.RuntimeError) {
-        output.WriteRawTag(18);
-        output.WriteString(RuntimeError);
-      }
-      if (resultCase_ == ResultOneofCase.ProtobufPayload) {
-        output.WriteRawTag(26);
-        output.WriteBytes(ProtobufPayload);
-      }
-      if (resultCase_ == ResultOneofCase.JsonPayload) {
-        output.WriteRawTag(34);
-        output.WriteString(JsonPayload);
-      }
-      if (resultCase_ == ResultOneofCase.Skipped) {
-        output.WriteRawTag(42);
-        output.WriteString(Skipped);
+        output.WriteRawTag(10, ref immediateBuffer);
+        output.WriteString(ParseError, ref immediateBuffer);
       }
       if (resultCase_ == ResultOneofCase.SerializeError) {
-        output.WriteRawTag(50);
-        output.WriteString(SerializeError);
+        output.WriteRawTag(50, ref immediateBuffer);
+        output.WriteString(SerializeError, ref immediateBuffer);
+      }
+      if (resultCase_ == ResultOneofCase.RuntimeError) {
+        output.WriteRawTag(18, ref immediateBuffer);
+        output.WriteString(RuntimeError, ref immediateBuffer);
+      }
+      if (resultCase_ == ResultOneofCase.ProtobufPayload) {
+        output.WriteRawTag(26, ref immediateBuffer);
+        output.WriteBytes(ProtobufPayload, ref immediateBuffer);
+      }
+      if (resultCase_ == ResultOneofCase.JsonPayload) {
+        output.WriteRawTag(34, ref immediateBuffer);
+        output.WriteString(JsonPayload, ref immediateBuffer);
+      }
+      if (resultCase_ == ResultOneofCase.Skipped) {
+        output.WriteRawTag(42, ref immediateBuffer);
+        output.WriteString(Skipped, ref immediateBuffer);
       }
       if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
+        _unknownFields.WriteTo(output, ref immediateBuffer);
       }
     }
 
@@ -652,6 +657,7 @@ namespace Conformance {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.Security.SecurityCritical]
+    [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
     public void MergeFrom(pb::CodedInputStream input, ref global::System.ReadOnlySpan<byte> immediateBuffer) {
       uint tag;
       while ((tag = input.ReadTag(ref immediateBuffer)) != 0) {

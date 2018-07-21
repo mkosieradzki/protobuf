@@ -60,23 +60,6 @@ RepeatedMessageFieldGenerator::~RepeatedMessageFieldGenerator() {
 void RepeatedMessageFieldGenerator::GenerateMembers(io::Printer* printer) {
   printer->Print(
     variables_,
-    "private static readonly pb::FieldCodec<$type_name$> _repeated_$name$_codec\n"
-    "    = ");
-  // Don't want to duplicate the codec code here... maybe we should have a
-  // "create single field generator for this repeated field"
-  // function, but it doesn't seem worth it for just this.
-  if (IsWrapperType(descriptor_)) {
-    std::unique_ptr<FieldGeneratorBase> single_generator(
-      new WrapperFieldGenerator(descriptor_, fieldOrdinal_, this->options()));
-    single_generator->GenerateCodecCode(printer);
-  } else {
-    std::unique_ptr<FieldGeneratorBase> single_generator(
-      new MessageFieldGenerator(descriptor_, fieldOrdinal_, this->options()));
-    single_generator->GenerateCodecCode(printer);
-  }
-  printer->Print(";\n");
-  printer->Print(
-    variables_,
     "private readonly pbc::RepeatedField<$type_name$> $name$_ = new pbc::RepeatedField<$type_name$>();\n");
   WritePropertyDocComment(printer, descriptor_);
   AddPublicMemberAttributes(printer);
@@ -93,22 +76,64 @@ void RepeatedMessageFieldGenerator::GenerateMergingCode(io::Printer* printer) {
     "$name$_.Add(other.$name$_);\n");
 }
 
-void RepeatedMessageFieldGenerator::GenerateParsingCode(io::Printer* printer) {
-  printer->Print(
-    variables_,
-    "$name$_.AddEntriesFrom(input, _repeated_$name$_codec, ref immediateBuffer);\n");
+void RepeatedMessageFieldGenerator::GenerateParsingCode(io::Printer* printer, const std::string& lvalueName, bool forceNonPacked) {
+  variables_["lvalue_name"] = lvalueName.empty() ? variables_["name"] + "_" : lvalueName;
+  if (IsWrapperType(descriptor_)) {
+    variables_["capitalized_wrapped_type_name"] = capitalized_type_name(descriptor_->message_type()->field(0));
+    printer->Print(
+      variables_,
+      "$lvalue_name$.Add(input.ReadWrapped$capitalized_wrapped_type_name$(ref immediateBuffer));\n");
+  }
+  else {
+    printer->Print(
+      variables_,
+      "var oldLimit = input.BeginReadNested(ref immediateBuffer);"
+      "var item = new $type_name$();\n"
+      "item.MergeFrom(input, ref immediateBuffer);\n"
+      "$lvalue_name$.Add(item);\n"
+      "input.EndReadNested(oldLimit);\n");
+  }
 }
 
-void RepeatedMessageFieldGenerator::GenerateSerializationCode(io::Printer* printer) {
-  printer->Print(
-    variables_,
-    "$name$_.WriteTo(output, _repeated_$name$_codec);\n");
+void RepeatedMessageFieldGenerator::GenerateSerializationCode(io::Printer* printer, const std::string& rvalueName) {
+  variables_["rvalue_name"] = rvalueName;
+  if (IsWrapperType(descriptor_)) {
+    variables_["capitalized_wrapped_type_name"] = capitalized_type_name(descriptor_->message_type()->field(0));
+    printer->Print(
+      variables_,
+      "for (var i = 0; i < $rvalue_name$.Count; i++) {\n"
+      "  output.WriteRawTag($tag_bytes$, ref immediateBuffer);\n"
+      "  output.WriteWrapped$capitalized_wrapped_type_name$($rvalue_name$[i], ref immediateBuffer);\n"
+      "}\n");
+  }
+  else {
+    printer->Print(
+      variables_,
+      "for (var i = 0; i < $rvalue_name$.Count; i++) {\n"
+      "  output.WriteRawTag($tag_bytes$, ref immediateBuffer);\n"
+      "  output.WriteMessage($rvalue_name$[i], ref immediateBuffer);\n"
+      "}\n");
+  }
 }
 
-void RepeatedMessageFieldGenerator::GenerateSerializedSizeCode(io::Printer* printer) {
-  printer->Print(
-    variables_,
-    "size += $name$_.CalculateSize(_repeated_$name$_codec);\n");
+void RepeatedMessageFieldGenerator::GenerateSerializedSizeCode(io::Printer* printer, const std::string& lvalueName, const std::string& rvalueName) {
+  variables_["lvalue_name"] = lvalueName;
+  variables_["rvalue_name"] = rvalueName;
+  if (IsWrapperType(descriptor_)) {
+    variables_["capitalized_wrapped_type_name"] = capitalized_type_name(descriptor_->message_type()->field(0));
+    printer->Print(
+      variables_,
+      "for (var i = 0; i < $rvalue_name$.Count; i++) {\n"
+      "  $lvalue_name$ += $tag_size$ + pb::CodedOutputStream.ComputeWrapped$capitalized_wrapped_type_name$Size($rvalue_name$[i]);\n"
+      "}\n");
+  }
+  else {
+    printer->Print(
+      variables_,
+      "for (var i = 0; i < $rvalue_name$.Count; i++) {\n"
+      "  $lvalue_name$ += $tag_size$ + pb::CodedOutputStream.Compute$capitalized_type_name$Size($rvalue_name$[i]);\n"
+      "}\n");
+  }
 }
 
 void RepeatedMessageFieldGenerator::WriteHash(io::Printer* printer) {

@@ -51,6 +51,7 @@ WrapperFieldGenerator::WrapperFieldGenerator(const FieldDescriptor* descriptor,
                                        int fieldOrdinal, const Options *options)
     : FieldGeneratorBase(descriptor, fieldOrdinal, options) {
   variables_["has_property_check"] = name() + "_ != null";
+  variables_["has_property_check_sufix"] = " != null";
   variables_["has_not_property_check"] = name() + "_ == null";
   const FieldDescriptor* wrapped_field = descriptor->message_type()->field(0);
   is_value_type = wrapped_field->type() != FieldDescriptor::TYPE_STRING &&
@@ -58,6 +59,7 @@ WrapperFieldGenerator::WrapperFieldGenerator(const FieldDescriptor* descriptor,
   if (is_value_type) {
     variables_["nonnullable_type_name"] = type_name(wrapped_field);
   }
+  variables_["wrapped_type_capitalized_name"] = capitalized_type_name(wrapped_field);
 }
 
 WrapperFieldGenerator::~WrapperFieldGenerator() {
@@ -65,12 +67,7 @@ WrapperFieldGenerator::~WrapperFieldGenerator() {
 
 void WrapperFieldGenerator::GenerateMembers(io::Printer* printer) {
   printer->Print(
-        variables_,
-        "private static readonly pb::FieldCodec<$type_name$> _single_$name$_codec = ");
-  GenerateCodecCode(printer);
-  printer->Print(
     variables_,
-    ";\n"
     "private $type_name$ $name$_;\n");
   WritePropertyDocComment(printer, descriptor_);
   AddPublicMemberAttributes(printer);
@@ -94,28 +91,33 @@ void WrapperFieldGenerator::GenerateMergingCode(io::Printer* printer) {
     "}\n");
 }
 
-void WrapperFieldGenerator::GenerateParsingCode(io::Printer* printer) {
+void WrapperFieldGenerator::GenerateParsingCode(io::Printer* printer, const std::string& lvalueName, bool forceNonPacked) {
+  variables_["lvalue_name"] = lvalueName.empty() ? variables_["property_name"] : lvalueName;
   printer->Print(
     variables_,
-    "$type_name$ value = _single_$name$_codec.Read(input, ref immediateBuffer);\n"
-    "if ($has_not_property_check$ || value != $default_value$) {\n"
-    "  $property_name$ = value;\n"
+    "$type_name$ value = input.ReadWrapped$wrapped_type_capitalized_name$(ref immediateBuffer);\n"
+    "if ($lvalue_name$ == null || value != $default_value$) {\n"
+    "  $lvalue_name$ = value;\n"
     "}\n");
 }
 
-void WrapperFieldGenerator::GenerateSerializationCode(io::Printer* printer) {
+void WrapperFieldGenerator::GenerateSerializationCode(io::Printer* printer, const std::string& rvalueName) {
+  variables_["rvalue_name"] = rvalueName;
   printer->Print(
     variables_,
-    "if ($has_property_check$) {\n"
-    "  _single_$name$_codec.WriteTagAndValue(output, $property_name$);\n"
+    "if ($rvalue_name$$has_property_check_sufix$) {\n"
+    "  output.WriteRawTag($tag_bytes$, ref immediateBuffer);\n"
+    "  output.WriteWrapped$wrapped_type_capitalized_name$($rvalue_name$, ref immediateBuffer);\n"
     "}\n");
 }
 
-void WrapperFieldGenerator::GenerateSerializedSizeCode(io::Printer* printer) {
+void WrapperFieldGenerator::GenerateSerializedSizeCode(io::Printer* printer, const std::string& lvalueName, const std::string& rvalueName) {
+  variables_["lvalue_name"] = lvalueName;
+  variables_["rvalue_name"] = rvalueName;
   printer->Print(
     variables_,
-    "if ($has_property_check$) {\n"
-    "  size += _single_$name$_codec.CalculateSizeWithTag($property_name$);\n"
+    "if ($rvalue_name$$has_property_check_sufix$) {\n"
+    "  $lvalue_name$ += $tag_size$ + pb::CodedOutputStream.ComputeWrapped$wrapped_type_capitalized_name$Size($rvalue_name$);\n"
     "}\n");
 }
 
@@ -150,34 +152,18 @@ void WrapperFieldGenerator::GenerateCloningCode(io::Printer* printer) {
     "$property_name$ = other.$property_name$;\n");
 }
 
-void WrapperFieldGenerator::GenerateCodecCode(io::Printer* printer) {
-  if (is_value_type) {
-    printer->Print(
-      variables_,
-      "pb::FieldCodec.ForStructWrapper<$nonnullable_type_name$>($tag$)");
-  } else {
-    printer->Print(
-      variables_,
-      "pb::FieldCodec.ForClassWrapper<$type_name$>($tag$)");
-  }
-}
-
 WrapperOneofFieldGenerator::WrapperOneofFieldGenerator(
     const FieldDescriptor* descriptor, int fieldOrdinal, const Options *options)
     : WrapperFieldGenerator(descriptor, fieldOrdinal, options) {
-    SetCommonOneofFieldVariables(&variables_);
+  SetCommonOneofFieldVariables(&variables_);
+  const FieldDescriptor* wrapped_field = descriptor->message_type()->field(0);
+  variables_["wrapped_type_capitalized_name"] = capitalized_type_name(wrapped_field);
 }
 
 WrapperOneofFieldGenerator::~WrapperOneofFieldGenerator() {
 }
 
 void WrapperOneofFieldGenerator::GenerateMembers(io::Printer* printer) {
-  // Note: deliberately _oneof_$name$_codec, not _$oneof_name$_codec... we have one codec per field.
-  printer->Print(
-        variables_,
-        "private static readonly pb::FieldCodec<$type_name$> _oneof_$name$_codec = ");
-  GenerateCodecCode(printer);
-  printer->Print(";\n");
   WritePropertyDocComment(printer, descriptor_);
   AddPublicMemberAttributes(printer);
   printer->Print(
@@ -195,27 +181,31 @@ void WrapperOneofFieldGenerator::GenerateMergingCode(io::Printer* printer) {
   printer->Print(variables_, "$property_name$ = other.$property_name$;\n");
 }
 
-void WrapperOneofFieldGenerator::GenerateParsingCode(io::Printer* printer) {
+void WrapperOneofFieldGenerator::GenerateParsingCode(io::Printer* printer, const std::string& lvalueName, bool forceNonPacked) {
+  variables_["lvalue_name"] = lvalueName.empty() ? variables_["property_name"] : lvalueName;
   printer->Print(
     variables_,
-    "$property_name$ = _oneof_$name$_codec.Read(input, ref immediateBuffer);\n");
+    "$lvalue_name$ = input.ReadWrapped$wrapped_type_capitalized_name$(ref immediateBuffer);\n");
 }
 
-void WrapperOneofFieldGenerator::GenerateSerializationCode(io::Printer* printer) {
+void WrapperOneofFieldGenerator::GenerateSerializationCode(io::Printer* printer, const std::string& rvalueName) {
   // TODO: I suspect this is wrong...
   printer->Print(
     variables_,
     "if ($has_property_check$) {\n"
-    "  _oneof_$name$_codec.WriteTagAndValue(output, ($type_name$) $oneof_name$_);\n"
+    "  output.WriteRawTag($tag_bytes$, ref immediateBuffer);\n"
+    "  output.WriteWrapped$wrapped_type_capitalized_name$($property_name$, ref immediateBuffer);\n"
     "}\n");
 }
 
-void WrapperOneofFieldGenerator::GenerateSerializedSizeCode(io::Printer* printer) {
+void WrapperOneofFieldGenerator::GenerateSerializedSizeCode(io::Printer* printer, const std::string& lvalueName, const std::string& rvalueName) {
   // TODO: I suspect this is wrong...
+  variables_["lvalue_name"] = lvalueName;
+  // NOTE: This one works only for property_name (ignoring rvalue)
   printer->Print(
     variables_,
     "if ($has_property_check$) {\n"
-    "  size += _oneof_$name$_codec.CalculateSizeWithTag($property_name$);\n"
+    "  $lvalue_name$ += $tag_size$ + pb::CodedOutputStream.ComputeWrapped$wrapped_type_capitalized_name$Size($property_name$);\n"
     "}\n");
 }
 

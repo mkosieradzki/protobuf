@@ -32,6 +32,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Security;
 using Google.Protobuf.Reflection;
@@ -70,11 +71,22 @@ namespace Google.Protobuf
         /// <summary>
         /// Serializes the set and writes it to <paramref name="output"/>.
         /// </summary>
+        [SecuritySafeCritical]
         public void WriteTo(CodedOutputStream output)
+        {
+            var immediateBudder = output.ImmediateBuffer;
+            WriteTo(output, ref immediateBudder);
+        }
+
+        /// <summary>
+        /// This supports the Protocol Buffers infrastructure and is not meant to be used directly from your code.
+        /// </summary>
+        [SecurityCritical]
+        public void WriteTo(CodedOutputStream output, ref Span<byte> immediateBuffer)
         {
             foreach (KeyValuePair<int, UnknownField> entry in fields)
             {
-                entry.Value.WriteTo(entry.Key, output);
+                entry.Value.WriteTo(entry.Key, output, ref immediateBuffer);
             }
         }
 
@@ -182,8 +194,8 @@ namespace Google.Protobuf
         /// Parse a single field from <paramref name="input"/> and merge it
         /// into this set.
         /// </summary>
-        /// <param name="input">The coded input stream containing the field</param>
         /// <returns>false if the tag is an "end group" tag, true otherwise</returns>
+        [EditorBrowsable(EditorBrowsableState.Never)]
         [SecurityCritical]
         private void MergeFieldFrom(CodedInputStream input, ref ReadOnlySpan<byte> immediateBuffer)
         {
@@ -238,6 +250,17 @@ namespace Google.Protobuf
         /// <param name="unknownFields">The UnknownFieldSet which need to be merged</param>
         /// <param name="input">The coded input stream containing the field</param>
         /// <returns>The merged UnknownFieldSet</returns>
+        [SecuritySafeCritical]
+        public static UnknownFieldSet MergeFieldFrom(UnknownFieldSet unknownFields, CodedInputStream input)
+        {
+            var immediateBudder = input.ImmediateBuffer;
+            return MergeFieldFrom(unknownFields, input, ref immediateBudder);
+        }
+
+        /// <summary>
+        /// This supports the Protocol Buffers infrastructure and is not meant to be used directly from your code.
+        /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
         [SecurityCritical]
         public static UnknownFieldSet MergeFieldFrom(UnknownFieldSet unknownFields, CodedInputStream input, ref ReadOnlySpan<byte> immediateBuffer)
         {

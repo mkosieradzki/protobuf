@@ -102,6 +102,21 @@ namespace Google.Protobuf
         }
 
         /// <summary>
+        /// Writes the data to the given coded output stream.
+        /// </summary>
+        /// <param name="message">The message to write to the stream.</param>
+        /// <param name="output">Coded output stream to write the data to. Must not be null.</param>
+        [SecuritySafeCritical]
+        public static void WriteTo(this IMessage message, CodedOutputStream output)
+        {
+            ProtoPreconditions.CheckNotNull(message, "message");
+            ProtoPreconditions.CheckNotNull(output, "output");
+            var immediateBuffer = output.ImmediateBuffer;
+            message.WriteTo(output, ref immediateBuffer);
+            output.Flush(ref immediateBuffer);
+        }
+
+        /// <summary>
         /// Writes the given message data to the given stream in protobuf encoding.
         /// </summary>
         /// <param name="message">The message to write to the stream.</param>
@@ -110,9 +125,8 @@ namespace Google.Protobuf
         {
             ProtoPreconditions.CheckNotNull(message, "message");
             ProtoPreconditions.CheckNotNull(output, "output");
-            CodedOutputStream codedOutput = new CodedOutputStream(output);
+            var codedOutput = new CodedOutputStream(output);
             message.WriteTo(codedOutput);
-            codedOutput.Flush();
         }
 
         /// <summary>
@@ -120,14 +134,16 @@ namespace Google.Protobuf
         /// </summary>
         /// <param name="message">The message to write.</param>
         /// <param name="output">The output stream to write to.</param>
+        [SecuritySafeCritical]
         public static void WriteDelimitedTo(this IMessage message, Stream output)
         {
             ProtoPreconditions.CheckNotNull(message, "message");
             ProtoPreconditions.CheckNotNull(output, "output");
             CodedOutputStream codedOutput = new CodedOutputStream(output);
-            codedOutput.WriteRawVarint32((uint)message.CalculateSize());
-            message.WriteTo(codedOutput);
-            codedOutput.Flush();
+            var immediateBuffer = codedOutput.ImmediateBuffer;
+            codedOutput.WriteRawVarint32((uint)message.CalculateSize(), ref immediateBuffer);
+            message.WriteTo(codedOutput, ref immediateBuffer);
+            codedOutput.Flush(ref immediateBuffer);
         }
 
         /// <summary>

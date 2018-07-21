@@ -222,17 +222,19 @@ namespace Google.Protobuf.WellKnownTypes {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
+    [global::System.Security.SecurityCritical]
+    [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+    public void WriteTo(pb::CodedOutputStream output, ref global::System.Span<byte> immediateBuffer) {
       if (Seconds != 0L) {
-        output.WriteRawTag(8);
-        output.WriteInt64(Seconds);
+        output.WriteRawTag(8, ref immediateBuffer);
+        output.WriteInt64(Seconds, ref immediateBuffer);
       }
       if (Nanos != 0) {
-        output.WriteRawTag(16);
-        output.WriteInt32(Nanos);
+        output.WriteRawTag(16, ref immediateBuffer);
+        output.WriteInt32(Nanos, ref immediateBuffer);
       }
       if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
+        _unknownFields.WriteTo(output, ref immediateBuffer);
       }
     }
 
@@ -267,6 +269,7 @@ namespace Google.Protobuf.WellKnownTypes {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.Security.SecurityCritical]
+    [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
     public void MergeFrom(pb::CodedInputStream input, ref global::System.ReadOnlySpan<byte> immediateBuffer) {
       uint tag;
       while ((tag = input.ReadTag(ref immediateBuffer)) != 0) {

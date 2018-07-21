@@ -34,7 +34,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using System.Security;
 
 namespace Google.Protobuf.Collections
 {
@@ -87,131 +86,6 @@ namespace Google.Protobuf.Collections
             }
             clone.count = count;
             return clone;
-        }
-
-        /// <summary>
-        /// Adds the entries from the given input stream, decoding them with the specified codec.
-        /// </summary>
-        /// <param name="input">The input stream to read from.</param>
-        /// <param name="codec">The codec to use in order to read each entry.</param>
-        [SecurityCritical]
-        public void AddEntriesFrom(CodedInputStream input, FieldCodec<T> codec, ref ReadOnlySpan<byte> immediateBuffer)
-        {
-            // TODO: Inline some of the Add code, so we can avoid checking the size on every
-            // iteration.
-            uint tag = input.LastTag;
-            var reader = codec.ValueReader;
-            // Non-nullable value types can be packed or not.
-            if (FieldCodec<T>.IsPackedRepeatedField(tag))
-            {
-                int length = input.ReadLength(ref immediateBuffer);
-                if (length > 0)
-                {
-                    int oldLimit = input.PushLimit(length);
-                    while (!input.ReachedLimit)
-                    {
-                        Add(reader(input, ref immediateBuffer));
-                    }
-                    input.PopLimit(oldLimit);
-                }
-                // Empty packed field. Odd, but valid - just ignore.
-            }
-            else
-            {
-                // Not packed... (possibly not packable)
-                do
-                {
-                    Add(reader(input, ref immediateBuffer));
-                } while (input.MaybeConsumeTag(tag, ref immediateBuffer));
-            }
-        }
-
-        /// <summary>
-        /// Calculates the size of this collection based on the given codec.
-        /// </summary>
-        /// <param name="codec">The codec to use when encoding each field.</param>
-        /// <returns>The number of bytes that would be written to a <see cref="CodedOutputStream"/> by <see cref="WriteTo"/>,
-        /// using the same codec.</returns>
-        public int CalculateSize(FieldCodec<T> codec)
-        {
-            if (count == 0)
-            {
-                return 0;
-            }
-            uint tag = codec.Tag;
-            if (codec.PackedRepeatedField)
-            {
-                int dataSize = CalculatePackedDataSize(codec);
-                return CodedOutputStream.ComputeRawVarint32Size(tag) +
-                    CodedOutputStream.ComputeLengthSize(dataSize) +
-                    dataSize;
-            }
-            else
-            {
-                var sizeCalculator = codec.ValueSizeCalculator;
-                int size = count * CodedOutputStream.ComputeRawVarint32Size(tag);
-                for (int i = 0; i < count; i++)
-                {
-                    size += sizeCalculator(array[i]);
-                }
-                return size;
-            }
-        }
-
-        private int CalculatePackedDataSize(FieldCodec<T> codec)
-        {
-            int fixedSize = codec.FixedSize;
-            if (fixedSize == 0)
-            {
-                var calculator = codec.ValueSizeCalculator;
-                int tmp = 0;
-                for (int i = 0; i < count; i++)
-                {
-                    tmp += calculator(array[i]);
-                }
-                return tmp;
-            }
-            else
-            {
-                return fixedSize * Count;
-            }
-        }
-
-        /// <summary>
-        /// Writes the contents of this collection to the given <see cref="CodedOutputStream"/>,
-        /// encoding each value using the specified codec.
-        /// </summary>
-        /// <param name="output">The output stream to write to.</param>
-        /// <param name="codec">The codec to use when encoding each value.</param>
-        public void WriteTo(CodedOutputStream output, FieldCodec<T> codec)
-        {
-            if (count == 0)
-            {
-                return;
-            }
-            var writer = codec.ValueWriter;
-            var tag = codec.Tag;
-            if (codec.PackedRepeatedField)
-            {
-                // Packed primitive type
-                uint size = (uint)CalculatePackedDataSize(codec);
-                output.WriteTag(tag);
-                output.WriteRawVarint32(size);
-                for (int i = 0; i < count; i++)
-                {
-                    writer(output, array[i]);
-                }
-            }
-            else
-            {
-                // Not packed: a simple tag/value pair for each value.
-                // Can't use codec.WriteTagAndValue, as that omits default values.
-                for (int i = 0; i < count; i++)
-                {
-                    output.WriteTag(tag);
-                    writer(output, array[i]);
-                }
-            }
         }
 
         private void EnsureSize(int size)

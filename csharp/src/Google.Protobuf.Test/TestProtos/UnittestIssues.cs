@@ -152,9 +152,11 @@ namespace UnitTest.Issues.TestProtos {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
+    [global::System.Security.SecurityCritical]
+    [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+    public void WriteTo(pb::CodedOutputStream output, ref global::System.Span<byte> immediateBuffer) {
       if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
+        _unknownFields.WriteTo(output, ref immediateBuffer);
       }
     }
 
@@ -177,6 +179,7 @@ namespace UnitTest.Issues.TestProtos {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.Security.SecurityCritical]
+    [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
     public void MergeFrom(pb::CodedInputStream input, ref global::System.ReadOnlySpan<byte> immediateBuffer) {
       uint tag;
       while ((tag = input.ReadTag(ref immediateBuffer)) != 0) {
@@ -256,9 +259,11 @@ namespace UnitTest.Issues.TestProtos {
         }
 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-        public void WriteTo(pb::CodedOutputStream output) {
+        [global::System.Security.SecurityCritical]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public void WriteTo(pb::CodedOutputStream output, ref global::System.Span<byte> immediateBuffer) {
           if (_unknownFields != null) {
-            _unknownFields.WriteTo(output);
+            _unknownFields.WriteTo(output, ref immediateBuffer);
           }
         }
 
@@ -281,6 +286,7 @@ namespace UnitTest.Issues.TestProtos {
 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         [global::System.Security.SecurityCritical]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
         public void MergeFrom(pb::CodedInputStream input, ref global::System.ReadOnlySpan<byte> immediateBuffer) {
           uint tag;
           while ((tag = input.ReadTag(ref immediateBuffer)) != 0) {
@@ -360,9 +366,11 @@ namespace UnitTest.Issues.TestProtos {
             }
 
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-            public void WriteTo(pb::CodedOutputStream output) {
+            [global::System.Security.SecurityCritical]
+            [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+            public void WriteTo(pb::CodedOutputStream output, ref global::System.Span<byte> immediateBuffer) {
               if (_unknownFields != null) {
-                _unknownFields.WriteTo(output);
+                _unknownFields.WriteTo(output, ref immediateBuffer);
               }
             }
 
@@ -385,6 +393,7 @@ namespace UnitTest.Issues.TestProtos {
 
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
             [global::System.Security.SecurityCritical]
+            [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
             public void MergeFrom(pb::CodedInputStream input, ref global::System.ReadOnlySpan<byte> immediateBuffer) {
               uint tag;
               while ((tag = input.ReadTag(ref immediateBuffer)) != 0) {
@@ -457,8 +466,6 @@ namespace UnitTest.Issues.TestProtos {
 
     /// <summary>Field number for the "values" field.</summary>
     public const int ValuesFieldNumber = 2;
-    private static readonly pb::FieldCodec<global::UnitTest.Issues.TestProtos.NegativeEnum> _repeated_values_codec
-        = pb::FieldCodec.ForEnum(16, x => (int) x, x => (global::UnitTest.Issues.TestProtos.NegativeEnum) x);
     private readonly pbc::RepeatedField<global::UnitTest.Issues.TestProtos.NegativeEnum> values_ = new pbc::RepeatedField<global::UnitTest.Issues.TestProtos.NegativeEnum>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<global::UnitTest.Issues.TestProtos.NegativeEnum> Values {
@@ -467,8 +474,6 @@ namespace UnitTest.Issues.TestProtos {
 
     /// <summary>Field number for the "packed_values" field.</summary>
     public const int PackedValuesFieldNumber = 3;
-    private static readonly pb::FieldCodec<global::UnitTest.Issues.TestProtos.NegativeEnum> _repeated_packedValues_codec
-        = pb::FieldCodec.ForEnum(26, x => (int) x, x => (global::UnitTest.Issues.TestProtos.NegativeEnum) x);
     private readonly pbc::RepeatedField<global::UnitTest.Issues.TestProtos.NegativeEnum> packedValues_ = new pbc::RepeatedField<global::UnitTest.Issues.TestProtos.NegativeEnum>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<global::UnitTest.Issues.TestProtos.NegativeEnum> PackedValues {
@@ -512,15 +517,32 @@ namespace UnitTest.Issues.TestProtos {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
+    [global::System.Security.SecurityCritical]
+    [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+    public void WriteTo(pb::CodedOutputStream output, ref global::System.Span<byte> immediateBuffer) {
       if (Value != 0) {
-        output.WriteRawTag(8);
-        output.WriteEnum((int) Value);
+        output.WriteRawTag(8, ref immediateBuffer);
+        output.WriteEnum((int)Value, ref immediateBuffer);
       }
-      values_.WriteTo(output, _repeated_values_codec);
-      packedValues_.WriteTo(output, _repeated_packedValues_codec);
+      for (var i = 0; i < Values.Count; i++) {
+        output.WriteRawTag(16, ref immediateBuffer);
+        output.WriteEnum((int)Values[i], ref immediateBuffer);
+      }
+      {
+        var packedSize = 0;
+        for (var i = 0; i < PackedValues.Count; i++) {
+          packedSize += pb::CodedOutputStream.ComputeEnumSize((int)PackedValues[i]);
+        }
+        if (packedSize > 0) {
+          output.WriteRawTag(26, ref immediateBuffer);
+          output.WriteLength(packedSize, ref immediateBuffer);
+          for (var i = 0; i < PackedValues.Count; i++) {
+            output.WriteEnum((int)PackedValues[i], ref immediateBuffer);
+          }
+        }
+      }
       if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
+        _unknownFields.WriteTo(output, ref immediateBuffer);
       }
     }
 
@@ -530,8 +552,18 @@ namespace UnitTest.Issues.TestProtos {
       if (Value != 0) {
         size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) Value);
       }
-      size += values_.CalculateSize(_repeated_values_codec);
-      size += packedValues_.CalculateSize(_repeated_packedValues_codec);
+      for (var i = 0; i < Values.Count; i++) {
+        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int)Values[i]);
+      }
+      {
+        var packedSize = 0;
+        for (var i = 0; i < PackedValues.Count; i++) {
+          packedSize += pb::CodedOutputStream.ComputeEnumSize((int)PackedValues[i]);
+        }
+        if (packedSize > 0) {
+          size += 1 + packedSize + pb::CodedOutputStream.ComputeLengthSize(packedSize);
+        }
+      }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -553,6 +585,7 @@ namespace UnitTest.Issues.TestProtos {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.Security.SecurityCritical]
+    [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
     public void MergeFrom(pb::CodedInputStream input, ref global::System.ReadOnlySpan<byte> immediateBuffer) {
       uint tag;
       while ((tag = input.ReadTag(ref immediateBuffer)) != 0) {
@@ -564,14 +597,27 @@ namespace UnitTest.Issues.TestProtos {
             value_ = (global::UnitTest.Issues.TestProtos.NegativeEnum) input.ReadEnum(ref immediateBuffer);
             break;
           }
-          case 18:
-          case 16: {
-            values_.AddEntriesFrom(input, _repeated_values_codec, ref immediateBuffer);
+          case 18: {
+            values_.Add((global::UnitTest.Issues.TestProtos.NegativeEnum)input.ReadEnum(ref immediateBuffer));
             break;
           }
-          case 26:
+          case 16: {
+            values_.Add((global::UnitTest.Issues.TestProtos.NegativeEnum)input.ReadEnum(ref immediateBuffer));
+            break;
+          }
+          case 26: {
+            int length = input.ReadLength(ref immediateBuffer);
+            if (length > 0) {
+              var oldLimit = input.PushLimit(length);
+              while (!input.ReachedLimit) {
+                packedValues_.Add((global::UnitTest.Issues.TestProtos.NegativeEnum)input.ReadEnum(ref immediateBuffer)); 
+              }
+              input.PopLimit(oldLimit);
+            }
+            break;
+          }
           case 24: {
-            packedValues_.AddEntriesFrom(input, _repeated_packedValues_codec, ref immediateBuffer);
+            packedValues_.Add((global::UnitTest.Issues.TestProtos.NegativeEnum)input.ReadEnum(ref immediateBuffer));
             break;
           }
         }
@@ -644,9 +690,11 @@ namespace UnitTest.Issues.TestProtos {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
+    [global::System.Security.SecurityCritical]
+    [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+    public void WriteTo(pb::CodedOutputStream output, ref global::System.Span<byte> immediateBuffer) {
       if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
+        _unknownFields.WriteTo(output, ref immediateBuffer);
       }
     }
 
@@ -669,6 +717,7 @@ namespace UnitTest.Issues.TestProtos {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.Security.SecurityCritical]
+    [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
     public void MergeFrom(pb::CodedInputStream input, ref global::System.ReadOnlySpan<byte> immediateBuffer) {
       uint tag;
       while ((tag = input.ReadTag(ref immediateBuffer)) != 0) {
@@ -735,8 +784,6 @@ namespace UnitTest.Issues.TestProtos {
 
     /// <summary>Field number for the "PrimitiveArray" field.</summary>
     public const int PrimitiveArrayFieldNumber = 2;
-    private static readonly pb::FieldCodec<int> _repeated_primitiveArray_codec
-        = pb::FieldCodec.ForInt32(18);
     private readonly pbc::RepeatedField<int> primitiveArray_ = new pbc::RepeatedField<int>();
     [global::System.ObsoleteAttribute]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -758,8 +805,6 @@ namespace UnitTest.Issues.TestProtos {
 
     /// <summary>Field number for the "MessageArray" field.</summary>
     public const int MessageArrayFieldNumber = 4;
-    private static readonly pb::FieldCodec<global::UnitTest.Issues.TestProtos.DeprecatedChild> _repeated_messageArray_codec
-        = pb::FieldCodec.ForMessage(34, global::UnitTest.Issues.TestProtos.DeprecatedChild.Parser);
     private readonly pbc::RepeatedField<global::UnitTest.Issues.TestProtos.DeprecatedChild> messageArray_ = new pbc::RepeatedField<global::UnitTest.Issues.TestProtos.DeprecatedChild>();
     [global::System.ObsoleteAttribute]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -781,8 +826,6 @@ namespace UnitTest.Issues.TestProtos {
 
     /// <summary>Field number for the "EnumArray" field.</summary>
     public const int EnumArrayFieldNumber = 6;
-    private static readonly pb::FieldCodec<global::UnitTest.Issues.TestProtos.DeprecatedEnum> _repeated_enumArray_codec
-        = pb::FieldCodec.ForEnum(50, x => (int) x, x => (global::UnitTest.Issues.TestProtos.DeprecatedEnum) x);
     private readonly pbc::RepeatedField<global::UnitTest.Issues.TestProtos.DeprecatedEnum> enumArray_ = new pbc::RepeatedField<global::UnitTest.Issues.TestProtos.DeprecatedEnum>();
     [global::System.ObsoleteAttribute]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -833,24 +876,53 @@ namespace UnitTest.Issues.TestProtos {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
+    [global::System.Security.SecurityCritical]
+    [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+    public void WriteTo(pb::CodedOutputStream output, ref global::System.Span<byte> immediateBuffer) {
       if (PrimitiveValue != 0) {
-        output.WriteRawTag(8);
-        output.WriteInt32(PrimitiveValue);
+        output.WriteRawTag(8, ref immediateBuffer);
+        output.WriteInt32(PrimitiveValue, ref immediateBuffer);
       }
-      primitiveArray_.WriteTo(output, _repeated_primitiveArray_codec);
-      if (messageValue_ != null) {
-        output.WriteRawTag(26);
-        output.WriteMessage(MessageValue);
+      {
+        var packedSize = 0;
+        for (var i = 0; i < PrimitiveArray.Count; i++) {
+          packedSize += pb::CodedOutputStream.ComputeInt32Size(PrimitiveArray[i]);
+        }
+        if (packedSize > 0) {
+          output.WriteRawTag(18, ref immediateBuffer);
+          output.WriteLength(packedSize, ref immediateBuffer);
+          for (var i = 0; i < PrimitiveArray.Count; i++) {
+            output.WriteInt32(PrimitiveArray[i], ref immediateBuffer);
+          }
+        }
       }
-      messageArray_.WriteTo(output, _repeated_messageArray_codec);
+      if (MessageValue != null) {
+        output.WriteRawTag(26, ref immediateBuffer);
+        output.WriteMessage(MessageValue, ref immediateBuffer);
+      }
+      for (var i = 0; i < MessageArray.Count; i++) {
+        output.WriteRawTag(34, ref immediateBuffer);
+        output.WriteMessage(MessageArray[i], ref immediateBuffer);
+      }
       if (EnumValue != 0) {
-        output.WriteRawTag(40);
-        output.WriteEnum((int) EnumValue);
+        output.WriteRawTag(40, ref immediateBuffer);
+        output.WriteEnum((int)EnumValue, ref immediateBuffer);
       }
-      enumArray_.WriteTo(output, _repeated_enumArray_codec);
+      {
+        var packedSize = 0;
+        for (var i = 0; i < EnumArray.Count; i++) {
+          packedSize += pb::CodedOutputStream.ComputeEnumSize((int)EnumArray[i]);
+        }
+        if (packedSize > 0) {
+          output.WriteRawTag(50, ref immediateBuffer);
+          output.WriteLength(packedSize, ref immediateBuffer);
+          for (var i = 0; i < EnumArray.Count; i++) {
+            output.WriteEnum((int)EnumArray[i], ref immediateBuffer);
+          }
+        }
+      }
       if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
+        _unknownFields.WriteTo(output, ref immediateBuffer);
       }
     }
 
@@ -860,15 +932,33 @@ namespace UnitTest.Issues.TestProtos {
       if (PrimitiveValue != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(PrimitiveValue);
       }
-      size += primitiveArray_.CalculateSize(_repeated_primitiveArray_codec);
-      if (messageValue_ != null) {
+      {
+        var packedSize = 0;
+        for (var i = 0; i < PrimitiveArray.Count; i++) {
+          packedSize += pb::CodedOutputStream.ComputeInt32Size(PrimitiveArray[i]);
+        }
+        if (packedSize > 0) {
+          size += 1 + packedSize + pb::CodedOutputStream.ComputeLengthSize(packedSize);
+        }
+      }
+      if (MessageValue != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(MessageValue);
       }
-      size += messageArray_.CalculateSize(_repeated_messageArray_codec);
+      for (var i = 0; i < MessageArray.Count; i++) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(MessageArray[i]);
+      }
       if (EnumValue != 0) {
         size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) EnumValue);
       }
-      size += enumArray_.CalculateSize(_repeated_enumArray_codec);
+      {
+        var packedSize = 0;
+        for (var i = 0; i < EnumArray.Count; i++) {
+          packedSize += pb::CodedOutputStream.ComputeEnumSize((int)EnumArray[i]);
+        }
+        if (packedSize > 0) {
+          size += 1 + packedSize + pb::CodedOutputStream.ComputeLengthSize(packedSize);
+        }
+      }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -900,6 +990,7 @@ namespace UnitTest.Issues.TestProtos {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.Security.SecurityCritical]
+    [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
     public void MergeFrom(pb::CodedInputStream input, ref global::System.ReadOnlySpan<byte> immediateBuffer) {
       uint tag;
       while ((tag = input.ReadTag(ref immediateBuffer)) != 0) {
@@ -911,9 +1002,19 @@ namespace UnitTest.Issues.TestProtos {
             PrimitiveValue = input.ReadInt32(ref immediateBuffer);
             break;
           }
-          case 18:
+          case 18: {
+            int length = input.ReadLength(ref immediateBuffer);
+            if (length > 0) {
+              var oldLimit = input.PushLimit(length);
+              while (!input.ReachedLimit) {
+                primitiveArray_.Add(input.ReadInt32(ref immediateBuffer)); 
+              }
+              input.PopLimit(oldLimit);
+            }
+            break;
+          }
           case 16: {
-            primitiveArray_.AddEntriesFrom(input, _repeated_primitiveArray_codec, ref immediateBuffer);
+            primitiveArray_.Add(input.ReadInt32(ref immediateBuffer));
             break;
           }
           case 26: {
@@ -924,16 +1025,29 @@ namespace UnitTest.Issues.TestProtos {
             break;
           }
           case 34: {
-            messageArray_.AddEntriesFrom(input, _repeated_messageArray_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::UnitTest.Issues.TestProtos.DeprecatedChild();
+            item.MergeFrom(input, ref immediateBuffer);
+            messageArray_.Add(item);
+            input.EndReadNested(oldLimit);
             break;
           }
           case 40: {
             enumValue_ = (global::UnitTest.Issues.TestProtos.DeprecatedEnum) input.ReadEnum(ref immediateBuffer);
             break;
           }
-          case 50:
+          case 50: {
+            int length = input.ReadLength(ref immediateBuffer);
+            if (length > 0) {
+              var oldLimit = input.PushLimit(length);
+              while (!input.ReachedLimit) {
+                enumArray_.Add((global::UnitTest.Issues.TestProtos.DeprecatedEnum)input.ReadEnum(ref immediateBuffer)); 
+              }
+              input.PopLimit(oldLimit);
+            }
+            break;
+          }
           case 48: {
-            enumArray_.AddEntriesFrom(input, _repeated_enumArray_codec, ref immediateBuffer);
+            enumArray_.Add((global::UnitTest.Issues.TestProtos.DeprecatedEnum)input.ReadEnum(ref immediateBuffer));
             break;
           }
         }
@@ -1023,13 +1137,15 @@ namespace UnitTest.Issues.TestProtos {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
+    [global::System.Security.SecurityCritical]
+    [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+    public void WriteTo(pb::CodedOutputStream output, ref global::System.Span<byte> immediateBuffer) {
       if (Item != 0) {
-        output.WriteRawTag(8);
-        output.WriteInt32(Item);
+        output.WriteRawTag(8, ref immediateBuffer);
+        output.WriteInt32(Item, ref immediateBuffer);
       }
       if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
+        _unknownFields.WriteTo(output, ref immediateBuffer);
       }
     }
 
@@ -1058,6 +1174,7 @@ namespace UnitTest.Issues.TestProtos {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.Security.SecurityCritical]
+    [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
     public void MergeFrom(pb::CodedInputStream input, ref global::System.ReadOnlySpan<byte> immediateBuffer) {
       uint tag;
       while ((tag = input.ReadTag(ref immediateBuffer)) != 0) {
@@ -1167,17 +1284,19 @@ namespace UnitTest.Issues.TestProtos {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
+    [global::System.Security.SecurityCritical]
+    [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+    public void WriteTo(pb::CodedOutputStream output, ref global::System.Span<byte> immediateBuffer) {
       if (Types_ != 0) {
-        output.WriteRawTag(8);
-        output.WriteInt32(Types_);
+        output.WriteRawTag(8, ref immediateBuffer);
+        output.WriteInt32(Types_, ref immediateBuffer);
       }
       if (Descriptor_ != 0) {
-        output.WriteRawTag(16);
-        output.WriteInt32(Descriptor_);
+        output.WriteRawTag(16, ref immediateBuffer);
+        output.WriteInt32(Descriptor_, ref immediateBuffer);
       }
       if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
+        _unknownFields.WriteTo(output, ref immediateBuffer);
       }
     }
 
@@ -1212,6 +1331,7 @@ namespace UnitTest.Issues.TestProtos {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.Security.SecurityCritical]
+    [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
     public void MergeFrom(pb::CodedInputStream input, ref global::System.ReadOnlySpan<byte> immediateBuffer) {
       uint tag;
       while ((tag = input.ReadTag(ref immediateBuffer)) != 0) {
@@ -1302,9 +1422,11 @@ namespace UnitTest.Issues.TestProtos {
         }
 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-        public void WriteTo(pb::CodedOutputStream output) {
+        [global::System.Security.SecurityCritical]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public void WriteTo(pb::CodedOutputStream output, ref global::System.Span<byte> immediateBuffer) {
           if (_unknownFields != null) {
-            _unknownFields.WriteTo(output);
+            _unknownFields.WriteTo(output, ref immediateBuffer);
           }
         }
 
@@ -1327,6 +1449,7 @@ namespace UnitTest.Issues.TestProtos {
 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         [global::System.Security.SecurityCritical]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
         public void MergeFrom(pb::CodedInputStream input, ref global::System.ReadOnlySpan<byte> immediateBuffer) {
           uint tag;
           while ((tag = input.ReadTag(ref immediateBuffer)) != 0) {
@@ -1561,33 +1684,35 @@ namespace UnitTest.Issues.TestProtos {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
-      if (PlainString.Length != 0) {
-        output.WriteRawTag(10);
-        output.WriteString(PlainString);
+    [global::System.Security.SecurityCritical]
+    [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+    public void WriteTo(pb::CodedOutputStream output, ref global::System.Span<byte> immediateBuffer) {
+      if (PlainInt32 != 0) {
+        output.WriteRawTag(32, ref immediateBuffer);
+        output.WriteInt32(PlainInt32, ref immediateBuffer);
       }
       if (o1Case_ == O1OneofCase.O1String) {
-        output.WriteRawTag(18);
-        output.WriteString(O1String);
-      }
-      if (o2Case_ == O2OneofCase.O2String) {
-        output.WriteRawTag(26);
-        output.WriteString(O2String);
-      }
-      if (PlainInt32 != 0) {
-        output.WriteRawTag(32);
-        output.WriteInt32(PlainInt32);
+        output.WriteRawTag(18, ref immediateBuffer);
+        output.WriteString(O1String, ref immediateBuffer);
       }
       if (o1Case_ == O1OneofCase.O1Int32) {
-        output.WriteRawTag(40);
-        output.WriteInt32(O1Int32);
+        output.WriteRawTag(40, ref immediateBuffer);
+        output.WriteInt32(O1Int32, ref immediateBuffer);
+      }
+      if (PlainString.Length != 0) {
+        output.WriteRawTag(10, ref immediateBuffer);
+        output.WriteString(PlainString, ref immediateBuffer);
       }
       if (o2Case_ == O2OneofCase.O2Int32) {
-        output.WriteRawTag(48);
-        output.WriteInt32(O2Int32);
+        output.WriteRawTag(48, ref immediateBuffer);
+        output.WriteInt32(O2Int32, ref immediateBuffer);
+      }
+      if (o2Case_ == O2OneofCase.O2String) {
+        output.WriteRawTag(26, ref immediateBuffer);
+        output.WriteString(O2String, ref immediateBuffer);
       }
       if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
+        _unknownFields.WriteTo(output, ref immediateBuffer);
       }
     }
 
@@ -1652,6 +1777,7 @@ namespace UnitTest.Issues.TestProtos {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.Security.SecurityCritical]
+    [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
     public void MergeFrom(pb::CodedInputStream input, ref global::System.ReadOnlySpan<byte> immediateBuffer) {
       uint tag;
       while ((tag = input.ReadTag(ref immediateBuffer)) != 0) {
@@ -1798,21 +1924,23 @@ namespace UnitTest.Issues.TestProtos {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
+    [global::System.Security.SecurityCritical]
+    [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+    public void WriteTo(pb::CodedOutputStream output, ref global::System.Span<byte> immediateBuffer) {
       if (Name.Length != 0) {
-        output.WriteRawTag(10);
-        output.WriteString(Name);
+        output.WriteRawTag(10, ref immediateBuffer);
+        output.WriteString(Name, ref immediateBuffer);
       }
       if (Description.Length != 0) {
-        output.WriteRawTag(18);
-        output.WriteString(Description);
+        output.WriteRawTag(18, ref immediateBuffer);
+        output.WriteString(Description, ref immediateBuffer);
       }
       if (Guid.Length != 0) {
-        output.WriteRawTag(26);
-        output.WriteString(Guid);
+        output.WriteRawTag(26, ref immediateBuffer);
+        output.WriteString(Guid, ref immediateBuffer);
       }
       if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
+        _unknownFields.WriteTo(output, ref immediateBuffer);
       }
     }
 
@@ -1853,6 +1981,7 @@ namespace UnitTest.Issues.TestProtos {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.Security.SecurityCritical]
+    [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
     public void MergeFrom(pb::CodedInputStream input, ref global::System.ReadOnlySpan<byte> immediateBuffer) {
       uint tag;
       while ((tag = input.ReadTag(ref immediateBuffer)) != 0) {
@@ -2003,17 +2132,19 @@ namespace UnitTest.Issues.TestProtos {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
+    [global::System.Security.SecurityCritical]
+    [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+    public void WriteTo(pb::CodedOutputStream output, ref global::System.Span<byte> immediateBuffer) {
       if (valueCase_ == ValueOneofCase.Text) {
-        output.WriteRawTag(10);
-        output.WriteString(Text);
+        output.WriteRawTag(10, ref immediateBuffer);
+        output.WriteString(Text, ref immediateBuffer);
       }
-      if (valueCase_ == ValueOneofCase.Nested) {
-        output.WriteRawTag(18);
-        output.WriteMessage(Nested);
+      if (Nested != null) {
+        output.WriteRawTag(18, ref immediateBuffer);
+        output.WriteMessage(Nested, ref immediateBuffer);
       }
       if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
+        _unknownFields.WriteTo(output, ref immediateBuffer);
       }
     }
 
@@ -2023,7 +2154,7 @@ namespace UnitTest.Issues.TestProtos {
       if (valueCase_ == ValueOneofCase.Text) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Text);
       }
-      if (valueCase_ == ValueOneofCase.Nested) {
+      if (Nested != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(Nested);
       }
       if (_unknownFields != null) {
@@ -2054,6 +2185,7 @@ namespace UnitTest.Issues.TestProtos {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.Security.SecurityCritical]
+    [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
     public void MergeFrom(pb::CodedInputStream input, ref global::System.ReadOnlySpan<byte> immediateBuffer) {
       uint tag;
       while ((tag = input.ReadTag(ref immediateBuffer)) != 0) {
@@ -2174,17 +2306,19 @@ namespace UnitTest.Issues.TestProtos {
         }
 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-        public void WriteTo(pb::CodedOutputStream output) {
+        [global::System.Security.SecurityCritical]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public void WriteTo(pb::CodedOutputStream output, ref global::System.Span<byte> immediateBuffer) {
           if (X != 0) {
-            output.WriteRawTag(8);
-            output.WriteInt32(X);
+            output.WriteRawTag(8, ref immediateBuffer);
+            output.WriteInt32(X, ref immediateBuffer);
           }
           if (Y != 0) {
-            output.WriteRawTag(16);
-            output.WriteInt32(Y);
+            output.WriteRawTag(16, ref immediateBuffer);
+            output.WriteInt32(Y, ref immediateBuffer);
           }
           if (_unknownFields != null) {
-            _unknownFields.WriteTo(output);
+            _unknownFields.WriteTo(output, ref immediateBuffer);
           }
         }
 
@@ -2219,6 +2353,7 @@ namespace UnitTest.Issues.TestProtos {
 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         [global::System.Security.SecurityCritical]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
         public void MergeFrom(pb::CodedInputStream input, ref global::System.ReadOnlySpan<byte> immediateBuffer) {
           uint tag;
           while ((tag = input.ReadTag(ref immediateBuffer)) != 0) {

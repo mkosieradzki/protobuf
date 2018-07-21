@@ -228,8 +228,6 @@ namespace Google.Protobuf.TestProtos {
 
     /// <summary>Field number for the "map_int32_int32" field.</summary>
     public const int MapInt32Int32FieldNumber = 1;
-    private static readonly pbc::MapField<int, int>.Codec _map_mapInt32Int32_codec
-        = new pbc::MapField<int, int>.Codec(pb::FieldCodec.ForInt32(8), pb::FieldCodec.ForInt32(16), 10);
     private readonly pbc::MapField<int, int> mapInt32Int32_ = new pbc::MapField<int, int>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::MapField<int, int> MapInt32Int32 {
@@ -238,8 +236,6 @@ namespace Google.Protobuf.TestProtos {
 
     /// <summary>Field number for the "map_int64_int64" field.</summary>
     public const int MapInt64Int64FieldNumber = 2;
-    private static readonly pbc::MapField<long, long>.Codec _map_mapInt64Int64_codec
-        = new pbc::MapField<long, long>.Codec(pb::FieldCodec.ForInt64(8), pb::FieldCodec.ForInt64(16), 18);
     private readonly pbc::MapField<long, long> mapInt64Int64_ = new pbc::MapField<long, long>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::MapField<long, long> MapInt64Int64 {
@@ -248,8 +244,6 @@ namespace Google.Protobuf.TestProtos {
 
     /// <summary>Field number for the "map_uint32_uint32" field.</summary>
     public const int MapUint32Uint32FieldNumber = 3;
-    private static readonly pbc::MapField<uint, uint>.Codec _map_mapUint32Uint32_codec
-        = new pbc::MapField<uint, uint>.Codec(pb::FieldCodec.ForUInt32(8), pb::FieldCodec.ForUInt32(16), 26);
     private readonly pbc::MapField<uint, uint> mapUint32Uint32_ = new pbc::MapField<uint, uint>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::MapField<uint, uint> MapUint32Uint32 {
@@ -258,8 +252,6 @@ namespace Google.Protobuf.TestProtos {
 
     /// <summary>Field number for the "map_uint64_uint64" field.</summary>
     public const int MapUint64Uint64FieldNumber = 4;
-    private static readonly pbc::MapField<ulong, ulong>.Codec _map_mapUint64Uint64_codec
-        = new pbc::MapField<ulong, ulong>.Codec(pb::FieldCodec.ForUInt64(8), pb::FieldCodec.ForUInt64(16), 34);
     private readonly pbc::MapField<ulong, ulong> mapUint64Uint64_ = new pbc::MapField<ulong, ulong>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::MapField<ulong, ulong> MapUint64Uint64 {
@@ -268,8 +260,6 @@ namespace Google.Protobuf.TestProtos {
 
     /// <summary>Field number for the "map_sint32_sint32" field.</summary>
     public const int MapSint32Sint32FieldNumber = 5;
-    private static readonly pbc::MapField<int, int>.Codec _map_mapSint32Sint32_codec
-        = new pbc::MapField<int, int>.Codec(pb::FieldCodec.ForSInt32(8), pb::FieldCodec.ForSInt32(16), 42);
     private readonly pbc::MapField<int, int> mapSint32Sint32_ = new pbc::MapField<int, int>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::MapField<int, int> MapSint32Sint32 {
@@ -278,8 +268,6 @@ namespace Google.Protobuf.TestProtos {
 
     /// <summary>Field number for the "map_sint64_sint64" field.</summary>
     public const int MapSint64Sint64FieldNumber = 6;
-    private static readonly pbc::MapField<long, long>.Codec _map_mapSint64Sint64_codec
-        = new pbc::MapField<long, long>.Codec(pb::FieldCodec.ForSInt64(8), pb::FieldCodec.ForSInt64(16), 50);
     private readonly pbc::MapField<long, long> mapSint64Sint64_ = new pbc::MapField<long, long>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::MapField<long, long> MapSint64Sint64 {
@@ -288,8 +276,6 @@ namespace Google.Protobuf.TestProtos {
 
     /// <summary>Field number for the "map_fixed32_fixed32" field.</summary>
     public const int MapFixed32Fixed32FieldNumber = 7;
-    private static readonly pbc::MapField<uint, uint>.Codec _map_mapFixed32Fixed32_codec
-        = new pbc::MapField<uint, uint>.Codec(pb::FieldCodec.ForFixed32(13), pb::FieldCodec.ForFixed32(21), 58);
     private readonly pbc::MapField<uint, uint> mapFixed32Fixed32_ = new pbc::MapField<uint, uint>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::MapField<uint, uint> MapFixed32Fixed32 {
@@ -298,8 +284,6 @@ namespace Google.Protobuf.TestProtos {
 
     /// <summary>Field number for the "map_fixed64_fixed64" field.</summary>
     public const int MapFixed64Fixed64FieldNumber = 8;
-    private static readonly pbc::MapField<ulong, ulong>.Codec _map_mapFixed64Fixed64_codec
-        = new pbc::MapField<ulong, ulong>.Codec(pb::FieldCodec.ForFixed64(9), pb::FieldCodec.ForFixed64(17), 66);
     private readonly pbc::MapField<ulong, ulong> mapFixed64Fixed64_ = new pbc::MapField<ulong, ulong>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::MapField<ulong, ulong> MapFixed64Fixed64 {
@@ -308,8 +292,6 @@ namespace Google.Protobuf.TestProtos {
 
     /// <summary>Field number for the "map_sfixed32_sfixed32" field.</summary>
     public const int MapSfixed32Sfixed32FieldNumber = 9;
-    private static readonly pbc::MapField<int, int>.Codec _map_mapSfixed32Sfixed32_codec
-        = new pbc::MapField<int, int>.Codec(pb::FieldCodec.ForSFixed32(13), pb::FieldCodec.ForSFixed32(21), 74);
     private readonly pbc::MapField<int, int> mapSfixed32Sfixed32_ = new pbc::MapField<int, int>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::MapField<int, int> MapSfixed32Sfixed32 {
@@ -318,8 +300,6 @@ namespace Google.Protobuf.TestProtos {
 
     /// <summary>Field number for the "map_sfixed64_sfixed64" field.</summary>
     public const int MapSfixed64Sfixed64FieldNumber = 10;
-    private static readonly pbc::MapField<long, long>.Codec _map_mapSfixed64Sfixed64_codec
-        = new pbc::MapField<long, long>.Codec(pb::FieldCodec.ForSFixed64(9), pb::FieldCodec.ForSFixed64(17), 82);
     private readonly pbc::MapField<long, long> mapSfixed64Sfixed64_ = new pbc::MapField<long, long>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::MapField<long, long> MapSfixed64Sfixed64 {
@@ -328,8 +308,6 @@ namespace Google.Protobuf.TestProtos {
 
     /// <summary>Field number for the "map_int32_float" field.</summary>
     public const int MapInt32FloatFieldNumber = 11;
-    private static readonly pbc::MapField<int, float>.Codec _map_mapInt32Float_codec
-        = new pbc::MapField<int, float>.Codec(pb::FieldCodec.ForInt32(8), pb::FieldCodec.ForFloat(21), 90);
     private readonly pbc::MapField<int, float> mapInt32Float_ = new pbc::MapField<int, float>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::MapField<int, float> MapInt32Float {
@@ -338,8 +316,6 @@ namespace Google.Protobuf.TestProtos {
 
     /// <summary>Field number for the "map_int32_double" field.</summary>
     public const int MapInt32DoubleFieldNumber = 12;
-    private static readonly pbc::MapField<int, double>.Codec _map_mapInt32Double_codec
-        = new pbc::MapField<int, double>.Codec(pb::FieldCodec.ForInt32(8), pb::FieldCodec.ForDouble(17), 98);
     private readonly pbc::MapField<int, double> mapInt32Double_ = new pbc::MapField<int, double>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::MapField<int, double> MapInt32Double {
@@ -348,8 +324,6 @@ namespace Google.Protobuf.TestProtos {
 
     /// <summary>Field number for the "map_bool_bool" field.</summary>
     public const int MapBoolBoolFieldNumber = 13;
-    private static readonly pbc::MapField<bool, bool>.Codec _map_mapBoolBool_codec
-        = new pbc::MapField<bool, bool>.Codec(pb::FieldCodec.ForBool(8), pb::FieldCodec.ForBool(16), 106);
     private readonly pbc::MapField<bool, bool> mapBoolBool_ = new pbc::MapField<bool, bool>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::MapField<bool, bool> MapBoolBool {
@@ -358,8 +332,6 @@ namespace Google.Protobuf.TestProtos {
 
     /// <summary>Field number for the "map_string_string" field.</summary>
     public const int MapStringStringFieldNumber = 14;
-    private static readonly pbc::MapField<string, string>.Codec _map_mapStringString_codec
-        = new pbc::MapField<string, string>.Codec(pb::FieldCodec.ForString(10), pb::FieldCodec.ForString(18), 114);
     private readonly pbc::MapField<string, string> mapStringString_ = new pbc::MapField<string, string>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::MapField<string, string> MapStringString {
@@ -368,8 +340,6 @@ namespace Google.Protobuf.TestProtos {
 
     /// <summary>Field number for the "map_int32_bytes" field.</summary>
     public const int MapInt32BytesFieldNumber = 15;
-    private static readonly pbc::MapField<int, pb::ByteString>.Codec _map_mapInt32Bytes_codec
-        = new pbc::MapField<int, pb::ByteString>.Codec(pb::FieldCodec.ForInt32(8), pb::FieldCodec.ForBytes(18), 122);
     private readonly pbc::MapField<int, pb::ByteString> mapInt32Bytes_ = new pbc::MapField<int, pb::ByteString>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::MapField<int, pb::ByteString> MapInt32Bytes {
@@ -378,8 +348,6 @@ namespace Google.Protobuf.TestProtos {
 
     /// <summary>Field number for the "map_int32_enum" field.</summary>
     public const int MapInt32EnumFieldNumber = 16;
-    private static readonly pbc::MapField<int, global::Google.Protobuf.TestProtos.MapEnum>.Codec _map_mapInt32Enum_codec
-        = new pbc::MapField<int, global::Google.Protobuf.TestProtos.MapEnum>.Codec(pb::FieldCodec.ForInt32(8), pb::FieldCodec.ForEnum(16, x => (int) x, x => (global::Google.Protobuf.TestProtos.MapEnum) x), 130);
     private readonly pbc::MapField<int, global::Google.Protobuf.TestProtos.MapEnum> mapInt32Enum_ = new pbc::MapField<int, global::Google.Protobuf.TestProtos.MapEnum>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::MapField<int, global::Google.Protobuf.TestProtos.MapEnum> MapInt32Enum {
@@ -388,8 +356,6 @@ namespace Google.Protobuf.TestProtos {
 
     /// <summary>Field number for the "map_int32_foreign_message" field.</summary>
     public const int MapInt32ForeignMessageFieldNumber = 17;
-    private static readonly pbc::MapField<int, global::Google.Protobuf.TestProtos.ForeignMessage>.Codec _map_mapInt32ForeignMessage_codec
-        = new pbc::MapField<int, global::Google.Protobuf.TestProtos.ForeignMessage>.Codec(pb::FieldCodec.ForInt32(8), pb::FieldCodec.ForMessage(18, global::Google.Protobuf.TestProtos.ForeignMessage.Parser), 138);
     private readonly pbc::MapField<int, global::Google.Protobuf.TestProtos.ForeignMessage> mapInt32ForeignMessage_ = new pbc::MapField<int, global::Google.Protobuf.TestProtos.ForeignMessage>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::MapField<int, global::Google.Protobuf.TestProtos.ForeignMessage> MapInt32ForeignMessage {
@@ -461,49 +427,510 @@ namespace Google.Protobuf.TestProtos {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
-      mapInt32Int32_.WriteTo(output, _map_mapInt32Int32_codec);
-      mapInt64Int64_.WriteTo(output, _map_mapInt64Int64_codec);
-      mapUint32Uint32_.WriteTo(output, _map_mapUint32Uint32_codec);
-      mapUint64Uint64_.WriteTo(output, _map_mapUint64Uint64_codec);
-      mapSint32Sint32_.WriteTo(output, _map_mapSint32Sint32_codec);
-      mapSint64Sint64_.WriteTo(output, _map_mapSint64Sint64_codec);
-      mapFixed32Fixed32_.WriteTo(output, _map_mapFixed32Fixed32_codec);
-      mapFixed64Fixed64_.WriteTo(output, _map_mapFixed64Fixed64_codec);
-      mapSfixed32Sfixed32_.WriteTo(output, _map_mapSfixed32Sfixed32_codec);
-      mapSfixed64Sfixed64_.WriteTo(output, _map_mapSfixed64Sfixed64_codec);
-      mapInt32Float_.WriteTo(output, _map_mapInt32Float_codec);
-      mapInt32Double_.WriteTo(output, _map_mapInt32Double_codec);
-      mapBoolBool_.WriteTo(output, _map_mapBoolBool_codec);
-      mapStringString_.WriteTo(output, _map_mapStringString_codec);
-      mapInt32Bytes_.WriteTo(output, _map_mapInt32Bytes_codec);
-      mapInt32Enum_.WriteTo(output, _map_mapInt32Enum_codec);
-      mapInt32ForeignMessage_.WriteTo(output, _map_mapInt32ForeignMessage_codec);
+    [global::System.Security.SecurityCritical]
+    [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+    public void WriteTo(pb::CodedOutputStream output, ref global::System.Span<byte> immediateBuffer) {
+      foreach (var entry in MapInt32Int32) {
+        var messageSize = 0;
+        if (entry.Key != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeInt32Size(entry.Key);
+        }
+        if (entry.Value != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeInt32Size(entry.Value);
+        }
+        output.WriteRawTag(10, ref immediateBuffer);
+        output.WriteLength(messageSize, ref immediateBuffer);
+        if (entry.Key != 0) {
+          output.WriteRawTag(8, ref immediateBuffer);
+          output.WriteInt32(entry.Key, ref immediateBuffer);
+        }
+        if (entry.Value != 0) {
+          output.WriteRawTag(16, ref immediateBuffer);
+          output.WriteInt32(entry.Value, ref immediateBuffer);
+        }
+      }
+      foreach (var entry in MapInt64Int64) {
+        var messageSize = 0;
+        if (entry.Key != 0L) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeInt64Size(entry.Key);
+        }
+        if (entry.Value != 0L) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeInt64Size(entry.Value);
+        }
+        output.WriteRawTag(18, ref immediateBuffer);
+        output.WriteLength(messageSize, ref immediateBuffer);
+        if (entry.Key != 0L) {
+          output.WriteRawTag(8, ref immediateBuffer);
+          output.WriteInt64(entry.Key, ref immediateBuffer);
+        }
+        if (entry.Value != 0L) {
+          output.WriteRawTag(16, ref immediateBuffer);
+          output.WriteInt64(entry.Value, ref immediateBuffer);
+        }
+      }
+      foreach (var entry in MapUint32Uint32) {
+        var messageSize = 0;
+        if (entry.Key != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeUInt32Size(entry.Key);
+        }
+        if (entry.Value != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeUInt32Size(entry.Value);
+        }
+        output.WriteRawTag(26, ref immediateBuffer);
+        output.WriteLength(messageSize, ref immediateBuffer);
+        if (entry.Key != 0) {
+          output.WriteRawTag(8, ref immediateBuffer);
+          output.WriteUInt32(entry.Key, ref immediateBuffer);
+        }
+        if (entry.Value != 0) {
+          output.WriteRawTag(16, ref immediateBuffer);
+          output.WriteUInt32(entry.Value, ref immediateBuffer);
+        }
+      }
+      foreach (var entry in MapUint64Uint64) {
+        var messageSize = 0;
+        if (entry.Key != 0UL) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeUInt64Size(entry.Key);
+        }
+        if (entry.Value != 0UL) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeUInt64Size(entry.Value);
+        }
+        output.WriteRawTag(34, ref immediateBuffer);
+        output.WriteLength(messageSize, ref immediateBuffer);
+        if (entry.Key != 0UL) {
+          output.WriteRawTag(8, ref immediateBuffer);
+          output.WriteUInt64(entry.Key, ref immediateBuffer);
+        }
+        if (entry.Value != 0UL) {
+          output.WriteRawTag(16, ref immediateBuffer);
+          output.WriteUInt64(entry.Value, ref immediateBuffer);
+        }
+      }
+      foreach (var entry in MapSint32Sint32) {
+        var messageSize = 0;
+        if (entry.Key != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeSInt32Size(entry.Key);
+        }
+        if (entry.Value != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeSInt32Size(entry.Value);
+        }
+        output.WriteRawTag(42, ref immediateBuffer);
+        output.WriteLength(messageSize, ref immediateBuffer);
+        if (entry.Key != 0) {
+          output.WriteRawTag(8, ref immediateBuffer);
+          output.WriteSInt32(entry.Key, ref immediateBuffer);
+        }
+        if (entry.Value != 0) {
+          output.WriteRawTag(16, ref immediateBuffer);
+          output.WriteSInt32(entry.Value, ref immediateBuffer);
+        }
+      }
+      foreach (var entry in MapSint64Sint64) {
+        var messageSize = 0;
+        if (entry.Key != 0L) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeSInt64Size(entry.Key);
+        }
+        if (entry.Value != 0L) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeSInt64Size(entry.Value);
+        }
+        output.WriteRawTag(50, ref immediateBuffer);
+        output.WriteLength(messageSize, ref immediateBuffer);
+        if (entry.Key != 0L) {
+          output.WriteRawTag(8, ref immediateBuffer);
+          output.WriteSInt64(entry.Key, ref immediateBuffer);
+        }
+        if (entry.Value != 0L) {
+          output.WriteRawTag(16, ref immediateBuffer);
+          output.WriteSInt64(entry.Value, ref immediateBuffer);
+        }
+      }
+      foreach (var entry in MapFixed32Fixed32) {
+        var messageSize = 0;
+        if (entry.Key != 0) {
+          messageSize += 1 + 4;
+        }
+        if (entry.Value != 0) {
+          messageSize += 1 + 4;
+        }
+        output.WriteRawTag(58, ref immediateBuffer);
+        output.WriteLength(messageSize, ref immediateBuffer);
+        if (entry.Key != 0) {
+          output.WriteRawTag(13, ref immediateBuffer);
+          output.WriteFixed32(entry.Key, ref immediateBuffer);
+        }
+        if (entry.Value != 0) {
+          output.WriteRawTag(21, ref immediateBuffer);
+          output.WriteFixed32(entry.Value, ref immediateBuffer);
+        }
+      }
+      foreach (var entry in MapFixed64Fixed64) {
+        var messageSize = 0;
+        if (entry.Key != 0UL) {
+          messageSize += 1 + 8;
+        }
+        if (entry.Value != 0UL) {
+          messageSize += 1 + 8;
+        }
+        output.WriteRawTag(66, ref immediateBuffer);
+        output.WriteLength(messageSize, ref immediateBuffer);
+        if (entry.Key != 0UL) {
+          output.WriteRawTag(9, ref immediateBuffer);
+          output.WriteFixed64(entry.Key, ref immediateBuffer);
+        }
+        if (entry.Value != 0UL) {
+          output.WriteRawTag(17, ref immediateBuffer);
+          output.WriteFixed64(entry.Value, ref immediateBuffer);
+        }
+      }
+      foreach (var entry in MapSfixed32Sfixed32) {
+        var messageSize = 0;
+        if (entry.Key != 0) {
+          messageSize += 1 + 4;
+        }
+        if (entry.Value != 0) {
+          messageSize += 1 + 4;
+        }
+        output.WriteRawTag(74, ref immediateBuffer);
+        output.WriteLength(messageSize, ref immediateBuffer);
+        if (entry.Key != 0) {
+          output.WriteRawTag(13, ref immediateBuffer);
+          output.WriteSFixed32(entry.Key, ref immediateBuffer);
+        }
+        if (entry.Value != 0) {
+          output.WriteRawTag(21, ref immediateBuffer);
+          output.WriteSFixed32(entry.Value, ref immediateBuffer);
+        }
+      }
+      foreach (var entry in MapSfixed64Sfixed64) {
+        var messageSize = 0;
+        if (entry.Key != 0L) {
+          messageSize += 1 + 8;
+        }
+        if (entry.Value != 0L) {
+          messageSize += 1 + 8;
+        }
+        output.WriteRawTag(82, ref immediateBuffer);
+        output.WriteLength(messageSize, ref immediateBuffer);
+        if (entry.Key != 0L) {
+          output.WriteRawTag(9, ref immediateBuffer);
+          output.WriteSFixed64(entry.Key, ref immediateBuffer);
+        }
+        if (entry.Value != 0L) {
+          output.WriteRawTag(17, ref immediateBuffer);
+          output.WriteSFixed64(entry.Value, ref immediateBuffer);
+        }
+      }
+      foreach (var entry in MapInt32Float) {
+        var messageSize = 0;
+        if (entry.Key != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeInt32Size(entry.Key);
+        }
+        if (entry.Value != 0F) {
+          messageSize += 1 + 4;
+        }
+        output.WriteRawTag(90, ref immediateBuffer);
+        output.WriteLength(messageSize, ref immediateBuffer);
+        if (entry.Key != 0) {
+          output.WriteRawTag(8, ref immediateBuffer);
+          output.WriteInt32(entry.Key, ref immediateBuffer);
+        }
+        if (entry.Value != 0F) {
+          output.WriteRawTag(21, ref immediateBuffer);
+          output.WriteFloat(entry.Value, ref immediateBuffer);
+        }
+      }
+      foreach (var entry in MapInt32Double) {
+        var messageSize = 0;
+        if (entry.Key != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeInt32Size(entry.Key);
+        }
+        if (entry.Value != 0D) {
+          messageSize += 1 + 8;
+        }
+        output.WriteRawTag(98, ref immediateBuffer);
+        output.WriteLength(messageSize, ref immediateBuffer);
+        if (entry.Key != 0) {
+          output.WriteRawTag(8, ref immediateBuffer);
+          output.WriteInt32(entry.Key, ref immediateBuffer);
+        }
+        if (entry.Value != 0D) {
+          output.WriteRawTag(17, ref immediateBuffer);
+          output.WriteDouble(entry.Value, ref immediateBuffer);
+        }
+      }
+      foreach (var entry in MapBoolBool) {
+        var messageSize = 0;
+        if (entry.Key != false) {
+          messageSize += 1 + 1;
+        }
+        if (entry.Value != false) {
+          messageSize += 1 + 1;
+        }
+        output.WriteRawTag(106, ref immediateBuffer);
+        output.WriteLength(messageSize, ref immediateBuffer);
+        if (entry.Key != false) {
+          output.WriteRawTag(8, ref immediateBuffer);
+          output.WriteBool(entry.Key, ref immediateBuffer);
+        }
+        if (entry.Value != false) {
+          output.WriteRawTag(16, ref immediateBuffer);
+          output.WriteBool(entry.Value, ref immediateBuffer);
+        }
+      }
+      foreach (var entry in MapStringString) {
+        var messageSize = 0;
+        if (entry.Key.Length != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeStringSize(entry.Key);
+        }
+        if (entry.Value.Length != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeStringSize(entry.Value);
+        }
+        output.WriteRawTag(114, ref immediateBuffer);
+        output.WriteLength(messageSize, ref immediateBuffer);
+        if (entry.Key.Length != 0) {
+          output.WriteRawTag(10, ref immediateBuffer);
+          output.WriteString(entry.Key, ref immediateBuffer);
+        }
+        if (entry.Value.Length != 0) {
+          output.WriteRawTag(18, ref immediateBuffer);
+          output.WriteString(entry.Value, ref immediateBuffer);
+        }
+      }
+      foreach (var entry in MapInt32Bytes) {
+        var messageSize = 0;
+        if (entry.Key != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeInt32Size(entry.Key);
+        }
+        if (entry.Value.Length != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeBytesSize(entry.Value);
+        }
+        output.WriteRawTag(122, ref immediateBuffer);
+        output.WriteLength(messageSize, ref immediateBuffer);
+        if (entry.Key != 0) {
+          output.WriteRawTag(8, ref immediateBuffer);
+          output.WriteInt32(entry.Key, ref immediateBuffer);
+        }
+        if (entry.Value.Length != 0) {
+          output.WriteRawTag(18, ref immediateBuffer);
+          output.WriteBytes(entry.Value, ref immediateBuffer);
+        }
+      }
+      foreach (var entry in MapInt32Enum) {
+        var messageSize = 0;
+        if (entry.Key != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeInt32Size(entry.Key);
+        }
+        if (entry.Value != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeEnumSize((int) entry.Value);
+        }
+        output.WriteRawTag(130, 1, ref immediateBuffer);
+        output.WriteLength(messageSize, ref immediateBuffer);
+        if (entry.Key != 0) {
+          output.WriteRawTag(8, ref immediateBuffer);
+          output.WriteInt32(entry.Key, ref immediateBuffer);
+        }
+        if (entry.Value != 0) {
+          output.WriteRawTag(16, ref immediateBuffer);
+          output.WriteEnum((int)entry.Value, ref immediateBuffer);
+        }
+      }
+      foreach (var entry in MapInt32ForeignMessage) {
+        var messageSize = 0;
+        if (entry.Key != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeInt32Size(entry.Key);
+        }
+        if (entry.Value != null) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeMessageSize(entry.Value);
+        }
+        output.WriteRawTag(138, 1, ref immediateBuffer);
+        output.WriteLength(messageSize, ref immediateBuffer);
+        if (entry.Key != 0) {
+          output.WriteRawTag(8, ref immediateBuffer);
+          output.WriteInt32(entry.Key, ref immediateBuffer);
+        }
+        if (entry.Value != null) {
+          output.WriteRawTag(18, ref immediateBuffer);
+          output.WriteMessage(entry.Value, ref immediateBuffer);
+        }
+      }
       if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
+        _unknownFields.WriteTo(output, ref immediateBuffer);
       }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      size += mapInt32Int32_.CalculateSize(_map_mapInt32Int32_codec);
-      size += mapInt64Int64_.CalculateSize(_map_mapInt64Int64_codec);
-      size += mapUint32Uint32_.CalculateSize(_map_mapUint32Uint32_codec);
-      size += mapUint64Uint64_.CalculateSize(_map_mapUint64Uint64_codec);
-      size += mapSint32Sint32_.CalculateSize(_map_mapSint32Sint32_codec);
-      size += mapSint64Sint64_.CalculateSize(_map_mapSint64Sint64_codec);
-      size += mapFixed32Fixed32_.CalculateSize(_map_mapFixed32Fixed32_codec);
-      size += mapFixed64Fixed64_.CalculateSize(_map_mapFixed64Fixed64_codec);
-      size += mapSfixed32Sfixed32_.CalculateSize(_map_mapSfixed32Sfixed32_codec);
-      size += mapSfixed64Sfixed64_.CalculateSize(_map_mapSfixed64Sfixed64_codec);
-      size += mapInt32Float_.CalculateSize(_map_mapInt32Float_codec);
-      size += mapInt32Double_.CalculateSize(_map_mapInt32Double_codec);
-      size += mapBoolBool_.CalculateSize(_map_mapBoolBool_codec);
-      size += mapStringString_.CalculateSize(_map_mapStringString_codec);
-      size += mapInt32Bytes_.CalculateSize(_map_mapInt32Bytes_codec);
-      size += mapInt32Enum_.CalculateSize(_map_mapInt32Enum_codec);
-      size += mapInt32ForeignMessage_.CalculateSize(_map_mapInt32ForeignMessage_codec);
+      foreach (var entry in MapInt32Int32) {
+        var messageSize = 0;
+        if (entry.Key != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeInt32Size(entry.Key);
+        }
+        if (entry.Value != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeInt32Size(entry.Value);
+        }
+        size += 1 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
+      foreach (var entry in MapInt64Int64) {
+        var messageSize = 0;
+        if (entry.Key != 0L) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeInt64Size(entry.Key);
+        }
+        if (entry.Value != 0L) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeInt64Size(entry.Value);
+        }
+        size += 1 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
+      foreach (var entry in MapUint32Uint32) {
+        var messageSize = 0;
+        if (entry.Key != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeUInt32Size(entry.Key);
+        }
+        if (entry.Value != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeUInt32Size(entry.Value);
+        }
+        size += 1 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
+      foreach (var entry in MapUint64Uint64) {
+        var messageSize = 0;
+        if (entry.Key != 0UL) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeUInt64Size(entry.Key);
+        }
+        if (entry.Value != 0UL) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeUInt64Size(entry.Value);
+        }
+        size += 1 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
+      foreach (var entry in MapSint32Sint32) {
+        var messageSize = 0;
+        if (entry.Key != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeSInt32Size(entry.Key);
+        }
+        if (entry.Value != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeSInt32Size(entry.Value);
+        }
+        size += 1 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
+      foreach (var entry in MapSint64Sint64) {
+        var messageSize = 0;
+        if (entry.Key != 0L) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeSInt64Size(entry.Key);
+        }
+        if (entry.Value != 0L) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeSInt64Size(entry.Value);
+        }
+        size += 1 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
+      foreach (var entry in MapFixed32Fixed32) {
+        var messageSize = 0;
+        if (entry.Key != 0) {
+          messageSize += 1 + 4;
+        }
+        if (entry.Value != 0) {
+          messageSize += 1 + 4;
+        }
+        size += 1 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
+      foreach (var entry in MapFixed64Fixed64) {
+        var messageSize = 0;
+        if (entry.Key != 0UL) {
+          messageSize += 1 + 8;
+        }
+        if (entry.Value != 0UL) {
+          messageSize += 1 + 8;
+        }
+        size += 1 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
+      foreach (var entry in MapSfixed32Sfixed32) {
+        var messageSize = 0;
+        if (entry.Key != 0) {
+          messageSize += 1 + 4;
+        }
+        if (entry.Value != 0) {
+          messageSize += 1 + 4;
+        }
+        size += 1 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
+      foreach (var entry in MapSfixed64Sfixed64) {
+        var messageSize = 0;
+        if (entry.Key != 0L) {
+          messageSize += 1 + 8;
+        }
+        if (entry.Value != 0L) {
+          messageSize += 1 + 8;
+        }
+        size += 1 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
+      foreach (var entry in MapInt32Float) {
+        var messageSize = 0;
+        if (entry.Key != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeInt32Size(entry.Key);
+        }
+        if (entry.Value != 0F) {
+          messageSize += 1 + 4;
+        }
+        size += 1 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
+      foreach (var entry in MapInt32Double) {
+        var messageSize = 0;
+        if (entry.Key != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeInt32Size(entry.Key);
+        }
+        if (entry.Value != 0D) {
+          messageSize += 1 + 8;
+        }
+        size += 1 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
+      foreach (var entry in MapBoolBool) {
+        var messageSize = 0;
+        if (entry.Key != false) {
+          messageSize += 1 + 1;
+        }
+        if (entry.Value != false) {
+          messageSize += 1 + 1;
+        }
+        size += 1 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
+      foreach (var entry in MapStringString) {
+        var messageSize = 0;
+        if (entry.Key.Length != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeStringSize(entry.Key);
+        }
+        if (entry.Value.Length != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeStringSize(entry.Value);
+        }
+        size += 1 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
+      foreach (var entry in MapInt32Bytes) {
+        var messageSize = 0;
+        if (entry.Key != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeInt32Size(entry.Key);
+        }
+        if (entry.Value.Length != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeBytesSize(entry.Value);
+        }
+        size += 1 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
+      foreach (var entry in MapInt32Enum) {
+        var messageSize = 0;
+        if (entry.Key != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeInt32Size(entry.Key);
+        }
+        if (entry.Value != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeEnumSize((int) entry.Value);
+        }
+        size += 2 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
+      foreach (var entry in MapInt32ForeignMessage) {
+        var messageSize = 0;
+        if (entry.Key != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeInt32Size(entry.Key);
+        }
+        if (entry.Value != null) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeMessageSize(entry.Value);
+        }
+        size += 2 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -537,6 +964,7 @@ namespace Google.Protobuf.TestProtos {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.Security.SecurityCritical]
+    [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
     public void MergeFrom(pb::CodedInputStream input, ref global::System.ReadOnlySpan<byte> immediateBuffer) {
       uint tag;
       while ((tag = input.ReadTag(ref immediateBuffer)) != 0) {
@@ -545,71 +973,315 @@ namespace Google.Protobuf.TestProtos {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input, ref immediateBuffer);
             break;
           case 10: {
-            mapInt32Int32_.AddEntriesFrom(input, _map_mapInt32Int32_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            int entryKey = 0;
+            int entryValue = 0;
+            uint ntag;
+            while ((ntag = input.ReadTag(ref immediateBuffer)) != 0) {
+              if (ntag == 8) {
+                entryKey = input.ReadInt32(ref immediateBuffer);
+              } else if (ntag == 16) {
+                entryValue = input.ReadInt32(ref immediateBuffer);
+              } else {
+                input.SkipLastField(ref immediateBuffer);
+              }
+            }
+            mapInt32Int32_[entryKey] = entryValue;
+            input.EndReadNested(oldLimit);
             break;
           }
           case 18: {
-            mapInt64Int64_.AddEntriesFrom(input, _map_mapInt64Int64_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            long entryKey = 0L;
+            long entryValue = 0L;
+            uint ntag;
+            while ((ntag = input.ReadTag(ref immediateBuffer)) != 0) {
+              if (ntag == 8) {
+                entryKey = input.ReadInt64(ref immediateBuffer);
+              } else if (ntag == 16) {
+                entryValue = input.ReadInt64(ref immediateBuffer);
+              } else {
+                input.SkipLastField(ref immediateBuffer);
+              }
+            }
+            mapInt64Int64_[entryKey] = entryValue;
+            input.EndReadNested(oldLimit);
             break;
           }
           case 26: {
-            mapUint32Uint32_.AddEntriesFrom(input, _map_mapUint32Uint32_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            uint entryKey = 0;
+            uint entryValue = 0;
+            uint ntag;
+            while ((ntag = input.ReadTag(ref immediateBuffer)) != 0) {
+              if (ntag == 8) {
+                entryKey = input.ReadUInt32(ref immediateBuffer);
+              } else if (ntag == 16) {
+                entryValue = input.ReadUInt32(ref immediateBuffer);
+              } else {
+                input.SkipLastField(ref immediateBuffer);
+              }
+            }
+            mapUint32Uint32_[entryKey] = entryValue;
+            input.EndReadNested(oldLimit);
             break;
           }
           case 34: {
-            mapUint64Uint64_.AddEntriesFrom(input, _map_mapUint64Uint64_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            ulong entryKey = 0UL;
+            ulong entryValue = 0UL;
+            uint ntag;
+            while ((ntag = input.ReadTag(ref immediateBuffer)) != 0) {
+              if (ntag == 8) {
+                entryKey = input.ReadUInt64(ref immediateBuffer);
+              } else if (ntag == 16) {
+                entryValue = input.ReadUInt64(ref immediateBuffer);
+              } else {
+                input.SkipLastField(ref immediateBuffer);
+              }
+            }
+            mapUint64Uint64_[entryKey] = entryValue;
+            input.EndReadNested(oldLimit);
             break;
           }
           case 42: {
-            mapSint32Sint32_.AddEntriesFrom(input, _map_mapSint32Sint32_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            int entryKey = 0;
+            int entryValue = 0;
+            uint ntag;
+            while ((ntag = input.ReadTag(ref immediateBuffer)) != 0) {
+              if (ntag == 8) {
+                entryKey = input.ReadSInt32(ref immediateBuffer);
+              } else if (ntag == 16) {
+                entryValue = input.ReadSInt32(ref immediateBuffer);
+              } else {
+                input.SkipLastField(ref immediateBuffer);
+              }
+            }
+            mapSint32Sint32_[entryKey] = entryValue;
+            input.EndReadNested(oldLimit);
             break;
           }
           case 50: {
-            mapSint64Sint64_.AddEntriesFrom(input, _map_mapSint64Sint64_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            long entryKey = 0L;
+            long entryValue = 0L;
+            uint ntag;
+            while ((ntag = input.ReadTag(ref immediateBuffer)) != 0) {
+              if (ntag == 8) {
+                entryKey = input.ReadSInt64(ref immediateBuffer);
+              } else if (ntag == 16) {
+                entryValue = input.ReadSInt64(ref immediateBuffer);
+              } else {
+                input.SkipLastField(ref immediateBuffer);
+              }
+            }
+            mapSint64Sint64_[entryKey] = entryValue;
+            input.EndReadNested(oldLimit);
             break;
           }
           case 58: {
-            mapFixed32Fixed32_.AddEntriesFrom(input, _map_mapFixed32Fixed32_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            uint entryKey = 0;
+            uint entryValue = 0;
+            uint ntag;
+            while ((ntag = input.ReadTag(ref immediateBuffer)) != 0) {
+              if (ntag == 13) {
+                entryKey = input.ReadFixed32(ref immediateBuffer);
+              } else if (ntag == 21) {
+                entryValue = input.ReadFixed32(ref immediateBuffer);
+              } else {
+                input.SkipLastField(ref immediateBuffer);
+              }
+            }
+            mapFixed32Fixed32_[entryKey] = entryValue;
+            input.EndReadNested(oldLimit);
             break;
           }
           case 66: {
-            mapFixed64Fixed64_.AddEntriesFrom(input, _map_mapFixed64Fixed64_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            ulong entryKey = 0UL;
+            ulong entryValue = 0UL;
+            uint ntag;
+            while ((ntag = input.ReadTag(ref immediateBuffer)) != 0) {
+              if (ntag == 9) {
+                entryKey = input.ReadFixed64(ref immediateBuffer);
+              } else if (ntag == 17) {
+                entryValue = input.ReadFixed64(ref immediateBuffer);
+              } else {
+                input.SkipLastField(ref immediateBuffer);
+              }
+            }
+            mapFixed64Fixed64_[entryKey] = entryValue;
+            input.EndReadNested(oldLimit);
             break;
           }
           case 74: {
-            mapSfixed32Sfixed32_.AddEntriesFrom(input, _map_mapSfixed32Sfixed32_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            int entryKey = 0;
+            int entryValue = 0;
+            uint ntag;
+            while ((ntag = input.ReadTag(ref immediateBuffer)) != 0) {
+              if (ntag == 13) {
+                entryKey = input.ReadSFixed32(ref immediateBuffer);
+              } else if (ntag == 21) {
+                entryValue = input.ReadSFixed32(ref immediateBuffer);
+              } else {
+                input.SkipLastField(ref immediateBuffer);
+              }
+            }
+            mapSfixed32Sfixed32_[entryKey] = entryValue;
+            input.EndReadNested(oldLimit);
             break;
           }
           case 82: {
-            mapSfixed64Sfixed64_.AddEntriesFrom(input, _map_mapSfixed64Sfixed64_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            long entryKey = 0L;
+            long entryValue = 0L;
+            uint ntag;
+            while ((ntag = input.ReadTag(ref immediateBuffer)) != 0) {
+              if (ntag == 9) {
+                entryKey = input.ReadSFixed64(ref immediateBuffer);
+              } else if (ntag == 17) {
+                entryValue = input.ReadSFixed64(ref immediateBuffer);
+              } else {
+                input.SkipLastField(ref immediateBuffer);
+              }
+            }
+            mapSfixed64Sfixed64_[entryKey] = entryValue;
+            input.EndReadNested(oldLimit);
             break;
           }
           case 90: {
-            mapInt32Float_.AddEntriesFrom(input, _map_mapInt32Float_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            int entryKey = 0;
+            float entryValue = 0F;
+            uint ntag;
+            while ((ntag = input.ReadTag(ref immediateBuffer)) != 0) {
+              if (ntag == 8) {
+                entryKey = input.ReadInt32(ref immediateBuffer);
+              } else if (ntag == 21) {
+                entryValue = input.ReadFloat(ref immediateBuffer);
+              } else {
+                input.SkipLastField(ref immediateBuffer);
+              }
+            }
+            mapInt32Float_[entryKey] = entryValue;
+            input.EndReadNested(oldLimit);
             break;
           }
           case 98: {
-            mapInt32Double_.AddEntriesFrom(input, _map_mapInt32Double_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            int entryKey = 0;
+            double entryValue = 0D;
+            uint ntag;
+            while ((ntag = input.ReadTag(ref immediateBuffer)) != 0) {
+              if (ntag == 8) {
+                entryKey = input.ReadInt32(ref immediateBuffer);
+              } else if (ntag == 17) {
+                entryValue = input.ReadDouble(ref immediateBuffer);
+              } else {
+                input.SkipLastField(ref immediateBuffer);
+              }
+            }
+            mapInt32Double_[entryKey] = entryValue;
+            input.EndReadNested(oldLimit);
             break;
           }
           case 106: {
-            mapBoolBool_.AddEntriesFrom(input, _map_mapBoolBool_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            bool entryKey = false;
+            bool entryValue = false;
+            uint ntag;
+            while ((ntag = input.ReadTag(ref immediateBuffer)) != 0) {
+              if (ntag == 8) {
+                entryKey = input.ReadBool(ref immediateBuffer);
+              } else if (ntag == 16) {
+                entryValue = input.ReadBool(ref immediateBuffer);
+              } else {
+                input.SkipLastField(ref immediateBuffer);
+              }
+            }
+            mapBoolBool_[entryKey] = entryValue;
+            input.EndReadNested(oldLimit);
             break;
           }
           case 114: {
-            mapStringString_.AddEntriesFrom(input, _map_mapStringString_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            string entryKey = "";
+            string entryValue = "";
+            uint ntag;
+            while ((ntag = input.ReadTag(ref immediateBuffer)) != 0) {
+              if (ntag == 10) {
+                entryKey = input.ReadString(ref immediateBuffer);
+              } else if (ntag == 18) {
+                entryValue = input.ReadString(ref immediateBuffer);
+              } else {
+                input.SkipLastField(ref immediateBuffer);
+              }
+            }
+            mapStringString_[entryKey] = entryValue;
+            input.EndReadNested(oldLimit);
             break;
           }
           case 122: {
-            mapInt32Bytes_.AddEntriesFrom(input, _map_mapInt32Bytes_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            int entryKey = 0;
+            pb::ByteString entryValue = pb::ByteString.Empty;
+            uint ntag;
+            while ((ntag = input.ReadTag(ref immediateBuffer)) != 0) {
+              if (ntag == 8) {
+                entryKey = input.ReadInt32(ref immediateBuffer);
+              } else if (ntag == 18) {
+                entryValue = input.ReadBytes(ref immediateBuffer);
+              } else {
+                input.SkipLastField(ref immediateBuffer);
+              }
+            }
+            mapInt32Bytes_[entryKey] = entryValue;
+            input.EndReadNested(oldLimit);
             break;
           }
           case 130: {
-            mapInt32Enum_.AddEntriesFrom(input, _map_mapInt32Enum_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            int entryKey = 0;
+            global::Google.Protobuf.TestProtos.MapEnum entryValue = 0;
+            uint ntag;
+            while ((ntag = input.ReadTag(ref immediateBuffer)) != 0) {
+              if (ntag == 8) {
+                entryKey = input.ReadInt32(ref immediateBuffer);
+              } else if (ntag == 16) {
+                entryValue = (global::Google.Protobuf.TestProtos.MapEnum) input.ReadEnum(ref immediateBuffer);
+              } else {
+                input.SkipLastField(ref immediateBuffer);
+              }
+            }
+            mapInt32Enum_[entryKey] = entryValue;
+            input.EndReadNested(oldLimit);
             break;
           }
           case 138: {
-            mapInt32ForeignMessage_.AddEntriesFrom(input, _map_mapInt32ForeignMessage_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            int entryKey = 0;
+            global::Google.Protobuf.TestProtos.ForeignMessage entryValue = null;
+            uint ntag;
+            while ((ntag = input.ReadTag(ref immediateBuffer)) != 0) {
+              if (ntag == 8) {
+                entryKey = input.ReadInt32(ref immediateBuffer);
+              } else if (ntag == 18) {
+                if (entryValue == null) {
+                  entryValue = new global::Google.Protobuf.TestProtos.ForeignMessage();
+                }
+                input.ReadMessage(entryValue, ref immediateBuffer);
+              } else {
+                input.SkipLastField(ref immediateBuffer);
+              }
+            }
+            if (entryValue == null) {
+              entryValue = new global::Google.Protobuf.TestProtos.ForeignMessage();
+            }
+            mapInt32ForeignMessage_[entryKey] = entryValue;
+            input.EndReadNested(oldLimit);
             break;
           }
         }
@@ -696,20 +1368,22 @@ namespace Google.Protobuf.TestProtos {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
-      if (testMap_ != null) {
-        output.WriteRawTag(10);
-        output.WriteMessage(TestMap);
+    [global::System.Security.SecurityCritical]
+    [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+    public void WriteTo(pb::CodedOutputStream output, ref global::System.Span<byte> immediateBuffer) {
+      if (TestMap != null) {
+        output.WriteRawTag(10, ref immediateBuffer);
+        output.WriteMessage(TestMap, ref immediateBuffer);
       }
       if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
+        _unknownFields.WriteTo(output, ref immediateBuffer);
       }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      if (testMap_ != null) {
+      if (TestMap != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(TestMap);
       }
       if (_unknownFields != null) {
@@ -734,6 +1408,7 @@ namespace Google.Protobuf.TestProtos {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.Security.SecurityCritical]
+    [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
     public void MergeFrom(pb::CodedInputStream input, ref global::System.ReadOnlySpan<byte> immediateBuffer) {
       uint tag;
       while ((tag = input.ReadTag(ref immediateBuffer)) != 0) {
@@ -790,8 +1465,6 @@ namespace Google.Protobuf.TestProtos {
 
     /// <summary>Field number for the "map_int32_message" field.</summary>
     public const int MapInt32MessageFieldNumber = 1;
-    private static readonly pbc::MapField<int, global::Google.Protobuf.TestProtos.TestAllTypes>.Codec _map_mapInt32Message_codec
-        = new pbc::MapField<int, global::Google.Protobuf.TestProtos.TestAllTypes>.Codec(pb::FieldCodec.ForInt32(8), pb::FieldCodec.ForMessage(18, global::Google.Protobuf.TestProtos.TestAllTypes.Parser), 10);
     private readonly pbc::MapField<int, global::Google.Protobuf.TestProtos.TestAllTypes> mapInt32Message_ = new pbc::MapField<int, global::Google.Protobuf.TestProtos.TestAllTypes>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::MapField<int, global::Google.Protobuf.TestProtos.TestAllTypes> MapInt32Message {
@@ -831,17 +1504,46 @@ namespace Google.Protobuf.TestProtos {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
-      mapInt32Message_.WriteTo(output, _map_mapInt32Message_codec);
+    [global::System.Security.SecurityCritical]
+    [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+    public void WriteTo(pb::CodedOutputStream output, ref global::System.Span<byte> immediateBuffer) {
+      foreach (var entry in MapInt32Message) {
+        var messageSize = 0;
+        if (entry.Key != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeInt32Size(entry.Key);
+        }
+        if (entry.Value != null) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeMessageSize(entry.Value);
+        }
+        output.WriteRawTag(10, ref immediateBuffer);
+        output.WriteLength(messageSize, ref immediateBuffer);
+        if (entry.Key != 0) {
+          output.WriteRawTag(8, ref immediateBuffer);
+          output.WriteInt32(entry.Key, ref immediateBuffer);
+        }
+        if (entry.Value != null) {
+          output.WriteRawTag(18, ref immediateBuffer);
+          output.WriteMessage(entry.Value, ref immediateBuffer);
+        }
+      }
       if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
+        _unknownFields.WriteTo(output, ref immediateBuffer);
       }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      size += mapInt32Message_.CalculateSize(_map_mapInt32Message_codec);
+      foreach (var entry in MapInt32Message) {
+        var messageSize = 0;
+        if (entry.Key != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeInt32Size(entry.Key);
+        }
+        if (entry.Value != null) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeMessageSize(entry.Value);
+        }
+        size += 1 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -859,6 +1561,7 @@ namespace Google.Protobuf.TestProtos {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.Security.SecurityCritical]
+    [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
     public void MergeFrom(pb::CodedInputStream input, ref global::System.ReadOnlySpan<byte> immediateBuffer) {
       uint tag;
       while ((tag = input.ReadTag(ref immediateBuffer)) != 0) {
@@ -867,7 +1570,27 @@ namespace Google.Protobuf.TestProtos {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input, ref immediateBuffer);
             break;
           case 10: {
-            mapInt32Message_.AddEntriesFrom(input, _map_mapInt32Message_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            int entryKey = 0;
+            global::Google.Protobuf.TestProtos.TestAllTypes entryValue = null;
+            uint ntag;
+            while ((ntag = input.ReadTag(ref immediateBuffer)) != 0) {
+              if (ntag == 8) {
+                entryKey = input.ReadInt32(ref immediateBuffer);
+              } else if (ntag == 18) {
+                if (entryValue == null) {
+                  entryValue = new global::Google.Protobuf.TestProtos.TestAllTypes();
+                }
+                input.ReadMessage(entryValue, ref immediateBuffer);
+              } else {
+                input.SkipLastField(ref immediateBuffer);
+              }
+            }
+            if (entryValue == null) {
+              entryValue = new global::Google.Protobuf.TestProtos.TestAllTypes();
+            }
+            mapInt32Message_[entryKey] = entryValue;
+            input.EndReadNested(oldLimit);
             break;
           }
         }
@@ -916,8 +1639,6 @@ namespace Google.Protobuf.TestProtos {
 
     /// <summary>Field number for the "map1" field.</summary>
     public const int Map1FieldNumber = 1;
-    private static readonly pbc::MapField<int, int>.Codec _map_map1_codec
-        = new pbc::MapField<int, int>.Codec(pb::FieldCodec.ForInt32(8), pb::FieldCodec.ForInt32(16), 10);
     private readonly pbc::MapField<int, int> map1_ = new pbc::MapField<int, int>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::MapField<int, int> Map1 {
@@ -926,8 +1647,6 @@ namespace Google.Protobuf.TestProtos {
 
     /// <summary>Field number for the "map2" field.</summary>
     public const int Map2FieldNumber = 2;
-    private static readonly pbc::MapField<int, int>.Codec _map_map2_codec
-        = new pbc::MapField<int, int>.Codec(pb::FieldCodec.ForInt32(8), pb::FieldCodec.ForInt32(16), 18);
     private readonly pbc::MapField<int, int> map2_ = new pbc::MapField<int, int>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::MapField<int, int> Map2 {
@@ -969,19 +1688,75 @@ namespace Google.Protobuf.TestProtos {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
-      map1_.WriteTo(output, _map_map1_codec);
-      map2_.WriteTo(output, _map_map2_codec);
+    [global::System.Security.SecurityCritical]
+    [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+    public void WriteTo(pb::CodedOutputStream output, ref global::System.Span<byte> immediateBuffer) {
+      foreach (var entry in Map1) {
+        var messageSize = 0;
+        if (entry.Key != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeInt32Size(entry.Key);
+        }
+        if (entry.Value != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeInt32Size(entry.Value);
+        }
+        output.WriteRawTag(10, ref immediateBuffer);
+        output.WriteLength(messageSize, ref immediateBuffer);
+        if (entry.Key != 0) {
+          output.WriteRawTag(8, ref immediateBuffer);
+          output.WriteInt32(entry.Key, ref immediateBuffer);
+        }
+        if (entry.Value != 0) {
+          output.WriteRawTag(16, ref immediateBuffer);
+          output.WriteInt32(entry.Value, ref immediateBuffer);
+        }
+      }
+      foreach (var entry in Map2) {
+        var messageSize = 0;
+        if (entry.Key != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeInt32Size(entry.Key);
+        }
+        if (entry.Value != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeInt32Size(entry.Value);
+        }
+        output.WriteRawTag(18, ref immediateBuffer);
+        output.WriteLength(messageSize, ref immediateBuffer);
+        if (entry.Key != 0) {
+          output.WriteRawTag(8, ref immediateBuffer);
+          output.WriteInt32(entry.Key, ref immediateBuffer);
+        }
+        if (entry.Value != 0) {
+          output.WriteRawTag(16, ref immediateBuffer);
+          output.WriteInt32(entry.Value, ref immediateBuffer);
+        }
+      }
       if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
+        _unknownFields.WriteTo(output, ref immediateBuffer);
       }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      size += map1_.CalculateSize(_map_map1_codec);
-      size += map2_.CalculateSize(_map_map2_codec);
+      foreach (var entry in Map1) {
+        var messageSize = 0;
+        if (entry.Key != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeInt32Size(entry.Key);
+        }
+        if (entry.Value != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeInt32Size(entry.Value);
+        }
+        size += 1 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
+      foreach (var entry in Map2) {
+        var messageSize = 0;
+        if (entry.Key != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeInt32Size(entry.Key);
+        }
+        if (entry.Value != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeInt32Size(entry.Value);
+        }
+        size += 1 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -1000,6 +1775,7 @@ namespace Google.Protobuf.TestProtos {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.Security.SecurityCritical]
+    [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
     public void MergeFrom(pb::CodedInputStream input, ref global::System.ReadOnlySpan<byte> immediateBuffer) {
       uint tag;
       while ((tag = input.ReadTag(ref immediateBuffer)) != 0) {
@@ -1008,11 +1784,39 @@ namespace Google.Protobuf.TestProtos {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input, ref immediateBuffer);
             break;
           case 10: {
-            map1_.AddEntriesFrom(input, _map_map1_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            int entryKey = 0;
+            int entryValue = 0;
+            uint ntag;
+            while ((ntag = input.ReadTag(ref immediateBuffer)) != 0) {
+              if (ntag == 8) {
+                entryKey = input.ReadInt32(ref immediateBuffer);
+              } else if (ntag == 16) {
+                entryValue = input.ReadInt32(ref immediateBuffer);
+              } else {
+                input.SkipLastField(ref immediateBuffer);
+              }
+            }
+            map1_[entryKey] = entryValue;
+            input.EndReadNested(oldLimit);
             break;
           }
           case 18: {
-            map2_.AddEntriesFrom(input, _map_map2_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            int entryKey = 0;
+            int entryValue = 0;
+            uint ntag;
+            while ((ntag = input.ReadTag(ref immediateBuffer)) != 0) {
+              if (ntag == 8) {
+                entryKey = input.ReadInt32(ref immediateBuffer);
+              } else if (ntag == 16) {
+                entryValue = input.ReadInt32(ref immediateBuffer);
+              } else {
+                input.SkipLastField(ref immediateBuffer);
+              }
+            }
+            map2_[entryKey] = entryValue;
+            input.EndReadNested(oldLimit);
             break;
           }
         }
@@ -1071,8 +1875,6 @@ namespace Google.Protobuf.TestProtos {
 
     /// <summary>Field number for the "map_int32_int32" field.</summary>
     public const int MapInt32Int32FieldNumber = 1;
-    private static readonly pbc::MapField<int, int>.Codec _map_mapInt32Int32_codec
-        = new pbc::MapField<int, int>.Codec(pb::FieldCodec.ForInt32(8), pb::FieldCodec.ForInt32(16), 10);
     private readonly pbc::MapField<int, int> mapInt32Int32_ = new pbc::MapField<int, int>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::MapField<int, int> MapInt32Int32 {
@@ -1081,8 +1883,6 @@ namespace Google.Protobuf.TestProtos {
 
     /// <summary>Field number for the "map_int64_int64" field.</summary>
     public const int MapInt64Int64FieldNumber = 2;
-    private static readonly pbc::MapField<long, long>.Codec _map_mapInt64Int64_codec
-        = new pbc::MapField<long, long>.Codec(pb::FieldCodec.ForInt64(8), pb::FieldCodec.ForInt64(16), 18);
     private readonly pbc::MapField<long, long> mapInt64Int64_ = new pbc::MapField<long, long>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::MapField<long, long> MapInt64Int64 {
@@ -1091,8 +1891,6 @@ namespace Google.Protobuf.TestProtos {
 
     /// <summary>Field number for the "map_uint32_uint32" field.</summary>
     public const int MapUint32Uint32FieldNumber = 3;
-    private static readonly pbc::MapField<uint, uint>.Codec _map_mapUint32Uint32_codec
-        = new pbc::MapField<uint, uint>.Codec(pb::FieldCodec.ForUInt32(8), pb::FieldCodec.ForUInt32(16), 26);
     private readonly pbc::MapField<uint, uint> mapUint32Uint32_ = new pbc::MapField<uint, uint>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::MapField<uint, uint> MapUint32Uint32 {
@@ -1101,8 +1899,6 @@ namespace Google.Protobuf.TestProtos {
 
     /// <summary>Field number for the "map_uint64_uint64" field.</summary>
     public const int MapUint64Uint64FieldNumber = 4;
-    private static readonly pbc::MapField<ulong, ulong>.Codec _map_mapUint64Uint64_codec
-        = new pbc::MapField<ulong, ulong>.Codec(pb::FieldCodec.ForUInt64(8), pb::FieldCodec.ForUInt64(16), 34);
     private readonly pbc::MapField<ulong, ulong> mapUint64Uint64_ = new pbc::MapField<ulong, ulong>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::MapField<ulong, ulong> MapUint64Uint64 {
@@ -1111,8 +1907,6 @@ namespace Google.Protobuf.TestProtos {
 
     /// <summary>Field number for the "map_sint32_sint32" field.</summary>
     public const int MapSint32Sint32FieldNumber = 5;
-    private static readonly pbc::MapField<int, int>.Codec _map_mapSint32Sint32_codec
-        = new pbc::MapField<int, int>.Codec(pb::FieldCodec.ForSInt32(8), pb::FieldCodec.ForSInt32(16), 42);
     private readonly pbc::MapField<int, int> mapSint32Sint32_ = new pbc::MapField<int, int>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::MapField<int, int> MapSint32Sint32 {
@@ -1121,8 +1915,6 @@ namespace Google.Protobuf.TestProtos {
 
     /// <summary>Field number for the "map_sint64_sint64" field.</summary>
     public const int MapSint64Sint64FieldNumber = 6;
-    private static readonly pbc::MapField<long, long>.Codec _map_mapSint64Sint64_codec
-        = new pbc::MapField<long, long>.Codec(pb::FieldCodec.ForSInt64(8), pb::FieldCodec.ForSInt64(16), 50);
     private readonly pbc::MapField<long, long> mapSint64Sint64_ = new pbc::MapField<long, long>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::MapField<long, long> MapSint64Sint64 {
@@ -1131,8 +1923,6 @@ namespace Google.Protobuf.TestProtos {
 
     /// <summary>Field number for the "map_fixed32_fixed32" field.</summary>
     public const int MapFixed32Fixed32FieldNumber = 7;
-    private static readonly pbc::MapField<uint, uint>.Codec _map_mapFixed32Fixed32_codec
-        = new pbc::MapField<uint, uint>.Codec(pb::FieldCodec.ForFixed32(13), pb::FieldCodec.ForFixed32(21), 58);
     private readonly pbc::MapField<uint, uint> mapFixed32Fixed32_ = new pbc::MapField<uint, uint>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::MapField<uint, uint> MapFixed32Fixed32 {
@@ -1141,8 +1931,6 @@ namespace Google.Protobuf.TestProtos {
 
     /// <summary>Field number for the "map_fixed64_fixed64" field.</summary>
     public const int MapFixed64Fixed64FieldNumber = 8;
-    private static readonly pbc::MapField<ulong, ulong>.Codec _map_mapFixed64Fixed64_codec
-        = new pbc::MapField<ulong, ulong>.Codec(pb::FieldCodec.ForFixed64(9), pb::FieldCodec.ForFixed64(17), 66);
     private readonly pbc::MapField<ulong, ulong> mapFixed64Fixed64_ = new pbc::MapField<ulong, ulong>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::MapField<ulong, ulong> MapFixed64Fixed64 {
@@ -1151,8 +1939,6 @@ namespace Google.Protobuf.TestProtos {
 
     /// <summary>Field number for the "map_sfixed32_sfixed32" field.</summary>
     public const int MapSfixed32Sfixed32FieldNumber = 9;
-    private static readonly pbc::MapField<int, int>.Codec _map_mapSfixed32Sfixed32_codec
-        = new pbc::MapField<int, int>.Codec(pb::FieldCodec.ForSFixed32(13), pb::FieldCodec.ForSFixed32(21), 74);
     private readonly pbc::MapField<int, int> mapSfixed32Sfixed32_ = new pbc::MapField<int, int>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::MapField<int, int> MapSfixed32Sfixed32 {
@@ -1161,8 +1947,6 @@ namespace Google.Protobuf.TestProtos {
 
     /// <summary>Field number for the "map_sfixed64_sfixed64" field.</summary>
     public const int MapSfixed64Sfixed64FieldNumber = 10;
-    private static readonly pbc::MapField<long, long>.Codec _map_mapSfixed64Sfixed64_codec
-        = new pbc::MapField<long, long>.Codec(pb::FieldCodec.ForSFixed64(9), pb::FieldCodec.ForSFixed64(17), 82);
     private readonly pbc::MapField<long, long> mapSfixed64Sfixed64_ = new pbc::MapField<long, long>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::MapField<long, long> MapSfixed64Sfixed64 {
@@ -1171,8 +1955,6 @@ namespace Google.Protobuf.TestProtos {
 
     /// <summary>Field number for the "map_int32_float" field.</summary>
     public const int MapInt32FloatFieldNumber = 11;
-    private static readonly pbc::MapField<int, float>.Codec _map_mapInt32Float_codec
-        = new pbc::MapField<int, float>.Codec(pb::FieldCodec.ForInt32(8), pb::FieldCodec.ForFloat(21), 90);
     private readonly pbc::MapField<int, float> mapInt32Float_ = new pbc::MapField<int, float>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::MapField<int, float> MapInt32Float {
@@ -1181,8 +1963,6 @@ namespace Google.Protobuf.TestProtos {
 
     /// <summary>Field number for the "map_int32_double" field.</summary>
     public const int MapInt32DoubleFieldNumber = 12;
-    private static readonly pbc::MapField<int, double>.Codec _map_mapInt32Double_codec
-        = new pbc::MapField<int, double>.Codec(pb::FieldCodec.ForInt32(8), pb::FieldCodec.ForDouble(17), 98);
     private readonly pbc::MapField<int, double> mapInt32Double_ = new pbc::MapField<int, double>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::MapField<int, double> MapInt32Double {
@@ -1191,8 +1971,6 @@ namespace Google.Protobuf.TestProtos {
 
     /// <summary>Field number for the "map_bool_bool" field.</summary>
     public const int MapBoolBoolFieldNumber = 13;
-    private static readonly pbc::MapField<bool, bool>.Codec _map_mapBoolBool_codec
-        = new pbc::MapField<bool, bool>.Codec(pb::FieldCodec.ForBool(8), pb::FieldCodec.ForBool(16), 106);
     private readonly pbc::MapField<bool, bool> mapBoolBool_ = new pbc::MapField<bool, bool>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::MapField<bool, bool> MapBoolBool {
@@ -1201,8 +1979,6 @@ namespace Google.Protobuf.TestProtos {
 
     /// <summary>Field number for the "map_int32_enum" field.</summary>
     public const int MapInt32EnumFieldNumber = 14;
-    private static readonly pbc::MapField<int, global::Google.Protobuf.TestProtos.MapEnum>.Codec _map_mapInt32Enum_codec
-        = new pbc::MapField<int, global::Google.Protobuf.TestProtos.MapEnum>.Codec(pb::FieldCodec.ForInt32(8), pb::FieldCodec.ForEnum(16, x => (int) x, x => (global::Google.Protobuf.TestProtos.MapEnum) x), 114);
     private readonly pbc::MapField<int, global::Google.Protobuf.TestProtos.MapEnum> mapInt32Enum_ = new pbc::MapField<int, global::Google.Protobuf.TestProtos.MapEnum>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::MapField<int, global::Google.Protobuf.TestProtos.MapEnum> MapInt32Enum {
@@ -1211,8 +1987,6 @@ namespace Google.Protobuf.TestProtos {
 
     /// <summary>Field number for the "map_int32_foreign_message" field.</summary>
     public const int MapInt32ForeignMessageFieldNumber = 15;
-    private static readonly pbc::MapField<int, global::Google.Protobuf.TestProtos.ForeignMessage>.Codec _map_mapInt32ForeignMessage_codec
-        = new pbc::MapField<int, global::Google.Protobuf.TestProtos.ForeignMessage>.Codec(pb::FieldCodec.ForInt32(8), pb::FieldCodec.ForMessage(18, global::Google.Protobuf.TestProtos.ForeignMessage.Parser), 122);
     private readonly pbc::MapField<int, global::Google.Protobuf.TestProtos.ForeignMessage> mapInt32ForeignMessage_ = new pbc::MapField<int, global::Google.Protobuf.TestProtos.ForeignMessage>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::MapField<int, global::Google.Protobuf.TestProtos.ForeignMessage> MapInt32ForeignMessage {
@@ -1280,45 +2054,452 @@ namespace Google.Protobuf.TestProtos {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
-      mapInt32Int32_.WriteTo(output, _map_mapInt32Int32_codec);
-      mapInt64Int64_.WriteTo(output, _map_mapInt64Int64_codec);
-      mapUint32Uint32_.WriteTo(output, _map_mapUint32Uint32_codec);
-      mapUint64Uint64_.WriteTo(output, _map_mapUint64Uint64_codec);
-      mapSint32Sint32_.WriteTo(output, _map_mapSint32Sint32_codec);
-      mapSint64Sint64_.WriteTo(output, _map_mapSint64Sint64_codec);
-      mapFixed32Fixed32_.WriteTo(output, _map_mapFixed32Fixed32_codec);
-      mapFixed64Fixed64_.WriteTo(output, _map_mapFixed64Fixed64_codec);
-      mapSfixed32Sfixed32_.WriteTo(output, _map_mapSfixed32Sfixed32_codec);
-      mapSfixed64Sfixed64_.WriteTo(output, _map_mapSfixed64Sfixed64_codec);
-      mapInt32Float_.WriteTo(output, _map_mapInt32Float_codec);
-      mapInt32Double_.WriteTo(output, _map_mapInt32Double_codec);
-      mapBoolBool_.WriteTo(output, _map_mapBoolBool_codec);
-      mapInt32Enum_.WriteTo(output, _map_mapInt32Enum_codec);
-      mapInt32ForeignMessage_.WriteTo(output, _map_mapInt32ForeignMessage_codec);
+    [global::System.Security.SecurityCritical]
+    [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+    public void WriteTo(pb::CodedOutputStream output, ref global::System.Span<byte> immediateBuffer) {
+      foreach (var entry in MapInt32Int32) {
+        var messageSize = 0;
+        if (entry.Key != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeInt32Size(entry.Key);
+        }
+        if (entry.Value != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeInt32Size(entry.Value);
+        }
+        output.WriteRawTag(10, ref immediateBuffer);
+        output.WriteLength(messageSize, ref immediateBuffer);
+        if (entry.Key != 0) {
+          output.WriteRawTag(8, ref immediateBuffer);
+          output.WriteInt32(entry.Key, ref immediateBuffer);
+        }
+        if (entry.Value != 0) {
+          output.WriteRawTag(16, ref immediateBuffer);
+          output.WriteInt32(entry.Value, ref immediateBuffer);
+        }
+      }
+      foreach (var entry in MapInt64Int64) {
+        var messageSize = 0;
+        if (entry.Key != 0L) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeInt64Size(entry.Key);
+        }
+        if (entry.Value != 0L) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeInt64Size(entry.Value);
+        }
+        output.WriteRawTag(18, ref immediateBuffer);
+        output.WriteLength(messageSize, ref immediateBuffer);
+        if (entry.Key != 0L) {
+          output.WriteRawTag(8, ref immediateBuffer);
+          output.WriteInt64(entry.Key, ref immediateBuffer);
+        }
+        if (entry.Value != 0L) {
+          output.WriteRawTag(16, ref immediateBuffer);
+          output.WriteInt64(entry.Value, ref immediateBuffer);
+        }
+      }
+      foreach (var entry in MapUint32Uint32) {
+        var messageSize = 0;
+        if (entry.Key != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeUInt32Size(entry.Key);
+        }
+        if (entry.Value != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeUInt32Size(entry.Value);
+        }
+        output.WriteRawTag(26, ref immediateBuffer);
+        output.WriteLength(messageSize, ref immediateBuffer);
+        if (entry.Key != 0) {
+          output.WriteRawTag(8, ref immediateBuffer);
+          output.WriteUInt32(entry.Key, ref immediateBuffer);
+        }
+        if (entry.Value != 0) {
+          output.WriteRawTag(16, ref immediateBuffer);
+          output.WriteUInt32(entry.Value, ref immediateBuffer);
+        }
+      }
+      foreach (var entry in MapUint64Uint64) {
+        var messageSize = 0;
+        if (entry.Key != 0UL) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeUInt64Size(entry.Key);
+        }
+        if (entry.Value != 0UL) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeUInt64Size(entry.Value);
+        }
+        output.WriteRawTag(34, ref immediateBuffer);
+        output.WriteLength(messageSize, ref immediateBuffer);
+        if (entry.Key != 0UL) {
+          output.WriteRawTag(8, ref immediateBuffer);
+          output.WriteUInt64(entry.Key, ref immediateBuffer);
+        }
+        if (entry.Value != 0UL) {
+          output.WriteRawTag(16, ref immediateBuffer);
+          output.WriteUInt64(entry.Value, ref immediateBuffer);
+        }
+      }
+      foreach (var entry in MapSint32Sint32) {
+        var messageSize = 0;
+        if (entry.Key != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeSInt32Size(entry.Key);
+        }
+        if (entry.Value != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeSInt32Size(entry.Value);
+        }
+        output.WriteRawTag(42, ref immediateBuffer);
+        output.WriteLength(messageSize, ref immediateBuffer);
+        if (entry.Key != 0) {
+          output.WriteRawTag(8, ref immediateBuffer);
+          output.WriteSInt32(entry.Key, ref immediateBuffer);
+        }
+        if (entry.Value != 0) {
+          output.WriteRawTag(16, ref immediateBuffer);
+          output.WriteSInt32(entry.Value, ref immediateBuffer);
+        }
+      }
+      foreach (var entry in MapSint64Sint64) {
+        var messageSize = 0;
+        if (entry.Key != 0L) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeSInt64Size(entry.Key);
+        }
+        if (entry.Value != 0L) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeSInt64Size(entry.Value);
+        }
+        output.WriteRawTag(50, ref immediateBuffer);
+        output.WriteLength(messageSize, ref immediateBuffer);
+        if (entry.Key != 0L) {
+          output.WriteRawTag(8, ref immediateBuffer);
+          output.WriteSInt64(entry.Key, ref immediateBuffer);
+        }
+        if (entry.Value != 0L) {
+          output.WriteRawTag(16, ref immediateBuffer);
+          output.WriteSInt64(entry.Value, ref immediateBuffer);
+        }
+      }
+      foreach (var entry in MapFixed32Fixed32) {
+        var messageSize = 0;
+        if (entry.Key != 0) {
+          messageSize += 1 + 4;
+        }
+        if (entry.Value != 0) {
+          messageSize += 1 + 4;
+        }
+        output.WriteRawTag(58, ref immediateBuffer);
+        output.WriteLength(messageSize, ref immediateBuffer);
+        if (entry.Key != 0) {
+          output.WriteRawTag(13, ref immediateBuffer);
+          output.WriteFixed32(entry.Key, ref immediateBuffer);
+        }
+        if (entry.Value != 0) {
+          output.WriteRawTag(21, ref immediateBuffer);
+          output.WriteFixed32(entry.Value, ref immediateBuffer);
+        }
+      }
+      foreach (var entry in MapFixed64Fixed64) {
+        var messageSize = 0;
+        if (entry.Key != 0UL) {
+          messageSize += 1 + 8;
+        }
+        if (entry.Value != 0UL) {
+          messageSize += 1 + 8;
+        }
+        output.WriteRawTag(66, ref immediateBuffer);
+        output.WriteLength(messageSize, ref immediateBuffer);
+        if (entry.Key != 0UL) {
+          output.WriteRawTag(9, ref immediateBuffer);
+          output.WriteFixed64(entry.Key, ref immediateBuffer);
+        }
+        if (entry.Value != 0UL) {
+          output.WriteRawTag(17, ref immediateBuffer);
+          output.WriteFixed64(entry.Value, ref immediateBuffer);
+        }
+      }
+      foreach (var entry in MapSfixed32Sfixed32) {
+        var messageSize = 0;
+        if (entry.Key != 0) {
+          messageSize += 1 + 4;
+        }
+        if (entry.Value != 0) {
+          messageSize += 1 + 4;
+        }
+        output.WriteRawTag(74, ref immediateBuffer);
+        output.WriteLength(messageSize, ref immediateBuffer);
+        if (entry.Key != 0) {
+          output.WriteRawTag(13, ref immediateBuffer);
+          output.WriteSFixed32(entry.Key, ref immediateBuffer);
+        }
+        if (entry.Value != 0) {
+          output.WriteRawTag(21, ref immediateBuffer);
+          output.WriteSFixed32(entry.Value, ref immediateBuffer);
+        }
+      }
+      foreach (var entry in MapSfixed64Sfixed64) {
+        var messageSize = 0;
+        if (entry.Key != 0L) {
+          messageSize += 1 + 8;
+        }
+        if (entry.Value != 0L) {
+          messageSize += 1 + 8;
+        }
+        output.WriteRawTag(82, ref immediateBuffer);
+        output.WriteLength(messageSize, ref immediateBuffer);
+        if (entry.Key != 0L) {
+          output.WriteRawTag(9, ref immediateBuffer);
+          output.WriteSFixed64(entry.Key, ref immediateBuffer);
+        }
+        if (entry.Value != 0L) {
+          output.WriteRawTag(17, ref immediateBuffer);
+          output.WriteSFixed64(entry.Value, ref immediateBuffer);
+        }
+      }
+      foreach (var entry in MapInt32Float) {
+        var messageSize = 0;
+        if (entry.Key != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeInt32Size(entry.Key);
+        }
+        if (entry.Value != 0F) {
+          messageSize += 1 + 4;
+        }
+        output.WriteRawTag(90, ref immediateBuffer);
+        output.WriteLength(messageSize, ref immediateBuffer);
+        if (entry.Key != 0) {
+          output.WriteRawTag(8, ref immediateBuffer);
+          output.WriteInt32(entry.Key, ref immediateBuffer);
+        }
+        if (entry.Value != 0F) {
+          output.WriteRawTag(21, ref immediateBuffer);
+          output.WriteFloat(entry.Value, ref immediateBuffer);
+        }
+      }
+      foreach (var entry in MapInt32Double) {
+        var messageSize = 0;
+        if (entry.Key != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeInt32Size(entry.Key);
+        }
+        if (entry.Value != 0D) {
+          messageSize += 1 + 8;
+        }
+        output.WriteRawTag(98, ref immediateBuffer);
+        output.WriteLength(messageSize, ref immediateBuffer);
+        if (entry.Key != 0) {
+          output.WriteRawTag(8, ref immediateBuffer);
+          output.WriteInt32(entry.Key, ref immediateBuffer);
+        }
+        if (entry.Value != 0D) {
+          output.WriteRawTag(17, ref immediateBuffer);
+          output.WriteDouble(entry.Value, ref immediateBuffer);
+        }
+      }
+      foreach (var entry in MapBoolBool) {
+        var messageSize = 0;
+        if (entry.Key != false) {
+          messageSize += 1 + 1;
+        }
+        if (entry.Value != false) {
+          messageSize += 1 + 1;
+        }
+        output.WriteRawTag(106, ref immediateBuffer);
+        output.WriteLength(messageSize, ref immediateBuffer);
+        if (entry.Key != false) {
+          output.WriteRawTag(8, ref immediateBuffer);
+          output.WriteBool(entry.Key, ref immediateBuffer);
+        }
+        if (entry.Value != false) {
+          output.WriteRawTag(16, ref immediateBuffer);
+          output.WriteBool(entry.Value, ref immediateBuffer);
+        }
+      }
+      foreach (var entry in MapInt32Enum) {
+        var messageSize = 0;
+        if (entry.Key != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeInt32Size(entry.Key);
+        }
+        if (entry.Value != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeEnumSize((int) entry.Value);
+        }
+        output.WriteRawTag(114, ref immediateBuffer);
+        output.WriteLength(messageSize, ref immediateBuffer);
+        if (entry.Key != 0) {
+          output.WriteRawTag(8, ref immediateBuffer);
+          output.WriteInt32(entry.Key, ref immediateBuffer);
+        }
+        if (entry.Value != 0) {
+          output.WriteRawTag(16, ref immediateBuffer);
+          output.WriteEnum((int)entry.Value, ref immediateBuffer);
+        }
+      }
+      foreach (var entry in MapInt32ForeignMessage) {
+        var messageSize = 0;
+        if (entry.Key != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeInt32Size(entry.Key);
+        }
+        if (entry.Value != null) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeMessageSize(entry.Value);
+        }
+        output.WriteRawTag(122, ref immediateBuffer);
+        output.WriteLength(messageSize, ref immediateBuffer);
+        if (entry.Key != 0) {
+          output.WriteRawTag(8, ref immediateBuffer);
+          output.WriteInt32(entry.Key, ref immediateBuffer);
+        }
+        if (entry.Value != null) {
+          output.WriteRawTag(18, ref immediateBuffer);
+          output.WriteMessage(entry.Value, ref immediateBuffer);
+        }
+      }
       if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
+        _unknownFields.WriteTo(output, ref immediateBuffer);
       }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      size += mapInt32Int32_.CalculateSize(_map_mapInt32Int32_codec);
-      size += mapInt64Int64_.CalculateSize(_map_mapInt64Int64_codec);
-      size += mapUint32Uint32_.CalculateSize(_map_mapUint32Uint32_codec);
-      size += mapUint64Uint64_.CalculateSize(_map_mapUint64Uint64_codec);
-      size += mapSint32Sint32_.CalculateSize(_map_mapSint32Sint32_codec);
-      size += mapSint64Sint64_.CalculateSize(_map_mapSint64Sint64_codec);
-      size += mapFixed32Fixed32_.CalculateSize(_map_mapFixed32Fixed32_codec);
-      size += mapFixed64Fixed64_.CalculateSize(_map_mapFixed64Fixed64_codec);
-      size += mapSfixed32Sfixed32_.CalculateSize(_map_mapSfixed32Sfixed32_codec);
-      size += mapSfixed64Sfixed64_.CalculateSize(_map_mapSfixed64Sfixed64_codec);
-      size += mapInt32Float_.CalculateSize(_map_mapInt32Float_codec);
-      size += mapInt32Double_.CalculateSize(_map_mapInt32Double_codec);
-      size += mapBoolBool_.CalculateSize(_map_mapBoolBool_codec);
-      size += mapInt32Enum_.CalculateSize(_map_mapInt32Enum_codec);
-      size += mapInt32ForeignMessage_.CalculateSize(_map_mapInt32ForeignMessage_codec);
+      foreach (var entry in MapInt32Int32) {
+        var messageSize = 0;
+        if (entry.Key != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeInt32Size(entry.Key);
+        }
+        if (entry.Value != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeInt32Size(entry.Value);
+        }
+        size += 1 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
+      foreach (var entry in MapInt64Int64) {
+        var messageSize = 0;
+        if (entry.Key != 0L) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeInt64Size(entry.Key);
+        }
+        if (entry.Value != 0L) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeInt64Size(entry.Value);
+        }
+        size += 1 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
+      foreach (var entry in MapUint32Uint32) {
+        var messageSize = 0;
+        if (entry.Key != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeUInt32Size(entry.Key);
+        }
+        if (entry.Value != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeUInt32Size(entry.Value);
+        }
+        size += 1 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
+      foreach (var entry in MapUint64Uint64) {
+        var messageSize = 0;
+        if (entry.Key != 0UL) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeUInt64Size(entry.Key);
+        }
+        if (entry.Value != 0UL) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeUInt64Size(entry.Value);
+        }
+        size += 1 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
+      foreach (var entry in MapSint32Sint32) {
+        var messageSize = 0;
+        if (entry.Key != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeSInt32Size(entry.Key);
+        }
+        if (entry.Value != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeSInt32Size(entry.Value);
+        }
+        size += 1 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
+      foreach (var entry in MapSint64Sint64) {
+        var messageSize = 0;
+        if (entry.Key != 0L) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeSInt64Size(entry.Key);
+        }
+        if (entry.Value != 0L) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeSInt64Size(entry.Value);
+        }
+        size += 1 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
+      foreach (var entry in MapFixed32Fixed32) {
+        var messageSize = 0;
+        if (entry.Key != 0) {
+          messageSize += 1 + 4;
+        }
+        if (entry.Value != 0) {
+          messageSize += 1 + 4;
+        }
+        size += 1 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
+      foreach (var entry in MapFixed64Fixed64) {
+        var messageSize = 0;
+        if (entry.Key != 0UL) {
+          messageSize += 1 + 8;
+        }
+        if (entry.Value != 0UL) {
+          messageSize += 1 + 8;
+        }
+        size += 1 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
+      foreach (var entry in MapSfixed32Sfixed32) {
+        var messageSize = 0;
+        if (entry.Key != 0) {
+          messageSize += 1 + 4;
+        }
+        if (entry.Value != 0) {
+          messageSize += 1 + 4;
+        }
+        size += 1 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
+      foreach (var entry in MapSfixed64Sfixed64) {
+        var messageSize = 0;
+        if (entry.Key != 0L) {
+          messageSize += 1 + 8;
+        }
+        if (entry.Value != 0L) {
+          messageSize += 1 + 8;
+        }
+        size += 1 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
+      foreach (var entry in MapInt32Float) {
+        var messageSize = 0;
+        if (entry.Key != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeInt32Size(entry.Key);
+        }
+        if (entry.Value != 0F) {
+          messageSize += 1 + 4;
+        }
+        size += 1 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
+      foreach (var entry in MapInt32Double) {
+        var messageSize = 0;
+        if (entry.Key != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeInt32Size(entry.Key);
+        }
+        if (entry.Value != 0D) {
+          messageSize += 1 + 8;
+        }
+        size += 1 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
+      foreach (var entry in MapBoolBool) {
+        var messageSize = 0;
+        if (entry.Key != false) {
+          messageSize += 1 + 1;
+        }
+        if (entry.Value != false) {
+          messageSize += 1 + 1;
+        }
+        size += 1 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
+      foreach (var entry in MapInt32Enum) {
+        var messageSize = 0;
+        if (entry.Key != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeInt32Size(entry.Key);
+        }
+        if (entry.Value != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeEnumSize((int) entry.Value);
+        }
+        size += 1 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
+      foreach (var entry in MapInt32ForeignMessage) {
+        var messageSize = 0;
+        if (entry.Key != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeInt32Size(entry.Key);
+        }
+        if (entry.Value != null) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeMessageSize(entry.Value);
+        }
+        size += 1 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -1350,6 +2531,7 @@ namespace Google.Protobuf.TestProtos {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.Security.SecurityCritical]
+    [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
     public void MergeFrom(pb::CodedInputStream input, ref global::System.ReadOnlySpan<byte> immediateBuffer) {
       uint tag;
       while ((tag = input.ReadTag(ref immediateBuffer)) != 0) {
@@ -1358,63 +2540,279 @@ namespace Google.Protobuf.TestProtos {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input, ref immediateBuffer);
             break;
           case 10: {
-            mapInt32Int32_.AddEntriesFrom(input, _map_mapInt32Int32_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            int entryKey = 0;
+            int entryValue = 0;
+            uint ntag;
+            while ((ntag = input.ReadTag(ref immediateBuffer)) != 0) {
+              if (ntag == 8) {
+                entryKey = input.ReadInt32(ref immediateBuffer);
+              } else if (ntag == 16) {
+                entryValue = input.ReadInt32(ref immediateBuffer);
+              } else {
+                input.SkipLastField(ref immediateBuffer);
+              }
+            }
+            mapInt32Int32_[entryKey] = entryValue;
+            input.EndReadNested(oldLimit);
             break;
           }
           case 18: {
-            mapInt64Int64_.AddEntriesFrom(input, _map_mapInt64Int64_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            long entryKey = 0L;
+            long entryValue = 0L;
+            uint ntag;
+            while ((ntag = input.ReadTag(ref immediateBuffer)) != 0) {
+              if (ntag == 8) {
+                entryKey = input.ReadInt64(ref immediateBuffer);
+              } else if (ntag == 16) {
+                entryValue = input.ReadInt64(ref immediateBuffer);
+              } else {
+                input.SkipLastField(ref immediateBuffer);
+              }
+            }
+            mapInt64Int64_[entryKey] = entryValue;
+            input.EndReadNested(oldLimit);
             break;
           }
           case 26: {
-            mapUint32Uint32_.AddEntriesFrom(input, _map_mapUint32Uint32_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            uint entryKey = 0;
+            uint entryValue = 0;
+            uint ntag;
+            while ((ntag = input.ReadTag(ref immediateBuffer)) != 0) {
+              if (ntag == 8) {
+                entryKey = input.ReadUInt32(ref immediateBuffer);
+              } else if (ntag == 16) {
+                entryValue = input.ReadUInt32(ref immediateBuffer);
+              } else {
+                input.SkipLastField(ref immediateBuffer);
+              }
+            }
+            mapUint32Uint32_[entryKey] = entryValue;
+            input.EndReadNested(oldLimit);
             break;
           }
           case 34: {
-            mapUint64Uint64_.AddEntriesFrom(input, _map_mapUint64Uint64_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            ulong entryKey = 0UL;
+            ulong entryValue = 0UL;
+            uint ntag;
+            while ((ntag = input.ReadTag(ref immediateBuffer)) != 0) {
+              if (ntag == 8) {
+                entryKey = input.ReadUInt64(ref immediateBuffer);
+              } else if (ntag == 16) {
+                entryValue = input.ReadUInt64(ref immediateBuffer);
+              } else {
+                input.SkipLastField(ref immediateBuffer);
+              }
+            }
+            mapUint64Uint64_[entryKey] = entryValue;
+            input.EndReadNested(oldLimit);
             break;
           }
           case 42: {
-            mapSint32Sint32_.AddEntriesFrom(input, _map_mapSint32Sint32_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            int entryKey = 0;
+            int entryValue = 0;
+            uint ntag;
+            while ((ntag = input.ReadTag(ref immediateBuffer)) != 0) {
+              if (ntag == 8) {
+                entryKey = input.ReadSInt32(ref immediateBuffer);
+              } else if (ntag == 16) {
+                entryValue = input.ReadSInt32(ref immediateBuffer);
+              } else {
+                input.SkipLastField(ref immediateBuffer);
+              }
+            }
+            mapSint32Sint32_[entryKey] = entryValue;
+            input.EndReadNested(oldLimit);
             break;
           }
           case 50: {
-            mapSint64Sint64_.AddEntriesFrom(input, _map_mapSint64Sint64_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            long entryKey = 0L;
+            long entryValue = 0L;
+            uint ntag;
+            while ((ntag = input.ReadTag(ref immediateBuffer)) != 0) {
+              if (ntag == 8) {
+                entryKey = input.ReadSInt64(ref immediateBuffer);
+              } else if (ntag == 16) {
+                entryValue = input.ReadSInt64(ref immediateBuffer);
+              } else {
+                input.SkipLastField(ref immediateBuffer);
+              }
+            }
+            mapSint64Sint64_[entryKey] = entryValue;
+            input.EndReadNested(oldLimit);
             break;
           }
           case 58: {
-            mapFixed32Fixed32_.AddEntriesFrom(input, _map_mapFixed32Fixed32_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            uint entryKey = 0;
+            uint entryValue = 0;
+            uint ntag;
+            while ((ntag = input.ReadTag(ref immediateBuffer)) != 0) {
+              if (ntag == 13) {
+                entryKey = input.ReadFixed32(ref immediateBuffer);
+              } else if (ntag == 21) {
+                entryValue = input.ReadFixed32(ref immediateBuffer);
+              } else {
+                input.SkipLastField(ref immediateBuffer);
+              }
+            }
+            mapFixed32Fixed32_[entryKey] = entryValue;
+            input.EndReadNested(oldLimit);
             break;
           }
           case 66: {
-            mapFixed64Fixed64_.AddEntriesFrom(input, _map_mapFixed64Fixed64_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            ulong entryKey = 0UL;
+            ulong entryValue = 0UL;
+            uint ntag;
+            while ((ntag = input.ReadTag(ref immediateBuffer)) != 0) {
+              if (ntag == 9) {
+                entryKey = input.ReadFixed64(ref immediateBuffer);
+              } else if (ntag == 17) {
+                entryValue = input.ReadFixed64(ref immediateBuffer);
+              } else {
+                input.SkipLastField(ref immediateBuffer);
+              }
+            }
+            mapFixed64Fixed64_[entryKey] = entryValue;
+            input.EndReadNested(oldLimit);
             break;
           }
           case 74: {
-            mapSfixed32Sfixed32_.AddEntriesFrom(input, _map_mapSfixed32Sfixed32_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            int entryKey = 0;
+            int entryValue = 0;
+            uint ntag;
+            while ((ntag = input.ReadTag(ref immediateBuffer)) != 0) {
+              if (ntag == 13) {
+                entryKey = input.ReadSFixed32(ref immediateBuffer);
+              } else if (ntag == 21) {
+                entryValue = input.ReadSFixed32(ref immediateBuffer);
+              } else {
+                input.SkipLastField(ref immediateBuffer);
+              }
+            }
+            mapSfixed32Sfixed32_[entryKey] = entryValue;
+            input.EndReadNested(oldLimit);
             break;
           }
           case 82: {
-            mapSfixed64Sfixed64_.AddEntriesFrom(input, _map_mapSfixed64Sfixed64_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            long entryKey = 0L;
+            long entryValue = 0L;
+            uint ntag;
+            while ((ntag = input.ReadTag(ref immediateBuffer)) != 0) {
+              if (ntag == 9) {
+                entryKey = input.ReadSFixed64(ref immediateBuffer);
+              } else if (ntag == 17) {
+                entryValue = input.ReadSFixed64(ref immediateBuffer);
+              } else {
+                input.SkipLastField(ref immediateBuffer);
+              }
+            }
+            mapSfixed64Sfixed64_[entryKey] = entryValue;
+            input.EndReadNested(oldLimit);
             break;
           }
           case 90: {
-            mapInt32Float_.AddEntriesFrom(input, _map_mapInt32Float_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            int entryKey = 0;
+            float entryValue = 0F;
+            uint ntag;
+            while ((ntag = input.ReadTag(ref immediateBuffer)) != 0) {
+              if (ntag == 8) {
+                entryKey = input.ReadInt32(ref immediateBuffer);
+              } else if (ntag == 21) {
+                entryValue = input.ReadFloat(ref immediateBuffer);
+              } else {
+                input.SkipLastField(ref immediateBuffer);
+              }
+            }
+            mapInt32Float_[entryKey] = entryValue;
+            input.EndReadNested(oldLimit);
             break;
           }
           case 98: {
-            mapInt32Double_.AddEntriesFrom(input, _map_mapInt32Double_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            int entryKey = 0;
+            double entryValue = 0D;
+            uint ntag;
+            while ((ntag = input.ReadTag(ref immediateBuffer)) != 0) {
+              if (ntag == 8) {
+                entryKey = input.ReadInt32(ref immediateBuffer);
+              } else if (ntag == 17) {
+                entryValue = input.ReadDouble(ref immediateBuffer);
+              } else {
+                input.SkipLastField(ref immediateBuffer);
+              }
+            }
+            mapInt32Double_[entryKey] = entryValue;
+            input.EndReadNested(oldLimit);
             break;
           }
           case 106: {
-            mapBoolBool_.AddEntriesFrom(input, _map_mapBoolBool_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            bool entryKey = false;
+            bool entryValue = false;
+            uint ntag;
+            while ((ntag = input.ReadTag(ref immediateBuffer)) != 0) {
+              if (ntag == 8) {
+                entryKey = input.ReadBool(ref immediateBuffer);
+              } else if (ntag == 16) {
+                entryValue = input.ReadBool(ref immediateBuffer);
+              } else {
+                input.SkipLastField(ref immediateBuffer);
+              }
+            }
+            mapBoolBool_[entryKey] = entryValue;
+            input.EndReadNested(oldLimit);
             break;
           }
           case 114: {
-            mapInt32Enum_.AddEntriesFrom(input, _map_mapInt32Enum_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            int entryKey = 0;
+            global::Google.Protobuf.TestProtos.MapEnum entryValue = 0;
+            uint ntag;
+            while ((ntag = input.ReadTag(ref immediateBuffer)) != 0) {
+              if (ntag == 8) {
+                entryKey = input.ReadInt32(ref immediateBuffer);
+              } else if (ntag == 16) {
+                entryValue = (global::Google.Protobuf.TestProtos.MapEnum) input.ReadEnum(ref immediateBuffer);
+              } else {
+                input.SkipLastField(ref immediateBuffer);
+              }
+            }
+            mapInt32Enum_[entryKey] = entryValue;
+            input.EndReadNested(oldLimit);
             break;
           }
           case 122: {
-            mapInt32ForeignMessage_.AddEntriesFrom(input, _map_mapInt32ForeignMessage_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            int entryKey = 0;
+            global::Google.Protobuf.TestProtos.ForeignMessage entryValue = null;
+            uint ntag;
+            while ((ntag = input.ReadTag(ref immediateBuffer)) != 0) {
+              if (ntag == 8) {
+                entryKey = input.ReadInt32(ref immediateBuffer);
+              } else if (ntag == 18) {
+                if (entryValue == null) {
+                  entryValue = new global::Google.Protobuf.TestProtos.ForeignMessage();
+                }
+                input.ReadMessage(entryValue, ref immediateBuffer);
+              } else {
+                input.SkipLastField(ref immediateBuffer);
+              }
+            }
+            if (entryValue == null) {
+              entryValue = new global::Google.Protobuf.TestProtos.ForeignMessage();
+            }
+            mapInt32ForeignMessage_[entryKey] = entryValue;
+            input.EndReadNested(oldLimit);
             break;
           }
         }
@@ -1463,8 +2861,6 @@ namespace Google.Protobuf.TestProtos {
 
     /// <summary>Field number for the "type" field.</summary>
     public const int TypeFieldNumber = 1;
-    private static readonly pbc::MapField<int, global::Google.Protobuf.TestProtos.MessageContainingEnumCalledType>.Codec _map_type_codec
-        = new pbc::MapField<int, global::Google.Protobuf.TestProtos.MessageContainingEnumCalledType>.Codec(pb::FieldCodec.ForInt32(8), pb::FieldCodec.ForMessage(18, global::Google.Protobuf.TestProtos.MessageContainingEnumCalledType.Parser), 10);
     private readonly pbc::MapField<int, global::Google.Protobuf.TestProtos.MessageContainingEnumCalledType> type_ = new pbc::MapField<int, global::Google.Protobuf.TestProtos.MessageContainingEnumCalledType>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::MapField<int, global::Google.Protobuf.TestProtos.MessageContainingEnumCalledType> Type {
@@ -1504,17 +2900,46 @@ namespace Google.Protobuf.TestProtos {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
-      type_.WriteTo(output, _map_type_codec);
+    [global::System.Security.SecurityCritical]
+    [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+    public void WriteTo(pb::CodedOutputStream output, ref global::System.Span<byte> immediateBuffer) {
+      foreach (var entry in Type) {
+        var messageSize = 0;
+        if (entry.Key != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeInt32Size(entry.Key);
+        }
+        if (entry.Value != null) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeMessageSize(entry.Value);
+        }
+        output.WriteRawTag(10, ref immediateBuffer);
+        output.WriteLength(messageSize, ref immediateBuffer);
+        if (entry.Key != 0) {
+          output.WriteRawTag(8, ref immediateBuffer);
+          output.WriteInt32(entry.Key, ref immediateBuffer);
+        }
+        if (entry.Value != null) {
+          output.WriteRawTag(18, ref immediateBuffer);
+          output.WriteMessage(entry.Value, ref immediateBuffer);
+        }
+      }
       if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
+        _unknownFields.WriteTo(output, ref immediateBuffer);
       }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      size += type_.CalculateSize(_map_type_codec);
+      foreach (var entry in Type) {
+        var messageSize = 0;
+        if (entry.Key != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeInt32Size(entry.Key);
+        }
+        if (entry.Value != null) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeMessageSize(entry.Value);
+        }
+        size += 1 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -1532,6 +2957,7 @@ namespace Google.Protobuf.TestProtos {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.Security.SecurityCritical]
+    [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
     public void MergeFrom(pb::CodedInputStream input, ref global::System.ReadOnlySpan<byte> immediateBuffer) {
       uint tag;
       while ((tag = input.ReadTag(ref immediateBuffer)) != 0) {
@@ -1540,7 +2966,27 @@ namespace Google.Protobuf.TestProtos {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input, ref immediateBuffer);
             break;
           case 10: {
-            type_.AddEntriesFrom(input, _map_type_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            int entryKey = 0;
+            global::Google.Protobuf.TestProtos.MessageContainingEnumCalledType entryValue = null;
+            uint ntag;
+            while ((ntag = input.ReadTag(ref immediateBuffer)) != 0) {
+              if (ntag == 8) {
+                entryKey = input.ReadInt32(ref immediateBuffer);
+              } else if (ntag == 18) {
+                if (entryValue == null) {
+                  entryValue = new global::Google.Protobuf.TestProtos.MessageContainingEnumCalledType();
+                }
+                input.ReadMessage(entryValue, ref immediateBuffer);
+              } else {
+                input.SkipLastField(ref immediateBuffer);
+              }
+            }
+            if (entryValue == null) {
+              entryValue = new global::Google.Protobuf.TestProtos.MessageContainingEnumCalledType();
+            }
+            type_[entryKey] = entryValue;
+            input.EndReadNested(oldLimit);
             break;
           }
         }
@@ -1599,8 +3045,6 @@ namespace Google.Protobuf.TestProtos {
 
     /// <summary>Field number for the "entry" field.</summary>
     public const int EntryFieldNumber = 1;
-    private static readonly pbc::MapField<int, int>.Codec _map_entry_codec
-        = new pbc::MapField<int, int>.Codec(pb::FieldCodec.ForInt32(8), pb::FieldCodec.ForInt32(16), 10);
     private readonly pbc::MapField<int, int> entry_ = new pbc::MapField<int, int>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::MapField<int, int> Entry {
@@ -1640,17 +3084,46 @@ namespace Google.Protobuf.TestProtos {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
-      entry_.WriteTo(output, _map_entry_codec);
+    [global::System.Security.SecurityCritical]
+    [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+    public void WriteTo(pb::CodedOutputStream output, ref global::System.Span<byte> immediateBuffer) {
+      foreach (var entry in Entry) {
+        var messageSize = 0;
+        if (entry.Key != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeInt32Size(entry.Key);
+        }
+        if (entry.Value != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeInt32Size(entry.Value);
+        }
+        output.WriteRawTag(10, ref immediateBuffer);
+        output.WriteLength(messageSize, ref immediateBuffer);
+        if (entry.Key != 0) {
+          output.WriteRawTag(8, ref immediateBuffer);
+          output.WriteInt32(entry.Key, ref immediateBuffer);
+        }
+        if (entry.Value != 0) {
+          output.WriteRawTag(16, ref immediateBuffer);
+          output.WriteInt32(entry.Value, ref immediateBuffer);
+        }
+      }
       if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
+        _unknownFields.WriteTo(output, ref immediateBuffer);
       }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      size += entry_.CalculateSize(_map_entry_codec);
+      foreach (var entry in Entry) {
+        var messageSize = 0;
+        if (entry.Key != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeInt32Size(entry.Key);
+        }
+        if (entry.Value != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeInt32Size(entry.Value);
+        }
+        size += 1 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -1668,6 +3141,7 @@ namespace Google.Protobuf.TestProtos {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.Security.SecurityCritical]
+    [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
     public void MergeFrom(pb::CodedInputStream input, ref global::System.ReadOnlySpan<byte> immediateBuffer) {
       uint tag;
       while ((tag = input.ReadTag(ref immediateBuffer)) != 0) {
@@ -1676,7 +3150,21 @@ namespace Google.Protobuf.TestProtos {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input, ref immediateBuffer);
             break;
           case 10: {
-            entry_.AddEntriesFrom(input, _map_entry_codec, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            int entryKey = 0;
+            int entryValue = 0;
+            uint ntag;
+            while ((ntag = input.ReadTag(ref immediateBuffer)) != 0) {
+              if (ntag == 8) {
+                entryKey = input.ReadInt32(ref immediateBuffer);
+              } else if (ntag == 16) {
+                entryValue = input.ReadInt32(ref immediateBuffer);
+              } else {
+                input.SkipLastField(ref immediateBuffer);
+              }
+            }
+            entry_[entryKey] = entryValue;
+            input.EndReadNested(oldLimit);
             break;
           }
         }
