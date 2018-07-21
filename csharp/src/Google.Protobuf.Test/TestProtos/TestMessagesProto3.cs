@@ -1864,6 +1864,7 @@ namespace ProtobufTestMessages.Proto3 {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.Security.SecurityCritical]
+    [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
     public void WriteTo(pb::CodedOutputStream output, ref global::System.Span<byte> immediateBuffer) {
       if (OptionalInt32 != 0) {
         output.WriteRawTag(8, ref immediateBuffer);
@@ -3621,6 +3622,7 @@ namespace ProtobufTestMessages.Proto3 {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.Security.SecurityCritical]
+    [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
     public void MergeFrom(pb::CodedInputStream input, ref global::System.ReadOnlySpan<byte> immediateBuffer) {
       uint tag;
       while ((tag = input.ReadTag(ref immediateBuffer)) != 0) {
@@ -4742,6 +4744,7 @@ namespace ProtobufTestMessages.Proto3 {
 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         [global::System.Security.SecurityCritical]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
         public void WriteTo(pb::CodedOutputStream output, ref global::System.Span<byte> immediateBuffer) {
           if (A != 0) {
             output.WriteRawTag(8, ref immediateBuffer);
@@ -4790,6 +4793,7 @@ namespace ProtobufTestMessages.Proto3 {
 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         [global::System.Security.SecurityCritical]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
         public void MergeFrom(pb::CodedInputStream input, ref global::System.ReadOnlySpan<byte> immediateBuffer) {
           uint tag;
           while ((tag = input.ReadTag(ref immediateBuffer)) != 0) {
@@ -4898,6 +4902,7 @@ namespace ProtobufTestMessages.Proto3 {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.Security.SecurityCritical]
+    [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
     public void WriteTo(pb::CodedOutputStream output, ref global::System.Span<byte> immediateBuffer) {
       if (C != 0) {
         output.WriteRawTag(8, ref immediateBuffer);
@@ -4933,6 +4938,7 @@ namespace ProtobufTestMessages.Proto3 {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.Security.SecurityCritical]
+    [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
     public void MergeFrom(pb::CodedInputStream input, ref global::System.ReadOnlySpan<byte> immediateBuffer) {
       uint tag;
       while ((tag = input.ReadTag(ref immediateBuffer)) != 0) {
