@@ -366,6 +366,7 @@ namespace Google.Protobuf
         /// Writes a fixed64 field value, without a tag, to the stream.
         /// </summary>
         /// <param name="value">The value to write</param>
+        [SecuritySafeCritical]
         public void WriteFixed64(ulong value)
         {
             var immediateBuffer = ImmediateBuffer;
@@ -920,6 +921,7 @@ namespace Google.Protobuf
         /// there's enough buffer space left to whizz through without checking
         /// for each byte; otherwise, we resort to calling WriteRawByte each time.
         /// </summary>
+        [SecuritySafeCritical]
         internal void WriteRawVarint32(uint value)
         {
             var immediateBudder = ImmediateBuffer;
@@ -1288,6 +1290,7 @@ namespace Google.Protobuf
         /// fail. It is recommend that you not call any other methods after this.
         /// </para>
         /// </remarks>
+        [SecuritySafeCritical]
         public void Dispose()
         {
             var immediateBuffer = ImmediateBuffer;

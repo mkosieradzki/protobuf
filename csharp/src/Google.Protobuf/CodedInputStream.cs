@@ -821,6 +821,7 @@ namespace Google.Protobuf
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [SecurityCritical]
         public void EndReadNested(int oldLimit)
         {
             CheckReadEndOfStreamTag();

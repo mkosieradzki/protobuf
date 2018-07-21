@@ -394,6 +394,7 @@ namespace Google.Protobuf
         /// <summary>
         /// Used internally by CodedOutputStream to avoid creating a copy for the write
         /// </summary>
+        [SecurityCritical]
         internal void WriteRawBytesTo(CodedOutputStream outputStream, ref Span<byte> immediateBuffer) => outputStream.WriteRawBytes(bytes, ref immediateBuffer);
 
         /// <summary>
