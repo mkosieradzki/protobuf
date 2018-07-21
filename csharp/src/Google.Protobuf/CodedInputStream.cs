@@ -32,6 +32,7 @@
 
 using Google.Protobuf.Collections;
 using System;
+using System.Buffers;
 using System.Buffers.Binary;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -85,6 +86,11 @@ namespace Google.Protobuf
         /// </summary>
         private readonly Stream input;
 
+        private ReadOnlySequence<byte>.Enumerator nativeInput;
+        private bool hasNativeInput;
+        private long nativeInputPastBuffersLength;
+        private ReadOnlyMemory<byte> currentNativeBuffer;
+
         /// <summary>
         /// The last tag we read. 0 indicates we've read to the end of the stream
         /// (or haven't read anything yet).
@@ -119,15 +125,34 @@ namespace Google.Protobuf
         /// <summary>
         /// Creates a new CodedInputStream reading data from the given byte array.
         /// </summary>
-        public CodedInputStream(byte[] buffer) : this(null, ProtoPreconditions.CheckNotNull(buffer, "buffer"), 0, buffer.Length, true)
+        [SecuritySafeCritical]
+        public CodedInputStream(byte[] buffer) : this(null, ProtoPreconditions.CheckNotNull(buffer, "buffer"), null, null, 0, buffer.Length, true)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new CodedInputStream reading data from the given contiguous memory segment.
+        /// </summary>
+        [SecurityCritical]
+        public CodedInputStream(ReadOnlyMemory<byte> buffer) : this(null, null, null, buffer, 0, buffer.Length, true)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new CodedInputStream reading data from the given non-contiguous memory sequence.
+        /// </summary>
+        [SecurityCritical]
+        public CodedInputStream(ReadOnlySequence<byte> buffer)
+            : this(null, null, buffer.IsSingleSegment ? default(ReadOnlySequence<byte>?) : buffer, buffer.First, 0, buffer.First.Length, true)
         {
         }
 
         /// <summary>
         /// Creates a new <see cref="CodedInputStream"/> that reads from the given byte array slice.
         /// </summary>
+        [SecuritySafeCritical]
         public CodedInputStream(byte[] buffer, int offset, int length)
-            : this(null, ProtoPreconditions.CheckNotNull(buffer, "buffer"), offset, offset + length, true)
+            : this(null, ProtoPreconditions.CheckNotNull(buffer, "buffer"), null, null, offset, offset + length, true)
         {
             if (offset < 0 || offset > buffer.Length)
             {
@@ -144,6 +169,7 @@ namespace Google.Protobuf
         /// when the returned object is disposed.
         /// </summary>
         /// <param name="input">The stream to read from.</param>
+        [SecuritySafeCritical]
         public CodedInputStream(Stream input) : this(input, false)
         {
         }
@@ -155,8 +181,9 @@ namespace Google.Protobuf
         /// <param name="leaveOpen"><c>true</c> to leave <paramref name="input"/> open when the returned
         /// <c cref="CodedInputStream"/> is disposed; <c>false</c> to dispose of the given stream when the
         /// returned object is disposed.</param>
+        [SecuritySafeCritical]
         public CodedInputStream(Stream input, bool leaveOpen)
-            : this(ProtoPreconditions.CheckNotNull(input, "input"), new byte[BufferSize], 0, 0, leaveOpen)
+            : this(ProtoPreconditions.CheckNotNull(input, "input"), new byte[BufferSize], null, null, 0, 0, leaveOpen)
         {
         }
 
@@ -164,10 +191,22 @@ namespace Google.Protobuf
         /// Creates a new CodedInputStream reading data from the given
         /// stream and buffer, using the default limits.
         /// </summary>
-        internal CodedInputStream(Stream input, byte[] buffer, int bufferPos, int bufferSize, bool leaveOpen)
+        [SecurityCritical]
+        internal CodedInputStream(Stream input, byte[] buffer, ReadOnlySequence<byte>? nativeInput, ReadOnlyMemory<byte>? nativeBuffer, int bufferPos, int bufferSize, bool leaveOpen)
         {
             this.input = input;
             this.buffer = buffer;
+            if (nativeInput.HasValue)
+            {
+                var en = nativeInput.Value.GetEnumerator();
+                en.MoveNext();
+                this.nativeInput = en;
+                hasNativeInput = true;
+            }
+            if (nativeBuffer.HasValue)
+            {
+                this.currentNativeBuffer = nativeBuffer.Value;
+            }
             this.bufferPos = bufferPos;
             this.bufferSize = bufferSize;
             this.sizeLimit = DefaultSizeLimit;
@@ -183,8 +222,9 @@ namespace Google.Protobuf
         /// This chains to the version with the default limits instead of vice versa to avoid
         /// having to check that the default values are valid every time.
         /// </remarks>
+        [SecuritySafeCritical]
         internal CodedInputStream(Stream input, byte[] buffer, int bufferPos, int bufferSize, int sizeLimit, int recursionLimit, bool leaveOpen)
-            : this(input, buffer, bufferPos, bufferSize, leaveOpen)
+            : this(input, buffer, null, null, bufferPos, bufferSize, leaveOpen)
         {
             if (sizeLimit <= 0)
             {
@@ -230,7 +270,14 @@ namespace Google.Protobuf
                 {
                     return input.Position - ((bufferSize + bufferSizeAfterLimit) - bufferPos);
                 }
-                return bufferPos;
+                else if (hasNativeInput)
+                {
+                    return nativeInputPastBuffersLength + bufferPos;
+                }
+                else
+                {
+                    return bufferPos;
+                }
             }
         }
 
@@ -243,7 +290,7 @@ namespace Google.Protobuf
         internal ReadOnlySpan<byte> ImmediateBuffer
         {
             [SecurityCritical]
-            get => buffer;
+            get => buffer != null ? buffer : currentNativeBuffer.Span;
         }
 
         /// <summary>
@@ -425,7 +472,7 @@ namespace Google.Protobuf
                     break;
                 case WireFormat.WireType.LengthDelimited:
                     var length = ReadLength(ref immediateBuffer);
-                    SkipRawBytes(length);
+                    SkipRawBytes(length, ref immediateBuffer);
                     break;
                 case WireFormat.WireType.Varint:
                     ReadRawVarint32(ref immediateBuffer);
@@ -1492,7 +1539,7 @@ namespace Google.Protobuf
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [SecurityCritical]
-        internal bool IsAtEndCore(ref ReadOnlySpan<byte> immediateBuffer) => bufferPos == bufferSize && (input == null || !RefillBuffer(false, ref immediateBuffer));
+        internal bool IsAtEndCore(ref ReadOnlySpan<byte> immediateBuffer) => bufferPos == bufferSize && (input == null && !hasNativeInput || !RefillBuffer(false, ref immediateBuffer));
 
         /// <summary>
         /// Called when buffer is empty to read more bytes from the
@@ -1526,7 +1573,29 @@ namespace Google.Protobuf
             totalBytesRetired += bufferSize;
 
             bufferPos = 0;
-            bufferSize = (input == null) ? 0 : input.Read(buffer, 0, buffer.Length);
+            if (input != null)
+            {
+                bufferSize = input.Read(buffer, 0, buffer.Length);
+            }
+            else if (hasNativeInput)
+            {
+                nativeInputPastBuffersLength += bufferSize;
+                if (nativeInput.MoveNext())
+                {
+                    currentNativeBuffer = nativeInput.Current;
+                    immediateBuffer = nativeInput.Current.Span;
+                    bufferSize = immediateBuffer.Length;
+                }
+                else
+                {
+                    bufferSize = 0;
+                }
+            }
+            else
+            {
+                bufferSize = 0;
+            }
+
             if (bufferSize < 0)
             {
                 throw new InvalidOperationException("Stream.Read returned a negative count");
@@ -1608,11 +1677,11 @@ namespace Google.Protobuf
             {
                 throw InvalidProtocolBufferException.NegativeSize();
             }
-            
+           
             if (totalBytesRetired + bufferPos + size > currentLimit)
             {
                 // Read to the end of the stream (up to the current limit) anyway.
-                SkipRawBytes(currentLimit - totalBytesRetired - bufferPos);
+                SkipRawBytes(currentLimit - totalBytesRetired - bufferPos, ref immediateBuffer);
                 // Then fail.
                 throw InvalidProtocolBufferException.TruncatedMessage();
             }
@@ -1625,10 +1694,11 @@ namespace Google.Protobuf
                 bufferPos += size;
                 return bytes;
             }
-            else if (size < immediateBuffer.Length)
+            else if (size < immediateBuffer.Length || hasNativeInput)
             {
                 // Reading more bytes than are in the buffer, but not an excessive number
-                // of bytes.  We can safely allocate the resulting array ahead of time.
+                // of bytes or all the bytes are already in a contiguous buffer.
+                // We can safely allocate the resulting array ahead of time.
 
                 // First copy what we have.
                 byte[] bytes = new byte[size];
@@ -1643,7 +1713,6 @@ namespace Google.Protobuf
 
                 while (size - pos > bufferSize)
                 {
-                    //Buffer.BlockCopy(immediateBuffer, 0, bytes, pos, bufferSize);
                     immediateBuffer.Slice(0, bufferSize).CopyTo(bytes.AsSpan().Slice(pos, bufferSize));
                     pos += bufferSize;
                     bufferPos = bufferSize;
@@ -1723,7 +1792,7 @@ namespace Google.Protobuf
         /// or the current limit was reached</exception>
         [SecurityCritical]
         [MethodImpl(MethodImplOptions.NoInlining)]
-        private void SkipRawBytes(int size)
+        private void SkipRawBytes(int size, ref ReadOnlySpan<byte> immediateBuffer)
         {
             if (size < 0)
             {
@@ -1733,7 +1802,7 @@ namespace Google.Protobuf
             if (totalBytesRetired + bufferPos + size > currentLimit)
             {
                 // Read to the end of the stream anyway.
-                SkipRawBytes(currentLimit - totalBytesRetired - bufferPos);
+                SkipRawBytes(currentLimit - totalBytesRetired - bufferPos, ref immediateBuffer);
                 // Then fail.
                 throw InvalidProtocolBufferException.TruncatedMessage();
             }
@@ -1758,11 +1827,11 @@ namespace Google.Protobuf
                 // Then skip directly from the InputStream for the rest.
                 if (pos < size)
                 {
-                    if (input == null)
+                    if (input == null && !hasNativeInput)
                     {
                         throw InvalidProtocolBufferException.TruncatedMessage();
                     }
-                    SkipImpl(size - pos);
+                    SkipImpl(size - pos, ref immediateBuffer);
                     totalBytesRetired += size - pos;
                 }
             }
@@ -1771,9 +1840,34 @@ namespace Google.Protobuf
         /// <summary>
         /// Abstraction of skipping to cope with streams which can't really skip.
         /// </summary>
-        private void SkipImpl(int amountToSkip)
+        [SecuritySafeCritical]
+        private void SkipImpl(int amountToSkip, ref ReadOnlySpan<byte> immediateBuffer)
         {
-            if (input.CanSeek)
+            if (hasNativeInput)
+            {
+                while (amountToSkip > 0)
+                {
+                    if (!nativeInput.MoveNext())
+                    {
+                        throw InvalidProtocolBufferException.TruncatedMessage();
+                    }
+                    currentNativeBuffer = nativeInput.Current;
+                    immediateBuffer = nativeInput.Current.Span;
+                    bufferSize = immediateBuffer.Length;
+                    bufferPos = 0;
+                    if (bufferSize < amountToSkip)
+                    {
+                        bufferPos = bufferSize;
+                        amountToSkip -= bufferSize;
+                    }
+                    else
+                    {
+                        bufferPos += amountToSkip;
+                        amountToSkip = 0;
+                    }
+                }
+            }
+            else if (input.CanSeek)
             {
                 long previousPosition = input.Position;
                 input.Position += amountToSkip;

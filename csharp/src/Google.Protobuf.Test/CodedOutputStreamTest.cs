@@ -31,6 +31,7 @@
 #endregion
 
 using System;
+using System.Buffers;
 using System.IO;
 using Google.Protobuf.TestProtos;
 using NUnit.Framework;
@@ -334,7 +335,7 @@ namespace Google.Protobuf
             }
             // Now test Input stream:
             {
-                CodedInputStream cin = new CodedInputStream(new MemoryStream(bytes), new byte[50], 0, 0, false);
+                CodedInputStream cin = new CodedInputStream(new MemoryStream(bytes), new byte[50], null, null, 0, 0, false);
                 Assert.AreEqual(0, cin.Position);
                 // Field 1:
                 uint tag = cin.ReadTag();
@@ -421,6 +422,51 @@ namespace Google.Protobuf
         {
             var stream = new CodedOutputStream(new byte[10]);
             stream.Dispose();
+        }
+
+        [Test]
+        public void NativeBuffer()
+        {
+            var msg = SampleMessages.CreateFullTestAllTypes();
+            var size = msg.CalculateSize();
+            var arr = new byte[size];
+            var output = new CodedOutputStream(new Memory<byte>(arr));
+            msg.WriteTo(output);
+            output.Flush();
+            Assert.AreEqual(arr, msg.ToByteArray());
+        }
+
+        [Test]
+        public void NativeOutput()
+        {
+            var ms = new MemoryStream();
+            var tsb = new TestStreamBufferWriter(ms, 3);
+            var msg = SampleMessages.CreateFullTestAllTypes();
+            var output = new CodedOutputStream(tsb);
+            msg.WriteTo(output);
+            output.Flush();
+            Assert.AreEqual(ms.ToArray(), msg.ToByteArray());
+        }
+
+        sealed class TestStreamBufferWriter : IBufferWriter<byte>
+        {
+            private Stream stream;
+            private Memory<byte> mem;
+
+            public TestStreamBufferWriter(Stream stream, int bufferSize)
+            {
+                if (stream == null)
+                    throw new ArgumentNullException(nameof(stream));
+
+                this.stream = stream;
+                this.mem = new Memory<byte>(new byte[bufferSize]);
+            }
+
+            public void Advance(int count) => stream.Write(mem.Slice(0, count).ToArray(), 0, count);
+
+            public Memory<byte> GetMemory(int sizeHint = 0) => mem;
+
+            public Span<byte> GetSpan(int sizeHint = 0) => mem.Span;
         }
     }
 }

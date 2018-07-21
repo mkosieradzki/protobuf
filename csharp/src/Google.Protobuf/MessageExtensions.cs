@@ -30,6 +30,8 @@
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #endregion
 
+using System;
+using System.Buffers;
 using System.IO;
 using System.Security;
 
@@ -177,6 +179,28 @@ namespace Google.Protobuf
         {
             ProtoPreconditions.CheckNotNull(message, "message");
             ProtoPreconditions.CheckNotNull(data, "data");
+            CodedInputStream input = new CodedInputStream(data);
+            input.DiscardUnknownFields = discardUnknownFields;
+            message.MergeFrom(input);
+            input.CheckReadEndOfStreamTag();
+        }
+
+        // Implementations allowing unknown fields to be discarded.
+        [SecurityCritical]
+        internal static void MergeFrom(this IMessage message, ReadOnlyMemory<byte> data, bool discardUnknownFields)
+        {
+            ProtoPreconditions.CheckNotNull(message, "message");
+            CodedInputStream input = new CodedInputStream(data);
+            input.DiscardUnknownFields = discardUnknownFields;
+            message.MergeFrom(input);
+            input.CheckReadEndOfStreamTag();
+        }
+
+        // Implementations allowing unknown fields to be discarded.
+        [SecurityCritical]
+        internal static void MergeFrom(this IMessage message, ReadOnlySequence<byte> data, bool discardUnknownFields)
+        {
+            ProtoPreconditions.CheckNotNull(message, "message");
             CodedInputStream input = new CodedInputStream(data);
             input.DiscardUnknownFields = discardUnknownFields;
             message.MergeFrom(input);
