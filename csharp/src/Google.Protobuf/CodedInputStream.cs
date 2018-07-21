@@ -89,7 +89,7 @@ namespace Google.Protobuf
         private ReadOnlySequence<byte>.Enumerator nativeInput;
         private bool hasNativeInput;
         private long nativeInputPastBuffersLength;
-        private ReadOnlyMemory<byte>? currentNativeBuffer;
+        private ReadOnlyMemory<byte> currentNativeBuffer;
 
         /// <summary>
         /// The last tag we read. 0 indicates we've read to the end of the stream
@@ -203,7 +203,10 @@ namespace Google.Protobuf
                 this.nativeInput = en;
                 hasNativeInput = true;
             }
-            this.currentNativeBuffer = nativeBuffer;
+            if (nativeBuffer.HasValue)
+            {
+                this.currentNativeBuffer = nativeBuffer.Value;
+            }
             this.bufferPos = bufferPos;
             this.bufferSize = bufferSize;
             this.sizeLimit = DefaultSizeLimit;
@@ -287,7 +290,7 @@ namespace Google.Protobuf
         internal ReadOnlySpan<byte> ImmediateBuffer
         {
             [SecurityCritical]
-            get => buffer != null ? buffer : currentNativeBuffer.Value.Span;
+            get => buffer != null ? buffer : currentNativeBuffer.Span;
         }
 
         /// <summary>
