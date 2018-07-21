@@ -407,6 +407,7 @@ void MessageGenerator::GenerateMessageSerializationMethods(io::Printer* printer)
   WriteGeneratedCodeAttributes(printer);
   printer->Print(
     "[global::System.Security.SecurityCritical]\n"
+    "[global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]\n"
     "public void WriteTo(pb::CodedOutputStream output, ref global::System.Span<byte> immediateBuffer) {\n");
   printer->Indent();
 
@@ -507,6 +508,7 @@ void MessageGenerator::GenerateMergingMethods(io::Printer* printer) {
   WriteGeneratedCodeAttributes(printer);
   printer->Print(
     "[global::System.Security.SecurityCritical]\n"
+    "[global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]\n"
     "public void MergeFrom(pb::CodedInputStream input, ref global::System.ReadOnlySpan<byte> immediateBuffer) {\n");
   printer->Indent();
   printer->Print(
