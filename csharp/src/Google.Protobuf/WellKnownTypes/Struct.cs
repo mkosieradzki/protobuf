@@ -174,7 +174,8 @@ namespace Google.Protobuf.WellKnownTypes {
         }
         if (entry.Value != null) {
           output.WriteRawTag(18, ref immediateBuffer);
-          output.WriteMessage(entry.Value, ref immediateBuffer);
+          output.WriteLength(entry.Value.CalculateSize(), ref immediateBuffer);
+          entry.Value.WriteTo(output, ref immediateBuffer);
         }
       }
       if (_unknownFields != null) {
@@ -221,7 +222,7 @@ namespace Google.Protobuf.WellKnownTypes {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input, ref immediateBuffer);
             break;
           case 10: {
-            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            var mapOldLimit = input.BeginReadNested(ref immediateBuffer);
             string entryKey = "";
             global::Google.Protobuf.WellKnownTypes.Value entryValue = null;
             uint ntag;
@@ -232,7 +233,9 @@ namespace Google.Protobuf.WellKnownTypes {
                 if (entryValue == null) {
                   entryValue = new global::Google.Protobuf.WellKnownTypes.Value();
                 }
-                input.ReadMessage(entryValue, ref immediateBuffer);
+                var oldLimit = input.BeginReadNested(ref immediateBuffer);
+                entryValue.MergeFrom(input, ref immediateBuffer);
+                input.EndReadNested(oldLimit);
               } else {
                 input.SkipLastField(ref immediateBuffer);
               }
@@ -241,7 +244,7 @@ namespace Google.Protobuf.WellKnownTypes {
               entryValue = new global::Google.Protobuf.WellKnownTypes.Value();
             }
             fields_[entryKey] = entryValue;
-            input.EndReadNested(oldLimit);
+            input.EndReadNested(mapOldLimit);
             break;
           }
         }
@@ -485,11 +488,13 @@ namespace Google.Protobuf.WellKnownTypes {
       }
       if (StructValue != null) {
         output.WriteRawTag(42, ref immediateBuffer);
-        output.WriteMessage(StructValue, ref immediateBuffer);
+        output.WriteLength(StructValue.CalculateSize(), ref immediateBuffer);
+        StructValue.WriteTo(output, ref immediateBuffer);
       }
       if (ListValue != null) {
         output.WriteRawTag(50, ref immediateBuffer);
-        output.WriteMessage(ListValue, ref immediateBuffer);
+        output.WriteLength(ListValue.CalculateSize(), ref immediateBuffer);
+        ListValue.WriteTo(output, ref immediateBuffer);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output, ref immediateBuffer);
@@ -590,7 +595,9 @@ namespace Google.Protobuf.WellKnownTypes {
             if (kindCase_ == KindOneofCase.StructValue) {
               subBuilder.MergeFrom(StructValue);
             }
-            input.ReadMessage(subBuilder, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            subBuilder.MergeFrom(input, ref immediateBuffer);
+            input.EndReadNested(oldLimit);
             StructValue = subBuilder;
             break;
           }
@@ -599,7 +606,9 @@ namespace Google.Protobuf.WellKnownTypes {
             if (kindCase_ == KindOneofCase.ListValue) {
               subBuilder.MergeFrom(ListValue);
             }
-            input.ReadMessage(subBuilder, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            subBuilder.MergeFrom(input, ref immediateBuffer);
+            input.EndReadNested(oldLimit);
             ListValue = subBuilder;
             break;
           }
@@ -697,7 +706,8 @@ namespace Google.Protobuf.WellKnownTypes {
     public void WriteTo(pb::CodedOutputStream output, ref global::System.Span<byte> immediateBuffer) {
       for (var i = 0; i < Values.Count; i++) {
         output.WriteRawTag(10, ref immediateBuffer);
-        output.WriteMessage(Values[i], ref immediateBuffer);
+        output.WriteLength(Values[i].CalculateSize(), ref immediateBuffer);
+        Values[i].WriteTo(output, ref immediateBuffer);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output, ref immediateBuffer);
@@ -736,10 +746,10 @@ namespace Google.Protobuf.WellKnownTypes {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input, ref immediateBuffer);
             break;
           case 10: {
-            var oldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.WellKnownTypes.Value();
+            var repeatedOldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.WellKnownTypes.Value();
             item.MergeFrom(input, ref immediateBuffer);
             values_.Add(item);
-            input.EndReadNested(oldLimit);
+            input.EndReadNested(repeatedOldLimit);
             break;
           }
         }

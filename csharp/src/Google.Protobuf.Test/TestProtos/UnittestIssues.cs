@@ -898,11 +898,13 @@ namespace UnitTest.Issues.TestProtos {
       }
       if (MessageValue != null) {
         output.WriteRawTag(26, ref immediateBuffer);
-        output.WriteMessage(MessageValue, ref immediateBuffer);
+        output.WriteLength(MessageValue.CalculateSize(), ref immediateBuffer);
+        MessageValue.WriteTo(output, ref immediateBuffer);
       }
       for (var i = 0; i < MessageArray.Count; i++) {
         output.WriteRawTag(34, ref immediateBuffer);
-        output.WriteMessage(MessageArray[i], ref immediateBuffer);
+        output.WriteLength(MessageArray[i].CalculateSize(), ref immediateBuffer);
+        MessageArray[i].WriteTo(output, ref immediateBuffer);
       }
       if (EnumValue != 0) {
         output.WriteRawTag(40, ref immediateBuffer);
@@ -1021,14 +1023,16 @@ namespace UnitTest.Issues.TestProtos {
             if (messageValue_ == null) {
               messageValue_ = new global::UnitTest.Issues.TestProtos.DeprecatedChild();
             }
-            input.ReadMessage(messageValue_, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            messageValue_.MergeFrom(input, ref immediateBuffer);
+            input.EndReadNested(oldLimit);
             break;
           }
           case 34: {
-            var oldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::UnitTest.Issues.TestProtos.DeprecatedChild();
+            var repeatedOldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::UnitTest.Issues.TestProtos.DeprecatedChild();
             item.MergeFrom(input, ref immediateBuffer);
             messageArray_.Add(item);
-            input.EndReadNested(oldLimit);
+            input.EndReadNested(repeatedOldLimit);
             break;
           }
           case 40: {
@@ -2141,7 +2145,8 @@ namespace UnitTest.Issues.TestProtos {
       }
       if (Nested != null) {
         output.WriteRawTag(18, ref immediateBuffer);
-        output.WriteMessage(Nested, ref immediateBuffer);
+        output.WriteLength(Nested.CalculateSize(), ref immediateBuffer);
+        Nested.WriteTo(output, ref immediateBuffer);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output, ref immediateBuffer);
@@ -2202,7 +2207,9 @@ namespace UnitTest.Issues.TestProtos {
             if (valueCase_ == ValueOneofCase.Nested) {
               subBuilder.MergeFrom(Nested);
             }
-            input.ReadMessage(subBuilder, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            subBuilder.MergeFrom(input, ref immediateBuffer);
+            input.EndReadNested(oldLimit);
             Nested = subBuilder;
             break;
           }

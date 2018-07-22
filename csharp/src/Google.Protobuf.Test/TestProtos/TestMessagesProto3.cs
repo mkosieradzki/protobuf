@@ -1928,11 +1928,13 @@ namespace ProtobufTestMessages.Proto3 {
       }
       if (OptionalNestedMessage != null) {
         output.WriteRawTag(146, 1, ref immediateBuffer);
-        output.WriteMessage(OptionalNestedMessage, ref immediateBuffer);
+        output.WriteLength(OptionalNestedMessage.CalculateSize(), ref immediateBuffer);
+        OptionalNestedMessage.WriteTo(output, ref immediateBuffer);
       }
       if (OptionalForeignMessage != null) {
         output.WriteRawTag(154, 1, ref immediateBuffer);
-        output.WriteMessage(OptionalForeignMessage, ref immediateBuffer);
+        output.WriteLength(OptionalForeignMessage.CalculateSize(), ref immediateBuffer);
+        OptionalForeignMessage.WriteTo(output, ref immediateBuffer);
       }
       if (OptionalNestedEnum != 0) {
         output.WriteRawTag(168, 1, ref immediateBuffer);
@@ -1952,7 +1954,8 @@ namespace ProtobufTestMessages.Proto3 {
       }
       if (RecursiveMessage != null) {
         output.WriteRawTag(218, 1, ref immediateBuffer);
-        output.WriteMessage(RecursiveMessage, ref immediateBuffer);
+        output.WriteLength(RecursiveMessage.CalculateSize(), ref immediateBuffer);
+        RecursiveMessage.WriteTo(output, ref immediateBuffer);
       }
       {
         var packedSize = 0;
@@ -2112,11 +2115,13 @@ namespace ProtobufTestMessages.Proto3 {
       }
       for (var i = 0; i < RepeatedNestedMessage.Count; i++) {
         output.WriteRawTag(130, 3, ref immediateBuffer);
-        output.WriteMessage(RepeatedNestedMessage[i], ref immediateBuffer);
+        output.WriteLength(RepeatedNestedMessage[i].CalculateSize(), ref immediateBuffer);
+        RepeatedNestedMessage[i].WriteTo(output, ref immediateBuffer);
       }
       for (var i = 0; i < RepeatedForeignMessage.Count; i++) {
         output.WriteRawTag(138, 3, ref immediateBuffer);
-        output.WriteMessage(RepeatedForeignMessage[i], ref immediateBuffer);
+        output.WriteLength(RepeatedForeignMessage[i].CalculateSize(), ref immediateBuffer);
+        RepeatedForeignMessage[i].WriteTo(output, ref immediateBuffer);
       }
       {
         var packedSize = 0;
@@ -2453,7 +2458,8 @@ namespace ProtobufTestMessages.Proto3 {
         }
         if (entry.Value != null) {
           output.WriteRawTag(18, ref immediateBuffer);
-          output.WriteMessage(entry.Value, ref immediateBuffer);
+          output.WriteLength(entry.Value.CalculateSize(), ref immediateBuffer);
+          entry.Value.WriteTo(output, ref immediateBuffer);
         }
       }
       foreach (var entry in MapStringForeignMessage) {
@@ -2472,7 +2478,8 @@ namespace ProtobufTestMessages.Proto3 {
         }
         if (entry.Value != null) {
           output.WriteRawTag(18, ref immediateBuffer);
-          output.WriteMessage(entry.Value, ref immediateBuffer);
+          output.WriteLength(entry.Value.CalculateSize(), ref immediateBuffer);
+          entry.Value.WriteTo(output, ref immediateBuffer);
         }
       }
       foreach (var entry in MapStringNestedEnum) {
@@ -2519,7 +2526,8 @@ namespace ProtobufTestMessages.Proto3 {
       }
       if (OneofNestedMessage != null) {
         output.WriteRawTag(130, 7, ref immediateBuffer);
-        output.WriteMessage(OneofNestedMessage, ref immediateBuffer);
+        output.WriteLength(OneofNestedMessage.CalculateSize(), ref immediateBuffer);
+        OneofNestedMessage.WriteTo(output, ref immediateBuffer);
       }
       if (oneofFieldCase_ == OneofFieldOneofCase.OneofString) {
         output.WriteRawTag(138, 7, ref immediateBuffer);
@@ -2623,51 +2631,63 @@ namespace ProtobufTestMessages.Proto3 {
       }
       if (OptionalDuration != null) {
         output.WriteRawTag(234, 18, ref immediateBuffer);
-        output.WriteMessage(OptionalDuration, ref immediateBuffer);
+        output.WriteLength(OptionalDuration.CalculateSize(), ref immediateBuffer);
+        OptionalDuration.WriteTo(output, ref immediateBuffer);
       }
       if (OptionalTimestamp != null) {
         output.WriteRawTag(242, 18, ref immediateBuffer);
-        output.WriteMessage(OptionalTimestamp, ref immediateBuffer);
+        output.WriteLength(OptionalTimestamp.CalculateSize(), ref immediateBuffer);
+        OptionalTimestamp.WriteTo(output, ref immediateBuffer);
       }
       if (OptionalFieldMask != null) {
         output.WriteRawTag(250, 18, ref immediateBuffer);
-        output.WriteMessage(OptionalFieldMask, ref immediateBuffer);
+        output.WriteLength(OptionalFieldMask.CalculateSize(), ref immediateBuffer);
+        OptionalFieldMask.WriteTo(output, ref immediateBuffer);
       }
       if (OptionalStruct != null) {
         output.WriteRawTag(130, 19, ref immediateBuffer);
-        output.WriteMessage(OptionalStruct, ref immediateBuffer);
+        output.WriteLength(OptionalStruct.CalculateSize(), ref immediateBuffer);
+        OptionalStruct.WriteTo(output, ref immediateBuffer);
       }
       if (OptionalAny != null) {
         output.WriteRawTag(138, 19, ref immediateBuffer);
-        output.WriteMessage(OptionalAny, ref immediateBuffer);
+        output.WriteLength(OptionalAny.CalculateSize(), ref immediateBuffer);
+        OptionalAny.WriteTo(output, ref immediateBuffer);
       }
       if (OptionalValue != null) {
         output.WriteRawTag(146, 19, ref immediateBuffer);
-        output.WriteMessage(OptionalValue, ref immediateBuffer);
+        output.WriteLength(OptionalValue.CalculateSize(), ref immediateBuffer);
+        OptionalValue.WriteTo(output, ref immediateBuffer);
       }
       for (var i = 0; i < RepeatedDuration.Count; i++) {
         output.WriteRawTag(186, 19, ref immediateBuffer);
-        output.WriteMessage(RepeatedDuration[i], ref immediateBuffer);
+        output.WriteLength(RepeatedDuration[i].CalculateSize(), ref immediateBuffer);
+        RepeatedDuration[i].WriteTo(output, ref immediateBuffer);
       }
       for (var i = 0; i < RepeatedTimestamp.Count; i++) {
         output.WriteRawTag(194, 19, ref immediateBuffer);
-        output.WriteMessage(RepeatedTimestamp[i], ref immediateBuffer);
+        output.WriteLength(RepeatedTimestamp[i].CalculateSize(), ref immediateBuffer);
+        RepeatedTimestamp[i].WriteTo(output, ref immediateBuffer);
       }
       for (var i = 0; i < RepeatedFieldmask.Count; i++) {
         output.WriteRawTag(202, 19, ref immediateBuffer);
-        output.WriteMessage(RepeatedFieldmask[i], ref immediateBuffer);
+        output.WriteLength(RepeatedFieldmask[i].CalculateSize(), ref immediateBuffer);
+        RepeatedFieldmask[i].WriteTo(output, ref immediateBuffer);
       }
       for (var i = 0; i < RepeatedStruct.Count; i++) {
         output.WriteRawTag(162, 20, ref immediateBuffer);
-        output.WriteMessage(RepeatedStruct[i], ref immediateBuffer);
+        output.WriteLength(RepeatedStruct[i].CalculateSize(), ref immediateBuffer);
+        RepeatedStruct[i].WriteTo(output, ref immediateBuffer);
       }
       for (var i = 0; i < RepeatedAny.Count; i++) {
         output.WriteRawTag(218, 19, ref immediateBuffer);
-        output.WriteMessage(RepeatedAny[i], ref immediateBuffer);
+        output.WriteLength(RepeatedAny[i].CalculateSize(), ref immediateBuffer);
+        RepeatedAny[i].WriteTo(output, ref immediateBuffer);
       }
       for (var i = 0; i < RepeatedValue.Count; i++) {
         output.WriteRawTag(226, 19, ref immediateBuffer);
-        output.WriteMessage(RepeatedValue[i], ref immediateBuffer);
+        output.WriteLength(RepeatedValue[i].CalculateSize(), ref immediateBuffer);
+        RepeatedValue[i].WriteTo(output, ref immediateBuffer);
       }
       if (Fieldname1 != 0) {
         output.WriteRawTag(136, 25, ref immediateBuffer);
@@ -3694,14 +3714,18 @@ namespace ProtobufTestMessages.Proto3 {
             if (optionalNestedMessage_ == null) {
               optionalNestedMessage_ = new global::ProtobufTestMessages.Proto3.TestAllTypesProto3.Types.NestedMessage();
             }
-            input.ReadMessage(optionalNestedMessage_, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            optionalNestedMessage_.MergeFrom(input, ref immediateBuffer);
+            input.EndReadNested(oldLimit);
             break;
           }
           case 154: {
             if (optionalForeignMessage_ == null) {
               optionalForeignMessage_ = new global::ProtobufTestMessages.Proto3.ForeignMessage();
             }
-            input.ReadMessage(optionalForeignMessage_, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            optionalForeignMessage_.MergeFrom(input, ref immediateBuffer);
+            input.EndReadNested(oldLimit);
             break;
           }
           case 168: {
@@ -3724,7 +3748,9 @@ namespace ProtobufTestMessages.Proto3 {
             if (recursiveMessage_ == null) {
               recursiveMessage_ = new global::ProtobufTestMessages.Proto3.TestAllTypesProto3();
             }
-            input.ReadMessage(recursiveMessage_, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            recursiveMessage_.MergeFrom(input, ref immediateBuffer);
+            input.EndReadNested(oldLimit);
             break;
           }
           case 250: {
@@ -3931,17 +3957,17 @@ namespace ProtobufTestMessages.Proto3 {
             break;
           }
           case 386: {
-            var oldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::ProtobufTestMessages.Proto3.TestAllTypesProto3.Types.NestedMessage();
+            var repeatedOldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::ProtobufTestMessages.Proto3.TestAllTypesProto3.Types.NestedMessage();
             item.MergeFrom(input, ref immediateBuffer);
             repeatedNestedMessage_.Add(item);
-            input.EndReadNested(oldLimit);
+            input.EndReadNested(repeatedOldLimit);
             break;
           }
           case 394: {
-            var oldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::ProtobufTestMessages.Proto3.ForeignMessage();
+            var repeatedOldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::ProtobufTestMessages.Proto3.ForeignMessage();
             item.MergeFrom(input, ref immediateBuffer);
             repeatedForeignMessage_.Add(item);
-            input.EndReadNested(oldLimit);
+            input.EndReadNested(repeatedOldLimit);
             break;
           }
           case 410: {
@@ -3983,7 +4009,7 @@ namespace ProtobufTestMessages.Proto3 {
             break;
           }
           case 450: {
-            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            var mapOldLimit = input.BeginReadNested(ref immediateBuffer);
             int entryKey = 0;
             int entryValue = 0;
             uint ntag;
@@ -3997,11 +4023,11 @@ namespace ProtobufTestMessages.Proto3 {
               }
             }
             mapInt32Int32_[entryKey] = entryValue;
-            input.EndReadNested(oldLimit);
+            input.EndReadNested(mapOldLimit);
             break;
           }
           case 458: {
-            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            var mapOldLimit = input.BeginReadNested(ref immediateBuffer);
             long entryKey = 0L;
             long entryValue = 0L;
             uint ntag;
@@ -4015,11 +4041,11 @@ namespace ProtobufTestMessages.Proto3 {
               }
             }
             mapInt64Int64_[entryKey] = entryValue;
-            input.EndReadNested(oldLimit);
+            input.EndReadNested(mapOldLimit);
             break;
           }
           case 466: {
-            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            var mapOldLimit = input.BeginReadNested(ref immediateBuffer);
             uint entryKey = 0;
             uint entryValue = 0;
             uint ntag;
@@ -4033,11 +4059,11 @@ namespace ProtobufTestMessages.Proto3 {
               }
             }
             mapUint32Uint32_[entryKey] = entryValue;
-            input.EndReadNested(oldLimit);
+            input.EndReadNested(mapOldLimit);
             break;
           }
           case 474: {
-            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            var mapOldLimit = input.BeginReadNested(ref immediateBuffer);
             ulong entryKey = 0UL;
             ulong entryValue = 0UL;
             uint ntag;
@@ -4051,11 +4077,11 @@ namespace ProtobufTestMessages.Proto3 {
               }
             }
             mapUint64Uint64_[entryKey] = entryValue;
-            input.EndReadNested(oldLimit);
+            input.EndReadNested(mapOldLimit);
             break;
           }
           case 482: {
-            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            var mapOldLimit = input.BeginReadNested(ref immediateBuffer);
             int entryKey = 0;
             int entryValue = 0;
             uint ntag;
@@ -4069,11 +4095,11 @@ namespace ProtobufTestMessages.Proto3 {
               }
             }
             mapSint32Sint32_[entryKey] = entryValue;
-            input.EndReadNested(oldLimit);
+            input.EndReadNested(mapOldLimit);
             break;
           }
           case 490: {
-            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            var mapOldLimit = input.BeginReadNested(ref immediateBuffer);
             long entryKey = 0L;
             long entryValue = 0L;
             uint ntag;
@@ -4087,11 +4113,11 @@ namespace ProtobufTestMessages.Proto3 {
               }
             }
             mapSint64Sint64_[entryKey] = entryValue;
-            input.EndReadNested(oldLimit);
+            input.EndReadNested(mapOldLimit);
             break;
           }
           case 498: {
-            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            var mapOldLimit = input.BeginReadNested(ref immediateBuffer);
             uint entryKey = 0;
             uint entryValue = 0;
             uint ntag;
@@ -4105,11 +4131,11 @@ namespace ProtobufTestMessages.Proto3 {
               }
             }
             mapFixed32Fixed32_[entryKey] = entryValue;
-            input.EndReadNested(oldLimit);
+            input.EndReadNested(mapOldLimit);
             break;
           }
           case 506: {
-            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            var mapOldLimit = input.BeginReadNested(ref immediateBuffer);
             ulong entryKey = 0UL;
             ulong entryValue = 0UL;
             uint ntag;
@@ -4123,11 +4149,11 @@ namespace ProtobufTestMessages.Proto3 {
               }
             }
             mapFixed64Fixed64_[entryKey] = entryValue;
-            input.EndReadNested(oldLimit);
+            input.EndReadNested(mapOldLimit);
             break;
           }
           case 514: {
-            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            var mapOldLimit = input.BeginReadNested(ref immediateBuffer);
             int entryKey = 0;
             int entryValue = 0;
             uint ntag;
@@ -4141,11 +4167,11 @@ namespace ProtobufTestMessages.Proto3 {
               }
             }
             mapSfixed32Sfixed32_[entryKey] = entryValue;
-            input.EndReadNested(oldLimit);
+            input.EndReadNested(mapOldLimit);
             break;
           }
           case 522: {
-            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            var mapOldLimit = input.BeginReadNested(ref immediateBuffer);
             long entryKey = 0L;
             long entryValue = 0L;
             uint ntag;
@@ -4159,11 +4185,11 @@ namespace ProtobufTestMessages.Proto3 {
               }
             }
             mapSfixed64Sfixed64_[entryKey] = entryValue;
-            input.EndReadNested(oldLimit);
+            input.EndReadNested(mapOldLimit);
             break;
           }
           case 530: {
-            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            var mapOldLimit = input.BeginReadNested(ref immediateBuffer);
             int entryKey = 0;
             float entryValue = 0F;
             uint ntag;
@@ -4177,11 +4203,11 @@ namespace ProtobufTestMessages.Proto3 {
               }
             }
             mapInt32Float_[entryKey] = entryValue;
-            input.EndReadNested(oldLimit);
+            input.EndReadNested(mapOldLimit);
             break;
           }
           case 538: {
-            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            var mapOldLimit = input.BeginReadNested(ref immediateBuffer);
             int entryKey = 0;
             double entryValue = 0D;
             uint ntag;
@@ -4195,11 +4221,11 @@ namespace ProtobufTestMessages.Proto3 {
               }
             }
             mapInt32Double_[entryKey] = entryValue;
-            input.EndReadNested(oldLimit);
+            input.EndReadNested(mapOldLimit);
             break;
           }
           case 546: {
-            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            var mapOldLimit = input.BeginReadNested(ref immediateBuffer);
             bool entryKey = false;
             bool entryValue = false;
             uint ntag;
@@ -4213,11 +4239,11 @@ namespace ProtobufTestMessages.Proto3 {
               }
             }
             mapBoolBool_[entryKey] = entryValue;
-            input.EndReadNested(oldLimit);
+            input.EndReadNested(mapOldLimit);
             break;
           }
           case 554: {
-            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            var mapOldLimit = input.BeginReadNested(ref immediateBuffer);
             string entryKey = "";
             string entryValue = "";
             uint ntag;
@@ -4231,11 +4257,11 @@ namespace ProtobufTestMessages.Proto3 {
               }
             }
             mapStringString_[entryKey] = entryValue;
-            input.EndReadNested(oldLimit);
+            input.EndReadNested(mapOldLimit);
             break;
           }
           case 562: {
-            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            var mapOldLimit = input.BeginReadNested(ref immediateBuffer);
             string entryKey = "";
             pb::ByteString entryValue = pb::ByteString.Empty;
             uint ntag;
@@ -4249,11 +4275,11 @@ namespace ProtobufTestMessages.Proto3 {
               }
             }
             mapStringBytes_[entryKey] = entryValue;
-            input.EndReadNested(oldLimit);
+            input.EndReadNested(mapOldLimit);
             break;
           }
           case 570: {
-            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            var mapOldLimit = input.BeginReadNested(ref immediateBuffer);
             string entryKey = "";
             global::ProtobufTestMessages.Proto3.TestAllTypesProto3.Types.NestedMessage entryValue = null;
             uint ntag;
@@ -4264,7 +4290,9 @@ namespace ProtobufTestMessages.Proto3 {
                 if (entryValue == null) {
                   entryValue = new global::ProtobufTestMessages.Proto3.TestAllTypesProto3.Types.NestedMessage();
                 }
-                input.ReadMessage(entryValue, ref immediateBuffer);
+                var oldLimit = input.BeginReadNested(ref immediateBuffer);
+                entryValue.MergeFrom(input, ref immediateBuffer);
+                input.EndReadNested(oldLimit);
               } else {
                 input.SkipLastField(ref immediateBuffer);
               }
@@ -4273,11 +4301,11 @@ namespace ProtobufTestMessages.Proto3 {
               entryValue = new global::ProtobufTestMessages.Proto3.TestAllTypesProto3.Types.NestedMessage();
             }
             mapStringNestedMessage_[entryKey] = entryValue;
-            input.EndReadNested(oldLimit);
+            input.EndReadNested(mapOldLimit);
             break;
           }
           case 578: {
-            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            var mapOldLimit = input.BeginReadNested(ref immediateBuffer);
             string entryKey = "";
             global::ProtobufTestMessages.Proto3.ForeignMessage entryValue = null;
             uint ntag;
@@ -4288,7 +4316,9 @@ namespace ProtobufTestMessages.Proto3 {
                 if (entryValue == null) {
                   entryValue = new global::ProtobufTestMessages.Proto3.ForeignMessage();
                 }
-                input.ReadMessage(entryValue, ref immediateBuffer);
+                var oldLimit = input.BeginReadNested(ref immediateBuffer);
+                entryValue.MergeFrom(input, ref immediateBuffer);
+                input.EndReadNested(oldLimit);
               } else {
                 input.SkipLastField(ref immediateBuffer);
               }
@@ -4297,11 +4327,11 @@ namespace ProtobufTestMessages.Proto3 {
               entryValue = new global::ProtobufTestMessages.Proto3.ForeignMessage();
             }
             mapStringForeignMessage_[entryKey] = entryValue;
-            input.EndReadNested(oldLimit);
+            input.EndReadNested(mapOldLimit);
             break;
           }
           case 586: {
-            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            var mapOldLimit = input.BeginReadNested(ref immediateBuffer);
             string entryKey = "";
             global::ProtobufTestMessages.Proto3.TestAllTypesProto3.Types.NestedEnum entryValue = 0;
             uint ntag;
@@ -4315,11 +4345,11 @@ namespace ProtobufTestMessages.Proto3 {
               }
             }
             mapStringNestedEnum_[entryKey] = entryValue;
-            input.EndReadNested(oldLimit);
+            input.EndReadNested(mapOldLimit);
             break;
           }
           case 594: {
-            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            var mapOldLimit = input.BeginReadNested(ref immediateBuffer);
             string entryKey = "";
             global::ProtobufTestMessages.Proto3.ForeignEnum entryValue = 0;
             uint ntag;
@@ -4333,7 +4363,7 @@ namespace ProtobufTestMessages.Proto3 {
               }
             }
             mapStringForeignEnum_[entryKey] = entryValue;
-            input.EndReadNested(oldLimit);
+            input.EndReadNested(mapOldLimit);
             break;
           }
           case 888: {
@@ -4345,7 +4375,9 @@ namespace ProtobufTestMessages.Proto3 {
             if (oneofFieldCase_ == OneofFieldOneofCase.OneofNestedMessage) {
               subBuilder.MergeFrom(OneofNestedMessage);
             }
-            input.ReadMessage(subBuilder, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            subBuilder.MergeFrom(input, ref immediateBuffer);
+            input.EndReadNested(oldLimit);
             OneofNestedMessage = subBuilder;
             break;
           }
@@ -4481,84 +4513,96 @@ namespace ProtobufTestMessages.Proto3 {
             if (optionalDuration_ == null) {
               optionalDuration_ = new global::Google.Protobuf.WellKnownTypes.Duration();
             }
-            input.ReadMessage(optionalDuration_, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            optionalDuration_.MergeFrom(input, ref immediateBuffer);
+            input.EndReadNested(oldLimit);
             break;
           }
           case 2418: {
             if (optionalTimestamp_ == null) {
               optionalTimestamp_ = new global::Google.Protobuf.WellKnownTypes.Timestamp();
             }
-            input.ReadMessage(optionalTimestamp_, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            optionalTimestamp_.MergeFrom(input, ref immediateBuffer);
+            input.EndReadNested(oldLimit);
             break;
           }
           case 2426: {
             if (optionalFieldMask_ == null) {
               optionalFieldMask_ = new global::Google.Protobuf.WellKnownTypes.FieldMask();
             }
-            input.ReadMessage(optionalFieldMask_, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            optionalFieldMask_.MergeFrom(input, ref immediateBuffer);
+            input.EndReadNested(oldLimit);
             break;
           }
           case 2434: {
             if (optionalStruct_ == null) {
               optionalStruct_ = new global::Google.Protobuf.WellKnownTypes.Struct();
             }
-            input.ReadMessage(optionalStruct_, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            optionalStruct_.MergeFrom(input, ref immediateBuffer);
+            input.EndReadNested(oldLimit);
             break;
           }
           case 2442: {
             if (optionalAny_ == null) {
               optionalAny_ = new global::Google.Protobuf.WellKnownTypes.Any();
             }
-            input.ReadMessage(optionalAny_, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            optionalAny_.MergeFrom(input, ref immediateBuffer);
+            input.EndReadNested(oldLimit);
             break;
           }
           case 2450: {
             if (optionalValue_ == null) {
               optionalValue_ = new global::Google.Protobuf.WellKnownTypes.Value();
             }
-            input.ReadMessage(optionalValue_, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            optionalValue_.MergeFrom(input, ref immediateBuffer);
+            input.EndReadNested(oldLimit);
             break;
           }
           case 2490: {
-            var oldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.WellKnownTypes.Duration();
+            var repeatedOldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.WellKnownTypes.Duration();
             item.MergeFrom(input, ref immediateBuffer);
             repeatedDuration_.Add(item);
-            input.EndReadNested(oldLimit);
+            input.EndReadNested(repeatedOldLimit);
             break;
           }
           case 2498: {
-            var oldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.WellKnownTypes.Timestamp();
+            var repeatedOldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.WellKnownTypes.Timestamp();
             item.MergeFrom(input, ref immediateBuffer);
             repeatedTimestamp_.Add(item);
-            input.EndReadNested(oldLimit);
+            input.EndReadNested(repeatedOldLimit);
             break;
           }
           case 2506: {
-            var oldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.WellKnownTypes.FieldMask();
+            var repeatedOldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.WellKnownTypes.FieldMask();
             item.MergeFrom(input, ref immediateBuffer);
             repeatedFieldmask_.Add(item);
-            input.EndReadNested(oldLimit);
+            input.EndReadNested(repeatedOldLimit);
             break;
           }
           case 2522: {
-            var oldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.WellKnownTypes.Any();
+            var repeatedOldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.WellKnownTypes.Any();
             item.MergeFrom(input, ref immediateBuffer);
             repeatedAny_.Add(item);
-            input.EndReadNested(oldLimit);
+            input.EndReadNested(repeatedOldLimit);
             break;
           }
           case 2530: {
-            var oldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.WellKnownTypes.Value();
+            var repeatedOldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.WellKnownTypes.Value();
             item.MergeFrom(input, ref immediateBuffer);
             repeatedValue_.Add(item);
-            input.EndReadNested(oldLimit);
+            input.EndReadNested(repeatedOldLimit);
             break;
           }
           case 2594: {
-            var oldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.WellKnownTypes.Struct();
+            var repeatedOldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.WellKnownTypes.Struct();
             item.MergeFrom(input, ref immediateBuffer);
             repeatedStruct_.Add(item);
-            input.EndReadNested(oldLimit);
+            input.EndReadNested(repeatedOldLimit);
             break;
           }
           case 3208: {
@@ -4752,7 +4796,8 @@ namespace ProtobufTestMessages.Proto3 {
           }
           if (Corecursive != null) {
             output.WriteRawTag(18, ref immediateBuffer);
-            output.WriteMessage(Corecursive, ref immediateBuffer);
+            output.WriteLength(Corecursive.CalculateSize(), ref immediateBuffer);
+            Corecursive.WriteTo(output, ref immediateBuffer);
           }
           if (_unknownFields != null) {
             _unknownFields.WriteTo(output, ref immediateBuffer);
@@ -4809,7 +4854,9 @@ namespace ProtobufTestMessages.Proto3 {
                 if (corecursive_ == null) {
                   corecursive_ = new global::ProtobufTestMessages.Proto3.TestAllTypesProto3();
                 }
-                input.ReadMessage(corecursive_, ref immediateBuffer);
+                var oldLimit = input.BeginReadNested(ref immediateBuffer);
+                corecursive_.MergeFrom(input, ref immediateBuffer);
+                input.EndReadNested(oldLimit);
                 break;
               }
             }

@@ -200,11 +200,13 @@ namespace Google.Protobuf.Examples.AddressBook {
       }
       for (var i = 0; i < Phones.Count; i++) {
         output.WriteRawTag(34, ref immediateBuffer);
-        output.WriteMessage(Phones[i], ref immediateBuffer);
+        output.WriteLength(Phones[i].CalculateSize(), ref immediateBuffer);
+        Phones[i].WriteTo(output, ref immediateBuffer);
       }
       if (LastUpdated != null) {
         output.WriteRawTag(42, ref immediateBuffer);
-        output.WriteMessage(LastUpdated, ref immediateBuffer);
+        output.WriteLength(LastUpdated.CalculateSize(), ref immediateBuffer);
+        LastUpdated.WriteTo(output, ref immediateBuffer);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output, ref immediateBuffer);
@@ -282,17 +284,19 @@ namespace Google.Protobuf.Examples.AddressBook {
             break;
           }
           case 34: {
-            var oldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.Examples.AddressBook.Person.Types.PhoneNumber();
+            var repeatedOldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.Examples.AddressBook.Person.Types.PhoneNumber();
             item.MergeFrom(input, ref immediateBuffer);
             phones_.Add(item);
-            input.EndReadNested(oldLimit);
+            input.EndReadNested(repeatedOldLimit);
             break;
           }
           case 42: {
             if (lastUpdated_ == null) {
               lastUpdated_ = new global::Google.Protobuf.WellKnownTypes.Timestamp();
             }
-            input.ReadMessage(lastUpdated_, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            lastUpdated_.MergeFrom(input, ref immediateBuffer);
+            input.EndReadNested(oldLimit);
             break;
           }
         }
@@ -558,7 +562,8 @@ namespace Google.Protobuf.Examples.AddressBook {
     public void WriteTo(pb::CodedOutputStream output, ref global::System.Span<byte> immediateBuffer) {
       for (var i = 0; i < People.Count; i++) {
         output.WriteRawTag(10, ref immediateBuffer);
-        output.WriteMessage(People[i], ref immediateBuffer);
+        output.WriteLength(People[i].CalculateSize(), ref immediateBuffer);
+        People[i].WriteTo(output, ref immediateBuffer);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output, ref immediateBuffer);
@@ -597,10 +602,10 @@ namespace Google.Protobuf.Examples.AddressBook {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input, ref immediateBuffer);
             break;
           case 10: {
-            var oldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.Examples.AddressBook.Person();
+            var repeatedOldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.Examples.AddressBook.Person();
             item.MergeFrom(input, ref immediateBuffer);
             people_.Add(item);
-            input.EndReadNested(oldLimit);
+            input.EndReadNested(repeatedOldLimit);
             break;
           }
         }

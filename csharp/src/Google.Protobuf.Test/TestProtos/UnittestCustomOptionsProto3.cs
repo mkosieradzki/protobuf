@@ -1917,7 +1917,8 @@ namespace UnitTest.Issues.TestProtos {
     public void WriteTo(pb::CodedOutputStream output, ref global::System.Span<byte> immediateBuffer) {
       if (Bar != null) {
         output.WriteRawTag(10, ref immediateBuffer);
-        output.WriteMessage(Bar, ref immediateBuffer);
+        output.WriteLength(Bar.CalculateSize(), ref immediateBuffer);
+        Bar.WriteTo(output, ref immediateBuffer);
       }
       if (Baz != 0) {
         output.WriteRawTag(16, ref immediateBuffer);
@@ -1925,11 +1926,13 @@ namespace UnitTest.Issues.TestProtos {
       }
       if (Fred != null) {
         output.WriteRawTag(26, ref immediateBuffer);
-        output.WriteMessage(Fred, ref immediateBuffer);
+        output.WriteLength(Fred.CalculateSize(), ref immediateBuffer);
+        Fred.WriteTo(output, ref immediateBuffer);
       }
       for (var i = 0; i < Barney.Count; i++) {
         output.WriteRawTag(34, ref immediateBuffer);
-        output.WriteMessage(Barney[i], ref immediateBuffer);
+        output.WriteLength(Barney[i].CalculateSize(), ref immediateBuffer);
+        Barney[i].WriteTo(output, ref immediateBuffer);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output, ref immediateBuffer);
@@ -1995,7 +1998,9 @@ namespace UnitTest.Issues.TestProtos {
             if (bar_ == null) {
               bar_ = new global::UnitTest.Issues.TestProtos.ComplexOptionType1();
             }
-            input.ReadMessage(bar_, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            bar_.MergeFrom(input, ref immediateBuffer);
+            input.EndReadNested(oldLimit);
             break;
           }
           case 16: {
@@ -2006,14 +2011,16 @@ namespace UnitTest.Issues.TestProtos {
             if (fred_ == null) {
               fred_ = new global::UnitTest.Issues.TestProtos.ComplexOptionType2.Types.ComplexOptionType4();
             }
-            input.ReadMessage(fred_, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            fred_.MergeFrom(input, ref immediateBuffer);
+            input.EndReadNested(oldLimit);
             break;
           }
           case 34: {
-            var oldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::UnitTest.Issues.TestProtos.ComplexOptionType2.Types.ComplexOptionType4();
+            var repeatedOldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::UnitTest.Issues.TestProtos.ComplexOptionType2.Types.ComplexOptionType4();
             item.MergeFrom(input, ref immediateBuffer);
             barney_.Add(item);
-            input.EndReadNested(oldLimit);
+            input.EndReadNested(repeatedOldLimit);
             break;
           }
         }
@@ -2528,7 +2535,8 @@ namespace UnitTest.Issues.TestProtos {
       }
       if (Sub != null) {
         output.WriteRawTag(26, ref immediateBuffer);
-        output.WriteMessage(Sub, ref immediateBuffer);
+        output.WriteLength(Sub.CalculateSize(), ref immediateBuffer);
+        Sub.WriteTo(output, ref immediateBuffer);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output, ref immediateBuffer);
@@ -2595,7 +2603,9 @@ namespace UnitTest.Issues.TestProtos {
             if (sub_ == null) {
               sub_ = new global::UnitTest.Issues.TestProtos.Aggregate();
             }
-            input.ReadMessage(sub_, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            sub_.MergeFrom(input, ref immediateBuffer);
+            input.EndReadNested(oldLimit);
             break;
           }
         }

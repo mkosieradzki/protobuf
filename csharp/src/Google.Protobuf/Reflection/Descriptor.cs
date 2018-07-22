@@ -273,7 +273,8 @@ namespace Google.Protobuf.Reflection {
     public void WriteTo(pb::CodedOutputStream output, ref global::System.Span<byte> immediateBuffer) {
       for (var i = 0; i < File.Count; i++) {
         output.WriteRawTag(10, ref immediateBuffer);
-        output.WriteMessage(File[i], ref immediateBuffer);
+        output.WriteLength(File[i].CalculateSize(), ref immediateBuffer);
+        File[i].WriteTo(output, ref immediateBuffer);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output, ref immediateBuffer);
@@ -312,10 +313,10 @@ namespace Google.Protobuf.Reflection {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input, ref immediateBuffer);
             break;
           case 10: {
-            var oldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.Reflection.FileDescriptorProto();
+            var repeatedOldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.Reflection.FileDescriptorProto();
             item.MergeFrom(input, ref immediateBuffer);
             file_.Add(item);
-            input.EndReadNested(oldLimit);
+            input.EndReadNested(repeatedOldLimit);
             break;
           }
         }
@@ -610,27 +611,33 @@ namespace Google.Protobuf.Reflection {
       }
       for (var i = 0; i < MessageType.Count; i++) {
         output.WriteRawTag(34, ref immediateBuffer);
-        output.WriteMessage(MessageType[i], ref immediateBuffer);
+        output.WriteLength(MessageType[i].CalculateSize(), ref immediateBuffer);
+        MessageType[i].WriteTo(output, ref immediateBuffer);
       }
       for (var i = 0; i < EnumType.Count; i++) {
         output.WriteRawTag(42, ref immediateBuffer);
-        output.WriteMessage(EnumType[i], ref immediateBuffer);
+        output.WriteLength(EnumType[i].CalculateSize(), ref immediateBuffer);
+        EnumType[i].WriteTo(output, ref immediateBuffer);
       }
       for (var i = 0; i < Service.Count; i++) {
         output.WriteRawTag(50, ref immediateBuffer);
-        output.WriteMessage(Service[i], ref immediateBuffer);
+        output.WriteLength(Service[i].CalculateSize(), ref immediateBuffer);
+        Service[i].WriteTo(output, ref immediateBuffer);
       }
       for (var i = 0; i < Extension.Count; i++) {
         output.WriteRawTag(58, ref immediateBuffer);
-        output.WriteMessage(Extension[i], ref immediateBuffer);
+        output.WriteLength(Extension[i].CalculateSize(), ref immediateBuffer);
+        Extension[i].WriteTo(output, ref immediateBuffer);
       }
       if (Options != null) {
         output.WriteRawTag(66, ref immediateBuffer);
-        output.WriteMessage(Options, ref immediateBuffer);
+        output.WriteLength(Options.CalculateSize(), ref immediateBuffer);
+        Options.WriteTo(output, ref immediateBuffer);
       }
       if (SourceCodeInfo != null) {
         output.WriteRawTag(74, ref immediateBuffer);
-        output.WriteMessage(SourceCodeInfo, ref immediateBuffer);
+        output.WriteLength(SourceCodeInfo.CalculateSize(), ref immediateBuffer);
+        SourceCodeInfo.WriteTo(output, ref immediateBuffer);
       }
       if (Syntax.Length != 0) {
         output.WriteRawTag(98, ref immediateBuffer);
@@ -745,45 +752,49 @@ namespace Google.Protobuf.Reflection {
             break;
           }
           case 34: {
-            var oldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.Reflection.DescriptorProto();
+            var repeatedOldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.Reflection.DescriptorProto();
             item.MergeFrom(input, ref immediateBuffer);
             messageType_.Add(item);
-            input.EndReadNested(oldLimit);
+            input.EndReadNested(repeatedOldLimit);
             break;
           }
           case 42: {
-            var oldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.Reflection.EnumDescriptorProto();
+            var repeatedOldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.Reflection.EnumDescriptorProto();
             item.MergeFrom(input, ref immediateBuffer);
             enumType_.Add(item);
-            input.EndReadNested(oldLimit);
+            input.EndReadNested(repeatedOldLimit);
             break;
           }
           case 50: {
-            var oldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.Reflection.ServiceDescriptorProto();
+            var repeatedOldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.Reflection.ServiceDescriptorProto();
             item.MergeFrom(input, ref immediateBuffer);
             service_.Add(item);
-            input.EndReadNested(oldLimit);
+            input.EndReadNested(repeatedOldLimit);
             break;
           }
           case 58: {
-            var oldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.Reflection.FieldDescriptorProto();
+            var repeatedOldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.Reflection.FieldDescriptorProto();
             item.MergeFrom(input, ref immediateBuffer);
             extension_.Add(item);
-            input.EndReadNested(oldLimit);
+            input.EndReadNested(repeatedOldLimit);
             break;
           }
           case 66: {
             if (options_ == null) {
               options_ = new global::Google.Protobuf.Reflection.FileOptions();
             }
-            input.ReadMessage(options_, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            options_.MergeFrom(input, ref immediateBuffer);
+            input.EndReadNested(oldLimit);
             break;
           }
           case 74: {
             if (sourceCodeInfo_ == null) {
               sourceCodeInfo_ = new global::Google.Protobuf.Reflection.SourceCodeInfo();
             }
-            input.ReadMessage(sourceCodeInfo_, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            sourceCodeInfo_.MergeFrom(input, ref immediateBuffer);
+            input.EndReadNested(oldLimit);
             break;
           }
           case 82: {
@@ -1022,35 +1033,43 @@ namespace Google.Protobuf.Reflection {
       }
       for (var i = 0; i < Field.Count; i++) {
         output.WriteRawTag(18, ref immediateBuffer);
-        output.WriteMessage(Field[i], ref immediateBuffer);
+        output.WriteLength(Field[i].CalculateSize(), ref immediateBuffer);
+        Field[i].WriteTo(output, ref immediateBuffer);
       }
       for (var i = 0; i < Extension.Count; i++) {
         output.WriteRawTag(50, ref immediateBuffer);
-        output.WriteMessage(Extension[i], ref immediateBuffer);
+        output.WriteLength(Extension[i].CalculateSize(), ref immediateBuffer);
+        Extension[i].WriteTo(output, ref immediateBuffer);
       }
       for (var i = 0; i < NestedType.Count; i++) {
         output.WriteRawTag(26, ref immediateBuffer);
-        output.WriteMessage(NestedType[i], ref immediateBuffer);
+        output.WriteLength(NestedType[i].CalculateSize(), ref immediateBuffer);
+        NestedType[i].WriteTo(output, ref immediateBuffer);
       }
       for (var i = 0; i < EnumType.Count; i++) {
         output.WriteRawTag(34, ref immediateBuffer);
-        output.WriteMessage(EnumType[i], ref immediateBuffer);
+        output.WriteLength(EnumType[i].CalculateSize(), ref immediateBuffer);
+        EnumType[i].WriteTo(output, ref immediateBuffer);
       }
       for (var i = 0; i < ExtensionRange.Count; i++) {
         output.WriteRawTag(42, ref immediateBuffer);
-        output.WriteMessage(ExtensionRange[i], ref immediateBuffer);
+        output.WriteLength(ExtensionRange[i].CalculateSize(), ref immediateBuffer);
+        ExtensionRange[i].WriteTo(output, ref immediateBuffer);
       }
       for (var i = 0; i < OneofDecl.Count; i++) {
         output.WriteRawTag(66, ref immediateBuffer);
-        output.WriteMessage(OneofDecl[i], ref immediateBuffer);
+        output.WriteLength(OneofDecl[i].CalculateSize(), ref immediateBuffer);
+        OneofDecl[i].WriteTo(output, ref immediateBuffer);
       }
       if (Options != null) {
         output.WriteRawTag(58, ref immediateBuffer);
-        output.WriteMessage(Options, ref immediateBuffer);
+        output.WriteLength(Options.CalculateSize(), ref immediateBuffer);
+        Options.WriteTo(output, ref immediateBuffer);
       }
       for (var i = 0; i < ReservedRange.Count; i++) {
         output.WriteRawTag(74, ref immediateBuffer);
-        output.WriteMessage(ReservedRange[i], ref immediateBuffer);
+        output.WriteLength(ReservedRange[i].CalculateSize(), ref immediateBuffer);
+        ReservedRange[i].WriteTo(output, ref immediateBuffer);
       }
       for (var i = 0; i < ReservedName.Count; i++) {
         output.WriteRawTag(82, ref immediateBuffer);
@@ -1140,59 +1159,61 @@ namespace Google.Protobuf.Reflection {
             break;
           }
           case 18: {
-            var oldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.Reflection.FieldDescriptorProto();
+            var repeatedOldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.Reflection.FieldDescriptorProto();
             item.MergeFrom(input, ref immediateBuffer);
             field_.Add(item);
-            input.EndReadNested(oldLimit);
+            input.EndReadNested(repeatedOldLimit);
             break;
           }
           case 26: {
-            var oldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.Reflection.DescriptorProto();
+            var repeatedOldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.Reflection.DescriptorProto();
             item.MergeFrom(input, ref immediateBuffer);
             nestedType_.Add(item);
-            input.EndReadNested(oldLimit);
+            input.EndReadNested(repeatedOldLimit);
             break;
           }
           case 34: {
-            var oldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.Reflection.EnumDescriptorProto();
+            var repeatedOldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.Reflection.EnumDescriptorProto();
             item.MergeFrom(input, ref immediateBuffer);
             enumType_.Add(item);
-            input.EndReadNested(oldLimit);
+            input.EndReadNested(repeatedOldLimit);
             break;
           }
           case 42: {
-            var oldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.Reflection.DescriptorProto.Types.ExtensionRange();
+            var repeatedOldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.Reflection.DescriptorProto.Types.ExtensionRange();
             item.MergeFrom(input, ref immediateBuffer);
             extensionRange_.Add(item);
-            input.EndReadNested(oldLimit);
+            input.EndReadNested(repeatedOldLimit);
             break;
           }
           case 50: {
-            var oldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.Reflection.FieldDescriptorProto();
+            var repeatedOldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.Reflection.FieldDescriptorProto();
             item.MergeFrom(input, ref immediateBuffer);
             extension_.Add(item);
-            input.EndReadNested(oldLimit);
+            input.EndReadNested(repeatedOldLimit);
             break;
           }
           case 58: {
             if (options_ == null) {
               options_ = new global::Google.Protobuf.Reflection.MessageOptions();
             }
-            input.ReadMessage(options_, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            options_.MergeFrom(input, ref immediateBuffer);
+            input.EndReadNested(oldLimit);
             break;
           }
           case 66: {
-            var oldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.Reflection.OneofDescriptorProto();
+            var repeatedOldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.Reflection.OneofDescriptorProto();
             item.MergeFrom(input, ref immediateBuffer);
             oneofDecl_.Add(item);
-            input.EndReadNested(oldLimit);
+            input.EndReadNested(repeatedOldLimit);
             break;
           }
           case 74: {
-            var oldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.Reflection.DescriptorProto.Types.ReservedRange();
+            var repeatedOldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.Reflection.DescriptorProto.Types.ReservedRange();
             item.MergeFrom(input, ref immediateBuffer);
             reservedRange_.Add(item);
-            input.EndReadNested(oldLimit);
+            input.EndReadNested(repeatedOldLimit);
             break;
           }
           case 82: {
@@ -1326,7 +1347,8 @@ namespace Google.Protobuf.Reflection {
           }
           if (Options != null) {
             output.WriteRawTag(26, ref immediateBuffer);
-            output.WriteMessage(Options, ref immediateBuffer);
+            output.WriteLength(Options.CalculateSize(), ref immediateBuffer);
+            Options.WriteTo(output, ref immediateBuffer);
           }
           if (_unknownFields != null) {
             _unknownFields.WriteTo(output, ref immediateBuffer);
@@ -1393,7 +1415,9 @@ namespace Google.Protobuf.Reflection {
                 if (options_ == null) {
                   options_ = new global::Google.Protobuf.Reflection.ExtensionRangeOptions();
                 }
-                input.ReadMessage(options_, ref immediateBuffer);
+                var oldLimit = input.BeginReadNested(ref immediateBuffer);
+                options_.MergeFrom(input, ref immediateBuffer);
+                input.EndReadNested(oldLimit);
                 break;
               }
             }
@@ -1662,7 +1686,8 @@ namespace Google.Protobuf.Reflection {
     public void WriteTo(pb::CodedOutputStream output, ref global::System.Span<byte> immediateBuffer) {
       for (var i = 0; i < UninterpretedOption.Count; i++) {
         output.WriteRawTag(186, 62, ref immediateBuffer);
-        output.WriteMessage(UninterpretedOption[i], ref immediateBuffer);
+        output.WriteLength(UninterpretedOption[i].CalculateSize(), ref immediateBuffer);
+        UninterpretedOption[i].WriteTo(output, ref immediateBuffer);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output, ref immediateBuffer);
@@ -1701,10 +1726,10 @@ namespace Google.Protobuf.Reflection {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input, ref immediateBuffer);
             break;
           case 7994: {
-            var oldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.Reflection.UninterpretedOption();
+            var repeatedOldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.Reflection.UninterpretedOption();
             item.MergeFrom(input, ref immediateBuffer);
             uninterpretedOption_.Add(item);
-            input.EndReadNested(oldLimit);
+            input.EndReadNested(repeatedOldLimit);
             break;
           }
         }
@@ -1993,7 +2018,8 @@ namespace Google.Protobuf.Reflection {
       }
       if (Options != null) {
         output.WriteRawTag(66, ref immediateBuffer);
-        output.WriteMessage(Options, ref immediateBuffer);
+        output.WriteLength(Options.CalculateSize(), ref immediateBuffer);
+        Options.WriteTo(output, ref immediateBuffer);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output, ref immediateBuffer);
@@ -2122,7 +2148,9 @@ namespace Google.Protobuf.Reflection {
             if (options_ == null) {
               options_ = new global::Google.Protobuf.Reflection.FieldOptions();
             }
-            input.ReadMessage(options_, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            options_.MergeFrom(input, ref immediateBuffer);
+            input.EndReadNested(oldLimit);
             break;
           }
           case 72: {
@@ -2310,7 +2338,8 @@ namespace Google.Protobuf.Reflection {
       }
       if (Options != null) {
         output.WriteRawTag(18, ref immediateBuffer);
-        output.WriteMessage(Options, ref immediateBuffer);
+        output.WriteLength(Options.CalculateSize(), ref immediateBuffer);
+        Options.WriteTo(output, ref immediateBuffer);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output, ref immediateBuffer);
@@ -2367,7 +2396,9 @@ namespace Google.Protobuf.Reflection {
             if (options_ == null) {
               options_ = new global::Google.Protobuf.Reflection.OneofOptions();
             }
-            input.ReadMessage(options_, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            options_.MergeFrom(input, ref immediateBuffer);
+            input.EndReadNested(oldLimit);
             break;
           }
         }
@@ -2522,15 +2553,18 @@ namespace Google.Protobuf.Reflection {
       }
       for (var i = 0; i < Value.Count; i++) {
         output.WriteRawTag(18, ref immediateBuffer);
-        output.WriteMessage(Value[i], ref immediateBuffer);
+        output.WriteLength(Value[i].CalculateSize(), ref immediateBuffer);
+        Value[i].WriteTo(output, ref immediateBuffer);
       }
       if (Options != null) {
         output.WriteRawTag(26, ref immediateBuffer);
-        output.WriteMessage(Options, ref immediateBuffer);
+        output.WriteLength(Options.CalculateSize(), ref immediateBuffer);
+        Options.WriteTo(output, ref immediateBuffer);
       }
       for (var i = 0; i < ReservedRange.Count; i++) {
         output.WriteRawTag(34, ref immediateBuffer);
-        output.WriteMessage(ReservedRange[i], ref immediateBuffer);
+        output.WriteLength(ReservedRange[i].CalculateSize(), ref immediateBuffer);
+        ReservedRange[i].WriteTo(output, ref immediateBuffer);
       }
       for (var i = 0; i < ReservedName.Count; i++) {
         output.WriteRawTag(42, ref immediateBuffer);
@@ -2600,24 +2634,26 @@ namespace Google.Protobuf.Reflection {
             break;
           }
           case 18: {
-            var oldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.Reflection.EnumValueDescriptorProto();
+            var repeatedOldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.Reflection.EnumValueDescriptorProto();
             item.MergeFrom(input, ref immediateBuffer);
             value_.Add(item);
-            input.EndReadNested(oldLimit);
+            input.EndReadNested(repeatedOldLimit);
             break;
           }
           case 26: {
             if (options_ == null) {
               options_ = new global::Google.Protobuf.Reflection.EnumOptions();
             }
-            input.ReadMessage(options_, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            options_.MergeFrom(input, ref immediateBuffer);
+            input.EndReadNested(oldLimit);
             break;
           }
           case 34: {
-            var oldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.Reflection.EnumDescriptorProto.Types.EnumReservedRange();
+            var repeatedOldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.Reflection.EnumDescriptorProto.Types.EnumReservedRange();
             item.MergeFrom(input, ref immediateBuffer);
             reservedRange_.Add(item);
-            input.EndReadNested(oldLimit);
+            input.EndReadNested(repeatedOldLimit);
             break;
           }
           case 42: {
@@ -2934,7 +2970,8 @@ namespace Google.Protobuf.Reflection {
       }
       if (Options != null) {
         output.WriteRawTag(26, ref immediateBuffer);
-        output.WriteMessage(Options, ref immediateBuffer);
+        output.WriteLength(Options.CalculateSize(), ref immediateBuffer);
+        Options.WriteTo(output, ref immediateBuffer);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output, ref immediateBuffer);
@@ -3001,7 +3038,9 @@ namespace Google.Protobuf.Reflection {
             if (options_ == null) {
               options_ = new global::Google.Protobuf.Reflection.EnumValueOptions();
             }
-            input.ReadMessage(options_, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            options_.MergeFrom(input, ref immediateBuffer);
+            input.EndReadNested(oldLimit);
             break;
           }
         }
@@ -3125,11 +3164,13 @@ namespace Google.Protobuf.Reflection {
       }
       for (var i = 0; i < Method.Count; i++) {
         output.WriteRawTag(18, ref immediateBuffer);
-        output.WriteMessage(Method[i], ref immediateBuffer);
+        output.WriteLength(Method[i].CalculateSize(), ref immediateBuffer);
+        Method[i].WriteTo(output, ref immediateBuffer);
       }
       if (Options != null) {
         output.WriteRawTag(26, ref immediateBuffer);
-        output.WriteMessage(Options, ref immediateBuffer);
+        output.WriteLength(Options.CalculateSize(), ref immediateBuffer);
+        Options.WriteTo(output, ref immediateBuffer);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output, ref immediateBuffer);
@@ -3187,17 +3228,19 @@ namespace Google.Protobuf.Reflection {
             break;
           }
           case 18: {
-            var oldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.Reflection.MethodDescriptorProto();
+            var repeatedOldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.Reflection.MethodDescriptorProto();
             item.MergeFrom(input, ref immediateBuffer);
             method_.Add(item);
-            input.EndReadNested(oldLimit);
+            input.EndReadNested(repeatedOldLimit);
             break;
           }
           case 26: {
             if (options_ == null) {
               options_ = new global::Google.Protobuf.Reflection.ServiceOptions();
             }
-            input.ReadMessage(options_, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            options_.MergeFrom(input, ref immediateBuffer);
+            input.EndReadNested(oldLimit);
             break;
           }
         }
@@ -3384,7 +3427,8 @@ namespace Google.Protobuf.Reflection {
       }
       if (Options != null) {
         output.WriteRawTag(34, ref immediateBuffer);
-        output.WriteMessage(Options, ref immediateBuffer);
+        output.WriteLength(Options.CalculateSize(), ref immediateBuffer);
+        Options.WriteTo(output, ref immediateBuffer);
       }
       if (ClientStreaming != false) {
         output.WriteRawTag(40, ref immediateBuffer);
@@ -3481,7 +3525,9 @@ namespace Google.Protobuf.Reflection {
             if (options_ == null) {
               options_ = new global::Google.Protobuf.Reflection.MethodOptions();
             }
-            input.ReadMessage(options_, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            options_.MergeFrom(input, ref immediateBuffer);
+            input.EndReadNested(oldLimit);
             break;
           }
           case 40: {
@@ -4038,7 +4084,8 @@ namespace Google.Protobuf.Reflection {
       }
       for (var i = 0; i < UninterpretedOption.Count; i++) {
         output.WriteRawTag(186, 62, ref immediateBuffer);
-        output.WriteMessage(UninterpretedOption[i], ref immediateBuffer);
+        output.WriteLength(UninterpretedOption[i].CalculateSize(), ref immediateBuffer);
+        UninterpretedOption[i].WriteTo(output, ref immediateBuffer);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output, ref immediateBuffer);
@@ -4277,10 +4324,10 @@ namespace Google.Protobuf.Reflection {
             break;
           }
           case 7994: {
-            var oldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.Reflection.UninterpretedOption();
+            var repeatedOldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.Reflection.UninterpretedOption();
             item.MergeFrom(input, ref immediateBuffer);
             uninterpretedOption_.Add(item);
-            input.EndReadNested(oldLimit);
+            input.EndReadNested(repeatedOldLimit);
             break;
           }
         }
@@ -4525,7 +4572,8 @@ namespace Google.Protobuf.Reflection {
       }
       for (var i = 0; i < UninterpretedOption.Count; i++) {
         output.WriteRawTag(186, 62, ref immediateBuffer);
-        output.WriteMessage(UninterpretedOption[i], ref immediateBuffer);
+        output.WriteLength(UninterpretedOption[i].CalculateSize(), ref immediateBuffer);
+        UninterpretedOption[i].WriteTo(output, ref immediateBuffer);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output, ref immediateBuffer);
@@ -4604,10 +4652,10 @@ namespace Google.Protobuf.Reflection {
             break;
           }
           case 7994: {
-            var oldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.Reflection.UninterpretedOption();
+            var repeatedOldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.Reflection.UninterpretedOption();
             item.MergeFrom(input, ref immediateBuffer);
             uninterpretedOption_.Add(item);
-            input.EndReadNested(oldLimit);
+            input.EndReadNested(repeatedOldLimit);
             break;
           }
         }
@@ -4873,7 +4921,8 @@ namespace Google.Protobuf.Reflection {
       }
       for (var i = 0; i < UninterpretedOption.Count; i++) {
         output.WriteRawTag(186, 62, ref immediateBuffer);
-        output.WriteMessage(UninterpretedOption[i], ref immediateBuffer);
+        output.WriteLength(UninterpretedOption[i].CalculateSize(), ref immediateBuffer);
+        UninterpretedOption[i].WriteTo(output, ref immediateBuffer);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output, ref immediateBuffer);
@@ -4972,10 +5021,10 @@ namespace Google.Protobuf.Reflection {
             break;
           }
           case 7994: {
-            var oldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.Reflection.UninterpretedOption();
+            var repeatedOldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.Reflection.UninterpretedOption();
             item.MergeFrom(input, ref immediateBuffer);
             uninterpretedOption_.Add(item);
-            input.EndReadNested(oldLimit);
+            input.EndReadNested(repeatedOldLimit);
             break;
           }
         }
@@ -5100,7 +5149,8 @@ namespace Google.Protobuf.Reflection {
     public void WriteTo(pb::CodedOutputStream output, ref global::System.Span<byte> immediateBuffer) {
       for (var i = 0; i < UninterpretedOption.Count; i++) {
         output.WriteRawTag(186, 62, ref immediateBuffer);
-        output.WriteMessage(UninterpretedOption[i], ref immediateBuffer);
+        output.WriteLength(UninterpretedOption[i].CalculateSize(), ref immediateBuffer);
+        UninterpretedOption[i].WriteTo(output, ref immediateBuffer);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output, ref immediateBuffer);
@@ -5139,10 +5189,10 @@ namespace Google.Protobuf.Reflection {
             CustomOptions = CustomOptions.ReadOrSkipUnknownField(input, ref immediateBuffer);
             break;
           case 7994: {
-            var oldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.Reflection.UninterpretedOption();
+            var repeatedOldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.Reflection.UninterpretedOption();
             item.MergeFrom(input, ref immediateBuffer);
             uninterpretedOption_.Add(item);
-            input.EndReadNested(oldLimit);
+            input.EndReadNested(repeatedOldLimit);
             break;
           }
         }
@@ -5282,7 +5332,8 @@ namespace Google.Protobuf.Reflection {
       }
       for (var i = 0; i < UninterpretedOption.Count; i++) {
         output.WriteRawTag(186, 62, ref immediateBuffer);
-        output.WriteMessage(UninterpretedOption[i], ref immediateBuffer);
+        output.WriteLength(UninterpretedOption[i].CalculateSize(), ref immediateBuffer);
+        UninterpretedOption[i].WriteTo(output, ref immediateBuffer);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output, ref immediateBuffer);
@@ -5341,10 +5392,10 @@ namespace Google.Protobuf.Reflection {
             break;
           }
           case 7994: {
-            var oldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.Reflection.UninterpretedOption();
+            var repeatedOldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.Reflection.UninterpretedOption();
             item.MergeFrom(input, ref immediateBuffer);
             uninterpretedOption_.Add(item);
-            input.EndReadNested(oldLimit);
+            input.EndReadNested(repeatedOldLimit);
             break;
           }
         }
@@ -5462,7 +5513,8 @@ namespace Google.Protobuf.Reflection {
       }
       for (var i = 0; i < UninterpretedOption.Count; i++) {
         output.WriteRawTag(186, 62, ref immediateBuffer);
-        output.WriteMessage(UninterpretedOption[i], ref immediateBuffer);
+        output.WriteLength(UninterpretedOption[i].CalculateSize(), ref immediateBuffer);
+        UninterpretedOption[i].WriteTo(output, ref immediateBuffer);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output, ref immediateBuffer);
@@ -5511,10 +5563,10 @@ namespace Google.Protobuf.Reflection {
             break;
           }
           case 7994: {
-            var oldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.Reflection.UninterpretedOption();
+            var repeatedOldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.Reflection.UninterpretedOption();
             item.MergeFrom(input, ref immediateBuffer);
             uninterpretedOption_.Add(item);
-            input.EndReadNested(oldLimit);
+            input.EndReadNested(repeatedOldLimit);
             break;
           }
         }
@@ -5632,7 +5684,8 @@ namespace Google.Protobuf.Reflection {
       }
       for (var i = 0; i < UninterpretedOption.Count; i++) {
         output.WriteRawTag(186, 62, ref immediateBuffer);
-        output.WriteMessage(UninterpretedOption[i], ref immediateBuffer);
+        output.WriteLength(UninterpretedOption[i].CalculateSize(), ref immediateBuffer);
+        UninterpretedOption[i].WriteTo(output, ref immediateBuffer);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output, ref immediateBuffer);
@@ -5681,10 +5734,10 @@ namespace Google.Protobuf.Reflection {
             break;
           }
           case 7994: {
-            var oldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.Reflection.UninterpretedOption();
+            var repeatedOldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.Reflection.UninterpretedOption();
             item.MergeFrom(input, ref immediateBuffer);
             uninterpretedOption_.Add(item);
-            input.EndReadNested(oldLimit);
+            input.EndReadNested(repeatedOldLimit);
             break;
           }
         }
@@ -5820,7 +5873,8 @@ namespace Google.Protobuf.Reflection {
       }
       for (var i = 0; i < UninterpretedOption.Count; i++) {
         output.WriteRawTag(186, 62, ref immediateBuffer);
-        output.WriteMessage(UninterpretedOption[i], ref immediateBuffer);
+        output.WriteLength(UninterpretedOption[i].CalculateSize(), ref immediateBuffer);
+        UninterpretedOption[i].WriteTo(output, ref immediateBuffer);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output, ref immediateBuffer);
@@ -5879,10 +5933,10 @@ namespace Google.Protobuf.Reflection {
             break;
           }
           case 7994: {
-            var oldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.Reflection.UninterpretedOption();
+            var repeatedOldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.Reflection.UninterpretedOption();
             item.MergeFrom(input, ref immediateBuffer);
             uninterpretedOption_.Add(item);
-            input.EndReadNested(oldLimit);
+            input.EndReadNested(repeatedOldLimit);
             break;
           }
         }
@@ -6091,7 +6145,8 @@ namespace Google.Protobuf.Reflection {
     public void WriteTo(pb::CodedOutputStream output, ref global::System.Span<byte> immediateBuffer) {
       for (var i = 0; i < Name.Count; i++) {
         output.WriteRawTag(18, ref immediateBuffer);
-        output.WriteMessage(Name[i], ref immediateBuffer);
+        output.WriteLength(Name[i].CalculateSize(), ref immediateBuffer);
+        Name[i].WriteTo(output, ref immediateBuffer);
       }
       if (IdentifierValue.Length != 0) {
         output.WriteRawTag(26, ref immediateBuffer);
@@ -6190,10 +6245,10 @@ namespace Google.Protobuf.Reflection {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input, ref immediateBuffer);
             break;
           case 18: {
-            var oldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.Reflection.UninterpretedOption.Types.NamePart();
+            var repeatedOldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.Reflection.UninterpretedOption.Types.NamePart();
             item.MergeFrom(input, ref immediateBuffer);
             name_.Add(item);
-            input.EndReadNested(oldLimit);
+            input.EndReadNested(repeatedOldLimit);
             break;
           }
           case 26: {
@@ -6530,7 +6585,8 @@ namespace Google.Protobuf.Reflection {
     public void WriteTo(pb::CodedOutputStream output, ref global::System.Span<byte> immediateBuffer) {
       for (var i = 0; i < Location.Count; i++) {
         output.WriteRawTag(10, ref immediateBuffer);
-        output.WriteMessage(Location[i], ref immediateBuffer);
+        output.WriteLength(Location[i].CalculateSize(), ref immediateBuffer);
+        Location[i].WriteTo(output, ref immediateBuffer);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output, ref immediateBuffer);
@@ -6569,10 +6625,10 @@ namespace Google.Protobuf.Reflection {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input, ref immediateBuffer);
             break;
           case 10: {
-            var oldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.Reflection.SourceCodeInfo.Types.Location();
+            var repeatedOldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.Reflection.SourceCodeInfo.Types.Location();
             item.MergeFrom(input, ref immediateBuffer);
             location_.Add(item);
-            input.EndReadNested(oldLimit);
+            input.EndReadNested(repeatedOldLimit);
             break;
           }
         }
@@ -7040,7 +7096,8 @@ namespace Google.Protobuf.Reflection {
     public void WriteTo(pb::CodedOutputStream output, ref global::System.Span<byte> immediateBuffer) {
       for (var i = 0; i < Annotation.Count; i++) {
         output.WriteRawTag(10, ref immediateBuffer);
-        output.WriteMessage(Annotation[i], ref immediateBuffer);
+        output.WriteLength(Annotation[i].CalculateSize(), ref immediateBuffer);
+        Annotation[i].WriteTo(output, ref immediateBuffer);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output, ref immediateBuffer);
@@ -7079,10 +7136,10 @@ namespace Google.Protobuf.Reflection {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input, ref immediateBuffer);
             break;
           case 10: {
-            var oldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.Reflection.GeneratedCodeInfo.Types.Annotation();
+            var repeatedOldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.Reflection.GeneratedCodeInfo.Types.Annotation();
             item.MergeFrom(input, ref immediateBuffer);
             annotation_.Add(item);
-            input.EndReadNested(oldLimit);
+            input.EndReadNested(repeatedOldLimit);
             break;
           }
         }
