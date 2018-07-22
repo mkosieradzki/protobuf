@@ -34,6 +34,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Security;
 using System.Text;
 #if !NET35
 using System.Threading;
@@ -53,30 +54,6 @@ namespace Google.Protobuf
         private static readonly ByteString empty = new ByteString(new byte[0]);
 
         private readonly byte[] bytes;
-
-        /// <summary>
-        /// Unsafe operations that can cause IO Failure and/or other catestrophic side-effects.
-        /// </summary>
-        internal static class Unsafe
-        {
-            /// <summary>
-            /// Constructs a new ByteString from the given byte array. The array is
-            /// *not* copied, and must not be modified after this constructor is called.
-            /// </summary>
-            internal static ByteString FromBytes(byte[] bytes)
-            {
-                return new ByteString(bytes);
-            }
-
-            /// <summary>
-            /// Provides direct, unrestricted access to the bytes contained in this instance.
-            /// You must not modify or resize the byte array returned by this method.
-            /// </summary>
-            internal static byte[] GetBuffer(ByteString bytes)
-            {
-                return bytes.bytes;
-            }
-        }
 
         /// <summary>
         /// Internal use only.  Ensure that the provided array is not mutated and belongs to this instance.
@@ -120,6 +97,11 @@ namespace Google.Protobuf
         }
 
         /// <summary>
+        /// Returns data as Span (the most efficient and secure to access data)
+        /// </summary>
+        public ReadOnlySpan<byte> Span => bytes;
+
+        /// <summary>
         /// Converts this <see cref="ByteString"/> into a byte array.
         /// </summary>
         /// <remarks>The data is copied - changes to the returned array will not be reflected in this <c>ByteString</c>.</remarks>
@@ -161,7 +143,7 @@ namespace Google.Protobuf
             int capacity = stream.CanSeek ? checked((int) (stream.Length - stream.Position)) : 0;
             var memoryStream = new MemoryStream(capacity);
             stream.CopyTo(memoryStream);
-#if NETSTANDARD1_0
+#if NETSTANDARD1_1
             byte[] bytes = memoryStream.ToArray();
 #else
             // Avoid an extra copy if we can.
@@ -187,7 +169,7 @@ namespace Google.Protobuf
             // We have to specify the buffer size here, as there's no overload accepting the cancellation token
             // alone. But it's documented to use 81920 by default if not specified.
             await stream.CopyToAsync(memoryStream, 81920, cancellationToken);
-#if NETSTANDARD1_0
+#if NETSTANDARD1_1
             byte[] bytes = memoryStream.ToArray();
 #else
             // Avoid an extra copy if we can.
@@ -207,6 +189,17 @@ namespace Google.Protobuf
         public static ByteString CopyFrom(params byte[] bytes)
         {
             return new ByteString((byte[]) bytes.Clone());
+        }
+
+        /// <summary>
+        /// Constructs a <see cref="ByteString" /> from the read only span. The contents
+        /// are copied, so further modifications to the span will not
+        /// be reflected in the returned ByteString.
+        /// </summary>
+        [SecurityCritical]
+        public static ByteString CopyFrom(ReadOnlySpan<byte> bytes)
+        {
+            return new ByteString(bytes.ToArray());
         }
 
         /// <summary>
@@ -377,10 +370,8 @@ namespace Google.Protobuf
         /// <summary>
         /// Used internally by CodedOutputStream to avoid creating a copy for the write
         /// </summary>
-        internal void WriteRawBytesTo(CodedOutputStream outputStream)
-        {
-            outputStream.WriteRawBytes(bytes, 0, bytes.Length);
-        }
+        [SecurityCritical]
+        internal void WriteRawBytesTo(CodedOutputStream outputStream, ref Span<byte> immediateBuffer) => outputStream.WriteRawBytes(bytes, ref immediateBuffer);
 
         /// <summary>
         /// Copies the entire byte array to the destination array provided at the offset specified.
