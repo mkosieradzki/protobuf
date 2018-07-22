@@ -750,7 +750,8 @@ namespace Google.Protobuf.TestProtos {
         }
         if (entry.Value != null) {
           output.WriteRawTag(18, ref immediateBuffer);
-          output.WriteMessage(entry.Value, ref immediateBuffer);
+          output.WriteLength(entry.Value.CalculateSize(), ref immediateBuffer);
+          entry.Value.WriteTo(output, ref immediateBuffer);
         }
       }
       if (_unknownFields != null) {
@@ -973,7 +974,7 @@ namespace Google.Protobuf.TestProtos {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input, ref immediateBuffer);
             break;
           case 10: {
-            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            var mapOldLimit = input.BeginReadNested(ref immediateBuffer);
             int entryKey = 0;
             int entryValue = 0;
             uint ntag;
@@ -987,11 +988,11 @@ namespace Google.Protobuf.TestProtos {
               }
             }
             mapInt32Int32_[entryKey] = entryValue;
-            input.EndReadNested(oldLimit);
+            input.EndReadNested(mapOldLimit);
             break;
           }
           case 18: {
-            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            var mapOldLimit = input.BeginReadNested(ref immediateBuffer);
             long entryKey = 0L;
             long entryValue = 0L;
             uint ntag;
@@ -1005,11 +1006,11 @@ namespace Google.Protobuf.TestProtos {
               }
             }
             mapInt64Int64_[entryKey] = entryValue;
-            input.EndReadNested(oldLimit);
+            input.EndReadNested(mapOldLimit);
             break;
           }
           case 26: {
-            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            var mapOldLimit = input.BeginReadNested(ref immediateBuffer);
             uint entryKey = 0;
             uint entryValue = 0;
             uint ntag;
@@ -1023,11 +1024,11 @@ namespace Google.Protobuf.TestProtos {
               }
             }
             mapUint32Uint32_[entryKey] = entryValue;
-            input.EndReadNested(oldLimit);
+            input.EndReadNested(mapOldLimit);
             break;
           }
           case 34: {
-            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            var mapOldLimit = input.BeginReadNested(ref immediateBuffer);
             ulong entryKey = 0UL;
             ulong entryValue = 0UL;
             uint ntag;
@@ -1041,11 +1042,11 @@ namespace Google.Protobuf.TestProtos {
               }
             }
             mapUint64Uint64_[entryKey] = entryValue;
-            input.EndReadNested(oldLimit);
+            input.EndReadNested(mapOldLimit);
             break;
           }
           case 42: {
-            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            var mapOldLimit = input.BeginReadNested(ref immediateBuffer);
             int entryKey = 0;
             int entryValue = 0;
             uint ntag;
@@ -1059,11 +1060,11 @@ namespace Google.Protobuf.TestProtos {
               }
             }
             mapSint32Sint32_[entryKey] = entryValue;
-            input.EndReadNested(oldLimit);
+            input.EndReadNested(mapOldLimit);
             break;
           }
           case 50: {
-            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            var mapOldLimit = input.BeginReadNested(ref immediateBuffer);
             long entryKey = 0L;
             long entryValue = 0L;
             uint ntag;
@@ -1077,11 +1078,11 @@ namespace Google.Protobuf.TestProtos {
               }
             }
             mapSint64Sint64_[entryKey] = entryValue;
-            input.EndReadNested(oldLimit);
+            input.EndReadNested(mapOldLimit);
             break;
           }
           case 58: {
-            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            var mapOldLimit = input.BeginReadNested(ref immediateBuffer);
             uint entryKey = 0;
             uint entryValue = 0;
             uint ntag;
@@ -1095,11 +1096,11 @@ namespace Google.Protobuf.TestProtos {
               }
             }
             mapFixed32Fixed32_[entryKey] = entryValue;
-            input.EndReadNested(oldLimit);
+            input.EndReadNested(mapOldLimit);
             break;
           }
           case 66: {
-            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            var mapOldLimit = input.BeginReadNested(ref immediateBuffer);
             ulong entryKey = 0UL;
             ulong entryValue = 0UL;
             uint ntag;
@@ -1113,11 +1114,11 @@ namespace Google.Protobuf.TestProtos {
               }
             }
             mapFixed64Fixed64_[entryKey] = entryValue;
-            input.EndReadNested(oldLimit);
+            input.EndReadNested(mapOldLimit);
             break;
           }
           case 74: {
-            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            var mapOldLimit = input.BeginReadNested(ref immediateBuffer);
             int entryKey = 0;
             int entryValue = 0;
             uint ntag;
@@ -1131,11 +1132,11 @@ namespace Google.Protobuf.TestProtos {
               }
             }
             mapSfixed32Sfixed32_[entryKey] = entryValue;
-            input.EndReadNested(oldLimit);
+            input.EndReadNested(mapOldLimit);
             break;
           }
           case 82: {
-            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            var mapOldLimit = input.BeginReadNested(ref immediateBuffer);
             long entryKey = 0L;
             long entryValue = 0L;
             uint ntag;
@@ -1149,11 +1150,11 @@ namespace Google.Protobuf.TestProtos {
               }
             }
             mapSfixed64Sfixed64_[entryKey] = entryValue;
-            input.EndReadNested(oldLimit);
+            input.EndReadNested(mapOldLimit);
             break;
           }
           case 90: {
-            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            var mapOldLimit = input.BeginReadNested(ref immediateBuffer);
             int entryKey = 0;
             float entryValue = 0F;
             uint ntag;
@@ -1167,11 +1168,11 @@ namespace Google.Protobuf.TestProtos {
               }
             }
             mapInt32Float_[entryKey] = entryValue;
-            input.EndReadNested(oldLimit);
+            input.EndReadNested(mapOldLimit);
             break;
           }
           case 98: {
-            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            var mapOldLimit = input.BeginReadNested(ref immediateBuffer);
             int entryKey = 0;
             double entryValue = 0D;
             uint ntag;
@@ -1185,11 +1186,11 @@ namespace Google.Protobuf.TestProtos {
               }
             }
             mapInt32Double_[entryKey] = entryValue;
-            input.EndReadNested(oldLimit);
+            input.EndReadNested(mapOldLimit);
             break;
           }
           case 106: {
-            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            var mapOldLimit = input.BeginReadNested(ref immediateBuffer);
             bool entryKey = false;
             bool entryValue = false;
             uint ntag;
@@ -1203,11 +1204,11 @@ namespace Google.Protobuf.TestProtos {
               }
             }
             mapBoolBool_[entryKey] = entryValue;
-            input.EndReadNested(oldLimit);
+            input.EndReadNested(mapOldLimit);
             break;
           }
           case 114: {
-            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            var mapOldLimit = input.BeginReadNested(ref immediateBuffer);
             string entryKey = "";
             string entryValue = "";
             uint ntag;
@@ -1221,11 +1222,11 @@ namespace Google.Protobuf.TestProtos {
               }
             }
             mapStringString_[entryKey] = entryValue;
-            input.EndReadNested(oldLimit);
+            input.EndReadNested(mapOldLimit);
             break;
           }
           case 122: {
-            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            var mapOldLimit = input.BeginReadNested(ref immediateBuffer);
             int entryKey = 0;
             pb::ByteString entryValue = pb::ByteString.Empty;
             uint ntag;
@@ -1239,11 +1240,11 @@ namespace Google.Protobuf.TestProtos {
               }
             }
             mapInt32Bytes_[entryKey] = entryValue;
-            input.EndReadNested(oldLimit);
+            input.EndReadNested(mapOldLimit);
             break;
           }
           case 130: {
-            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            var mapOldLimit = input.BeginReadNested(ref immediateBuffer);
             int entryKey = 0;
             global::Google.Protobuf.TestProtos.MapEnum entryValue = 0;
             uint ntag;
@@ -1257,11 +1258,11 @@ namespace Google.Protobuf.TestProtos {
               }
             }
             mapInt32Enum_[entryKey] = entryValue;
-            input.EndReadNested(oldLimit);
+            input.EndReadNested(mapOldLimit);
             break;
           }
           case 138: {
-            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            var mapOldLimit = input.BeginReadNested(ref immediateBuffer);
             int entryKey = 0;
             global::Google.Protobuf.TestProtos.ForeignMessage entryValue = null;
             uint ntag;
@@ -1272,7 +1273,9 @@ namespace Google.Protobuf.TestProtos {
                 if (entryValue == null) {
                   entryValue = new global::Google.Protobuf.TestProtos.ForeignMessage();
                 }
-                input.ReadMessage(entryValue, ref immediateBuffer);
+                var oldLimit = input.BeginReadNested(ref immediateBuffer);
+                entryValue.MergeFrom(input, ref immediateBuffer);
+                input.EndReadNested(oldLimit);
               } else {
                 input.SkipLastField(ref immediateBuffer);
               }
@@ -1281,7 +1284,7 @@ namespace Google.Protobuf.TestProtos {
               entryValue = new global::Google.Protobuf.TestProtos.ForeignMessage();
             }
             mapInt32ForeignMessage_[entryKey] = entryValue;
-            input.EndReadNested(oldLimit);
+            input.EndReadNested(mapOldLimit);
             break;
           }
         }
@@ -1373,7 +1376,8 @@ namespace Google.Protobuf.TestProtos {
     public void WriteTo(pb::CodedOutputStream output, ref global::System.Span<byte> immediateBuffer) {
       if (TestMap != null) {
         output.WriteRawTag(10, ref immediateBuffer);
-        output.WriteMessage(TestMap, ref immediateBuffer);
+        output.WriteLength(TestMap.CalculateSize(), ref immediateBuffer);
+        TestMap.WriteTo(output, ref immediateBuffer);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output, ref immediateBuffer);
@@ -1420,7 +1424,9 @@ namespace Google.Protobuf.TestProtos {
             if (testMap_ == null) {
               testMap_ = new global::Google.Protobuf.TestProtos.TestMap();
             }
-            input.ReadMessage(testMap_, ref immediateBuffer);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            testMap_.MergeFrom(input, ref immediateBuffer);
+            input.EndReadNested(oldLimit);
             break;
           }
         }
@@ -1523,7 +1529,8 @@ namespace Google.Protobuf.TestProtos {
         }
         if (entry.Value != null) {
           output.WriteRawTag(18, ref immediateBuffer);
-          output.WriteMessage(entry.Value, ref immediateBuffer);
+          output.WriteLength(entry.Value.CalculateSize(), ref immediateBuffer);
+          entry.Value.WriteTo(output, ref immediateBuffer);
         }
       }
       if (_unknownFields != null) {
@@ -1570,7 +1577,7 @@ namespace Google.Protobuf.TestProtos {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input, ref immediateBuffer);
             break;
           case 10: {
-            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            var mapOldLimit = input.BeginReadNested(ref immediateBuffer);
             int entryKey = 0;
             global::Google.Protobuf.TestProtos.TestAllTypes entryValue = null;
             uint ntag;
@@ -1581,7 +1588,9 @@ namespace Google.Protobuf.TestProtos {
                 if (entryValue == null) {
                   entryValue = new global::Google.Protobuf.TestProtos.TestAllTypes();
                 }
-                input.ReadMessage(entryValue, ref immediateBuffer);
+                var oldLimit = input.BeginReadNested(ref immediateBuffer);
+                entryValue.MergeFrom(input, ref immediateBuffer);
+                input.EndReadNested(oldLimit);
               } else {
                 input.SkipLastField(ref immediateBuffer);
               }
@@ -1590,7 +1599,7 @@ namespace Google.Protobuf.TestProtos {
               entryValue = new global::Google.Protobuf.TestProtos.TestAllTypes();
             }
             mapInt32Message_[entryKey] = entryValue;
-            input.EndReadNested(oldLimit);
+            input.EndReadNested(mapOldLimit);
             break;
           }
         }
@@ -1784,7 +1793,7 @@ namespace Google.Protobuf.TestProtos {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input, ref immediateBuffer);
             break;
           case 10: {
-            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            var mapOldLimit = input.BeginReadNested(ref immediateBuffer);
             int entryKey = 0;
             int entryValue = 0;
             uint ntag;
@@ -1798,11 +1807,11 @@ namespace Google.Protobuf.TestProtos {
               }
             }
             map1_[entryKey] = entryValue;
-            input.EndReadNested(oldLimit);
+            input.EndReadNested(mapOldLimit);
             break;
           }
           case 18: {
-            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            var mapOldLimit = input.BeginReadNested(ref immediateBuffer);
             int entryKey = 0;
             int entryValue = 0;
             uint ntag;
@@ -1816,7 +1825,7 @@ namespace Google.Protobuf.TestProtos {
               }
             }
             map2_[entryKey] = entryValue;
-            input.EndReadNested(oldLimit);
+            input.EndReadNested(mapOldLimit);
             break;
           }
         }
@@ -2339,7 +2348,8 @@ namespace Google.Protobuf.TestProtos {
         }
         if (entry.Value != null) {
           output.WriteRawTag(18, ref immediateBuffer);
-          output.WriteMessage(entry.Value, ref immediateBuffer);
+          output.WriteLength(entry.Value.CalculateSize(), ref immediateBuffer);
+          entry.Value.WriteTo(output, ref immediateBuffer);
         }
       }
       if (_unknownFields != null) {
@@ -2540,7 +2550,7 @@ namespace Google.Protobuf.TestProtos {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input, ref immediateBuffer);
             break;
           case 10: {
-            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            var mapOldLimit = input.BeginReadNested(ref immediateBuffer);
             int entryKey = 0;
             int entryValue = 0;
             uint ntag;
@@ -2554,11 +2564,11 @@ namespace Google.Protobuf.TestProtos {
               }
             }
             mapInt32Int32_[entryKey] = entryValue;
-            input.EndReadNested(oldLimit);
+            input.EndReadNested(mapOldLimit);
             break;
           }
           case 18: {
-            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            var mapOldLimit = input.BeginReadNested(ref immediateBuffer);
             long entryKey = 0L;
             long entryValue = 0L;
             uint ntag;
@@ -2572,11 +2582,11 @@ namespace Google.Protobuf.TestProtos {
               }
             }
             mapInt64Int64_[entryKey] = entryValue;
-            input.EndReadNested(oldLimit);
+            input.EndReadNested(mapOldLimit);
             break;
           }
           case 26: {
-            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            var mapOldLimit = input.BeginReadNested(ref immediateBuffer);
             uint entryKey = 0;
             uint entryValue = 0;
             uint ntag;
@@ -2590,11 +2600,11 @@ namespace Google.Protobuf.TestProtos {
               }
             }
             mapUint32Uint32_[entryKey] = entryValue;
-            input.EndReadNested(oldLimit);
+            input.EndReadNested(mapOldLimit);
             break;
           }
           case 34: {
-            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            var mapOldLimit = input.BeginReadNested(ref immediateBuffer);
             ulong entryKey = 0UL;
             ulong entryValue = 0UL;
             uint ntag;
@@ -2608,11 +2618,11 @@ namespace Google.Protobuf.TestProtos {
               }
             }
             mapUint64Uint64_[entryKey] = entryValue;
-            input.EndReadNested(oldLimit);
+            input.EndReadNested(mapOldLimit);
             break;
           }
           case 42: {
-            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            var mapOldLimit = input.BeginReadNested(ref immediateBuffer);
             int entryKey = 0;
             int entryValue = 0;
             uint ntag;
@@ -2626,11 +2636,11 @@ namespace Google.Protobuf.TestProtos {
               }
             }
             mapSint32Sint32_[entryKey] = entryValue;
-            input.EndReadNested(oldLimit);
+            input.EndReadNested(mapOldLimit);
             break;
           }
           case 50: {
-            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            var mapOldLimit = input.BeginReadNested(ref immediateBuffer);
             long entryKey = 0L;
             long entryValue = 0L;
             uint ntag;
@@ -2644,11 +2654,11 @@ namespace Google.Protobuf.TestProtos {
               }
             }
             mapSint64Sint64_[entryKey] = entryValue;
-            input.EndReadNested(oldLimit);
+            input.EndReadNested(mapOldLimit);
             break;
           }
           case 58: {
-            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            var mapOldLimit = input.BeginReadNested(ref immediateBuffer);
             uint entryKey = 0;
             uint entryValue = 0;
             uint ntag;
@@ -2662,11 +2672,11 @@ namespace Google.Protobuf.TestProtos {
               }
             }
             mapFixed32Fixed32_[entryKey] = entryValue;
-            input.EndReadNested(oldLimit);
+            input.EndReadNested(mapOldLimit);
             break;
           }
           case 66: {
-            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            var mapOldLimit = input.BeginReadNested(ref immediateBuffer);
             ulong entryKey = 0UL;
             ulong entryValue = 0UL;
             uint ntag;
@@ -2680,11 +2690,11 @@ namespace Google.Protobuf.TestProtos {
               }
             }
             mapFixed64Fixed64_[entryKey] = entryValue;
-            input.EndReadNested(oldLimit);
+            input.EndReadNested(mapOldLimit);
             break;
           }
           case 74: {
-            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            var mapOldLimit = input.BeginReadNested(ref immediateBuffer);
             int entryKey = 0;
             int entryValue = 0;
             uint ntag;
@@ -2698,11 +2708,11 @@ namespace Google.Protobuf.TestProtos {
               }
             }
             mapSfixed32Sfixed32_[entryKey] = entryValue;
-            input.EndReadNested(oldLimit);
+            input.EndReadNested(mapOldLimit);
             break;
           }
           case 82: {
-            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            var mapOldLimit = input.BeginReadNested(ref immediateBuffer);
             long entryKey = 0L;
             long entryValue = 0L;
             uint ntag;
@@ -2716,11 +2726,11 @@ namespace Google.Protobuf.TestProtos {
               }
             }
             mapSfixed64Sfixed64_[entryKey] = entryValue;
-            input.EndReadNested(oldLimit);
+            input.EndReadNested(mapOldLimit);
             break;
           }
           case 90: {
-            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            var mapOldLimit = input.BeginReadNested(ref immediateBuffer);
             int entryKey = 0;
             float entryValue = 0F;
             uint ntag;
@@ -2734,11 +2744,11 @@ namespace Google.Protobuf.TestProtos {
               }
             }
             mapInt32Float_[entryKey] = entryValue;
-            input.EndReadNested(oldLimit);
+            input.EndReadNested(mapOldLimit);
             break;
           }
           case 98: {
-            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            var mapOldLimit = input.BeginReadNested(ref immediateBuffer);
             int entryKey = 0;
             double entryValue = 0D;
             uint ntag;
@@ -2752,11 +2762,11 @@ namespace Google.Protobuf.TestProtos {
               }
             }
             mapInt32Double_[entryKey] = entryValue;
-            input.EndReadNested(oldLimit);
+            input.EndReadNested(mapOldLimit);
             break;
           }
           case 106: {
-            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            var mapOldLimit = input.BeginReadNested(ref immediateBuffer);
             bool entryKey = false;
             bool entryValue = false;
             uint ntag;
@@ -2770,11 +2780,11 @@ namespace Google.Protobuf.TestProtos {
               }
             }
             mapBoolBool_[entryKey] = entryValue;
-            input.EndReadNested(oldLimit);
+            input.EndReadNested(mapOldLimit);
             break;
           }
           case 114: {
-            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            var mapOldLimit = input.BeginReadNested(ref immediateBuffer);
             int entryKey = 0;
             global::Google.Protobuf.TestProtos.MapEnum entryValue = 0;
             uint ntag;
@@ -2788,11 +2798,11 @@ namespace Google.Protobuf.TestProtos {
               }
             }
             mapInt32Enum_[entryKey] = entryValue;
-            input.EndReadNested(oldLimit);
+            input.EndReadNested(mapOldLimit);
             break;
           }
           case 122: {
-            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            var mapOldLimit = input.BeginReadNested(ref immediateBuffer);
             int entryKey = 0;
             global::Google.Protobuf.TestProtos.ForeignMessage entryValue = null;
             uint ntag;
@@ -2803,7 +2813,9 @@ namespace Google.Protobuf.TestProtos {
                 if (entryValue == null) {
                   entryValue = new global::Google.Protobuf.TestProtos.ForeignMessage();
                 }
-                input.ReadMessage(entryValue, ref immediateBuffer);
+                var oldLimit = input.BeginReadNested(ref immediateBuffer);
+                entryValue.MergeFrom(input, ref immediateBuffer);
+                input.EndReadNested(oldLimit);
               } else {
                 input.SkipLastField(ref immediateBuffer);
               }
@@ -2812,7 +2824,7 @@ namespace Google.Protobuf.TestProtos {
               entryValue = new global::Google.Protobuf.TestProtos.ForeignMessage();
             }
             mapInt32ForeignMessage_[entryKey] = entryValue;
-            input.EndReadNested(oldLimit);
+            input.EndReadNested(mapOldLimit);
             break;
           }
         }
@@ -2919,7 +2931,8 @@ namespace Google.Protobuf.TestProtos {
         }
         if (entry.Value != null) {
           output.WriteRawTag(18, ref immediateBuffer);
-          output.WriteMessage(entry.Value, ref immediateBuffer);
+          output.WriteLength(entry.Value.CalculateSize(), ref immediateBuffer);
+          entry.Value.WriteTo(output, ref immediateBuffer);
         }
       }
       if (_unknownFields != null) {
@@ -2966,7 +2979,7 @@ namespace Google.Protobuf.TestProtos {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input, ref immediateBuffer);
             break;
           case 10: {
-            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            var mapOldLimit = input.BeginReadNested(ref immediateBuffer);
             int entryKey = 0;
             global::Google.Protobuf.TestProtos.MessageContainingEnumCalledType entryValue = null;
             uint ntag;
@@ -2977,7 +2990,9 @@ namespace Google.Protobuf.TestProtos {
                 if (entryValue == null) {
                   entryValue = new global::Google.Protobuf.TestProtos.MessageContainingEnumCalledType();
                 }
-                input.ReadMessage(entryValue, ref immediateBuffer);
+                var oldLimit = input.BeginReadNested(ref immediateBuffer);
+                entryValue.MergeFrom(input, ref immediateBuffer);
+                input.EndReadNested(oldLimit);
               } else {
                 input.SkipLastField(ref immediateBuffer);
               }
@@ -2986,7 +3001,7 @@ namespace Google.Protobuf.TestProtos {
               entryValue = new global::Google.Protobuf.TestProtos.MessageContainingEnumCalledType();
             }
             type_[entryKey] = entryValue;
-            input.EndReadNested(oldLimit);
+            input.EndReadNested(mapOldLimit);
             break;
           }
         }
@@ -3150,7 +3165,7 @@ namespace Google.Protobuf.TestProtos {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input, ref immediateBuffer);
             break;
           case 10: {
-            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            var mapOldLimit = input.BeginReadNested(ref immediateBuffer);
             int entryKey = 0;
             int entryValue = 0;
             uint ntag;
@@ -3164,7 +3179,7 @@ namespace Google.Protobuf.TestProtos {
               }
             }
             entry_[entryKey] = entryValue;
-            input.EndReadNested(oldLimit);
+            input.EndReadNested(mapOldLimit);
             break;
           }
         }

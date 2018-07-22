@@ -87,11 +87,11 @@ void RepeatedMessageFieldGenerator::GenerateParsingCode(io::Printer* printer, co
   else {
     printer->Print(
       variables_,
-      "var oldLimit = input.BeginReadNested(ref immediateBuffer);"
+      "var repeatedOldLimit = input.BeginReadNested(ref immediateBuffer);"
       "var item = new $type_name$();\n"
       "item.MergeFrom(input, ref immediateBuffer);\n"
       "$lvalue_name$.Add(item);\n"
-      "input.EndReadNested(oldLimit);\n");
+      "input.EndReadNested(repeatedOldLimit);\n");
   }
 }
 
@@ -111,7 +111,8 @@ void RepeatedMessageFieldGenerator::GenerateSerializationCode(io::Printer* print
       variables_,
       "for (var i = 0; i < $rvalue_name$.Count; i++) {\n"
       "  output.WriteRawTag($tag_bytes$, ref immediateBuffer);\n"
-      "  output.WriteMessage($rvalue_name$[i], ref immediateBuffer);\n"
+      "  output.WriteLength($rvalue_name$[i].CalculateSize(), ref immediateBuffer);\n"
+      "  $rvalue_name$[i].WriteTo(output, ref immediateBuffer);\n"
       "}\n");
   }
 }
