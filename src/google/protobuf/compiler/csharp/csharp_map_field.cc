@@ -101,7 +101,7 @@ void MapFieldGenerator::GenerateParsingCode(io::Printer* printer, const std::str
 
   printer->Print(
     variables_,
-    "var oldLimit = input.BeginReadNested(ref immediateBuffer);\n"
+    "var mapOldLimit = input.BeginReadNested(ref immediateBuffer);\n"
     "$key_type_name$ entryKey = $key_default_value$;\n"
     "$value_type_name$ entryValue = $value_default_value$;\n"
     "uint ntag;\n"
@@ -136,7 +136,7 @@ void MapFieldGenerator::GenerateParsingCode(io::Printer* printer, const std::str
   printer->Print(
     variables_,
     "$lvalue_name$[entryKey] = entryValue;\n"
-    "input.EndReadNested(oldLimit);\n");
+    "input.EndReadNested(mapOldLimit);\n");
 }
 
 void MapFieldGenerator::GenerateSerializationCode(io::Printer* printer, const std::string& rvalueName) {

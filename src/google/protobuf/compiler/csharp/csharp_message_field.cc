@@ -95,8 +95,9 @@ void MessageFieldGenerator::GenerateParsingCode(io::Printer* printer, const std:
     "if ($lvalue_name$ == null) {\n"
     "  $lvalue_name$ = new $type_name$();\n"
     "}\n"
-    // TODO(jonskeet): Do we really need merging behaviour like this?
-    "input.ReadMessage($lvalue_name$, ref immediateBuffer);\n"); // No need to support TYPE_GROUP...
+    "var oldLimit = input.BeginReadNested(ref immediateBuffer);\n"
+    "$lvalue_name$.MergeFrom(input, ref immediateBuffer);\n"
+    "input.EndReadNested(oldLimit);\n"); // No need to support TYPE_GROUP...
 }
 
 void MessageFieldGenerator::GenerateSerializationCode(io::Printer* printer, const std::string& rvalueName) {
@@ -105,8 +106,8 @@ void MessageFieldGenerator::GenerateSerializationCode(io::Printer* printer, cons
     variables_,
     "if ($rvalue_name$$has_property_check_sufix$) {\n"
     "  output.WriteRawTag($tag_bytes$, ref immediateBuffer);\n"
-    //TODO: Inline write message
-    "  output.WriteMessage($rvalue_name$, ref immediateBuffer);\n"
+    "  output.WriteLength($rvalue_name$.CalculateSize(), ref immediateBuffer);\n"
+    "  $rvalue_name$.WriteTo(output, ref immediateBuffer);\n"
     "}\n");
 }
 
@@ -188,7 +189,9 @@ void MessageOneofFieldGenerator::GenerateParsingCode(io::Printer* printer, const
     "if ($has_property_check$) {\n"
     "  subBuilder.MergeFrom($property_name$);\n"
     "}\n"
-    "input.ReadMessage(subBuilder, ref immediateBuffer);\n" // No support of TYPE_GROUP
+    "var oldLimit = input.BeginReadNested(ref immediateBuffer);\n"
+    "subBuilder.MergeFrom(input, ref immediateBuffer);\n" // No support of TYPE_GROUP
+    "input.EndReadNested(oldLimit);\n"
     "$lvalue_name$ = subBuilder;\n");
 }
 
