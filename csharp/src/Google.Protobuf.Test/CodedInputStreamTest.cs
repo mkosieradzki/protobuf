@@ -31,6 +31,7 @@
 #endregion
 
 using System;
+using System.Buffers;
 using System.IO;
 using Google.Protobuf.TestProtos;
 using NUnit.Framework;
@@ -417,7 +418,7 @@ namespace Google.Protobuf
                 output.Flush();
 
                 ms.Position = 0;
-                CodedInputStream input = new CodedInputStream(ms, new byte[ms.Length / 2], 0, 0, false);
+                CodedInputStream input = new CodedInputStream(ms, new byte[ms.Length / 2], null, null, 0, 0, false);
 
                 uint tag = input.ReadTag();
                 Assert.AreEqual(1, WireFormat.GetTagFieldNumber(tag));
@@ -484,6 +485,92 @@ namespace Google.Protobuf
         }
 
         [Test]
+        public void SkipGroupNativeInput()
+        {
+            // Create an output stream with a group in:
+            // Field 1: string "field 1"
+            // Field 2: group containing:
+            //   Field 1: fixed int32 value 100
+            //   Field 2: string "ignore me"
+            //   Field 3: nested group containing
+            //      Field 1: fixed int64 value 1000
+            // Field 3: string "field 3"
+            var stream = new MemoryStream();
+            var output = new CodedOutputStream(stream);
+            output.WriteTag(1, WireFormat.WireType.LengthDelimited);
+            output.WriteString("field 1");
+
+            // The outer group...
+            output.WriteTag(2, WireFormat.WireType.StartGroup);
+            output.WriteTag(1, WireFormat.WireType.Fixed32);
+            output.WriteFixed32(100);
+            output.WriteTag(2, WireFormat.WireType.LengthDelimited);
+            output.WriteString("ignore me");
+            // The nested group...
+            output.WriteTag(3, WireFormat.WireType.StartGroup);
+            output.WriteTag(1, WireFormat.WireType.Fixed64);
+            output.WriteFixed64(1000);
+            // Note: Not sure the field number is relevant for end group...
+            output.WriteTag(3, WireFormat.WireType.EndGroup);
+
+            // End the outer group
+            output.WriteTag(2, WireFormat.WireType.EndGroup);
+
+            output.WriteTag(3, WireFormat.WireType.LengthDelimited);
+            output.WriteString("field 3");
+            output.Flush();
+
+            var buffer = stream.ToArray();
+            var seq = CreateTestReadOnlySequence(new[]
+            {
+                //Point of division is picked in a way to force and ReadRawBytes SkipImpl to kick-in
+                new ReadOnlyMemory<byte>(buffer, 0, 3),
+                new ReadOnlyMemory<byte>(buffer, 3, 2),
+                new ReadOnlyMemory<byte>(buffer, 5, 2),
+                new ReadOnlyMemory<byte>(buffer, 7, 2),
+                new ReadOnlyMemory<byte>(buffer, 9, 6),
+                new ReadOnlyMemory<byte>(buffer, 15, 5),
+                new ReadOnlyMemory<byte>(buffer, 20, 5),
+                new ReadOnlyMemory<byte>(buffer, 25, buffer.Length - 25)
+            });
+
+            // Now act like a generated client
+            var input = new CodedInputStream(seq);
+            Assert.AreEqual(WireFormat.MakeTag(1, WireFormat.WireType.LengthDelimited), input.ReadTag());
+            Assert.AreEqual("field 1", input.ReadString());
+            Assert.AreEqual(WireFormat.MakeTag(2, WireFormat.WireType.StartGroup), input.ReadTag());
+            input.SkipLastField(); // Should consume the whole group, including the nested one.
+            Assert.AreEqual(WireFormat.MakeTag(3, WireFormat.WireType.LengthDelimited), input.ReadTag());
+            Assert.AreEqual("field 3", input.ReadString());
+        }
+
+        [Test]
+        public void SkipLengthDelimitedNativeInput()
+        {
+            // Field 1: string "ignore me"
+            var stream = new MemoryStream();
+            var output = new CodedOutputStream(stream);
+            output.WriteTag(1, WireFormat.WireType.LengthDelimited);
+            output.WriteString("ignore me");
+            output.Flush();
+
+            var buffer = stream.ToArray();
+            var seq = CreateTestReadOnlySequence(new[]
+            {
+                new ReadOnlyMemory<byte>(buffer, 0, 4),
+                new ReadOnlyMemory<byte>(buffer, 4, 1),
+                //Point of division is picked in a way to force SkipImpl to kick-in
+                new ReadOnlyMemory<byte>(buffer, 5, buffer.Length - 5)
+            });
+
+            // Now act like a generated client
+            var input = new CodedInputStream(seq);
+            Assert.AreEqual(WireFormat.MakeTag(1, WireFormat.WireType.LengthDelimited), input.ReadTag());
+            input.SkipLastField();
+            Assert.IsTrue(input.IsAtEnd);
+        }
+
+        [Test]
         public void SkipGroup_WrongEndGroupTag()
         {
             // Create an output stream with:
@@ -543,6 +630,30 @@ namespace Google.Protobuf
 
             // Now act like a generated client
             var input = new CodedInputStream(stream);
+            input.ReadTag();
+            Assert.Throws<InvalidProtocolBufferException>(input.SkipLastField);
+        }
+
+        [Test]
+        public void EndOfStreamReachedWhileSkippingGroupNativeInput()
+        {
+            var stream = new MemoryStream();
+            var output = new CodedOutputStream(stream);
+            output.WriteTag(1, WireFormat.WireType.StartGroup);
+            output.WriteTag(2, WireFormat.WireType.StartGroup);
+            output.WriteTag(2, WireFormat.WireType.EndGroup);
+
+            output.Flush();
+
+            var buffer = stream.ToArray();
+            var sequence = CreateTestReadOnlySequence(new[]
+            {
+                new ReadOnlyMemory<byte>(buffer, 0, 2),
+                new ReadOnlyMemory<byte>(buffer, 2, buffer.Length - 2)
+            });
+
+            // Now act like a generated client
+            var input = new CodedInputStream(sequence);
             input.ReadTag();
             Assert.Throws<InvalidProtocolBufferException>(input.SkipLastField);
         }
@@ -617,6 +728,13 @@ namespace Google.Protobuf
         }
 
         [Test]
+        public void Dispose_FromMemoryArray()
+        {
+            var stream = new CodedInputStream(new Memory<byte>(new byte[10]));
+            stream.Dispose();
+        }
+
+        [Test]
         public void TestParseMessagesCloseTo2G()
         {
             byte[] serializedMessage = GenerateBigSerializedMessage();
@@ -655,6 +773,32 @@ namespace Google.Protobuf
             TestAllTypes message = SampleMessages.CreateFullTestAllTypes();
             message.SingleBytes = ByteString.CopyFrom(value);
             return message.ToByteArray();
+        }
+
+        [Test]
+        public void TestParseFromContiguousMemory()
+        {
+            var origMsg = SampleMessages.CreateFullTestAllTypes();
+            var msg = TestAllTypes.Parser.ParseFrom(new ReadOnlyMemory<byte>(origMsg.ToByteArray()));
+            Assert.AreEqual(origMsg, msg);
+        }
+
+        [Test]
+        public void TestParseFromNonContiguousMemory()
+        {
+            var origMsg = SampleMessages.CreateFullTestAllTypes();
+            var origMsgArray = origMsg.ToByteArray();
+            var testSequence = CreateTestReadOnlySequence(new[]
+            {
+                new ReadOnlyMemory<byte>(origMsgArray, 0, 10),
+                new ReadOnlyMemory<byte>(origMsgArray, 10, 13),
+                new ReadOnlyMemory<byte>(origMsgArray, 23, 1),
+                new ReadOnlyMemory<byte>(origMsgArray, 24, 20),
+                new ReadOnlyMemory<byte>(origMsgArray, 44, origMsgArray.Length - 44)
+            });
+           
+            var msg = TestAllTypes.Parser.ParseFrom(testSequence);
+            Assert.AreEqual(origMsg, msg);
         }
 
         /// <summary>
@@ -696,6 +840,41 @@ namespace Google.Protobuf
                     }
                 }
                 return numBytesCopiedTotal;
+            }
+        }
+
+        private static ReadOnlySequence<T> CreateTestReadOnlySequence<T>(ReadOnlyMemory<T>[] segments)
+        {
+            if (segments == null)
+                throw new ArgumentNullException(nameof(segments));
+
+            if (segments.Length == 0)
+                return ReadOnlySequence<T>.Empty;
+
+            var first = new TestSequenceSegment<T>(0, segments[0]);
+            var prev = first;
+            long pos = segments[0].Length;
+            for (int i = 1; i < segments.Length; i++)
+            {
+                var next = new TestSequenceSegment<T>(pos, segments[i]);
+                prev.SetNext(next);
+                prev = next;
+                pos += next.Memory.Length;
+            }
+            return new ReadOnlySequence<T>(first, 0, prev, prev.Memory.Length);
+        }
+
+        private class TestSequenceSegment<T> : ReadOnlySequenceSegment<T>
+        {
+            internal TestSequenceSegment(long currentPos, ReadOnlyMemory<T> memory)
+            {
+                RunningIndex = currentPos;
+                Memory = memory;
+            }
+
+            internal void SetNext(TestSequenceSegment<T> next)
+            {
+                Next = next;
             }
         }
     }
