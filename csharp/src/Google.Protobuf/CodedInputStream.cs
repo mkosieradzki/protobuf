@@ -1713,13 +1713,13 @@ namespace Google.Protobuf
 
                 while (size - pos > bufferSize)
                 {
-                    immediateBuffer.Slice(0, bufferSize).CopyTo(bytes.AsSpan().Slice(pos, bufferSize));
+                    immediateBuffer.Slice(0, bufferSize).CopyTo(bytes.AsSpan(pos, bufferSize));
                     pos += bufferSize;
                     bufferPos = bufferSize;
                     RefillBuffer(true, ref immediateBuffer);
                 }
 
-                immediateBuffer.Slice(0, size - pos).CopyTo(bytes.AsSpan().Slice(pos));
+                immediateBuffer.Slice(0, size - pos).CopyTo(bytes.AsSpan(pos));
                 bufferPos = size - pos;
 
                 return bytes;
