@@ -153,6 +153,7 @@ namespace Google.Protobuf
         /// </summary>
         /// <param name="message">The message to convert.</param>
         /// <returns>The message data as a byte string.</returns>
+        [SecuritySafeCritical]
         public static ByteString ToByteString(this IMessage message)
         {
             ProtoPreconditions.CheckNotNull(message, "message");
