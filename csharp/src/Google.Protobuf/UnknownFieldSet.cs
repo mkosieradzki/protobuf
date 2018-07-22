@@ -32,7 +32,9 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
+using System.Security;
 using Google.Protobuf.Reflection;
 
 namespace Google.Protobuf
@@ -69,11 +71,22 @@ namespace Google.Protobuf
         /// <summary>
         /// Serializes the set and writes it to <paramref name="output"/>.
         /// </summary>
+        [SecuritySafeCritical]
         public void WriteTo(CodedOutputStream output)
+        {
+            var immediateBudder = output.ImmediateBuffer;
+            WriteTo(output, ref immediateBudder);
+        }
+
+        /// <summary>
+        /// This supports the Protocol Buffers infrastructure and is not meant to be used directly from your code.
+        /// </summary>
+        [SecurityCritical]
+        public void WriteTo(CodedOutputStream output, ref Span<byte> immediateBuffer)
         {
             foreach (KeyValuePair<int, UnknownField> entry in fields)
             {
-                entry.Value.WriteTo(entry.Key, output);
+                entry.Value.WriteTo(entry.Key, output, ref immediateBuffer);
             }
         }
 
@@ -181,9 +194,10 @@ namespace Google.Protobuf
         /// Parse a single field from <paramref name="input"/> and merge it
         /// into this set.
         /// </summary>
-        /// <param name="input">The coded input stream containing the field</param>
         /// <returns>false if the tag is an "end group" tag, true otherwise</returns>
-        private void MergeFieldFrom(CodedInputStream input)
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        [SecurityCritical]
+        private void MergeFieldFrom(CodedInputStream input, ref ReadOnlySpan<byte> immediateBuffer)
         {
             uint tag = input.LastTag;
             int number = WireFormat.GetTagFieldNumber(tag);
@@ -191,31 +205,31 @@ namespace Google.Protobuf
             {
                 case WireFormat.WireType.Varint:
                     {
-                        ulong uint64 = input.ReadUInt64();
+                        ulong uint64 = input.ReadUInt64(ref immediateBuffer);
                         GetOrAddField(number).AddVarint(uint64);
                         return;
                     }
                 case WireFormat.WireType.Fixed32:
                     {
-                        uint uint32 = input.ReadFixed32();
+                        uint uint32 = input.ReadFixed32(ref immediateBuffer);
                         GetOrAddField(number).AddFixed32(uint32);
                         return;
                     }
                 case WireFormat.WireType.Fixed64:
                     {
-                        ulong uint64 = input.ReadFixed64();
+                        ulong uint64 = input.ReadFixed64(ref immediateBuffer);
                         GetOrAddField(number).AddFixed64(uint64);
                         return;
                     }
                 case WireFormat.WireType.LengthDelimited:
                     {
-                        ByteString bytes = input.ReadBytes();
+                        ByteString bytes = input.ReadBytes(ref immediateBuffer);
                         GetOrAddField(number).AddLengthDelimited(bytes);
                         return;
                     }
                 case WireFormat.WireType.StartGroup:
                     {
-                        input.SkipGroup(tag);
+                        input.SkipGroup(tag, ref immediateBuffer);
                         return;
                     }
                 case WireFormat.WireType.EndGroup:
@@ -236,19 +250,30 @@ namespace Google.Protobuf
         /// <param name="unknownFields">The UnknownFieldSet which need to be merged</param>
         /// <param name="input">The coded input stream containing the field</param>
         /// <returns>The merged UnknownFieldSet</returns>
-        public static UnknownFieldSet MergeFieldFrom(UnknownFieldSet unknownFields,
-                                                     CodedInputStream input)
+        [SecuritySafeCritical]
+        public static UnknownFieldSet MergeFieldFrom(UnknownFieldSet unknownFields, CodedInputStream input)
+        {
+            var immediateBudder = input.ImmediateBuffer;
+            return MergeFieldFrom(unknownFields, input, ref immediateBudder);
+        }
+
+        /// <summary>
+        /// This supports the Protocol Buffers infrastructure and is not meant to be used directly from your code.
+        /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        [SecurityCritical]
+        public static UnknownFieldSet MergeFieldFrom(UnknownFieldSet unknownFields, CodedInputStream input, ref ReadOnlySpan<byte> immediateBuffer)
         {
             if (input.DiscardUnknownFields)
             {
-                input.SkipLastField();
+                input.SkipLastField(ref immediateBuffer);
                 return unknownFields;
             }
             if (unknownFields == null)
             {
                 unknownFields = new UnknownFieldSet();
             }
-            unknownFields.MergeFieldFrom(input);
+            unknownFields.MergeFieldFrom(input, ref immediateBuffer);
             return unknownFields;
         }
 

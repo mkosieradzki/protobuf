@@ -31,7 +31,9 @@
 #endregion
     
 using System;
+using System.Buffers;
 using System.IO;
+using System.Security;
 
 namespace Google.Protobuf
 {
@@ -66,6 +68,32 @@ namespace Google.Protobuf
         /// <param name="data">The byte array containing the message. Must not be null.</param>
         /// <returns>The newly parsed message.</returns>
         public IMessage ParseFrom(byte[] data)
+        {
+            IMessage message = factory();
+            message.MergeFrom(data, DiscardUnknownFields);
+            return message;
+        }
+
+        /// <summary>
+        /// Parses a message from contiguous memory.
+        /// </summary>
+        /// <param name="data">Contiguous memory containing the message.</param>
+        /// <returns>The newly parsed message.</returns>
+        [SecurityCritical]
+        public IMessage ParseFrom(ReadOnlyMemory<byte> data)
+        {
+            IMessage message = factory();
+            message.MergeFrom(data, DiscardUnknownFields);
+            return message;
+        }
+
+        /// <summary>
+        /// Parses a message from non-contiguous memory segment.
+        /// </summary>
+        /// <param name="data">Non-contiguous memory containing the message.</param>
+        /// <returns>The newly parsed message.</returns>
+        [SecurityCritical]
+        public IMessage ParseFrom(ReadOnlySequence<byte> data)
         {
             IMessage message = factory();
             message.MergeFrom(data, DiscardUnknownFields);
@@ -232,6 +260,32 @@ namespace Google.Protobuf
         /// <param name="data">The byte array containing the message. Must not be null.</param>
         /// <returns>The newly parsed message.</returns>
         public new T ParseFrom(byte[] data)
+        {
+            T message = factory();
+            message.MergeFrom(data, DiscardUnknownFields);
+            return message;
+        }
+
+        /// <summary>
+        /// Parses a message from contiguous memory.
+        /// </summary>
+        /// <param name="data">Contiguous memory containing the message.</param>
+        /// <returns>The newly parsed message.</returns>
+        [SecurityCritical]
+        public new T ParseFrom(ReadOnlyMemory<byte> data)
+        {
+            T message = factory();
+            message.MergeFrom(data, DiscardUnknownFields);
+            return message;
+        }
+
+        /// <summary>
+        /// Parses a message from non-contiguous memory segment.
+        /// </summary>
+        /// <param name="data">Non-contiguous memory containing the message.</param>
+        /// <returns>The newly parsed message.</returns>
+        [SecurityCritical]
+        public new T ParseFrom(ReadOnlySequence<byte> data)
         {
             T message = factory();
             message.MergeFrom(data, DiscardUnknownFields);

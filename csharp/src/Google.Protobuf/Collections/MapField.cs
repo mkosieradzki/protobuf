@@ -37,6 +37,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security;
 
 namespace Google.Protobuf.Collections
 {
@@ -411,68 +412,6 @@ namespace Google.Protobuf.Collections
         }
 
         /// <summary>
-        /// Adds entries to the map from the given stream.
-        /// </summary>
-        /// <remarks>
-        /// It is assumed that the stream is initially positioned after the tag specified by the codec.
-        /// This method will continue reading entries from the stream until the end is reached, or
-        /// a different tag is encountered.
-        /// </remarks>
-        /// <param name="input">Stream to read from</param>
-        /// <param name="codec">Codec describing how the key/value pairs are encoded</param>
-        public void AddEntriesFrom(CodedInputStream input, Codec codec)
-        {
-            var adapter = new Codec.MessageAdapter(codec);
-            do
-            {
-                adapter.Reset();
-                input.ReadMessage(adapter);
-                this[adapter.Key] = adapter.Value;
-            } while (input.MaybeConsumeTag(codec.MapTag));
-        }
-
-        /// <summary>
-        /// Writes the contents of this map to the given coded output stream, using the specified codec
-        /// to encode each entry.
-        /// </summary>
-        /// <param name="output">The output stream to write to.</param>
-        /// <param name="codec">The codec to use for each entry.</param>
-        public void WriteTo(CodedOutputStream output, Codec codec)
-        {
-            var message = new Codec.MessageAdapter(codec);
-            foreach (var entry in list)
-            {
-                message.Key = entry.Key;
-                message.Value = entry.Value;
-                output.WriteTag(codec.MapTag);
-                output.WriteMessage(message);
-            }
-        }
-
-        /// <summary>
-        /// Calculates the size of this map based on the given entry codec.
-        /// </summary>
-        /// <param name="codec">The codec to use to encode each entry.</param>
-        /// <returns></returns>
-        public int CalculateSize(Codec codec)
-        {
-            if (Count == 0)
-            {
-                return 0;
-            }
-            var message = new Codec.MessageAdapter(codec);
-            int size = 0;
-            foreach (var entry in list)
-            {
-                message.Key = entry.Key;
-                message.Value = entry.Value;
-                size += CodedOutputStream.ComputeRawVarint32Size(codec.MapTag);
-                size += CodedOutputStream.ComputeMessageSize(message);
-            }
-            return size;
-        }
-
-        /// <summary>
         /// Returns a string representation of this repeated field, in the same
         /// way as it would be represented by the default JSON formatter.
         /// </summary>
@@ -582,103 +521,6 @@ namespace Google.Protobuf.Collections
             public DictionaryEntry Entry { get { return new DictionaryEntry(Key, Value); } }
             public object Key { get { return enumerator.Current.Key; } }
             public object Value { get { return enumerator.Current.Value; } }
-        }
-
-        /// <summary>
-        /// A codec for a specific map field. This contains all the information required to encode and
-        /// decode the nested messages.
-        /// </summary>
-        public sealed class Codec
-        {
-            private readonly FieldCodec<TKey> keyCodec;
-            private readonly FieldCodec<TValue> valueCodec;
-            private readonly uint mapTag;
-
-            /// <summary>
-            /// Creates a new entry codec based on a separate key codec and value codec,
-            /// and the tag to use for each map entry.
-            /// </summary>
-            /// <param name="keyCodec">The key codec.</param>
-            /// <param name="valueCodec">The value codec.</param>
-            /// <param name="mapTag">The map tag to use to introduce each map entry.</param>
-            public Codec(FieldCodec<TKey> keyCodec, FieldCodec<TValue> valueCodec, uint mapTag)
-            {
-                this.keyCodec = keyCodec;
-                this.valueCodec = valueCodec;
-                this.mapTag = mapTag;
-            }
-
-            /// <summary>
-            /// The tag used in the enclosing message to indicate map entries.
-            /// </summary>
-            internal uint MapTag { get { return mapTag; } }
-
-            /// <summary>
-            /// A mutable message class, used for parsing and serializing. This
-            /// delegates the work to a codec, but implements the <see cref="IMessage"/> interface
-            /// for interop with <see cref="CodedInputStream"/> and <see cref="CodedOutputStream"/>.
-            /// This is nested inside Codec as it's tightly coupled to the associated codec,
-            /// and it's simpler if it has direct access to all its fields.
-            /// </summary>
-            internal class MessageAdapter : IMessage
-            {
-                private static readonly byte[] ZeroLengthMessageStreamData = new byte[] { 0 };
-
-                private readonly Codec codec;
-                internal TKey Key { get; set; }
-                internal TValue Value { get; set; }
-
-                internal MessageAdapter(Codec codec)
-                {
-                    this.codec = codec;
-                }
-
-                internal void Reset()
-                {
-                    Key = codec.keyCodec.DefaultValue;
-                    Value = codec.valueCodec.DefaultValue;
-                }
-
-                public void MergeFrom(CodedInputStream input)
-                {
-                    uint tag;
-                    while ((tag = input.ReadTag()) != 0)
-                    {
-                        if (tag == codec.keyCodec.Tag)
-                        {
-                            Key = codec.keyCodec.Read(input);
-                        }
-                        else if (tag == codec.valueCodec.Tag)
-                        {
-                            Value = codec.valueCodec.Read(input);
-                        }
-                        else 
-                        {
-                            input.SkipLastField();
-                        }
-                    }
-
-                    // Corner case: a map entry with a key but no value, where the value type is a message.
-                    // Read it as if we'd seen an input stream with no data (i.e. create a "default" message).
-                    if (Value == null)
-                    {
-                        Value = codec.valueCodec.Read(new CodedInputStream(ZeroLengthMessageStreamData));
-                    }
-                }
-
-                public void WriteTo(CodedOutputStream output)
-                {
-                    codec.keyCodec.WriteTagAndValue(output, Key);
-                    codec.valueCodec.WriteTagAndValue(output, Value);
-                }
-
-                public int CalculateSize()
-                {
-                    return codec.keyCodec.CalculateSizeWithTag(Key) + codec.valueCodec.CalculateSizeWithTag(Value);
-                }
-
-                MessageDescriptor IMessage.Descriptor { get { return null; } }
-            }
         }
 
         private class MapView<T> : ICollection<T>, ICollection

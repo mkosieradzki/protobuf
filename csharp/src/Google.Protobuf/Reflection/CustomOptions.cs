@@ -32,6 +32,8 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Security;
 
 namespace Google.Protobuf.Reflection
 {
@@ -327,26 +329,36 @@ namespace Google.Protobuf.Reflection
         /// will be created and returned. Otherwise, the return value is <c>this</c>. This allows
         /// us to start with a singleton empty set of options and just create new ones where necessary.
         /// </remarks>
-        /// <param name="input">Input stream to read from. </param>
-        /// <returns>The resulting set of custom options, either <c>this</c> or a new set.</returns>
+        [SecuritySafeCritical]
         internal CustomOptions ReadOrSkipUnknownField(CodedInputStream input)
+        {
+            var immediateBudder = input.ImmediateBuffer;
+            return ReadOrSkipUnknownField(input, ref immediateBudder);
+        }
+
+        /// <summary>
+        /// This supports the Protocol Buffers infrastructure and is not meant to be used directly from your code.
+        /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        [SecurityCritical]
+        internal CustomOptions ReadOrSkipUnknownField(CodedInputStream input, ref ReadOnlySpan<byte> immediateBuffer)
         {
             var tag = input.LastTag;
             var field = WireFormat.GetTagFieldNumber(tag);
             switch (WireFormat.GetTagWireType(tag))
             {
                 case WireFormat.WireType.LengthDelimited:
-                    return AddValue(field, new FieldValue(input.ReadBytes()));
+                    return AddValue(field, new FieldValue(input.ReadBytes(ref immediateBuffer)));
                 case WireFormat.WireType.Fixed32:
-                    return AddValue(field, new FieldValue(input.ReadFixed32()));
+                    return AddValue(field, new FieldValue(input.ReadFixed32(ref immediateBuffer)));
                 case WireFormat.WireType.Fixed64:
-                    return AddValue(field, new FieldValue(input.ReadFixed64()));
+                    return AddValue(field, new FieldValue(input.ReadFixed64(ref immediateBuffer)));
                 case WireFormat.WireType.Varint:
-                    return AddValue(field, new FieldValue(input.ReadRawVarint64()));
+                    return AddValue(field, new FieldValue(input.ReadRawVarint64(ref immediateBuffer)));
                 // For StartGroup, EndGroup or any wire format we don't understand,
                 // just use the normal behavior (call SkipLastField).
                 default:
-                    input.SkipLastField();
+                    input.SkipLastField(ref immediateBuffer);
                     return this;
             }
         }
