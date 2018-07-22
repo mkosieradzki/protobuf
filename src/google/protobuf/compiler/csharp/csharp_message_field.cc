@@ -53,6 +53,7 @@ MessageFieldGenerator::MessageFieldGenerator(const FieldDescriptor* descriptor,
                                              const Options *options)
     : FieldGeneratorBase(descriptor, fieldOrdinal, options) {
   variables_["has_property_check"] = name() + "_ != null";
+  variables_["has_property_check_sufix"] = " != null";
   variables_["has_not_property_check"] = name() + "_ == null";
 }
 
@@ -87,30 +88,36 @@ void MessageFieldGenerator::GenerateMergingCode(io::Printer* printer) {
     "}\n");
 }
 
-void MessageFieldGenerator::GenerateParsingCode(io::Printer* printer) {
+void MessageFieldGenerator::GenerateParsingCode(io::Printer* printer, const std::string& lvalueName, bool forceNonPacked) {
+  variables_["lvalue_name"] = lvalueName.empty() ? variables_["name"] + "_" : lvalueName;
   printer->Print(
     variables_,
-    "if ($has_not_property_check$) {\n"
-    "  $name$_ = new $type_name$();\n"
+    "if ($lvalue_name$ == null) {\n"
+    "  $lvalue_name$ = new $type_name$();\n"
     "}\n"
-    // TODO(jonskeet): Do we really need merging behaviour like this?
-    "input.ReadMessage($name$_);\n"); // No need to support TYPE_GROUP...
+    "var oldLimit = input.BeginReadNested(ref immediateBuffer);\n"
+    "$lvalue_name$.MergeFrom(input, ref immediateBuffer);\n"
+    "input.EndReadNested(oldLimit);\n"); // No need to support TYPE_GROUP...
 }
 
-void MessageFieldGenerator::GenerateSerializationCode(io::Printer* printer) {
+void MessageFieldGenerator::GenerateSerializationCode(io::Printer* printer, const std::string& rvalueName) {
+  variables_["rvalue_name"] = rvalueName;
   printer->Print(
     variables_,
-    "if ($has_property_check$) {\n"
-    "  output.WriteRawTag($tag_bytes$);\n"
-    "  output.WriteMessage($property_name$);\n"
+    "if ($rvalue_name$$has_property_check_sufix$) {\n"
+    "  output.WriteRawTag($tag_bytes$, ref immediateBuffer);\n"
+    "  output.WriteLength($rvalue_name$.CalculateSize(), ref immediateBuffer);\n"
+    "  $rvalue_name$.WriteTo(output, ref immediateBuffer);\n"
     "}\n");
 }
 
-void MessageFieldGenerator::GenerateSerializedSizeCode(io::Printer* printer) {
+void MessageFieldGenerator::GenerateSerializedSizeCode(io::Printer* printer, const std::string& lvalueName, const std::string& rvalueName) {
+  variables_["lvalue_name"] = lvalueName;
+  variables_["rvalue_name"] = rvalueName;
   printer->Print(
     variables_,
-    "if ($has_property_check$) {\n"
-    "  size += $tag_size$ + pb::CodedOutputStream.ComputeMessageSize($property_name$);\n"
+    "if ($rvalue_name$$has_property_check_sufix$) {\n"
+    "  $lvalue_name$ += $tag_size$ + pb::CodedOutputStream.ComputeMessageSize($rvalue_name$);\n"
     "}\n");
 }
 
@@ -137,12 +144,6 @@ void MessageFieldGenerator::GenerateCloningCode(io::Printer* printer) {
 }
 
 void MessageFieldGenerator::GenerateFreezingCode(io::Printer* printer) {
-}
-
-void MessageFieldGenerator::GenerateCodecCode(io::Printer* printer) {
-  printer->Print(
-    variables_,
-    "pb::FieldCodec.ForMessage($tag$, $type_name$.Parser)");
 }
 
 MessageOneofFieldGenerator::MessageOneofFieldGenerator(
@@ -179,7 +180,8 @@ void MessageOneofFieldGenerator::GenerateMergingCode(io::Printer* printer) {
     "$property_name$.MergeFrom(other.$property_name$);\n");
 }
 
-void MessageOneofFieldGenerator::GenerateParsingCode(io::Printer* printer) {
+void MessageOneofFieldGenerator::GenerateParsingCode(io::Printer* printer, const std::string& lvalueName, bool forceNonPacked) {
+  variables_["lvalue_name"] = lvalueName.empty() ? variables_["property_name"] : lvalueName;
   // TODO(jonskeet): We may be able to do better than this
   printer->Print(
     variables_,
@@ -187,8 +189,10 @@ void MessageOneofFieldGenerator::GenerateParsingCode(io::Printer* printer) {
     "if ($has_property_check$) {\n"
     "  subBuilder.MergeFrom($property_name$);\n"
     "}\n"
-    "input.ReadMessage(subBuilder);\n" // No support of TYPE_GROUP
-    "$property_name$ = subBuilder;\n");
+    "var oldLimit = input.BeginReadNested(ref immediateBuffer);\n"
+    "subBuilder.MergeFrom(input, ref immediateBuffer);\n" // No support of TYPE_GROUP
+    "input.EndReadNested(oldLimit);\n"
+    "$lvalue_name$ = subBuilder;\n");
 }
 
 void MessageOneofFieldGenerator::WriteToString(io::Printer* printer) {

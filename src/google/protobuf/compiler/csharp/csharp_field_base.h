@@ -51,12 +51,11 @@ class FieldGeneratorBase : public SourceGeneratorBase {
 
   virtual void GenerateCloningCode(io::Printer* printer) = 0;
   virtual void GenerateFreezingCode(io::Printer* printer);
-  virtual void GenerateCodecCode(io::Printer* printer);
   virtual void GenerateMembers(io::Printer* printer) = 0;
   virtual void GenerateMergingCode(io::Printer* printer) = 0;
-  virtual void GenerateParsingCode(io::Printer* printer) = 0;
-  virtual void GenerateSerializationCode(io::Printer* printer) = 0;
-  virtual void GenerateSerializedSizeCode(io::Printer* printer) = 0;
+  virtual void GenerateParsingCode(io::Printer* printer, const std::string& lvalueName, bool forceNonPacked) = 0;
+  virtual void GenerateSerializationCode(io::Printer* printer, const std::string& rvalueName) = 0;
+  virtual void GenerateSerializedSizeCode(io::Printer* printer, const std::string& lvalueName, const std::string& rvalueName) = 0;
 
   virtual void WriteHash(io::Printer* printer) = 0;
   virtual void WriteEquals(io::Printer* printer) = 0;
@@ -87,6 +86,7 @@ class FieldGeneratorBase : public SourceGeneratorBase {
   std::string default_value(const FieldDescriptor* descriptor);
   std::string number();
   std::string capitalized_type_name();
+  std::string capitalized_type_name(const FieldDescriptor* descriptor);
 
  private:
   void SetCommonFieldVariables(std::map<string, string>* variables);

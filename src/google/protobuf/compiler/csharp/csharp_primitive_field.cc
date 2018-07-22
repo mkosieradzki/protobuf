@@ -55,6 +55,7 @@ PrimitiveFieldGenerator::PrimitiveFieldGenerator(
   is_value_type = descriptor->type() != FieldDescriptor::TYPE_STRING
       && descriptor->type() != FieldDescriptor::TYPE_BYTES;
   if (!is_value_type) {
+    variables_["has_property_check_sufix"] = ".Length != 0";
     variables_["has_property_check"] = variables_["property_name"] + ".Length != 0";
     variables_["other_has_property_check"] = "other." + variables_["property_name"] + ".Length != 0";
   }
@@ -67,6 +68,11 @@ void PrimitiveFieldGenerator::GenerateMembers(io::Printer* printer) {
   // TODO(jonskeet): Work out whether we want to prevent the fields from ever being
   // null, or whether we just handle it, in the cases of bytes and string.
   // (Basically, should null-handling code be in the getter or the setter?)
+  // mkosieradzki: Current solution is OK:
+  // - oneof with handling in getter
+  // - standard in setter
+  // This determines how recursive code-gen works (we can use safely getters
+  // anytime we are not in oneof field - and oneofs are not used in recursive fields)
   printer->Print(
     variables_,
     "private $type_name$ $name_def_message$;\n");
@@ -99,36 +105,60 @@ void PrimitiveFieldGenerator::GenerateMergingCode(io::Printer* printer) {
     "}\n");
 }
 
-void PrimitiveFieldGenerator::GenerateParsingCode(io::Printer* printer) {
+void PrimitiveFieldGenerator::GenerateParsingCode(io::Printer* printer, const std::string& lvalueName, bool forceNonPacked) {
   // Note: invoke the property setter rather than writing straight to the field,
   // so that we can normalize "null to empty" for strings and bytes.
+  variables_["lvalue_name"] = lvalueName.empty() ? variables_["property_name"] : lvalueName;
   printer->Print(
     variables_,
-    "$property_name$ = input.Read$capitalized_type_name$();\n");
+    "$lvalue_name$ = input.Read$capitalized_type_name$(ref immediateBuffer);\n");
 }
 
-void PrimitiveFieldGenerator::GenerateSerializationCode(io::Printer* printer) {
+void PrimitiveFieldGenerator::GenerateSerializationCode(io::Printer* printer, const std::string& rvalueName) {
+  variables_["rvalue_name"] = rvalueName;
+
+  if (descriptor_->containing_oneof()) {
+    printer->Print(
+      variables_,
+      "if ($has_property_check$) {\n");
+  }
+  else {
+    printer->Print(
+      variables_,
+      "if ($rvalue_name$$has_property_check_sufix$) {\n");
+  }
+
   printer->Print(
     variables_,
-    "if ($has_property_check$) {\n"
-    "  output.WriteRawTag($tag_bytes$);\n"
-    "  output.Write$capitalized_type_name$($property_name$);\n"
+    "  output.WriteRawTag($tag_bytes$, ref immediateBuffer);\n"
+    "  output.Write$capitalized_type_name$($rvalue_name$, ref immediateBuffer);\n"
     "}\n");
 }
 
-void PrimitiveFieldGenerator::GenerateSerializedSizeCode(io::Printer* printer) {
-  printer->Print(
-    variables_,
-    "if ($has_property_check$) {\n");
+void PrimitiveFieldGenerator::GenerateSerializedSizeCode(io::Printer* printer, const std::string& lvalueName, const std::string& rvalueName) {
+  variables_["lvalue_name"] = lvalueName;
+  variables_["rvalue_name"] = rvalueName;
+  //Oneof variant igonores rvalue
+  if (descriptor_->containing_oneof()) {
+    printer->Print(
+      variables_,
+      "if ($has_property_check$) {\n");
+  }
+  else {
+    printer->Print(
+      variables_,
+      "if ($rvalue_name$$has_property_check_sufix$) {\n");
+  }
   printer->Indent();
   int fixedSize = GetFixedSize(descriptor_->type());
   if (fixedSize == -1) {
     printer->Print(
       variables_,
-      "size += $tag_size$ + pb::CodedOutputStream.Compute$capitalized_type_name$Size($property_name$);\n");
+      "$lvalue_name$ += $tag_size$ + pb::CodedOutputStream.Compute$capitalized_type_name$Size($rvalue_name$);\n");
   } else {
     printer->Print(
-      "size += $tag_size$ + $fixed_size$;\n",
+      "$lvalue_name$ += $tag_size$ + $fixed_size$;\n",
+      "lvalue_name", lvalueName,
       "fixed_size", SimpleItoa(fixedSize),
       "tag_size", variables_["tag_size"]);
   }
@@ -163,12 +193,6 @@ void PrimitiveFieldGenerator::WriteToString(io::Printer* printer) {
 void PrimitiveFieldGenerator::GenerateCloningCode(io::Printer* printer) {
   printer->Print(variables_,
     "$name$_ = other.$name$_;\n");
-}
-
-void PrimitiveFieldGenerator::GenerateCodecCode(io::Printer* printer) {
-  printer->Print(
-    variables_,
-    "pb::FieldCodec.For$capitalized_type_name$($tag$)");
 }
 
 PrimitiveOneofFieldGenerator::PrimitiveOneofFieldGenerator(
@@ -213,10 +237,11 @@ void PrimitiveOneofFieldGenerator::WriteToString(io::Printer* printer) {
     "PrintField(\"$descriptor_name$\", $has_property_check$, $oneof_name$_, writer);\n");
 }
 
-void PrimitiveOneofFieldGenerator::GenerateParsingCode(io::Printer* printer) {
-    printer->Print(
-      variables_,
-      "$property_name$ = input.Read$capitalized_type_name$();\n");
+void PrimitiveOneofFieldGenerator::GenerateParsingCode(io::Printer* printer, const std::string& lvalueName, bool forceNonPacked) {
+  variables_["lvalue_name"] = lvalueName.empty() ? variables_["property_name"] : lvalueName;
+  printer->Print(
+   variables_,
+  "$lvalue_name$ = input.Read$capitalized_type_name$(ref immediateBuffer);\n");
 }
 
 void PrimitiveOneofFieldGenerator::GenerateCloningCode(io::Printer* printer) {

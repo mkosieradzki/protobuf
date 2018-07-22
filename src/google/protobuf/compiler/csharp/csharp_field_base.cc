@@ -85,6 +85,8 @@ void FieldGeneratorBase::SetCommonFieldVariables(
   (*variables)["number"] = number();
   (*variables)["has_property_check"] =
     (*variables)["property_name"] + " != " + (*variables)["default_value"];
+  (*variables)["has_property_check_sufix"] =
+    " != " + (*variables)["default_value"];
   (*variables)["other_has_property_check"] = "other." +
     (*variables)["property_name"] + " != " + (*variables)["default_value"];
 }
@@ -112,11 +114,6 @@ FieldGeneratorBase::~FieldGeneratorBase() {
 void FieldGeneratorBase::GenerateFreezingCode(io::Printer* printer) {
   // No-op: only message fields and repeated fields need
   // special handling for freezing, so default to not generating any code.
-}
-
-void FieldGeneratorBase::GenerateCodecCode(io::Printer* printer) {
-    // No-op: expect this to be overridden by appropriate types.
-    // Could fail if we get called here though...
 }
 
 void FieldGeneratorBase::AddDeprecatedFlag(io::Printer* printer) {
@@ -381,7 +378,11 @@ std::string FieldGeneratorBase::number() {
 }
 
 std::string FieldGeneratorBase::capitalized_type_name() {
-  switch (descriptor_->type()) {
+  return capitalized_type_name(descriptor_);
+}
+
+std::string FieldGeneratorBase::capitalized_type_name(const FieldDescriptor* descriptor) {
+  switch (descriptor->type()) {
     case FieldDescriptor::TYPE_ENUM:
       return "Enum";
     case FieldDescriptor::TYPE_MESSAGE:
