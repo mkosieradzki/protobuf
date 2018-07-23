@@ -59,7 +59,7 @@ matrix:
       env: CONFIG=csharp
       language: csharp
       dist: trusty
-      dotnet: 2.0.3
+      dotnet: 2.1.300
       mono: none
       # Install the .NET Core 1.0 runtime as that's what we test against
       addons:
