@@ -24,7 +24,27 @@ mkdir build_msvc
 cd build_msvc
 cmake -G "%generator%" -Dprotobuf_BUILD_SHARED_LIBS=%BUILD_DLL% -Dprotobuf_UNICODE=%UNICODE% ../cmake
 msbuild protobuf.sln /p:Platform=%vcplatform% /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll" || goto error
-cd %configuration%
+mkdir c:\protobuf-dist\google\protobuf
+copy %configuration%\protoc.exe c:\protobuf-dist\
+
+copy c:\projects\protobuf\src\google\protobuf\any.proto c:\protobuf-dist\google\protobuf\
+copy c:\projects\protobuf\src\google\protobuf\api.proto c:\protobuf-dist\google\protobuf\
+copy c:\projects\protobuf\src\google\protobuf\descriptor.proto c:\protobuf-dist\google\protobuf\
+copy c:\projects\protobuf\src\google\protobuf\duration.proto c:\protobuf-dist\google\protobuf\
+copy c:\projects\protobuf\src\google\protobuf\empty.proto c:\protobuf-dist\google\protobuf\
+copy c:\projects\protobuf\src\google\protobuf\field_mask.proto c:\protobuf-dist\google\protobuf\
+copy c:\projects\protobuf\src\google\protobuf\source_context.proto c:\protobuf-dist\google\protobuf\
+copy c:\projects\protobuf\src\google\protobuf\struct.proto c:\protobuf-dist\google\protobuf\
+copy c:\projects\protobuf\src\google\protobuf\timestamp.proto c:\protobuf-dist\google\protobuf\
+copy c:\projects\protobuf\src\google\protobuf\type.proto c:\protobuf-dist\google\protobuf\
+copy c:\projects\protobuf\src\google\protobuf\wrappers.proto c:\protobuf-dist\google\protobuf\
+
+cd c:\protobuf-dist
+7z a c:\protobuf.zip *
+appveyor PushArtifact c:\protobuf.zip
+
+cd C:\projects\protobuf\build_msvc\%configuration%
+
 tests.exe || goto error
 goto :EOF
 
@@ -37,8 +57,13 @@ set platform=
 dotnet restore
 dotnet build -c %configuration% || goto error
 
+dotnet pack Google.Protobuf\Google.Protobuf.csproj -c Release -o C:\nugets --version-suffix "pre-%APPVEYOR_BUILD_NUMBER%
+
+appveyor PushArtifact c:\nugets\Google.Protobuf.4.0.0-pre-%APPVEYOR_BUILD_NUMBER%.nupkg
+
 echo Testing C#
 dotnet test -c %configuration% -f netcoreapp1.0 Google.Protobuf.Test\Google.Protobuf.Test.csproj || goto error
+dotnet test -c %configuration% -f netcoreapp2.1 Google.Protobuf.Test\Google.Protobuf.Test.csproj || goto error
 dotnet test -c %configuration% -f net451 Google.Protobuf.Test\Google.Protobuf.Test.csproj || goto error
 
 goto :EOF
