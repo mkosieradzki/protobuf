@@ -27,7 +27,7 @@ msbuild protobuf.sln /p:Platform=%vcplatform% /logger:"C:\Program Files\AppVeyor
 cd %configuration%
 mkdir c:\protobuf-dist
 copy protoc.exe c:\protobuf-dist\
-7z a C:\protobuf.zip c:\protobuf-dist\**\*
+7z a C:\protobuf.zip c:\protobuf-dist
 appveyor PushArtifact  C:\protobuf.zip
 
 tests.exe || goto error
