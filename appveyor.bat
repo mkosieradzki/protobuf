@@ -24,7 +24,6 @@ mkdir build_msvc
 cd build_msvc
 cmake -G "%generator%" -Dprotobuf_BUILD_SHARED_LIBS=%BUILD_DLL% -Dprotobuf_UNICODE=%UNICODE% ../cmake
 msbuild protobuf.sln /p:Platform=%vcplatform% /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll" || goto error
-cd %configuration%
 mkdir c:\protobuf-dist\google\protobuf
 copy protoc.exe c:\protobuf-dist\
 
@@ -38,8 +37,11 @@ copy c:\projects\protobuf\src\google\protobuf\timestamp.proto c:\protobuf-dist\g
 copy c:\projects\protobuf\src\google\protobuf\type.proto c:\protobuf-dist\google\protobuf\
 copy c:\projects\protobuf\src\google\protobuf\wrappers.proto c:\protobuf-dist\google\protobuf\
 
-7z a C:\protobuf.zip c:\protobuf-dist
+cd c:\protobuf-dist
+7z a c:\protobuf.zip *
 appveyor PushArtifact c:\protobuf.zip
+
+cd c:\build_msvc\%configuration%
 
 tests.exe || goto error
 goto :EOF
