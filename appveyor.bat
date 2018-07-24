@@ -24,8 +24,9 @@ mkdir build_msvc
 cd build_msvc
 cmake -G "%generator%" -Dprotobuf_BUILD_SHARED_LIBS=%BUILD_DLL% -Dprotobuf_UNICODE=%UNICODE% ../cmake
 msbuild protobuf.sln /p:Platform=%vcplatform% /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll" || goto error
-cmake -DCMAKE_INSTALL_PREFIX=C:\protobuf-dist -P ../cmake/install.cmake
-cd %configuration%
+cd ../cmake
+cmake -DCMAKE_INSTALL_PREFIX=C:\protobuf-dist -P install.cmake
+cd ../build_msvc/%configuration%
 tests.exe || goto error
 goto :EOF
 
