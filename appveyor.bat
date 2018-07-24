@@ -28,7 +28,7 @@ cd %configuration%
 mkdir c:\protobuf-dist
 copy protoc.exe c:\protobuf-dist\
 7z a C:\protobuf.zip c:\protobuf-dist\**\*
-appveyor PublishArtifact C:\protobuf.zip
+appveyor PushArtifact  C:\protobuf.zip
 
 tests.exe || goto error
 goto :EOF
