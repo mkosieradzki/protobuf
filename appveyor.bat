@@ -27,8 +27,19 @@ msbuild protobuf.sln /p:Platform=%vcplatform% /logger:"C:\Program Files\AppVeyor
 cd %configuration%
 mkdir c:\protobuf-dist
 copy protoc.exe c:\protobuf-dist\
+
+copy C:\projects\protobuf\src\google\protobuf\api.proto c:\protobuf-dist\google\protobuf\
+copy C:\projects\protobuf\src\google\protobuf\duration.proto c:\protobuf-dist\google\protobuf\
+copy C:\projects\protobuf\src\google\protobuf\empty.proto c:\protobuf-dist\google\protobuf\
+copy C:\projects\protobuf\src\google\protobuf\field_mask.proto c:\protobuf-dist\google\protobuf\
+copy C:\projects\protobuf\src\google\protobuf\source_context.proto c:\protobuf-dist\google\protobuf\
+copy C:\projects\protobuf\src\google\protobuf\struct.proto c:\protobuf-dist\google\protobuf\
+copy C:\projects\protobuf\src\google\protobuf\timestamp.proto c:\protobuf-dist\google\protobuf\
+copy C:\projects\protobuf\src\google\protobuf\type.proto c:\protobuf-dist\google\protobuf\
+copy C:\projects\protobuf\src\google\protobuf\wrappers.proto c:\protobuf-dist\google\protobuf\
+
 7z a C:\protobuf.zip c:\protobuf-dist
-appveyor PushArtifact  C:\protobuf.zip
+appveyor PushArtifact C:\protobuf.zip
 
 tests.exe || goto error
 goto :EOF
