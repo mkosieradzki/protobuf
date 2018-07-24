@@ -27,7 +27,9 @@ msbuild protobuf.sln /p:Platform=%vcplatform% /logger:"C:\Program Files\AppVeyor
 mkdir c:\protobuf-dist\google\protobuf
 copy %configuration%\protoc.exe c:\protobuf-dist\
 
+copy c:\projects\protobuf\src\google\protobuf\any.proto c:\protobuf-dist\google\protobuf\
 copy c:\projects\protobuf\src\google\protobuf\api.proto c:\protobuf-dist\google\protobuf\
+copy c:\projects\protobuf\src\google\protobuf\descriptor.proto c:\protobuf-dist\google\protobuf\
 copy c:\projects\protobuf\src\google\protobuf\duration.proto c:\protobuf-dist\google\protobuf\
 copy c:\projects\protobuf\src\google\protobuf\empty.proto c:\protobuf-dist\google\protobuf\
 copy c:\projects\protobuf\src\google\protobuf\field_mask.proto c:\protobuf-dist\google\protobuf\
@@ -57,7 +59,7 @@ dotnet build -c %configuration% || goto error
 
 dotnet pack Google.Protobuf\Google.Protobuf.csproj -c Release -o C:\nugets
 
-appveyor PushArtifact c:\nugets\*.nupkg
+appveyor PushArtifact c:\nugets\Google.Protobuf.3.6.0.nupkg
 
 echo Testing C#
 dotnet test -c %configuration% -f netcoreapp1.0 Google.Protobuf.Test\Google.Protobuf.Test.csproj || goto error
