@@ -25,7 +25,7 @@ cd build_msvc
 cmake -G "%generator%" -Dprotobuf_BUILD_SHARED_LIBS=%BUILD_DLL% -Dprotobuf_UNICODE=%UNICODE% ../cmake
 msbuild protobuf.sln /p:Platform=%vcplatform% /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll" || goto error
 mkdir c:\protobuf-dist\google\protobuf
-copy protoc.exe c:\protobuf-dist\
+copy %configuration%\protoc.exe c:\protobuf-dist\
 
 copy c:\projects\protobuf\src\google\protobuf\api.proto c:\protobuf-dist\google\protobuf\
 copy c:\projects\protobuf\src\google\protobuf\duration.proto c:\protobuf-dist\google\protobuf\
@@ -41,7 +41,7 @@ cd c:\protobuf-dist
 7z a c:\protobuf.zip *
 appveyor PushArtifact c:\protobuf.zip
 
-cd c:\build_msvc\%configuration%
+cd C:\projects\protobuf\build_msvc\%configuration%
 
 tests.exe || goto error
 goto :EOF
@@ -54,6 +54,8 @@ REM we don't want it.
 set platform=
 dotnet restore
 dotnet build -c %configuration% || goto error
+
+dotnet pack Google.Protobuf\Google.Protobuf.csproj -c Release -o C:\nugets
 
 echo Testing C#
 dotnet test -c %configuration% -f netcoreapp1.0 Google.Protobuf.Test\Google.Protobuf.Test.csproj || goto error
