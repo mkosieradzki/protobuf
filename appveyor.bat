@@ -57,6 +57,8 @@ dotnet build -c %configuration% || goto error
 
 dotnet pack Google.Protobuf\Google.Protobuf.csproj -c Release -o C:\nugets
 
+appveyor PushArtifact c:\nugets\*.nupkg
+
 echo Testing C#
 dotnet test -c %configuration% -f netcoreapp1.0 Google.Protobuf.Test\Google.Protobuf.Test.csproj || goto error
 dotnet test -c %configuration% -f netcoreapp2.1 Google.Protobuf.Test\Google.Protobuf.Test.csproj || goto error
