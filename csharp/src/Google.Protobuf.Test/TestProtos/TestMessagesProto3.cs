@@ -653,8 +653,6 @@ namespace ProtobufTestMessages.Proto3 {
 
     /// <summary>Field number for the "repeated_int32" field.</summary>
     public const int RepeatedInt32FieldNumber = 31;
-    private static readonly pb::FieldCodec<int> _repeated_repeatedInt32_codec
-        = pb::FieldCodec.ForInt32(250);
     private readonly pbc::RepeatedField<int> repeatedInt32_ = new pbc::RepeatedField<int>();
     /// <summary>
     /// Repeated
@@ -666,8 +664,6 @@ namespace ProtobufTestMessages.Proto3 {
 
     /// <summary>Field number for the "repeated_int64" field.</summary>
     public const int RepeatedInt64FieldNumber = 32;
-    private static readonly pb::FieldCodec<long> _repeated_repeatedInt64_codec
-        = pb::FieldCodec.ForInt64(258);
     private readonly pbc::RepeatedField<long> repeatedInt64_ = new pbc::RepeatedField<long>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<long> RepeatedInt64 {
@@ -676,8 +672,6 @@ namespace ProtobufTestMessages.Proto3 {
 
     /// <summary>Field number for the "repeated_uint32" field.</summary>
     public const int RepeatedUint32FieldNumber = 33;
-    private static readonly pb::FieldCodec<uint> _repeated_repeatedUint32_codec
-        = pb::FieldCodec.ForUInt32(266);
     private readonly pbc::RepeatedField<uint> repeatedUint32_ = new pbc::RepeatedField<uint>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<uint> RepeatedUint32 {
@@ -686,8 +680,6 @@ namespace ProtobufTestMessages.Proto3 {
 
     /// <summary>Field number for the "repeated_uint64" field.</summary>
     public const int RepeatedUint64FieldNumber = 34;
-    private static readonly pb::FieldCodec<ulong> _repeated_repeatedUint64_codec
-        = pb::FieldCodec.ForUInt64(274);
     private readonly pbc::RepeatedField<ulong> repeatedUint64_ = new pbc::RepeatedField<ulong>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<ulong> RepeatedUint64 {
@@ -696,8 +688,6 @@ namespace ProtobufTestMessages.Proto3 {
 
     /// <summary>Field number for the "repeated_sint32" field.</summary>
     public const int RepeatedSint32FieldNumber = 35;
-    private static readonly pb::FieldCodec<int> _repeated_repeatedSint32_codec
-        = pb::FieldCodec.ForSInt32(282);
     private readonly pbc::RepeatedField<int> repeatedSint32_ = new pbc::RepeatedField<int>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<int> RepeatedSint32 {
@@ -706,8 +696,6 @@ namespace ProtobufTestMessages.Proto3 {
 
     /// <summary>Field number for the "repeated_sint64" field.</summary>
     public const int RepeatedSint64FieldNumber = 36;
-    private static readonly pb::FieldCodec<long> _repeated_repeatedSint64_codec
-        = pb::FieldCodec.ForSInt64(290);
     private readonly pbc::RepeatedField<long> repeatedSint64_ = new pbc::RepeatedField<long>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<long> RepeatedSint64 {
@@ -716,8 +704,6 @@ namespace ProtobufTestMessages.Proto3 {
 
     /// <summary>Field number for the "repeated_fixed32" field.</summary>
     public const int RepeatedFixed32FieldNumber = 37;
-    private static readonly pb::FieldCodec<uint> _repeated_repeatedFixed32_codec
-        = pb::FieldCodec.ForFixed32(298);
     private readonly pbc::RepeatedField<uint> repeatedFixed32_ = new pbc::RepeatedField<uint>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<uint> RepeatedFixed32 {
@@ -726,8 +712,6 @@ namespace ProtobufTestMessages.Proto3 {
 
     /// <summary>Field number for the "repeated_fixed64" field.</summary>
     public const int RepeatedFixed64FieldNumber = 38;
-    private static readonly pb::FieldCodec<ulong> _repeated_repeatedFixed64_codec
-        = pb::FieldCodec.ForFixed64(306);
     private readonly pbc::RepeatedField<ulong> repeatedFixed64_ = new pbc::RepeatedField<ulong>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<ulong> RepeatedFixed64 {
@@ -736,8 +720,6 @@ namespace ProtobufTestMessages.Proto3 {
 
     /// <summary>Field number for the "repeated_sfixed32" field.</summary>
     public const int RepeatedSfixed32FieldNumber = 39;
-    private static readonly pb::FieldCodec<int> _repeated_repeatedSfixed32_codec
-        = pb::FieldCodec.ForSFixed32(314);
     private readonly pbc::RepeatedField<int> repeatedSfixed32_ = new pbc::RepeatedField<int>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<int> RepeatedSfixed32 {
@@ -746,8 +728,6 @@ namespace ProtobufTestMessages.Proto3 {
 
     /// <summary>Field number for the "repeated_sfixed64" field.</summary>
     public const int RepeatedSfixed64FieldNumber = 40;
-    private static readonly pb::FieldCodec<long> _repeated_repeatedSfixed64_codec
-        = pb::FieldCodec.ForSFixed64(322);
     private readonly pbc::RepeatedField<long> repeatedSfixed64_ = new pbc::RepeatedField<long>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<long> RepeatedSfixed64 {
@@ -756,8 +736,6 @@ namespace ProtobufTestMessages.Proto3 {
 
     /// <summary>Field number for the "repeated_float" field.</summary>
     public const int RepeatedFloatFieldNumber = 41;
-    private static readonly pb::FieldCodec<float> _repeated_repeatedFloat_codec
-        = pb::FieldCodec.ForFloat(330);
     private readonly pbc::RepeatedField<float> repeatedFloat_ = new pbc::RepeatedField<float>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<float> RepeatedFloat {
@@ -766,8 +744,6 @@ namespace ProtobufTestMessages.Proto3 {
 
     /// <summary>Field number for the "repeated_double" field.</summary>
     public const int RepeatedDoubleFieldNumber = 42;
-    private static readonly pb::FieldCodec<double> _repeated_repeatedDouble_codec
-        = pb::FieldCodec.ForDouble(338);
     private readonly pbc::RepeatedField<double> repeatedDouble_ = new pbc::RepeatedField<double>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<double> RepeatedDouble {
@@ -776,8 +752,6 @@ namespace ProtobufTestMessages.Proto3 {
 
     /// <summary>Field number for the "repeated_bool" field.</summary>
     public const int RepeatedBoolFieldNumber = 43;
-    private static readonly pb::FieldCodec<bool> _repeated_repeatedBool_codec
-        = pb::FieldCodec.ForBool(346);
     private readonly pbc::RepeatedField<bool> repeatedBool_ = new pbc::RepeatedField<bool>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<bool> RepeatedBool {
@@ -786,8 +760,6 @@ namespace ProtobufTestMessages.Proto3 {
 
     /// <summary>Field number for the "repeated_string" field.</summary>
     public const int RepeatedStringFieldNumber = 44;
-    private static readonly pb::FieldCodec<string> _repeated_repeatedString_codec
-        = pb::FieldCodec.ForString(354);
     private readonly pbc::RepeatedField<string> repeatedString_ = new pbc::RepeatedField<string>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<string> RepeatedString {
@@ -796,8 +768,6 @@ namespace ProtobufTestMessages.Proto3 {
 
     /// <summary>Field number for the "repeated_bytes" field.</summary>
     public const int RepeatedBytesFieldNumber = 45;
-    private static readonly pb::FieldCodec<pb::ByteString> _repeated_repeatedBytes_codec
-        = pb::FieldCodec.ForBytes(362);
     private readonly pbc::RepeatedField<pb::ByteString> repeatedBytes_ = new pbc::RepeatedField<pb::ByteString>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<pb::ByteString> RepeatedBytes {
@@ -806,8 +776,6 @@ namespace ProtobufTestMessages.Proto3 {
 
     /// <summary>Field number for the "repeated_nested_message" field.</summary>
     public const int RepeatedNestedMessageFieldNumber = 48;
-    private static readonly pb::FieldCodec<global::ProtobufTestMessages.Proto3.TestAllTypesProto3.Types.NestedMessage> _repeated_repeatedNestedMessage_codec
-        = pb::FieldCodec.ForMessage(386, global::ProtobufTestMessages.Proto3.TestAllTypesProto3.Types.NestedMessage.Parser);
     private readonly pbc::RepeatedField<global::ProtobufTestMessages.Proto3.TestAllTypesProto3.Types.NestedMessage> repeatedNestedMessage_ = new pbc::RepeatedField<global::ProtobufTestMessages.Proto3.TestAllTypesProto3.Types.NestedMessage>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<global::ProtobufTestMessages.Proto3.TestAllTypesProto3.Types.NestedMessage> RepeatedNestedMessage {
@@ -816,8 +784,6 @@ namespace ProtobufTestMessages.Proto3 {
 
     /// <summary>Field number for the "repeated_foreign_message" field.</summary>
     public const int RepeatedForeignMessageFieldNumber = 49;
-    private static readonly pb::FieldCodec<global::ProtobufTestMessages.Proto3.ForeignMessage> _repeated_repeatedForeignMessage_codec
-        = pb::FieldCodec.ForMessage(394, global::ProtobufTestMessages.Proto3.ForeignMessage.Parser);
     private readonly pbc::RepeatedField<global::ProtobufTestMessages.Proto3.ForeignMessage> repeatedForeignMessage_ = new pbc::RepeatedField<global::ProtobufTestMessages.Proto3.ForeignMessage>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<global::ProtobufTestMessages.Proto3.ForeignMessage> RepeatedForeignMessage {
@@ -826,8 +792,6 @@ namespace ProtobufTestMessages.Proto3 {
 
     /// <summary>Field number for the "repeated_nested_enum" field.</summary>
     public const int RepeatedNestedEnumFieldNumber = 51;
-    private static readonly pb::FieldCodec<global::ProtobufTestMessages.Proto3.TestAllTypesProto3.Types.NestedEnum> _repeated_repeatedNestedEnum_codec
-        = pb::FieldCodec.ForEnum(410, x => (int) x, x => (global::ProtobufTestMessages.Proto3.TestAllTypesProto3.Types.NestedEnum) x);
     private readonly pbc::RepeatedField<global::ProtobufTestMessages.Proto3.TestAllTypesProto3.Types.NestedEnum> repeatedNestedEnum_ = new pbc::RepeatedField<global::ProtobufTestMessages.Proto3.TestAllTypesProto3.Types.NestedEnum>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<global::ProtobufTestMessages.Proto3.TestAllTypesProto3.Types.NestedEnum> RepeatedNestedEnum {
@@ -836,8 +800,6 @@ namespace ProtobufTestMessages.Proto3 {
 
     /// <summary>Field number for the "repeated_foreign_enum" field.</summary>
     public const int RepeatedForeignEnumFieldNumber = 52;
-    private static readonly pb::FieldCodec<global::ProtobufTestMessages.Proto3.ForeignEnum> _repeated_repeatedForeignEnum_codec
-        = pb::FieldCodec.ForEnum(418, x => (int) x, x => (global::ProtobufTestMessages.Proto3.ForeignEnum) x);
     private readonly pbc::RepeatedField<global::ProtobufTestMessages.Proto3.ForeignEnum> repeatedForeignEnum_ = new pbc::RepeatedField<global::ProtobufTestMessages.Proto3.ForeignEnum>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<global::ProtobufTestMessages.Proto3.ForeignEnum> RepeatedForeignEnum {
@@ -846,8 +808,6 @@ namespace ProtobufTestMessages.Proto3 {
 
     /// <summary>Field number for the "repeated_string_piece" field.</summary>
     public const int RepeatedStringPieceFieldNumber = 54;
-    private static readonly pb::FieldCodec<string> _repeated_repeatedStringPiece_codec
-        = pb::FieldCodec.ForString(434);
     private readonly pbc::RepeatedField<string> repeatedStringPiece_ = new pbc::RepeatedField<string>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<string> RepeatedStringPiece {
@@ -856,8 +816,6 @@ namespace ProtobufTestMessages.Proto3 {
 
     /// <summary>Field number for the "repeated_cord" field.</summary>
     public const int RepeatedCordFieldNumber = 55;
-    private static readonly pb::FieldCodec<string> _repeated_repeatedCord_codec
-        = pb::FieldCodec.ForString(442);
     private readonly pbc::RepeatedField<string> repeatedCord_ = new pbc::RepeatedField<string>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<string> RepeatedCord {
@@ -866,8 +824,6 @@ namespace ProtobufTestMessages.Proto3 {
 
     /// <summary>Field number for the "map_int32_int32" field.</summary>
     public const int MapInt32Int32FieldNumber = 56;
-    private static readonly pbc::MapField<int, int>.Codec _map_mapInt32Int32_codec
-        = new pbc::MapField<int, int>.Codec(pb::FieldCodec.ForInt32(8), pb::FieldCodec.ForInt32(16), 450);
     private readonly pbc::MapField<int, int> mapInt32Int32_ = new pbc::MapField<int, int>();
     /// <summary>
     /// Map
@@ -879,8 +835,6 @@ namespace ProtobufTestMessages.Proto3 {
 
     /// <summary>Field number for the "map_int64_int64" field.</summary>
     public const int MapInt64Int64FieldNumber = 57;
-    private static readonly pbc::MapField<long, long>.Codec _map_mapInt64Int64_codec
-        = new pbc::MapField<long, long>.Codec(pb::FieldCodec.ForInt64(8), pb::FieldCodec.ForInt64(16), 458);
     private readonly pbc::MapField<long, long> mapInt64Int64_ = new pbc::MapField<long, long>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::MapField<long, long> MapInt64Int64 {
@@ -889,8 +843,6 @@ namespace ProtobufTestMessages.Proto3 {
 
     /// <summary>Field number for the "map_uint32_uint32" field.</summary>
     public const int MapUint32Uint32FieldNumber = 58;
-    private static readonly pbc::MapField<uint, uint>.Codec _map_mapUint32Uint32_codec
-        = new pbc::MapField<uint, uint>.Codec(pb::FieldCodec.ForUInt32(8), pb::FieldCodec.ForUInt32(16), 466);
     private readonly pbc::MapField<uint, uint> mapUint32Uint32_ = new pbc::MapField<uint, uint>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::MapField<uint, uint> MapUint32Uint32 {
@@ -899,8 +851,6 @@ namespace ProtobufTestMessages.Proto3 {
 
     /// <summary>Field number for the "map_uint64_uint64" field.</summary>
     public const int MapUint64Uint64FieldNumber = 59;
-    private static readonly pbc::MapField<ulong, ulong>.Codec _map_mapUint64Uint64_codec
-        = new pbc::MapField<ulong, ulong>.Codec(pb::FieldCodec.ForUInt64(8), pb::FieldCodec.ForUInt64(16), 474);
     private readonly pbc::MapField<ulong, ulong> mapUint64Uint64_ = new pbc::MapField<ulong, ulong>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::MapField<ulong, ulong> MapUint64Uint64 {
@@ -909,8 +859,6 @@ namespace ProtobufTestMessages.Proto3 {
 
     /// <summary>Field number for the "map_sint32_sint32" field.</summary>
     public const int MapSint32Sint32FieldNumber = 60;
-    private static readonly pbc::MapField<int, int>.Codec _map_mapSint32Sint32_codec
-        = new pbc::MapField<int, int>.Codec(pb::FieldCodec.ForSInt32(8), pb::FieldCodec.ForSInt32(16), 482);
     private readonly pbc::MapField<int, int> mapSint32Sint32_ = new pbc::MapField<int, int>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::MapField<int, int> MapSint32Sint32 {
@@ -919,8 +867,6 @@ namespace ProtobufTestMessages.Proto3 {
 
     /// <summary>Field number for the "map_sint64_sint64" field.</summary>
     public const int MapSint64Sint64FieldNumber = 61;
-    private static readonly pbc::MapField<long, long>.Codec _map_mapSint64Sint64_codec
-        = new pbc::MapField<long, long>.Codec(pb::FieldCodec.ForSInt64(8), pb::FieldCodec.ForSInt64(16), 490);
     private readonly pbc::MapField<long, long> mapSint64Sint64_ = new pbc::MapField<long, long>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::MapField<long, long> MapSint64Sint64 {
@@ -929,8 +875,6 @@ namespace ProtobufTestMessages.Proto3 {
 
     /// <summary>Field number for the "map_fixed32_fixed32" field.</summary>
     public const int MapFixed32Fixed32FieldNumber = 62;
-    private static readonly pbc::MapField<uint, uint>.Codec _map_mapFixed32Fixed32_codec
-        = new pbc::MapField<uint, uint>.Codec(pb::FieldCodec.ForFixed32(13), pb::FieldCodec.ForFixed32(21), 498);
     private readonly pbc::MapField<uint, uint> mapFixed32Fixed32_ = new pbc::MapField<uint, uint>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::MapField<uint, uint> MapFixed32Fixed32 {
@@ -939,8 +883,6 @@ namespace ProtobufTestMessages.Proto3 {
 
     /// <summary>Field number for the "map_fixed64_fixed64" field.</summary>
     public const int MapFixed64Fixed64FieldNumber = 63;
-    private static readonly pbc::MapField<ulong, ulong>.Codec _map_mapFixed64Fixed64_codec
-        = new pbc::MapField<ulong, ulong>.Codec(pb::FieldCodec.ForFixed64(9), pb::FieldCodec.ForFixed64(17), 506);
     private readonly pbc::MapField<ulong, ulong> mapFixed64Fixed64_ = new pbc::MapField<ulong, ulong>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::MapField<ulong, ulong> MapFixed64Fixed64 {
@@ -949,8 +891,6 @@ namespace ProtobufTestMessages.Proto3 {
 
     /// <summary>Field number for the "map_sfixed32_sfixed32" field.</summary>
     public const int MapSfixed32Sfixed32FieldNumber = 64;
-    private static readonly pbc::MapField<int, int>.Codec _map_mapSfixed32Sfixed32_codec
-        = new pbc::MapField<int, int>.Codec(pb::FieldCodec.ForSFixed32(13), pb::FieldCodec.ForSFixed32(21), 514);
     private readonly pbc::MapField<int, int> mapSfixed32Sfixed32_ = new pbc::MapField<int, int>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::MapField<int, int> MapSfixed32Sfixed32 {
@@ -959,8 +899,6 @@ namespace ProtobufTestMessages.Proto3 {
 
     /// <summary>Field number for the "map_sfixed64_sfixed64" field.</summary>
     public const int MapSfixed64Sfixed64FieldNumber = 65;
-    private static readonly pbc::MapField<long, long>.Codec _map_mapSfixed64Sfixed64_codec
-        = new pbc::MapField<long, long>.Codec(pb::FieldCodec.ForSFixed64(9), pb::FieldCodec.ForSFixed64(17), 522);
     private readonly pbc::MapField<long, long> mapSfixed64Sfixed64_ = new pbc::MapField<long, long>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::MapField<long, long> MapSfixed64Sfixed64 {
@@ -969,8 +907,6 @@ namespace ProtobufTestMessages.Proto3 {
 
     /// <summary>Field number for the "map_int32_float" field.</summary>
     public const int MapInt32FloatFieldNumber = 66;
-    private static readonly pbc::MapField<int, float>.Codec _map_mapInt32Float_codec
-        = new pbc::MapField<int, float>.Codec(pb::FieldCodec.ForInt32(8), pb::FieldCodec.ForFloat(21), 530);
     private readonly pbc::MapField<int, float> mapInt32Float_ = new pbc::MapField<int, float>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::MapField<int, float> MapInt32Float {
@@ -979,8 +915,6 @@ namespace ProtobufTestMessages.Proto3 {
 
     /// <summary>Field number for the "map_int32_double" field.</summary>
     public const int MapInt32DoubleFieldNumber = 67;
-    private static readonly pbc::MapField<int, double>.Codec _map_mapInt32Double_codec
-        = new pbc::MapField<int, double>.Codec(pb::FieldCodec.ForInt32(8), pb::FieldCodec.ForDouble(17), 538);
     private readonly pbc::MapField<int, double> mapInt32Double_ = new pbc::MapField<int, double>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::MapField<int, double> MapInt32Double {
@@ -989,8 +923,6 @@ namespace ProtobufTestMessages.Proto3 {
 
     /// <summary>Field number for the "map_bool_bool" field.</summary>
     public const int MapBoolBoolFieldNumber = 68;
-    private static readonly pbc::MapField<bool, bool>.Codec _map_mapBoolBool_codec
-        = new pbc::MapField<bool, bool>.Codec(pb::FieldCodec.ForBool(8), pb::FieldCodec.ForBool(16), 546);
     private readonly pbc::MapField<bool, bool> mapBoolBool_ = new pbc::MapField<bool, bool>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::MapField<bool, bool> MapBoolBool {
@@ -999,8 +931,6 @@ namespace ProtobufTestMessages.Proto3 {
 
     /// <summary>Field number for the "map_string_string" field.</summary>
     public const int MapStringStringFieldNumber = 69;
-    private static readonly pbc::MapField<string, string>.Codec _map_mapStringString_codec
-        = new pbc::MapField<string, string>.Codec(pb::FieldCodec.ForString(10), pb::FieldCodec.ForString(18), 554);
     private readonly pbc::MapField<string, string> mapStringString_ = new pbc::MapField<string, string>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::MapField<string, string> MapStringString {
@@ -1009,8 +939,6 @@ namespace ProtobufTestMessages.Proto3 {
 
     /// <summary>Field number for the "map_string_bytes" field.</summary>
     public const int MapStringBytesFieldNumber = 70;
-    private static readonly pbc::MapField<string, pb::ByteString>.Codec _map_mapStringBytes_codec
-        = new pbc::MapField<string, pb::ByteString>.Codec(pb::FieldCodec.ForString(10), pb::FieldCodec.ForBytes(18), 562);
     private readonly pbc::MapField<string, pb::ByteString> mapStringBytes_ = new pbc::MapField<string, pb::ByteString>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::MapField<string, pb::ByteString> MapStringBytes {
@@ -1019,8 +947,6 @@ namespace ProtobufTestMessages.Proto3 {
 
     /// <summary>Field number for the "map_string_nested_message" field.</summary>
     public const int MapStringNestedMessageFieldNumber = 71;
-    private static readonly pbc::MapField<string, global::ProtobufTestMessages.Proto3.TestAllTypesProto3.Types.NestedMessage>.Codec _map_mapStringNestedMessage_codec
-        = new pbc::MapField<string, global::ProtobufTestMessages.Proto3.TestAllTypesProto3.Types.NestedMessage>.Codec(pb::FieldCodec.ForString(10), pb::FieldCodec.ForMessage(18, global::ProtobufTestMessages.Proto3.TestAllTypesProto3.Types.NestedMessage.Parser), 570);
     private readonly pbc::MapField<string, global::ProtobufTestMessages.Proto3.TestAllTypesProto3.Types.NestedMessage> mapStringNestedMessage_ = new pbc::MapField<string, global::ProtobufTestMessages.Proto3.TestAllTypesProto3.Types.NestedMessage>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::MapField<string, global::ProtobufTestMessages.Proto3.TestAllTypesProto3.Types.NestedMessage> MapStringNestedMessage {
@@ -1029,8 +955,6 @@ namespace ProtobufTestMessages.Proto3 {
 
     /// <summary>Field number for the "map_string_foreign_message" field.</summary>
     public const int MapStringForeignMessageFieldNumber = 72;
-    private static readonly pbc::MapField<string, global::ProtobufTestMessages.Proto3.ForeignMessage>.Codec _map_mapStringForeignMessage_codec
-        = new pbc::MapField<string, global::ProtobufTestMessages.Proto3.ForeignMessage>.Codec(pb::FieldCodec.ForString(10), pb::FieldCodec.ForMessage(18, global::ProtobufTestMessages.Proto3.ForeignMessage.Parser), 578);
     private readonly pbc::MapField<string, global::ProtobufTestMessages.Proto3.ForeignMessage> mapStringForeignMessage_ = new pbc::MapField<string, global::ProtobufTestMessages.Proto3.ForeignMessage>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::MapField<string, global::ProtobufTestMessages.Proto3.ForeignMessage> MapStringForeignMessage {
@@ -1039,8 +963,6 @@ namespace ProtobufTestMessages.Proto3 {
 
     /// <summary>Field number for the "map_string_nested_enum" field.</summary>
     public const int MapStringNestedEnumFieldNumber = 73;
-    private static readonly pbc::MapField<string, global::ProtobufTestMessages.Proto3.TestAllTypesProto3.Types.NestedEnum>.Codec _map_mapStringNestedEnum_codec
-        = new pbc::MapField<string, global::ProtobufTestMessages.Proto3.TestAllTypesProto3.Types.NestedEnum>.Codec(pb::FieldCodec.ForString(10), pb::FieldCodec.ForEnum(16, x => (int) x, x => (global::ProtobufTestMessages.Proto3.TestAllTypesProto3.Types.NestedEnum) x), 586);
     private readonly pbc::MapField<string, global::ProtobufTestMessages.Proto3.TestAllTypesProto3.Types.NestedEnum> mapStringNestedEnum_ = new pbc::MapField<string, global::ProtobufTestMessages.Proto3.TestAllTypesProto3.Types.NestedEnum>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::MapField<string, global::ProtobufTestMessages.Proto3.TestAllTypesProto3.Types.NestedEnum> MapStringNestedEnum {
@@ -1049,8 +971,6 @@ namespace ProtobufTestMessages.Proto3 {
 
     /// <summary>Field number for the "map_string_foreign_enum" field.</summary>
     public const int MapStringForeignEnumFieldNumber = 74;
-    private static readonly pbc::MapField<string, global::ProtobufTestMessages.Proto3.ForeignEnum>.Codec _map_mapStringForeignEnum_codec
-        = new pbc::MapField<string, global::ProtobufTestMessages.Proto3.ForeignEnum>.Codec(pb::FieldCodec.ForString(10), pb::FieldCodec.ForEnum(16, x => (int) x, x => (global::ProtobufTestMessages.Proto3.ForeignEnum) x), 594);
     private readonly pbc::MapField<string, global::ProtobufTestMessages.Proto3.ForeignEnum> mapStringForeignEnum_ = new pbc::MapField<string, global::ProtobufTestMessages.Proto3.ForeignEnum>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::MapField<string, global::ProtobufTestMessages.Proto3.ForeignEnum> MapStringForeignEnum {
@@ -1158,7 +1078,6 @@ namespace ProtobufTestMessages.Proto3 {
 
     /// <summary>Field number for the "optional_bool_wrapper" field.</summary>
     public const int OptionalBoolWrapperFieldNumber = 201;
-    private static readonly pb::FieldCodec<bool?> _single_optionalBoolWrapper_codec = pb::FieldCodec.ForStructWrapper<bool>(1610);
     private bool? optionalBoolWrapper_;
     /// <summary>
     /// Well-known types
@@ -1173,7 +1092,6 @@ namespace ProtobufTestMessages.Proto3 {
 
     /// <summary>Field number for the "optional_int32_wrapper" field.</summary>
     public const int OptionalInt32WrapperFieldNumber = 202;
-    private static readonly pb::FieldCodec<int?> _single_optionalInt32Wrapper_codec = pb::FieldCodec.ForStructWrapper<int>(1618);
     private int? optionalInt32Wrapper_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int? OptionalInt32Wrapper {
@@ -1185,7 +1103,6 @@ namespace ProtobufTestMessages.Proto3 {
 
     /// <summary>Field number for the "optional_int64_wrapper" field.</summary>
     public const int OptionalInt64WrapperFieldNumber = 203;
-    private static readonly pb::FieldCodec<long?> _single_optionalInt64Wrapper_codec = pb::FieldCodec.ForStructWrapper<long>(1626);
     private long? optionalInt64Wrapper_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public long? OptionalInt64Wrapper {
@@ -1197,7 +1114,6 @@ namespace ProtobufTestMessages.Proto3 {
 
     /// <summary>Field number for the "optional_uint32_wrapper" field.</summary>
     public const int OptionalUint32WrapperFieldNumber = 204;
-    private static readonly pb::FieldCodec<uint?> _single_optionalUint32Wrapper_codec = pb::FieldCodec.ForStructWrapper<uint>(1634);
     private uint? optionalUint32Wrapper_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public uint? OptionalUint32Wrapper {
@@ -1209,7 +1125,6 @@ namespace ProtobufTestMessages.Proto3 {
 
     /// <summary>Field number for the "optional_uint64_wrapper" field.</summary>
     public const int OptionalUint64WrapperFieldNumber = 205;
-    private static readonly pb::FieldCodec<ulong?> _single_optionalUint64Wrapper_codec = pb::FieldCodec.ForStructWrapper<ulong>(1642);
     private ulong? optionalUint64Wrapper_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public ulong? OptionalUint64Wrapper {
@@ -1221,7 +1136,6 @@ namespace ProtobufTestMessages.Proto3 {
 
     /// <summary>Field number for the "optional_float_wrapper" field.</summary>
     public const int OptionalFloatWrapperFieldNumber = 206;
-    private static readonly pb::FieldCodec<float?> _single_optionalFloatWrapper_codec = pb::FieldCodec.ForStructWrapper<float>(1650);
     private float? optionalFloatWrapper_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public float? OptionalFloatWrapper {
@@ -1233,7 +1147,6 @@ namespace ProtobufTestMessages.Proto3 {
 
     /// <summary>Field number for the "optional_double_wrapper" field.</summary>
     public const int OptionalDoubleWrapperFieldNumber = 207;
-    private static readonly pb::FieldCodec<double?> _single_optionalDoubleWrapper_codec = pb::FieldCodec.ForStructWrapper<double>(1658);
     private double? optionalDoubleWrapper_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public double? OptionalDoubleWrapper {
@@ -1245,7 +1158,6 @@ namespace ProtobufTestMessages.Proto3 {
 
     /// <summary>Field number for the "optional_string_wrapper" field.</summary>
     public const int OptionalStringWrapperFieldNumber = 208;
-    private static readonly pb::FieldCodec<string> _single_optionalStringWrapper_codec = pb::FieldCodec.ForClassWrapper<string>(1666);
     private string optionalStringWrapper_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public string OptionalStringWrapper {
@@ -1257,7 +1169,6 @@ namespace ProtobufTestMessages.Proto3 {
 
     /// <summary>Field number for the "optional_bytes_wrapper" field.</summary>
     public const int OptionalBytesWrapperFieldNumber = 209;
-    private static readonly pb::FieldCodec<pb::ByteString> _single_optionalBytesWrapper_codec = pb::FieldCodec.ForClassWrapper<pb::ByteString>(1674);
     private pb::ByteString optionalBytesWrapper_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pb::ByteString OptionalBytesWrapper {
@@ -1269,8 +1180,6 @@ namespace ProtobufTestMessages.Proto3 {
 
     /// <summary>Field number for the "repeated_bool_wrapper" field.</summary>
     public const int RepeatedBoolWrapperFieldNumber = 211;
-    private static readonly pb::FieldCodec<bool?> _repeated_repeatedBoolWrapper_codec
-        = pb::FieldCodec.ForStructWrapper<bool>(1690);
     private readonly pbc::RepeatedField<bool?> repeatedBoolWrapper_ = new pbc::RepeatedField<bool?>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<bool?> RepeatedBoolWrapper {
@@ -1279,8 +1188,6 @@ namespace ProtobufTestMessages.Proto3 {
 
     /// <summary>Field number for the "repeated_int32_wrapper" field.</summary>
     public const int RepeatedInt32WrapperFieldNumber = 212;
-    private static readonly pb::FieldCodec<int?> _repeated_repeatedInt32Wrapper_codec
-        = pb::FieldCodec.ForStructWrapper<int>(1698);
     private readonly pbc::RepeatedField<int?> repeatedInt32Wrapper_ = new pbc::RepeatedField<int?>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<int?> RepeatedInt32Wrapper {
@@ -1289,8 +1196,6 @@ namespace ProtobufTestMessages.Proto3 {
 
     /// <summary>Field number for the "repeated_int64_wrapper" field.</summary>
     public const int RepeatedInt64WrapperFieldNumber = 213;
-    private static readonly pb::FieldCodec<long?> _repeated_repeatedInt64Wrapper_codec
-        = pb::FieldCodec.ForStructWrapper<long>(1706);
     private readonly pbc::RepeatedField<long?> repeatedInt64Wrapper_ = new pbc::RepeatedField<long?>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<long?> RepeatedInt64Wrapper {
@@ -1299,8 +1204,6 @@ namespace ProtobufTestMessages.Proto3 {
 
     /// <summary>Field number for the "repeated_uint32_wrapper" field.</summary>
     public const int RepeatedUint32WrapperFieldNumber = 214;
-    private static readonly pb::FieldCodec<uint?> _repeated_repeatedUint32Wrapper_codec
-        = pb::FieldCodec.ForStructWrapper<uint>(1714);
     private readonly pbc::RepeatedField<uint?> repeatedUint32Wrapper_ = new pbc::RepeatedField<uint?>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<uint?> RepeatedUint32Wrapper {
@@ -1309,8 +1212,6 @@ namespace ProtobufTestMessages.Proto3 {
 
     /// <summary>Field number for the "repeated_uint64_wrapper" field.</summary>
     public const int RepeatedUint64WrapperFieldNumber = 215;
-    private static readonly pb::FieldCodec<ulong?> _repeated_repeatedUint64Wrapper_codec
-        = pb::FieldCodec.ForStructWrapper<ulong>(1722);
     private readonly pbc::RepeatedField<ulong?> repeatedUint64Wrapper_ = new pbc::RepeatedField<ulong?>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<ulong?> RepeatedUint64Wrapper {
@@ -1319,8 +1220,6 @@ namespace ProtobufTestMessages.Proto3 {
 
     /// <summary>Field number for the "repeated_float_wrapper" field.</summary>
     public const int RepeatedFloatWrapperFieldNumber = 216;
-    private static readonly pb::FieldCodec<float?> _repeated_repeatedFloatWrapper_codec
-        = pb::FieldCodec.ForStructWrapper<float>(1730);
     private readonly pbc::RepeatedField<float?> repeatedFloatWrapper_ = new pbc::RepeatedField<float?>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<float?> RepeatedFloatWrapper {
@@ -1329,8 +1228,6 @@ namespace ProtobufTestMessages.Proto3 {
 
     /// <summary>Field number for the "repeated_double_wrapper" field.</summary>
     public const int RepeatedDoubleWrapperFieldNumber = 217;
-    private static readonly pb::FieldCodec<double?> _repeated_repeatedDoubleWrapper_codec
-        = pb::FieldCodec.ForStructWrapper<double>(1738);
     private readonly pbc::RepeatedField<double?> repeatedDoubleWrapper_ = new pbc::RepeatedField<double?>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<double?> RepeatedDoubleWrapper {
@@ -1339,8 +1236,6 @@ namespace ProtobufTestMessages.Proto3 {
 
     /// <summary>Field number for the "repeated_string_wrapper" field.</summary>
     public const int RepeatedStringWrapperFieldNumber = 218;
-    private static readonly pb::FieldCodec<string> _repeated_repeatedStringWrapper_codec
-        = pb::FieldCodec.ForClassWrapper<string>(1746);
     private readonly pbc::RepeatedField<string> repeatedStringWrapper_ = new pbc::RepeatedField<string>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<string> RepeatedStringWrapper {
@@ -1349,8 +1244,6 @@ namespace ProtobufTestMessages.Proto3 {
 
     /// <summary>Field number for the "repeated_bytes_wrapper" field.</summary>
     public const int RepeatedBytesWrapperFieldNumber = 219;
-    private static readonly pb::FieldCodec<pb::ByteString> _repeated_repeatedBytesWrapper_codec
-        = pb::FieldCodec.ForClassWrapper<pb::ByteString>(1754);
     private readonly pbc::RepeatedField<pb::ByteString> repeatedBytesWrapper_ = new pbc::RepeatedField<pb::ByteString>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<pb::ByteString> RepeatedBytesWrapper {
@@ -1425,8 +1318,6 @@ namespace ProtobufTestMessages.Proto3 {
 
     /// <summary>Field number for the "repeated_duration" field.</summary>
     public const int RepeatedDurationFieldNumber = 311;
-    private static readonly pb::FieldCodec<global::Google.Protobuf.WellKnownTypes.Duration> _repeated_repeatedDuration_codec
-        = pb::FieldCodec.ForMessage(2490, global::Google.Protobuf.WellKnownTypes.Duration.Parser);
     private readonly pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.Duration> repeatedDuration_ = new pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.Duration>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.Duration> RepeatedDuration {
@@ -1435,8 +1326,6 @@ namespace ProtobufTestMessages.Proto3 {
 
     /// <summary>Field number for the "repeated_timestamp" field.</summary>
     public const int RepeatedTimestampFieldNumber = 312;
-    private static readonly pb::FieldCodec<global::Google.Protobuf.WellKnownTypes.Timestamp> _repeated_repeatedTimestamp_codec
-        = pb::FieldCodec.ForMessage(2498, global::Google.Protobuf.WellKnownTypes.Timestamp.Parser);
     private readonly pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.Timestamp> repeatedTimestamp_ = new pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.Timestamp>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.Timestamp> RepeatedTimestamp {
@@ -1445,8 +1334,6 @@ namespace ProtobufTestMessages.Proto3 {
 
     /// <summary>Field number for the "repeated_fieldmask" field.</summary>
     public const int RepeatedFieldmaskFieldNumber = 313;
-    private static readonly pb::FieldCodec<global::Google.Protobuf.WellKnownTypes.FieldMask> _repeated_repeatedFieldmask_codec
-        = pb::FieldCodec.ForMessage(2506, global::Google.Protobuf.WellKnownTypes.FieldMask.Parser);
     private readonly pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.FieldMask> repeatedFieldmask_ = new pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.FieldMask>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.FieldMask> RepeatedFieldmask {
@@ -1455,8 +1342,6 @@ namespace ProtobufTestMessages.Proto3 {
 
     /// <summary>Field number for the "repeated_struct" field.</summary>
     public const int RepeatedStructFieldNumber = 324;
-    private static readonly pb::FieldCodec<global::Google.Protobuf.WellKnownTypes.Struct> _repeated_repeatedStruct_codec
-        = pb::FieldCodec.ForMessage(2594, global::Google.Protobuf.WellKnownTypes.Struct.Parser);
     private readonly pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.Struct> repeatedStruct_ = new pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.Struct>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.Struct> RepeatedStruct {
@@ -1465,8 +1350,6 @@ namespace ProtobufTestMessages.Proto3 {
 
     /// <summary>Field number for the "repeated_any" field.</summary>
     public const int RepeatedAnyFieldNumber = 315;
-    private static readonly pb::FieldCodec<global::Google.Protobuf.WellKnownTypes.Any> _repeated_repeatedAny_codec
-        = pb::FieldCodec.ForMessage(2522, global::Google.Protobuf.WellKnownTypes.Any.Parser);
     private readonly pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.Any> repeatedAny_ = new pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.Any>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.Any> RepeatedAny {
@@ -1475,8 +1358,6 @@ namespace ProtobufTestMessages.Proto3 {
 
     /// <summary>Field number for the "repeated_value" field.</summary>
     public const int RepeatedValueFieldNumber = 316;
-    private static readonly pb::FieldCodec<global::Google.Protobuf.WellKnownTypes.Value> _repeated_repeatedValue_codec
-        = pb::FieldCodec.ForMessage(2530, global::Google.Protobuf.WellKnownTypes.Value.Parser);
     private readonly pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.Value> repeatedValue_ = new pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.Value>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<global::Google.Protobuf.WellKnownTypes.Value> RepeatedValue {
@@ -1982,311 +1863,906 @@ namespace ProtobufTestMessages.Proto3 {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
+    [global::System.Security.SecurityCritical]
+    [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+    public void WriteTo(pb::CodedOutputStream output, ref global::System.Span<byte> immediateBuffer) {
       if (OptionalInt32 != 0) {
-        output.WriteRawTag(8);
-        output.WriteInt32(OptionalInt32);
+        output.WriteRawTag(8, ref immediateBuffer);
+        output.WriteInt32(OptionalInt32, ref immediateBuffer);
       }
       if (OptionalInt64 != 0L) {
-        output.WriteRawTag(16);
-        output.WriteInt64(OptionalInt64);
+        output.WriteRawTag(16, ref immediateBuffer);
+        output.WriteInt64(OptionalInt64, ref immediateBuffer);
       }
       if (OptionalUint32 != 0) {
-        output.WriteRawTag(24);
-        output.WriteUInt32(OptionalUint32);
+        output.WriteRawTag(24, ref immediateBuffer);
+        output.WriteUInt32(OptionalUint32, ref immediateBuffer);
       }
       if (OptionalUint64 != 0UL) {
-        output.WriteRawTag(32);
-        output.WriteUInt64(OptionalUint64);
+        output.WriteRawTag(32, ref immediateBuffer);
+        output.WriteUInt64(OptionalUint64, ref immediateBuffer);
       }
       if (OptionalSint32 != 0) {
-        output.WriteRawTag(40);
-        output.WriteSInt32(OptionalSint32);
+        output.WriteRawTag(40, ref immediateBuffer);
+        output.WriteSInt32(OptionalSint32, ref immediateBuffer);
       }
       if (OptionalSint64 != 0L) {
-        output.WriteRawTag(48);
-        output.WriteSInt64(OptionalSint64);
+        output.WriteRawTag(48, ref immediateBuffer);
+        output.WriteSInt64(OptionalSint64, ref immediateBuffer);
       }
       if (OptionalFixed32 != 0) {
-        output.WriteRawTag(61);
-        output.WriteFixed32(OptionalFixed32);
+        output.WriteRawTag(61, ref immediateBuffer);
+        output.WriteFixed32(OptionalFixed32, ref immediateBuffer);
       }
       if (OptionalFixed64 != 0UL) {
-        output.WriteRawTag(65);
-        output.WriteFixed64(OptionalFixed64);
+        output.WriteRawTag(65, ref immediateBuffer);
+        output.WriteFixed64(OptionalFixed64, ref immediateBuffer);
       }
       if (OptionalSfixed32 != 0) {
-        output.WriteRawTag(77);
-        output.WriteSFixed32(OptionalSfixed32);
+        output.WriteRawTag(77, ref immediateBuffer);
+        output.WriteSFixed32(OptionalSfixed32, ref immediateBuffer);
       }
       if (OptionalSfixed64 != 0L) {
-        output.WriteRawTag(81);
-        output.WriteSFixed64(OptionalSfixed64);
+        output.WriteRawTag(81, ref immediateBuffer);
+        output.WriteSFixed64(OptionalSfixed64, ref immediateBuffer);
       }
       if (OptionalFloat != 0F) {
-        output.WriteRawTag(93);
-        output.WriteFloat(OptionalFloat);
+        output.WriteRawTag(93, ref immediateBuffer);
+        output.WriteFloat(OptionalFloat, ref immediateBuffer);
       }
       if (OptionalDouble != 0D) {
-        output.WriteRawTag(97);
-        output.WriteDouble(OptionalDouble);
+        output.WriteRawTag(97, ref immediateBuffer);
+        output.WriteDouble(OptionalDouble, ref immediateBuffer);
       }
       if (OptionalBool != false) {
-        output.WriteRawTag(104);
-        output.WriteBool(OptionalBool);
+        output.WriteRawTag(104, ref immediateBuffer);
+        output.WriteBool(OptionalBool, ref immediateBuffer);
       }
       if (OptionalString.Length != 0) {
-        output.WriteRawTag(114);
-        output.WriteString(OptionalString);
+        output.WriteRawTag(114, ref immediateBuffer);
+        output.WriteString(OptionalString, ref immediateBuffer);
       }
       if (OptionalBytes.Length != 0) {
-        output.WriteRawTag(122);
-        output.WriteBytes(OptionalBytes);
+        output.WriteRawTag(122, ref immediateBuffer);
+        output.WriteBytes(OptionalBytes, ref immediateBuffer);
       }
-      if (optionalNestedMessage_ != null) {
-        output.WriteRawTag(146, 1);
-        output.WriteMessage(OptionalNestedMessage);
+      if (OptionalNestedMessage != null) {
+        output.WriteRawTag(146, 1, ref immediateBuffer);
+        output.WriteLength(OptionalNestedMessage.CalculateSize(), ref immediateBuffer);
+        OptionalNestedMessage.WriteTo(output, ref immediateBuffer);
       }
-      if (optionalForeignMessage_ != null) {
-        output.WriteRawTag(154, 1);
-        output.WriteMessage(OptionalForeignMessage);
+      if (OptionalForeignMessage != null) {
+        output.WriteRawTag(154, 1, ref immediateBuffer);
+        output.WriteLength(OptionalForeignMessage.CalculateSize(), ref immediateBuffer);
+        OptionalForeignMessage.WriteTo(output, ref immediateBuffer);
       }
       if (OptionalNestedEnum != 0) {
-        output.WriteRawTag(168, 1);
-        output.WriteEnum((int) OptionalNestedEnum);
+        output.WriteRawTag(168, 1, ref immediateBuffer);
+        output.WriteEnum((int)OptionalNestedEnum, ref immediateBuffer);
       }
       if (OptionalForeignEnum != 0) {
-        output.WriteRawTag(176, 1);
-        output.WriteEnum((int) OptionalForeignEnum);
+        output.WriteRawTag(176, 1, ref immediateBuffer);
+        output.WriteEnum((int)OptionalForeignEnum, ref immediateBuffer);
       }
       if (OptionalStringPiece.Length != 0) {
-        output.WriteRawTag(194, 1);
-        output.WriteString(OptionalStringPiece);
+        output.WriteRawTag(194, 1, ref immediateBuffer);
+        output.WriteString(OptionalStringPiece, ref immediateBuffer);
       }
       if (OptionalCord.Length != 0) {
-        output.WriteRawTag(202, 1);
-        output.WriteString(OptionalCord);
+        output.WriteRawTag(202, 1, ref immediateBuffer);
+        output.WriteString(OptionalCord, ref immediateBuffer);
       }
-      if (recursiveMessage_ != null) {
-        output.WriteRawTag(218, 1);
-        output.WriteMessage(RecursiveMessage);
+      if (RecursiveMessage != null) {
+        output.WriteRawTag(218, 1, ref immediateBuffer);
+        output.WriteLength(RecursiveMessage.CalculateSize(), ref immediateBuffer);
+        RecursiveMessage.WriteTo(output, ref immediateBuffer);
       }
-      repeatedInt32_.WriteTo(output, _repeated_repeatedInt32_codec);
-      repeatedInt64_.WriteTo(output, _repeated_repeatedInt64_codec);
-      repeatedUint32_.WriteTo(output, _repeated_repeatedUint32_codec);
-      repeatedUint64_.WriteTo(output, _repeated_repeatedUint64_codec);
-      repeatedSint32_.WriteTo(output, _repeated_repeatedSint32_codec);
-      repeatedSint64_.WriteTo(output, _repeated_repeatedSint64_codec);
-      repeatedFixed32_.WriteTo(output, _repeated_repeatedFixed32_codec);
-      repeatedFixed64_.WriteTo(output, _repeated_repeatedFixed64_codec);
-      repeatedSfixed32_.WriteTo(output, _repeated_repeatedSfixed32_codec);
-      repeatedSfixed64_.WriteTo(output, _repeated_repeatedSfixed64_codec);
-      repeatedFloat_.WriteTo(output, _repeated_repeatedFloat_codec);
-      repeatedDouble_.WriteTo(output, _repeated_repeatedDouble_codec);
-      repeatedBool_.WriteTo(output, _repeated_repeatedBool_codec);
-      repeatedString_.WriteTo(output, _repeated_repeatedString_codec);
-      repeatedBytes_.WriteTo(output, _repeated_repeatedBytes_codec);
-      repeatedNestedMessage_.WriteTo(output, _repeated_repeatedNestedMessage_codec);
-      repeatedForeignMessage_.WriteTo(output, _repeated_repeatedForeignMessage_codec);
-      repeatedNestedEnum_.WriteTo(output, _repeated_repeatedNestedEnum_codec);
-      repeatedForeignEnum_.WriteTo(output, _repeated_repeatedForeignEnum_codec);
-      repeatedStringPiece_.WriteTo(output, _repeated_repeatedStringPiece_codec);
-      repeatedCord_.WriteTo(output, _repeated_repeatedCord_codec);
-      mapInt32Int32_.WriteTo(output, _map_mapInt32Int32_codec);
-      mapInt64Int64_.WriteTo(output, _map_mapInt64Int64_codec);
-      mapUint32Uint32_.WriteTo(output, _map_mapUint32Uint32_codec);
-      mapUint64Uint64_.WriteTo(output, _map_mapUint64Uint64_codec);
-      mapSint32Sint32_.WriteTo(output, _map_mapSint32Sint32_codec);
-      mapSint64Sint64_.WriteTo(output, _map_mapSint64Sint64_codec);
-      mapFixed32Fixed32_.WriteTo(output, _map_mapFixed32Fixed32_codec);
-      mapFixed64Fixed64_.WriteTo(output, _map_mapFixed64Fixed64_codec);
-      mapSfixed32Sfixed32_.WriteTo(output, _map_mapSfixed32Sfixed32_codec);
-      mapSfixed64Sfixed64_.WriteTo(output, _map_mapSfixed64Sfixed64_codec);
-      mapInt32Float_.WriteTo(output, _map_mapInt32Float_codec);
-      mapInt32Double_.WriteTo(output, _map_mapInt32Double_codec);
-      mapBoolBool_.WriteTo(output, _map_mapBoolBool_codec);
-      mapStringString_.WriteTo(output, _map_mapStringString_codec);
-      mapStringBytes_.WriteTo(output, _map_mapStringBytes_codec);
-      mapStringNestedMessage_.WriteTo(output, _map_mapStringNestedMessage_codec);
-      mapStringForeignMessage_.WriteTo(output, _map_mapStringForeignMessage_codec);
-      mapStringNestedEnum_.WriteTo(output, _map_mapStringNestedEnum_codec);
-      mapStringForeignEnum_.WriteTo(output, _map_mapStringForeignEnum_codec);
+      {
+        var packedSize = 0;
+        for (var i = 0; i < RepeatedInt32.Count; i++) {
+          packedSize += pb::CodedOutputStream.ComputeInt32Size(RepeatedInt32[i]);
+        }
+        if (packedSize > 0) {
+          output.WriteRawTag(250, 1, ref immediateBuffer);
+          output.WriteLength(packedSize, ref immediateBuffer);
+          for (var i = 0; i < RepeatedInt32.Count; i++) {
+            output.WriteInt32(RepeatedInt32[i], ref immediateBuffer);
+          }
+        }
+      }
+      {
+        var packedSize = 0;
+        for (var i = 0; i < RepeatedInt64.Count; i++) {
+          packedSize += pb::CodedOutputStream.ComputeInt64Size(RepeatedInt64[i]);
+        }
+        if (packedSize > 0) {
+          output.WriteRawTag(130, 2, ref immediateBuffer);
+          output.WriteLength(packedSize, ref immediateBuffer);
+          for (var i = 0; i < RepeatedInt64.Count; i++) {
+            output.WriteInt64(RepeatedInt64[i], ref immediateBuffer);
+          }
+        }
+      }
+      {
+        var packedSize = 0;
+        for (var i = 0; i < RepeatedUint32.Count; i++) {
+          packedSize += pb::CodedOutputStream.ComputeUInt32Size(RepeatedUint32[i]);
+        }
+        if (packedSize > 0) {
+          output.WriteRawTag(138, 2, ref immediateBuffer);
+          output.WriteLength(packedSize, ref immediateBuffer);
+          for (var i = 0; i < RepeatedUint32.Count; i++) {
+            output.WriteUInt32(RepeatedUint32[i], ref immediateBuffer);
+          }
+        }
+      }
+      {
+        var packedSize = 0;
+        for (var i = 0; i < RepeatedUint64.Count; i++) {
+          packedSize += pb::CodedOutputStream.ComputeUInt64Size(RepeatedUint64[i]);
+        }
+        if (packedSize > 0) {
+          output.WriteRawTag(146, 2, ref immediateBuffer);
+          output.WriteLength(packedSize, ref immediateBuffer);
+          for (var i = 0; i < RepeatedUint64.Count; i++) {
+            output.WriteUInt64(RepeatedUint64[i], ref immediateBuffer);
+          }
+        }
+      }
+      {
+        var packedSize = 0;
+        for (var i = 0; i < RepeatedSint32.Count; i++) {
+          packedSize += pb::CodedOutputStream.ComputeSInt32Size(RepeatedSint32[i]);
+        }
+        if (packedSize > 0) {
+          output.WriteRawTag(154, 2, ref immediateBuffer);
+          output.WriteLength(packedSize, ref immediateBuffer);
+          for (var i = 0; i < RepeatedSint32.Count; i++) {
+            output.WriteSInt32(RepeatedSint32[i], ref immediateBuffer);
+          }
+        }
+      }
+      {
+        var packedSize = 0;
+        for (var i = 0; i < RepeatedSint64.Count; i++) {
+          packedSize += pb::CodedOutputStream.ComputeSInt64Size(RepeatedSint64[i]);
+        }
+        if (packedSize > 0) {
+          output.WriteRawTag(162, 2, ref immediateBuffer);
+          output.WriteLength(packedSize, ref immediateBuffer);
+          for (var i = 0; i < RepeatedSint64.Count; i++) {
+            output.WriteSInt64(RepeatedSint64[i], ref immediateBuffer);
+          }
+        }
+      }
+      {
+        var packedSize = 4 * RepeatedFixed32.Count;
+        if (packedSize > 0) {
+          output.WriteRawTag(170, 2, ref immediateBuffer);
+          output.WriteLength(packedSize, ref immediateBuffer);
+          for (var i = 0; i < RepeatedFixed32.Count; i++) {
+            output.WriteFixed32(RepeatedFixed32[i], ref immediateBuffer);
+          }
+        }
+      }
+      {
+        var packedSize = 8 * RepeatedFixed64.Count;
+        if (packedSize > 0) {
+          output.WriteRawTag(178, 2, ref immediateBuffer);
+          output.WriteLength(packedSize, ref immediateBuffer);
+          for (var i = 0; i < RepeatedFixed64.Count; i++) {
+            output.WriteFixed64(RepeatedFixed64[i], ref immediateBuffer);
+          }
+        }
+      }
+      {
+        var packedSize = 4 * RepeatedSfixed32.Count;
+        if (packedSize > 0) {
+          output.WriteRawTag(186, 2, ref immediateBuffer);
+          output.WriteLength(packedSize, ref immediateBuffer);
+          for (var i = 0; i < RepeatedSfixed32.Count; i++) {
+            output.WriteSFixed32(RepeatedSfixed32[i], ref immediateBuffer);
+          }
+        }
+      }
+      {
+        var packedSize = 8 * RepeatedSfixed64.Count;
+        if (packedSize > 0) {
+          output.WriteRawTag(194, 2, ref immediateBuffer);
+          output.WriteLength(packedSize, ref immediateBuffer);
+          for (var i = 0; i < RepeatedSfixed64.Count; i++) {
+            output.WriteSFixed64(RepeatedSfixed64[i], ref immediateBuffer);
+          }
+        }
+      }
+      {
+        var packedSize = 4 * RepeatedFloat.Count;
+        if (packedSize > 0) {
+          output.WriteRawTag(202, 2, ref immediateBuffer);
+          output.WriteLength(packedSize, ref immediateBuffer);
+          for (var i = 0; i < RepeatedFloat.Count; i++) {
+            output.WriteFloat(RepeatedFloat[i], ref immediateBuffer);
+          }
+        }
+      }
+      {
+        var packedSize = 8 * RepeatedDouble.Count;
+        if (packedSize > 0) {
+          output.WriteRawTag(210, 2, ref immediateBuffer);
+          output.WriteLength(packedSize, ref immediateBuffer);
+          for (var i = 0; i < RepeatedDouble.Count; i++) {
+            output.WriteDouble(RepeatedDouble[i], ref immediateBuffer);
+          }
+        }
+      }
+      {
+        var packedSize = 1 * RepeatedBool.Count;
+        if (packedSize > 0) {
+          output.WriteRawTag(218, 2, ref immediateBuffer);
+          output.WriteLength(packedSize, ref immediateBuffer);
+          for (var i = 0; i < RepeatedBool.Count; i++) {
+            output.WriteBool(RepeatedBool[i], ref immediateBuffer);
+          }
+        }
+      }
+      for (var i = 0; i < RepeatedString.Count; i++) {
+        output.WriteRawTag(226, 2, ref immediateBuffer);
+        output.WriteString(RepeatedString[i], ref immediateBuffer);
+      }
+      for (var i = 0; i < RepeatedBytes.Count; i++) {
+        output.WriteRawTag(234, 2, ref immediateBuffer);
+        output.WriteBytes(RepeatedBytes[i], ref immediateBuffer);
+      }
+      for (var i = 0; i < RepeatedNestedMessage.Count; i++) {
+        output.WriteRawTag(130, 3, ref immediateBuffer);
+        output.WriteLength(RepeatedNestedMessage[i].CalculateSize(), ref immediateBuffer);
+        RepeatedNestedMessage[i].WriteTo(output, ref immediateBuffer);
+      }
+      for (var i = 0; i < RepeatedForeignMessage.Count; i++) {
+        output.WriteRawTag(138, 3, ref immediateBuffer);
+        output.WriteLength(RepeatedForeignMessage[i].CalculateSize(), ref immediateBuffer);
+        RepeatedForeignMessage[i].WriteTo(output, ref immediateBuffer);
+      }
+      {
+        var packedSize = 0;
+        for (var i = 0; i < RepeatedNestedEnum.Count; i++) {
+          packedSize += pb::CodedOutputStream.ComputeEnumSize((int)RepeatedNestedEnum[i]);
+        }
+        if (packedSize > 0) {
+          output.WriteRawTag(154, 3, ref immediateBuffer);
+          output.WriteLength(packedSize, ref immediateBuffer);
+          for (var i = 0; i < RepeatedNestedEnum.Count; i++) {
+            output.WriteEnum((int)RepeatedNestedEnum[i], ref immediateBuffer);
+          }
+        }
+      }
+      {
+        var packedSize = 0;
+        for (var i = 0; i < RepeatedForeignEnum.Count; i++) {
+          packedSize += pb::CodedOutputStream.ComputeEnumSize((int)RepeatedForeignEnum[i]);
+        }
+        if (packedSize > 0) {
+          output.WriteRawTag(162, 3, ref immediateBuffer);
+          output.WriteLength(packedSize, ref immediateBuffer);
+          for (var i = 0; i < RepeatedForeignEnum.Count; i++) {
+            output.WriteEnum((int)RepeatedForeignEnum[i], ref immediateBuffer);
+          }
+        }
+      }
+      for (var i = 0; i < RepeatedStringPiece.Count; i++) {
+        output.WriteRawTag(178, 3, ref immediateBuffer);
+        output.WriteString(RepeatedStringPiece[i], ref immediateBuffer);
+      }
+      for (var i = 0; i < RepeatedCord.Count; i++) {
+        output.WriteRawTag(186, 3, ref immediateBuffer);
+        output.WriteString(RepeatedCord[i], ref immediateBuffer);
+      }
+      foreach (var entry in MapInt32Int32) {
+        var messageSize = 0;
+        if (entry.Key != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeInt32Size(entry.Key);
+        }
+        if (entry.Value != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeInt32Size(entry.Value);
+        }
+        output.WriteRawTag(194, 3, ref immediateBuffer);
+        output.WriteLength(messageSize, ref immediateBuffer);
+        if (entry.Key != 0) {
+          output.WriteRawTag(8, ref immediateBuffer);
+          output.WriteInt32(entry.Key, ref immediateBuffer);
+        }
+        if (entry.Value != 0) {
+          output.WriteRawTag(16, ref immediateBuffer);
+          output.WriteInt32(entry.Value, ref immediateBuffer);
+        }
+      }
+      foreach (var entry in MapInt64Int64) {
+        var messageSize = 0;
+        if (entry.Key != 0L) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeInt64Size(entry.Key);
+        }
+        if (entry.Value != 0L) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeInt64Size(entry.Value);
+        }
+        output.WriteRawTag(202, 3, ref immediateBuffer);
+        output.WriteLength(messageSize, ref immediateBuffer);
+        if (entry.Key != 0L) {
+          output.WriteRawTag(8, ref immediateBuffer);
+          output.WriteInt64(entry.Key, ref immediateBuffer);
+        }
+        if (entry.Value != 0L) {
+          output.WriteRawTag(16, ref immediateBuffer);
+          output.WriteInt64(entry.Value, ref immediateBuffer);
+        }
+      }
+      foreach (var entry in MapUint32Uint32) {
+        var messageSize = 0;
+        if (entry.Key != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeUInt32Size(entry.Key);
+        }
+        if (entry.Value != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeUInt32Size(entry.Value);
+        }
+        output.WriteRawTag(210, 3, ref immediateBuffer);
+        output.WriteLength(messageSize, ref immediateBuffer);
+        if (entry.Key != 0) {
+          output.WriteRawTag(8, ref immediateBuffer);
+          output.WriteUInt32(entry.Key, ref immediateBuffer);
+        }
+        if (entry.Value != 0) {
+          output.WriteRawTag(16, ref immediateBuffer);
+          output.WriteUInt32(entry.Value, ref immediateBuffer);
+        }
+      }
+      foreach (var entry in MapUint64Uint64) {
+        var messageSize = 0;
+        if (entry.Key != 0UL) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeUInt64Size(entry.Key);
+        }
+        if (entry.Value != 0UL) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeUInt64Size(entry.Value);
+        }
+        output.WriteRawTag(218, 3, ref immediateBuffer);
+        output.WriteLength(messageSize, ref immediateBuffer);
+        if (entry.Key != 0UL) {
+          output.WriteRawTag(8, ref immediateBuffer);
+          output.WriteUInt64(entry.Key, ref immediateBuffer);
+        }
+        if (entry.Value != 0UL) {
+          output.WriteRawTag(16, ref immediateBuffer);
+          output.WriteUInt64(entry.Value, ref immediateBuffer);
+        }
+      }
+      foreach (var entry in MapSint32Sint32) {
+        var messageSize = 0;
+        if (entry.Key != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeSInt32Size(entry.Key);
+        }
+        if (entry.Value != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeSInt32Size(entry.Value);
+        }
+        output.WriteRawTag(226, 3, ref immediateBuffer);
+        output.WriteLength(messageSize, ref immediateBuffer);
+        if (entry.Key != 0) {
+          output.WriteRawTag(8, ref immediateBuffer);
+          output.WriteSInt32(entry.Key, ref immediateBuffer);
+        }
+        if (entry.Value != 0) {
+          output.WriteRawTag(16, ref immediateBuffer);
+          output.WriteSInt32(entry.Value, ref immediateBuffer);
+        }
+      }
+      foreach (var entry in MapSint64Sint64) {
+        var messageSize = 0;
+        if (entry.Key != 0L) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeSInt64Size(entry.Key);
+        }
+        if (entry.Value != 0L) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeSInt64Size(entry.Value);
+        }
+        output.WriteRawTag(234, 3, ref immediateBuffer);
+        output.WriteLength(messageSize, ref immediateBuffer);
+        if (entry.Key != 0L) {
+          output.WriteRawTag(8, ref immediateBuffer);
+          output.WriteSInt64(entry.Key, ref immediateBuffer);
+        }
+        if (entry.Value != 0L) {
+          output.WriteRawTag(16, ref immediateBuffer);
+          output.WriteSInt64(entry.Value, ref immediateBuffer);
+        }
+      }
+      foreach (var entry in MapFixed32Fixed32) {
+        var messageSize = 0;
+        if (entry.Key != 0) {
+          messageSize += 1 + 4;
+        }
+        if (entry.Value != 0) {
+          messageSize += 1 + 4;
+        }
+        output.WriteRawTag(242, 3, ref immediateBuffer);
+        output.WriteLength(messageSize, ref immediateBuffer);
+        if (entry.Key != 0) {
+          output.WriteRawTag(13, ref immediateBuffer);
+          output.WriteFixed32(entry.Key, ref immediateBuffer);
+        }
+        if (entry.Value != 0) {
+          output.WriteRawTag(21, ref immediateBuffer);
+          output.WriteFixed32(entry.Value, ref immediateBuffer);
+        }
+      }
+      foreach (var entry in MapFixed64Fixed64) {
+        var messageSize = 0;
+        if (entry.Key != 0UL) {
+          messageSize += 1 + 8;
+        }
+        if (entry.Value != 0UL) {
+          messageSize += 1 + 8;
+        }
+        output.WriteRawTag(250, 3, ref immediateBuffer);
+        output.WriteLength(messageSize, ref immediateBuffer);
+        if (entry.Key != 0UL) {
+          output.WriteRawTag(9, ref immediateBuffer);
+          output.WriteFixed64(entry.Key, ref immediateBuffer);
+        }
+        if (entry.Value != 0UL) {
+          output.WriteRawTag(17, ref immediateBuffer);
+          output.WriteFixed64(entry.Value, ref immediateBuffer);
+        }
+      }
+      foreach (var entry in MapSfixed32Sfixed32) {
+        var messageSize = 0;
+        if (entry.Key != 0) {
+          messageSize += 1 + 4;
+        }
+        if (entry.Value != 0) {
+          messageSize += 1 + 4;
+        }
+        output.WriteRawTag(130, 4, ref immediateBuffer);
+        output.WriteLength(messageSize, ref immediateBuffer);
+        if (entry.Key != 0) {
+          output.WriteRawTag(13, ref immediateBuffer);
+          output.WriteSFixed32(entry.Key, ref immediateBuffer);
+        }
+        if (entry.Value != 0) {
+          output.WriteRawTag(21, ref immediateBuffer);
+          output.WriteSFixed32(entry.Value, ref immediateBuffer);
+        }
+      }
+      foreach (var entry in MapSfixed64Sfixed64) {
+        var messageSize = 0;
+        if (entry.Key != 0L) {
+          messageSize += 1 + 8;
+        }
+        if (entry.Value != 0L) {
+          messageSize += 1 + 8;
+        }
+        output.WriteRawTag(138, 4, ref immediateBuffer);
+        output.WriteLength(messageSize, ref immediateBuffer);
+        if (entry.Key != 0L) {
+          output.WriteRawTag(9, ref immediateBuffer);
+          output.WriteSFixed64(entry.Key, ref immediateBuffer);
+        }
+        if (entry.Value != 0L) {
+          output.WriteRawTag(17, ref immediateBuffer);
+          output.WriteSFixed64(entry.Value, ref immediateBuffer);
+        }
+      }
+      foreach (var entry in MapInt32Float) {
+        var messageSize = 0;
+        if (entry.Key != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeInt32Size(entry.Key);
+        }
+        if (entry.Value != 0F) {
+          messageSize += 1 + 4;
+        }
+        output.WriteRawTag(146, 4, ref immediateBuffer);
+        output.WriteLength(messageSize, ref immediateBuffer);
+        if (entry.Key != 0) {
+          output.WriteRawTag(8, ref immediateBuffer);
+          output.WriteInt32(entry.Key, ref immediateBuffer);
+        }
+        if (entry.Value != 0F) {
+          output.WriteRawTag(21, ref immediateBuffer);
+          output.WriteFloat(entry.Value, ref immediateBuffer);
+        }
+      }
+      foreach (var entry in MapInt32Double) {
+        var messageSize = 0;
+        if (entry.Key != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeInt32Size(entry.Key);
+        }
+        if (entry.Value != 0D) {
+          messageSize += 1 + 8;
+        }
+        output.WriteRawTag(154, 4, ref immediateBuffer);
+        output.WriteLength(messageSize, ref immediateBuffer);
+        if (entry.Key != 0) {
+          output.WriteRawTag(8, ref immediateBuffer);
+          output.WriteInt32(entry.Key, ref immediateBuffer);
+        }
+        if (entry.Value != 0D) {
+          output.WriteRawTag(17, ref immediateBuffer);
+          output.WriteDouble(entry.Value, ref immediateBuffer);
+        }
+      }
+      foreach (var entry in MapBoolBool) {
+        var messageSize = 0;
+        if (entry.Key != false) {
+          messageSize += 1 + 1;
+        }
+        if (entry.Value != false) {
+          messageSize += 1 + 1;
+        }
+        output.WriteRawTag(162, 4, ref immediateBuffer);
+        output.WriteLength(messageSize, ref immediateBuffer);
+        if (entry.Key != false) {
+          output.WriteRawTag(8, ref immediateBuffer);
+          output.WriteBool(entry.Key, ref immediateBuffer);
+        }
+        if (entry.Value != false) {
+          output.WriteRawTag(16, ref immediateBuffer);
+          output.WriteBool(entry.Value, ref immediateBuffer);
+        }
+      }
+      foreach (var entry in MapStringString) {
+        var messageSize = 0;
+        if (entry.Key.Length != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeStringSize(entry.Key);
+        }
+        if (entry.Value.Length != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeStringSize(entry.Value);
+        }
+        output.WriteRawTag(170, 4, ref immediateBuffer);
+        output.WriteLength(messageSize, ref immediateBuffer);
+        if (entry.Key.Length != 0) {
+          output.WriteRawTag(10, ref immediateBuffer);
+          output.WriteString(entry.Key, ref immediateBuffer);
+        }
+        if (entry.Value.Length != 0) {
+          output.WriteRawTag(18, ref immediateBuffer);
+          output.WriteString(entry.Value, ref immediateBuffer);
+        }
+      }
+      foreach (var entry in MapStringBytes) {
+        var messageSize = 0;
+        if (entry.Key.Length != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeStringSize(entry.Key);
+        }
+        if (entry.Value.Length != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeBytesSize(entry.Value);
+        }
+        output.WriteRawTag(178, 4, ref immediateBuffer);
+        output.WriteLength(messageSize, ref immediateBuffer);
+        if (entry.Key.Length != 0) {
+          output.WriteRawTag(10, ref immediateBuffer);
+          output.WriteString(entry.Key, ref immediateBuffer);
+        }
+        if (entry.Value.Length != 0) {
+          output.WriteRawTag(18, ref immediateBuffer);
+          output.WriteBytes(entry.Value, ref immediateBuffer);
+        }
+      }
+      foreach (var entry in MapStringNestedMessage) {
+        var messageSize = 0;
+        if (entry.Key.Length != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeStringSize(entry.Key);
+        }
+        if (entry.Value != null) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeMessageSize(entry.Value);
+        }
+        output.WriteRawTag(186, 4, ref immediateBuffer);
+        output.WriteLength(messageSize, ref immediateBuffer);
+        if (entry.Key.Length != 0) {
+          output.WriteRawTag(10, ref immediateBuffer);
+          output.WriteString(entry.Key, ref immediateBuffer);
+        }
+        if (entry.Value != null) {
+          output.WriteRawTag(18, ref immediateBuffer);
+          output.WriteLength(entry.Value.CalculateSize(), ref immediateBuffer);
+          entry.Value.WriteTo(output, ref immediateBuffer);
+        }
+      }
+      foreach (var entry in MapStringForeignMessage) {
+        var messageSize = 0;
+        if (entry.Key.Length != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeStringSize(entry.Key);
+        }
+        if (entry.Value != null) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeMessageSize(entry.Value);
+        }
+        output.WriteRawTag(194, 4, ref immediateBuffer);
+        output.WriteLength(messageSize, ref immediateBuffer);
+        if (entry.Key.Length != 0) {
+          output.WriteRawTag(10, ref immediateBuffer);
+          output.WriteString(entry.Key, ref immediateBuffer);
+        }
+        if (entry.Value != null) {
+          output.WriteRawTag(18, ref immediateBuffer);
+          output.WriteLength(entry.Value.CalculateSize(), ref immediateBuffer);
+          entry.Value.WriteTo(output, ref immediateBuffer);
+        }
+      }
+      foreach (var entry in MapStringNestedEnum) {
+        var messageSize = 0;
+        if (entry.Key.Length != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeStringSize(entry.Key);
+        }
+        if (entry.Value != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeEnumSize((int) entry.Value);
+        }
+        output.WriteRawTag(202, 4, ref immediateBuffer);
+        output.WriteLength(messageSize, ref immediateBuffer);
+        if (entry.Key.Length != 0) {
+          output.WriteRawTag(10, ref immediateBuffer);
+          output.WriteString(entry.Key, ref immediateBuffer);
+        }
+        if (entry.Value != 0) {
+          output.WriteRawTag(16, ref immediateBuffer);
+          output.WriteEnum((int)entry.Value, ref immediateBuffer);
+        }
+      }
+      foreach (var entry in MapStringForeignEnum) {
+        var messageSize = 0;
+        if (entry.Key.Length != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeStringSize(entry.Key);
+        }
+        if (entry.Value != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeEnumSize((int) entry.Value);
+        }
+        output.WriteRawTag(210, 4, ref immediateBuffer);
+        output.WriteLength(messageSize, ref immediateBuffer);
+        if (entry.Key.Length != 0) {
+          output.WriteRawTag(10, ref immediateBuffer);
+          output.WriteString(entry.Key, ref immediateBuffer);
+        }
+        if (entry.Value != 0) {
+          output.WriteRawTag(16, ref immediateBuffer);
+          output.WriteEnum((int)entry.Value, ref immediateBuffer);
+        }
+      }
       if (oneofFieldCase_ == OneofFieldOneofCase.OneofUint32) {
-        output.WriteRawTag(248, 6);
-        output.WriteUInt32(OneofUint32);
+        output.WriteRawTag(248, 6, ref immediateBuffer);
+        output.WriteUInt32(OneofUint32, ref immediateBuffer);
       }
-      if (oneofFieldCase_ == OneofFieldOneofCase.OneofNestedMessage) {
-        output.WriteRawTag(130, 7);
-        output.WriteMessage(OneofNestedMessage);
+      if (OneofNestedMessage != null) {
+        output.WriteRawTag(130, 7, ref immediateBuffer);
+        output.WriteLength(OneofNestedMessage.CalculateSize(), ref immediateBuffer);
+        OneofNestedMessage.WriteTo(output, ref immediateBuffer);
       }
       if (oneofFieldCase_ == OneofFieldOneofCase.OneofString) {
-        output.WriteRawTag(138, 7);
-        output.WriteString(OneofString);
+        output.WriteRawTag(138, 7, ref immediateBuffer);
+        output.WriteString(OneofString, ref immediateBuffer);
       }
       if (oneofFieldCase_ == OneofFieldOneofCase.OneofBytes) {
-        output.WriteRawTag(146, 7);
-        output.WriteBytes(OneofBytes);
+        output.WriteRawTag(146, 7, ref immediateBuffer);
+        output.WriteBytes(OneofBytes, ref immediateBuffer);
       }
       if (oneofFieldCase_ == OneofFieldOneofCase.OneofBool) {
-        output.WriteRawTag(152, 7);
-        output.WriteBool(OneofBool);
+        output.WriteRawTag(152, 7, ref immediateBuffer);
+        output.WriteBool(OneofBool, ref immediateBuffer);
       }
       if (oneofFieldCase_ == OneofFieldOneofCase.OneofUint64) {
-        output.WriteRawTag(160, 7);
-        output.WriteUInt64(OneofUint64);
+        output.WriteRawTag(160, 7, ref immediateBuffer);
+        output.WriteUInt64(OneofUint64, ref immediateBuffer);
       }
       if (oneofFieldCase_ == OneofFieldOneofCase.OneofFloat) {
-        output.WriteRawTag(173, 7);
-        output.WriteFloat(OneofFloat);
+        output.WriteRawTag(173, 7, ref immediateBuffer);
+        output.WriteFloat(OneofFloat, ref immediateBuffer);
       }
       if (oneofFieldCase_ == OneofFieldOneofCase.OneofDouble) {
-        output.WriteRawTag(177, 7);
-        output.WriteDouble(OneofDouble);
+        output.WriteRawTag(177, 7, ref immediateBuffer);
+        output.WriteDouble(OneofDouble, ref immediateBuffer);
       }
       if (oneofFieldCase_ == OneofFieldOneofCase.OneofEnum) {
-        output.WriteRawTag(184, 7);
-        output.WriteEnum((int) OneofEnum);
+        output.WriteRawTag(184, 7, ref immediateBuffer);
+        output.WriteEnum((int) OneofEnum, ref immediateBuffer);
       }
-      if (optionalBoolWrapper_ != null) {
-        _single_optionalBoolWrapper_codec.WriteTagAndValue(output, OptionalBoolWrapper);
+      if (OptionalBoolWrapper != null) {
+        output.WriteRawTag(202, 12, ref immediateBuffer);
+        output.WriteWrappedBool(OptionalBoolWrapper, ref immediateBuffer);
       }
-      if (optionalInt32Wrapper_ != null) {
-        _single_optionalInt32Wrapper_codec.WriteTagAndValue(output, OptionalInt32Wrapper);
+      if (OptionalInt32Wrapper != null) {
+        output.WriteRawTag(210, 12, ref immediateBuffer);
+        output.WriteWrappedInt32(OptionalInt32Wrapper, ref immediateBuffer);
       }
-      if (optionalInt64Wrapper_ != null) {
-        _single_optionalInt64Wrapper_codec.WriteTagAndValue(output, OptionalInt64Wrapper);
+      if (OptionalInt64Wrapper != null) {
+        output.WriteRawTag(218, 12, ref immediateBuffer);
+        output.WriteWrappedInt64(OptionalInt64Wrapper, ref immediateBuffer);
       }
-      if (optionalUint32Wrapper_ != null) {
-        _single_optionalUint32Wrapper_codec.WriteTagAndValue(output, OptionalUint32Wrapper);
+      if (OptionalUint32Wrapper != null) {
+        output.WriteRawTag(226, 12, ref immediateBuffer);
+        output.WriteWrappedUInt32(OptionalUint32Wrapper, ref immediateBuffer);
       }
-      if (optionalUint64Wrapper_ != null) {
-        _single_optionalUint64Wrapper_codec.WriteTagAndValue(output, OptionalUint64Wrapper);
+      if (OptionalUint64Wrapper != null) {
+        output.WriteRawTag(234, 12, ref immediateBuffer);
+        output.WriteWrappedUInt64(OptionalUint64Wrapper, ref immediateBuffer);
       }
-      if (optionalFloatWrapper_ != null) {
-        _single_optionalFloatWrapper_codec.WriteTagAndValue(output, OptionalFloatWrapper);
+      if (OptionalFloatWrapper != null) {
+        output.WriteRawTag(242, 12, ref immediateBuffer);
+        output.WriteWrappedFloat(OptionalFloatWrapper, ref immediateBuffer);
       }
-      if (optionalDoubleWrapper_ != null) {
-        _single_optionalDoubleWrapper_codec.WriteTagAndValue(output, OptionalDoubleWrapper);
+      if (OptionalDoubleWrapper != null) {
+        output.WriteRawTag(250, 12, ref immediateBuffer);
+        output.WriteWrappedDouble(OptionalDoubleWrapper, ref immediateBuffer);
       }
-      if (optionalStringWrapper_ != null) {
-        _single_optionalStringWrapper_codec.WriteTagAndValue(output, OptionalStringWrapper);
+      if (OptionalStringWrapper != null) {
+        output.WriteRawTag(130, 13, ref immediateBuffer);
+        output.WriteWrappedString(OptionalStringWrapper, ref immediateBuffer);
       }
-      if (optionalBytesWrapper_ != null) {
-        _single_optionalBytesWrapper_codec.WriteTagAndValue(output, OptionalBytesWrapper);
+      if (OptionalBytesWrapper != null) {
+        output.WriteRawTag(138, 13, ref immediateBuffer);
+        output.WriteWrappedBytes(OptionalBytesWrapper, ref immediateBuffer);
       }
-      repeatedBoolWrapper_.WriteTo(output, _repeated_repeatedBoolWrapper_codec);
-      repeatedInt32Wrapper_.WriteTo(output, _repeated_repeatedInt32Wrapper_codec);
-      repeatedInt64Wrapper_.WriteTo(output, _repeated_repeatedInt64Wrapper_codec);
-      repeatedUint32Wrapper_.WriteTo(output, _repeated_repeatedUint32Wrapper_codec);
-      repeatedUint64Wrapper_.WriteTo(output, _repeated_repeatedUint64Wrapper_codec);
-      repeatedFloatWrapper_.WriteTo(output, _repeated_repeatedFloatWrapper_codec);
-      repeatedDoubleWrapper_.WriteTo(output, _repeated_repeatedDoubleWrapper_codec);
-      repeatedStringWrapper_.WriteTo(output, _repeated_repeatedStringWrapper_codec);
-      repeatedBytesWrapper_.WriteTo(output, _repeated_repeatedBytesWrapper_codec);
-      if (optionalDuration_ != null) {
-        output.WriteRawTag(234, 18);
-        output.WriteMessage(OptionalDuration);
+      for (var i = 0; i < RepeatedBoolWrapper.Count; i++) {
+        output.WriteRawTag(154, 13, ref immediateBuffer);
+        output.WriteWrappedBool(RepeatedBoolWrapper[i], ref immediateBuffer);
       }
-      if (optionalTimestamp_ != null) {
-        output.WriteRawTag(242, 18);
-        output.WriteMessage(OptionalTimestamp);
+      for (var i = 0; i < RepeatedInt32Wrapper.Count; i++) {
+        output.WriteRawTag(162, 13, ref immediateBuffer);
+        output.WriteWrappedInt32(RepeatedInt32Wrapper[i], ref immediateBuffer);
       }
-      if (optionalFieldMask_ != null) {
-        output.WriteRawTag(250, 18);
-        output.WriteMessage(OptionalFieldMask);
+      for (var i = 0; i < RepeatedInt64Wrapper.Count; i++) {
+        output.WriteRawTag(170, 13, ref immediateBuffer);
+        output.WriteWrappedInt64(RepeatedInt64Wrapper[i], ref immediateBuffer);
       }
-      if (optionalStruct_ != null) {
-        output.WriteRawTag(130, 19);
-        output.WriteMessage(OptionalStruct);
+      for (var i = 0; i < RepeatedUint32Wrapper.Count; i++) {
+        output.WriteRawTag(178, 13, ref immediateBuffer);
+        output.WriteWrappedUInt32(RepeatedUint32Wrapper[i], ref immediateBuffer);
       }
-      if (optionalAny_ != null) {
-        output.WriteRawTag(138, 19);
-        output.WriteMessage(OptionalAny);
+      for (var i = 0; i < RepeatedUint64Wrapper.Count; i++) {
+        output.WriteRawTag(186, 13, ref immediateBuffer);
+        output.WriteWrappedUInt64(RepeatedUint64Wrapper[i], ref immediateBuffer);
       }
-      if (optionalValue_ != null) {
-        output.WriteRawTag(146, 19);
-        output.WriteMessage(OptionalValue);
+      for (var i = 0; i < RepeatedFloatWrapper.Count; i++) {
+        output.WriteRawTag(194, 13, ref immediateBuffer);
+        output.WriteWrappedFloat(RepeatedFloatWrapper[i], ref immediateBuffer);
       }
-      repeatedDuration_.WriteTo(output, _repeated_repeatedDuration_codec);
-      repeatedTimestamp_.WriteTo(output, _repeated_repeatedTimestamp_codec);
-      repeatedFieldmask_.WriteTo(output, _repeated_repeatedFieldmask_codec);
-      repeatedAny_.WriteTo(output, _repeated_repeatedAny_codec);
-      repeatedValue_.WriteTo(output, _repeated_repeatedValue_codec);
-      repeatedStruct_.WriteTo(output, _repeated_repeatedStruct_codec);
+      for (var i = 0; i < RepeatedDoubleWrapper.Count; i++) {
+        output.WriteRawTag(202, 13, ref immediateBuffer);
+        output.WriteWrappedDouble(RepeatedDoubleWrapper[i], ref immediateBuffer);
+      }
+      for (var i = 0; i < RepeatedStringWrapper.Count; i++) {
+        output.WriteRawTag(210, 13, ref immediateBuffer);
+        output.WriteWrappedString(RepeatedStringWrapper[i], ref immediateBuffer);
+      }
+      for (var i = 0; i < RepeatedBytesWrapper.Count; i++) {
+        output.WriteRawTag(218, 13, ref immediateBuffer);
+        output.WriteWrappedBytes(RepeatedBytesWrapper[i], ref immediateBuffer);
+      }
+      if (OptionalDuration != null) {
+        output.WriteRawTag(234, 18, ref immediateBuffer);
+        output.WriteLength(OptionalDuration.CalculateSize(), ref immediateBuffer);
+        OptionalDuration.WriteTo(output, ref immediateBuffer);
+      }
+      if (OptionalTimestamp != null) {
+        output.WriteRawTag(242, 18, ref immediateBuffer);
+        output.WriteLength(OptionalTimestamp.CalculateSize(), ref immediateBuffer);
+        OptionalTimestamp.WriteTo(output, ref immediateBuffer);
+      }
+      if (OptionalFieldMask != null) {
+        output.WriteRawTag(250, 18, ref immediateBuffer);
+        output.WriteLength(OptionalFieldMask.CalculateSize(), ref immediateBuffer);
+        OptionalFieldMask.WriteTo(output, ref immediateBuffer);
+      }
+      if (OptionalStruct != null) {
+        output.WriteRawTag(130, 19, ref immediateBuffer);
+        output.WriteLength(OptionalStruct.CalculateSize(), ref immediateBuffer);
+        OptionalStruct.WriteTo(output, ref immediateBuffer);
+      }
+      if (OptionalAny != null) {
+        output.WriteRawTag(138, 19, ref immediateBuffer);
+        output.WriteLength(OptionalAny.CalculateSize(), ref immediateBuffer);
+        OptionalAny.WriteTo(output, ref immediateBuffer);
+      }
+      if (OptionalValue != null) {
+        output.WriteRawTag(146, 19, ref immediateBuffer);
+        output.WriteLength(OptionalValue.CalculateSize(), ref immediateBuffer);
+        OptionalValue.WriteTo(output, ref immediateBuffer);
+      }
+      for (var i = 0; i < RepeatedDuration.Count; i++) {
+        output.WriteRawTag(186, 19, ref immediateBuffer);
+        output.WriteLength(RepeatedDuration[i].CalculateSize(), ref immediateBuffer);
+        RepeatedDuration[i].WriteTo(output, ref immediateBuffer);
+      }
+      for (var i = 0; i < RepeatedTimestamp.Count; i++) {
+        output.WriteRawTag(194, 19, ref immediateBuffer);
+        output.WriteLength(RepeatedTimestamp[i].CalculateSize(), ref immediateBuffer);
+        RepeatedTimestamp[i].WriteTo(output, ref immediateBuffer);
+      }
+      for (var i = 0; i < RepeatedFieldmask.Count; i++) {
+        output.WriteRawTag(202, 19, ref immediateBuffer);
+        output.WriteLength(RepeatedFieldmask[i].CalculateSize(), ref immediateBuffer);
+        RepeatedFieldmask[i].WriteTo(output, ref immediateBuffer);
+      }
+      for (var i = 0; i < RepeatedStruct.Count; i++) {
+        output.WriteRawTag(162, 20, ref immediateBuffer);
+        output.WriteLength(RepeatedStruct[i].CalculateSize(), ref immediateBuffer);
+        RepeatedStruct[i].WriteTo(output, ref immediateBuffer);
+      }
+      for (var i = 0; i < RepeatedAny.Count; i++) {
+        output.WriteRawTag(218, 19, ref immediateBuffer);
+        output.WriteLength(RepeatedAny[i].CalculateSize(), ref immediateBuffer);
+        RepeatedAny[i].WriteTo(output, ref immediateBuffer);
+      }
+      for (var i = 0; i < RepeatedValue.Count; i++) {
+        output.WriteRawTag(226, 19, ref immediateBuffer);
+        output.WriteLength(RepeatedValue[i].CalculateSize(), ref immediateBuffer);
+        RepeatedValue[i].WriteTo(output, ref immediateBuffer);
+      }
       if (Fieldname1 != 0) {
-        output.WriteRawTag(136, 25);
-        output.WriteInt32(Fieldname1);
+        output.WriteRawTag(136, 25, ref immediateBuffer);
+        output.WriteInt32(Fieldname1, ref immediateBuffer);
       }
       if (FieldName2 != 0) {
-        output.WriteRawTag(144, 25);
-        output.WriteInt32(FieldName2);
+        output.WriteRawTag(144, 25, ref immediateBuffer);
+        output.WriteInt32(FieldName2, ref immediateBuffer);
       }
       if (FieldName3 != 0) {
-        output.WriteRawTag(152, 25);
-        output.WriteInt32(FieldName3);
+        output.WriteRawTag(152, 25, ref immediateBuffer);
+        output.WriteInt32(FieldName3, ref immediateBuffer);
       }
       if (FieldName4 != 0) {
-        output.WriteRawTag(160, 25);
-        output.WriteInt32(FieldName4);
+        output.WriteRawTag(160, 25, ref immediateBuffer);
+        output.WriteInt32(FieldName4, ref immediateBuffer);
       }
       if (Field0Name5 != 0) {
-        output.WriteRawTag(168, 25);
-        output.WriteInt32(Field0Name5);
+        output.WriteRawTag(168, 25, ref immediateBuffer);
+        output.WriteInt32(Field0Name5, ref immediateBuffer);
       }
       if (Field0Name6 != 0) {
-        output.WriteRawTag(176, 25);
-        output.WriteInt32(Field0Name6);
+        output.WriteRawTag(176, 25, ref immediateBuffer);
+        output.WriteInt32(Field0Name6, ref immediateBuffer);
       }
       if (FieldName7 != 0) {
-        output.WriteRawTag(184, 25);
-        output.WriteInt32(FieldName7);
+        output.WriteRawTag(184, 25, ref immediateBuffer);
+        output.WriteInt32(FieldName7, ref immediateBuffer);
       }
       if (FieldName8 != 0) {
-        output.WriteRawTag(192, 25);
-        output.WriteInt32(FieldName8);
+        output.WriteRawTag(192, 25, ref immediateBuffer);
+        output.WriteInt32(FieldName8, ref immediateBuffer);
       }
       if (FieldName9 != 0) {
-        output.WriteRawTag(200, 25);
-        output.WriteInt32(FieldName9);
+        output.WriteRawTag(200, 25, ref immediateBuffer);
+        output.WriteInt32(FieldName9, ref immediateBuffer);
       }
       if (FieldName10 != 0) {
-        output.WriteRawTag(208, 25);
-        output.WriteInt32(FieldName10);
+        output.WriteRawTag(208, 25, ref immediateBuffer);
+        output.WriteInt32(FieldName10, ref immediateBuffer);
       }
       if (FIELDNAME11 != 0) {
-        output.WriteRawTag(216, 25);
-        output.WriteInt32(FIELDNAME11);
+        output.WriteRawTag(216, 25, ref immediateBuffer);
+        output.WriteInt32(FIELDNAME11, ref immediateBuffer);
       }
       if (FIELDName12 != 0) {
-        output.WriteRawTag(224, 25);
-        output.WriteInt32(FIELDName12);
+        output.WriteRawTag(224, 25, ref immediateBuffer);
+        output.WriteInt32(FIELDName12, ref immediateBuffer);
       }
       if (FieldName13 != 0) {
-        output.WriteRawTag(232, 25);
-        output.WriteInt32(FieldName13);
+        output.WriteRawTag(232, 25, ref immediateBuffer);
+        output.WriteInt32(FieldName13, ref immediateBuffer);
       }
       if (FieldName14 != 0) {
-        output.WriteRawTag(240, 25);
-        output.WriteInt32(FieldName14);
+        output.WriteRawTag(240, 25, ref immediateBuffer);
+        output.WriteInt32(FieldName14, ref immediateBuffer);
       }
       if (FieldName15 != 0) {
-        output.WriteRawTag(248, 25);
-        output.WriteInt32(FieldName15);
+        output.WriteRawTag(248, 25, ref immediateBuffer);
+        output.WriteInt32(FieldName15, ref immediateBuffer);
       }
       if (FieldName16 != 0) {
-        output.WriteRawTag(128, 26);
-        output.WriteInt32(FieldName16);
+        output.WriteRawTag(128, 26, ref immediateBuffer);
+        output.WriteInt32(FieldName16, ref immediateBuffer);
       }
       if (FieldName17 != 0) {
-        output.WriteRawTag(136, 26);
-        output.WriteInt32(FieldName17);
+        output.WriteRawTag(136, 26, ref immediateBuffer);
+        output.WriteInt32(FieldName17, ref immediateBuffer);
       }
       if (FieldName18 != 0) {
-        output.WriteRawTag(144, 26);
-        output.WriteInt32(FieldName18);
+        output.WriteRawTag(144, 26, ref immediateBuffer);
+        output.WriteInt32(FieldName18, ref immediateBuffer);
       }
       if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
+        _unknownFields.WriteTo(output, ref immediateBuffer);
       }
     }
 
@@ -2338,10 +2814,10 @@ namespace ProtobufTestMessages.Proto3 {
       if (OptionalBytes.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeBytesSize(OptionalBytes);
       }
-      if (optionalNestedMessage_ != null) {
+      if (OptionalNestedMessage != null) {
         size += 2 + pb::CodedOutputStream.ComputeMessageSize(OptionalNestedMessage);
       }
-      if (optionalForeignMessage_ != null) {
+      if (OptionalForeignMessage != null) {
         size += 2 + pb::CodedOutputStream.ComputeMessageSize(OptionalForeignMessage);
       }
       if (OptionalNestedEnum != 0) {
@@ -2356,53 +2832,335 @@ namespace ProtobufTestMessages.Proto3 {
       if (OptionalCord.Length != 0) {
         size += 2 + pb::CodedOutputStream.ComputeStringSize(OptionalCord);
       }
-      if (recursiveMessage_ != null) {
+      if (RecursiveMessage != null) {
         size += 2 + pb::CodedOutputStream.ComputeMessageSize(RecursiveMessage);
       }
-      size += repeatedInt32_.CalculateSize(_repeated_repeatedInt32_codec);
-      size += repeatedInt64_.CalculateSize(_repeated_repeatedInt64_codec);
-      size += repeatedUint32_.CalculateSize(_repeated_repeatedUint32_codec);
-      size += repeatedUint64_.CalculateSize(_repeated_repeatedUint64_codec);
-      size += repeatedSint32_.CalculateSize(_repeated_repeatedSint32_codec);
-      size += repeatedSint64_.CalculateSize(_repeated_repeatedSint64_codec);
-      size += repeatedFixed32_.CalculateSize(_repeated_repeatedFixed32_codec);
-      size += repeatedFixed64_.CalculateSize(_repeated_repeatedFixed64_codec);
-      size += repeatedSfixed32_.CalculateSize(_repeated_repeatedSfixed32_codec);
-      size += repeatedSfixed64_.CalculateSize(_repeated_repeatedSfixed64_codec);
-      size += repeatedFloat_.CalculateSize(_repeated_repeatedFloat_codec);
-      size += repeatedDouble_.CalculateSize(_repeated_repeatedDouble_codec);
-      size += repeatedBool_.CalculateSize(_repeated_repeatedBool_codec);
-      size += repeatedString_.CalculateSize(_repeated_repeatedString_codec);
-      size += repeatedBytes_.CalculateSize(_repeated_repeatedBytes_codec);
-      size += repeatedNestedMessage_.CalculateSize(_repeated_repeatedNestedMessage_codec);
-      size += repeatedForeignMessage_.CalculateSize(_repeated_repeatedForeignMessage_codec);
-      size += repeatedNestedEnum_.CalculateSize(_repeated_repeatedNestedEnum_codec);
-      size += repeatedForeignEnum_.CalculateSize(_repeated_repeatedForeignEnum_codec);
-      size += repeatedStringPiece_.CalculateSize(_repeated_repeatedStringPiece_codec);
-      size += repeatedCord_.CalculateSize(_repeated_repeatedCord_codec);
-      size += mapInt32Int32_.CalculateSize(_map_mapInt32Int32_codec);
-      size += mapInt64Int64_.CalculateSize(_map_mapInt64Int64_codec);
-      size += mapUint32Uint32_.CalculateSize(_map_mapUint32Uint32_codec);
-      size += mapUint64Uint64_.CalculateSize(_map_mapUint64Uint64_codec);
-      size += mapSint32Sint32_.CalculateSize(_map_mapSint32Sint32_codec);
-      size += mapSint64Sint64_.CalculateSize(_map_mapSint64Sint64_codec);
-      size += mapFixed32Fixed32_.CalculateSize(_map_mapFixed32Fixed32_codec);
-      size += mapFixed64Fixed64_.CalculateSize(_map_mapFixed64Fixed64_codec);
-      size += mapSfixed32Sfixed32_.CalculateSize(_map_mapSfixed32Sfixed32_codec);
-      size += mapSfixed64Sfixed64_.CalculateSize(_map_mapSfixed64Sfixed64_codec);
-      size += mapInt32Float_.CalculateSize(_map_mapInt32Float_codec);
-      size += mapInt32Double_.CalculateSize(_map_mapInt32Double_codec);
-      size += mapBoolBool_.CalculateSize(_map_mapBoolBool_codec);
-      size += mapStringString_.CalculateSize(_map_mapStringString_codec);
-      size += mapStringBytes_.CalculateSize(_map_mapStringBytes_codec);
-      size += mapStringNestedMessage_.CalculateSize(_map_mapStringNestedMessage_codec);
-      size += mapStringForeignMessage_.CalculateSize(_map_mapStringForeignMessage_codec);
-      size += mapStringNestedEnum_.CalculateSize(_map_mapStringNestedEnum_codec);
-      size += mapStringForeignEnum_.CalculateSize(_map_mapStringForeignEnum_codec);
+      {
+        var packedSize = 0;
+        for (var i = 0; i < RepeatedInt32.Count; i++) {
+          packedSize += pb::CodedOutputStream.ComputeInt32Size(RepeatedInt32[i]);
+        }
+        if (packedSize > 0) {
+          size += 2 + packedSize + pb::CodedOutputStream.ComputeLengthSize(packedSize);
+        }
+      }
+      {
+        var packedSize = 0;
+        for (var i = 0; i < RepeatedInt64.Count; i++) {
+          packedSize += pb::CodedOutputStream.ComputeInt64Size(RepeatedInt64[i]);
+        }
+        if (packedSize > 0) {
+          size += 2 + packedSize + pb::CodedOutputStream.ComputeLengthSize(packedSize);
+        }
+      }
+      {
+        var packedSize = 0;
+        for (var i = 0; i < RepeatedUint32.Count; i++) {
+          packedSize += pb::CodedOutputStream.ComputeUInt32Size(RepeatedUint32[i]);
+        }
+        if (packedSize > 0) {
+          size += 2 + packedSize + pb::CodedOutputStream.ComputeLengthSize(packedSize);
+        }
+      }
+      {
+        var packedSize = 0;
+        for (var i = 0; i < RepeatedUint64.Count; i++) {
+          packedSize += pb::CodedOutputStream.ComputeUInt64Size(RepeatedUint64[i]);
+        }
+        if (packedSize > 0) {
+          size += 2 + packedSize + pb::CodedOutputStream.ComputeLengthSize(packedSize);
+        }
+      }
+      {
+        var packedSize = 0;
+        for (var i = 0; i < RepeatedSint32.Count; i++) {
+          packedSize += pb::CodedOutputStream.ComputeSInt32Size(RepeatedSint32[i]);
+        }
+        if (packedSize > 0) {
+          size += 2 + packedSize + pb::CodedOutputStream.ComputeLengthSize(packedSize);
+        }
+      }
+      {
+        var packedSize = 0;
+        for (var i = 0; i < RepeatedSint64.Count; i++) {
+          packedSize += pb::CodedOutputStream.ComputeSInt64Size(RepeatedSint64[i]);
+        }
+        if (packedSize > 0) {
+          size += 2 + packedSize + pb::CodedOutputStream.ComputeLengthSize(packedSize);
+        }
+      }
+      {
+        var packedSize = 4 * RepeatedFixed32.Count;
+        if (packedSize > 0) {
+          size += 2 + packedSize + pb::CodedOutputStream.ComputeLengthSize(packedSize);
+        }
+      }
+      {
+        var packedSize = 8 * RepeatedFixed64.Count;
+        if (packedSize > 0) {
+          size += 2 + packedSize + pb::CodedOutputStream.ComputeLengthSize(packedSize);
+        }
+      }
+      {
+        var packedSize = 4 * RepeatedSfixed32.Count;
+        if (packedSize > 0) {
+          size += 2 + packedSize + pb::CodedOutputStream.ComputeLengthSize(packedSize);
+        }
+      }
+      {
+        var packedSize = 8 * RepeatedSfixed64.Count;
+        if (packedSize > 0) {
+          size += 2 + packedSize + pb::CodedOutputStream.ComputeLengthSize(packedSize);
+        }
+      }
+      {
+        var packedSize = 4 * RepeatedFloat.Count;
+        if (packedSize > 0) {
+          size += 2 + packedSize + pb::CodedOutputStream.ComputeLengthSize(packedSize);
+        }
+      }
+      {
+        var packedSize = 8 * RepeatedDouble.Count;
+        if (packedSize > 0) {
+          size += 2 + packedSize + pb::CodedOutputStream.ComputeLengthSize(packedSize);
+        }
+      }
+      {
+        var packedSize = 1 * RepeatedBool.Count;
+        if (packedSize > 0) {
+          size += 2 + packedSize + pb::CodedOutputStream.ComputeLengthSize(packedSize);
+        }
+      }
+      for (var i = 0; i < RepeatedString.Count; i++) {
+        size += 2 + pb::CodedOutputStream.ComputeStringSize(RepeatedString[i]);
+      }
+      for (var i = 0; i < RepeatedBytes.Count; i++) {
+        size += 2 + pb::CodedOutputStream.ComputeBytesSize(RepeatedBytes[i]);
+      }
+      for (var i = 0; i < RepeatedNestedMessage.Count; i++) {
+        size += 2 + pb::CodedOutputStream.ComputeMessageSize(RepeatedNestedMessage[i]);
+      }
+      for (var i = 0; i < RepeatedForeignMessage.Count; i++) {
+        size += 2 + pb::CodedOutputStream.ComputeMessageSize(RepeatedForeignMessage[i]);
+      }
+      {
+        var packedSize = 0;
+        for (var i = 0; i < RepeatedNestedEnum.Count; i++) {
+          packedSize += pb::CodedOutputStream.ComputeEnumSize((int)RepeatedNestedEnum[i]);
+        }
+        if (packedSize > 0) {
+          size += 2 + packedSize + pb::CodedOutputStream.ComputeLengthSize(packedSize);
+        }
+      }
+      {
+        var packedSize = 0;
+        for (var i = 0; i < RepeatedForeignEnum.Count; i++) {
+          packedSize += pb::CodedOutputStream.ComputeEnumSize((int)RepeatedForeignEnum[i]);
+        }
+        if (packedSize > 0) {
+          size += 2 + packedSize + pb::CodedOutputStream.ComputeLengthSize(packedSize);
+        }
+      }
+      for (var i = 0; i < RepeatedStringPiece.Count; i++) {
+        size += 2 + pb::CodedOutputStream.ComputeStringSize(RepeatedStringPiece[i]);
+      }
+      for (var i = 0; i < RepeatedCord.Count; i++) {
+        size += 2 + pb::CodedOutputStream.ComputeStringSize(RepeatedCord[i]);
+      }
+      foreach (var entry in MapInt32Int32) {
+        var messageSize = 0;
+        if (entry.Key != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeInt32Size(entry.Key);
+        }
+        if (entry.Value != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeInt32Size(entry.Value);
+        }
+        size += 2 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
+      foreach (var entry in MapInt64Int64) {
+        var messageSize = 0;
+        if (entry.Key != 0L) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeInt64Size(entry.Key);
+        }
+        if (entry.Value != 0L) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeInt64Size(entry.Value);
+        }
+        size += 2 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
+      foreach (var entry in MapUint32Uint32) {
+        var messageSize = 0;
+        if (entry.Key != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeUInt32Size(entry.Key);
+        }
+        if (entry.Value != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeUInt32Size(entry.Value);
+        }
+        size += 2 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
+      foreach (var entry in MapUint64Uint64) {
+        var messageSize = 0;
+        if (entry.Key != 0UL) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeUInt64Size(entry.Key);
+        }
+        if (entry.Value != 0UL) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeUInt64Size(entry.Value);
+        }
+        size += 2 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
+      foreach (var entry in MapSint32Sint32) {
+        var messageSize = 0;
+        if (entry.Key != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeSInt32Size(entry.Key);
+        }
+        if (entry.Value != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeSInt32Size(entry.Value);
+        }
+        size += 2 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
+      foreach (var entry in MapSint64Sint64) {
+        var messageSize = 0;
+        if (entry.Key != 0L) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeSInt64Size(entry.Key);
+        }
+        if (entry.Value != 0L) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeSInt64Size(entry.Value);
+        }
+        size += 2 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
+      foreach (var entry in MapFixed32Fixed32) {
+        var messageSize = 0;
+        if (entry.Key != 0) {
+          messageSize += 1 + 4;
+        }
+        if (entry.Value != 0) {
+          messageSize += 1 + 4;
+        }
+        size += 2 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
+      foreach (var entry in MapFixed64Fixed64) {
+        var messageSize = 0;
+        if (entry.Key != 0UL) {
+          messageSize += 1 + 8;
+        }
+        if (entry.Value != 0UL) {
+          messageSize += 1 + 8;
+        }
+        size += 2 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
+      foreach (var entry in MapSfixed32Sfixed32) {
+        var messageSize = 0;
+        if (entry.Key != 0) {
+          messageSize += 1 + 4;
+        }
+        if (entry.Value != 0) {
+          messageSize += 1 + 4;
+        }
+        size += 2 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
+      foreach (var entry in MapSfixed64Sfixed64) {
+        var messageSize = 0;
+        if (entry.Key != 0L) {
+          messageSize += 1 + 8;
+        }
+        if (entry.Value != 0L) {
+          messageSize += 1 + 8;
+        }
+        size += 2 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
+      foreach (var entry in MapInt32Float) {
+        var messageSize = 0;
+        if (entry.Key != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeInt32Size(entry.Key);
+        }
+        if (entry.Value != 0F) {
+          messageSize += 1 + 4;
+        }
+        size += 2 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
+      foreach (var entry in MapInt32Double) {
+        var messageSize = 0;
+        if (entry.Key != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeInt32Size(entry.Key);
+        }
+        if (entry.Value != 0D) {
+          messageSize += 1 + 8;
+        }
+        size += 2 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
+      foreach (var entry in MapBoolBool) {
+        var messageSize = 0;
+        if (entry.Key != false) {
+          messageSize += 1 + 1;
+        }
+        if (entry.Value != false) {
+          messageSize += 1 + 1;
+        }
+        size += 2 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
+      foreach (var entry in MapStringString) {
+        var messageSize = 0;
+        if (entry.Key.Length != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeStringSize(entry.Key);
+        }
+        if (entry.Value.Length != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeStringSize(entry.Value);
+        }
+        size += 2 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
+      foreach (var entry in MapStringBytes) {
+        var messageSize = 0;
+        if (entry.Key.Length != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeStringSize(entry.Key);
+        }
+        if (entry.Value.Length != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeBytesSize(entry.Value);
+        }
+        size += 2 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
+      foreach (var entry in MapStringNestedMessage) {
+        var messageSize = 0;
+        if (entry.Key.Length != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeStringSize(entry.Key);
+        }
+        if (entry.Value != null) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeMessageSize(entry.Value);
+        }
+        size += 2 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
+      foreach (var entry in MapStringForeignMessage) {
+        var messageSize = 0;
+        if (entry.Key.Length != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeStringSize(entry.Key);
+        }
+        if (entry.Value != null) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeMessageSize(entry.Value);
+        }
+        size += 2 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
+      foreach (var entry in MapStringNestedEnum) {
+        var messageSize = 0;
+        if (entry.Key.Length != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeStringSize(entry.Key);
+        }
+        if (entry.Value != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeEnumSize((int) entry.Value);
+        }
+        size += 2 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
+      foreach (var entry in MapStringForeignEnum) {
+        var messageSize = 0;
+        if (entry.Key.Length != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeStringSize(entry.Key);
+        }
+        if (entry.Value != 0) {
+          messageSize += 1 + pb::CodedOutputStream.ComputeEnumSize((int) entry.Value);
+        }
+        size += 2 + pb::CodedOutputStream.ComputeLengthSize(messageSize) + messageSize;
+      }
       if (oneofFieldCase_ == OneofFieldOneofCase.OneofUint32) {
         size += 2 + pb::CodedOutputStream.ComputeUInt32Size(OneofUint32);
       }
-      if (oneofFieldCase_ == OneofFieldOneofCase.OneofNestedMessage) {
+      if (OneofNestedMessage != null) {
         size += 2 + pb::CodedOutputStream.ComputeMessageSize(OneofNestedMessage);
       }
       if (oneofFieldCase_ == OneofFieldOneofCase.OneofString) {
@@ -2426,66 +3184,96 @@ namespace ProtobufTestMessages.Proto3 {
       if (oneofFieldCase_ == OneofFieldOneofCase.OneofEnum) {
         size += 2 + pb::CodedOutputStream.ComputeEnumSize((int) OneofEnum);
       }
-      if (optionalBoolWrapper_ != null) {
-        size += _single_optionalBoolWrapper_codec.CalculateSizeWithTag(OptionalBoolWrapper);
+      if (OptionalBoolWrapper != null) {
+        size += 2 + pb::CodedOutputStream.ComputeWrappedBoolSize(OptionalBoolWrapper);
       }
-      if (optionalInt32Wrapper_ != null) {
-        size += _single_optionalInt32Wrapper_codec.CalculateSizeWithTag(OptionalInt32Wrapper);
+      if (OptionalInt32Wrapper != null) {
+        size += 2 + pb::CodedOutputStream.ComputeWrappedInt32Size(OptionalInt32Wrapper);
       }
-      if (optionalInt64Wrapper_ != null) {
-        size += _single_optionalInt64Wrapper_codec.CalculateSizeWithTag(OptionalInt64Wrapper);
+      if (OptionalInt64Wrapper != null) {
+        size += 2 + pb::CodedOutputStream.ComputeWrappedInt64Size(OptionalInt64Wrapper);
       }
-      if (optionalUint32Wrapper_ != null) {
-        size += _single_optionalUint32Wrapper_codec.CalculateSizeWithTag(OptionalUint32Wrapper);
+      if (OptionalUint32Wrapper != null) {
+        size += 2 + pb::CodedOutputStream.ComputeWrappedUInt32Size(OptionalUint32Wrapper);
       }
-      if (optionalUint64Wrapper_ != null) {
-        size += _single_optionalUint64Wrapper_codec.CalculateSizeWithTag(OptionalUint64Wrapper);
+      if (OptionalUint64Wrapper != null) {
+        size += 2 + pb::CodedOutputStream.ComputeWrappedUInt64Size(OptionalUint64Wrapper);
       }
-      if (optionalFloatWrapper_ != null) {
-        size += _single_optionalFloatWrapper_codec.CalculateSizeWithTag(OptionalFloatWrapper);
+      if (OptionalFloatWrapper != null) {
+        size += 2 + pb::CodedOutputStream.ComputeWrappedFloatSize(OptionalFloatWrapper);
       }
-      if (optionalDoubleWrapper_ != null) {
-        size += _single_optionalDoubleWrapper_codec.CalculateSizeWithTag(OptionalDoubleWrapper);
+      if (OptionalDoubleWrapper != null) {
+        size += 2 + pb::CodedOutputStream.ComputeWrappedDoubleSize(OptionalDoubleWrapper);
       }
-      if (optionalStringWrapper_ != null) {
-        size += _single_optionalStringWrapper_codec.CalculateSizeWithTag(OptionalStringWrapper);
+      if (OptionalStringWrapper != null) {
+        size += 2 + pb::CodedOutputStream.ComputeWrappedStringSize(OptionalStringWrapper);
       }
-      if (optionalBytesWrapper_ != null) {
-        size += _single_optionalBytesWrapper_codec.CalculateSizeWithTag(OptionalBytesWrapper);
+      if (OptionalBytesWrapper != null) {
+        size += 2 + pb::CodedOutputStream.ComputeWrappedBytesSize(OptionalBytesWrapper);
       }
-      size += repeatedBoolWrapper_.CalculateSize(_repeated_repeatedBoolWrapper_codec);
-      size += repeatedInt32Wrapper_.CalculateSize(_repeated_repeatedInt32Wrapper_codec);
-      size += repeatedInt64Wrapper_.CalculateSize(_repeated_repeatedInt64Wrapper_codec);
-      size += repeatedUint32Wrapper_.CalculateSize(_repeated_repeatedUint32Wrapper_codec);
-      size += repeatedUint64Wrapper_.CalculateSize(_repeated_repeatedUint64Wrapper_codec);
-      size += repeatedFloatWrapper_.CalculateSize(_repeated_repeatedFloatWrapper_codec);
-      size += repeatedDoubleWrapper_.CalculateSize(_repeated_repeatedDoubleWrapper_codec);
-      size += repeatedStringWrapper_.CalculateSize(_repeated_repeatedStringWrapper_codec);
-      size += repeatedBytesWrapper_.CalculateSize(_repeated_repeatedBytesWrapper_codec);
-      if (optionalDuration_ != null) {
+      for (var i = 0; i < RepeatedBoolWrapper.Count; i++) {
+        size += 2 + pb::CodedOutputStream.ComputeWrappedBoolSize(RepeatedBoolWrapper[i]);
+      }
+      for (var i = 0; i < RepeatedInt32Wrapper.Count; i++) {
+        size += 2 + pb::CodedOutputStream.ComputeWrappedInt32Size(RepeatedInt32Wrapper[i]);
+      }
+      for (var i = 0; i < RepeatedInt64Wrapper.Count; i++) {
+        size += 2 + pb::CodedOutputStream.ComputeWrappedInt64Size(RepeatedInt64Wrapper[i]);
+      }
+      for (var i = 0; i < RepeatedUint32Wrapper.Count; i++) {
+        size += 2 + pb::CodedOutputStream.ComputeWrappedUInt32Size(RepeatedUint32Wrapper[i]);
+      }
+      for (var i = 0; i < RepeatedUint64Wrapper.Count; i++) {
+        size += 2 + pb::CodedOutputStream.ComputeWrappedUInt64Size(RepeatedUint64Wrapper[i]);
+      }
+      for (var i = 0; i < RepeatedFloatWrapper.Count; i++) {
+        size += 2 + pb::CodedOutputStream.ComputeWrappedFloatSize(RepeatedFloatWrapper[i]);
+      }
+      for (var i = 0; i < RepeatedDoubleWrapper.Count; i++) {
+        size += 2 + pb::CodedOutputStream.ComputeWrappedDoubleSize(RepeatedDoubleWrapper[i]);
+      }
+      for (var i = 0; i < RepeatedStringWrapper.Count; i++) {
+        size += 2 + pb::CodedOutputStream.ComputeWrappedStringSize(RepeatedStringWrapper[i]);
+      }
+      for (var i = 0; i < RepeatedBytesWrapper.Count; i++) {
+        size += 2 + pb::CodedOutputStream.ComputeWrappedBytesSize(RepeatedBytesWrapper[i]);
+      }
+      if (OptionalDuration != null) {
         size += 2 + pb::CodedOutputStream.ComputeMessageSize(OptionalDuration);
       }
-      if (optionalTimestamp_ != null) {
+      if (OptionalTimestamp != null) {
         size += 2 + pb::CodedOutputStream.ComputeMessageSize(OptionalTimestamp);
       }
-      if (optionalFieldMask_ != null) {
+      if (OptionalFieldMask != null) {
         size += 2 + pb::CodedOutputStream.ComputeMessageSize(OptionalFieldMask);
       }
-      if (optionalStruct_ != null) {
+      if (OptionalStruct != null) {
         size += 2 + pb::CodedOutputStream.ComputeMessageSize(OptionalStruct);
       }
-      if (optionalAny_ != null) {
+      if (OptionalAny != null) {
         size += 2 + pb::CodedOutputStream.ComputeMessageSize(OptionalAny);
       }
-      if (optionalValue_ != null) {
+      if (OptionalValue != null) {
         size += 2 + pb::CodedOutputStream.ComputeMessageSize(OptionalValue);
       }
-      size += repeatedDuration_.CalculateSize(_repeated_repeatedDuration_codec);
-      size += repeatedTimestamp_.CalculateSize(_repeated_repeatedTimestamp_codec);
-      size += repeatedFieldmask_.CalculateSize(_repeated_repeatedFieldmask_codec);
-      size += repeatedStruct_.CalculateSize(_repeated_repeatedStruct_codec);
-      size += repeatedAny_.CalculateSize(_repeated_repeatedAny_codec);
-      size += repeatedValue_.CalculateSize(_repeated_repeatedValue_codec);
+      for (var i = 0; i < RepeatedDuration.Count; i++) {
+        size += 2 + pb::CodedOutputStream.ComputeMessageSize(RepeatedDuration[i]);
+      }
+      for (var i = 0; i < RepeatedTimestamp.Count; i++) {
+        size += 2 + pb::CodedOutputStream.ComputeMessageSize(RepeatedTimestamp[i]);
+      }
+      for (var i = 0; i < RepeatedFieldmask.Count; i++) {
+        size += 2 + pb::CodedOutputStream.ComputeMessageSize(RepeatedFieldmask[i]);
+      }
+      for (var i = 0; i < RepeatedStruct.Count; i++) {
+        size += 2 + pb::CodedOutputStream.ComputeMessageSize(RepeatedStruct[i]);
+      }
+      for (var i = 0; i < RepeatedAny.Count; i++) {
+        size += 2 + pb::CodedOutputStream.ComputeMessageSize(RepeatedAny[i]);
+      }
+      for (var i = 0; i < RepeatedValue.Count; i++) {
+        size += 2 + pb::CodedOutputStream.ComputeMessageSize(RepeatedValue[i]);
+      }
       if (Fieldname1 != 0) {
         size += 2 + pb::CodedOutputStream.ComputeInt32Size(Fieldname1);
       }
@@ -2853,287 +3641,733 @@ namespace ProtobufTestMessages.Proto3 {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
+    [global::System.Security.SecurityCritical]
+    [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+    public void MergeFrom(pb::CodedInputStream input, ref global::System.ReadOnlySpan<byte> immediateBuffer) {
       uint tag;
-      while ((tag = input.ReadTag()) != 0) {
+      while ((tag = input.ReadTag(ref immediateBuffer)) != 0) {
         switch(tag) {
           default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input, ref immediateBuffer);
             break;
           case 8: {
-            OptionalInt32 = input.ReadInt32();
+            OptionalInt32 = input.ReadInt32(ref immediateBuffer);
             break;
           }
           case 16: {
-            OptionalInt64 = input.ReadInt64();
+            OptionalInt64 = input.ReadInt64(ref immediateBuffer);
             break;
           }
           case 24: {
-            OptionalUint32 = input.ReadUInt32();
+            OptionalUint32 = input.ReadUInt32(ref immediateBuffer);
             break;
           }
           case 32: {
-            OptionalUint64 = input.ReadUInt64();
+            OptionalUint64 = input.ReadUInt64(ref immediateBuffer);
             break;
           }
           case 40: {
-            OptionalSint32 = input.ReadSInt32();
+            OptionalSint32 = input.ReadSInt32(ref immediateBuffer);
             break;
           }
           case 48: {
-            OptionalSint64 = input.ReadSInt64();
+            OptionalSint64 = input.ReadSInt64(ref immediateBuffer);
             break;
           }
           case 61: {
-            OptionalFixed32 = input.ReadFixed32();
+            OptionalFixed32 = input.ReadFixed32(ref immediateBuffer);
             break;
           }
           case 65: {
-            OptionalFixed64 = input.ReadFixed64();
+            OptionalFixed64 = input.ReadFixed64(ref immediateBuffer);
             break;
           }
           case 77: {
-            OptionalSfixed32 = input.ReadSFixed32();
+            OptionalSfixed32 = input.ReadSFixed32(ref immediateBuffer);
             break;
           }
           case 81: {
-            OptionalSfixed64 = input.ReadSFixed64();
+            OptionalSfixed64 = input.ReadSFixed64(ref immediateBuffer);
             break;
           }
           case 93: {
-            OptionalFloat = input.ReadFloat();
+            OptionalFloat = input.ReadFloat(ref immediateBuffer);
             break;
           }
           case 97: {
-            OptionalDouble = input.ReadDouble();
+            OptionalDouble = input.ReadDouble(ref immediateBuffer);
             break;
           }
           case 104: {
-            OptionalBool = input.ReadBool();
+            OptionalBool = input.ReadBool(ref immediateBuffer);
             break;
           }
           case 114: {
-            OptionalString = input.ReadString();
+            OptionalString = input.ReadString(ref immediateBuffer);
             break;
           }
           case 122: {
-            OptionalBytes = input.ReadBytes();
+            OptionalBytes = input.ReadBytes(ref immediateBuffer);
             break;
           }
           case 146: {
             if (optionalNestedMessage_ == null) {
               optionalNestedMessage_ = new global::ProtobufTestMessages.Proto3.TestAllTypesProto3.Types.NestedMessage();
             }
-            input.ReadMessage(optionalNestedMessage_);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            optionalNestedMessage_.MergeFrom(input, ref immediateBuffer);
+            input.EndReadNested(oldLimit);
             break;
           }
           case 154: {
             if (optionalForeignMessage_ == null) {
               optionalForeignMessage_ = new global::ProtobufTestMessages.Proto3.ForeignMessage();
             }
-            input.ReadMessage(optionalForeignMessage_);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            optionalForeignMessage_.MergeFrom(input, ref immediateBuffer);
+            input.EndReadNested(oldLimit);
             break;
           }
           case 168: {
-            optionalNestedEnum_ = (global::ProtobufTestMessages.Proto3.TestAllTypesProto3.Types.NestedEnum) input.ReadEnum();
+            optionalNestedEnum_ = (global::ProtobufTestMessages.Proto3.TestAllTypesProto3.Types.NestedEnum) input.ReadEnum(ref immediateBuffer);
             break;
           }
           case 176: {
-            optionalForeignEnum_ = (global::ProtobufTestMessages.Proto3.ForeignEnum) input.ReadEnum();
+            optionalForeignEnum_ = (global::ProtobufTestMessages.Proto3.ForeignEnum) input.ReadEnum(ref immediateBuffer);
             break;
           }
           case 194: {
-            OptionalStringPiece = input.ReadString();
+            OptionalStringPiece = input.ReadString(ref immediateBuffer);
             break;
           }
           case 202: {
-            OptionalCord = input.ReadString();
+            OptionalCord = input.ReadString(ref immediateBuffer);
             break;
           }
           case 218: {
             if (recursiveMessage_ == null) {
               recursiveMessage_ = new global::ProtobufTestMessages.Proto3.TestAllTypesProto3();
             }
-            input.ReadMessage(recursiveMessage_);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            recursiveMessage_.MergeFrom(input, ref immediateBuffer);
+            input.EndReadNested(oldLimit);
             break;
           }
-          case 250:
+          case 250: {
+            int length = input.ReadLength(ref immediateBuffer);
+            if (length > 0) {
+              var oldLimit = input.PushLimit(length);
+              while (!input.ReachedLimit) {
+                repeatedInt32_.Add(input.ReadInt32(ref immediateBuffer)); 
+              }
+              input.PopLimit(oldLimit);
+            }
+            break;
+          }
           case 248: {
-            repeatedInt32_.AddEntriesFrom(input, _repeated_repeatedInt32_codec);
+            repeatedInt32_.Add(input.ReadInt32(ref immediateBuffer));
             break;
           }
-          case 258:
+          case 258: {
+            int length = input.ReadLength(ref immediateBuffer);
+            if (length > 0) {
+              var oldLimit = input.PushLimit(length);
+              while (!input.ReachedLimit) {
+                repeatedInt64_.Add(input.ReadInt64(ref immediateBuffer)); 
+              }
+              input.PopLimit(oldLimit);
+            }
+            break;
+          }
           case 256: {
-            repeatedInt64_.AddEntriesFrom(input, _repeated_repeatedInt64_codec);
+            repeatedInt64_.Add(input.ReadInt64(ref immediateBuffer));
             break;
           }
-          case 266:
+          case 266: {
+            int length = input.ReadLength(ref immediateBuffer);
+            if (length > 0) {
+              var oldLimit = input.PushLimit(length);
+              while (!input.ReachedLimit) {
+                repeatedUint32_.Add(input.ReadUInt32(ref immediateBuffer)); 
+              }
+              input.PopLimit(oldLimit);
+            }
+            break;
+          }
           case 264: {
-            repeatedUint32_.AddEntriesFrom(input, _repeated_repeatedUint32_codec);
+            repeatedUint32_.Add(input.ReadUInt32(ref immediateBuffer));
             break;
           }
-          case 274:
+          case 274: {
+            int length = input.ReadLength(ref immediateBuffer);
+            if (length > 0) {
+              var oldLimit = input.PushLimit(length);
+              while (!input.ReachedLimit) {
+                repeatedUint64_.Add(input.ReadUInt64(ref immediateBuffer)); 
+              }
+              input.PopLimit(oldLimit);
+            }
+            break;
+          }
           case 272: {
-            repeatedUint64_.AddEntriesFrom(input, _repeated_repeatedUint64_codec);
+            repeatedUint64_.Add(input.ReadUInt64(ref immediateBuffer));
             break;
           }
-          case 282:
+          case 282: {
+            int length = input.ReadLength(ref immediateBuffer);
+            if (length > 0) {
+              var oldLimit = input.PushLimit(length);
+              while (!input.ReachedLimit) {
+                repeatedSint32_.Add(input.ReadSInt32(ref immediateBuffer)); 
+              }
+              input.PopLimit(oldLimit);
+            }
+            break;
+          }
           case 280: {
-            repeatedSint32_.AddEntriesFrom(input, _repeated_repeatedSint32_codec);
+            repeatedSint32_.Add(input.ReadSInt32(ref immediateBuffer));
             break;
           }
-          case 290:
+          case 290: {
+            int length = input.ReadLength(ref immediateBuffer);
+            if (length > 0) {
+              var oldLimit = input.PushLimit(length);
+              while (!input.ReachedLimit) {
+                repeatedSint64_.Add(input.ReadSInt64(ref immediateBuffer)); 
+              }
+              input.PopLimit(oldLimit);
+            }
+            break;
+          }
           case 288: {
-            repeatedSint64_.AddEntriesFrom(input, _repeated_repeatedSint64_codec);
+            repeatedSint64_.Add(input.ReadSInt64(ref immediateBuffer));
             break;
           }
-          case 298:
+          case 298: {
+            int length = input.ReadLength(ref immediateBuffer);
+            if (length > 0) {
+              var oldLimit = input.PushLimit(length);
+              while (!input.ReachedLimit) {
+                repeatedFixed32_.Add(input.ReadFixed32(ref immediateBuffer)); 
+              }
+              input.PopLimit(oldLimit);
+            }
+            break;
+          }
           case 301: {
-            repeatedFixed32_.AddEntriesFrom(input, _repeated_repeatedFixed32_codec);
+            repeatedFixed32_.Add(input.ReadFixed32(ref immediateBuffer));
             break;
           }
-          case 306:
+          case 306: {
+            int length = input.ReadLength(ref immediateBuffer);
+            if (length > 0) {
+              var oldLimit = input.PushLimit(length);
+              while (!input.ReachedLimit) {
+                repeatedFixed64_.Add(input.ReadFixed64(ref immediateBuffer)); 
+              }
+              input.PopLimit(oldLimit);
+            }
+            break;
+          }
           case 305: {
-            repeatedFixed64_.AddEntriesFrom(input, _repeated_repeatedFixed64_codec);
+            repeatedFixed64_.Add(input.ReadFixed64(ref immediateBuffer));
             break;
           }
-          case 314:
+          case 314: {
+            int length = input.ReadLength(ref immediateBuffer);
+            if (length > 0) {
+              var oldLimit = input.PushLimit(length);
+              while (!input.ReachedLimit) {
+                repeatedSfixed32_.Add(input.ReadSFixed32(ref immediateBuffer)); 
+              }
+              input.PopLimit(oldLimit);
+            }
+            break;
+          }
           case 317: {
-            repeatedSfixed32_.AddEntriesFrom(input, _repeated_repeatedSfixed32_codec);
+            repeatedSfixed32_.Add(input.ReadSFixed32(ref immediateBuffer));
             break;
           }
-          case 322:
+          case 322: {
+            int length = input.ReadLength(ref immediateBuffer);
+            if (length > 0) {
+              var oldLimit = input.PushLimit(length);
+              while (!input.ReachedLimit) {
+                repeatedSfixed64_.Add(input.ReadSFixed64(ref immediateBuffer)); 
+              }
+              input.PopLimit(oldLimit);
+            }
+            break;
+          }
           case 321: {
-            repeatedSfixed64_.AddEntriesFrom(input, _repeated_repeatedSfixed64_codec);
+            repeatedSfixed64_.Add(input.ReadSFixed64(ref immediateBuffer));
             break;
           }
-          case 330:
+          case 330: {
+            int length = input.ReadLength(ref immediateBuffer);
+            if (length > 0) {
+              var oldLimit = input.PushLimit(length);
+              while (!input.ReachedLimit) {
+                repeatedFloat_.Add(input.ReadFloat(ref immediateBuffer)); 
+              }
+              input.PopLimit(oldLimit);
+            }
+            break;
+          }
           case 333: {
-            repeatedFloat_.AddEntriesFrom(input, _repeated_repeatedFloat_codec);
+            repeatedFloat_.Add(input.ReadFloat(ref immediateBuffer));
             break;
           }
-          case 338:
+          case 338: {
+            int length = input.ReadLength(ref immediateBuffer);
+            if (length > 0) {
+              var oldLimit = input.PushLimit(length);
+              while (!input.ReachedLimit) {
+                repeatedDouble_.Add(input.ReadDouble(ref immediateBuffer)); 
+              }
+              input.PopLimit(oldLimit);
+            }
+            break;
+          }
           case 337: {
-            repeatedDouble_.AddEntriesFrom(input, _repeated_repeatedDouble_codec);
+            repeatedDouble_.Add(input.ReadDouble(ref immediateBuffer));
             break;
           }
-          case 346:
+          case 346: {
+            int length = input.ReadLength(ref immediateBuffer);
+            if (length > 0) {
+              var oldLimit = input.PushLimit(length);
+              while (!input.ReachedLimit) {
+                repeatedBool_.Add(input.ReadBool(ref immediateBuffer)); 
+              }
+              input.PopLimit(oldLimit);
+            }
+            break;
+          }
           case 344: {
-            repeatedBool_.AddEntriesFrom(input, _repeated_repeatedBool_codec);
+            repeatedBool_.Add(input.ReadBool(ref immediateBuffer));
             break;
           }
           case 354: {
-            repeatedString_.AddEntriesFrom(input, _repeated_repeatedString_codec);
+            repeatedString_.Add(input.ReadString(ref immediateBuffer));
             break;
           }
           case 362: {
-            repeatedBytes_.AddEntriesFrom(input, _repeated_repeatedBytes_codec);
+            repeatedBytes_.Add(input.ReadBytes(ref immediateBuffer));
             break;
           }
           case 386: {
-            repeatedNestedMessage_.AddEntriesFrom(input, _repeated_repeatedNestedMessage_codec);
+            var repeatedOldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::ProtobufTestMessages.Proto3.TestAllTypesProto3.Types.NestedMessage();
+            item.MergeFrom(input, ref immediateBuffer);
+            repeatedNestedMessage_.Add(item);
+            input.EndReadNested(repeatedOldLimit);
             break;
           }
           case 394: {
-            repeatedForeignMessage_.AddEntriesFrom(input, _repeated_repeatedForeignMessage_codec);
+            var repeatedOldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::ProtobufTestMessages.Proto3.ForeignMessage();
+            item.MergeFrom(input, ref immediateBuffer);
+            repeatedForeignMessage_.Add(item);
+            input.EndReadNested(repeatedOldLimit);
             break;
           }
-          case 410:
+          case 410: {
+            int length = input.ReadLength(ref immediateBuffer);
+            if (length > 0) {
+              var oldLimit = input.PushLimit(length);
+              while (!input.ReachedLimit) {
+                repeatedNestedEnum_.Add((global::ProtobufTestMessages.Proto3.TestAllTypesProto3.Types.NestedEnum)input.ReadEnum(ref immediateBuffer)); 
+              }
+              input.PopLimit(oldLimit);
+            }
+            break;
+          }
           case 408: {
-            repeatedNestedEnum_.AddEntriesFrom(input, _repeated_repeatedNestedEnum_codec);
+            repeatedNestedEnum_.Add((global::ProtobufTestMessages.Proto3.TestAllTypesProto3.Types.NestedEnum)input.ReadEnum(ref immediateBuffer));
             break;
           }
-          case 418:
+          case 418: {
+            int length = input.ReadLength(ref immediateBuffer);
+            if (length > 0) {
+              var oldLimit = input.PushLimit(length);
+              while (!input.ReachedLimit) {
+                repeatedForeignEnum_.Add((global::ProtobufTestMessages.Proto3.ForeignEnum)input.ReadEnum(ref immediateBuffer)); 
+              }
+              input.PopLimit(oldLimit);
+            }
+            break;
+          }
           case 416: {
-            repeatedForeignEnum_.AddEntriesFrom(input, _repeated_repeatedForeignEnum_codec);
+            repeatedForeignEnum_.Add((global::ProtobufTestMessages.Proto3.ForeignEnum)input.ReadEnum(ref immediateBuffer));
             break;
           }
           case 434: {
-            repeatedStringPiece_.AddEntriesFrom(input, _repeated_repeatedStringPiece_codec);
+            repeatedStringPiece_.Add(input.ReadString(ref immediateBuffer));
             break;
           }
           case 442: {
-            repeatedCord_.AddEntriesFrom(input, _repeated_repeatedCord_codec);
+            repeatedCord_.Add(input.ReadString(ref immediateBuffer));
             break;
           }
           case 450: {
-            mapInt32Int32_.AddEntriesFrom(input, _map_mapInt32Int32_codec);
+            var mapOldLimit = input.BeginReadNested(ref immediateBuffer);
+            int entryKey = 0;
+            int entryValue = 0;
+            uint ntag;
+            while ((ntag = input.ReadTag(ref immediateBuffer)) != 0) {
+              if (ntag == 8) {
+                entryKey = input.ReadInt32(ref immediateBuffer);
+              } else if (ntag == 16) {
+                entryValue = input.ReadInt32(ref immediateBuffer);
+              } else {
+                input.SkipLastField(ref immediateBuffer);
+              }
+            }
+            mapInt32Int32_[entryKey] = entryValue;
+            input.EndReadNested(mapOldLimit);
             break;
           }
           case 458: {
-            mapInt64Int64_.AddEntriesFrom(input, _map_mapInt64Int64_codec);
+            var mapOldLimit = input.BeginReadNested(ref immediateBuffer);
+            long entryKey = 0L;
+            long entryValue = 0L;
+            uint ntag;
+            while ((ntag = input.ReadTag(ref immediateBuffer)) != 0) {
+              if (ntag == 8) {
+                entryKey = input.ReadInt64(ref immediateBuffer);
+              } else if (ntag == 16) {
+                entryValue = input.ReadInt64(ref immediateBuffer);
+              } else {
+                input.SkipLastField(ref immediateBuffer);
+              }
+            }
+            mapInt64Int64_[entryKey] = entryValue;
+            input.EndReadNested(mapOldLimit);
             break;
           }
           case 466: {
-            mapUint32Uint32_.AddEntriesFrom(input, _map_mapUint32Uint32_codec);
+            var mapOldLimit = input.BeginReadNested(ref immediateBuffer);
+            uint entryKey = 0;
+            uint entryValue = 0;
+            uint ntag;
+            while ((ntag = input.ReadTag(ref immediateBuffer)) != 0) {
+              if (ntag == 8) {
+                entryKey = input.ReadUInt32(ref immediateBuffer);
+              } else if (ntag == 16) {
+                entryValue = input.ReadUInt32(ref immediateBuffer);
+              } else {
+                input.SkipLastField(ref immediateBuffer);
+              }
+            }
+            mapUint32Uint32_[entryKey] = entryValue;
+            input.EndReadNested(mapOldLimit);
             break;
           }
           case 474: {
-            mapUint64Uint64_.AddEntriesFrom(input, _map_mapUint64Uint64_codec);
+            var mapOldLimit = input.BeginReadNested(ref immediateBuffer);
+            ulong entryKey = 0UL;
+            ulong entryValue = 0UL;
+            uint ntag;
+            while ((ntag = input.ReadTag(ref immediateBuffer)) != 0) {
+              if (ntag == 8) {
+                entryKey = input.ReadUInt64(ref immediateBuffer);
+              } else if (ntag == 16) {
+                entryValue = input.ReadUInt64(ref immediateBuffer);
+              } else {
+                input.SkipLastField(ref immediateBuffer);
+              }
+            }
+            mapUint64Uint64_[entryKey] = entryValue;
+            input.EndReadNested(mapOldLimit);
             break;
           }
           case 482: {
-            mapSint32Sint32_.AddEntriesFrom(input, _map_mapSint32Sint32_codec);
+            var mapOldLimit = input.BeginReadNested(ref immediateBuffer);
+            int entryKey = 0;
+            int entryValue = 0;
+            uint ntag;
+            while ((ntag = input.ReadTag(ref immediateBuffer)) != 0) {
+              if (ntag == 8) {
+                entryKey = input.ReadSInt32(ref immediateBuffer);
+              } else if (ntag == 16) {
+                entryValue = input.ReadSInt32(ref immediateBuffer);
+              } else {
+                input.SkipLastField(ref immediateBuffer);
+              }
+            }
+            mapSint32Sint32_[entryKey] = entryValue;
+            input.EndReadNested(mapOldLimit);
             break;
           }
           case 490: {
-            mapSint64Sint64_.AddEntriesFrom(input, _map_mapSint64Sint64_codec);
+            var mapOldLimit = input.BeginReadNested(ref immediateBuffer);
+            long entryKey = 0L;
+            long entryValue = 0L;
+            uint ntag;
+            while ((ntag = input.ReadTag(ref immediateBuffer)) != 0) {
+              if (ntag == 8) {
+                entryKey = input.ReadSInt64(ref immediateBuffer);
+              } else if (ntag == 16) {
+                entryValue = input.ReadSInt64(ref immediateBuffer);
+              } else {
+                input.SkipLastField(ref immediateBuffer);
+              }
+            }
+            mapSint64Sint64_[entryKey] = entryValue;
+            input.EndReadNested(mapOldLimit);
             break;
           }
           case 498: {
-            mapFixed32Fixed32_.AddEntriesFrom(input, _map_mapFixed32Fixed32_codec);
+            var mapOldLimit = input.BeginReadNested(ref immediateBuffer);
+            uint entryKey = 0;
+            uint entryValue = 0;
+            uint ntag;
+            while ((ntag = input.ReadTag(ref immediateBuffer)) != 0) {
+              if (ntag == 13) {
+                entryKey = input.ReadFixed32(ref immediateBuffer);
+              } else if (ntag == 21) {
+                entryValue = input.ReadFixed32(ref immediateBuffer);
+              } else {
+                input.SkipLastField(ref immediateBuffer);
+              }
+            }
+            mapFixed32Fixed32_[entryKey] = entryValue;
+            input.EndReadNested(mapOldLimit);
             break;
           }
           case 506: {
-            mapFixed64Fixed64_.AddEntriesFrom(input, _map_mapFixed64Fixed64_codec);
+            var mapOldLimit = input.BeginReadNested(ref immediateBuffer);
+            ulong entryKey = 0UL;
+            ulong entryValue = 0UL;
+            uint ntag;
+            while ((ntag = input.ReadTag(ref immediateBuffer)) != 0) {
+              if (ntag == 9) {
+                entryKey = input.ReadFixed64(ref immediateBuffer);
+              } else if (ntag == 17) {
+                entryValue = input.ReadFixed64(ref immediateBuffer);
+              } else {
+                input.SkipLastField(ref immediateBuffer);
+              }
+            }
+            mapFixed64Fixed64_[entryKey] = entryValue;
+            input.EndReadNested(mapOldLimit);
             break;
           }
           case 514: {
-            mapSfixed32Sfixed32_.AddEntriesFrom(input, _map_mapSfixed32Sfixed32_codec);
+            var mapOldLimit = input.BeginReadNested(ref immediateBuffer);
+            int entryKey = 0;
+            int entryValue = 0;
+            uint ntag;
+            while ((ntag = input.ReadTag(ref immediateBuffer)) != 0) {
+              if (ntag == 13) {
+                entryKey = input.ReadSFixed32(ref immediateBuffer);
+              } else if (ntag == 21) {
+                entryValue = input.ReadSFixed32(ref immediateBuffer);
+              } else {
+                input.SkipLastField(ref immediateBuffer);
+              }
+            }
+            mapSfixed32Sfixed32_[entryKey] = entryValue;
+            input.EndReadNested(mapOldLimit);
             break;
           }
           case 522: {
-            mapSfixed64Sfixed64_.AddEntriesFrom(input, _map_mapSfixed64Sfixed64_codec);
+            var mapOldLimit = input.BeginReadNested(ref immediateBuffer);
+            long entryKey = 0L;
+            long entryValue = 0L;
+            uint ntag;
+            while ((ntag = input.ReadTag(ref immediateBuffer)) != 0) {
+              if (ntag == 9) {
+                entryKey = input.ReadSFixed64(ref immediateBuffer);
+              } else if (ntag == 17) {
+                entryValue = input.ReadSFixed64(ref immediateBuffer);
+              } else {
+                input.SkipLastField(ref immediateBuffer);
+              }
+            }
+            mapSfixed64Sfixed64_[entryKey] = entryValue;
+            input.EndReadNested(mapOldLimit);
             break;
           }
           case 530: {
-            mapInt32Float_.AddEntriesFrom(input, _map_mapInt32Float_codec);
+            var mapOldLimit = input.BeginReadNested(ref immediateBuffer);
+            int entryKey = 0;
+            float entryValue = 0F;
+            uint ntag;
+            while ((ntag = input.ReadTag(ref immediateBuffer)) != 0) {
+              if (ntag == 8) {
+                entryKey = input.ReadInt32(ref immediateBuffer);
+              } else if (ntag == 21) {
+                entryValue = input.ReadFloat(ref immediateBuffer);
+              } else {
+                input.SkipLastField(ref immediateBuffer);
+              }
+            }
+            mapInt32Float_[entryKey] = entryValue;
+            input.EndReadNested(mapOldLimit);
             break;
           }
           case 538: {
-            mapInt32Double_.AddEntriesFrom(input, _map_mapInt32Double_codec);
+            var mapOldLimit = input.BeginReadNested(ref immediateBuffer);
+            int entryKey = 0;
+            double entryValue = 0D;
+            uint ntag;
+            while ((ntag = input.ReadTag(ref immediateBuffer)) != 0) {
+              if (ntag == 8) {
+                entryKey = input.ReadInt32(ref immediateBuffer);
+              } else if (ntag == 17) {
+                entryValue = input.ReadDouble(ref immediateBuffer);
+              } else {
+                input.SkipLastField(ref immediateBuffer);
+              }
+            }
+            mapInt32Double_[entryKey] = entryValue;
+            input.EndReadNested(mapOldLimit);
             break;
           }
           case 546: {
-            mapBoolBool_.AddEntriesFrom(input, _map_mapBoolBool_codec);
+            var mapOldLimit = input.BeginReadNested(ref immediateBuffer);
+            bool entryKey = false;
+            bool entryValue = false;
+            uint ntag;
+            while ((ntag = input.ReadTag(ref immediateBuffer)) != 0) {
+              if (ntag == 8) {
+                entryKey = input.ReadBool(ref immediateBuffer);
+              } else if (ntag == 16) {
+                entryValue = input.ReadBool(ref immediateBuffer);
+              } else {
+                input.SkipLastField(ref immediateBuffer);
+              }
+            }
+            mapBoolBool_[entryKey] = entryValue;
+            input.EndReadNested(mapOldLimit);
             break;
           }
           case 554: {
-            mapStringString_.AddEntriesFrom(input, _map_mapStringString_codec);
+            var mapOldLimit = input.BeginReadNested(ref immediateBuffer);
+            string entryKey = "";
+            string entryValue = "";
+            uint ntag;
+            while ((ntag = input.ReadTag(ref immediateBuffer)) != 0) {
+              if (ntag == 10) {
+                entryKey = input.ReadString(ref immediateBuffer);
+              } else if (ntag == 18) {
+                entryValue = input.ReadString(ref immediateBuffer);
+              } else {
+                input.SkipLastField(ref immediateBuffer);
+              }
+            }
+            mapStringString_[entryKey] = entryValue;
+            input.EndReadNested(mapOldLimit);
             break;
           }
           case 562: {
-            mapStringBytes_.AddEntriesFrom(input, _map_mapStringBytes_codec);
+            var mapOldLimit = input.BeginReadNested(ref immediateBuffer);
+            string entryKey = "";
+            pb::ByteString entryValue = pb::ByteString.Empty;
+            uint ntag;
+            while ((ntag = input.ReadTag(ref immediateBuffer)) != 0) {
+              if (ntag == 10) {
+                entryKey = input.ReadString(ref immediateBuffer);
+              } else if (ntag == 18) {
+                entryValue = input.ReadBytes(ref immediateBuffer);
+              } else {
+                input.SkipLastField(ref immediateBuffer);
+              }
+            }
+            mapStringBytes_[entryKey] = entryValue;
+            input.EndReadNested(mapOldLimit);
             break;
           }
           case 570: {
-            mapStringNestedMessage_.AddEntriesFrom(input, _map_mapStringNestedMessage_codec);
+            var mapOldLimit = input.BeginReadNested(ref immediateBuffer);
+            string entryKey = "";
+            global::ProtobufTestMessages.Proto3.TestAllTypesProto3.Types.NestedMessage entryValue = null;
+            uint ntag;
+            while ((ntag = input.ReadTag(ref immediateBuffer)) != 0) {
+              if (ntag == 10) {
+                entryKey = input.ReadString(ref immediateBuffer);
+              } else if (ntag == 18) {
+                if (entryValue == null) {
+                  entryValue = new global::ProtobufTestMessages.Proto3.TestAllTypesProto3.Types.NestedMessage();
+                }
+                var oldLimit = input.BeginReadNested(ref immediateBuffer);
+                entryValue.MergeFrom(input, ref immediateBuffer);
+                input.EndReadNested(oldLimit);
+              } else {
+                input.SkipLastField(ref immediateBuffer);
+              }
+            }
+            if (entryValue == null) {
+              entryValue = new global::ProtobufTestMessages.Proto3.TestAllTypesProto3.Types.NestedMessage();
+            }
+            mapStringNestedMessage_[entryKey] = entryValue;
+            input.EndReadNested(mapOldLimit);
             break;
           }
           case 578: {
-            mapStringForeignMessage_.AddEntriesFrom(input, _map_mapStringForeignMessage_codec);
+            var mapOldLimit = input.BeginReadNested(ref immediateBuffer);
+            string entryKey = "";
+            global::ProtobufTestMessages.Proto3.ForeignMessage entryValue = null;
+            uint ntag;
+            while ((ntag = input.ReadTag(ref immediateBuffer)) != 0) {
+              if (ntag == 10) {
+                entryKey = input.ReadString(ref immediateBuffer);
+              } else if (ntag == 18) {
+                if (entryValue == null) {
+                  entryValue = new global::ProtobufTestMessages.Proto3.ForeignMessage();
+                }
+                var oldLimit = input.BeginReadNested(ref immediateBuffer);
+                entryValue.MergeFrom(input, ref immediateBuffer);
+                input.EndReadNested(oldLimit);
+              } else {
+                input.SkipLastField(ref immediateBuffer);
+              }
+            }
+            if (entryValue == null) {
+              entryValue = new global::ProtobufTestMessages.Proto3.ForeignMessage();
+            }
+            mapStringForeignMessage_[entryKey] = entryValue;
+            input.EndReadNested(mapOldLimit);
             break;
           }
           case 586: {
-            mapStringNestedEnum_.AddEntriesFrom(input, _map_mapStringNestedEnum_codec);
+            var mapOldLimit = input.BeginReadNested(ref immediateBuffer);
+            string entryKey = "";
+            global::ProtobufTestMessages.Proto3.TestAllTypesProto3.Types.NestedEnum entryValue = 0;
+            uint ntag;
+            while ((ntag = input.ReadTag(ref immediateBuffer)) != 0) {
+              if (ntag == 10) {
+                entryKey = input.ReadString(ref immediateBuffer);
+              } else if (ntag == 16) {
+                entryValue = (global::ProtobufTestMessages.Proto3.TestAllTypesProto3.Types.NestedEnum) input.ReadEnum(ref immediateBuffer);
+              } else {
+                input.SkipLastField(ref immediateBuffer);
+              }
+            }
+            mapStringNestedEnum_[entryKey] = entryValue;
+            input.EndReadNested(mapOldLimit);
             break;
           }
           case 594: {
-            mapStringForeignEnum_.AddEntriesFrom(input, _map_mapStringForeignEnum_codec);
+            var mapOldLimit = input.BeginReadNested(ref immediateBuffer);
+            string entryKey = "";
+            global::ProtobufTestMessages.Proto3.ForeignEnum entryValue = 0;
+            uint ntag;
+            while ((ntag = input.ReadTag(ref immediateBuffer)) != 0) {
+              if (ntag == 10) {
+                entryKey = input.ReadString(ref immediateBuffer);
+              } else if (ntag == 16) {
+                entryValue = (global::ProtobufTestMessages.Proto3.ForeignEnum) input.ReadEnum(ref immediateBuffer);
+              } else {
+                input.SkipLastField(ref immediateBuffer);
+              }
+            }
+            mapStringForeignEnum_[entryKey] = entryValue;
+            input.EndReadNested(mapOldLimit);
             break;
           }
           case 888: {
-            OneofUint32 = input.ReadUInt32();
+            OneofUint32 = input.ReadUInt32(ref immediateBuffer);
             break;
           }
           case 898: {
@@ -3141,274 +4375,306 @@ namespace ProtobufTestMessages.Proto3 {
             if (oneofFieldCase_ == OneofFieldOneofCase.OneofNestedMessage) {
               subBuilder.MergeFrom(OneofNestedMessage);
             }
-            input.ReadMessage(subBuilder);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            subBuilder.MergeFrom(input, ref immediateBuffer);
+            input.EndReadNested(oldLimit);
             OneofNestedMessage = subBuilder;
             break;
           }
           case 906: {
-            OneofString = input.ReadString();
+            OneofString = input.ReadString(ref immediateBuffer);
             break;
           }
           case 914: {
-            OneofBytes = input.ReadBytes();
+            OneofBytes = input.ReadBytes(ref immediateBuffer);
             break;
           }
           case 920: {
-            OneofBool = input.ReadBool();
+            OneofBool = input.ReadBool(ref immediateBuffer);
             break;
           }
           case 928: {
-            OneofUint64 = input.ReadUInt64();
+            OneofUint64 = input.ReadUInt64(ref immediateBuffer);
             break;
           }
           case 941: {
-            OneofFloat = input.ReadFloat();
+            OneofFloat = input.ReadFloat(ref immediateBuffer);
             break;
           }
           case 945: {
-            OneofDouble = input.ReadDouble();
+            OneofDouble = input.ReadDouble(ref immediateBuffer);
             break;
           }
           case 952: {
-            oneofField_ = input.ReadEnum();
+            oneofField_ = input.ReadEnum(ref immediateBuffer);
             oneofFieldCase_ = OneofFieldOneofCase.OneofEnum;
             break;
           }
           case 1610: {
-            bool? value = _single_optionalBoolWrapper_codec.Read(input);
-            if (optionalBoolWrapper_ == null || value != false) {
+            bool? value = input.ReadWrappedBool(ref immediateBuffer);
+            if (OptionalBoolWrapper == null || value != false) {
               OptionalBoolWrapper = value;
             }
             break;
           }
           case 1618: {
-            int? value = _single_optionalInt32Wrapper_codec.Read(input);
-            if (optionalInt32Wrapper_ == null || value != 0) {
+            int? value = input.ReadWrappedInt32(ref immediateBuffer);
+            if (OptionalInt32Wrapper == null || value != 0) {
               OptionalInt32Wrapper = value;
             }
             break;
           }
           case 1626: {
-            long? value = _single_optionalInt64Wrapper_codec.Read(input);
-            if (optionalInt64Wrapper_ == null || value != 0L) {
+            long? value = input.ReadWrappedInt64(ref immediateBuffer);
+            if (OptionalInt64Wrapper == null || value != 0L) {
               OptionalInt64Wrapper = value;
             }
             break;
           }
           case 1634: {
-            uint? value = _single_optionalUint32Wrapper_codec.Read(input);
-            if (optionalUint32Wrapper_ == null || value != 0) {
+            uint? value = input.ReadWrappedUInt32(ref immediateBuffer);
+            if (OptionalUint32Wrapper == null || value != 0) {
               OptionalUint32Wrapper = value;
             }
             break;
           }
           case 1642: {
-            ulong? value = _single_optionalUint64Wrapper_codec.Read(input);
-            if (optionalUint64Wrapper_ == null || value != 0UL) {
+            ulong? value = input.ReadWrappedUInt64(ref immediateBuffer);
+            if (OptionalUint64Wrapper == null || value != 0UL) {
               OptionalUint64Wrapper = value;
             }
             break;
           }
           case 1650: {
-            float? value = _single_optionalFloatWrapper_codec.Read(input);
-            if (optionalFloatWrapper_ == null || value != 0F) {
+            float? value = input.ReadWrappedFloat(ref immediateBuffer);
+            if (OptionalFloatWrapper == null || value != 0F) {
               OptionalFloatWrapper = value;
             }
             break;
           }
           case 1658: {
-            double? value = _single_optionalDoubleWrapper_codec.Read(input);
-            if (optionalDoubleWrapper_ == null || value != 0D) {
+            double? value = input.ReadWrappedDouble(ref immediateBuffer);
+            if (OptionalDoubleWrapper == null || value != 0D) {
               OptionalDoubleWrapper = value;
             }
             break;
           }
           case 1666: {
-            string value = _single_optionalStringWrapper_codec.Read(input);
-            if (optionalStringWrapper_ == null || value != "") {
+            string value = input.ReadWrappedString(ref immediateBuffer);
+            if (OptionalStringWrapper == null || value != "") {
               OptionalStringWrapper = value;
             }
             break;
           }
           case 1674: {
-            pb::ByteString value = _single_optionalBytesWrapper_codec.Read(input);
-            if (optionalBytesWrapper_ == null || value != pb::ByteString.Empty) {
+            pb::ByteString value = input.ReadWrappedBytes(ref immediateBuffer);
+            if (OptionalBytesWrapper == null || value != pb::ByteString.Empty) {
               OptionalBytesWrapper = value;
             }
             break;
           }
           case 1690: {
-            repeatedBoolWrapper_.AddEntriesFrom(input, _repeated_repeatedBoolWrapper_codec);
+            repeatedBoolWrapper_.Add(input.ReadWrappedBool(ref immediateBuffer));
             break;
           }
           case 1698: {
-            repeatedInt32Wrapper_.AddEntriesFrom(input, _repeated_repeatedInt32Wrapper_codec);
+            repeatedInt32Wrapper_.Add(input.ReadWrappedInt32(ref immediateBuffer));
             break;
           }
           case 1706: {
-            repeatedInt64Wrapper_.AddEntriesFrom(input, _repeated_repeatedInt64Wrapper_codec);
+            repeatedInt64Wrapper_.Add(input.ReadWrappedInt64(ref immediateBuffer));
             break;
           }
           case 1714: {
-            repeatedUint32Wrapper_.AddEntriesFrom(input, _repeated_repeatedUint32Wrapper_codec);
+            repeatedUint32Wrapper_.Add(input.ReadWrappedUInt32(ref immediateBuffer));
             break;
           }
           case 1722: {
-            repeatedUint64Wrapper_.AddEntriesFrom(input, _repeated_repeatedUint64Wrapper_codec);
+            repeatedUint64Wrapper_.Add(input.ReadWrappedUInt64(ref immediateBuffer));
             break;
           }
           case 1730: {
-            repeatedFloatWrapper_.AddEntriesFrom(input, _repeated_repeatedFloatWrapper_codec);
+            repeatedFloatWrapper_.Add(input.ReadWrappedFloat(ref immediateBuffer));
             break;
           }
           case 1738: {
-            repeatedDoubleWrapper_.AddEntriesFrom(input, _repeated_repeatedDoubleWrapper_codec);
+            repeatedDoubleWrapper_.Add(input.ReadWrappedDouble(ref immediateBuffer));
             break;
           }
           case 1746: {
-            repeatedStringWrapper_.AddEntriesFrom(input, _repeated_repeatedStringWrapper_codec);
+            repeatedStringWrapper_.Add(input.ReadWrappedString(ref immediateBuffer));
             break;
           }
           case 1754: {
-            repeatedBytesWrapper_.AddEntriesFrom(input, _repeated_repeatedBytesWrapper_codec);
+            repeatedBytesWrapper_.Add(input.ReadWrappedBytes(ref immediateBuffer));
             break;
           }
           case 2410: {
             if (optionalDuration_ == null) {
               optionalDuration_ = new global::Google.Protobuf.WellKnownTypes.Duration();
             }
-            input.ReadMessage(optionalDuration_);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            optionalDuration_.MergeFrom(input, ref immediateBuffer);
+            input.EndReadNested(oldLimit);
             break;
           }
           case 2418: {
             if (optionalTimestamp_ == null) {
               optionalTimestamp_ = new global::Google.Protobuf.WellKnownTypes.Timestamp();
             }
-            input.ReadMessage(optionalTimestamp_);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            optionalTimestamp_.MergeFrom(input, ref immediateBuffer);
+            input.EndReadNested(oldLimit);
             break;
           }
           case 2426: {
             if (optionalFieldMask_ == null) {
               optionalFieldMask_ = new global::Google.Protobuf.WellKnownTypes.FieldMask();
             }
-            input.ReadMessage(optionalFieldMask_);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            optionalFieldMask_.MergeFrom(input, ref immediateBuffer);
+            input.EndReadNested(oldLimit);
             break;
           }
           case 2434: {
             if (optionalStruct_ == null) {
               optionalStruct_ = new global::Google.Protobuf.WellKnownTypes.Struct();
             }
-            input.ReadMessage(optionalStruct_);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            optionalStruct_.MergeFrom(input, ref immediateBuffer);
+            input.EndReadNested(oldLimit);
             break;
           }
           case 2442: {
             if (optionalAny_ == null) {
               optionalAny_ = new global::Google.Protobuf.WellKnownTypes.Any();
             }
-            input.ReadMessage(optionalAny_);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            optionalAny_.MergeFrom(input, ref immediateBuffer);
+            input.EndReadNested(oldLimit);
             break;
           }
           case 2450: {
             if (optionalValue_ == null) {
               optionalValue_ = new global::Google.Protobuf.WellKnownTypes.Value();
             }
-            input.ReadMessage(optionalValue_);
+            var oldLimit = input.BeginReadNested(ref immediateBuffer);
+            optionalValue_.MergeFrom(input, ref immediateBuffer);
+            input.EndReadNested(oldLimit);
             break;
           }
           case 2490: {
-            repeatedDuration_.AddEntriesFrom(input, _repeated_repeatedDuration_codec);
+            var repeatedOldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.WellKnownTypes.Duration();
+            item.MergeFrom(input, ref immediateBuffer);
+            repeatedDuration_.Add(item);
+            input.EndReadNested(repeatedOldLimit);
             break;
           }
           case 2498: {
-            repeatedTimestamp_.AddEntriesFrom(input, _repeated_repeatedTimestamp_codec);
+            var repeatedOldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.WellKnownTypes.Timestamp();
+            item.MergeFrom(input, ref immediateBuffer);
+            repeatedTimestamp_.Add(item);
+            input.EndReadNested(repeatedOldLimit);
             break;
           }
           case 2506: {
-            repeatedFieldmask_.AddEntriesFrom(input, _repeated_repeatedFieldmask_codec);
+            var repeatedOldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.WellKnownTypes.FieldMask();
+            item.MergeFrom(input, ref immediateBuffer);
+            repeatedFieldmask_.Add(item);
+            input.EndReadNested(repeatedOldLimit);
             break;
           }
           case 2522: {
-            repeatedAny_.AddEntriesFrom(input, _repeated_repeatedAny_codec);
+            var repeatedOldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.WellKnownTypes.Any();
+            item.MergeFrom(input, ref immediateBuffer);
+            repeatedAny_.Add(item);
+            input.EndReadNested(repeatedOldLimit);
             break;
           }
           case 2530: {
-            repeatedValue_.AddEntriesFrom(input, _repeated_repeatedValue_codec);
+            var repeatedOldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.WellKnownTypes.Value();
+            item.MergeFrom(input, ref immediateBuffer);
+            repeatedValue_.Add(item);
+            input.EndReadNested(repeatedOldLimit);
             break;
           }
           case 2594: {
-            repeatedStruct_.AddEntriesFrom(input, _repeated_repeatedStruct_codec);
+            var repeatedOldLimit = input.BeginReadNested(ref immediateBuffer);var item = new global::Google.Protobuf.WellKnownTypes.Struct();
+            item.MergeFrom(input, ref immediateBuffer);
+            repeatedStruct_.Add(item);
+            input.EndReadNested(repeatedOldLimit);
             break;
           }
           case 3208: {
-            Fieldname1 = input.ReadInt32();
+            Fieldname1 = input.ReadInt32(ref immediateBuffer);
             break;
           }
           case 3216: {
-            FieldName2 = input.ReadInt32();
+            FieldName2 = input.ReadInt32(ref immediateBuffer);
             break;
           }
           case 3224: {
-            FieldName3 = input.ReadInt32();
+            FieldName3 = input.ReadInt32(ref immediateBuffer);
             break;
           }
           case 3232: {
-            FieldName4 = input.ReadInt32();
+            FieldName4 = input.ReadInt32(ref immediateBuffer);
             break;
           }
           case 3240: {
-            Field0Name5 = input.ReadInt32();
+            Field0Name5 = input.ReadInt32(ref immediateBuffer);
             break;
           }
           case 3248: {
-            Field0Name6 = input.ReadInt32();
+            Field0Name6 = input.ReadInt32(ref immediateBuffer);
             break;
           }
           case 3256: {
-            FieldName7 = input.ReadInt32();
+            FieldName7 = input.ReadInt32(ref immediateBuffer);
             break;
           }
           case 3264: {
-            FieldName8 = input.ReadInt32();
+            FieldName8 = input.ReadInt32(ref immediateBuffer);
             break;
           }
           case 3272: {
-            FieldName9 = input.ReadInt32();
+            FieldName9 = input.ReadInt32(ref immediateBuffer);
             break;
           }
           case 3280: {
-            FieldName10 = input.ReadInt32();
+            FieldName10 = input.ReadInt32(ref immediateBuffer);
             break;
           }
           case 3288: {
-            FIELDNAME11 = input.ReadInt32();
+            FIELDNAME11 = input.ReadInt32(ref immediateBuffer);
             break;
           }
           case 3296: {
-            FIELDName12 = input.ReadInt32();
+            FIELDName12 = input.ReadInt32(ref immediateBuffer);
             break;
           }
           case 3304: {
-            FieldName13 = input.ReadInt32();
+            FieldName13 = input.ReadInt32(ref immediateBuffer);
             break;
           }
           case 3312: {
-            FieldName14 = input.ReadInt32();
+            FieldName14 = input.ReadInt32(ref immediateBuffer);
             break;
           }
           case 3320: {
-            FieldName15 = input.ReadInt32();
+            FieldName15 = input.ReadInt32(ref immediateBuffer);
             break;
           }
           case 3328: {
-            FieldName16 = input.ReadInt32();
+            FieldName16 = input.ReadInt32(ref immediateBuffer);
             break;
           }
           case 3336: {
-            FieldName17 = input.ReadInt32();
+            FieldName17 = input.ReadInt32(ref immediateBuffer);
             break;
           }
           case 3344: {
-            FieldName18 = input.ReadInt32();
+            FieldName18 = input.ReadInt32(ref immediateBuffer);
             break;
           }
         }
@@ -3521,17 +4787,20 @@ namespace ProtobufTestMessages.Proto3 {
         }
 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-        public void WriteTo(pb::CodedOutputStream output) {
+        [global::System.Security.SecurityCritical]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public void WriteTo(pb::CodedOutputStream output, ref global::System.Span<byte> immediateBuffer) {
           if (A != 0) {
-            output.WriteRawTag(8);
-            output.WriteInt32(A);
+            output.WriteRawTag(8, ref immediateBuffer);
+            output.WriteInt32(A, ref immediateBuffer);
           }
-          if (corecursive_ != null) {
-            output.WriteRawTag(18);
-            output.WriteMessage(Corecursive);
+          if (Corecursive != null) {
+            output.WriteRawTag(18, ref immediateBuffer);
+            output.WriteLength(Corecursive.CalculateSize(), ref immediateBuffer);
+            Corecursive.WriteTo(output, ref immediateBuffer);
           }
           if (_unknownFields != null) {
-            _unknownFields.WriteTo(output);
+            _unknownFields.WriteTo(output, ref immediateBuffer);
           }
         }
 
@@ -3541,7 +4810,7 @@ namespace ProtobufTestMessages.Proto3 {
           if (A != 0) {
             size += 1 + pb::CodedOutputStream.ComputeInt32Size(A);
           }
-          if (corecursive_ != null) {
+          if (Corecursive != null) {
             size += 1 + pb::CodedOutputStream.ComputeMessageSize(Corecursive);
           }
           if (_unknownFields != null) {
@@ -3568,22 +4837,26 @@ namespace ProtobufTestMessages.Proto3 {
         }
 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-        public void MergeFrom(pb::CodedInputStream input) {
+        [global::System.Security.SecurityCritical]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public void MergeFrom(pb::CodedInputStream input, ref global::System.ReadOnlySpan<byte> immediateBuffer) {
           uint tag;
-          while ((tag = input.ReadTag()) != 0) {
+          while ((tag = input.ReadTag(ref immediateBuffer)) != 0) {
             switch(tag) {
               default:
-                _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+                _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input, ref immediateBuffer);
                 break;
               case 8: {
-                A = input.ReadInt32();
+                A = input.ReadInt32(ref immediateBuffer);
                 break;
               }
               case 18: {
                 if (corecursive_ == null) {
                   corecursive_ = new global::ProtobufTestMessages.Proto3.TestAllTypesProto3();
                 }
-                input.ReadMessage(corecursive_);
+                var oldLimit = input.BeginReadNested(ref immediateBuffer);
+                corecursive_.MergeFrom(input, ref immediateBuffer);
+                input.EndReadNested(oldLimit);
                 break;
               }
             }
@@ -3675,13 +4948,15 @@ namespace ProtobufTestMessages.Proto3 {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
+    [global::System.Security.SecurityCritical]
+    [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+    public void WriteTo(pb::CodedOutputStream output, ref global::System.Span<byte> immediateBuffer) {
       if (C != 0) {
-        output.WriteRawTag(8);
-        output.WriteInt32(C);
+        output.WriteRawTag(8, ref immediateBuffer);
+        output.WriteInt32(C, ref immediateBuffer);
       }
       if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
+        _unknownFields.WriteTo(output, ref immediateBuffer);
       }
     }
 
@@ -3709,15 +4984,17 @@ namespace ProtobufTestMessages.Proto3 {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
+    [global::System.Security.SecurityCritical]
+    [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+    public void MergeFrom(pb::CodedInputStream input, ref global::System.ReadOnlySpan<byte> immediateBuffer) {
       uint tag;
-      while ((tag = input.ReadTag()) != 0) {
+      while ((tag = input.ReadTag(ref immediateBuffer)) != 0) {
         switch(tag) {
           default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input, ref immediateBuffer);
             break;
           case 8: {
-            C = input.ReadInt32();
+            C = input.ReadInt32(ref immediateBuffer);
             break;
           }
         }

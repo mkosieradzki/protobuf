@@ -284,8 +284,6 @@ namespace Google.Protobuf.WellKnownTypes {
 
     /// <summary>Field number for the "paths" field.</summary>
     public const int PathsFieldNumber = 1;
-    private static readonly pb::FieldCodec<string> _repeated_paths_codec
-        = pb::FieldCodec.ForString(10);
     private readonly pbc::RepeatedField<string> paths_ = new pbc::RepeatedField<string>();
     /// <summary>
     /// The set of field mask paths.
@@ -328,17 +326,24 @@ namespace Google.Protobuf.WellKnownTypes {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
-      paths_.WriteTo(output, _repeated_paths_codec);
+    [global::System.Security.SecurityCritical]
+    [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+    public void WriteTo(pb::CodedOutputStream output, ref global::System.Span<byte> immediateBuffer) {
+      for (var i = 0; i < Paths.Count; i++) {
+        output.WriteRawTag(10, ref immediateBuffer);
+        output.WriteString(Paths[i], ref immediateBuffer);
+      }
       if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
+        _unknownFields.WriteTo(output, ref immediateBuffer);
       }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      size += paths_.CalculateSize(_repeated_paths_codec);
+      for (var i = 0; i < Paths.Count; i++) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Paths[i]);
+      }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -355,15 +360,17 @@ namespace Google.Protobuf.WellKnownTypes {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
+    [global::System.Security.SecurityCritical]
+    [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+    public void MergeFrom(pb::CodedInputStream input, ref global::System.ReadOnlySpan<byte> immediateBuffer) {
       uint tag;
-      while ((tag = input.ReadTag()) != 0) {
+      while ((tag = input.ReadTag(ref immediateBuffer)) != 0) {
         switch(tag) {
           default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input, ref immediateBuffer);
             break;
           case 10: {
-            paths_.AddEntriesFrom(input, _repeated_paths_codec);
+            paths_.Add(input.ReadString(ref immediateBuffer));
             break;
           }
         }
