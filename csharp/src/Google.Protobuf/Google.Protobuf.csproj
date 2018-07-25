@@ -2,10 +2,10 @@
 
   <PropertyGroup>
     <Description>C# runtime library for Protocol Buffers - Google's data interchange format.</Description>
-    <Copyright>Copyright 2015, Google Inc.</Copyright>
+    <Copyright>Copyright 2018, Google Inc.</Copyright>
     <AssemblyTitle>Google Protocol Buffers</AssemblyTitle>
-    <VersionPrefix>3.6.0</VersionPrefix>
-    <Authors>Google Inc.</Authors>
+    <VersionPrefix>4.0.0</VersionPrefix>
+    <Authors>Google Inc., Marcin Kosieradzki</Authors>
     <TargetFrameworks>netstandard1.1;net45;netcoreapp2.1</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <AssemblyOriginatorKeyFile>../../keys/Google.Protobuf.snk</AssemblyOriginatorKeyFile>
