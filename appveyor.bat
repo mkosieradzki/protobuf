@@ -59,7 +59,7 @@ dotnet build -c %configuration% || goto error
 
 dotnet pack Google.Protobuf\Google.Protobuf.csproj -c Release -o C:\nugets
 
-appveyor PushArtifact c:\nugets\Google.Protobuf.3.6.0.nupkg
+appveyor PushArtifact c:\nugets\Google.Protobuf.4.0.0.nupkg --version-suffix "pre-%APPVEYOR_BUILD_NUMBER%
 
 echo Testing C#
 dotnet test -c %configuration% -f netcoreapp1.0 Google.Protobuf.Test\Google.Protobuf.Test.csproj || goto error
