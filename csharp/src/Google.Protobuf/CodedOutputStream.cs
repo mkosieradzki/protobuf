@@ -512,25 +512,25 @@ namespace Google.Protobuf
                     else
                     {
 #if NETCOREAPP2_1
-                        Utf8Encoding.GetBytes(value, immediateBuffer);
+                        Utf8Encoding.GetBytes(value, immediateBuffer.Slice(position));
 #else
-                    if (buffer != null)
-                    {
-                        Utf8Encoding.GetBytes(value, 0, value.Length, buffer, position);
-                    }
-                    else
-                    {
-                        var temp = ArrayPool<byte>.Shared.Rent(length);
-                        try
+                        if (buffer != null)
                         {
-                            Utf8Encoding.GetBytes(value, 0, value.Length, temp, position);
-                            temp.AsSpan(0, length).CopyTo(immediateBuffer);
+                            Utf8Encoding.GetBytes(value, 0, value.Length, buffer, position);
                         }
-                        finally
+                        else
                         {
-                            ArrayPool<byte>.Shared.Return(temp);
+                            var temp = ArrayPool<byte>.Shared.Rent(length);
+                            try
+                            {
+                                Utf8Encoding.GetBytes(value, 0, value.Length, temp, position);
+                                temp.AsSpan(0, length).CopyTo(immediateBuffer);
+                            }
+                            finally
+                            {
+                                ArrayPool<byte>.Shared.Return(temp);
+                            }
                         }
-                    }
 #endif
                     }
                     position += length;
