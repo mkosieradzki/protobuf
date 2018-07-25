@@ -1506,7 +1506,7 @@ namespace Google.Protobuf
         /// Returns whether or not all the data before the limit has been read.
         /// </summary>
         /// <returns></returns>
-        internal bool ReachedLimit
+        public bool ReachedLimit
         {
             get
             {
