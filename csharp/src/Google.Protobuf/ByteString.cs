@@ -34,6 +34,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Security;
 using System.Text;
 #if !NET35
 using System.Threading;
@@ -114,7 +115,11 @@ namespace Google.Protobuf
         /// Provides read-only access to the data of this <see cref="ByteString"/>.
         /// No data is copied so this is the most efficient way of accessing.
         /// </summary>
-        public ReadOnlySpan<byte> Span => new ReadOnlySpan<byte>(bytes);
+        public ReadOnlySpan<byte> Span
+        {
+            [SecurityCritical]
+            get => bytes;
+        }
 
         /// <summary>
         /// Converts this <see cref="ByteString"/> into a byte array.
@@ -221,6 +226,7 @@ namespace Google.Protobuf
         /// are copied, so further modifications to the span will not
         /// be reflected in the returned <see cref="ByteString" />.
         /// </summary>
+        [SecurityCritical]
         public static ByteString CopyFrom(ReadOnlySpan<byte> bytes)
         {
             return new ByteString(bytes.ToArray());
